@@ -63,8 +63,8 @@ jobs:
           fi
         env:
           ARXIV_INIT_RESULTS: 80
-          ARXIV_DAILY_RESULTS: 5
-          ARXIV_DAILY_TOTAL_LIMIT: 5
+          ARXIV_DAILY_RESULTS: 20
+          ARXIV_DAILY_TOTAL_LIMIT: 20
           ARXIV_PAGE_SIZE: 5
           ARXIV_DELAY_SECONDS: 3
           ARXIV_REQUEST_TIMEOUT_SECONDS: 10
