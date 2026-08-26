@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GeoWAM: Visual Geometry World Action Models for Autonomous Driving - 自动驾驶每日论文卡</title>
-    <meta name="description" content="本文解决自动驾驶中的世界动作模型（WAM）问题，应用场景为端到端驾驶规划和场景演变预测。 研究问题：现有 WAM 大多在像素空间进行未来预测，像素将几何与运动同外观、纹理、光照纠缠在一起，无法显式捕捉三维空间变换。本文提出用点云表示场景几何作为更自然的驾驶状态空间，预测未来场景几何而非未来图像，并据此进行轨迹规划。" />
+    <meta name="description" content="论文解决自动驾驶中联合场景演化建模与自车动作规划的任务。 提出 GeoWAM，一种视觉几何世界动作模型（World Action Model, WAM）。 与现有基于视频生成进行未来图像预测的世界动作模型不同，GeoWAM 将预测目标从像素空间迁移至三维几何空间，预训练以预测未来场景几何（稠密点图），再以预测的几何动力学为条件预测自车未来轨迹。 应用场景涵盖未来几何预测、开环和闭环运动规划。" />
 
     <script>
       (function() {
@@ -70,11 +70,11 @@
             <p class="eyebrow">论文详情</p>
             <h1 class="detail-page-title">GeoWAM: Visual Geometry World Action Models for Autonomous Driving</h1>
             <div class="detail-meta">2026-08-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.23486" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.23486" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.23486</span></div>
-            <p class="detail-summary">本文解决自动驾驶中的世界动作模型（WAM）问题，应用场景为端到端驾驶规划和场景演变预测。 研究问题：现有 WAM 大多在像素空间进行未来预测，像素将几何与运动同外观、纹理、光照纠缠在一起，无法显式捕捉三维空间变换。本文提出用点云表示场景几何作为更自然的驾驶状态空间，预测未来场景几何而非未来图像，并据此进行轨迹规划。</p>
+            <p class="detail-summary">论文解决自动驾驶中联合场景演化建模与自车动作规划的任务。 提出 GeoWAM，一种视觉几何世界动作模型（World Action Model, WAM）。 与现有基于视频生成进行未来图像预测的世界动作模型不同，GeoWAM 将预测目标从像素空间迁移至三维几何空间，预训练以预测未来场景几何（稠密点图），再以预测的几何动力学为条件预测自车未来轨迹。 应用场景涵盖未来几何预测、开环和闭环运动规划。</p>
             <div class="detail-micro-meta">
-              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">8 分钟读完</span>
               <span class="meta-pill">6 张阅读卡</span>
-              <span class="meta-pill">Uber AV Labs</span>
+              <span class="meta-pill">Uber AV Labs · Yiren Lu、Xin Ye、Jiaming Liu 等</span>
             </div>
           </div>
         </div>
@@ -88,8 +88,8 @@
     <span class="reading-badge">一眼看懂</span>
     <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.23486/">封面预览</a>
   </div>
-  <p class="reading-intro-hook">本文解决自动驾驶中的世界动作模型（WAM）问题，应用场景为端到端驾驶规划和场景演变预测。</p>
-  <ul class="reading-intro-points"><li>本文解决自动驾驶中的世界动作模型（WAM）问题，应用场景为端到端驾驶规划和场景演变预测。</li><li>研究问题：现有 WAM 大多在像素空间进行未来预测，像素将几何与运动同外观、纹理、光照纠缠在一起，无法显式捕捉三维空间变换。本文提出用点云表示场景几何作为更自然的驾驶状态空间，预测未来场景几何而非未来图像，并据此进行轨迹规划。</li><li>提出几何是驾驶世界动作模型的天然状态表示，直接对齐场景动态与驾驶动作所在的三维空间。</li></ul>
+  <p class="reading-intro-hook">论文解决自动驾驶中联合场景演化建模与自车动作规划的任务。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶中联合场景演化建模与自车动作规划的任务。</li><li>提出 GeoWAM，一种视觉几何世界动作模型（World Action Model, WAM）。</li><li>与现有基于视频生成进行未来图像预测的世界动作模型不同，GeoWAM 将预测目标从像素空间迁移至三维几何空间，预训练以预测未来场景几何（稠密点图），再以预测的几何动力学为条件预测自车未来轨迹。</li></ul>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -97,7 +97,7 @@
     <span class="reading-step-note">研究单位</span>
   </div>
   <h2>研究单位</h2>
-  <div class="reading-card-content"><ul><li>Uber AV Labs</li><li>Case Western Reserve University</li></ul></div>
+  <div class="reading-card-content"><ul><li>机构：Uber AV Labs；作者：Yiren Lu, Xin Ye, Jiaming Liu, Philip Jacobson, Jin Yao, Yi-chung Chen, Liam Merino, Dhruva Dixith Kurra, Min Cai, Tom Lampo, Danhua Guo, Burhan Yaman</li><li>机构：Case Western Reserve University；作者：Yiren Lu, Yu Yin</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -105,7 +105,7 @@
     <span class="reading-step-note">论文概述</span>
   </div>
   <h2>论文概述</h2>
-  <div class="reading-card-content"><ul><li>本文解决自动驾驶中的世界动作模型（WAM）问题，应用场景为端到端驾驶规划和场景演变预测。</li><li>研究问题：现有 WAM 大多在像素空间进行未来预测，像素将几何与运动同外观、纹理、光照纠缠在一起，无法显式捕捉三维空间变换。本文提出用点云表示场景几何作为更自然的驾驶状态空间，预测未来场景几何而非未来图像，并据此进行轨迹规划。</li></ul></div>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶中联合场景演化建模与自车动作规划的任务。</li><li>提出 GeoWAM，一种视觉几何世界动作模型（World Action Model, WAM）。</li><li>与现有基于视频生成进行未来图像预测的世界动作模型不同，GeoWAM 将预测目标从像素空间迁移至三维几何空间，预训练以预测未来场景几何（稠密点图），再以预测的几何动力学为条件预测自车未来轨迹。</li><li>应用场景涵盖未来几何预测、开环和闭环运动规划。</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -113,7 +113,7 @@
     <span class="reading-step-note">核心贡献</span>
   </div>
   <h2>核心贡献</h2>
-  <div class="reading-card-content"><ul><li>提出几何是驾驶世界动作模型的天然状态表示，直接对齐场景动态与驾驶动作所在的三维空间。</li><li>预训练一个视觉几何世界模型，从历史多视角观测预测未来场景几何，捕捉驾驶场景的空间结构与时序动态。</li><li>引入 GeoWAM，通过类逆动力学公式从预测几何中推断未来自车运动并将其映射为自车轨迹。</li><li>通过未来几何预测、开环和闭环规划实验验证了视觉几何世界建模对自动驾驶规划的有效性。</li><li>与基于图像的 WAM 相比，基于几何的世界建模显著提升了驾驶策略性能，将未来几何预测确立为自动驾驶的有效预训练目标。</li></ul></div>
+  <div class="reading-card-content"><ul><li>论证了几何（点云）比像素更适用于世界动作模型的场景演化建模，因其显式刻画空间结构与运动变换，并与驾驶动作执行的空间自然对齐。</li><li>预训练一个视觉几何世界模型，从历史多视角观测预测未来场景几何，联合编码空间结构与时间演化，无需占用栅格标注。</li><li>提出 GeoWAM，通过类似逆动力学（inverse-dynamics）的公式，将预训练几何模型扩展为世界动作模型：由预测的几何推断未来自车运动并映射为轨迹。</li><li>通过未来几何预测及 NAVSIM 开环、闭环规划实验，验证了视觉几何世界建模作为自动驾驶预训练目标的有效性。</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -121,15 +121,10 @@
     <span class="reading-step-note">方法描述</span>
   </div>
   <h2>方法描述</h2>
-  <div class="reading-card-content"><ul><li>所属模块：世界动作模型（视觉几何世界模型 + 动作头）。</li><li>输入传感器：仅多视角 RGB 相机图像（原文未报告使用其他传感器）。</li><li>场景表示：未来密集点地图（point map）与逐像素置信度图。</li><li>模型结构：</li></ul>
-<p> - 采用 DVGT-2 作为几何编码器，输出多层级的历史几何 token 与 ego token。</p>
-<p> - 未来几何解码器包含 6 层 transformer（隐藏维度 1024，16 注意力头），采用因果时序自注意力与对历史记忆的交叉注意力，将查询解码为未来几何潜在表征，再经共享几何头（Point DPT）解码为密集点地图。</p>
-<p> - 动作分支中，未来 ego-token 解码器采用因果时序自注意力并交叉注意力到历史几何记忆与预测的未来几何 token（带 stop-gradient 连接），随后轨迹头对历史与未来 ego features 进行因果时序 transformer 精化，轨迹查询交叉注意力后回归单一未来轨迹。</p>
-<ul><li>关键技术：</li></ul>
-<p> - 未来几何监督包含：预测特征与目标特征（由同一几何编码器处理未来图像得到、带 stop-gradient）之间的余弦距离损失；点图目标包含欧氏点回归、置信度感知回归和多尺度表面法线一致性损失；外加对当前帧的点图目标损失。</p>
-<p> - 规划微调保留几何目标，另加轨迹 ℓ1 回归损失和辅助的历史帧相对位姿 ℓ1 损失 。</p>
-<p> - 轨迹头直接回归一条轨迹，不使用轨迹锚点、模式分类或迭代采样。</p>
-<p> - 通过 stop-gradient 连接防止轨迹损失回溯影响预测几何，保持预训练几何预测能力。</p></div>
+  <div class="reading-card-content"><ul><li>所属模块：世界模型 + 规划模块（两阶段训练：先几何预训练，再联合微调规划）。</li><li>输入传感器：多视角 RGB 图像序列（原文采用 2 至 8 个动态采样摄像头）。</li><li>场景表示：稠密未来点图（point map）与逐像素置信度图，位于自车坐标系；几何编码基于 DVGT-2。</li><li>模型结构：几何编码器（DVGT-2）输出多层级历史几何令牌与自车令牌；未来几何解码器（6 层 transformer，隐藏维 1024，16 注意力头）通过因果时序自注意力与对历史记忆的交叉注意力预测未来几何令牌，并由 Point DPT 解码为稠密点图；动作分支包含未来自车令牌解码器与轨迹头。</li><li>关键技术：</li></ul>
+<p> - 未来几何监督结合余弦距离特征对齐、点回归、置信度回归与多尺度表面法线一致性损失。</p>
+<p> - 轨迹与未来几何之间采用 stop-gradient 连接，保持几何预测能力不被轨迹损失反向传播干扰。</p>
+<p> - 轨迹头直接回归单一轨迹，不使用锚点、模式分类或迭代采样。</p></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -137,7 +132,7 @@
     <span class="reading-step-note">数据集与资源</span>
   </div>
   <h2>数据集与资源</h2>
-  <div class="reading-card-content"><ul><li>数据集：未来几何预训练结合 OpenScene、nuScenes、Bench2Drive、Waymo Open Dataset、KITTI、Argoverse 2、DDAD；未来几何评估在 nuScenes 验证集；规划在 NAVSIM v2 的 navtrain 微调，navtest 与 navhard 报告结果。</li><li>仿真器：NAVSIM v2（含两阶段伪闭环 navhard 基准）。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：原文未报告 GPU 数量等具体硬件资源。</li><li>实车平台：原文未报告。几何目标由现成几何基础模型（DVGT-2）生成的密集度量点图目标提供，不采用地面真值占用标注。</li></ul></div>
+  <div class="reading-card-content"><ul><li>数据集：OpenScene、nuScenes、Bench2Drive、Waymo Open Dataset、KITTI、Argoverse 2、DDAD（几何预训练）；nuScenes validation（未来几何评估）；NAVSIM v2 navtrain（规划微调）、navtest 与 navhard（规划评估）。</li><li>仿真器：NAVSIM v2（含 navhard 两阶段伪闭环评估）。</li><li>模型规模：未来几何解码器 6 层、隐藏维 1024、16 注意力头（原文未报告总参数量）。</li><li>训练资源：原文未报告 GPU 型号与数量。</li><li>实车平台：原文未报告。</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -145,14 +140,17 @@
     <span class="reading-step-note">评估与结果</span>
   </div>
   <h2>评估与结果</h2>
-  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集（未来几何预测）、NAVSIM v2 navtest（开环/闭环规划）与 navhard 两阶段伪闭环基准。</li><li>评估指标：</li></ul>
-<p> - 未来几何：绝对相对误差（Abs Rel）、阈值精度 δ&lt;1.25，按八个未来步长及完整预测视界（1–4 秒）计算。</p>
-<p> - 规划：Extended Predictive Driver Model Score（EPDMS），聚合无责任碰撞（NC）、可行驶区域合规（DAC）、行驶方向合规（DDC）、交通灯合规（TLC）、自车进度（EP）、碰撞时间（TTC）、车道保持（LK）、历史舒适性（HC）和扩展舒适性（EC），按官方人类惩罚协议报告。</p>
-<ul><li>关键数值：</li></ul>
-<p> - 未来几何预测：GeoWAM 在均值 Abs Rel 上达到 0.257（对比最强基线 Epona+DVGT 为 0.274），均值 δ&lt;1.25 从 0.655 提升到 0.754，在 2–4 秒显著更优，仅 1 秒阈值精度略低于 Epona+DVGT。</p>
-<p> - navtest 规划：GeoWAM EPDMS 达 90.2，为表中最高，较 DVGT-2 初始化提升 0.6 分，并匹配最佳 DDC 和 TLC 得分。</p>
-<p> - navhard 两阶段：原文表格展示了 CV、Ego MLP、LTF、DriveVLA-W0、DriveLaW、DVGT-2、LTFv6† 等方法的两阶段分数；GeoWAM 与部分方法的完整单组件数值在提供的表格文本中未完整列出，原文未报告 GeoWAM 在 navhard 上的最终 EPDMS 数值。</p>
-<ul><li>对比方法：未来几何预测对比 VGGT-World、Epona+DVGT、Cosmos 3+DVGT；规划对比 Transfuser、Hydra-MDP++、DriveSuprim、ARTEMIS、DiffusionDrive、WoTE、DriveVLA-W0、PWM、DriveLaW、DVGT-2、EponaV2 等。</li><li>开环、闭环、仿真条件：navtest 规划为开环评估，navhard 采用两阶段伪闭环评估（第一阶段为原始场景，第二阶段为合成反应式场景）；未来几何预测为开环评估。</li></ul></div>
+  <div class="reading-card-content"><ul><li>未来几何预测（nuScenes validation，开环式）：</li></ul>
+<p> - 指标：Abs Rel（越低越好）、δ&lt;1.25（越高越好），覆盖 1s–4s 与均值。</p>
+<p> - GeoWAM 均值 Abs Rel 0.257（最强基线 Epona+DVGT 为 0.274），均值 δ&lt;1.25 0.754（基线 0.655）。</p>
+<p> - 对比方法：Epona+DVGT、Cosmos 3+DVGT、VGGT-World。</p>
+<ul><li>规划（NAVSIM v2，navtest，闭环式）：</li></ul>
+<p> - 指标：EPDMS 及 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC，按官方 human-penalty 协议。</p>
+<p> - GeoWAM EPDMS 90.2，优于 DVGT-2 初始化 0.6 分，为表内最佳；对比方法含 Transfuser、Hydra-MDP++、DriveSuprim、ARTEMIS、DiffusionDrive、WoTE、DriveVLA-W0、PWM、DriveLaW、DVGT-2、EponaV2 等。</p>
+<ul><li>两阶段规划（NAVSIM v2，navhard，两阶段伪闭环）：</li></ul>
+<p> - 指标同 EPDMS 体系，分 Stage 1（原场景）与 Stage 2（合成反应场景）。</p>
+<p> - GeoWAM 在非 RL/PDMS 监督方法中表现突出（具体数值原文表格给出，未在正文单独总结）。</p>
+<ul><li>评估条件总结：未来几何为开环式数据集评估；navtest 与 navhard 均采用闭环或两阶段伪闭环仿真评估。</li></ul></div>
 </section></article>
         <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
           <p class="detail-toc-title">阅读目录</p>

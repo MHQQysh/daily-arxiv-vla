@@ -437,6 +437,24 @@ def find_section(sections: List[Dict[str, str]], *keywords: str) -> Dict[str, st
     return None
 
 
+def compact_author_names(authors: str, limit: int = 3) -> str:
+    """压缩卡片上的作者列表，保留姓名边界，避免在姓名中间截断。"""
+    normalized = authors.strip()
+    if not normalized or normalized == "原文未明确对应":
+        return normalized
+
+    names = [
+        name.strip()
+        for name in re.split(r"\s*(?:,|，|、|;|；|\band\b)\s*", normalized)
+        if name.strip()
+    ]
+    if not names:
+        return normalized
+
+    compact = "、".join(names[:limit])
+    return f"{compact} 等" if len(names) > limit else compact
+
+
 def extract_research_unit(sections: List[Dict[str, str]]) -> str:
     section = find_section(sections, "研究单位")
     if not section:
@@ -444,9 +462,25 @@ def extract_research_unit(sections: List[Dict[str, str]]) -> str:
 
     bullets = section["bullets"]
     if bullets:
-        return truncate_text(bullets[0], 52)
+        first_unit = bullets[0].strip()
+        structured_match = re.match(
+            r"^(?:机构|学校|单位)\s*[:：]\s*(.+?)\s*[；;|｜]\s*作者\s*[:：]\s*(.+)$",
+            first_unit,
+        )
+        if structured_match:
+            institution = structured_match.group(1).strip()
+            authors = compact_author_names(structured_match.group(2))
+            return truncate_text(f"{institution} · {authors}", 76)
 
-    return truncate_text(section["plain_text"], 52)
+        parenthesized_authors = re.match(r"^(.+?)\s*[（(]([^（）()]+)[）)]$", first_unit)
+        if parenthesized_authors and re.search(r"[A-Za-z]", parenthesized_authors.group(2)):
+            institution = parenthesized_authors.group(1).strip(" ，,")
+            authors = compact_author_names(parenthesized_authors.group(2))
+            return truncate_text(f"{institution} · {authors}", 76)
+
+        return truncate_text(first_unit, 76)
+
+    return truncate_text(section["plain_text"], 76)
 
 
 def build_preview(sections: List[Dict[str, str]]) -> str:

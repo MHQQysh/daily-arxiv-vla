@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CARE: Camera-Residual Reserves for First Sightings in Adaptive LiDAR Sensing - 自动驾驶每日论文卡</title>
-    <meta name="description" content="任务：自适应LiDAR感知中的传感预算分配，聚焦于3D物体检测。 应用场景：自动驾驶中的LiDAR扫描，通过将有限射线预算集中在目标感兴趣区域，在降低数据量的同时维持检测精度。 研究问题：针对自适应LiDAR扫描中“首次目击欠分配”问题，即历史驱动扫描策略依赖过去目标轨迹，导致对从未被跟踪过的新出现物体检测延迟或遗漏。" />
+    <meta name="description" content="本文针对自适应 LiDAR 扫描中的“首次发现欠分配”问题展开研究。自适应 LiDAR 扫描通过将有限的传感预算集中在基于历史目标轨迹预测的兴趣区域，以降低数据量并保持检测精度。 任务：在自动驾驶场景下，基于固定射线预算（ray-cell budget）进行 LiDAR 扫描方向的自适应分配，目标是在预算受限时提升新进入视野物体（即首次出现、尚无历史轨迹的对象）的检测性能（首次发现召回）。 应用场景：自动驾驶中的 3D 目标检测，特别是对行人、车辆等新出现或遮挡物体的早期发现与安全响应。 研究问题：现有的基于历史驱动的扫描策略、随机/均匀采样策略以及纯相机引导策略，均未有效解决对无历史轨迹的新物体分配足量感知预算的问题。" />
 
     <script>
       (function() {
@@ -70,11 +70,11 @@
             <p class="eyebrow">论文详情</p>
             <h1 class="detail-page-title">CARE: Camera-Residual Reserves for First Sightings in Adaptive LiDAR Sensing</h1>
             <div class="detail-meta">2026-08-25 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.24282" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.24282" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.24282</span></div>
-            <p class="detail-summary">任务：自适应LiDAR感知中的传感预算分配，聚焦于3D物体检测。 应用场景：自动驾驶中的LiDAR扫描，通过将有限射线预算集中在目标感兴趣区域，在降低数据量的同时维持检测精度。 研究问题：针对自适应LiDAR扫描中“首次目击欠分配”问题，即历史驱动扫描策略依赖过去目标轨迹，导致对从未被跟踪过的新出现物体检测延迟或遗漏。</p>
+            <p class="detail-summary">本文针对自适应 LiDAR 扫描中的“首次发现欠分配”问题展开研究。自适应 LiDAR 扫描通过将有限的传感预算集中在基于历史目标轨迹预测的兴趣区域，以降低数据量并保持检测精度。 任务：在自动驾驶场景下，基于固定射线预算（ray-cell budget）进行 LiDAR 扫描方向的自适应分配，目标是在预算受限时提升新进入视野物体（即首次出现、尚无历史轨迹的对象）的检测性能（首次发现召回）。 应用场景：自动驾驶中的 3D 目标检测，特别是对行人、车辆等新出现或遮挡物体的早期发现与安全响应。 研究问题：现有的基于历史驱动的扫描策略、随机/均匀采样策略以及纯相机引导策略，均未有效解决对无历史轨迹的新物体分配足量感知预算的问题。</p>
             <div class="detail-micro-meta">
-              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">11 分钟读完</span>
               <span class="meta-pill">6 张阅读卡</span>
-              <span class="meta-pill">东京大学（The University of Tokyo），东京，日本</span>
+              <span class="meta-pill">The University of Tokyo, Tokyo, Japan · Jiacheng Gong、Yun Li、Ehsan Javanmar…</span>
             </div>
           </div>
         </div>
@@ -88,8 +88,8 @@
     <span class="reading-badge">一眼看懂</span>
     <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.24282/">封面预览</a>
   </div>
-  <p class="reading-intro-hook">任务：自适应LiDAR感知中的传感预算分配，聚焦于3D物体检测。</p>
-  <ul class="reading-intro-points"><li>任务：自适应LiDAR感知中的传感预算分配，聚焦于3D物体检测。</li><li>应用场景：自动驾驶中的LiDAR扫描，通过将有限射线预算集中在目标感兴趣区域，在降低数据量的同时维持检测精度。</li><li>研究问题：针对自适应LiDAR扫描中“首次目击欠分配”问题，即历史驱动扫描策略依赖过去目标轨迹，导致对从未被跟踪过的新出现物体检测延迟或遗漏。</li></ul>
+  <p class="reading-intro-hook">本文针对自适应 LiDAR 扫描中的“首次发现欠分配”问题展开研究。自适应 LiDAR 扫描通过将有限的传感预算集中在基于历史目标轨迹预测的兴趣区域，以降低数据量并保持检测精度。</p>
+  <ul class="reading-intro-points"><li>本文针对自适应 LiDAR 扫描中的“首次发现欠分配”问题展开研究。自适应 LiDAR 扫描通过将有限的传感预算集中在基于历史目标轨迹预测的兴趣区域，以降低数据量并保持检测精度。</li><li>任务：在自动驾驶场景下，基于固定射线预算（ray-cell budget）进行 LiDAR 扫描方向的自适应分配，目标是在预算受限时提升新进入视野物体（即首次出现、尚无历史轨迹的对象）的检测性能（首次发现召回）。</li><li>应用场景：自动驾驶中的 3D 目标检测，特别是对行人、车辆等新出现或遮挡物体的早期发现与安全响应。</li></ul>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -97,7 +97,7 @@
     <span class="reading-step-note">研究单位</span>
   </div>
   <h2>研究单位</h2>
-  <div class="reading-card-content"><ul><li>东京大学（The University of Tokyo），东京，日本</li><li>国立情报学研究所（National Institute of Informatics），东京，日本</li></ul></div>
+  <div class="reading-card-content"><ul><li>机构：The University of Tokyo, Tokyo, Japan；作者：Jiacheng Gong、Yun Li、Ehsan Javanmardi、Manabu Tsukada</li><li>机构：National Institute of Informatics, Tokyo, Japan；作者：Wencan Mao</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -105,7 +105,7 @@
     <span class="reading-step-note">论文概述</span>
   </div>
   <h2>论文概述</h2>
-  <div class="reading-card-content"><ul><li>任务：自适应LiDAR感知中的传感预算分配，聚焦于3D物体检测。</li><li>应用场景：自动驾驶中的LiDAR扫描，通过将有限射线预算集中在目标感兴趣区域，在降低数据量的同时维持检测精度。</li><li>研究问题：针对自适应LiDAR扫描中“首次目击欠分配”问题，即历史驱动扫描策略依赖过去目标轨迹，导致对从未被跟踪过的新出现物体检测延迟或遗漏。</li></ul></div>
+  <div class="reading-card-content"><ul><li>本文针对自适应 LiDAR 扫描中的“首次发现欠分配”问题展开研究。自适应 LiDAR 扫描通过将有限的传感预算集中在基于历史目标轨迹预测的兴趣区域，以降低数据量并保持检测精度。</li><li>任务：在自动驾驶场景下，基于固定射线预算（ray-cell budget）进行 LiDAR 扫描方向的自适应分配，目标是在预算受限时提升新进入视野物体（即首次出现、尚无历史轨迹的对象）的检测性能（首次发现召回）。</li><li>应用场景：自动驾驶中的 3D 目标检测，特别是对行人、车辆等新出现或遮挡物体的早期发现与安全响应。</li><li>研究问题：现有的基于历史驱动的扫描策略、随机/均匀采样策略以及纯相机引导策略，均未有效解决对无历史轨迹的新物体分配足量感知预算的问题。</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -113,7 +113,7 @@
     <span class="reading-step-note">核心贡献</span>
   </div>
   <h2>核心贡献</h2>
-  <div class="reading-card-content"><ul><li>提出无泄漏评估协议，在固定角射线单元预算下测量首次目击欠分配现象，包含严格的因果变体（延迟一个关键帧的相机提示），并使用配对逐场景自助法区间进行评分。</li><li>提出CARE分配规则，一种免训练的储备机制，将部分固定射线预算保留给当前相机检测中轨迹预测无法解释的方向，其余预算沿用历史策略，未使用的储备返回到共享随机基底。</li><li>在nuScenes验证集上（150场景、4,148事件），CARE在10%、20%、35%预算下分别将首次目击召回率提升5.2、5.2和4.3个百分点（相对历史策略），配对置信区间排除零。</li><li>提出安全有界遗忘模块，结合时间衰减遗忘与速度相关保护距离，从后退或静止且超出保护距离的目标释放预算；在严格预算下无保护的遗忘会显著损害近场召回率，而保护距离则保证遗忘的安全性。</li></ul></div>
+  <div class="reading-card-content"><ul><li>提出 CAmera-REsidual reserve (CARE)，一种无需训练（training-free）的预算分配规则：将固定射线预算的一部分保留给“当前相机检测中、但轨迹预测无法解释”的物体方向，剩余预算仍遵循基础历史策略，未被使用的保留预算则回流向共享的随机底层（random floor）。</li><li>提出一个无泄漏（leakage-free）的射线预算评估协议，在 nuScenes 验证集（150 场景，4,148 个事件）上度量历史驱动扫描的首次发现损失，并提供了严格因果（strict-causal）变体（相机线索延迟一个关键帧）。</li><li>在 10%、20%、35% 三种预算下，CARE 将首次发现召回率分别提升 5.2、5.2、4.3 个百分点（配对置信区间不含零），并公开报告首次发现与整体召回之间的预算依赖 Pareto 权衡。</li><li>提出安全有界遗忘（Safety-Bounded Forgetting, SBF）模块：对远离或静止的轨迹，依据速度相关的保护距离（guard distance）释放预算，并确保在预算紧张时不会显著损害近场召回。</li><li>在真实车辆上进行了端到端验证，并在闭环仿真中验证了 CARE 能更早检测到被遮挡的行人并更可靠地制动。</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -121,7 +121,14 @@
     <span class="reading-step-note">方法描述</span>
   </div>
   <h2>方法描述</h2>
-  <div class="reading-card-content"><ul><li>所属模块：LiDAR扫描策略/传感预算分配，位于感知前端，决定每个关键帧的扫描掩码。</li><li>输入传感器：相机（2D检测框）+ LiDAR（3D检测与跟踪）+ 自车运动信息。</li><li>场景表示：将LiDAR视场角离散化为角度网格，包含512个方位角列和32个仰角行，共N=16,384个发射单元；每个策略选择预算B内的子集S_t。</li><li>模型结构：采用共享预算分配器（exploitation + reserve + seeded floor），CARE包含残差储备构建和安全有界遗忘模块。</li><li>关键技术：将轨迹预测投影到相机图像，通过与2D检测框的同类别中心匹配判断是否“被解释”，未被解释的检测形成残差储备；匹配使用完整预测而非萎缩外壳以保证安全性；exploitation份额有独立上限保护；速度相关保护距离d_guard = k_safe(s_0 + v_ego·T_h)，采用两秒规则、智能驾驶模型和RSS模型参数设置。</li></ul></div>
+  <div class="reading-card-content"><ul><li>所属模块：自适应 LiDAR 扫描的预算分配策略（传感端、扫描策略层）。</li><li>输入传感器：相机（提供 2D 检测框）+ LiDAR（提供 3D 点云与轨迹）。</li><li>场景表示：将 LiDAR 视场角离散化为角度网格（azimuth × elevation），每个网格单元称为 firing cell；策略选择一个子集作为扫描掩码。</li><li>模型结构：</li></ul>
+<p> - 共享预算分配器（Shared Budget Allocator）：将预算分为开发份额（exploitation share，基于轨迹预测的角度凸包）、储备份额（reserve share，按优先级填充）和随机底层（seeded random floor）。</p>
+<p> - CARE 储备构建：将当前相机帧的 2D 检测框与投影到图像中的同类别轨迹预测中心进行匹配；未被任何预测中心落入的检测框构成残差集，映射为深度无关的角度楔形区，作为储备层。</p>
+<p> - 安全有界遗忘模块（SBF）：对满足“远离或静止”且“距离大于速度相关保护距离”条件的低危轨迹，按连续帧数衰减其凸包边距，被释放的单元流入残差储备。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 无泄漏选择：扫描掩码在观测当前帧点云返回之前确定，仅可使用过去信息和相机。</p>
+<p> - 位置不确定性边距：基于位置噪声和单元宽度的比值，为被遗忘的轨迹保留最小边距。</p>
+<p> - 失败处理：相机无可用检测时，CARE 自动等价于历史策略；虚假 2D 检测不会挤占开发份额单元。</p></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -129,7 +136,7 @@
     <span class="reading-step-note">数据集与资源</span>
   </div>
   <h2>数据集与资源</h2>
-  <div class="reading-card-content"><ul><li>数据集：nuScenes验证集，150个场景，6,019个关键帧，4,148个首次目击事件；另用20个不相交场景训练学习型分配基线。</li><li>仿真器：CARLA（封闭回路模拟研究）</li><li>检测器：2D使用冻结的YOLOX（公开置信度阈值0.25）；3D使用冻结的CenterPoint（标准十帧输入配置）</li><li>模型规模：原文未报告具体参数量</li><li>训练资源：仅学习基线需要在20个场景上训练，其余为免训练方法</li><li>实车平台：线控驱动车辆，配备旋转LiDAR、前向相机和GNSS</li></ul></div>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes 验证集（150 场景，6,019 关键帧，4,148 个首次发现事件）；另用 20 个不重叠场景仅用于训练学习型分配基线。</li><li>仿真器：CARLA 仿真器（用于闭环仿真研究，固定控制器基于检测物体制动，相机线索用带可注入假阴性和延迟的真值框）。</li><li>模型规模：原文未报告具体模型参数规模。</li><li>训练资源：原文未报告具体训练硬件资源。</li><li>实车平台：可驾驶（drive-by-wire）车辆底盘，配备一个旋转 LiDAR、一个前置相机和 GNSS。</li><li>检测器：冻结的 YOLOX 作为 2D 检测器（置信度阈值 0.25）；冻结的 CenterPoint 作为 3D 检测器（标准十帧输入配置）。</li></ul></div>
 </section>
 <section class="reading-card reading-card-section">
   <div class="reading-card-topline">
@@ -137,7 +144,16 @@
     <span class="reading-step-note">评估与结果</span>
   </div>
   <h2>评估与结果</h2>
-  <div class="reading-card-content"><ul><li>评估基准：nuScenes验证集，固定角射线单元预算（β∈{0.10, 0.20, 0.35}），诊断范围R=50m，类一致2m中心距离匹配；另报告官方nuScenes指标（mAP、NDS）。</li><li>评估指标：首次目击召回率、首次检测时间（TTFD）、总体召回率，均使用配对逐场景自助法（10^4次重采样）95%置信区间。</li><li>主要数值：CARE相对历史策略的首次目击召回率提升：+5.2 [4.3,6.2]、+5.2 [4.3,6.2]、+4.3 [3.5,5.1]（10%、20%、35%）；相对不确定性储备：+3.5 [2.6,4.4]、+2.7 [1.7,3.8]、+2.1 [1.1,3.1]。</li><li>对比方法：历史驱动扫描（history）、history+uniform、all-camera储备、不确定性储备、beam reduction、学习型评分器、随机点采样、最远点采样（非因果参考）。</li><li>开环/闭环条件：主要评估为开环仿真（nuScenes射线单元仿真），另含封闭回路CARLA模拟和实车案例研究。</li><li>封闭回路结果：在10%预算下，相机策略在约15m检测到穿行行人并在每个情节中制动，历史策略在11.9m检测且仅5个情节中3个制动；密集场景3%预算下CARE在15.1m检测到穿越者（达到全扫描界限），all-camera储备仅10.3m。</li><li>实车结果：104个新进入事件中，CARE比历史策略提前17个事件检测，延迟8个，其余相同；感知路径p99计算时间为97.9ms（预算100ms）。</li></ul></div>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集（开环评估）；CARLA 仿真（闭环评估）；真实车辆平台（案例研究，描述性结果）。</li><li>评估指标：首次发现召回率（first-sighting recall）、首次检测时间（TTFD，截尾于 6 帧）、整体召回率（overall recall）、官方 nuScenes 指标（mAP、NDS）、近场（20m 内）召回率。</li><li>关键数值：</li></ul>
+<p> - CARE 在 10%、20%、35% 预算下，首次发现召回率相对历史策略提升 +5.2 [4.3,6.2]、+5.2 [4.3,6.2]、+4.3 [3.5,5.1] 点（配对区间不含零）。</p>
+<p> - 相对不确定性储备，首次发现召回率提升 +3.5 [2.6,4.4]、+2.7 [1.7,3.8]、+2.1 [1.1,3.1] 点。</p>
+<p> - 整体召回率相对光束削减（beam reduction）提升 +17.4、+11.5、+6.4 点；相对学习型评分器提升 +2.4、+0.7、+0.6 点。</p>
+<p> - 相对历史策略，整体召回率在 10%、20%、35% 预算下变化为 -0.8、-0.5、+0.6 点（预算依赖的 Pareto 权衡）。</p>
+<p> - 全量扫描（100% 预算）达到 0.245 首次发现召回率和 0.494 整体召回率；CARE 在 35% 预算下恢复 88%（首次发现）和 94%（整体）的上限。</p>
+<p> - 在 10% 预算下，无保护遗忘相对无遗忘 CARE 在 20m 内近场召回损失 1.8 点（区间 [-2.9,-0.5]）；默认保护无显著损失。</p>
+<p> - 闭环仿真（10% 预算）：相机策略在约 15m 处检测到从停靠车辆后窜出的行人并在所有回合制动，经过距离 ≥5.7m；历史策略在 11.9m 处检测，5 回合中仅 3 次制动，经过距离 4.0m。</p>
+<p> - 稠密场景（3% 预算）：CARE 在 15.1m 处检测到横穿者（即全扫描界），全相机储备在 10.3m 处检测。</p>
+<ul><li>对比方法：history-driven scanning、history+uniform、all-camera reserve、uncertainty reserve、beam reduction、learned scorer、random/farthest point sampling（非因果下采样参考）。</li><li>开环/闭环/仿真/实车条件：开环评估在 nuScenes 数据集上通过射线单元仿真进行；闭环评估在 CARLA 仿真器中进行；实车验证在真实车辆平台上完成（描述性结果）。</li></ul></div>
 </section></article>
         <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
           <p class="detail-toc-title">阅读目录</p>

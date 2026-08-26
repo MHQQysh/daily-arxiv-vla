@@ -97,9 +97,35 @@ class BrandingTests(unittest.TestCase):
             "开环",
             "闭环",
             "不得补造",
+            "机构：机构全称；作者：与该机构对应的作者姓名",
+            "不得只写机构名",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, prompt)
+
+    def test_research_unit_label_combines_school_and_authors(self):
+        structured_sections = build_site.parse_markdown_sections(
+            "## 研究单位\n- 机构：清华大学；作者：张三、李四\n"
+        )
+        legacy_sections = build_site.parse_markdown_sections(
+            "## 研究单位\n- 香港理工大学（Weizhi Tao, Hailong Huang）\n"
+        )
+        long_sections = build_site.parse_markdown_sections(
+            "## 研究单位\n- 机构：东京大学；作者：Aki Ito, Bo Li, Chen Wu, Dana Xu\n"
+        )
+
+        self.assertEqual(
+            build_site.extract_research_unit(structured_sections),
+            "清华大学 · 张三、李四",
+        )
+        self.assertEqual(
+            build_site.extract_research_unit(legacy_sections),
+            "香港理工大学 · Weizhi Tao、Hailong Huang",
+        )
+        self.assertEqual(
+            build_site.extract_research_unit(long_sections),
+            "东京大学 · Aki Ito、Bo Li、Chen Wu 等",
+        )
 
     def test_summary_generation_uses_the_autonomous_driving_system_prompt(self):
         http_response = MagicMock()
