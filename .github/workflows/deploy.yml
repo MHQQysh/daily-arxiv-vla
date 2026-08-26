@@ -1,6 +1,7 @@
 name: 部署到 GitHub Pages
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master, main ]
   schedule:
