@@ -87,6 +87,8 @@ class CollectorTests(unittest.TestCase):
         self.assertIn("python -u scripts/arxiv_crawler.py", workflow)
         self.assertIn("add_new_papers:", workflow)
         self.assertIn("default: false", workflow)
+        self.assertNotIn("github.event_name != 'push'", workflow)
+        self.assertIn('github.event_name }}" = "schedule"', workflow)
         self.assertIn("timeout-minutes: 6", workflow)
         self.assertIn("ARXIV_REQUEST_TIMEOUT_SECONDS: 10", workflow)
         self.assertIn("ARXIV_RETRY_BASE_SECONDS: 5", workflow)
