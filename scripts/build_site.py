@@ -17,9 +17,10 @@ import os
 import re
 import shutil
 import sys
-from html import escape
+from html import escape, unescape
 from pathlib import Path
 from typing import Dict, List
+from urllib.parse import urlsplit
 
 try:
     from PIL import Image
@@ -200,14 +201,59 @@ def markdown_to_html(md: str) -> str:
     html_lines: List[str] = []
 
     def render_inline(text: str) -> str:
-        text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
-        text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
-        text = re.sub(
-            r"\[([^\]]+)\]\(([^)]+)\)",
-            r'<a href="\2" target="_blank" rel="noopener noreferrer">\1</a>',
-            text,
+        escaped_text = escape(text, quote=True)
+        replacements: List[tuple[str, str]] = []
+        token_prefix = "\x00markdown-inline-token-"
+        while token_prefix in escaped_text:
+            token_prefix += "_"
+
+        def stash(rendered_html: str) -> str:
+            token = f"{token_prefix}{len(replacements)}\x00"
+            replacements.append((token, rendered_html))
+            return token
+
+        def render_bold(value: str) -> str:
+            return re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", value)
+
+        escaped_text = re.sub(
+            r"`([^`]+)`",
+            lambda match: stash(f"<code>{match.group(1)}</code>"),
+            escaped_text,
         )
-        return text
+
+        def render_link(match: re.Match[str]) -> str:
+            label = render_bold(match.group(1))
+            escaped_target = match.group(2)
+            if token_prefix in escaped_target:
+                return label
+
+            target = unescape(escaped_target).strip()
+            try:
+                parsed_target = urlsplit(target)
+                hostname = parsed_target.hostname
+                parsed_target.port
+            except ValueError:
+                return label
+
+            if parsed_target.scheme.lower() not in {"http", "https"} or not hostname:
+                return label
+
+            safe_href = escape(target, quote=True)
+            return stash(
+                f'<a href="{safe_href}" target="_blank" '
+                f'rel="noopener noreferrer">{label}</a>'
+            )
+
+        escaped_text = re.sub(
+            r"\[([^\]]+)\]\(([^)]+)\)",
+            render_link,
+            escaped_text,
+        )
+        escaped_text = render_bold(escaped_text)
+
+        for token, rendered_html in reversed(replacements):
+            escaped_text = escaped_text.replace(token, rendered_html)
+        return escaped_text
 
     index = 0
     while index < len(lines):
@@ -784,7 +830,7 @@ def render_theme_toggle() -> str:
 
 def generate_index_html() -> str:
     keyword = get_arxiv_keyword_label()
-    site_title = f"{keyword} 每日论文卡"
+    site_title = f"{keyword}每日论文卡"
     site_description = f"{keyword} 论文精选卡片"
 
     return f"""<!doctype html>
@@ -815,7 +861,7 @@ def generate_index_html() -> str:
         <div class="header-content">
           <div class="header-copy">
             <p class="eyebrow">Autonomous Driving Research Feed</p>
-            <h1 class="site-title">{escape(keyword)} <span class="site-title-nowrap">每日论文卡</span></h1>
+            <h1 class="site-title">{escape(keyword)}<span class="site-title-nowrap">每日论文卡</span></h1>
             <p class="site-subtitle">聚合感知、定位、预测、规划、控制与端到端驾驶最新论文，提炼核心贡献、方法与实验结果。</p>
             <div class="hero-tags" aria-label="站点特点">
               <span class="hero-tag">中文精读</span>
@@ -863,7 +909,7 @@ def generate_index_html() -> str:
 
 def generate_paper_html(record: Dict[str, object], prev_record: Dict[str, object] | None = None, next_record: Dict[str, object] | None = None) -> str:
     keyword = get_arxiv_keyword_label()
-    site_title = f"{keyword} 每日论文卡"
+    site_title = f"{keyword}每日论文卡"
     page_title = str(record["title"])
     page_description = str(record["preview_text"] or f"{keyword} 论文详情")
     meta_html = render_detail_meta(record)
@@ -955,7 +1001,7 @@ def generate_paper_html(record: Dict[str, object], prev_record: Dict[str, object
 
 def generate_cover_html(record: Dict[str, object]) -> str:
     keyword = get_arxiv_keyword_label()
-    site_title = f"{keyword} 每日论文卡"
+    site_title = f"{keyword}每日论文卡"
     page_title = f"{record['title']} - 封面卡"
     description = str(record["hook_text"])
     cover_html = render_note_cover(record, standalone=True)
