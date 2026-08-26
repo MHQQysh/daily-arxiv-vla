@@ -6,7 +6,7 @@
 
 **Architecture:** 用独立主题配置维护七组 arXiv 查询，爬虫逐组执行、容错、相关性过滤并按规范化 arXiv ID 合并。保持 `papers.md` 四列协议和现有静态站生成链路不变，只调整摘要提示词、自动驾驶品牌文案、自动化配置和初始数据。
 
-**Tech Stack:** Python 3.9、`arxiv`、OpenAI 兼容 ModelScope API、原生 HTML/CSS/JavaScript、Playwright、GitHub Actions、GitHub Pages。
+**Tech Stack:** Python 3.9、`arxiv`、DeepSeek 官方 OpenAI 兼容 API、原生 HTML/CSS/JavaScript、Playwright、GitHub Actions、GitHub Pages。
 
 ## Global Constraints
 
@@ -14,7 +14,8 @@
 - 前台继续展示统一论文流，不增加分类标签或分类页面。
 - 检索必须覆盖综合、感知、定位与建图、预测、规划与决策、控制、端到端/基础模型七组方向。
 - 清除全部旧 VLA/WAM 论文表格、详情页、封面和图片缓存，然后用自动驾驶论文重建。
-- ModelScope 令牌只能来自本地环境变量或 GitHub Secret `MODELSCOPE_ACCESS_TOKEN`，不得写入仓库或日志。
+- DeepSeek 令牌只能来自本地环境变量或 GitHub Secret `DEEPSEEK_API_KEY`，不得写入仓库或日志。
+- 摘要请求必须直连 `https://api.deepseek.com` 并默认使用 `deepseek-v4-flash`；不得保留 ModelScope 或多供应商回退。
 - 单组检索失败不能中止其余主题；全部主题失败必须返回失败。
 - 默认首次每组 80 条、每日每组 10 条，允许环境变量覆盖。
 - Python 代码兼容工作流指定的 Python 3.9，不使用 `X | None` 等 3.10 才支持的注解。
@@ -26,13 +27,15 @@
 - Create `scripts/autonomous_driving_topics.py`: 七组查询、允许类别和相关性判定的唯一来源。
 - Modify `scripts/arxiv_crawler.py`: 多主题执行、跨主题去重、排序、部分失败容错和空库初始化判断。
 - Create `tests/test_arxiv_crawler.py`: 查询配置、相关性、去重、排序和失败语义测试。
-- Modify `scripts/generate_summaries.py`: 自动驾驶专用结构化摘要提示词。
+- Modify `scripts/generate_summaries.py`: 自动驾驶专用结构化摘要提示词和 DeepSeek 官方 API 客户端。
+- Modify `test_api.py`: DeepSeek Flash 手工连通性测试。
 - Modify `scripts/build_site.py`: 自动驾驶品牌、SEO、英雄区和搜索示例。
 - Modify `scripts/modern_ui.css`: 英雄区背景水印从 `VLA` 改为 `AD`。
 - Modify `scripts/fetch_paper_images.py`: 抓图 User-Agent 更名。
 - Modify `package.json`, `package-lock.json`: 包名改为 `daily-arxiv-autodrive`。
 - Create `tests/test_branding.py`: 摘要提示词和生成 HTML 的品牌回归测试。
-- Modify `.env.example`, `.github/workflows/deploy.yml`, `README.md`: 新默认参数、无令牌可部署行为和使用说明。
+- Create `tests/test_deepseek_config.py`: DeepSeek 地址、密钥、Flash 模型和无回退行为测试。
+- Modify `.env.example`, `.github/workflows/deploy.yml`, `README.md`: DeepSeek 配置、新抓取默认参数、无令牌可部署行为和使用说明。
 - Modify `papers.md`, generated `site/**`: 清空旧数据，实时回填自动驾驶论文并重建站点。
 
 ---
@@ -466,22 +469,107 @@ git commit -m "feat: retheme paper site for autonomous driving"
 
 ---
 
-### Task 3: Update automation and operator documentation
+### Task 3: Migrate summaries to DeepSeek Flash and update automation/docs
 
 **Files:**
+- Modify: `scripts/generate_summaries.py`
+- Modify: `test_api.py`
+- Create: `tests/test_deepseek_config.py`
 - Modify: `.env.example`
 - Modify: `.github/workflows/deploy.yml`
 - Modify: `README.md`
 
 **Interfaces:**
+- Produces: `DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com"`
+- Produces: `DEEPSEEK_DEFAULT_MODEL = "deepseek-v4-flash"`
+- Produces: `get_client() -> OpenAI` using only `DEEPSEEK_API_KEY` and the DeepSeek official endpoint.
+- Produces: `get_model() -> str` with the Flash default and optional `DEEPSEEK_MODEL` override.
 - Consumes: multi-query defaults from `scripts/autonomous_driving_topics.py`.
-- Produces: a workflow that deploys placeholder summaries safely when `MODELSCOPE_ACCESS_TOKEN` is absent.
+- Produces: a workflow that safely deploys pending summaries when `DEEPSEEK_API_KEY` is absent.
 
-- [ ] **Step 1: Update example configuration**
+- [ ] **Step 1: Add failing DeepSeek-only configuration tests**
 
-Replace the crawler block in `.env.example` with:
+Create `tests/test_deepseek_config.py` with mocked environment/client tests that assert:
+
+```python
+import os
+import sys
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import generate_summaries
+
+
+class DeepSeekConfigTests(unittest.TestCase):
+    def test_defaults_are_official_flash(self):
+        with patch.dict(os.environ, {"DEEPSEEK_API_KEY": "test-key"}, clear=True):
+            self.assertEqual(generate_summaries.get_model(), "deepseek-v4-flash")
+            with patch.object(generate_summaries, "OpenAI") as openai_class:
+                generate_summaries.get_client()
+        openai_class.assert_called_once_with(
+            api_key="test-key",
+            base_url="https://api.deepseek.com",
+        )
+
+    def test_missing_deepseek_key_is_rejected(self):
+        with patch.dict(os.environ, {}, clear=True):
+            with self.assertRaisesRegex(RuntimeError, "DEEPSEEK_API_KEY"):
+                generate_summaries.get_client()
+
+    def test_model_override_stays_with_deepseek_configuration(self):
+        with patch.dict(os.environ, {"DEEPSEEK_MODEL": "deepseek-v4-flash"}, clear=True):
+            self.assertEqual(generate_summaries.get_model(), "deepseek-v4-flash")
+
+    def test_no_modelscope_configuration_remains(self):
+        source = (ROOT / "scripts" / "generate_summaries.py").read_text(encoding="utf-8")
+        self.assertNotIn("MODELSCOPE", source)
+        self.assertNotIn("api-inference.modelscope.cn", source)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+- [ ] **Step 2: Replace ModelScope and model fallback with one DeepSeek model**
+
+In `scripts/generate_summaries.py`, define:
+
+```python
+DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com"
+DEEPSEEK_DEFAULT_MODEL = "deepseek-v4-flash"
+
+
+def get_client() -> OpenAI:
+    load_dotenv()
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if not api_key:
+        raise RuntimeError("缺少环境变量 DEEPSEEK_API_KEY")
+    base_url = os.getenv("DEEPSEEK_BASE_URL", DEEPSEEK_DEFAULT_BASE_URL).strip()
+    return OpenAI(api_key=api_key, base_url=base_url)
+
+
+def get_model() -> str:
+    return (os.getenv("DEEPSEEK_MODEL") or DEEPSEEK_DEFAULT_MODEL).strip()
+```
+
+Remove `MODELSCOPE_*`, `MODELSCOPE_MODELS`, `RATE_LIMITED_MODELS`, model-list iteration and cross-model fallback. `generate_summary_for_link()` must make retry attempts against exactly `model or get_model()` and return an empty string after that one model exhausts its retries. Preserve the automatic-driving prompt, HTML retry logic, output cleanup and batch writes.
+
+Update `test_api.py` to read `DEEPSEEK_API_KEY`, use `https://api.deepseek.com`, and call `deepseek-v4-flash`; it must fail clearly before network access when the key is missing.
+
+- [ ] **Step 3: Update example configuration**
+
+Use these provider and crawler blocks in `.env.example`:
 
 ```dotenv
+# DeepSeek 官方 API 配置
+DEEPSEEK_API_KEY=your_api_key_here
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-v4-flash
+
 # arXiv 爬虫配置：不设置 ARXIV_QUERY_KEYWORD 时启用七组自动驾驶检索
 ARXIV_KEYWORD_LABEL=自动驾驶
 ARXIV_INIT_RESULTS=80
@@ -493,16 +581,9 @@ ARXIV_MAX_RETRIES=3
 # ARXIV_QUERY_KEYWORD=all:"your custom query"
 ```
 
-- [ ] **Step 2: Make GitHub Actions use topic defaults and tolerate a missing summary token**
+- [ ] **Step 4: Make GitHub Actions use DeepSeek Flash and topic defaults**
 
-In `.github/workflows/deploy.yml`:
-
-- Add `python -m unittest discover -s tests -v` immediately after dependency installation.
-- Remove `ARXIV_QUERY_KEYWORD` from crawler and build steps.
-- Set `ARXIV_INIT_RESULTS: 80` and `ARXIV_DAILY_RESULTS: 10` for the crawler.
-- Replace the summary step body with this shell guard while retaining the existing model list:
-
-The test and crawler steps must be exactly:
+The test, crawler and summary steps must be:
 
 ```yaml
       - name: 运行单元测试
@@ -517,76 +598,44 @@ The test and crawler steps must be exactly:
           ARXIV_DELAY_SECONDS: 15
           ARXIV_RETRY_BASE_SECONDS: 60
           ARXIV_MAX_RETRIES: 4
-```
 
-```yaml
-      - name: 生成论文摘要
+      - name: 使用 DeepSeek Flash 生成论文摘要
         run: |
-          if [ -z "$MODELSCOPE_ACCESS_TOKEN" ]; then
-            echo "未配置 MODELSCOPE_ACCESS_TOKEN，本次保留待生成摘要并继续部署"
+          if [ -z "$DEEPSEEK_API_KEY" ]; then
+            echo "未配置 DEEPSEEK_API_KEY，本次保留待生成摘要并继续部署"
             exit 0
           fi
           python scripts/generate_summaries.py
         env:
-          MODELSCOPE_ACCESS_TOKEN: ${{ secrets.MODELSCOPE_ACCESS_TOKEN }}
-          MODELSCOPE_MODELS: moonshotai/Kimi-K3,deepseek-ai/DeepSeek-V4-Flash-0731,Tencent-Hunyuan/Hy3,stepfun-ai/Step-3.7-Flash,ZhipuAI/GLM-5.2,deepseek-ai/DeepSeek-V4-Pro
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_BASE_URL: https://api.deepseek.com
+          DEEPSEEK_MODEL: deepseek-v4-flash
 ```
 
-- [ ] **Step 3: Rewrite README around the automatic-driving behavior**
+Remove `ARXIV_QUERY_KEYWORD` from crawler/build and remove every `MODELSCOPE_*` workflow variable.
 
-Replace the title, introduction, feature list and configuration explanation with the following exact content, then retain the existing build, preview, GA4 and Pages command sections below it:
+- [ ] **Step 5: Rewrite README around autonomous driving and DeepSeek**
 
-```markdown
-# 每日自动驾驶论文站
+Document the seven automatic-driving topics, per-topic merging/deduplication, direct DeepSeek traffic path, `DEEPSEEK_API_KEY`, official base URL, `deepseek-v4-flash`, custom arXiv override, unchanged image/build/GA/Pages commands, and the behavior when the key is absent. State explicitly that the OpenAI Python package is only an API-compatible client and requests go directly to DeepSeek.
 
-这是一个自动收集、中文精读并展示自动驾驶 arXiv 论文的静态网站。页面保留统一的每日论文流，后台分别检索多个技术方向并在写入前去重。
-
-## 覆盖方向
-
-- 综合自动驾驶
-- 感知：BEV、三维检测、跟踪、车道、占用预测与多传感器融合
-- 定位与建图：SLAM、里程计和高精地图
-- 运动与行为预测
-- 规划与决策
-- 车辆控制
-- 端到端驾驶、基础模型与世界模型
-
-## 功能特性
-
-- 每日分方向抓取 arXiv 最新论文，跨方向按 arXiv ID 去重并按日期排序
-- 使用 ModelScope OpenAI 兼容 API 生成自动驾驶专用中文摘要
-- 提取论文原图、生成详情页并支持标题、机构、摘要和 arXiv ID 搜索
-- GitHub Actions 每日北京时间 12:00 自动更新并部署 GitHub Pages
-
-## 检索配置
-
-未设置 `ARXIV_QUERY_KEYWORD` 时，爬虫使用 `scripts/autonomous_driving_topics.py` 中的七组默认查询。设置该变量后只执行这一条自定义查询。
-
-- `ARXIV_INIT_RESULTS`：首次初始化时每个方向的最大结果数，默认 `80`
-- `ARXIV_DAILY_RESULTS`：每日更新时每个方向的最大结果数，默认 `10`
-- `ARXIV_PAGE_SIZE`：单次 arXiv 请求页大小，默认 `20`
-- `ARXIV_DELAY_SECONDS`：arXiv 请求间隔，默认 `10`
-- `ARXIV_KEYWORD_LABEL`：页面显示名称，默认 `自动驾驶`
-
-`MODELSCOPE_ACCESS_TOKEN` 只用于生成摘要。未配置时论文仍会收录和部署，摘要保留“待生成”，配置 Secret 后由后续任务继续补齐。
-```
-
-- [ ] **Step 4: Validate automation text and residual source branding**
+- [ ] **Step 6: Validate provider isolation, automation and tests**
 
 Run:
 
 ```powershell
+python -m unittest tests.test_deepseek_config -v
 python -m unittest discover -s tests -v
-rg -n 'ARXIV_QUERY_KEYWORD.*VLA|VLA/WAM|World Action Model Feed|OpenVLA' .env.example README.md .github scripts package.json package-lock.json
+rg -n -i 'MODELSCOPE|api-inference\.modelscope\.cn|ARXIV_QUERY_KEYWORD.*VLA|VLA/WAM|World Action Model Feed|OpenVLA' .env.example README.md .github scripts test_api.py package.json package-lock.json
+rg -n 'DEEPSEEK_API_KEY|https://api\.deepseek\.com|deepseek-v4-flash' .env.example README.md .github scripts test_api.py
 ```
 
-Expected: tests PASS and `rg` returns no matches.
+Expected: all tests PASS; the first `rg` returns no production matches; the second confirms the exact DeepSeek key, endpoint and Flash model. Do not make a live API request unless `DEEPSEEK_API_KEY` is already configured, and never print its value.
 
-- [ ] **Step 5: Commit automation and documentation**
+- [ ] **Step 7: Commit provider, automation and documentation together**
 
 ```powershell
-git add .env.example .github/workflows/deploy.yml README.md
-git commit -m "docs: configure autonomous driving updates"
+git add scripts/generate_summaries.py test_api.py tests/test_deepseek_config.py .env.example .github/workflows/deploy.yml README.md
+git commit -m "feat: use DeepSeek Flash for paper summaries"
 ```
 
 ---
@@ -657,10 +706,10 @@ Expected: output lists seven topic names, reports initialization rather than dai
 - [ ] **Step 4: Generate summaries only when a token is already configured**
 
 ```powershell
-if (Test-Path Env:MODELSCOPE_ACCESS_TOKEN) {
+if (Test-Path Env:DEEPSEEK_API_KEY) {
     python scripts/generate_summaries.py
 } else {
-    Write-Output 'MODELSCOPE_ACCESS_TOKEN is not configured; summaries remain pending.'
+    Write-Output 'DEEPSEEK_API_KEY is not configured; summaries remain pending.'
 }
 ```
 
@@ -735,7 +784,7 @@ Confirm visually that the hero/search two-column layout, date groups, cards, fig
 
 ```powershell
 rg -n -i 'VLA/WAM|World Action Model Feed|OpenVLA|all:"VLA"' README.md .env.example .github scripts package.json package-lock.json site/index.html
-rg --pcre2 -n 'MODELSCOPE_ACCESS_TOKEN\s*=\s*(?!your_api_key_here)' -g '*.env' -g '*.example' .
+rg --pcre2 -n 'DEEPSEEK_API_KEY\s*=\s*(?!your_api_key_here)' -g '*.env' -g '*.example' .
 python -m unittest discover -s tests -v
 git diff --check
 git status --short
@@ -800,7 +849,7 @@ Expected: `origin/master` points to the final local commit. If Git Credential Ma
 
 - [ ] **Step 4: Enable and verify GitHub Pages**
 
-In the fork's `Settings -> Pages`, select `GitHub Actions` as the source. In `Actions`, open the workflow run created by the push and verify test, crawl, build, upload and deploy steps. If `MODELSCOPE_ACCESS_TOKEN` is absent, verify that the summary step reports the documented skip and that deployment still succeeds.
+In the fork's `Settings -> Pages`, select `GitHub Actions` as the source. In `Actions`, open the workflow run created by the push and verify test, crawl, build, upload and deploy steps. If `DEEPSEEK_API_KEY` is absent, verify that the summary step reports the documented skip and that deployment still succeeds.
 
 - [ ] **Step 5: Verify the public artifact and report exact evidence**
 

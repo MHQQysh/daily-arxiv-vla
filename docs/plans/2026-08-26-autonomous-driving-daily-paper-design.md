@@ -19,7 +19,7 @@
 
 1. Python 爬虫从 arXiv 获取论文。
 2. `papers.md` 作为四列表格数据源，字段保持日期、标题、链接、简要总结。
-3. ModelScope OpenAI 兼容接口根据论文 HTML 生成中文摘要。
+3. DeepSeek 官方 OpenAI 兼容接口根据论文 HTML 生成中文摘要。
 4. 图片脚本提取论文首图，并在必要时使用 Playwright 截图兜底。
 5. `build_site.py` 生成静态首页、数据文件和论文详情页。
 6. GitHub Actions 在代码提交和每日定时任务中更新数据并部署 GitHub Pages。
@@ -65,6 +65,15 @@
 
 摘要生成失败时保留“待生成”，后续每日任务继续补齐，不阻塞新论文收录和静态站构建。
 
+### DeepSeek API 边界
+
+- 请求直接发送到 DeepSeek 官方 OpenAI 兼容地址 `https://api.deepseek.com`。
+- 默认且部署时固定使用模型标识 `deepseek-v4-flash`。
+- Python 继续使用官方文档支持的 OpenAI 兼容客户端，但流量不经过 OpenAI、ModelScope 或其他模型代理。
+- 删除 ModelScope 环境变量、多模型列表和跨供应商回退逻辑。
+- 本地使用 `DEEPSEEK_API_KEY`，GitHub Actions 使用同名 Secret；可选 `DEEPSEEK_BASE_URL` 和 `DEEPSEEK_MODEL` 默认分别为官方地址和 Flash 模型。
+- 未配置 DeepSeek 密钥时跳过摘要生成，保留“待生成”并继续构建和部署。
+
 ## 页面与文案
 
 页面保持当前视觉和交互，只替换主题相关内容：
@@ -95,4 +104,4 @@
 
 ## 部署与密钥边界
 
-仓库内只保留 `.env.example`。ModelScope 访问令牌通过 GitHub Actions Secret `MODELSCOPE_ACCESS_TOKEN` 注入，不在本地提交、日志或共享配置中持久化。推送前将上游仓库保留为 `upstream`，将用户 fork 设置为 `origin`。若本机没有可用 GitHub 身份验证，代码和本地验证照常完成，最终仅暂停在需要用户授权的推送步骤。
+仓库内只保留 `.env.example`。DeepSeek 访问令牌通过 GitHub Actions Secret `DEEPSEEK_API_KEY` 注入，不在本地提交、日志或共享配置中持久化。推送前将上游仓库保留为 `upstream`，将用户 fork 设置为 `origin`。若本机没有可用 GitHub 身份验证，代码和本地验证照常完成，最终仅暂停在需要用户授权的推送步骤。
