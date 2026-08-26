@@ -2,14 +2,14 @@ import os
 import re
 import time
 from datetime import datetime
-from typing import List, Set
+from typing import Dict, List, Optional, Set
 
 import arxiv
 
-DEFAULT_ARXIV_QUERY = (
-	'all:"VLA" OR all:"Vision-Language-Action" OR '
-	'all:"World Action Model" OR all:"World-Action Model" OR '
-	'all:"action world model"'
+from autonomous_driving_topics import (
+	ALLOWED_PRIMARY_CATEGORIES,
+	get_topic_queries,
+	is_relevant_paper,
 )
 
 
@@ -17,40 +17,34 @@ class ArxivCollector:
 	"""
 	/**
 	 * @class ArxivCollector
-	 * @description 每日自动获取 arXiv 上包含指定关键词的论文，并维护项目根目录下的
+	 * @description 每日分主题获取 arXiv 上的自动驾驶论文，并维护项目根目录下的
 	 * `papers.md` 表格（列：日期、标题、链接）。首次运行无数据时执行初始化，之后每日增量并去重。
-	 * 关键词可通过环境变量 ARXIV_QUERY_KEYWORD 配置，默认同时检索 VLA 与 World Action Model 相关短语。
+	 * 可通过环境变量 ARXIV_QUERY_KEYWORD 临时覆盖默认的七组自动驾驶检索主题。
 	 */
 	"""
 
-	# 允许的主类目（与现有脚本一致）
-	_ALLOWED_PRIMARY_CATEGORIES = {
-		"cs.CV",
-		"cs.AI",
-		"cs.CL",
-		"cs.LG",
-		"cs.MM",
-		"cs.RO",
-	}
+	_ALLOWED_PRIMARY_CATEGORIES = ALLOWED_PRIMARY_CATEGORIES
 
-	def __init__(self, papers_path: str, init_results: int = None, daily_results: int = None, query_keyword: str = None):
+	def __init__(self, papers_path: str, init_results: int = None, daily_results: int = None,
+				 query_keyword: str = None, topic_queries: Optional[Dict[str, str]] = None):
 		"""
 		初始化 ArxivCollector
 		参数可通过环境变量配置：
-		- ARXIV_QUERY_KEYWORD: 搜索关键词（默认同时检索 VLA 与 World Action Model）
-		- ARXIV_INIT_RESULTS: 初始化抓取数量（默认 500）
-		- ARXIV_DAILY_RESULTS: 每日抓取数量（默认 20）
+		- ARXIV_QUERY_KEYWORD: 可选的单条自定义搜索查询
+		- ARXIV_INIT_RESULTS: 初始化时每个主题抓取数量（默认 80）
+		- ARXIV_DAILY_RESULTS: 每日每个主题抓取数量（默认 10）
 		- ARXIV_PAGE_SIZE: 单次请求返回数量（默认 20，避免 arxiv 库默认请求 100 条触发限流）
 		- ARXIV_DELAY_SECONDS: arXiv 请求间隔（默认 10 秒）
 		"""
 		self.papers_path = papers_path
-		self.init_results = init_results or int(os.getenv("ARXIV_INIT_RESULTS", "500"))
-		self.daily_results = daily_results or int(os.getenv("ARXIV_DAILY_RESULTS", "20"))
-		self.query_keyword = query_keyword or os.getenv("ARXIV_QUERY_KEYWORD") or DEFAULT_ARXIV_QUERY
+		self.init_results = init_results or int(os.getenv("ARXIV_INIT_RESULTS", "80"))
+		self.daily_results = daily_results or int(os.getenv("ARXIV_DAILY_RESULTS", "10"))
+		override = query_keyword or os.getenv("ARXIV_QUERY_KEYWORD")
+		self.topic_queries = topic_queries or get_topic_queries(override)
 		self.arxiv_page_size = int(os.getenv("ARXIV_PAGE_SIZE", "20"))
 		self.arxiv_delay_seconds = float(os.getenv("ARXIV_DELAY_SECONDS", "10"))
 
-	def _search(self, max_results: int) -> List[arxiv.Result]:
+	def _search(self, query: str, max_results: int) -> List[arxiv.Result]:
 		"""
 		搜索 arXiv 论文，带重试机制
 		"""
@@ -63,28 +57,53 @@ class ArxivCollector:
 			num_retries=0,
 		)
 
+		last_error = None
 		for attempt in range(max_retries):
 			try:
 				search = arxiv.Search(
-					query=self.query_keyword,
+					query=query,
 					max_results=max_results,
 					sort_by=arxiv.SortCriterion.SubmittedDate,
 					sort_order=arxiv.SortOrder.Descending,
 				)
 				return list(client.results(search))
-			except Exception as e:
+			except Exception as exc:
+				last_error = exc
 				if attempt < max_retries - 1:
 					wait_seconds = retry_base_seconds * (2 ** attempt)
 					print(
-						f"arXiv搜索失败，等待 {wait_seconds:.0f} 秒后重试 "
-						f"{attempt + 1}/{max_retries}: {repr(e)}"
+						f"arXiv 搜索失败，{wait_seconds:.0f} 秒后重试 "
+						f"{attempt + 1}/{max_retries}: {exc!r}"
 					)
 					time.sleep(wait_seconds)
-				else:
-					print(f"arXiv搜索失败，已达最大重试次数: {repr(e)}")
-					return []
+		raise RuntimeError(f"arXiv 搜索达到最大重试次数: {last_error!r}")
 
-		return []
+	def _collect(self, max_results: int) -> List[arxiv.Result]:
+		merged: Dict[str, arxiv.Result] = {}
+		failed_topics = []
+		for topic_name, query in self.topic_queries.items():
+			print(f"检索主题: {topic_name}")
+			try:
+				results = self._search(query, max_results)
+			except Exception as exc:
+				failed_topics.append(topic_name)
+				print(f"主题检索失败，继续其他主题: {topic_name}: {exc!r}")
+				continue
+			for result in results:
+				if result.primary_category not in self._ALLOWED_PRIMARY_CATEGORIES:
+					continue
+				if not is_relevant_paper(result.title or "", result.summary or ""):
+					continue
+				normalized_link = self._normalize_link(result.entry_id)
+				current = merged.get(normalized_link)
+				if current is None or result.published > current.published:
+					merged[normalized_link] = result
+		if len(failed_topics) == len(self.topic_queries):
+			raise RuntimeError(f"全部 {len(self.topic_queries)} 个自动驾驶主题检索失败")
+		return sorted(merged.values(), key=lambda result: result.published, reverse=True)
+
+	def has_existing_papers(self) -> bool:
+		return bool(self._load_existing_links())
 
 	def _filter_categories(self, results: List[arxiv.Result]) -> List[arxiv.Result]:
 		"""
@@ -206,7 +225,7 @@ class ArxivCollector:
 		"""
 		self._ensure_md_header()
 		existing = self._load_existing_links()
-		results = self._filter_categories(self._search(self.init_results))
+		results = self._collect(self.init_results)
 		rows: List[str] = []
 		for r in results:
 			# 使用规范化链接进行去重比较
@@ -227,7 +246,7 @@ class ArxivCollector:
 		"""
 		self._ensure_md_header()
 		existing = self._load_existing_links()
-		results = self._filter_categories(self._search(self.daily_results))
+		results = self._collect(self.daily_results)
 		rows: List[str] = []
 		for r in results:
 			# 使用规范化链接进行去重比较
@@ -253,17 +272,12 @@ def _default_papers_path() -> str:
 
 
 if __name__ == "__main__":
-	import sys
-	
 	papers_md = _default_papers_path()
 	collector = ArxivCollector(papers_md)
-	
-	# 检查是否已有 papers.md 文件，决定运行模式
-	if os.path.exists(papers_md) and os.path.getsize(papers_md) > 0:
-		# 文件存在且不为空，执行每日增量更新
+
+	if collector.has_existing_papers():
 		count = collector.run_daily()
 		print(f"每日更新完成，新增 {count} 篇论文，写入 {papers_md}")
 	else:
-		# 文件不存在或为空，执行初始化
 		count = collector.initialize()
 		print(f"初始化完成，新增 {count} 篇论文，写入 {papers_md}")
