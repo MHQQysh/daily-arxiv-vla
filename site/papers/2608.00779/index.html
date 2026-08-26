@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SIPTraj: Map-Free End-to-End Trajectory Prediction via Physics-Guided Scene Interaction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。 核心研究问题：在去除 HD map 后，如何利用传感器生成的鸟瞰图（BEV）特征补偿缺失的车道拓扑与可行驶区域先验，同时保证预测轨迹的物理可行性（运动学一致性）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.00779">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.00779.webp" alt="SIPTraj: Map-Free End-to-End Trajectory Prediction via Physics-Guided Scene Interaction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SIPTraj: Map-Free End-to-End Trajectory Prediction via Physics-Guided Scene Interaction</h1>
+            <div class="detail-meta">2026-08-01 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.00779" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.00779" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.00779</span></div>
+            <p class="detail-summary">本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。 核心研究问题：在去除 HD map 后，如何利用传感器生成的鸟瞰图（BEV）特征补偿缺失的车道拓扑与可行驶区域先验，同时保证预测轨迹的物理可行性（运动学一致性）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">华南师范大学行知书院数据科学与工程学院 · Feifei Liu、Zejun Wei、Haozhe Wang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.00779/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。</p>
+  <ul class="reading-intro-points"><li>本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。</li><li>核心研究问题：在去除 HD map 后，如何利用传感器生成的鸟瞰图（BEV）特征补偿缺失的车道拓扑与可行驶区域先验，同时保证预测轨迹的物理可行性（运动学一致性）。</li><li>提出 SIPTraj 框架，通过统一设计原则将场景接地编码与运动学状态条件化解码相结合，显式补偿去除 HD map 后丢失的结构先验。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：华南师范大学行知书院数据科学与工程学院；作者：Feifei Liu, Zejun Wei, Haozhe Wang, Yazhi Ye, Yuying Zhang</li><li>机构：香港科技大学电子与计算机工程系；作者：Jintao Cheng</li><li>机构：澳门大学；作者：Chi Man Vong</li><li>机构：国防科技大学智能科学学院；作者：Xieyuanli Chen</li><li>机构：华南师范大学电子科学与工程学院；作者：Xiaoyu Tang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。</li><li>核心研究问题：在去除 HD map 后，如何利用传感器生成的鸟瞰图（BEV）特征补偿缺失的车道拓扑与可行驶区域先验，同时保证预测轨迹的物理可行性（运动学一致性）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SIPTraj 框架，通过统一设计原则将场景接地编码与运动学状态条件化解码相结合，显式补偿去除 HD map 后丢失的结构先验。</li><li>设计 Hierarchical Agent-Scene Encoder（HASE），通过多阶段渐进式双向耦合（Agent-to-Scene Aggregation、Scene-to-Agent Grounding and Relation Refinement、Late Scene-Context Fusion）替代先前 map-free 方法中的单步融合，使智能体表示在其局部 BEV 环境中充分接地。</li><li>设计 Physics-Guided Iterative Decoder（PGID），将每个智能体的瞬时运动学状态编码为可学习查询注入解码器每一层，使物理约束塑造内部表示而非仅作用于输出轨迹。</li><li>引入加速度、加加速度和曲率一致性损失，并通过梯度路径穿过坐标残差与物理交叉注意力分支，使内部物理编码与坐标优化目标协同适应。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：无高精地图的端到端轨迹预测，涵盖传感器编码、场景编码与解码模块。</li><li>输入传感器：相机图像与 LiDAR 点云（经 BEVFusion 骨干融合）；原文未报告是否使用其他传感器。</li><li>场景表示：传感器生成的密集 BEV 特征图，无显式车道拓扑或可行驶区域先验。</li><li>模型结构：HASE 包含三个耦合阶段（Agent-to-Scene Aggregation 通过 agent-conditioned queries 与 deformable attention 读取 BEV；Scene-to-Agent Grounding 检索最近场景 token 并写回智能体表示，配合 relation-biased self-attention 细化智能体间交互；Late Scene-Context Fusion 让智能体重新访问完整场景记忆）。PGID 包含 Mode Initialization（由运动学描述子生成动态意图点）、Physics-Conditioned Attention Refinement（PCAR，产生轨迹级坐标校正）、Iterative Physics-Guided Decoding（模式自注意力、物理交叉注意力、场景交叉注意力、BEV deformable attention 与 GMM 头）。</li><li>关键技术：物理描述子（速度、加速、航向、曲率）作为 6 维向量嵌入解码器；GateFuse 与 FiLM 特征调制；deformable attention。所有智能体特征在 target-centric 坐标系中表示，隐藏维度 256。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（约 32k 训练 / 9k 验证样本，2s 历史预测 6s 未来）、Argoverse 2 Sensor（自提取 35k 训练 / 7k 验证样本，同 2s/6s 设置，nuScenes 的历史数据从 2Hz 插值到 10Hz）</li><li>仿真器：原文未报告。</li><li>模型规模：统一隐藏维度 D=256；原文未报告参数量。</li><li>训练资源：PyTorch 实现，AdamW 优化器（权重衰减 1e-2），初始学习率 2e-4，线性 warmup 5 轮后余弦退火 15 轮，batch size 12，3 块 NVIDIA A100 GPU；BEVFusion 传感器编码器在轨迹预测训练中冻结。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集、Argoverse 2 Sensor 验证集；开环评估，非闭环。</li><li>评估指标：minADE_K、minFDE_K（K∈{5,10}）、Miss Rate（MR），均为越低越好。</li><li>关键数值（nuScenes）：SIPTraj 达 mADE5=1.1367、mADE10=0.8766、mFDE1=6.6205、mFDE10=2.0079、MR=0.2749；相比 map-free 方法 BEVTraj，mADE5 降低 21.9%、mADE10 降低 7.1%、MR 降低 10.8%；相比 map-based 方法 DeMo、Autobot、Wayformer，SIPTraj 在多项指标上更优。</li><li>关键数值（Argoverse 2 Sensor）：SIPTraj 达 mADE5=0.7438、mADE10=0.4635、mFDE1=4.8421、mFDE10=1.3422、MR=0.1654，在所有 map-free 与 map-based 方法中五项指标均为最优；相对 BEVTraj，mADE5 降低 24.3%、mADE10 降低 25.8%、MR 降低 12.8%。</li><li>对比方法：Autobot、MTR、Wayformer、DeMo（map-based），BEVTraj（map-free）。</li><li>消融研究（nuScenes 验证集）：HASE 各阶段（A1→A2→A3）渐进提升，S2A+Rel 增益最大（mADE5 从 1.3821 降至 1.2754）；PGID 中 PQ 与 PL 互补且都必要，完整 B3 相比 B1/B2 在 mFDE1 上分别提升 4.0%/2.4%（6.6205 vs 6.8934/6.7810）。</li><li>定性分析：相比 AgentFormer 与 P2T，SIPTraj 在直线与弯道场景中产生更紧凑的模式分布、更接近真值的端点预测，且多模态轨迹与道路曲率和驾驶意图对齐。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.01133/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Policy Optimality Measurement for Multi-Vehicle Decision-Making: From Extrinsic Indicators to Intrinsic Quality</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.14727/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">WorkDrive: Roadwork Chain of Causation for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

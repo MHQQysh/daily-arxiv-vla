@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WorkDrive: Roadwork Chain of Causation for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。 应用场景为施工区自动驾驶，其中车道线、永久性标志等常规视觉线索缺失或被改变，锥桶、隔离栏等临时交通控制设施重新定义了可行驶区域。 研究问题为：VLM 能检测施工区物体，但缺乏将施工区观测与正确规划决策相连接的因果知识，导致推理锚定在预训练中的熟悉元素上，规划轨迹偏差大。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.14727">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.14727.webp" alt="WorkDrive: Roadwork Chain of Causation for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">WorkDrive: Roadwork Chain of Causation for Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.14727" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.14727" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.14727</span></div>
+            <p class="detail-summary">论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。 应用场景为施工区自动驾驶，其中车道线、永久性标志等常规视觉线索缺失或被改变，锥桶、隔离栏等临时交通控制设施重新定义了可行驶区域。 研究问题为：VLM 能检测施工区物体，但缺乏将施工区观测与正确规划决策相连接的因果知识，导致推理锚定在预训练中的熟悉元素上，规划轨迹偏差大。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Peking University · Tianyi Jiang、Sihan Yang、Ming Lu 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.14727/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。</li><li>应用场景为施工区自动驾驶，其中车道线、永久性标志等常规视觉线索缺失或被改变，锥桶、隔离栏等临时交通控制设施重新定义了可行驶区域。</li><li>研究问题为：VLM 能检测施工区物体，但缺乏将施工区观测与正确规划决策相连接的因果知识，导致推理锚定在预训练中的熟悉元素上，规划轨迹偏差大。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Peking University；作者：Tianyi Jiang, Sihan Yang, Ming Lu, Wentao Zhang（通讯作者）</li><li>机构：Xiaomi EV；作者：Wen Zhang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。</li><li>应用场景为施工区自动驾驶，其中车道线、永久性标志等常规视觉线索缺失或被改变，锥桶、隔离栏等临时交通控制设施重新定义了可行驶区域。</li><li>研究问题为：VLM 能检测施工区物体，但缺乏将施工区观测与正确规划决策相连接的因果知识，导致推理锚定在预训练中的熟悉元素上，规划轨迹偏差大。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个感知锚定的因果推理标注框架，通过自动多任务感知管线（深度估计、开放词汇检测、实例分割、跨帧跟踪）提取结构化场景事实，并将其注入 Chain-of-Causation (CoC) 标注管线，将标注模型的注意力重定向到施工区专用元素上。</li><li>展示了单一 GRPO 奖励（衡量横向元动作与预测轨迹之间的一致性）足以在监督微调之上进一步提升规划性能，无需显式轨迹奖励。</li><li>感知锚定推理使 ADE 降低 9.0%，一致性驱动的 GRPO 进一步带来 3.0% 的改进，实现逐步提升；代码与推理数据集将公开发布。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶推理与规划框架，包含感知、标注与训练对齐三阶段。</li><li>输入传感器：单目摄像头视频帧（RGB），帧间隔固定为 0.4 秒。</li><li>场景表示：ROADWork 数据集的 2D 像素轨迹格式，模型输入为关键帧及前两帧历史帧（共 3 帧）加上 5 个已观测轨迹点，输出 15 个未来轨迹航点。</li><li>模型结构：基于 Qwen3-VL-8B-Instruct 的 VLM，通过 LoRA 进行监督微调，随后进行 GRPO 全参数强化学习。</li><li>关键技术：自动驾驶感知管线采用 Depth Anything 3 (DA3-Giant) 估计单目深度、Rex-Omni 进行开放词汇检测（45 个施工区专用类别 + 11 个通用交通类别）、SAM 3 进行实例分割与嵌入提取、基于 IoU 与外观相似性的跨帧跟踪；CoC 标注管线包含四步：闭集决策分类（纵/横向各 28 类）、因果因素识别、因果链合成（纯文本输入）、自动质量评估（GPT-5.2high 作为评判模型，分数 s≥8 保留）；训练阶段采用 SFT（LoRA 秩 64，α=128，10 轮，学习率 2×10⁻⁵）+ GRPO（G=4，学习率 1×10⁻⁶，1 轮，无 KL 正则，奖励为格式奖励与元动作一致性的乘积）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：ROADWork（最大公开施工区数据集，4,375 个视频、18 个城市）。</li><li>数据划分：基于 32 字符十六进制场景 ID 的 clip 级划分，城市分层采样，训练集 801 个 clips（14,331 个关键帧样本），验证集 110 个 clips（2,032 个关键帧样本）。</li><li>标注模型：Qwen3-VL-32B-Instruct 或 GPT-5.2high 作为标注 LLM，GPT-5.2high 作为唯一质量评判模型。</li><li>训练资源：原文未报告具体 GPU 型号与数量。</li><li>实车平台：原文未报告。</li><li>仿真器：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：ROADWork 数据集的验证集。</li><li>评估指标：ADE@5、ADE@10、ADE@15（主指标）、FDE、碰撞率 CR、Meta-Consistency（元动作一致性），所有位移均在像素坐标下测量。</li><li>关键数值（最佳设置：GPT-5.2high + 感知锚定）：轨迹基线 SFT 的 ADE@15 为 12.10，+推理 11.87，+R+Meta-action 11.01（−9.0%），+GRPO 10.68（再 −3.0%）；FDE 从 42.34 降至 35.87；CR 从 14.66% 降至 7.03%；Meta-Consistency 从 80.2% 升至 100.0%。</li><li>对比方法：零样本 VLM 基线，包括 Qwen3-VL-8B-Instruct（ADE@15 18.05）、Qwen3-VL-32B-Instruct（19.25）、GPT-5.2high（16.09）、Gemini 3 Pro（19.44）；REACT-Drive 因未开源无法复现。</li><li>评估条件：开环轨迹预测评估（非闭环），无仿真器或实车测试；还包含消融研究（标注来源×感知锚定 2×2 因子设计）以及人类评估（100 个样本，GPT-5.2high 评判与人类评分 MAE 仅 0.62，通过率一致性 92%）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.00779/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SIPTraj: Map-Free End-to-End Trajectory Prediction via Physics-Guided Scene Interaction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.10975/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Real-Time Rulebook-Aware Nonlinear MPC for Autonomous Driving with Priority-Biased Tiered Slacks</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

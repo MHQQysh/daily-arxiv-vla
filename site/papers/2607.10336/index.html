@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PrismAD: Decoupled Planning via Semantic Mixture-of-Planners for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决端到端自动驾驶中的规划问题。 现有规划器通常将异构场景 token 聚合到一个耦合的表示空间中，导致单个规划分支被迫同时建模智能体交互、道路几何和驾驶意图，从而削弱因子特定推理并模糊不同规划线索的贡献。 论文提出 PrismAD，一个基于语义混合规划器（Semantic Mixture-of-Planners）的解耦端到端自动驾驶框架。 应用场景涵盖标准开环轨迹预测、安全关键场景的闭环规划评估以及转弯场景的规划鲁棒性评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.10336">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.10336.webp" alt="PrismAD: Decoupled Planning via Semantic Mixture-of-Planners for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决端到端自动驾驶中的规划问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PrismAD: Decoupled Planning via Semantic Mixture-of-Planners for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.10336" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.10336" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.10336</span></div>
+            <p class="detail-summary">该论文解决端到端自动驾驶中的规划问题。 现有规划器通常将异构场景 token 聚合到一个耦合的表示空间中，导致单个规划分支被迫同时建模智能体交互、道路几何和驾驶意图，从而削弱因子特定推理并模糊不同规划线索的贡献。 论文提出 PrismAD，一个基于语义混合规划器（Semantic Mixture-of-Planners）的解耦端到端自动驾驶框架。 应用场景涵盖标准开环轨迹预测、安全关键场景的闭环规划评估以及转弯场景的规划鲁棒性评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">15 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.10336/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决端到端自动驾驶中的规划问题。</p>
+  <ul class="reading-intro-points"><li>该论文解决端到端自动驾驶中的规划问题。</li><li>现有规划器通常将异构场景 token 聚合到一个耦合的表示空间中，导致单个规划分支被迫同时建模智能体交互、道路几何和驾驶意图，从而削弱因子特定推理并模糊不同规划线索的贡献。</li><li>论文提出 PrismAD，一个基于语义混合规划器（Semantic Mixture-of-Planners）的解耦端到端自动驾驶框架。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China; State Key Laboratory of Intelligent Green Vehicle and Mobility, Tsinghua University, Beijing 100084, China; School of Cyberspace Security, Southeast University, Nanjing 210096, China；作者：Kang Ding</li><li>机构：School of Automotive Engineering, Wuhan University of Technology, Hubei Key Laboratory of Advanced Technology for Automotive Components, Hubei Collaborative Innovation Center for Automotive Components Technology, and Hubei Research Center for New Energy &amp; Intelligent Connected Vehicles, Wuhan 430070, China；作者：Zhigui Lin</li><li>机构：School of Computer Science and Engineering, Southeast University, Nanjing 210096, China；作者：Hongsong Wang</li><li>机构：School of Cyberspace Security, Southeast University, Nanjing 210096, China；作者：Jie Gui</li><li>机构：School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China; State Key Laboratory of Intelligent Green Vehicle and Mobility, Tsinghua University, Beijing 100084, China; School of Computer Science and Engineering, Southeast University, Nanjing 210096, China；作者：Qi Liu</li><li>机构：SAIC GM Wuling Automobile Co., Ltd., Guangxi Laboratory of New Energy Automobile, and Guangxi Key Laboratory of Automobile Artificial Intelligence, Liuzhou 545000, China；作者：Zhe Wang</li><li>机构：SAIC GM Wuling Automobile Co., Ltd., Guangxi Laboratory of New Energy Automobile, and Guangxi Key Laboratory of Automobile Artificial Intelligence, Liuzhou 545000, China；作者：Luqi Tang</li><li>机构：School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China；作者：Lei He</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决端到端自动驾驶中的规划问题。</li><li>现有规划器通常将异构场景 token 聚合到一个耦合的表示空间中，导致单个规划分支被迫同时建模智能体交互、道路几何和驾驶意图，从而削弱因子特定推理并模糊不同规划线索的贡献。</li><li>论文提出 PrismAD，一个基于语义混合规划器（Semantic Mixture-of-Planners）的解耦端到端自动驾驶框架。</li><li>应用场景涵盖标准开环轨迹预测、安全关键场景的闭环规划评估以及转弯场景的规划鲁棒性评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出语义 token 分区策略，将场景 token 显式解耦为交互（interaction）、几何（geometry）和意图（intent）三组，实现因子感知的规划表示学习。</li><li>设计语义混合规划器，每个专家都是一个完整的运动规划分支，而非插入中间网络层的通用专家，使专业化发生在规划层面而非低层特征变换阶段。</li><li>引入语义感知路由器，为运动预测和自车规划生成独立的专家权重，支持自适应融合和稀疏专家激活，并通过带噪声门控的稀疏 top-K 激活提升路由鲁棒性并减少不必要的专家计算。</li><li>在 nuScenes、NeuroNCAP 和 Turning-nuScenes 三个基准上验证 PrismAD 能一致地提升强规划基线（SparseDrive 和 DiffusionDrive）的开环准确率、闭环安全性和转弯场景鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶中的规划模块（decoupled planning）。</li><li>输入传感器：仅使用多视角相机图像作为视觉输入，配合导航指令信息。</li><li>场景表示：稀疏场景 token，划分为交互 token（来自高置信度动态目标 query）、几何 token（来自地图元素 query）和意图 token（来自指令嵌入和自车状态 token），每个组与自车 token 拼接。</li><li>模型结构：基于 SparseDrive 或 DiffusionDrive 框架；包含感知主干、语义 token 分区、三个独立参数的规划专家（交互专家、几何专家、意图专家）和语义感知路由器。每个专家包含时间注意力、分支内 token 交互、前馈层及运动与规划解码器；专家间不进行交叉专家注意力，防止语义泄漏。</li><li>关键技术：语义 token 分区；解耦专家表示学习（每个专家学习因子级规划表示）；语义感知路由器（以自车查询和场景 token 估计专家重要性，为运动和规划产生独立路由权重）；带噪声门控的稀疏 top-K 激活（交互专家始终激活，几何和意图专家按得分选择）；采用三阶段训练策略（基础端到端训练 → 专家独立训练 → 冻结专家仅训练路由器）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes 验证集（大规模真实世界驾驶数据集，1000 个场景，每个约 20 秒）；NeuroNCAP 闭环基准（从 nuScenes 日志构建安全关键闭环节景，含 stationary、frontal、side 三类碰撞场景）；Turning-nuScenes（由 nuScenes 验证集转弯样本构建，17 个场景，680 个样本）。</li><li>模型规模：原文未报告完整模型总参数量；稀疏激活消融中报告 Top-1/Top-2/Top-3 对应参数量为 89M/101M/112M。</li><li>训练资源：4 块 GPU，总批大小 24；AdamW 优化器，学习率 1×10⁻⁴，权重衰减 1×10⁻³；专家阶段训练 24 轮，随后路由器仅训练 5 轮。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集（开环规划）、NeuroNCAP（闭环安全）、Turning-nuScenes（开环转弯规划）。</li><li>评估指标：开环采用平均 L2 位移误差和碰撞率；闭环采用 NeuroNCAP 分数和碰撞率，按场景类型分别报告并给出平均值。</li><li>关键数值：</li></ul>
+<p> - nuScenes 开环：PrismAD-SparseDrive 平均 L2 从 0.61m 降至 0.59m，碰撞率从 0.08% 降至 0.07%；PrismAD-DiffusionDrive 平均 L2 从 0.57m 降至 0.55m，碰撞率从 0.08% 降至 0.04%。</p>
+<p> - NeuroNCAP 闭环：PrismAD-SparseDrive 平均分从 0.92 升至 1.83（相对提升 98.9%），平均碰撞率从 93.9% 降至 82.0%（相对降低 12.7%）；PrismAD-DiffusionDrive 平均分从 3.00 升至 3.28（相对提升 9.3%），碰撞率从 51.9% 降至 44.1%（相对降低 15.0%）。</p>
+<p> - Turning-nuScenes：PrismAD-SparseDrive 平均 L2 从 0.86m 降至 0.71m，碰撞率从 0.40% 降至 0.07%；PrismAD-DiffusionDrive 平均 L2 从 0.62m 降至 0.59m，碰撞率从 0.06% 降至 0.01%。</p>
+<p> - 消融实验：三专家全用时碰撞率最低（0.042%）；噪声门控融合优于均匀融合（碰撞率 0.04% vs 0.12%）；Top-2 稀疏激活在效率与质量间取得较好权衡（L2 0.55m、碰撞率 0.05%、FPS 6.0）。</p>
+<ul><li>对比方法：VAD、UniAD、GenAD、MomAD、UncAD、BridgeAD、BEV-Planner、CausalVAD、FlowAD、SparseDrive、DiffusionDrive、Drive-WM、LAW、OccWorld、ORION、OmniDrive、UniDriveVLA、Impromptu-VLA、Reasoning-VLA 等。</li><li>条件：开环评估在 nuScenes 和 Turning-nuScenes 上进行；闭环评估在 NeuroNCAP 仿真基准上进行；推理速度（FPS）在 NVIDIA Tesla A100 GPU 上测量。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.11964/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">LIDAR-AD: A Decoder-Free Latent-Interaction Dreamer with Action-Residual Chains for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.08745/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">AUTOPILOT VQA: Benchmarking Vision-Language Models for Incident-Centric Dashcam Understanding</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,5 +1,585 @@
 [
   {
+    "date": "2026-08-03",
+    "title": "Deferred Exposure of Future Trajectories for Verifiable Reasoning in Autonomous Driving VLMs",
+    "link": "https://arxiv.org/abs/2608.01755",
+    "arxiv_id": "2608.01755",
+    "detail_path": "papers/2608.01755/",
+    "cover_path": "covers/2608.01755/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.01755.webp",
+    "paper_image_full_path": "assets/paper-images/2608.01755.webp",
+    "preview_text": "解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。 提出并验证了“轨迹锚定偏差”：在现有自动驾驶链式思维（CoT）标注流程中，教师模型被暴露于日志的真实未来轨迹，导致其“事后合理化”而非基于场景证据推理，产生因果不忠实的推理和更严重的幻觉。 为规避该偏差，引入可验证的候选轨迹基准 AD-MCQ 和延迟暴露未来轨迹的强化学习算法 DEFT-RLVR，使轨迹作为决策后的验证目标而非决策前的前提。",
+    "research_unit": "原文未明确标注各作者所属机构 · Zixuan Huang、Yang Zhou、Kaixuan Wang 等",
+    "hook_text": "解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。",
+    "key_points": [
+      "解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。",
+      "提出并验证了“轨迹锚定偏差”：在现有自动驾驶链式思维（CoT）标注流程中，教师模型被暴露于日志的真实未来轨迹，导致其“事后合理化”而非基于场景证据推理，产生因果不忠实的推理和更严重的幻觉。",
+      "为规避该偏差，引入可验证的候选轨迹基准 AD-MCQ 和延迟暴露未来轨迹的强化学习算法 DEFT-RLVR，使轨迹作为决策后的验证目标而非决策前的前提。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-02",
+    "title": "PRISM: Privileged Probabilistic Latent Supervision for End-to-End Autonomous Driving Motion Planning",
+    "link": "https://arxiv.org/abs/2608.01201",
+    "arxiv_id": "2608.01201",
+    "detail_path": "papers/2608.01201/",
+    "cover_path": "covers/2608.01201/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.01201.webp",
+    "paper_image_full_path": "assets/paper-images/2608.01201.webp",
+    "preview_text": "本文针对端到端自动驾驶（E2E AD）运动规划任务，研究中间潜在特征的正则化问题。 论文指出标准端到端模型的训练仅依赖输出级监督，导致隐层梯度弱、表征学习不充分。 论文揭示了近期方法VLP的性能提升并非来自视觉-语言模型的推理能力，而源于训练过程中端到端模型与真值（GT）数据之间建立的潜在连接。 基于此洞察，论文提出一种概率深度监督框架PRISM，通过GT数据直接正则化中间潜在表征，替代昂贵的文本编码器。",
+    "research_unit": "University of Tübingen · Volodymyr Havrylov、Andreas Geiger",
+    "hook_text": "本文针对端到端自动驾驶（E2E AD）运动规划任务，研究中间潜在特征的正则化问题。",
+    "key_points": [
+      "本文针对端到端自动驾驶（E2E AD）运动规划任务，研究中间潜在特征的正则化问题。",
+      "论文指出标准端到端模型的训练仅依赖输出级监督，导致隐层梯度弱、表征学习不充分。",
+      "论文揭示了近期方法VLP的性能提升并非来自视觉-语言模型的推理能力，而源于训练过程中端到端模型与真值（GT）数据之间建立的潜在连接。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-08-02",
+    "title": "Policy Optimality Measurement for Multi-Vehicle Decision-Making: From Extrinsic Indicators to Intrinsic Quality",
+    "link": "https://arxiv.org/abs/2608.01133",
+    "arxiv_id": "2608.01133",
+    "detail_path": "papers/2608.01133/",
+    "cover_path": "covers/2608.01133/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.01133.webp",
+    "paper_image_full_path": "assets/paper-images/2608.01133.webp",
+    "preview_text": "该论文针对自动驾驶中多车辆协同决策问题，提出一套基于信息论的策略最优性诊断框架。 传统MARL评估依赖外部统计指标（如奖励曲线、成功率），这些指标常掩盖策略内在退化与算法盲区。 论文利用完全收敛的蒙特卡洛树搜索作为渐近Oracle，建立理论基准分布，并通过前向KL散度构建有界策略最优性分数，实现对多智能体策略内在质量的量化诊断。 通过将指标语义解耦为横向与纵向维度，形成“语义显微镜”，用于空间与时间维度的策略诊断，并将超参数调优转化为可视化轨迹优化。",
+    "research_unit": "同济大学汽车学院（School of Automotive Studies, Tongji University） · Ye Han、Lijun Zh…",
+    "hook_text": "该论文针对自动驾驶中多车辆协同决策问题，提出一套基于信息论的策略最优性诊断框架。",
+    "key_points": [
+      "该论文针对自动驾驶中多车辆协同决策问题，提出一套基于信息论的策略最优性诊断框架。",
+      "传统MARL评估依赖外部统计指标（如奖励曲线、成功率），这些指标常掩盖策略内在退化与算法盲区。",
+      "论文利用完全收敛的蒙特卡洛树搜索作为渐近Oracle，建立理论基准分布，并通过前向KL散度构建有界策略最优性分数，实现对多智能体策略内在质量的量化诊断。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-01",
+    "title": "SIPTraj: Map-Free End-to-End Trajectory Prediction via Physics-Guided Scene Interaction",
+    "link": "https://arxiv.org/abs/2608.00779",
+    "arxiv_id": "2608.00779",
+    "detail_path": "papers/2608.00779/",
+    "cover_path": "covers/2608.00779/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.00779.webp",
+    "paper_image_full_path": "assets/paper-images/2608.00779.webp",
+    "preview_text": "本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。 核心研究问题：在去除 HD map 后，如何利用传感器生成的鸟瞰图（BEV）特征补偿缺失的车道拓扑与可行驶区域先验，同时保证预测轨迹的物理可行性（运动学一致性）。",
+    "research_unit": "华南师范大学行知书院数据科学与工程学院 · Feifei Liu、Zejun Wei、Haozhe Wang 等",
+    "hook_text": "本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。",
+    "key_points": [
+      "本文提出 SIPTraj，一个无高精地图（HD map）的端到端轨迹预测框架，面向自动驾驶场景中周围车辆、行人、自行车等智能体的未来运动预测任务。",
+      "核心研究问题：在去除 HD map 后，如何利用传感器生成的鸟瞰图（BEV）特征补偿缺失的车道拓扑与可行驶区域先验，同时保证预测轨迹的物理可行性（运动学一致性）。",
+      "提出 SIPTraj 框架，通过统一设计原则将场景接地编码与运动学状态条件化解码相结合，显式补偿去除 HD map 后丢失的结构先验。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-16",
+    "title": "WorkDrive: Roadwork Chain of Causation for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.14727",
+    "arxiv_id": "2607.14727",
+    "detail_path": "papers/2607.14727/",
+    "cover_path": "covers/2607.14727/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.14727.webp",
+    "paper_image_full_path": "assets/paper-images/2607.14727.webp",
+    "preview_text": "论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。 应用场景为施工区自动驾驶，其中车道线、永久性标志等常规视觉线索缺失或被改变，锥桶、隔离栏等临时交通控制设施重新定义了可行驶区域。 研究问题为：VLM 能检测施工区物体，但缺乏将施工区观测与正确规划决策相连接的因果知识，导致推理锚定在预训练中的熟悉元素上，规划轨迹偏差大。",
+    "research_unit": "Peking University · Tianyi Jiang、Sihan Yang、Ming Lu 等",
+    "hook_text": "论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。",
+    "key_points": [
+      "论文解决自动驾驶视觉语言模型（VLM）在道路施工区（roadwork zones）这一长尾、分布外场景下的规划决策问题。",
+      "应用场景为施工区自动驾驶，其中车道线、永久性标志等常规视觉线索缺失或被改变，锥桶、隔离栏等临时交通控制设施重新定义了可行驶区域。",
+      "研究问题为：VLM 能检测施工区物体，但缺乏将施工区观测与正确规划决策相连接的因果知识，导致推理锚定在预训练中的熟悉元素上，规划轨迹偏差大。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-13",
+    "title": "Real-Time Rulebook-Aware Nonlinear MPC for Autonomous Driving with Priority-Biased Tiered Slacks",
+    "link": "https://arxiv.org/abs/2607.10975",
+    "arxiv_id": "2607.10975",
+    "detail_path": "papers/2607.10975/",
+    "cover_path": "covers/2607.10975/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.10975.webp",
+    "paper_image_full_path": "assets/paper-images/2607.10975.webp",
+    "preview_text": "本文解决自动驾驶运动规划中的多优先级规则冲突求解问题，即在一个控制器中折衷安全、法规、舒适和效率等相互竞争的驾驶规则，并保证决策过程可审计。 提出 W-SQP（weighted soft-constrained quadratic-penalty NMPC）控制器，将九种驾驶规则族编译为四层共享松弛变量的非线性规划，以 10 Hz 的规划频率运行，支持实时在线求解。 同时提出一个与日志无关的评估协议，将“驾驶质量”与“对记录人类轨迹的模仿度”分离，避免评估指标因模仿偏差而失真。",
+    "research_unit": "TORC Robotics LLC, an independent subsidiary of Daimler Truck AG, USA · Had…",
+    "hook_text": "本文解决自动驾驶运动规划中的多优先级规则冲突求解问题，即在一个控制器中折衷安全、法规、舒适和效率等相互竞争的驾驶规则，并保证决策过程可审计。",
+    "key_points": [
+      "本文解决自动驾驶运动规划中的多优先级规则冲突求解问题，即在一个控制器中折衷安全、法规、舒适和效率等相互竞争的驾驶规则，并保证决策过程可审计。",
+      "提出 W-SQP（weighted soft-constrained quadratic-penalty NMPC）控制器，将九种驾驶规则族编译为四层共享松弛变量的非线性规划，以 10 Hz 的规划频率运行，支持实时在线求解。",
+      "同时提出一个与日志无关的评估协议，将“驾驶质量”与“对记录人类轨迹的模仿度”分离，避免评估指标因模仿偏差而失真。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-12",
+    "title": "LIDAR-AD: A Decoder-Free Latent-Interaction Dreamer with Action-Residual Chains for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.11964",
+    "arxiv_id": "2607.11964",
+    "detail_path": "papers/2607.11964/",
+    "cover_path": "covers/2607.11964/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.11964.webp",
+    "paper_image_full_path": "assets/paper-images/2607.11964.webp",
+    "preview_text": "解决自动驾驶中的长时程闭环决策任务，应用场景包括自动驾驶车辆在动态交通环境中的复杂驾驶行为。 研究问题聚焦于多源观测中的控制无关冗余问题、连续动作建模子优化问题，以及世界模型在长时程动力学预测中的不足。论文提出 LIDAR-AD 框架，通过无解码器的潜在交互表征、残差动作世界模型和动作残差链对比学习，提升闭环驾驶决策的性能。",
+    "research_unit": "东南大学机械工程学院 · Yongzhi Liu、Yang Xiao、Zeng Kang 等",
+    "hook_text": "解决自动驾驶中的长时程闭环决策任务，应用场景包括自动驾驶车辆在动态交通环境中的复杂驾驶行为。",
+    "key_points": [
+      "解决自动驾驶中的长时程闭环决策任务，应用场景包括自动驾驶车辆在动态交通环境中的复杂驾驶行为。",
+      "研究问题聚焦于多源观测中的控制无关冗余问题、连续动作建模子优化问题，以及世界模型在长时程动力学预测中的不足。论文提出 LIDAR-AD 框架，通过无解码器的潜在交互表征、残差动作世界模型和动作残差链对比学习，提升闭环驾驶决策的性能。",
+      "提出 Decoder-Free Latent Interaction Representation (DLIR)，在无观测重建的情况下，通过风险加权的冗余减少目标对齐交互感知的潜在嵌入，促进风险相关关系的紧凑表征。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-11",
+    "title": "PrismAD: Decoupled Planning via Semantic Mixture-of-Planners for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.10336",
+    "arxiv_id": "2607.10336",
+    "detail_path": "papers/2607.10336/",
+    "cover_path": "covers/2607.10336/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.10336.webp",
+    "paper_image_full_path": "assets/paper-images/2607.10336.webp",
+    "preview_text": "该论文解决端到端自动驾驶中的规划问题。 现有规划器通常将异构场景 token 聚合到一个耦合的表示空间中，导致单个规划分支被迫同时建模智能体交互、道路几何和驾驶意图，从而削弱因子特定推理并模糊不同规划线索的贡献。 论文提出 PrismAD，一个基于语义混合规划器（Semantic Mixture-of-Planners）的解耦端到端自动驾驶框架。 应用场景涵盖标准开环轨迹预测、安全关键场景的闭环规划评估以及转弯场景的规划鲁棒性评估。",
+    "research_unit": "School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China…",
+    "hook_text": "该论文解决端到端自动驾驶中的规划问题。",
+    "key_points": [
+      "该论文解决端到端自动驾驶中的规划问题。",
+      "现有规划器通常将异构场景 token 聚合到一个耦合的表示空间中，导致单个规划分支被迫同时建模智能体交互、道路几何和驾驶意图，从而削弱因子特定推理并模糊不同规划线索的贡献。",
+      "论文提出 PrismAD，一个基于语义混合规划器（Semantic Mixture-of-Planners）的解耦端到端自动驾驶框架。"
+    ],
+    "reading_minutes": 15,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-09",
+    "title": "AUTOPILOT VQA: Benchmarking Vision-Language Models for Incident-Centric Dashcam Understanding",
+    "link": "https://arxiv.org/abs/2607.08745",
+    "arxiv_id": "2607.08745",
+    "detail_path": "papers/2607.08745/",
+    "cover_path": "covers/2607.08745/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.08745.webp",
+    "paper_image_full_path": "assets/paper-images/2607.08745.webp",
+    "preview_text": "论文提出 AUTOPILOT-VQA，一个面向行车记录仪（dashcam）视频的以事故为中心（incident-centric）的视觉问答（VQA）基准。 任务为自动驾驶场景理解中的结构化问答，覆盖真实世界驾驶事故及近事故（near-incident）场景。 研究问题包括：评估视觉-语言模型（VLM）、大语言模型（LLM）和多模态大语言模型（MLLM）在安全关键推理、场景上下文理解、事故因果推理等方面的能力，超越简单的目标识别，实现时间上可解释、安全感知的推理。 该基准作为 AUTOPILOT CVPR 2026 竞赛的一部分发布，提供标准化评估框架。",
+    "research_unit": "University of Colorado Colorado Springs · Siddharth Damodharan、Ali Alshami、…",
+    "hook_text": "论文提出 AUTOPILOT-VQA，一个面向行车记录仪（dashcam）视频的以事故为中心（incident-centric）的视觉问答（VQA）基准。",
+    "key_points": [
+      "论文提出 AUTOPILOT-VQA，一个面向行车记录仪（dashcam）视频的以事故为中心（incident-centric）的视觉问答（VQA）基准。",
+      "任务为自动驾驶场景理解中的结构化问答，覆盖真实世界驾驶事故及近事故（near-incident）场景。",
+      "研究问题包括：评估视觉-语言模型（VLM）、大语言模型（LLM）和多模态大语言模型（MLLM）在安全关键推理、场景上下文理解、事故因果推理等方面的能力，超越简单的目标识别，实现时间上可解释、安全感知的推理。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-09",
+    "title": "INTENT: An LSTM Framework for Vehicle Intention Prediction in Intersection Scenarios with Comprehensive Ablation Analysis",
+    "link": "https://arxiv.org/abs/2607.08316",
+    "arxiv_id": "2607.08316",
+    "detail_path": "papers/2607.08316/",
+    "cover_path": "covers/2607.08316/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.08316.webp",
+    "paper_image_full_path": "assets/paper-images/2607.08316.webp",
+    "preview_text": "本文针对自动驾驶中的车辆意图预测问题，聚焦于交叉路口这一复杂驾驶场景。 任务为在事件发生前 2 秒，预测目标车辆在交叉路口的意图类别（直行、左转、右转），属于三分类问题。 研究问题包括：缺乏专门用于交叉路口意图预测的带标注数据集、现有研究多集中于高速公路场景、以及缺少针对交叉路口场景的高精度模型消融分析。",
+    "research_unit": "C-DRiVeS Lab: Cognitive Driving Research in Vehicular Systems, Cairo, Egypt…",
+    "hook_text": "本文针对自动驾驶中的车辆意图预测问题，聚焦于交叉路口这一复杂驾驶场景。",
+    "key_points": [
+      "本文针对自动驾驶中的车辆意图预测问题，聚焦于交叉路口这一复杂驾驶场景。",
+      "任务为在事件发生前 2 秒，预测目标车辆在交叉路口的意图类别（直行、左转、右转），属于三分类问题。",
+      "研究问题包括：缺乏专门用于交叉路口意图预测的带标注数据集、现有研究多集中于高速公路场景、以及缺少针对交叉路口场景的高精度模型消融分析。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-07",
+    "title": "Synthetic-to-Real Translation for Class-Agnostic Motion Prediction",
+    "link": "https://arxiv.org/abs/2607.06319",
+    "arxiv_id": "2607.06319",
+    "detail_path": "papers/2607.06319/",
+    "cover_path": "covers/2607.06319/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.06319.webp",
+    "paper_image_full_path": "assets/paper-images/2607.06319.webp",
+    "preview_text": "论文解决自动驾驶中的类无关运动预测任务，具体研究问题是将从合成数据中学到的运动知识迁移到无标注的真实世界数据上，即合成到真实的运动预测翻译（SRMP）。 应用场景为自动驾驶中的LiDAR点云运动预测，目标是在无需真实运动标注的情况下，实现对真实场景的准确运动预测。",
+    "research_unit": "华中科技大学 · Yizheng Wu、Hongwei Fan、Kewei Wang 等",
+    "hook_text": "论文解决自动驾驶中的类无关运动预测任务，具体研究问题是将从合成数据中学到的运动知识迁移到无标注的真实世界数据上，即合成到真实的运动预测翻译（SRMP）。",
+    "key_points": [
+      "论文解决自动驾驶中的类无关运动预测任务，具体研究问题是将从合成数据中学到的运动知识迁移到无标注的真实世界数据上，即合成到真实的运动预测翻译（SRMP）。",
+      "应用场景为自动驾驶中的LiDAR点云运动预测，目标是在无需真实运动标注的情况下，实现对真实场景的准确运动预测。",
+      "首次正式定义合成到真实运动预测翻译（SRMP）任务，并指出运动抖动和物体级不一致性是阻碍稳健知识迁移的关键障碍。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-06",
+    "title": "VLM-CASE: Vision-Language Model Enabled Context-Adaptive Safety Envelopes for Anticipatory Safe Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.05180",
+    "arxiv_id": "2607.05180",
+    "detail_path": "papers/2607.05180/",
+    "cover_path": "covers/2607.05180/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.05180.webp",
+    "paper_image_full_path": "assets/paper-images/2607.05180.webp",
+    "preview_text": "论文任务：在恶劣驾驶条件下（如雨、雪、雾、夜间等）保证自动驾驶的安全性。 应用场景：结合车道保持和车辆跟随的自动驾驶任务。 研究问题：解决现有自动驾驶系统在恶劣条件下缺乏人类驾驶员“预见性”的问题，即系统无法提前根据场景理解调整速度、跟车距离和转向，且其安全极限（如RSS参数）通常是固定离线标定的，无法适应变化的道路摩擦力和能见度。",
+    "research_unit": "Department of Civil and Environmental Engineering, The Pennsylvania State U…",
+    "hook_text": "论文任务：在恶劣驾驶条件下（如雨、雪、雾、夜间等）保证自动驾驶的安全性。",
+    "key_points": [
+      "论文任务：在恶劣驾驶条件下（如雨、雪、雾、夜间等）保证自动驾驶的安全性。",
+      "应用场景：结合车道保持和车辆跟随的自动驾驶任务。",
+      "研究问题：解决现有自动驾驶系统在恶劣条件下缺乏人类驾驶员“预见性”的问题，即系统无法提前根据场景理解调整速度、跟车距离和转向，且其安全极限（如RSS参数）通常是固定离线标定的，无法适应变化的道路摩擦力和能见度。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-06",
+    "title": "TGRIP: A Text-Guided Approach to Vehicle Instance Prediction in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.04812",
+    "arxiv_id": "2607.04812",
+    "detail_path": "papers/2607.04812/",
+    "cover_path": "covers/2607.04812/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.04812.webp",
+    "paper_image_full_path": "assets/paper-images/2607.04812.webp",
+    "preview_text": "该论文解决自动驾驶中的 BEV 端到端实例预测任务。当前 SOTA 方法主要依赖几何监督（如占用率回归和光流），将场景代理视为通用移动障碍物，缺乏显式语义感知能力，导致在复杂场景（如超车、路口）中的预测存在歧义。论文提出 TGRIP 框架，将视觉-语言基础模型的语义先验注入实例预测循环中，通过教师-学生管道生成语义增强的 BEV 地图作为训练期间的辅助监督信号，引导模型学习既几何一致又语义可区分的时空表征。",
+    "research_unit": "Electronics Department, University of Alcalá (UAH) · Miguel Antunes-García、…",
+    "hook_text": "该论文解决自动驾驶中的 BEV 端到端实例预测任务。当前 SOTA 方法主要依赖几何监督（如占用率回归和光流），将场景代理视为通用移动障碍物，缺乏显式语义感知能力，导致在复杂场景（如超车、路口）中的预测存在歧义。论文提出 TGRIP 框架，将视觉-语言基础模型的语义先验注入实例预测循环中，通过教师-学生管道生成语义增强的 BEV 地图作为训练期间的辅助监督信号，引导模型学习既几何一致又语义可区分的时空表征。",
+    "key_points": [
+      "该论文解决自动驾驶中的 BEV 端到端实例预测任务。当前 SOTA 方法主要依赖几何监督（如占用率回归和光流），将场景代理视为通用移动障碍物，缺乏显式语义感知能力，导致在复杂场景（如超车、路口）中的预测存在歧义。论文提出 TGRIP 框架，将视觉-语言基础模型的语义先验注入实例预测循环中，通过教师-学生管道生成语义增强的 BEV 地图作为训练期间的辅助监督信号，引导模型学习既几何一致又语义可区分的时空表征。",
+      "提出一个新颖的管道，从多相机图像生成高保真语义 BEV 地图，提供超越常规标签的全面辅助监督源。",
+      "首次将开放词汇语义引导与端到端实例预测的时序任务统一起来。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-05",
+    "title": "Integrated Graph Search and Model Predictive Control for Smooth and Efficient Path Planning in Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2607.04259",
+    "arxiv_id": "2607.04259",
+    "detail_path": "papers/2607.04259/",
+    "cover_path": "covers/2607.04259/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.04259.webp",
+    "paper_image_full_path": "assets/paper-images/2607.04259.webp",
+    "preview_text": "本文解决自动驾驶汽车在结构化道路环境中的局部路径规划问题，应用场景包括直道和弯道上的单车与多车超车工况。 研究问题是如何在保证路径安全、平滑、动态可行性的同时，降低计算开销，实现实时性。",
+    "research_unit": "Institute of Automotive Engineering, Graz University of Technology · Duc-Ti…",
+    "hook_text": "本文解决自动驾驶汽车在结构化道路环境中的局部路径规划问题，应用场景包括直道和弯道上的单车与多车超车工况。",
+    "key_points": [
+      "本文解决自动驾驶汽车在结构化道路环境中的局部路径规划问题，应用场景包括直道和弯道上的单车与多车超车工况。",
+      "研究问题是如何在保证路径安全、平滑、动态可行性的同时，降低计算开销，实现实时性。",
+      "提出一种图搜索引导的凸走廊构建方法，利用Dijkstra搜索得到的粗略无碰撞路径显式定义空间变化的可行优化区域。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-03",
+    "title": "Longitudinal-Motion-Aware Lateral Control for Autonomous Vehicles: A Robust Nonlinear Control Framework",
+    "link": "https://arxiv.org/abs/2607.02924",
+    "arxiv_id": "2607.02924",
+    "detail_path": "papers/2607.02924/",
+    "cover_path": "covers/2607.02924/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.02924.webp",
+    "paper_image_full_path": "assets/paper-images/2607.02924.webp",
+    "preview_text": "本文提出一种纵向运动感知的鲁棒非线性横向控制框架，用于自动驾驶车辆，解决在纵向速度与加速度动态变化且车辆参数存在不确定性的条件下进行精确路径跟踪的问题。",
+    "research_unit": "Texas A&M University, College Station, TX 77843, USA · Sixu Li、Nitesh Kumar…",
+    "hook_text": "本文提出一种纵向运动感知的鲁棒非线性横向控制框架，用于自动驾驶车辆，解决在纵向速度与加速度动态变化且车辆参数存在不确定性的条件下进行精确路径跟踪的问题。",
+    "key_points": [
+      "本文提出一种纵向运动感知的鲁棒非线性横向控制框架，用于自动驾驶车辆，解决在纵向速度与加速度动态变化且车辆参数存在不确定性的条件下进行精确路径跟踪的问题。",
+      "提出一个面向控制的设计，显式考虑纵向速度与加速度变化的跟踪误差模型。",
+      "通过反馈线性化设计纵向运动感知的横向控制律，并显式分析由此产生的内部动力学的稳定性。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-06-29",
+    "title": "Lateral String Stability for Vehicle Platoons",
+    "link": "https://arxiv.org/abs/2606.29677",
+    "arxiv_id": "2606.29677",
+    "detail_path": "papers/2606.29677/",
+    "cover_path": "covers/2606.29677/",
+    "paper_image_path": "assets/paper-images/thumbs/2606.29677.webp",
+    "paper_image_full_path": "assets/paper-images/2606.29677.webp",
+    "preview_text": "论文研究车辆队列的横向弦稳定性（Lateral String Stability）问题，属于智能网联自动驾驶车辆（CAV）队列控制的领域。 应用场景为自动驾驶车辆队列在无地图导航、依赖车载感知和V2V通信条件下的路径跟踪控制，尤其在传感器遮挡和密集编队等安全风险场景中。 核心研究问题是：如何定义和保证横向（路径跟踪误差）的弦稳定性，使得跟踪误差沿队列传播时能够衰减而不放大，从而保障安全。",
+    "research_unit": "Texas A&M University, College Station, TX, 77483, USA · Sixu Li",
+    "hook_text": "论文研究车辆队列的横向弦稳定性（Lateral String Stability）问题，属于智能网联自动驾驶车辆（CAV）队列控制的领域。",
+    "key_points": [
+      "论文研究车辆队列的横向弦稳定性（Lateral String Stability）问题，属于智能网联自动驾驶车辆（CAV）队列控制的领域。",
+      "应用场景为自动驾驶车辆队列在无地图导航、依赖车载感知和V2V通信条件下的路径跟踪控制，尤其在传感器遮挡和密集编队等安全风险场景中。",
+      "核心研究问题是：如何定义和保证横向（路径跟踪误差）的弦稳定性，使得跟踪误差沿队列传播时能够衰减而不放大，从而保障安全。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-06-12",
+    "title": "Short-Horizon Position Accuracy of Single-Track Models: Implications for Motion Planning of Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2606.14216",
+    "arxiv_id": "2606.14216",
+    "detail_path": "papers/2606.14216/",
+    "cover_path": "covers/2606.14216/",
+    "paper_image_path": "assets/paper-images/thumbs/2606.14216.webp",
+    "paper_image_full_path": "assets/paper-images/2606.14216.webp",
+    "preview_text": "本文研究了自动驾驶车辆运动规划中车辆模型的位置精度。论文指出，在模型预测控制（MPC）等规划与控制框架中，车辆模型的保真度直接影响轨迹跟踪精度和安全性，但位置精度尚未与真实测量进行系统对比。 论文针对用于 MPC 的短预测时域（约 5 秒）内的车辆位置预测问题，对比了三种单轨（自行车）车辆模型在不同驾驶工况下的位置精度，旨在为不同操作条件下的模型选择提供依据。 该研究面向自动驾驶车辆（包括乘用车、客车和卡车）的运动规划与控制的应用场景，尤其关注低速高精度操作（如停车、倒车）和中高速稳态转向工况。",
+    "research_unit": "Eindhoven University of Technology, Department of Mechanical Engineering, G…",
+    "hook_text": "本文研究了自动驾驶车辆运动规划中车辆模型的位置精度。论文指出，在模型预测控制（MPC）等规划与控制框架中，车辆模型的保真度直接影响轨迹跟踪精度和安全性，但位置精度尚未与真实测量进行系统对比。",
+    "key_points": [
+      "本文研究了自动驾驶车辆运动规划中车辆模型的位置精度。论文指出，在模型预测控制（MPC）等规划与控制框架中，车辆模型的保真度直接影响轨迹跟踪精度和安全性，但位置精度尚未与真实测量进行系统对比。",
+      "论文针对用于 MPC 的短预测时域（约 5 秒）内的车辆位置预测问题，对比了三种单轨（自行车）车辆模型在不同驾驶工况下的位置精度，旨在为不同操作条件下的模型选择提供依据。",
+      "该研究面向自动驾驶车辆（包括乘用车、客车和卡车）的运动规划与控制的应用场景，尤其关注低速高精度操作（如停车、倒车）和中高速稳态转向工况。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-06-09",
+    "title": "Language-Driven Cost Optimization for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2606.10974",
+    "arxiv_id": "2606.10974",
+    "detail_path": "papers/2606.10974/",
+    "cover_path": "covers/2606.10974/",
+    "paper_image_path": "assets/paper-images/thumbs/2606.10974.webp",
+    "paper_image_full_path": "assets/paper-images/2606.10974.webp",
+    "preview_text": "本文解决自动驾驶中运动规划器成本函数参数难以在线调整的问题。传统上，成本函数权重通过离线经验调参并保持固定，缺乏对动态交通场景和用户个性化偏好的自适应能力。 论文提出一个语言驱动的自适应运动规划框架，利用大语言模型（LLM）理解场景描述和用户自然语言查询，生成应用于风险感知的模型预测路径积分（MPPI）控制器的成本函数参数，从而在线调整车辆的驾驶风格。 应用场景包括城市环境中多智能体交互的复杂驾驶情景，如并线合并等，并支持非专业用户以自然语言控制车辆行为。",
+    "research_unit": "Cognitive Robotics Department, TU Delft, The Netherlands · Diego Martinez-B…",
+    "hook_text": "本文解决自动驾驶中运动规划器成本函数参数难以在线调整的问题。传统上，成本函数权重通过离线经验调参并保持固定，缺乏对动态交通场景和用户个性化偏好的自适应能力。",
+    "key_points": [
+      "本文解决自动驾驶中运动规划器成本函数参数难以在线调整的问题。传统上，成本函数权重通过离线经验调参并保持固定，缺乏对动态交通场景和用户个性化偏好的自适应能力。",
+      "论文提出一个语言驱动的自适应运动规划框架，利用大语言模型（LLM）理解场景描述和用户自然语言查询，生成应用于风险感知的模型预测路径积分（MPPI）控制器的成本函数参数，从而在线调整车辆的驾驶风格。",
+      "应用场景包括城市环境中多智能体交互的复杂驾驶情景，如并线合并等，并支持非专业用户以自然语言控制车辆行为。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-06-06",
+    "title": "Learning Predictive Control with Deep Koopman Operators for Autonomous Vehicle Motion Planning",
+    "link": "https://arxiv.org/abs/2606.08136",
+    "arxiv_id": "2606.08136",
+    "detail_path": "papers/2606.08136/",
+    "cover_path": "covers/2606.08136/",
+    "paper_image_path": "assets/paper-images/thumbs/2606.08136.webp",
+    "paper_image_full_path": "assets/paper-images/2606.08136.webp",
+    "preview_text": "论文解决自动驾驶车辆在动态道路环境中的实时运动规划任务，重点处理避障场景下的非线性、非凸优化问题。 传统MPC因依赖精确模型且需在线求解非凸优化问题，实时性受限；强化学习方法缺乏控制理论结构。论文提出结合深度Koopman算子与滚动时域actor-critic学习的学习预测控制（LPC）框架。 应用场景包括直道避障、弯道避障和混合路面避障，面向未知动力学和非凸环境约束下的安全、实时规划。",
+    "research_unit": "原文未明确报告机构全称 · Xinglong Zhang、Yongqian Xiao、Haotian Cao 等",
+    "hook_text": "论文解决自动驾驶车辆在动态道路环境中的实时运动规划任务，重点处理避障场景下的非线性、非凸优化问题。",
+    "key_points": [
+      "论文解决自动驾驶车辆在动态道路环境中的实时运动规划任务，重点处理避障场景下的非线性、非凸优化问题。",
+      "传统MPC因依赖精确模型且需在线求解非凸优化问题，实时性受限；强化学习方法缺乏控制理论结构。论文提出结合深度Koopman算子与滚动时域actor-critic学习的学习预测控制（LPC）框架。",
+      "应用场景包括直道避障、弯道避障和混合路面避障，面向未知动力学和非凸环境约束下的安全、实时规划。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-06-02",
+    "title": "StandardE2E: A Unified Framework for End-to-End Autonomous Driving Datasets",
+    "link": "https://arxiv.org/abs/2606.04271",
+    "arxiv_id": "2606.04271",
+    "detail_path": "papers/2606.04271/",
+    "cover_path": "covers/2606.04271/",
+    "paper_image_path": "assets/paper-images/thumbs/2606.04271.webp",
+    "paper_image_full_path": "assets/paper-images/2606.04271.webp",
+    "preview_text": "该论文解决端到端(E2E)自动驾驶研究中多数据集格式、API、坐标约定和传感器模态不一致的问题，这些问题导致跨数据集实验和预处理需要为每个项目重复实现。 研究问题是构建一个统一框架，为传感器丰富的E2E驾驶数据集提供单一接口，支持跨数据集预训练、辅助任务监督和场景级过滤。 应用场景涵盖E2E自动驾驶模型训练的数据准备和加载，包括多传感器、多数据集的合并使用。",
+    "research_unit": "原文未明确机构全称 · Stepan Konev",
+    "hook_text": "该论文解决端到端(E2E)自动驾驶研究中多数据集格式、API、坐标约定和传感器模态不一致的问题，这些问题导致跨数据集实验和预处理需要为每个项目重复实现。",
+    "key_points": [
+      "该论文解决端到端(E2E)自动驾驶研究中多数据集格式、API、坐标约定和传感器模态不一致的问题，这些问题导致跨数据集实验和预处理需要为每个项目重复实现。",
+      "研究问题是构建一个统一框架，为传感器丰富的E2E驾驶数据集提供单一接口，支持跨数据集预训练、辅助任务监督和场景级过滤。",
+      "应用场景涵盖E2E自动驾驶模型训练的数据准备和加载，包括多传感器、多数据集的合并使用。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
     "date": "2026-08-21",
     "title": "CoAnchor: Robust Collaborative Perception under Spatio-Temporal Misalignment via Object-Level Anchors",
     "link": "https://arxiv.org/abs/2608.21055",

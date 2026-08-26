@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Deferred Exposure of Future Trajectories for Verifiable Reasoning in Autonomous Driving VLMs - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。 提出并验证了“轨迹锚定偏差”：在现有自动驾驶链式思维（CoT）标注流程中，教师模型被暴露于日志的真实未来轨迹，导致其“事后合理化”而非基于场景证据推理，产生因果不忠实的推理和更严重的幻觉。 为规避该偏差，引入可验证的候选轨迹基准 AD-MCQ 和延迟暴露未来轨迹的强化学习算法 DEFT-RLVR，使轨迹作为决策后的验证目标而非决策前的前提。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.01755">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.01755.webp" alt="Deferred Exposure of Future Trajectories for Verifiable Reasoning in Autonomous Driving VLMs" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Deferred Exposure of Future Trajectories for Verifiable Reasoning in Autonomous Driving VLMs</h1>
+            <div class="detail-meta">2026-08-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.01755" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.01755" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.01755</span></div>
+            <p class="detail-summary">解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。 提出并验证了“轨迹锚定偏差”：在现有自动驾驶链式思维（CoT）标注流程中，教师模型被暴露于日志的真实未来轨迹，导致其“事后合理化”而非基于场景证据推理，产生因果不忠实的推理和更严重的幻觉。 为规避该偏差，引入可验证的候选轨迹基准 AD-MCQ 和延迟暴露未来轨迹的强化学习算法 DEFT-RLVR，使轨迹作为决策后的验证目标而非决策前的前提。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确标注各作者所属机构 · Zixuan Huang、Yang Zhou、Kaixuan Wang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.01755/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。</li><li>提出并验证了“轨迹锚定偏差”：在现有自动驾驶链式思维（CoT）标注流程中，教师模型被暴露于日志的真实未来轨迹，导致其“事后合理化”而非基于场景证据推理，产生因果不忠实的推理和更严重的幻觉。</li><li>为规避该偏差，引入可验证的候选轨迹基准 AD-MCQ 和延迟暴露未来轨迹的强化学习算法 DEFT-RLVR，使轨迹作为决策后的验证目标而非决策前的前提。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未明确标注各作者所属机构；作者：Zixuan Huang, Yang Zhou, Kaixuan Wang, Guli Zhang, Hongyan Xie, Yakun Zhu, Hao Geng, Xiaozhi Chen, Yikun Ban, Deqing Wang（原文未明确机构与作者对应关系）</li><li>机构：北京航空航天大学（由通讯作者邮箱 huang_zx@buaa.edu.cn 推断）；作者：Zixuan Huang（原文未明确对应，仅为推断）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶中视觉-语言-动作（VLA）模型的推理能力提升问题，核心任务是轨迹级驾驶决策（规划）。</li><li>提出并验证了“轨迹锚定偏差”：在现有自动驾驶链式思维（CoT）标注流程中，教师模型被暴露于日志的真实未来轨迹，导致其“事后合理化”而非基于场景证据推理，产生因果不忠实的推理和更严重的幻觉。</li><li>为规避该偏差，引入可验证的候选轨迹基准 AD-MCQ 和延迟暴露未来轨迹的强化学习算法 DEFT-RLVR，使轨迹作为决策后的验证目标而非决策前的前提。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次识别并实证验证“轨迹锚定偏差”：暴露真实未来轨迹使教师模型产生行动一致但因果不忠实的推理，尤其在困难因果场景中恶化严重幻觉。</li><li>提出 AD-MCQ：将自动驾驶规划形式化为在场景特定显式轨迹候选中做选择题，保留轨迹级粒度（制动时间、速度剖面、横向几何），无需开放式坐标生成即可实现精确可验证的决策。</li><li>提出 DEFT-RLVR：采用两轮交互设计，第一轮基于场景证据形成因果决策，第二轮才暴露候选轨迹用于显式接地；结合精确轨迹正确性奖励与实例特定结构化学分表过程监督。</li><li>实验证明 DEFT-RLVR 在提升 AD 推理能力的同时保持甚至增强基础模型的通用视觉能力，且训练所得推理能力可泛化到 OOD 驾驶域（nuScenes）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶视觉-语言模型（AD VLM）的推理与规划后训练，包括数据构建、蒸馏基线、强化学习优化。</li><li>输入传感器：原文未明确报告传感器物理细节；视觉输入为三个摄像头（前左、前、前右）在 2 Hz 下采样的四帧多视角历史场景帧。</li><li>场景表示：场景由多视角历史帧、自车历史与当前运动状态、导航指令组成；轨迹用固定时域 T 的长/横向位移序列表示，并通过 K-means 码本（K=8192，聚类语料 N=489,042）量化为离散轨迹原型。</li><li>模型结构：基于 Qwen3-VL-8B-Instruct 和 Qwen3.5-4B 作为策略模型；Qwen3.5-397B-A17B 提供蒸馏目标；Qwen3.6-35B-A3B 离线生成实例特定规则并作为推理过程评审。</li><li>关键技术：轨迹码本量化与硬负样本构造；DEFT 两轮交互（第 1 轮因果决策推理、第 2 轮显式轨迹接地）；GRPO 强化学习，两轮 rollout 联合优化；结构化规则奖励 R_RUB 由离线生成的加权准则集驱动，文本评审器无视觉与候选集访问权。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo Open E2E 与内部驾驶语料；训练 5,000 场景、开发 100 场景、测试 AD-MCQ-500（500 场景）；跨域评估 nuScenes（500 场景）。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：Qwen3-VL-8B-Instruct（8B）、Qwen3.5-4B（4B）、Qwen3.5-397B-A17B（397B）、Qwen3.6-35B-A3B（35B）。</li><li>训练资源：原文未报告 GPU 数量、训练时长等具体资源信息。</li><li>实车平台：原文未报告实车平台。</li><li>代码、模型、数据公开：代码 https://github.com/hzx122/DEFT-RLVR；模型 https://huggingface.co/hzxllll/DEFT-RLVR-model-HF；数据集 https://huggingface.co/datasets/hzxllll/AD-MCQ。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：AD-MCQ-500（AD 专用推理）、12 个视觉-语言基准（基础视觉、具身空间、3D/多视角、引用空间接地四组）、跨域 nuScenes 500 场景。</li><li>评估指标：ACC（AD-MCQ-500 准确率）、CFS（归一化因果忠实度分数）、HLD（高层决策一致性）；基础视觉能力分 Basic、Embodied、3D/MV、RefSpatial 及 Avg。</li><li>关键数值：Qwen3-VL-8B 上训练无关 DEFT 将 ACC 从 28.1% 提升至 56.6%；DEFT-RLVR 将 ACC 提升至 77.9%，CFS 0.658，HLD 0.501，同时平均通用视觉能力 56.09%（基础 81.33%）。Qwen3.5-4B 上 DEFT-RLVR 达 ACC 82.2%、CFS 0.822、HLD 0.582。DEFT Distillation（Full Interaction）ACC 82.4%、CFS 0.909、HLD 0.591；DEFT Distillation（Mixed Targets）ACC 84.1%、CFS 0.934、HLD 0.627。OOD nuScenes 上 DEFT-RLVR 将 ACC 从 39.6% 提升至 49.5%，CFS 提升 0.114，HLD 提升 0.073。</li><li>对比方法：JEFT（联合暴露轨迹）及 JEFT+RLVR(R_MCQ)、DEFT+RLVR(R_MCQ)、DEFT+RLVR(R_MCQ R_GEN)、JEFT Distillation、DEFT Distillation（Plan Only / Full Interaction / Mixed Targets）、冷启动 SFT。</li><li>评估条件：开环评估（基于真实场景）；通用视觉能力评估在 12 个基准上进行；跨域评估在 OOD 的 nuScenes 数据集上进行；原文未报告闭环或实车评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2608.01201/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">PRISM: Privileged Probabilistic Latent Supervision for End-to-End Autonomous Driving Motion Planning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
