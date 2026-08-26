@@ -1,230 +1,200 @@
-# ArXiv Papers 网站
+# 每日自动驾驶论文站
 
-这是一个展示ArXiv论文精选的静态网站，支持搜索和独立详情页查看功能。项目会自动爬取包含 VLA / Vision-Language-Action 以及 World Action Model 相关关键词的论文，并使用 AI 生成摘要。
+这是一个自动收集、中文精读并展示自动驾驶 arXiv 论文的静态网站。页面保留统一的每日论文流，后台分别检索多个技术方向，在写入前按规范化 arXiv ID 合并去重。
+
+## 覆盖方向
+
+- 综合自动驾驶
+- 感知：BEV、三维检测、跟踪、车道、占用预测与多传感器融合
+- 定位与建图：SLAM、里程计和高精地图
+- 运动与行为预测
+- 规划与决策
+- 车辆控制
+- 端到端驾驶、基础模型与世界模型
 
 ## 功能特性
 
-- 🤖 **自动爬取**: 每日自动从 ArXiv 爬取 VLA 与 World Action Model 相关最新论文
-- 🧠 **AI摘要生成**: 使用ModelScope API自动为论文生成中文摘要
-- 📚 从 `papers.md` 自动解析论文信息
-- 🔍 实时搜索功能
-- 📱 响应式设计，支持移动端
-- 🎨 现代化暗色主题界面
-- 📄 每篇论文生成独立静态详情页
-- 🖼️ 自动从论文 HTML 提取首图，优先作为论文卡封面
-- 🎭 当 HTML 原图不可直接下载时，自动使用 Playwright 截取页面里的首个 figure 作为兜底封面
-- 💾 按 arXiv ID 独立记录论文页滚动进度
-- ⏰ **定时任务**: 每日中午12点自动更新内容
+- 每日分方向抓取 arXiv 最新论文，跨方向去重并按发布日期排序
+- 使用 DeepSeek 官方 API 和 `deepseek-v4-flash` 生成自动驾驶专用中文摘要
+- 从论文 HTML 提取首图，无法直接下载时用 Playwright 截取首个 figure 作为兜底
+- 生成响应式首页和独立详情页，支持标题、机构、摘要和 arXiv ID 搜索
+- 按 arXiv ID 保存论文详情页阅读进度
+- GitHub Actions 每日北京时间 12:00 自动更新并部署 GitHub Pages
 
-## 本地开发
+## 检索配置
 
-### 环境配置
+未设置 `ARXIV_QUERY_KEYWORD` 时，爬虫使用 [`scripts/autonomous_driving_topics.py`](scripts/autonomous_driving_topics.py) 中的七组默认查询。每组查询独立执行；单组失败不会中断其他方向，全部失败时任务才会失败。结果经过自动驾驶相关性过滤，跨方向按去除版本号后的 arXiv ID 合并。
 
-首先需要配置环境变量：
+- `ARXIV_INIT_RESULTS`：首次初始化时每个方向的最大结果数，默认 `80`
+- `ARXIV_DAILY_RESULTS`：每日更新时每个方向的最大结果数，默认 `10`
+- `ARXIV_PAGE_SIZE`：单次 arXiv 请求页大小，默认 `20`
+- `ARXIV_DELAY_SECONDS`：arXiv 请求间隔，默认 `10` 秒
+- `ARXIV_RETRY_BASE_SECONDS`：失败后的指数退避基数，默认 `30` 秒
+- `ARXIV_MAX_RETRIES`：每个方向的最大请求次数，默认 `3`
+- `ARXIV_KEYWORD_LABEL`：页面显示名称，默认 `自动驾驶`
 
-```bash
-# 复制示例配置文件
-cp .env.example .env
+设置 `ARXIV_QUERY_KEYWORD` 后只执行这一条自定义 arXiv 查询，不再运行七组默认查询。例如在 PowerShell 中：
 
-# 编辑 .env 文件，填入你的 API 密钥
-# MODELSCOPE_ACCESS_TOKEN=你的API密钥
+```powershell
+$env:ARXIV_QUERY_KEYWORD = 'all:"autonomous driving" AND all:"simulation"'
+python scripts/arxiv_crawler.py
+Remove-Item Env:ARXIV_QUERY_KEYWORD
 ```
 
-可配置的环境变量：
+首次运行且 `papers.md` 没有论文记录时使用每方向 `80` 条的初始化上限；后续运行自动使用每方向 `10` 条的每日上限。这两个数都是“每个方向的候选结果上限”，最终写入数会因相关性过滤和跨方向去重而减少。
 
-**必需配置：**
-- `MODELSCOPE_ACCESS_TOKEN`: ModelScope API 密钥
+## DeepSeek 摘要配置
 
-**可选配置：**
-- `MODELSCOPE_BASE_URL`: API 基础 URL（默认：https://api-inference.modelscope.cn/v1/）
-- `MODELSCOPE_MODEL`: 使用的模型（默认：deepseek-ai/DeepSeek-V3.2）
-- `ARXIV_QUERY_KEYWORD`: 搜索关键词，支持 arXiv 查询语法（默认同时检索 VLA 与 World Action Model 相关短语）
-- `ARXIV_INIT_RESULTS`: 初始化抓取数量（默认：500）
-- `ARXIV_DAILY_RESULTS`: 每日抓取数量（默认：20）
-- `ARXIV_MAX_RETRIES`: arXiv 搜索重试次数（默认：3）
-- `HTTP_MAX_RETRIES`: HTTP 请求重试次数（默认：3）
-- `HTTP_TIMEOUT`: HTTP 请求超时时间（秒，默认：30）
-- `HTML_MAX_CHARS`: HTML 内容最大字符数（默认：180000）
-- `API_MAX_RETRIES`: API 调用重试次数（默认：3）
-- `BATCH_WRITE_SIZE`: 批量写入大小，每生成 N 篇摘要写入一次文件（默认：5）
-- `GA_MEASUREMENT_ID`: Google Analytics 4 的 Measurement ID（例如 `G-XXXXXXXXXX`，未配置时不加载 GA）
+摘要脚本只使用一个 DeepSeek 模型，不进行跨模型或跨供应商回退：
 
-### 爬取论文数据
+- `DEEPSEEK_API_KEY`：DeepSeek API 密钥
+- `DEEPSEEK_BASE_URL`：默认 `https://api.deepseek.com`
+- `DEEPSEEK_MODEL`：默认 `deepseek-v4-flash`
+- `API_MAX_RETRIES`：同一模型的 API 调用次数，默认 `3`
+- `HTTP_MAX_RETRIES`：抓取论文 HTML 的最大次数，默认 `3`
+- `HTTP_TIMEOUT`：抓取论文 HTML 的超时秒数，默认 `30`
+- `HTML_MAX_CHARS`：送入模型的 HTML 最大字符数，默认 `180000`
+- `BATCH_WRITE_SIZE`：每成功生成多少篇后写回一次，默认 `5`
 
-```bash
-# 初始化爬取（首次运行）
-python scripts/arxiv_crawler.py
+项目依赖中的 `openai` Python 包仅作为 OpenAI 兼容协议客户端使用。默认流量路径是“本地或 GitHub Actions → `https://api.deepseek.com` → DeepSeek 官方 API”，不会把请求发送到 OpenAI，也没有其他模型供应商兜底。
 
-# 生成论文摘要
+复制示例配置后填写密钥即可在本地生成摘要；`.env` 只保存在本机，不应提交：
+
+```powershell
+Copy-Item .env.example .env
+# 编辑 .env，只填写自己的 DEEPSEEK_API_KEY
 python scripts/generate_summaries.py
+```
 
-# 抓取论文首图（可选，GitHub Actions 会自动执行）
-python scripts/fetch_paper_images.py --max-items 30
+`DEEPSEEK_API_KEY` 只影响摘要生成。没有密钥时仍可抓取论文、提取图片、构建和部署网站，摘要保留“待生成”；GitHub Actions 会安全跳过摘要步骤，之后配置 Secret 再补齐。密钥只应通过本地环境变量、未提交的 `.env` 或 GitHub Secret 传入，脚本和工作流都不会打印它。
 
-# 为剩余缺图论文生成 Playwright 截图兜底队列
-python scripts/build_paper_image_fallback_queue.py --max-items 20
+## 本地运行
 
-# 安装 Playwright 并执行截图兜底
+### 1. 安装依赖并运行测试
+
+```powershell
+python -m pip install -r requirements.txt
 npm install
 npx playwright install chromium
-npm run paper-image:fallbacks
+python -m unittest discover -s tests -v
+```
 
-# 将截图结果注册进 manifest
+### 2. 爬取论文
+
+```powershell
+python scripts/arxiv_crawler.py
+```
+
+脚本根据 `papers.md` 是否已有论文记录自动选择初始化或每日更新模式。
+
+### 3. 生成摘要（可选）
+
+仅在已经配置 `DEEPSEEK_API_KEY` 时运行：
+
+```powershell
+python scripts/generate_summaries.py
+```
+
+### 4. 抓取论文首图
+
+```powershell
+# 直接从 arXiv HTML 提取图片
+python scripts/fetch_paper_images.py --max-items 30
+
+# 为仍缺图的论文建立截图兜底队列
+python scripts/build_paper_image_fallback_queue.py --max-items 20
+
+# 截取首个 figure，并注册进图片 manifest
+npm run paper-image:fallbacks
 python scripts/register_paper_image_fallbacks.py
 ```
 
-### 构建网站
+### 5. 构建与预览
 
-```bash
+```powershell
+python scripts/build_site.py
+python -m http.server 8000 --directory site
+```
+
+浏览器打开 `http://127.0.0.1:8000`。构建结果位于 `site/`，包括首页、轻量数据文件、论文图片资源和每篇论文的独立详情页。
+
+## Google Analytics 4
+
+GA4 完全可选。构建前设置 Measurement ID：
+
+```powershell
+$env:GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'
 python scripts/build_site.py
 ```
 
-这将在 `site/` 目录下生成静态网站文件，包括首页、轻量数据文件、论文首图资源，以及每篇论文对应的独立静态详情页。
+未配置或格式不正确时，页面不会加载 Google Analytics，也不会发送自定义统计事件。可在浏览器开发者工具的 Network 面板搜索 `googletagmanager` 或 `collect` 验证；实时报告通常有几分钟延迟。
 
-### Google Analytics 4
-
-如需统计页面浏览、搜索和论文阅读行为，在本地构建前设置 Measurement ID：
-
-```bash
-export GA_MEASUREMENT_ID=G-XXXXXXXXXX
-python scripts/build_site.py
-```
-
-未配置或格式不正确时，生成的页面不会加载 Google Analytics，也不会发送自定义统计事件。
-
-验证时可以打开浏览器开发者工具的 **Network** 面板，搜索 `googletagmanager` 或 `collect`；GA4 后台的实时报告通常会有几分钟延迟。
-
-> Google Analytics 会涉及 Cookie、隐私和数据跨境等合规问题。面向公众提供服务时，请根据所在地法规补充隐私说明，并在必要时增加用户同意机制。
-
-### 本地预览
-
-可以使用任何静态文件服务器预览网站：
-
-```bash
-# 使用Python内置服务器
-cd site
-python -m http.server 8000
-
-# 或使用Node.js serve
-npx serve site
-```
+Measurement ID 会写入客户端 HTML，不属于密钥。公开部署时建议在 `Settings → Secrets and variables → Actions → Variables` 中添加 `GA_MEASUREMENT_ID`；工作流也兼容同名 Secret。面向公众提供服务时，请根据适用法规补充隐私说明和必要的用户同意机制。
 
 ## GitHub Pages 部署
 
-### 1. 配置仓库
+### 仓库设置
 
-1. 确保你的仓库是公开的
-2. 在仓库设置中启用 GitHub Pages
-3. 选择 "GitHub Actions" 作为部署源
+1. 在仓库 `Settings → Pages` 中选择 `GitHub Actions` 作为部署源。
+2. 如需自动生成摘要，在 `Settings → Secrets and variables → Actions → Secrets` 中添加 `DEEPSEEK_API_KEY`。
+3. 如需 GA4，在 Actions Variables 中添加 `GA_MEASUREMENT_ID`。
 
-### 2. 配置环境变量
+`DEEPSEEK_API_KEY` 对部署不是必需项。未配置时，工作流只跳过摘要调用，论文抓取、图片处理、站点构建和 Pages 部署继续执行。
 
-在仓库设置中添加以下Secret：
-- `MODELSCOPE_ACCESS_TOKEN`: 你的ModelScope API密钥（必需）
+### 自动流程
 
-如需启用 Google Analytics 4，在 `Settings → Secrets and variables → Actions → Variables` 中新增仓库变量 `GA_MEASUREMENT_ID`，值填写类似 `G-XXXXXXXXXX` 的 Measurement ID。当前工作流会自动把它注入网站构建；也兼容在 **Secrets** 中配置同名变量。不设置或格式不正确时不会加载 GA。Measurement ID 会出现在客户端 HTML 中，因此优先使用 **Variables** 即可。
+推送到 `master` 或 `main` 会触发工作流；定时任务在每天 UTC 04:00（北京时间 12:00）触发。工作流依次：
 
-**可选配置：** 如果需要修改默认配置（如搜索关键词、模型等），可以在 `.github/workflows/deploy.yml` 中添加环境变量：
+1. 安装 Python 和 Playwright 依赖并运行完整单元测试。
+2. 按七个方向抓取论文，工作流上限为首次每方向 `80`、每日每方向 `10`，并保留请求节流。
+3. 有 `DEEPSEEK_API_KEY` 时直连 DeepSeek Flash 生成摘要；没有时保留“待生成”并继续。
+4. 抓取论文首图并执行 Playwright 截图兜底。
+5. 注入可选 GA4 配置并运行 `python scripts/build_site.py`。
+6. 提交更新后的 `papers.md` 和 `site/`，上传并部署 Pages 产物。
 
-```yaml
-- name: 运行 arXiv 爬虫
-  run: python scripts/arxiv_crawler.py
-  env:
-    MODELSCOPE_ACCESS_TOKEN: ${{ secrets.MODELSCOPE_ACCESS_TOKEN }}
-    ARXIV_QUERY_KEYWORD: "your_keyword"  # 可选：修改搜索关键词
-    ARXIV_DAILY_RESULTS: "30"            # 可选：修改每日抓取数量
+部署成功后，网站地址通常为：
+
+```text
+https://你的用户名.github.io/仓库名/
 ```
-
-默认配置：
-- 搜索关键词：`all:"VLA" OR all:"Vision-Language-Action" OR all:"World Action Model" OR all:"World-Action Model" OR all:"action world model"`
-- 每日抓取：20篇（GitHub Actions 中可覆盖）
-- 模型：deepseek-ai/DeepSeek-V3.2
-- 其他配置见 `.env.example`
-
-### 3. 自动部署
-
-每次推送到 `master` 或 `main` 分支时，GitHub Actions 会自动：
-
-1. 检出代码
-2. 爬取新论文并生成摘要
-3. 抓取最新论文的首图
-4. 对无法直接下载原图的论文执行 Playwright 截图兜底
-5. 运行构建脚本
-6. 部署到 GitHub Pages
-
-### 4. 定时任务
-
-GitHub Actions 还会在每日中午12点自动执行：
-
-1. 爬取ArXiv上的新论文
-2. 为待生成的论文生成AI摘要
-3. 抓取最新论文的首图
-4. 对无法直接下载原图的论文执行 Playwright 截图兜底
-5. 提交更改到仓库
-6. 重新构建和部署网站
-
-### 5. 访问网站
-
-部署完成后，你的网站将在以下地址可访问：
-```
-https://你的用户名.github.io/仓库名
-```
-
-例如：`https://username.github.io/arxiv`
-
-## 自定义配置
-
-### 修改网站标题
-
-编辑 `scripts/build_site.py` 中的 `generate_index_html()` 函数来修改网站标题。
 
 ## 项目结构
 
-```
-arxiv/
-├── papers.md                    # 论文数据源文件
+```text
+.
+├── papers.md
 ├── scripts/
-│   ├── arxiv_crawler.py         # ArXiv论文爬虫
-│   ├── generate_summaries.py    # AI摘要生成脚本
-│   ├── fetch_paper_images.py    # 从论文HTML提取首图
+│   ├── autonomous_driving_topics.py
+│   ├── arxiv_crawler.py
+│   ├── generate_summaries.py
+│   ├── fetch_paper_images.py
 │   ├── build_paper_image_fallback_queue.py
-│   ├── register_paper_image_fallbacks.py
 │   ├── render_paper_image_fallbacks.mjs
-│   └── build_site.py            # 网站构建脚本
-├── site/                        # 生成的静态网站
+│   ├── register_paper_image_fallbacks.py
+│   └── build_site.py
+├── tests/
+├── site/
 │   ├── index.html
-│   ├── papers/
-│   │   └── <arxiv-id>/
-│   │       └── index.html
+│   ├── papers/<arxiv-id>/index.html
 │   └── assets/
-│       ├── paper-images/        # 下载到本地的论文首图
-│       ├── paper-images.json    # 论文首图 manifest
-│       ├── style.css
-│       ├── analytics.js
-│       ├── app.js
-│       ├── paper.js
-│       └── data.json
-└── .github/
-    └── workflows/
-        └── deploy.yml           # GitHub Actions 部署配置
+└── .github/workflows/deploy.yml
 ```
 
 ## 数据格式
 
-`papers.md` 文件应包含以下格式的表格：
+`papers.md` 使用固定四列表格：
 
 ```markdown
 | 日期 | 标题 | 链接 | 简要总结 |
-|------|------|------|----------|
-| 2024-01-01 | 论文标题 | https://arxiv.org/abs/xxx | <details><summary>点击查看</summary>详细内容...</details> |
+| --- | --- | --- | --- |
+| 2026-08-26 | 论文标题 | https://arxiv.org/abs/2608.00001 | <details><summary>展开</summary>待生成</details> |
 ```
 
 ## 技术栈
 
-- **后端**: Python 3.9+
-- **爬虫**: arxiv Python库
-- **AI摘要**: ModelScope API
-- **前端**: 原生 HTML/CSS/JavaScript
-- **部署**: GitHub Pages + GitHub Actions
-- **定时任务**: GitHub Actions Cron
-- **字体**: Google Fonts (Inter)
+- Python 3.9
+- arXiv Python 库与 Requests
+- DeepSeek 官方 OpenAI 兼容 API
+- 原生 HTML、CSS 和 JavaScript
+- Playwright
+- GitHub Actions 与 GitHub Pages

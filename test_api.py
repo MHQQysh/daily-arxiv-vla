@@ -1,44 +1,52 @@
 import os
-from dotenv import load_dotenv
-import openai
+
 import requests
+from dotenv import load_dotenv
+from openai import OpenAI
 
-load_dotenv()
-
-client = openai.OpenAI(
-    api_key=os.getenv("MODELSCOPE_ACCESS_TOKEN"),
-    base_url="https://api-inference.modelscope.cn/v1/"
+from scripts.generate_summaries import (
+    AUTONOMOUS_DRIVING_SUMMARY_PROMPT,
+    DEEPSEEK_DEFAULT_BASE_URL,
+    DEEPSEEK_DEFAULT_MODEL,
 )
 
-# 目标 arXiv HTML 页面
-url = "http://arxiv.org/html/2509.21243v1"
 
-# 抓取 HTML 原文
-resp = requests.get(url, timeout=30)
-resp.raise_for_status()
-html_content = resp.text
+def main() -> None:
+    """对 DeepSeek 官方兼容接口执行一次手动连通性检查。"""
+    load_dotenv()
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if not api_key:
+        raise RuntimeError("缺少环境变量 DEEPSEEK_API_KEY，未发起网络请求")
 
-# 可选：为了避免超长输入导致超出上下文长度，这里做一个简单截断（按需调整）
-max_chars = 180000
-if len(html_content) > max_chars:
-    html_content = html_content[:max_chars]
+    base_url = (os.getenv("DEEPSEEK_BASE_URL") or DEEPSEEK_DEFAULT_BASE_URL).strip()
+    model = (os.getenv("DEEPSEEK_MODEL") or DEEPSEEK_DEFAULT_MODEL).strip()
+    client = OpenAI(api_key=api_key, base_url=base_url)
 
-response = client.chat.completions.create(
-    model='Qwen/Qwen3-Next-80B-A3B-Instruct',
-    messages=[
-        {
-            'role': 'system',
-            'content': '你是一名论文阅读专家。根据提供的Arxiv论文HTML原文，总结论文的要点，不需要输出其他内容。'
-        },
-        {
-            'role': 'user',
-            'content': f"以下为论文的HTML原文（可能已截断）：\n\n{html_content}"
-        }
-    ],
-    stream=True
-)
+    url = "https://arxiv.org/html/2509.21243v1"
+    response = requests.get(url, timeout=30)
+    response.raise_for_status()
+    html_content = response.text[:180000]
 
-for chunk in response:
-    delta = chunk.choices[0].delta
-    if delta and delta.content:
-        print(delta.content, end='', flush=True)
+    stream = client.chat.completions.create(
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": AUTONOMOUS_DRIVING_SUMMARY_PROMPT,
+            },
+            {
+                "role": "user",
+                "content": f"以下为论文的 HTML 原文（可能已截断）：\n\n{html_content}",
+            },
+        ],
+        stream=True,
+    )
+
+    for chunk in stream:
+        delta = chunk.choices[0].delta
+        if delta and delta.content:
+            print(delta.content, end="", flush=True)
+
+
+if __name__ == "__main__":
+    main()

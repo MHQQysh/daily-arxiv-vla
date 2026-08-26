@@ -1,7 +1,7 @@
 import os
 import re
 import time
-from typing import List, Set, Tuple
+from typing import List, Tuple
 
 import requests
 from dotenv import load_dotenv
@@ -9,7 +9,8 @@ from openai import OpenAI
 from tqdm import tqdm
 
 
-RATE_LIMITED_MODELS: Set[str] = set()
+DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com"
+DEEPSEEK_DEFAULT_MODEL = "deepseek-v4-flash"
 
 AUTONOMOUS_DRIVING_SUMMARY_PROMPT = """你是一名自动驾驶论文阅读专家。只能根据提供的 arXiv 论文 HTML 原文生成中文结构化总结，不得补造论文没有报告的实验信息。
 
@@ -41,22 +42,36 @@ AUTONOMOUS_DRIVING_SUMMARY_PROMPT = """你是一名自动驾驶论文阅读专�
 /**
  * @file generate_summaries.py
  * @description 读取项目根目录 `papers.md`，为“简要总结”列仍为“待生成”的条目生成摘要，
- * 使用在 `test_api.py` 中相同的推理接口（ModelScope OpenAI 兼容 API），并将结果回写到 `papers.md`。
+ * 使用 DeepSeek 官方 OpenAI 兼容 API，并将结果回写到 `papers.md`。
  */
 """
 
 
 def get_client() -> OpenAI:
     """
-    构造 OpenAI 客户端（ModelScope），从环境变量读取配置。
+    构造直连 DeepSeek 官方 API 的 OpenAI 兼容客户端。
     """
     load_dotenv()
-    api_key = os.getenv("MODELSCOPE_ACCESS_TOKEN")
+    api_key = os.getenv("DEEPSEEK_API_KEY")
     if not api_key:
-        raise RuntimeError("缺少环境变量 MODELSCOPE_ACCESS_TOKEN")
+        raise RuntimeError("缺少环境变量 DEEPSEEK_API_KEY")
 
-    base_url = os.getenv("MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1/")
+    base_url = os.getenv("DEEPSEEK_BASE_URL", DEEPSEEK_DEFAULT_BASE_URL).strip()
     return OpenAI(api_key=api_key, base_url=base_url)
+
+
+def get_model() -> str:
+    """返回单一 DeepSeek 摘要模型，允许通过环境变量覆盖。"""
+    return (os.getenv("DEEPSEEK_MODEL") or DEEPSEEK_DEFAULT_MODEL).strip()
+
+
+def _safe_error_repr(exc: Exception) -> str:
+    """保留错误诊断信息，同时避免环境中的 API 密钥进入日志。"""
+    message = repr(exc)
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if api_key:
+        message = message.replace(api_key, "[REDACTED]")
+    return message
 
 
 def get_papers_md_path() -> str:
@@ -108,50 +123,12 @@ def rebuild_line(date_str: str, title: str, link: str, summary_html: str) -> str
     return f"| {date_str} | {safe_title} | {link} | {safe_summary} |\n"
 
 
-def get_model_list() -> List[str]:
-    """
-    从环境变量读取模型列表，按优先级排序。
-    支持逗号分隔的多个模型，如: model1,model2,model3
-    """
-    models_str = os.getenv("MODELSCOPE_MODELS", "")
-    if models_str:
-        # 解析逗号分隔的模型列表，去除空白
-        models = [m.strip() for m in models_str.split(",") if m.strip()]
-        if models:
-            return models
-
-    # 如果未配置 MODELSCOPE_MODELS，回退到单个模型配置
-    single_model = os.getenv("MODELSCOPE_MODEL", "deepseek-ai/DeepSeek-V3.2")
-    return [single_model]
-
-
-def mark_model_rate_limited(model: str) -> None:
-    """
-    记录本次运行中已被判定为限流的模型，后续论文不再从它重试。
-    """
-    RATE_LIMITED_MODELS.add(model)
-
-
-def get_available_model_list(model: str = None) -> List[str]:
-    """
-    获取当前仍可用的模型列表，跳过本次运行中已经限流的模型。
-    """
-    if model is not None:
-        return [] if model in RATE_LIMITED_MODELS else [model]
-
-    return [candidate for candidate in get_model_list() if candidate not in RATE_LIMITED_MODELS]
-
-
 def generate_summary_for_link(client: OpenAI, link: str, model: str = None) -> str:
     """
     抓取 arXiv HTML 原文并让模型基于 HTML 生成简要总结。
-    包含模型回退机制和重试机制。
+    HTML 和 API 分别重试；API 始终使用同一个 DeepSeek 模型。
     """
-    # 获取模型列表，跳过本次运行中已经判定为限流的模型。
-    model_list = get_available_model_list(model)
-    if not model_list:
-        print(f"✗ 所有模型都已被判定为限流，跳过摘要生成: {link}")
-        return ""
+    current_model = model or get_model()
 
     # 将 /abs/ 链接转换为 /html/ 页面
     html_url = re.sub(r"/abs/", "/html/", link)
@@ -194,100 +171,61 @@ def generate_summary_for_link(client: OpenAI, link: str, model: str = None) -> s
     if len(html_content) > max_chars:
         html_content = html_content[:max_chars]
 
-    # 遍历模型列表，依次尝试。单个模型最多调用两次：第二次仍失败则认为已被限流，直接切换下一个模型。
-    api_max_retries = max(1, min(int(os.getenv("API_MAX_RETRIES", "3")), 2))
+    api_max_retries = max(1, int(os.getenv("API_MAX_RETRIES", "3")))
+    print(f"使用模型生成摘要: {current_model}")
 
-    for model_idx, current_model in enumerate(model_list):
-        print(f"尝试使用模型 [{model_idx + 1}/{len(model_list)}]: {current_model}")
+    for attempt in range(api_max_retries):
+        try:
+            response = client.chat.completions.create(
+                model=current_model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": AUTONOMOUS_DRIVING_SUMMARY_PROMPT,
+                    },
+                    {
+                        "role": "user",
+                        "content": f"以下为论文的 HTML 原文（可能已截断）：\n\n{html_content}",
+                    },
+                ],
+                stream=False,
+            )
 
-        # 对当前模型进行重试
-        for attempt in range(api_max_retries):
-            try:
-                response = client.chat.completions.create(
-                    model=current_model,
-                    messages=[
-                        {
-                            'role': 'system',
-                            'content': AUTONOMOUS_DRIVING_SUMMARY_PROMPT,
-                        },
-                        {
-                            'role': 'user',
-                            'content': f"以下为论文的 HTML 原文（可能已截断）：\n\n{html_content}"
-                        },
-                    ],
-                    stream=False,
-                )
+            if not response.choices:
+                raise RuntimeError("API 返回无 choices")
 
-                if not response.choices:
-                    print(f"警告: API返回无choices，链接: {link}")
-                    if attempt < api_max_retries - 1:
-                        time.sleep(2 ** attempt)
-                        continue
-                    else:
-                        mark_model_rate_limited(current_model)
-                        print(f"✗ 模型 {current_model} 第二次调用仍失败，切换下一个模型")
-                        break  # 尝试下一个模型
+            text = getattr(response.choices[0].message, "content", "") or ""
+            if not text.strip():
+                raise RuntimeError("API 返回 content 为空")
 
-                text = getattr(response.choices[0].message, "content", "")
-                if not text:
-                    print(f"警告: API返回content为空，链接: {link}")
-                    if attempt < api_max_retries - 1:
-                        time.sleep(2 ** attempt)
-                        continue
-                    else:
-                        mark_model_rate_limited(current_model)
-                        print(f"✗ 模型 {current_model} 第二次调用仍失败，切换下一个模型")
-                        break  # 尝试下一个模型
+            text = text.strip()
+            # 移除模型可能输出的 <think>...</think> 思考内容
+            text = re.sub(r"<think>.*?</think>", "", text, flags=re.IGNORECASE | re.DOTALL).strip()
+            # 移除 Markdown 代码块标记
+            text = re.sub(r"```markdown\s*", "", text, flags=re.IGNORECASE)
+            text = re.sub(r"```\s*$", "", text, flags=re.MULTILINE)
+            text = text.strip()
+            # 规范化换行：保留换行符，但规范化空白
+            text = re.sub(r"[ \t]+", " ", text)
+            text = re.sub(r"\n{3,}", "\n\n", text)
+            text = re.sub(r" +\n", "\n", text)
+            # 将换行符转换为 <br> 标签以便在 Markdown 表格中存储
+            text = text.replace("\n", "<br>")
 
-                text = text.strip()
-                # 移除模型可能输出的 <think>...</think> 思考内容
-                text = re.sub(r"<think>.*?</think>", "", text, flags=re.IGNORECASE | re.DOTALL).strip()
-                # 移除 Markdown 代码块标记
-                text = re.sub(r"```markdown\s*", "", text, flags=re.IGNORECASE)
-                text = re.sub(r"```\s*$", "", text, flags=re.MULTILINE)
-                text = text.strip()
-                # 规范化换行：保留换行符，但规范化空白
-                text = re.sub(r"[ \t]+", " ", text)
-                text = re.sub(r"\n{3,}", "\n\n", text)
-                text = re.sub(r" +\n", "\n", text)
-                # 将换行符转换为 <br> 标签以便在 Markdown 表格中存储
-                text = text.replace("\n", "<br>")
+            if not text:
+                raise RuntimeError("处理后文本为空")
 
-                if not text:
-                    print(f"警告: 处理后文本为空，链接: {link}")
-                    if attempt < api_max_retries - 1:
-                        time.sleep(2 ** attempt)
-                        continue
-                    else:
-                        mark_model_rate_limited(current_model)
-                        print(f"✗ 模型 {current_model} 第二次调用仍失败，切换下一个模型")
-                        break  # 尝试下一个模型
+            print(f"✓ 使用模型 {current_model} 成功生成摘要")
+            return text
+        except Exception as exc:
+            safe_error = _safe_error_repr(exc)
+            if attempt < api_max_retries - 1:
+                print(f"API 调用失败，重试 {attempt + 1}/{api_max_retries}: {safe_error}")
+                time.sleep(2 ** attempt)
+            else:
+                print(f"✗ 模型 {current_model} 已达最大重试次数: {safe_error}")
 
-                # 成功生成摘要
-                print(f"✓ 使用模型 {current_model} 成功生成摘要")
-                return text
-
-            except Exception as e:
-                error_msg = str(e).lower()
-                # 检查是否是配额用完的错误
-                is_quota_error = any(keyword in error_msg for keyword in [
-                    'quota', 'rate limit', 'insufficient', 'exceeded', 'balance'
-                ])
-
-                if is_quota_error:
-                    mark_model_rate_limited(current_model)
-                    print(f"✗ 模型 {current_model} 配额已用完")
-                    break  # 直接尝试下一个模型，不重试
-                elif attempt < api_max_retries - 1:
-                    print(f"API调用失败，重试 {attempt + 1}/{api_max_retries}: {repr(e)}")
-                    time.sleep(2 ** attempt)
-                else:
-                    mark_model_rate_limited(current_model)
-                    print(f"✗ 模型 {current_model} 第二次调用仍失败，切换下一个模型: {repr(e)}")
-                    break  # 尝试下一个模型
-
-    # 所有模型都失败
-    print(f"✗ 所有模型都无法生成摘要: {link}")
+    print(f"✗ 模型 {current_model} 无法生成摘要: {link}")
     return ""
 
 

@@ -110,18 +110,17 @@ class BrandingTests(unittest.TestCase):
         client = MagicMock()
         client.chat.completions.create.return_value = api_response
 
-        with patch.object(generate_summaries, "RATE_LIMITED_MODELS", set()):
-            with patch.object(
-                generate_summaries.requests,
-                "get",
-                return_value=http_response,
-            ) as http_get:
-                with patch("builtins.print"):
-                    result = generate_summaries.generate_summary_for_link(
-                        client,
-                        "https://arxiv.org/abs/2608.00001",
-                        model="mock-model",
-                    )
+        with patch.object(
+            generate_summaries.requests,
+            "get",
+            return_value=http_response,
+        ) as http_get:
+            with patch("builtins.print"):
+                result = generate_summaries.generate_summary_for_link(
+                    client,
+                    "https://arxiv.org/abs/2608.00001",
+                    model="mock-model",
+                )
 
         http_get.assert_called_once_with("https://arxiv.org/html/2608.00001", timeout=30)
         client.chat.completions.create.assert_called_once()
