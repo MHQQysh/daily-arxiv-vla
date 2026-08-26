@@ -83,6 +83,7 @@ class CollectorTests(unittest.TestCase):
         )
 
         self.assertIn("cancel-in-progress: false", workflow)
+        self.assertIn("python-version: '3.11'", workflow)
         self.assertIn("python -u scripts/arxiv_crawler.py --dry-run", workflow)
         self.assertIn("python -u scripts/arxiv_crawler.py", workflow)
         self.assertIn("add_new_papers:", workflow)
