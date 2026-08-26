@@ -50,6 +50,7 @@ jobs:
         env:
           ARXIV_INIT_RESULTS: 80
           ARXIV_DAILY_RESULTS: 10
+          ARXIV_DAILY_TOTAL_LIMIT: 5
           ARXIV_PAGE_SIZE: 10
           ARXIV_DELAY_SECONDS: 15
           ARXIV_RETRY_BASE_SECONDS: 60
@@ -66,6 +67,8 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_BASE_URL: https://api.deepseek.com
           DEEPSEEK_MODEL: deepseek-v4-flash
+          SUMMARY_WORKERS: 5
+          SUMMARY_MAX_TOKENS: 2048
 
       - name: 抓取论文首图
         run: |

@@ -1,5 +1,7 @@
 import os
 import sys
+import tempfile
+import threading
 import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -61,7 +63,15 @@ class DeepSeekConfigTests(unittest.TestCase):
         client = MagicMock()
         client.chat.completions.create.return_value = api_response
 
-        with patch.dict(os.environ, {"API_MAX_RETRIES": "1"}, clear=True):
+        with patch.dict(
+            os.environ,
+            {
+                "API_MAX_RETRIES": "1",
+                # 摘要任务必须显式禁用 thinking，不能被同名环境变量重新开启。
+                "DEEPSEEK_THINKING": "enabled",
+            },
+            clear=True,
+        ):
             with patch.object(
                 generate_summaries.requests,
                 "get",
@@ -81,6 +91,11 @@ class DeepSeekConfigTests(unittest.TestCase):
         request = client.chat.completions.create.call_args.kwargs
         self.assertEqual(request["model"], "deepseek-v4-flash")
         self.assertFalse(request["stream"])
+        self.assertEqual(request["max_tokens"], 2048)
+        self.assertEqual(
+            request["extra_body"],
+            {"thinking": {"type": "disabled"}},
+        )
         self.assertIs(
             request["messages"][0]["content"],
             generate_summaries.AUTONOMOUS_DRIVING_SUMMARY_PROMPT,
@@ -164,6 +179,171 @@ class DeepSeekConfigTests(unittest.TestCase):
                 source = (ROOT / relative_path).read_text(encoding="utf-8")
                 self.assertNotIn("MODELSCOPE", source.upper())
                 self.assertNotIn("api-inference.modelscope.cn", source)
+
+    def test_summary_workers_are_positive_and_capped_by_five_item_run(self):
+        with patch.dict(os.environ, {"SUMMARY_WORKERS": "99"}, clear=True):
+            self.assertEqual(generate_summaries.get_summary_workers(8), 5)
+            self.assertEqual(generate_summaries.get_summary_workers(3), 3)
+
+        with patch.dict(os.environ, {"SUMMARY_WORKERS": "0"}, clear=True):
+            with self.assertRaisesRegex(ValueError, "SUMMARY_WORKERS"):
+                generate_summaries.get_summary_workers(5)
+
+
+class SummaryBatchTests(unittest.TestCase):
+    HEADER = (
+        "| 日期 | 标题 | 链接 | 简要总结 |\n"
+        "| --- | --- | --- | --- |\n"
+    )
+
+    @staticmethod
+    def pending_line(index: int) -> str:
+        return (
+            f"| 2026-08-{index + 1:02d} | Paper {index} | "
+            f"https://arxiv.org/abs/2608.{index:05d} | "
+            "<details><summary>展开</summary>待生成</details> |\n"
+        )
+
+    def test_each_run_processes_only_first_five_pending_entries_concurrently(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            papers_path = Path(temp_dir) / "papers.md"
+            completed_line = (
+                "| 2026-08-20 | Completed | https://arxiv.org/abs/2608.99999 | "
+                "<details><summary>展开</summary>已完成</details> |\n"
+            )
+            papers_path.write_text(
+                self.HEADER
+                + "".join(self.pending_line(index) for index in range(7))
+                + completed_line,
+                encoding="utf-8",
+            )
+
+            lock = threading.Lock()
+            release = threading.Event()
+            active_count = 0
+            started_count = 0
+            peak_active = 0
+
+            def summarize(_client, link):
+                nonlocal active_count, started_count, peak_active
+                with lock:
+                    active_count += 1
+                    started_count += 1
+                    peak_active = max(peak_active, active_count)
+                    if started_count >= 3:
+                        release.set()
+                if not release.wait(timeout=2):
+                    raise RuntimeError("并发任务没有同时启动")
+                with lock:
+                    active_count -= 1
+                return f"## 论文概述<br>- 已生成 {link}"
+
+            client = object()
+            env = {
+                "SUMMARY_WORKERS": "3",
+                "BATCH_WRITE_SIZE": "5",
+            }
+            with patch.dict(os.environ, env, clear=True):
+                with patch.object(
+                    generate_summaries,
+                    "get_papers_md_path",
+                    return_value=str(papers_path),
+                ):
+                    with patch.object(
+                        generate_summaries,
+                        "get_client",
+                        return_value=client,
+                    ) as get_client:
+                        with patch.object(
+                            generate_summaries,
+                            "generate_summary_for_link",
+                            side_effect=summarize,
+                        ) as generate_summary:
+                            with patch("builtins.print"):
+                                selected, updated = generate_summaries.update_papers_md()
+
+            self.assertEqual((selected, updated), (5, 5))
+            get_client.assert_called_once_with()
+            self.assertEqual(generate_summary.call_count, 5)
+            requested_links = {
+                call.args[1] for call in generate_summary.call_args_list
+            }
+            self.assertEqual(
+                requested_links,
+                {
+                    f"https://arxiv.org/abs/2608.{index:05d}"
+                    for index in range(5)
+                },
+            )
+            self.assertEqual(peak_active, 3)
+
+            body_lines = papers_path.read_text(encoding="utf-8").splitlines()[2:]
+            for line in body_lines[:5]:
+                self.assertNotIn("待生成", line)
+            for line in body_lines[5:7]:
+                self.assertIn("待生成", line)
+            self.assertIn("已完成", body_lines[7])
+
+    def test_failed_future_keeps_placeholder_and_other_results_are_saved(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            papers_path = Path(temp_dir) / "papers.md"
+            papers_path.write_text(
+                self.HEADER
+                + "".join(self.pending_line(index) for index in range(3)),
+                encoding="utf-8",
+            )
+
+            def summarize(_client, link):
+                if link.endswith("00001"):
+                    raise RuntimeError("mock failure")
+                return "## 论文概述<br>- 成功"
+
+            with patch.dict(os.environ, {"SUMMARY_WORKERS": "2"}, clear=True):
+                with patch.object(
+                    generate_summaries,
+                    "get_papers_md_path",
+                    return_value=str(papers_path),
+                ):
+                    with patch.object(generate_summaries, "get_client", return_value=object()):
+                        with patch.object(
+                            generate_summaries,
+                            "generate_summary_for_link",
+                            side_effect=summarize,
+                        ):
+                            with patch("builtins.print") as printer:
+                                selected, updated = generate_summaries.update_papers_md()
+
+            self.assertEqual((selected, updated), (3, 2))
+            body_lines = papers_path.read_text(encoding="utf-8").splitlines()[2:]
+            self.assertNotIn("待生成", body_lines[0])
+            self.assertIn("待生成", body_lines[1])
+            self.assertNotIn("待生成", body_lines[2])
+            rendered_log = "\n".join(
+                " ".join(str(part) for part in call.args)
+                for call in printer.call_args_list
+            )
+            self.assertIn("https://arxiv.org/abs/2608.00001", rendered_log)
+
+    def test_no_pending_entries_avoids_creating_an_api_client(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            papers_path = Path(temp_dir) / "papers.md"
+            papers_path.write_text(
+                self.HEADER
+                + "| 2026-08-20 | Completed | https://arxiv.org/abs/2608.99999 | "
+                "<details><summary>展开</summary>已完成</details> |\n",
+                encoding="utf-8",
+            )
+
+            with patch.object(
+                generate_summaries,
+                "get_papers_md_path",
+                return_value=str(papers_path),
+            ):
+                with patch.object(generate_summaries, "get_client") as get_client:
+                    selected, updated = generate_summaries.update_papers_md()
+
+            self.assertEqual((selected, updated), (0, 0))
+            get_client.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -781,7 +781,7 @@ def generate_head(title: str, description: str, stylesheet_prefix: str = "") -> 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{escape(title)}</title>
     <meta name="description" content="{escape(description, quote=True)}" />
-    {generate_google_analytics()}
+{generate_google_analytics()}
     <script>
       (function() {{
         try {{

@@ -1,6 +1,7 @@
 import os
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Tuple
 
 import requests
@@ -11,6 +12,8 @@ from tqdm import tqdm
 
 DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com"
 DEEPSEEK_DEFAULT_MODEL = "deepseek-v4-flash"
+MAX_SUMMARIES_PER_RUN = 5
+DEFAULT_SUMMARY_WORKERS = 5
 
 AUTONOMOUS_DRIVING_SUMMARY_PROMPT = """你是一名自动驾驶论文阅读专家。只能根据提供的 arXiv 论文 HTML 原文生成中文结构化总结，不得补造论文没有报告的实验信息。
 
@@ -63,6 +66,29 @@ def get_client() -> OpenAI:
 def get_model() -> str:
     """返回单一 DeepSeek 摘要模型，允许通过环境变量覆盖。"""
     return (os.getenv("DEEPSEEK_MODEL") or DEEPSEEK_DEFAULT_MODEL).strip()
+
+
+def _get_positive_int_env(name: str, default: int) -> int:
+    """读取正整数环境变量，避免无效并发数或写入批大小静默生效。"""
+    raw_value = (os.getenv(name) or str(default)).strip()
+    try:
+        value = int(raw_value)
+    except ValueError as exc:
+        raise ValueError(f"{name} 必须是正整数") from exc
+    if value < 1:
+        raise ValueError(f"{name} 必须是正整数")
+    return value
+
+
+def get_summary_workers(task_count: int) -> int:
+    """返回本轮实际并发数；永远不超过任务数和单轮五篇上限。"""
+    if task_count < 1:
+        return 0
+    configured_workers = _get_positive_int_env(
+        "SUMMARY_WORKERS",
+        DEFAULT_SUMMARY_WORKERS,
+    )
+    return min(configured_workers, task_count, MAX_SUMMARIES_PER_RUN)
 
 
 def _safe_error_repr(exc: Exception) -> str:
@@ -171,7 +197,7 @@ def generate_summary_for_link(client: OpenAI, link: str, model: str = None) -> s
     if len(html_content) > max_chars:
         html_content = html_content[:max_chars]
 
-    api_max_retries = max(1, int(os.getenv("API_MAX_RETRIES", "3")))
+    api_max_retries = _get_positive_int_env("API_MAX_RETRIES", 3)
     print(f"使用模型生成摘要: {current_model}")
 
     for attempt in range(api_max_retries):
@@ -189,6 +215,8 @@ def generate_summary_for_link(client: OpenAI, link: str, model: str = None) -> s
                     },
                 ],
                 stream=False,
+                max_tokens=_get_positive_int_env("SUMMARY_MAX_TOKENS", 2048),
+                extra_body={"thinking": {"type": "disabled"}},
             )
 
             if not response.choices:
@@ -254,7 +282,7 @@ def update_papers_md() -> Tuple[int, int]:
     /**
      * @function update_papers_md
      * @description 读取 `papers.md`，为缺失摘要的条目生成并写回。
-     * @returns {Tuple[int,int]} (总需更新数, 实际更新成功数)
+     * @returns {Tuple[int,int]} (本轮选中数, 实际更新成功数)
      */
     """
     papers_md = get_papers_md_path()
@@ -270,9 +298,7 @@ def update_papers_md() -> Tuple[int, int]:
     header = lines[:2]
     body = lines[2:]
 
-    client = get_client()
-
-    entries_to_update: List[Tuple[int, str, str, str]] = []
+    pending_entries: List[Tuple[int, str, str, str]] = []
     for idx, line in enumerate(body):
         if not line.strip().startswith("|"):
             continue
@@ -282,40 +308,55 @@ def update_papers_md() -> Tuple[int, int]:
         date_str, title, link, summary_cell = cells
         if not is_placeholder_summary(summary_cell):
             continue
-        entries_to_update.append((idx, date_str, title, link))
+        pending_entries.append((idx, date_str, title, link))
 
+    entries_to_update = pending_entries[:MAX_SUMMARIES_PER_RUN]
     need_count = len(entries_to_update)
+    if need_count == 0:
+        return 0, 0
+
     success_count = 0
-    batch_size = int(os.getenv("BATCH_WRITE_SIZE", "5"))
+    batch_size = _get_positive_int_env("BATCH_WRITE_SIZE", 5)
     updates_since_last_write = 0
+    workers = get_summary_workers(need_count)
+    client = get_client()
 
-    progress_bar = tqdm(entries_to_update, desc="生成简要总结", unit="篇")
+    remaining_count = len(pending_entries) - need_count
+    print(
+        f"本轮摘要: {need_count} 篇，workers: {workers}，"
+        f"本轮后仍待处理: {remaining_count} 篇"
+    )
+    with ThreadPoolExecutor(max_workers=workers, thread_name_prefix="deepseek-summary") as executor:
+        future_entries = {
+            executor.submit(generate_summary_for_link, client, entry[3]): entry
+            for entry in entries_to_update
+        }
+        progress_bar = tqdm(
+            as_completed(future_entries),
+            total=need_count,
+            desc="生成简要总结",
+            unit="篇",
+        )
 
-    for idx, date_str, title, link in progress_bar:
-        try:
-            summary_text = generate_summary_for_link(client, link)
-            if not summary_text:
-                print(f"警告: 生成摘要为空，跳过: {link}")
-                continue
-            new_summary_cell = wrap_in_details(summary_text)
-            new_line = rebuild_line(date_str, title, link, new_summary_cell)
-            # 更新内存中的行
-            body[idx] = new_line
-            success_count += 1
-            updates_since_last_write += 1
-            progress_bar.set_postfix({"成功": success_count})
+        for future in progress_bar:
+            idx, date_str, title, link = future_entries[future]
+            try:
+                summary_text = future.result()
+                if not summary_text:
+                    print(f"警告: 生成摘要为空，跳过: {link}")
+                    continue
+                new_summary_cell = wrap_in_details(summary_text)
+                body[idx] = rebuild_line(date_str, title, link, new_summary_cell)
+                success_count += 1
+                updates_since_last_write += 1
+                progress_bar.set_postfix({"成功": success_count})
 
-            # 批量写入：每处理 batch_size 篇就写一次文件
-            if updates_since_last_write >= batch_size:
-                try:
+                if updates_since_last_write >= batch_size:
                     with open(papers_md, "w", encoding="utf-8") as f:
                         f.writelines(header + body)
                     updates_since_last_write = 0
-                except Exception as e:
-                    print(f"警告: 写入文件失败: {repr(e)}")
-
-        except Exception as e:
-            print(f"生成摘要失败: {link}: {repr(e)}")
+            except Exception as exc:
+                print(f"生成摘要失败: {link}: {_safe_error_repr(exc)}")
 
     # 最后写入一次，确保所有更改都保存
     if updates_since_last_write > 0:

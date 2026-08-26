@@ -14,7 +14,7 @@
 
 ## 功能特性
 
-- 每日分方向抓取 arXiv 最新论文，跨方向去重并按发布日期排序
+- 每日分方向抓取 arXiv 最新论文，跨方向去重并按发布日期排序，单次全站最多新增 `5` 篇
 - 使用 DeepSeek 官方 API 和 `deepseek-v4-flash` 生成自动驾驶专用中文摘要
 - 从论文 HTML 提取首图，无法直接下载时用 Playwright 截取首个 figure 作为兜底
 - 生成响应式首页和独立详情页，支持标题、机构、摘要和 arXiv ID 搜索
@@ -27,6 +27,7 @@
 
 - `ARXIV_INIT_RESULTS`：首次初始化时每个方向的最大结果数，默认 `80`
 - `ARXIV_DAILY_RESULTS`：每日更新时每个方向的最大结果数，默认 `10`
+- `ARXIV_DAILY_TOTAL_LIMIT`：排除已有论文后，单次运行全站最终写入的硬上限，可设为 `1`–`5`，默认且最高为 `5`
 - `ARXIV_PAGE_SIZE`：单次 arXiv 请求页大小，默认 `20`
 - `ARXIV_DELAY_SECONDS`：arXiv 请求间隔，默认 `10` 秒
 - `ARXIV_RETRY_BASE_SECONDS`：失败后的指数退避基数，默认 `30` 秒
@@ -41,7 +42,7 @@ python scripts/arxiv_crawler.py
 Remove-Item Env:ARXIV_QUERY_KEYWORD
 ```
 
-首次运行且 `papers.md` 没有论文记录时使用每方向 `80` 条的初始化上限；后续运行自动使用每方向 `10` 条的每日上限。这两个数都是“每个方向的候选结果上限”，最终写入数会因相关性过滤和跨方向去重而减少。
+首次运行且 `papers.md` 没有论文记录时使用每方向 `80` 条的初始化上限；后续运行自动使用每方向 `10` 条的每日上限。这两个数都是“每个方向的候选结果上限”。初始化和每日更新都会先完成相关性过滤、跨方向去重并排除已有论文，再按发布日期顺序最多写入 `ARXIV_DAILY_TOTAL_LIMIT` 篇，默认全站单次不超过 `5` 篇。
 
 ## DeepSeek 摘要配置
 
@@ -50,6 +51,9 @@ Remove-Item Env:ARXIV_QUERY_KEYWORD
 - `DEEPSEEK_API_KEY`：DeepSeek API 密钥
 - `DEEPSEEK_BASE_URL`：默认 `https://api.deepseek.com`
 - `DEEPSEEK_MODEL`：默认 `deepseek-v4-flash`
+- 摘要脚本每次固定最多处理 `5` 篇，失败条目保留“待生成”供下一次补齐
+- `SUMMARY_WORKERS`：摘要并发数，默认 `5`，实际不会超过本轮论文数和五篇硬上限
+- `SUMMARY_MAX_TOKENS`：单篇摘要最大输出 token，默认 `2048`
 - `API_MAX_RETRIES`：同一模型的 API 调用次数，默认 `3`
 - `HTTP_MAX_RETRIES`：抓取论文 HTML 的最大次数，默认 `3`
 - `HTTP_TIMEOUT`：抓取论文 HTML 的超时秒数，默认 `30`
@@ -146,8 +150,8 @@ Measurement ID 会写入客户端 HTML，不属于密钥。公开部署时建议
 推送到 `master` 或 `main` 会触发工作流；定时任务在每天 UTC 04:00（北京时间 12:00）触发。工作流依次：
 
 1. 安装 Python 和 Playwright 依赖并运行完整单元测试。
-2. 按七个方向抓取论文，工作流上限为首次每方向 `80`、每日每方向 `10`，并保留请求节流。
-3. 有 `DEEPSEEK_API_KEY` 时直连 DeepSeek Flash 生成摘要；没有时保留“待生成”并继续。
+2. 按七个方向抓取论文，候选上限为首次每方向 `80`、每日每方向 `10`；过滤、去重并排除已有论文后，全站单次最多写入 `5` 篇。
+3. 有 `DEEPSEEK_API_KEY` 时直连 DeepSeek Flash，并发生成本轮最多 `5` 篇摘要；没有时保留“待生成”并继续。
 4. 抓取论文首图并执行 Playwright 截图兜底。
 5. 注入可选 GA4 配置并运行 `python scripts/build_site.py`。
 6. 提交更新后的 `papers.md` 和 `site/`，上传并部署 Pages 产物。
