@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adaptive-WAM: Quality-Guided Early-Exit Planning from Intermediate Video-Diffusion Features - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文针对自动驾驶中的端到端轨迹规划任务，探讨了在大规模视频扩散模型（video diffusion model）用于世界模型（world model）时，部署阶段是否需要执行完整的视频生成流程，以及需要执行多少层深度才能做出可靠驾驶决策的问题。 提出 Adaptive-WAM，一个质量感知的“早期退出”多出口规划器（multi-exit planner），基于 Wan2.2-5B 视频扩散骨干网络，通过中间层的轨迹解码和轻量级质量评分器，动态决定推理所需的骨干深度，从而在不生成未来视频的情况下完成轨迹规划。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.06008">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.06008.webp" alt="Adaptive-WAM: Quality-Guided Early-Exit Planning from Intermediate Video-Diffusion Features" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文针对自动驾驶中的端到端轨迹规划任务，探讨了在大规模视频扩散模型（video diffusion model）用于世界模型（world model）时，部署阶段是否需要执行完整的视频生成流程，以及需要执行多少层深度才能做出可靠驾驶决策的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Adaptive-WAM: Quality-Guided Early-Exit Planning from Intermediate Video-Diffusion Features</h1>
+            <div class="detail-meta">2026-08-06 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.06008" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.06008" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.06008</span></div>
+            <p class="detail-summary">该论文针对自动驾驶中的端到端轨迹规划任务，探讨了在大规模视频扩散模型（video diffusion model）用于世界模型（world model）时，部署阶段是否需要执行完整的视频生成流程，以及需要执行多少层深度才能做出可靠驾驶决策的问题。 提出 Adaptive-WAM，一个质量感知的“早期退出”多出口规划器（multi-exit planner），基于 Wan2.2-5B 视频扩散骨干网络，通过中间层的轨迹解码和轻量级质量评分器，动态决定推理所需的骨干深度，从而在不生成未来视频的情况下完成轨迹规划。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">清华大学智能产业研究院（AIR） · Sining Ang、Yan Wang</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.06008/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文针对自动驾驶中的端到端轨迹规划任务，探讨了在大规模视频扩散模型（video diffusion model）用于世界模型（world model）时，部署阶段是否需要执行完整的视频生成流程，以及需要执行多少层深度才能做出可靠驾驶决策的问题。</p>
+  <ul class="reading-intro-points"><li>该论文针对自动驾驶中的端到端轨迹规划任务，探讨了在大规模视频扩散模型（video diffusion model）用于世界模型（world model）时，部署阶段是否需要执行完整的视频生成流程，以及需要执行多少层深度才能做出可靠驾驶决策的问题。</li><li>提出 Adaptive-WAM，一个质量感知的“早期退出”多出口规划器（multi-exit planner），基于 Wan2.2-5B 视频扩散骨干网络，通过中间层的轨迹解码和轻量级质量评分器，动态决定推理所需的骨干深度，从而在不生成未来视频的情况下完成轨迹规划。</li><li>系统性诊断了视频去噪时间步（video-noise level）和 DiT 深度对驾驶规划质量的影响，发现规划性能对测试的五个视频噪声等级不敏感，而中间层的轨迹质量存在显著的深度依赖差异。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：清华大学智能产业研究院（AIR）；作者：Sining Ang、Yan Wang</li><li>机构：中国科学技术大学自动化系；作者：Sining Ang、Yuguang Yang</li><li>机构：北京航空航天大学电子信息工程学院；作者：原文未明确对应作者</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文针对自动驾驶中的端到端轨迹规划任务，探讨了在大规模视频扩散模型（video diffusion model）用于世界模型（world model）时，部署阶段是否需要执行完整的视频生成流程，以及需要执行多少层深度才能做出可靠驾驶决策的问题。</li><li>提出 Adaptive-WAM，一个质量感知的“早期退出”多出口规划器（multi-exit planner），基于 Wan2.2-5B 视频扩散骨干网络，通过中间层的轨迹解码和轻量级质量评分器，动态决定推理所需的骨干深度，从而在不生成未来视频的情况下完成轨迹规划。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>系统性诊断了视频去噪时间步（video-noise level）和 DiT 深度对驾驶规划质量的影响，发现规划性能对测试的五个视频噪声等级不敏感，而中间层的轨迹质量存在显著的深度依赖差异。</li><li>提出多出口世界-动作模型架构，在六个中间 DiT 块上挂接独立的轨迹扩散头，并通过一个轻量级 DINOv2-Small 质量评分器动态选择所需的骨干深度，避免完整视频生成开销。</li><li>在 NAVSIM v1/v2 和 nuScenes 上评估了规划、迁移、轨迹评分和效率，其中自适应单轨迹规划器在 NAVSIM v1 上达到 90.8 PDMS，固定出口 64 提案变体达 92.6 PDMS，NAVSIM v2 上达 89.9 EPDMS；零样本迁移至 nuScenes 时平均 L2 误差 0.88 m、碰撞率 0.08%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：世界模型（world model）驱动的端到端轨迹规划器（world-action model）。</li><li>输入传感器：仅使用前置摄像头图像，不使用 LiDAR。</li><li>场景表示：使用 Wan2.2-TI2V-5B 潜在视频扩散 Transformer 的中间层隐藏特征作为规划表征；输入包括当前摄像头图像、当前和历史自车状态、导航指令，以及由部署可用结构化属性生成的文本描述。</li><li>模型结构：骨干为 Wan2.2-TI2V-5B（条件分支，固定视频噪声索引 s*=17）；在 DiT 块 {5,9,15,18,22,30} 上挂接六个独立的 ReCogDrive 风格五步轨迹扩散头；质量评分器使用微调的 DINOv2-Small 图像编码器加 MLP，预测 NAVSIM 规划子分数（NC、DAC、DDC、TTC、EP、Comf）。</li><li>关键技术：质量引导的自适应推理——每个尝试的出口解码一条轨迹，评分器评估后若最高预测分达到阈值 η 则终止，否则从缓存隐藏状态继续到更深出口；部署路径跳过无分类器引导分支和 VAE 视频解码；训练采用视频-域 LoRA 适配、轨迹质量评分器（stop-gradient 隔离）、以及 planner-only DiffGRPO 强化学习。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM v1（PDMS 指标）、NAVSIM v2（EPDMS 指标）、nuScenes（零样本迁移评估，报告平均 L2 误差和碰撞率）。</li><li>仿真器：采用 NAVSIM navtest 协议进行开环离线评估。</li><li>模型规模：骨干为 Wan2.2-TI2V-5B（约 5B 参数），LoRA 适配；六个轨迹扩散头独立参数；评分器为 DINOv2-Small。</li><li>训练资源：原文未明确报告具体 GPU 数量；推理延迟在单块 A100 80GB 上以 batch size 1 测量。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1 的 PDMS（含 NC、DAC、TTC、EP、Comf）、NAVSIM v2 的 EPDMS（含 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC）、nuScenes 零样本迁移的 L2 位移和碰撞率。</li><li>关键数值：NAVSIM v1 自适应单轨迹规划器 90.8 PDMS；固定 B22 64 提案变体 92.6 PDMS；NAVSIM v2 达 89.9 EPDMS；nvScenes 零样本平均 L2 0.88 m，碰撞率 0.08%。</li><li>对比方法：DriveVA（90.5 PDMS，v1）、Epona、DriveVLA-W0、PWM、WoTE、LAW、DiffusionDrive、ReCogDrive、VADv2、UniAD、TransFuser、PARA-Drive 等；零样本对比 DriveVA（0.84 m，0.06%）、DriveVLA-W0、PWM。</li><li>效率结果：自适应规划在 η=90 时平均端到端延迟 170 ms，相比固定 B15 规划器 190 ms 降低约 10%，相比固定全深度 320 ms 降低 47%；94.1% 场景在前三个出口内终止；完整 40 步 classifier-free 视频生成为 13.22 s。</li><li>评分器可靠性：评分器在 12,146 场景的诊断池上，精确最高分选中 91.2%、tie-aware 软准确率 94.4%；仅 0.42% 场景选择了比可用近完美轨迹差 50% 以上的轨迹。</li><li>评估条件：所有评估均在 NAVSIM 开放循环（开环）navtest 协议下进行，包括固定出口规划和自适应路由；延迟测量在单块 A100 80GB 上完成。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.07621/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">CMU-Drive and V2V-VLA: Cooperative Multi-agent Unified Driving with Reasoning Benchmark and Vehicle-to-Vehicle Vision-Language-Action Models</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.05634/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">MEC-Patch: Visible-Infrared Cross-Modal Adversarial Attack Driven by Intrinsic Material Emissivity Laws</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

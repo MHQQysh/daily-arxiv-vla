@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Video2Track: From Real-World Interaction Videos to Steerable Adversarial Closed-Track Testing for Automated Driving Systems - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 Video2Track 框架，用于将真实世界交互视频中的驾驶场景迁移为封闭场地（closed-track）中可执行、可引导（steerable）的对抗性测试场景。 解决的问题：现有封闭场地测试依赖标准化协议或预定义轨迹，交互过于脚本化，难以复现公共道路交互的自然复杂度。 应用场景：自动驾驶系统（ADS）的安全验证与确认，特别是真实封闭场地上的压力测试和可控风险再现。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.11592">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.11592.webp" alt="Video2Track: From Real-World Interaction Videos to Steerable Adversarial Closed-Track Testing for Automated Driving Systems" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 Video2Track 框架，用于将真实世界交互视频中的驾驶场景迁移为封闭场地（closed-track）中可执行、可引导（steerable）的对抗性测试场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Video2Track: From Real-World Interaction Videos to Steerable Adversarial Closed-Track Testing for Automated Driving Systems</h1>
+            <div class="detail-meta">2026-08-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.11592" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.11592" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.11592</span></div>
+            <p class="detail-summary">本文提出 Video2Track 框架，用于将真实世界交互视频中的驾驶场景迁移为封闭场地（closed-track）中可执行、可引导（steerable）的对抗性测试场景。 解决的问题：现有封闭场地测试依赖标准化协议或预定义轨迹，交互过于脚本化，难以复现公共道路交互的自然复杂度。 应用场景：自动驾驶系统（ADS）的安全验证与确认，特别是真实封闭场地上的压力测试和可控风险再现。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">6 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确机构全称 · Mengjie Tian、Xinrui Zhang、Tianyu Li 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.11592/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 Video2Track 框架，用于将真实世界交互视频中的驾驶场景迁移为封闭场地（closed-track）中可执行、可引导（steerable）的对抗性测试场景。</p>
+  <ul class="reading-intro-points"><li>本文提出 Video2Track 框架，用于将真实世界交互视频中的驾驶场景迁移为封闭场地（closed-track）中可执行、可引导（steerable）的对抗性测试场景。</li><li>解决的问题：现有封闭场地测试依赖标准化协议或预定义轨迹，交互过于脚本化，难以复现公共道路交互的自然复杂度。</li><li>应用场景：自动驾驶系统（ADS）的安全验证与确认，特别是真实封闭场地上的压力测试和可控风险再现。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未明确机构全称；作者：Mengjie Tian, Xinrui Zhang, Tianyu Li, Peizhi Zhang, Guirong Zhuo, Haojie Feng, Junpeng Huang, Qixiang Zhang, Lu Xiong（通讯作者：Peizhi Zhang，邮箱 zhangpeizhitom@126.com）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 Video2Track 框架，用于将真实世界交互视频中的驾驶场景迁移为封闭场地（closed-track）中可执行、可引导（steerable）的对抗性测试场景。</li><li>解决的问题：现有封闭场地测试依赖标准化协议或预定义轨迹，交互过于脚本化，难以复现公共道路交互的自然复杂度。</li><li>应用场景：自动驾驶系统（ADS）的安全验证与确认，特别是真实封闭场地上的压力测试和可控风险再现。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Video2Track 框架，将交互视频中的真实场景迁移到封闭场地测试，克服传统封闭场地测试的脚本化局限。</li><li>开发了基于检索增强生成（RAG）的场景语义映射方法，桥接 VLM 提取的交互语义与可部署的封闭场地拓扑，实现可执行场景构建。</li><li>开发了动态交互测试方法，将交互引导的扩散轨迹生成与基于 Stackelberg 博弈的交互风险调节相结合，实现风险水平和交互风格可控的对抗性测试。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：视频到封闭场地场景迁移框架，包含场景语义映射模块和动态交互测试模块。</li><li>输入传感器：真实世界驾驶交互视频（源自 VideoScenario 数据集）。</li><li>场景表示：封闭场地拓扑库（OpenDRIVE 格式）中的拓扑片段，以及包含道路拓扑、智能体状态、交互事件和事件级描述的语义表示。</li><li>模型结构：</li></ul>
+<p> - VLM（实例化为 OpenAI GPT-5.4）用于从视频中提取结构化场景语义。</p>
+<p> - 条件扩散模型（在联合控制序列上建模）用于生成多智能体轨迹。</p>
+<p> - Stackelberg 博弈中，VUT（被测车辆）作为 follower，关键背景车辆（BV）作为 leader。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 采用链式思维（CoT）提示策略，按“道路拓扑 → 自车行为 → 交互代理”层次化推理。</p>
+<p> - 语义-地图映射通过 RAG 从拓扑库检索拓扑片段，并实例化入口锚点、出口锚点和冲突锚点。</p>
+<p> - 扩散过程中引入锚点对齐与车道边界保护的轨迹级引导能量，并通过可微滚动动力学反向传播梯度。</p>
+<p> - 交互风险调节采用目标 PET（后侵占时间）值，对抗项定义为实际 PET 与目标值的平方偏差；双层优化（上层 leader 优化、下层 follower 最优响应）在 CasADi 中实现，使用非线性规划求解器。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：VideoScenario（公开数据集，来源于典型交互冲突场景）。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告具体平台细节，但实验在真实封闭场地进行。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：封闭场地实验，采用 OpenDRIVE 地图拓扑库构建的场地环境。</li><li>评估指标：包括 PET（后侵占时间）用于量化交互风险。</li><li>关键数值：原文未报告具体数值结果。</li><li>对比方法：原文未列出具体的对比方法名称。</li><li>条件：整体为真实封闭场地实验，属于闭环真实测试；扩散轨迹生成部分属于离线生成。</li><li>实验设计围绕三个研究问题：RQ1 能否忠实复现真实视频中的交互场景、RQ2 能否支持对抗性压力测试、RQ3 能否生成风险水平和交互风格可引导的变体。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.11790/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">High-Order Liquid Evidence Encoding for Gradual GNSS Spoofing Detection in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.21414/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RiskWorld: Object-Centric Latent World Modeling for Autonomous Driving Risk Identification</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

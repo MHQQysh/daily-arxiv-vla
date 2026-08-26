@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CAViAR: A Causal Video Dataset for Fine-Grained Accident Reasoning in Real-World Scenarios - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 CAViAR（因果事故视频与事件分析库），一个真实世界的行车记录仪事故视频基准数据集，用于自动驾驶系统中的细粒度事故因果推理。 解决的核心任务是超越感知层面的高层因果与责任推理，包括：判定事故中谁有过错（At-Fault Agent）、谁受影响（Affected Agent）、违反了哪条交通规则（Rule-Violation Category）。 应用场景为自动驾驶安全、监控和事故取证分析，旨在量化当前视觉语言模型（VLM）在安全关键驾驶场景中的&quot;感知-推理差距&quot;（Perception–Reasoning Gap）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.19380">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.19380.webp" alt="CAViAR: A Causal Video Dataset for Fine-Grained Accident Reasoning in Real-World Scenarios" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 CAViAR（因果事故视频与事件分析库），一个真实世界的行车记录仪事故视频基准数据集，用于自动驾驶系统中的细粒度事故因果推理。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CAViAR: A Causal Video Dataset for Fine-Grained Accident Reasoning in Real-World Scenarios</h1>
+            <div class="detail-meta">2026-08-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.19380" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.19380" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.19380</span></div>
+            <p class="detail-summary">本文提出 CAViAR（因果事故视频与事件分析库），一个真实世界的行车记录仪事故视频基准数据集，用于自动驾驶系统中的细粒度事故因果推理。 解决的核心任务是超越感知层面的高层因果与责任推理，包括：判定事故中谁有过错（At-Fault Agent）、谁受影响（Affected Agent）、违反了哪条交通规则（Rule-Violation Category）。 应用场景为自动驾驶安全、监控和事故取证分析，旨在量化当前视觉语言模型（VLM）在安全关键驾驶场景中的&quot;感知-推理差距&quot;（Perception–Reasoning Gap）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">NEC Laboratories, America, USA · Sparsh Garg、Yi-Wen Chen、Vijay Kumar B G 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.19380/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 CAViAR（因果事故视频与事件分析库），一个真实世界的行车记录仪事故视频基准数据集，用于自动驾驶系统中的细粒度事故因果推理。</p>
+  <ul class="reading-intro-points"><li>本文提出 CAViAR（因果事故视频与事件分析库），一个真实世界的行车记录仪事故视频基准数据集，用于自动驾驶系统中的细粒度事故因果推理。</li><li>解决的核心任务是超越感知层面的高层因果与责任推理，包括：判定事故中谁有过错（At-Fault Agent）、谁受影响（Affected Agent）、违反了哪条交通规则（Rule-Violation Category）。</li><li>应用场景为自动驾驶安全、监控和事故取证分析，旨在量化当前视觉语言模型（VLM）在安全关键驾驶场景中的&quot;感知-推理差距&quot;（Perception–Reasoning Gap）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：NEC Laboratories, America, USA；作者：Sparsh Garg, Yi-Wen Chen, Vijay Kumar B G, Abhishek Aich</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 CAViAR（因果事故视频与事件分析库），一个真实世界的行车记录仪事故视频基准数据集，用于自动驾驶系统中的细粒度事故因果推理。</li><li>解决的核心任务是超越感知层面的高层因果与责任推理，包括：判定事故中谁有过错（At-Fault Agent）、谁受影响（Affected Agent）、违反了哪条交通规则（Rule-Violation Category）。</li><li>应用场景为自动驾驶安全、监控和事故取证分析，旨在量化当前视觉语言模型（VLM）在安全关键驾驶场景中的&quot;感知-推理差距&quot;（Perception–Reasoning Gap）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建了包含 2,249 个真实行车记录仪事故视频、20,108 个 QA 对的基准数据集 CAViAR，基于 CarCrashDataset（CCD，1,500 个视频）和 Nexar（749 个视频）构建，训练/测试采用无泄漏的 CCD/Nexar 划分。</li><li>提出三层结构化标注体系：环境条件（天气、光照、路况）、事故分析（事故类型、因果说明）、责任归属（过错方、受影响方、疑似违规规则类别），其中责任归属标注是先前基准所缺失的。</li><li>建立了一个包含 11 个类别的司法辖区无关的交通规则违反本体（jurisdiction-agnostic rule ontology），用于细粒度规则违规识别。</li><li>揭示了&quot;感知-推理差距&quot;：当前 VLM 能较好识别光照等视觉上下文线索，但无法可靠地将可见的智能体行为映射到规则相关的责任类别。</li><li>发布了代码、标注模式、提示词和评估脚本，但未重新分发受限制的视频内容。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：事故视频理解与因果推理基准评估。</li><li>输入传感器：单目行车记录仪（Dashcam）视频。</li><li>场景表示：视频帧序列（16 FPS 均匀采样）；InternVL3 使用 segment-midpoint 采样（上限 64 帧），Qwen3-VL 与 Cosmos-Reason2 使用处理器内部抽取（fps 参数）。</li><li>模型结构：评估三个开源视频 VLM 家族各两个规模（2B/8B）：Cosmos-Reason2、Qwen3-VL、InternVL3；微调采用 LoRA SFT（rank 64, α=128, dropout 0.05），冻结视觉编码器和投影器，仅适配语言模型注意力与 MLP 投影。</li><li>关键技术：</li></ul>
+<p> - 标注流程：两名主要标注员生成初始标签，两名评审员进行质量控制与裁决，GPT-4 仅用于语法规范化（不增改事实）。</p>
+<p> - 责任标注定义为&quot;表观&quot;（apparent）责任，即从视频可见证据中可观察的责任线索，而非法律判定；模糊案例被标记并排除在责任评估之外。</p>
+<p> - 评估指标：MCQ 用准确率/平衡准确率/macro-F1，开放题用 BERTScore-F1，责任推理用 GPT-4o LLM-as-Judge（0–5 分）。</p>
+<p> - 规则违规评估采用确定性有序关键词词表将自由文本映射到 11 个规则家族（无 LLM 或人工介入，可复现）。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CAViAR（2,249 个视频，20,108 个 QA 对），基于 CarCrashDataset（CCD，1,500 个训练视频）和 Nexar（749 个测试视频）；训练集 13,445 个 QA 对，测试集 6,663 个 QA 对，133 个缺失字段（主要对应无碰撞的近失事片段）。</li><li>测试集任务统计：天气 749、光照 749、路况 749、事故类型 749、过错方 724、受影响方 724、规则违规 744。</li><li>仿真器：未使用（原文未报告）。</li><li>模型规模：Cosmos-Reason2、Qwen3-VL、InternVL3 各 2B/8B 共 6 个模型。</li><li>训练资源：原文未报告具体硬件资源；微调配置为 AdamW、bf16、梯度检查点、学习率 2e-5（2B）/1e-5（8B）、余弦调度、1 或 3 轮、批量 128/16–32（梯度累积），InternVL3 用 DeepSpeed ZeRO-1，Qwen3-VL/Cosmos 用 TRL+ZeRO-2。</li><li>实车平台：未使用（原文未报告）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Nexar 测试集（749 个视频），在 CCD 上微调后评估，采用外部集测试条件（跨领域泛化评估）。</li><li>评估指标：MCQ 准确率、平衡准确率（Bal-Acc）、macro-F1、BERTScore-F1、GPT-4o LLM-as-Judge（0–5 分）。</li><li>关键数值（六模型平均）：</li></ul>
+<p> - 光照几乎被解决（准确率 98.6/98.7，平衡准确率 98.7/98.7，macro-F1 98.5/98.6）。</p>
+<p> - 天气低于多数类基线（准确率 58.4/62.6，多数类 73.0；平衡准确率 64.0/62.9；macro-F1 49.3/50.3）。</p>
+<p> - 路况准确率 65.3/74.0（多数类 89.3），平衡准确率 80.9/83.8，macro-F1 59.8/65.8。</p>
+<p> - 事故类型最困难：准确率 33.1/35.4（多数类 37.7），平衡准确率 25.1/26.1，macro-F1 18.6/21.1。</p>
+<p> - 责任推理 Judge 得分普遍低：最佳过错方 2.27/5.0（Qwen3-VL-2B FT），最佳违规识别 0.82/5.0（Cosmos2-2B FT），违规识别是最弱子任务。</p>
+<p> - 微调对 2B 模型提升显著（Qwen3-2B MCQ +11.49，BERTScore +25.29），但 8B 模型提升有限（InternVL3-8B MCQ Δ=-0.23，Qwen3-8B Δ=+0.90）。</p>
+<ul><li>对比方法：随机基线、多数类基线与六个 VLM 模型（Base vs. Fine-tuned）的对比。</li><li>LLM-as-Judge 人工验证：N=45 样本，两名标注员 κ=0.579；GPT-4o 与人工平均分 Spearman ρ=0.851，Pearson r=0.882（p&lt;0.001）。</li><li>事故类型混淆分析：模型严重偏向预测&quot;追尾&quot;（Rear-End）类（过度预测 2.58×/2.01×），几乎不识别&quot;并排&quot;或&quot;对头&quot;碰撞。</li><li>训练/测试分布偏移：失去控制（8.3% 训练 vs 0.0% 测试）和违规超车（1.3% 训练 vs 0.0% 测试）类在测试集中缺失。</li><li>运行条件：均为离线评估（开环），无闭环仿真或实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.19425/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SCAPE: Scenario-Conditioned Simulation-Augmented Policy Evaluation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.19298/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SceneGTMM: A Conformal Mapping-based Scene-Aware Transferable GNN-Transformer Dual-Graph Interaction Framework for Map Matching</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

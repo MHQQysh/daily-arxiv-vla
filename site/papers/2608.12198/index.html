@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learning-Based Behavior Planning for Automated Driving: Real-World Integration and Deployment - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文面向城市自动驾驶中的行为规划任务，提出一种混合规划架构，结合深度学习驱动的行为规划与基于优化的轨迹监督，旨在兼顾学习方法的泛化能力与传统方法的可验证性、确定性。 解决了学习型规划器在可解释性、可信度、安全性保证方面的系统级挑战，并实现了在真实研究车辆上的集成与部署验证。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.12198">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.12198.webp" alt="Learning-Based Behavior Planning for Automated Driving: Real-World Integration and Deployment" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文面向城市自动驾驶中的行为规划任务，提出一种混合规划架构，结合深度学习驱动的行为规划与基于优化的轨迹监督，旨在兼顾学习方法的泛化能力与传统方法的可验证性、确定性。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Learning-Based Behavior Planning for Automated Driving: Real-World Integration and Deployment</h1>
+            <div class="detail-meta">2026-08-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.12198" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.12198" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.12198</span></div>
+            <p class="detail-summary">本文面向城市自动驾驶中的行为规划任务，提出一种混合规划架构，结合深度学习驱动的行为规划与基于优化的轨迹监督，旨在兼顾学习方法的泛化能力与传统方法的可验证性、确定性。 解决了学习型规划器在可解释性、可信度、安全性保证方面的系统级挑战，并实现了在真实研究车辆上的集成与部署验证。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute for Automotive Engineering (ika), RWTH Aachen University, Germany…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.12198/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文面向城市自动驾驶中的行为规划任务，提出一种混合规划架构，结合深度学习驱动的行为规划与基于优化的轨迹监督，旨在兼顾学习方法的泛化能力与传统方法的可验证性、确定性。</p>
+  <ul class="reading-intro-points"><li>本文面向城市自动驾驶中的行为规划任务，提出一种混合规划架构，结合深度学习驱动的行为规划与基于优化的轨迹监督，旨在兼顾学习方法的泛化能力与传统方法的可验证性、确定性。</li><li>解决了学习型规划器在可解释性、可信度、安全性保证方面的系统级挑战，并实现了在真实研究车辆上的集成与部署验证。</li><li>提出并实现了一种混合规划架构：深度学习行为规划器提出参考轨迹，优化监督层验证并施加显式可驾驶性与安全约束。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute for Automotive Engineering (ika), RWTH Aachen University, Germany；作者：Jean-Pierre Busch, Guido Linden, Jan Bergmann, Lutz Eckstein</li><li>机构：Chair of Automotive Technology (FTM), Technical University of Munich；作者：Jan Bergmann（原文注明其在 ika 完成硕士论文后加入该校）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文面向城市自动驾驶中的行为规划任务，提出一种混合规划架构，结合深度学习驱动的行为规划与基于优化的轨迹监督，旨在兼顾学习方法的泛化能力与传统方法的可验证性、确定性。</li><li>解决了学习型规划器在可解释性、可信度、安全性保证方面的系统级挑战，并实现了在真实研究车辆上的集成与部署验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出并实现了一种混合规划架构：深度学习行为规划器提出参考轨迹，优化监督层验证并施加显式可驾驶性与安全约束。</li><li>构建了基于向量化场景表示和注意力融合的 DNN 行为规划器，输出运动学约束的参考轨迹，并联合学习辅助任务（对象预测、地图接地）与可解释性输出（注意力权重）。</li><li>开发了基于 acados 的非线性 OCP 轨迹监督模块和确定性安全回退规划器，保证降级工况下的鲁棒性。</li><li>在真实研究车辆 karl. 上完成了架构的实车集成与演示，并开源了轨迹优化、简单规划器、轨迹控制器等组件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：行为规划（learning-based behavior planning）、轨迹监督（trajectory supervision）、安全回退（safety fallback）、轨迹控制器；涵盖从规划到执行的完整自动驾驶规划栈。</li><li>输入传感器：原文未报告具体传感器型号；行为规划器输入为环境模型输出（HD 地图、导航、跟踪对象列表、自车状态），不直接处理原始传感器数据。</li><li>场景表示：自车中心 BEV 坐标系下的向量化表示；智能体以最近 2 秒（5 步，0.5 秒间隔）状态历史表示，含位置、朝向、速度、包围盒、类别；地图含车道中心线、边界、信号灯等及关系；输出为 8 秒、0.5 秒间隔的参考轨迹（位置与速度序列）。</li><li>模型结构：DNN 采用向量化 scene 编码（agent 历史与地图/路线分别编码）、注意力融合机制、运动学约束的逐步解码器（预测速度与航向变化并积分）；额外有对象预测解码器和地图接地输出。</li><li>关键技术：轨迹监督基于运动学单轨模型的 OCP（acados），成本函数含横向/速度/加速度/加加速度/转向率惩罚，约束含速度、加速度、转向、可驾驶空间、避障及车辆动力学；安全回退为基于中心线的确定性规划器；轨迹控制器为级联 PID 的 Ackermann 控制器，双向稳定化策略（阈值触发从实际状态重新规划）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：DrivIng 数据集（约 18 km 路线、约 105 分钟，含 day/dusk/night 三次采集，位于德国 Ingolstadt 城区）；ika 自建 test track 与 test track interaction 数据集（研究车辆 karl. 在测试场上采集）。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告具体参数量或层数。</li><li>训练资源：原文未报告 GPU 型号或训练耗时。</li><li>实车平台：研究车辆 karl.；演示场地为 ika 测试场、Aldenhoven Testing Center (ATC)；实车试验在测试场内进行，未在公开道路上运行。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：自建验证集（DrivIng 的 dusk 记录作为验证；test track 与 test track interaction 各有独立验证集），无公开基准。</li><li>评估指标：位置/速度/航向 ADE、轨迹碰撞率（4s 与 8s 时域）；反事实示例（红灯/插入前车）定性验证行为；测试场实车集成演示定性评估。</li><li>关键数值：DrivIng 验证集（仅 DrivIng 训练）位置 ADE 0.74/1.83 m（4s/8s）、速度 ADE 0.37/0.56 m/s、航向 ADE 1.9/2.6°、碰撞率 0.3%/2.3%；加入 test track interaction 数据后碰撞率降至 0.3%/1.2%。test track interaction 验证集（DrivIng only）碰撞率 6.1%/26.7%，加入 test track 后降至 0.0%/5.9%，再加入 interaction 数据后为 0.0%/0.0%。</li><li>对比方法：未与第三方规划器进行定量对比，仅对比三种训练数据组合下的模型性能；无开环/闭环仿真基准，开放式评估为开环轨迹精度，闭环为实车测试场演示。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.12854/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">BrainWAM: Action-Space Coordination of Semantic Priors and Predictive Dynamics for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.14725/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Spatial Attention Noise Masking for Causally Sufficient Interpretability</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

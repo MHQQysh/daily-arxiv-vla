@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UnsDrive: Towards Robust End-to-End Autonomous Driving in Unstructured Scenes - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文针对非结构化矿区环境下的端到端自动驾驶规划问题，提出了 UnsDrive 端到端规划器。 应用场景为露天矿区的自动驾驶运输，包括装载、运输、卸载等作业流程，涉及重型矿卡与挖掘机的交互。 研究问题为：在弱道路结构、地形遮挡导致的大范围未知区域、可见度下降等挑战下，如何实现安全可靠的多模态轨迹规划，并提供面向矿区场景的闭环评估框架。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.09098">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.09098.webp" alt="UnsDrive: Towards Robust End-to-End Autonomous Driving in Unstructured Scenes" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文针对非结构化矿区环境下的端到端自动驾驶规划问题，提出了 UnsDrive 端到端规划器。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">UnsDrive: Towards Robust End-to-End Autonomous Driving in Unstructured Scenes</h1>
+            <div class="detail-meta">2026-08-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.09098" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.09098" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.09098</span></div>
+            <p class="detail-summary">该论文针对非结构化矿区环境下的端到端自动驾驶规划问题，提出了 UnsDrive 端到端规划器。 应用场景为露天矿区的自动驾驶运输，包括装载、运输、卸载等作业流程，涉及重型矿卡与挖掘机的交互。 研究问题为：在弱道路结构、地形遮挡导致的大范围未知区域、可见度下降等挑战下，如何实现安全可靠的多模态轨迹规划，并提供面向矿区场景的闭环评估框架。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Chinese Academy of Sciences · Nanxin Zeng、Yunfeng Ai（通讯作者）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.09098/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文针对非结构化矿区环境下的端到端自动驾驶规划问题，提出了 UnsDrive 端到端规划器。</p>
+  <ul class="reading-intro-points"><li>该论文针对非结构化矿区环境下的端到端自动驾驶规划问题，提出了 UnsDrive 端到端规划器。</li><li>应用场景为露天矿区的自动驾驶运输，包括装载、运输、卸载等作业流程，涉及重型矿卡与挖掘机的交互。</li><li>研究问题为：在弱道路结构、地形遮挡导致的大范围未知区域、可见度下降等挑战下，如何实现安全可靠的多模态轨迹规划，并提供面向矿区场景的闭环评估框架。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Chinese Academy of Sciences；作者：Nanxin Zeng, Yunfeng Ai（通讯作者）</li><li>机构：Institute of Automation, Chinese Academy of Sciences；作者：Ruiqi Song</li><li>机构：Waytous Inc.；作者：Xiangyu Guo, Baiyong Ding</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文针对非结构化矿区环境下的端到端自动驾驶规划问题，提出了 UnsDrive 端到端规划器。</li><li>应用场景为露天矿区的自动驾驶运输，包括装载、运输、卸载等作业流程，涉及重型矿卡与挖掘机的交互。</li><li>研究问题为：在弱道路结构、地形遮挡导致的大范围未知区域、可见度下降等挑战下，如何实现安全可靠的多模态轨迹规划，并提供面向矿区场景的闭环评估框架。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 UnsDrive，一种端到端规划器，包含未知感知（unknown-aware）占用表示、占用轨迹一致性（OTC）损失和不确定性感知轨迹评分模块，共同应对非结构化矿区环境的规划挑战。</li><li>开发 MineLoop，一个面向矿区的闭环仿真器，包含矿区特定场景、智能体与作业逻辑，支持开环与闭环评估。</li><li>通过大量开环实验和 MineLoop 闭环评估，证明 UnsDrive 在矿区场景下显著优于多个调整后的城市驾驶基线方法。</li><li>实验表明，三个核心组件（UA-OCC、OTC、评分器）在开环和闭环设置下均对轨迹质量、碰撞率和驾驶鲁棒性有互补性贡献。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知表示模块与生成式规划模块组成的端到端框架。</li><li>输入传感器：多视角摄像头图像、LiDAR 点云、自车状态、高层导航指令和目标点。</li><li>场景表示：采用 TransFuser 编码多视角图像与 LiDAR 得到 BEV 特征 F_bev 与智能体特征 F_agent；采用 SurroundOcc 获得体素特征与语义占用分布，并通过多帧可见性估计、可见性调制语义、门控占用编码和体素令牌化构建未知感知的占用表示。</li><li>模型结构：基于条件流匹配（CFM）的生成式规划器，通过级联交叉注意力依次关注占用令牌、BEV 特征图和智能体特征，并使用 FiLM 注入导航条件；堆叠 L 个融合块进行迭代细化，最终由 MLP 解码预测速度场。</li><li>关键技术：多帧可见性估计基于 LiDAR 射线追踪；OTC 损失惩罚轨迹进入不可通行或未知区域；不确定性感知评分器结合轨迹质量、非通行占用惩罚和未知区域惩罚进行候选轨迹选择；训练目标联合 CFM 损失、占用分割损失、OTC 损失与评分排序损失。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：在 MineLoop 中采集的仿真数据集，共 89 个场景、34,229 帧（含 11,054 个关键帧），覆盖运输道路、坡道、T 型路口、十字路口、装载区、卸载区和临时工作区。</li><li>仿真器：MineLoop，闭环仿真器，采用六路环绕摄像头（1920×1080，2 Hz）与四个 Ouster OS2-128 LiDAR（10 Hz），自车采用与 PMWorld 相同的 16-DoF 动力学模型。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：原文未报告具体 GPU 型号与数量；使用 AdamW 优化器，开环训练 10 个 epoch，batch size 为 48，闭环训练 100 个 epoch，学习率开环为 3e-4/3e-5，闭环为 6e-4/6e-5。</li><li>实车平台：原文未报告，且论文指出所有实验均在仿真中进行，物理矿卡验证留作未来工作。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：开环使用 MineLoop 数据集（nuScenes 风格注释），闭环使用基于 MineLoop 构建的采矿基准（Bench2Drive 风格协议），任务包括运输道路跟随、障碍物避让、装载区驶离、卸载区接近和临时工作区穿越。</li><li>评估指标：开环为轨迹 L2 误差（1s/2s/3s/平均）与碰撞率（1s/2s/3s/平均）；闭环为 Driving Score 与 Success Rate。</li><li>关键数值：开环下 UnsDrive 平均 L2 误差为 0.44 m（1s: 0.29 m，2s: 0.41 m，3s: 0.61 m），平均碰撞率为 0.10%（1s: 0.04%，2s: 0.06%，3s: 0.19%）；闭环下 Driving Score 为 84.25，Success Rate 为 68.56%。</li><li>对比方法：OccWorld、OccNet、SparseWorld、DiffusionDrive，均作为基线在矿区数据集上表现下降，UnsDrive 在所有指标上均优于最强基线 SparseWorld（平均 L2 从 0.85 m 降至 0.44 m，平均碰撞率从 0.33% 降至 0.10%，Driving Score 提升 6.89，Success Rate 提升 10.29）。</li><li>消融实验：开环下，UA-OCC 约降低平均 L2 误差 26% 与碰撞率约三分之一；加入 OTC 再降低 L2 约 18%、碰撞率 46%；完整模型相对基线平均 L2 降低超 50%、碰撞率降低近 75%。闭环下，完整模型 Driving Score 84.25、Success Rate 68.56%，均显著高于基线（76.14 / 55.12）。</li><li>评估条件：所有实验在 MineLoop 仿真环境中进行，包括开环与闭环设置；论文明确指出尚无实车验证。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.09144/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">How Roadside Units Enhance Intersection Safety? Cooperative Autonomous Driving System Design and A Proof of Concept</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.08815/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Distilling Vision-Language Models for Robust Traffic Sign Perception in Autonomous Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

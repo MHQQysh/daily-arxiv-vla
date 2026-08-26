@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Top-down Traffic Scenario Generation via Joint Initial-Goal Diffusion and Trajectory Infilling - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出了一种名为 TrafficDiffuser 的自上而下的交通场景生成框架，旨在解决自动驾驶系统中多样化和可解释的交通场景合成问题。 该框架将交通场景生成分解为两个子任务：首先，联合建模智能体的初始状态和目标状态，生成高层交通场景（由初始-目标状态对定义）；其次，将轨迹生成简化为一个目标条件下的轨迹填充（infilling）问题。 研究问题聚焦于提升生成场景的可解释性（通过显式建模智能体意图）以及简化轨迹生成任务的复杂性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.11407">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.11407.webp" alt="Top-down Traffic Scenario Generation via Joint Initial-Goal Diffusion and Trajectory Infilling" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出了一种名为 TrafficDiffuser 的自上而下的交通场景生成框架，旨在解决自动驾驶系统中多样化和可解释的交通场景合成问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Top-down Traffic Scenario Generation via Joint Initial-Goal Diffusion and Trajectory Infilling</h1>
+            <div class="detail-meta">2026-08-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.11407" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.11407" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.11407</span></div>
+            <p class="detail-summary">本文提出了一种名为 TrafficDiffuser 的自上而下的交通场景生成框架，旨在解决自动驾驶系统中多样化和可解释的交通场景合成问题。 该框架将交通场景生成分解为两个子任务：首先，联合建模智能体的初始状态和目标状态，生成高层交通场景（由初始-目标状态对定义）；其次，将轨迹生成简化为一个目标条件下的轨迹填充（infilling）问题。 研究问题聚焦于提升生成场景的可解释性（通过显式建模智能体意图）以及简化轨迹生成任务的复杂性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Waterloo, Department of Electrical and Computer Engineering ·…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.11407/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出了一种名为 TrafficDiffuser 的自上而下的交通场景生成框架，旨在解决自动驾驶系统中多样化和可解释的交通场景合成问题。</p>
+  <ul class="reading-intro-points"><li>本文提出了一种名为 TrafficDiffuser 的自上而下的交通场景生成框架，旨在解决自动驾驶系统中多样化和可解释的交通场景合成问题。</li><li>该框架将交通场景生成分解为两个子任务：首先，联合建模智能体的初始状态和目标状态，生成高层交通场景（由初始-目标状态对定义）；其次，将轨迹生成简化为一个目标条件下的轨迹填充（infilling）问题。</li><li>研究问题聚焦于提升生成场景的可解释性（通过显式建模智能体意图）以及简化轨迹生成任务的复杂性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Waterloo, Department of Electrical and Computer Engineering；作者：Da Saem Lee, Yash Vardhan Pant, Sebastian Fischmeister</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出了一种名为 TrafficDiffuser 的自上而下的交通场景生成框架，旨在解决自动驾驶系统中多样化和可解释的交通场景合成问题。</li><li>该框架将交通场景生成分解为两个子任务：首先，联合建模智能体的初始状态和目标状态，生成高层交通场景（由初始-目标状态对定义）；其次，将轨迹生成简化为一个目标条件下的轨迹填充（infilling）问题。</li><li>研究问题聚焦于提升生成场景的可解释性（通过显式建模智能体意图）以及简化轨迹生成任务的复杂性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li><strong>可解释性</strong>：通过联合生成初始-目标状态对，为初始交通场景和智能体意图提供更好的可解释性。</li><li><strong>可行路径生成</strong>：模型能够为多智能体场景合成可行的起始-目标构型，隐式学习端点之间的可行路径。</li><li><strong>简化轨迹生成</strong>：利用高层交通场景，将复杂的轨迹生成问题简化为目标条件驱动的轨迹填充问题，支持不同的约束模式（初始状态、目标状态或两者皆约束）。</li><li><strong>模块化兼容性</strong>：框架与现有轨迹生成模型（如 PathDiffuser 的 PD-Traj）具有兼容性，可集成以促进多样化场景生成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li><strong>所属模块</strong>：交通场景生成与轨迹生成（两阶段层次化框架）。</li><li><strong>输入传感器</strong>：原文未报告（不使用原始传感器数据，输入为矢量化地图和智能体状态）。</li><li><strong>场景表示</strong>：使用矢量化地图表示（地图多边形和地图点嵌入），场景状态由智能体状态（位置、速度、类型）构成，高层场景定义为初始状态与目标状态的联合。</li><li><strong>模型结构</strong>：</li></ul>
+<p> - <strong>高层场景生成</strong>：包含一个基于 QCNet 修改的地图编码器（使用异质消息传递层和地图摘要层），以及一个流量生成器（采用差分 Transformer 以促进稀疏地图注意力）。生成器包含一系列注意力层：地图摘要注意力、时序自注意力、智能体间社交交叉注意力和局部地图注意力。</p>
+<p> - <strong>轨迹填充</strong>：提出一种统一的模型架构，通过构建初始和目标状态之间的“桥”（线性插值线），并预测轨迹在时间上偏离该桥的距离。支持四种约束模式（初始和目标状态均硬约束、仅初始约束、仅目标约束、无约束），通过模式相关权重实施。</p>
+<ul><li><strong>关键技术</strong>：采用去噪扩散概率模型（DDPM），使用噪声预测训练目标，并引入注意力熵正则化损失以促进稀疏注意力。轨迹填充使用重建损失和平滑性损失联合训练。同时支持基于梯度的引导采样（如到邻近智能体和车道中心的距离）来偏置生成过程。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li><strong>数据集</strong>：Argoverse 2 运动预测数据集（大规模真实世界数据集）。考虑 5 种智能体类别：车辆、公交车、行人、自行车和摩托车。训练时对位置和速度进行 z-归一化。</li><li><strong>仿真器</strong>：原文未报告。</li><li><strong>模型规模</strong>：原文未报告具体的参数量。</li><li><strong>训练资源</strong>：原文未报告。</li><li><strong>实车平台</strong>：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li><strong>评估基准</strong>：Argoverse 2 运动预测数据集，高层场景生成评估初始状态和目标状态。</li><li><strong>评估指标</strong>：</li></ul>
+<p> - <strong>高层场景生成</strong>：常识指标（碰撞率、道路外率、到最近车道中心的距离）和分布 JSD（速度、横向偏差、局部密度、最近距离）。</p>
+<p> - <strong>轨迹填充</strong>：ADE（平均位移误差）、FDE（最终位移误差）、MR（漏检率，FDE 大于 2 米的占比）。</p>
+<ul><li><strong>关键数值</strong>：</li></ul>
+<p> - 高层场景生成（初始状态）：碰撞率 9.80%，道路外率 5.10%，速度 JSD 0.068。与 PD-init 相比，道路外率降低 2.8%；与 SC 相比，速度分布距离降低 55.3%。</p>
+<p> - 高层场景生成（目标状态）：碰撞率 10.6%，道路外率 7.21%。</p>
+<p> - 轨迹填充（初始和目标状态均硬约束）：ADE 0.52 m，FDE 0，MR 0。</p>
+<ul><li><strong>对比方法</strong>：SceneControl (SC) 复现版、PathDiffuser 的智能体初始化 (PD-init)。轨迹填充对比 PD-init。</li><li><strong>开环/闭环条件</strong>：原文未明确标注开环或闭环；实验在给定地图和真实/生成的高层场景条件下进行。评估为数据驱动的生成任务，不涉及闭环仿真。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.11451/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Herding End-to-End Autonomous Driving via Neuro-Symbolic Safety Guards</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.10976/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">XCoT-VLA: Executable Chain-of-Thought for Vision-Language-Action Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

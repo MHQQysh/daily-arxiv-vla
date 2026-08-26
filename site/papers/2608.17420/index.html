@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SPVC: Structured and Panoptic Video Fixing for Cross-Dataset Driving Scene Rendering - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶仿真中神经渲染（基于 3DGS 重建后渲染）在 extrapolated（外推）自车轨迹和场景编辑下出现的渲染伪影问题，包括模糊结构、时间闪烁和前景-背景错位。 提出 SPVC（Structured and Panoptic Video Fixing）框架，用于跨数据集驾驶场景渲染修复，同时处理背景渲染伪影和前景车辆插入伪影。 应用场景涵盖 novel-view（新视角）合成修复、3D 资产插入修复、闭环仿真评估以及跨数据集的零样本迁移。 研究问题是验证一个统一、可学习的视频修复模型如何在不同驾驶数据集之间泛化，同时保持空间可控性和时间一致性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.17420">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.17420.webp" alt="SPVC: Structured and Panoptic Video Fixing for Cross-Dataset Driving Scene Rendering" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶仿真中神经渲染（基于 3DGS 重建后渲染）在 extrapolated（外推）自车轨迹和场景编辑下出现的渲染伪影问题，包括模糊结构、时间闪烁和前景-背景错位。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SPVC: Structured and Panoptic Video Fixing for Cross-Dataset Driving Scene Rendering</h1>
+            <div class="detail-meta">2026-08-18 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.17420" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.17420" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.17420</span></div>
+            <p class="detail-summary">论文解决自动驾驶仿真中神经渲染（基于 3DGS 重建后渲染）在 extrapolated（外推）自车轨迹和场景编辑下出现的渲染伪影问题，包括模糊结构、时间闪烁和前景-背景错位。 提出 SPVC（Structured and Panoptic Video Fixing）框架，用于跨数据集驾驶场景渲染修复，同时处理背景渲染伪影和前景车辆插入伪影。 应用场景涵盖 novel-view（新视角）合成修复、3D 资产插入修复、闭环仿真评估以及跨数据集的零样本迁移。 研究问题是验证一个统一、可学习的视频修复模型如何在不同驾驶数据集之间泛化，同时保持空间可控性和时间一致性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute for AI Industry Research (AIR), Tsinghua University · Gen Li、Hao…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.17420/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶仿真中神经渲染（基于 3DGS 重建后渲染）在 extrapolated（外推）自车轨迹和场景编辑下出现的渲染伪影问题，包括模糊结构、时间闪烁和前景-背景错位。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶仿真中神经渲染（基于 3DGS 重建后渲染）在 extrapolated（外推）自车轨迹和场景编辑下出现的渲染伪影问题，包括模糊结构、时间闪烁和前景-背景错位。</li><li>提出 SPVC（Structured and Panoptic Video Fixing）框架，用于跨数据集驾驶场景渲染修复，同时处理背景渲染伪影和前景车辆插入伪影。</li><li>应用场景涵盖 novel-view（新视角）合成修复、3D 资产插入修复、闭环仿真评估以及跨数据集的零样本迁移。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute for AI Industry Research (AIR), Tsinghua University；作者：Gen Li, Hao Zhao</li><li>机构：Zhejiang University；作者：Gen Li</li><li>机构：University of Wisconsin–Madison；作者：Shu Han</li><li>机构：Tsinghua University；作者：Yun Xi Qiao</li><li>机构：Great Wall Motor Company Limited；作者：Hua Chen, Xuyang Dai</li><li>机构：Shanghai Jiao Tong University；作者：Bohan Li</li><li>机构：The Hong Kong University of Science and Technology；作者：Chaojian Li</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶仿真中神经渲染（基于 3DGS 重建后渲染）在 extrapolated（外推）自车轨迹和场景编辑下出现的渲染伪影问题，包括模糊结构、时间闪烁和前景-背景错位。</li><li>提出 SPVC（Structured and Panoptic Video Fixing）框架，用于跨数据集驾驶场景渲染修复，同时处理背景渲染伪影和前景车辆插入伪影。</li><li>应用场景涵盖 novel-view（新视角）合成修复、3D 资产插入修复、闭环仿真评估以及跨数据集的零样本迁移。</li><li>研究问题是验证一个统一、可学习的视频修复模型如何在不同驾驶数据集之间泛化，同时保持空间可控性和时间一致性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SPVC，一种可控视频扩散修复框架，可同时修复背景渲染伪影和前景车辆插入伪影，并利用显式的相机位姿、地图和 3D 边界框条件。</li><li>构建了跨多个驾驶数据集的、可扩展的退化-干净配对训练数据 pipeline，支持跨数据集的统一训练和泛化。</li><li>提出两阶段可控视频扩散模型：第一阶段进行视频级外观和时间一致性修复，第二阶段引入 3D 边界框与 HD 地图进行结构化空间精修。</li><li>在 Waymo、nuScenes 和 PandaSet 三个数据集以及零样本 EUVS 场景上验证了方法，优于强图像级和视频级基线，改善了时间一致性和空间可控性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：驾驶场景神经渲染（3DGS 重建）后的生成式视频修复与精修模块，面向自动驾驶仿真闭环。</li><li>输入传感器：多视角相机视频序列，以及相关结构化标注（相机位姿、3D 边界框、HD 地图）；原文未报告是否使用 LiDAR 等其他传感器。</li><li>场景表示：3D 高斯泼溅（3DGS）重建场景；配对数据中背景使用 3DGS 渲染，前景动态对象使用 TRELLIS 提取的 3D 高斯资产（vehicle assets）插入。</li><li>模型结构：基于 Wan-2.2 预训练视频扩散模型构建，包括 pretrained 3D VAE 编码器、DiT（Diffusion Transformer）块、参考感知时间注意力（reference-aware temporal attention）、可学习相机编码器，以及第二阶段的结构化条件（3D 边界框和 HD 地图）通过通道维度拼接注入。</li><li>关键技术：</li></ul>
+<p> - 退化-干净配对数据构造（三种策略：欠训练 3DGS、单相机训练跨视角渲染、随机掩码模拟缺失内容）；前景车辆资产提取与扰动插入。</p>
+<p> - 两阶段扩散模型：Stage I 用参考视频和相对相机位姿进行视频级修复；Stage II 用 3D 边界框和 HD 地图进行结构引导精修。</p>
+<p> - 推理时使用 INT8 FFN 量化、cuBLASLt 融合 GEMM 内核等加速技术。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练和评估数据集：Waymo、nuScenes、PandaSet，以及零样本迁移数据集 EUVS（Level-1 场景）。</li><li>仿真器/渲染引擎：3DGS（3D Gaussian Splatting）重建和渲染；TRELLIS 用于从车辆裁剪生成 3D 高斯资产。</li><li>模型规模：基于 Wan-2.2 预训练模型；原文未报告总参数量。</li><li>训练资源：训练分辨率 800×448，25 帧序列；原文未报告 GPU 数量和训练时长。</li><li>推理资源：推理在单张 NVIDIA H20 GPU 上进行，800×448 分辨率、25 帧、50 步去噪；未加速时每序列 305.70 秒，INT8 量化加速后 252.64 秒（1.21× 加速）。</li><li>实车平台：原文未报告实车平台；实验均为基于公开数据集的仿真和渲染评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：</li></ul>
+<p> - Waymo 上新视角修复（车道横向偏移 1m–4m），报告 FID、IQ、CLIP-F、FVD、CLIP-V。</p>
+<p> - nuScenes 上新视角修复（3m/4m 车道偏移），报告 FID、IQ、CLIP-F、FVD、CLIP-V。</p>
+<p> - PandaSet 上水平/垂直视角扰动修复，报告 FID。</p>
+<p> - EUVS 上零样本迁移，报告 SSIM、PSNR、LPIPS。</p>
+<p> - 3D asset insertion 修复（十段 nuScenes 场景），报告 FID-A、FID、CLIP-F、IQ、FVD。</p>
+<p> - 闭环评估：用 SPVC 修复的安全关键场景训练数据微调 VAD 和 UniAD，报告碰撞率和 NeuroNCAP Score（NNS）。</p>
+<ul><li>关键数值：</li></ul>
+<p> - Waymo 4m 车道偏移：SPVC FID 45.3、IQ 71.64、CLIP-F 0.9160、FVD 658.5、CLIP-V 0.9843，全面优于对比方法。</p>
+<p> - nuScenes 4m 车道偏移：SPVC FID 45.8、IQ 65.70、CLIP-F 0.8419、FVD 719.3、CLIP-V 0.9795；FID 比最强基线（Difix3D+ 69.0）降低 33.62%，FVD 比基线（1272.0）降低 43.45%。</p>
+<p> - PandaSet：SPVC FID 在 Lane 2m/3m/Vert.1m 下分别为 35.1、45.0、42.1，较 ReconDreamer++ 分别提升 43.3%、37.2%、32.5%。</p>
+<p> - EUVS 零样本：SPVC SSIM 0.6870、PSNR 19.6655、LPIPS 0.3027，优于直接 3DGS 渲染（0.6436 / 16.9629 / 0.4301）。</p>
+<p> - 3D asset insertion：SPVC FID-A 87.9、FID 124.9、CLIP-F 0.8322、IQ 0.65、FVD 1297.2，优于 Difix3D+（94.80 / 133.1 / 0.8171 / 0.61 / 1343.7）等基线。</p>
+<p> - 闭环：微调后 UniAD 碰撞率 60%→50%、NNS 2.193→2.757；VAD 碰撞率 50%→30%、NNS 2.659→3.707。</p>
+<ul><li>消融实验（nuScenes 3m 车道偏移）：移除 Stage I 和 Stage II 条件、单独移除某一阶段、移除相机位姿均导致 FID/FVD 等指标下降；移除 Cross-view 数据、UnderFitting 数据或 Random Crop 数据也均导致性能退化；完整 SPVC 获得 IQ 65.89、CLIP-F 0.8511、FID 41.0、FVD 499.0。</li><li>对比方法：PVG、StreetGaussian、OmniRe、FreeVS、StreetCrafter、Difix3D+、ReconDreamer、ReconDreamer++、UniSim、NeuRAD、Wan-2.2、LTX-Video、Naive Insertion 等。</li><li>实验条件：新视角修复、3D 资产插入修复和消融实验均为基于公开数据集的仿真渲染评估；闭环评估基于安全关键仿真数据微调下游模型（VAD、UniAD）；零样本转移评估在 EUVS 数据集上，不进行重训练或微调；原文未报告真实世界实车闭环驾驶实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.21440/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Geo-VLA: Geometry-Aware Vision-Language-Action Planning via Internalization of Map Semantics</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.17178/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Mask What Matters: Saliency-Guided Video Self-Supervised Learning for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

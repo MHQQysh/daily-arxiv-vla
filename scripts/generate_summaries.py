@@ -1,5 +1,6 @@
 import os
 import re
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Tuple
@@ -15,6 +16,11 @@ DEEPSEEK_DEFAULT_MODEL = "deepseek-v4-flash"
 MAX_SUMMARIES_PER_RUN = 100
 MAX_SUMMARY_WORKERS = 5
 DEFAULT_SUMMARY_WORKERS = 5
+DEFAULT_ARXIV_FETCH_DELAY_SECONDS = 1.0
+
+_arxiv_fetch_lock = threading.Lock()
+_arxiv_fetch_wait_event = threading.Event()
+_last_arxiv_fetch_at = 0.0
 
 AUTONOMOUS_DRIVING_SUMMARY_PROMPT = """你是一名自动驾驶论文阅读专家。只能根据提供的 arXiv 论文 HTML 原文生成中文结构化总结，不得补造论文没有报告的实验信息。
 
@@ -111,6 +117,28 @@ def _safe_error_repr(exc: Exception) -> str:
     return message
 
 
+def _fetch_arxiv_html(html_url: str, timeout: int) -> requests.Response:
+    """串行访问 arXiv 并控制请求间隔，DeepSeek 调用仍保持并发。"""
+    global _last_arxiv_fetch_at
+    delay = float(
+        os.getenv(
+            "ARXIV_FETCH_DELAY_SECONDS",
+            str(DEFAULT_ARXIV_FETCH_DELAY_SECONDS),
+        )
+    )
+    if delay < 0:
+        raise ValueError("ARXIV_FETCH_DELAY_SECONDS 不能为负数")
+
+    with _arxiv_fetch_lock:
+        elapsed = time.monotonic() - _last_arxiv_fetch_at
+        if elapsed < delay:
+            _arxiv_fetch_wait_event.wait(delay - elapsed)
+        try:
+            return requests.get(html_url, timeout=timeout)
+        finally:
+            _last_arxiv_fetch_at = time.monotonic()
+
+
 def get_papers_md_path() -> str:
     """
     /**
@@ -177,15 +205,21 @@ def generate_summary_for_link(client: OpenAI, link: str, model: str = None) -> s
 
     for attempt in range(max_retries):
         try:
-            resp = requests.get(html_url, timeout=timeout)
+            resp = _fetch_arxiv_html(html_url, timeout)
             resp.raise_for_status()
             html_content = resp.text
             break
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 404:
-                print(f"警告: HTML页面不存在，尝试使用PDF: {link}")
-                # 如果HTML不存在，尝试获取摘要（fallback）
-                return ""
+                print(f"警告: HTML页面不存在，改用 arXiv 摘要页: {link}")
+                try:
+                    fallback_resp = _fetch_arxiv_html(link, timeout)
+                    fallback_resp.raise_for_status()
+                    html_content = fallback_resp.text
+                    break
+                except requests.exceptions.RequestException as fallback_error:
+                    print(f"摘要页请求失败: {link}: {repr(fallback_error)}")
+                    return ""
             elif attempt < max_retries - 1:
                 print(f"HTTP错误 {e.response.status_code}，重试 {attempt + 1}/{max_retries}: {link}")
                 time.sleep(2 ** attempt)
@@ -254,7 +288,7 @@ def generate_summary_for_link(client: OpenAI, link: str, model: str = None) -> s
             if not text:
                 raise RuntimeError("处理后文本为空")
 
-            print(f"✓ 使用模型 {current_model} 成功生成摘要")
+            print(f"成功: 使用模型 {current_model} 生成摘要")
             return text
         except Exception as exc:
             safe_error = _safe_error_repr(exc)
@@ -262,9 +296,9 @@ def generate_summary_for_link(client: OpenAI, link: str, model: str = None) -> s
                 print(f"API 调用失败，重试 {attempt + 1}/{api_max_retries}: {safe_error}")
                 time.sleep(2 ** attempt)
             else:
-                print(f"✗ 模型 {current_model} 已达最大重试次数: {safe_error}")
+                print(f"失败: 模型 {current_model} 已达最大重试次数: {safe_error}")
 
-    print(f"✗ 模型 {current_model} 无法生成摘要: {link}")
+    print(f"失败: 模型 {current_model} 无法生成摘要: {link}")
     return ""
 
 

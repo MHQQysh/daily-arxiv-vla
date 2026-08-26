@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CrossView: Can Vision-Language Models Reason Across Cameras? - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文提出并定义了“多摄像头推理”这一研究问题，指出其与单摄像头视频理解存在本质区别，而非简单的数据量增加。 论文面向自动驾驶、安防监控、人-中心（第一/第三人称）交互和机器人操作四个真实世界应用场景，构建了名为 CrossView 的多摄像头视频问答（VQA）基准。 核心研究问题是：当前视觉语言模型（VLM）能否跨多个同步摄像头流进行推理？论文通过系统化基准测试，揭示了现有模型在上下文扩展、跨视角空间推理等方面存在的显著能力缺口。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.15539">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.15539.webp" alt="CrossView: Can Vision-Language Models Reason Across Cameras?" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文提出并定义了“多摄像头推理”这一研究问题，指出其与单摄像头视频理解存在本质区别，而非简单的数据量增加。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CrossView: Can Vision-Language Models Reason Across Cameras?</h1>
+            <div class="detail-meta">2026-08-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.15539" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.15539" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.15539</span></div>
+            <p class="detail-summary">该论文提出并定义了“多摄像头推理”这一研究问题，指出其与单摄像头视频理解存在本质区别，而非简单的数据量增加。 论文面向自动驾驶、安防监控、人-中心（第一/第三人称）交互和机器人操作四个真实世界应用场景，构建了名为 CrossView 的多摄像头视频问答（VQA）基准。 核心研究问题是：当前视觉语言模型（VLM）能否跨多个同步摄像头流进行推理？论文通过系统化基准测试，揭示了现有模型在上下文扩展、跨视角空间推理等方面存在的显著能力缺口。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The University of Texas at Austin · Sahil Shah、S P Sharan、Harsh Goel 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.15539/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文提出并定义了“多摄像头推理”这一研究问题，指出其与单摄像头视频理解存在本质区别，而非简单的数据量增加。</p>
+  <ul class="reading-intro-points"><li>该论文提出并定义了“多摄像头推理”这一研究问题，指出其与单摄像头视频理解存在本质区别，而非简单的数据量增加。</li><li>论文面向自动驾驶、安防监控、人-中心（第一/第三人称）交互和机器人操作四个真实世界应用场景，构建了名为 CrossView 的多摄像头视频问答（VQA）基准。</li><li>核心研究问题是：当前视觉语言模型（VLM）能否跨多个同步摄像头流进行推理？论文通过系统化基准测试，揭示了现有模型在上下文扩展、跨视角空间推理等方面存在的显著能力缺口。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The University of Texas at Austin；作者：Sahil Shah, S P Sharan, Harsh Goel, Adithya Hebbalae, Minkyu Choi, Sandeep P. Chinchali</li><li>机构：Independent Researcher；作者：Manvik Pasula</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文提出并定义了“多摄像头推理”这一研究问题，指出其与单摄像头视频理解存在本质区别，而非简单的数据量增加。</li><li>论文面向自动驾驶、安防监控、人-中心（第一/第三人称）交互和机器人操作四个真实世界应用场景，构建了名为 <code>CrossView</code> 的多摄像头视频问答（VQA）基准。</li><li>核心研究问题是：当前视觉语言模型（VLM）能否跨多个同步摄像头流进行推理？论文通过系统化基准测试，揭示了现有模型在上下文扩展、跨视角空间推理等方面存在的显著能力缺口。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了 <code>CrossView</code>，据称是第一个专门用于评估在 2 到 8 路同步摄像头流上进行联合推理的 VQA 数据集，覆盖四个真实世界领域。</li><li>设计了针对性的多视角推理任务，包括五类自然语言问题（时间、事件排序、空间、计数、总结）以及一个“摄像头-ID”任务，该任务要求模型整合来自多个视点的时空信息。</li><li>对闭源（GPT-5.2）和开源（Qwen、InternVL、Gemma 家族）模型进行了全面评估，揭示了“多摄像头鸿沟”，即模型在多摄像头设置下性能显著下降。</li><li>研究了不同的多视角视觉聚合架构选择（如均匀采样 vs. 拼接采样）对模型跨视角时空理解能力的影响。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：多摄像头视频问答（VQA）基准构建与评估，属于自动驾驶及机器人领域的多模态语言模型推理能力评测。</li><li>输入传感器：多路同步摄像头视频流，每个数据点包含 2 到 8 个摄像头视角。数据集构建过程利用了多模态数据集的元数据，包括摄像头图像、点云（针对 nuScenes）及边界框标注。</li><li>场景表示：采用时空场景图（STSG）作为统一的结构化表示。该图将每个时间戳的对象节点、活动标签、事件间隔和空间关系边（如 behind、near、left、right）进行整合，以支持程序化问题生成。</li><li>模型结构：评估了四种主要 VLM 家族（Qwen、InternVL、GPT、Gemma）。这些模型是现成的多模态语言模型，而非论文训练的新模型，论文未报告其内部架构细节。</li><li>关键技术：</li></ul>
+<p> - 数据集构建采用两阶段流程：先从原始数据集构建 STSG，然后通过程序化问答生成引擎进行查询。</p>
+<p> - 问题生成采用“Grounding-Target”架构，程序化地从 STSG 中选取锚点事件/对象、目标答案和干扰项，并交由 GPT-5.2 生成自然语言问题。</p>
+<p> - 提出了多种问题类型的具体生成逻辑，包括基于时间间隔关系（Before、After、During、In-between）的时间推理、基于空间谓词和方向姿态的空间推理、基于唯一标识符（UID）聚合的跨视角对象计数、基于可见性元数据的最佳视角选择，以及基于事件链挖掘的时间顺序重排。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：<code>CrossView</code> VQA 基准，包含 6,000 个问题，覆盖四个领域来源数据集：nuScenes（自动驾驶）、Ego-Exo4D（第一/第三人称互动）、AgiBot（机器人）、MEVA（安防监控）。各数据集问题量分别为 1,750、1,250、750、2,250。</li><li>仿真器：原文未报告。</li><li>模型规模：评估的模型包括 Qwen2.5-3B/7B、Qwen3-4B/8B、InternVL2-8B、InternVL2.5-8B、InternVL3.5-4B/14B、GPT-5.2、Gemma-3-4B/12B。用于数据生成的模型包括 InternVL-3.5 38B 和 GPT-5.2。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：<code>CrossView</code> 基准内部，包括四个领域子集（nuScenes、Ego-Exo4D、AgiBot、MEVA）。</li><li>评估指标：对多项选择题（计数、时间推理、事件排序、空间推理、最佳摄像头识别）报告准确率（%）；对开放式总结任务报告 ROUGE 分数（R-1、R-2、R-L）。</li><li>关键数值：</li></ul>
+<p> - 各模型在多数任务上准确率普遍不高。例如，GPT-5.2 在 nuScenes 时间推理上得分低于 50%，在 Ego-Exo4D 上的最佳摄像头识别准确率仅为 34.6%（接近随机猜测水平）。</p>
+<p> - 需跨摄像头整合信息的任务（计数、最佳摄像头选择）得分最低。例如，MEVA 和 nuScenes 上的计数任务得分在 25-47% 范围内。</p>
+<p> - 场景规模和摄像头密度影响难度：AgiBot（小型受控环境）上的时间推理准确率最高可达 69.6%，而 MEVA（广域多摄像头）在所有类别中得分最低。</p>
+<p> - 单摄像头输入验证了问题需要多视角证据：将 <code>CrossView</code> 的输入限制为单摄像头，在多个任务上导致性能下降，例如 nuScenes 计数任务下降 8.8%，空间推理下降 4.4%。</p>
+<p> - 拼接采样策略在部分任务上优于均匀采样，例如 nuScenes 上的计数（+10.5%）、事件排序（+15.2%）和时间推理（+4.6%），但在 AgiBot 上提升不明显或有下降。</p>
+<ul><li>对比方法：评估了四个模型家族（Qwen、InternVL、GPT、Gemma）的 11 个模型变体。</li><li>开环/闭环/仿真/实车：所有评估均为离线开环评估，直接对完全采样后的多摄像头视频帧进行回答。未涉及在线规划或闭环仿真。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.15573/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Not All History Helps: Velocity-Aware Selective Memory for Long-Horizon End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.15279/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Geometry-Aware Spatio-Temporal Context Modeling for 4D Occupancy Forecasting</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

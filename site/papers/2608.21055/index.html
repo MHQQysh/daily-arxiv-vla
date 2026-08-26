@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoAnchor: Robust Collaborative Perception under Spatio-Temporal Misalignment via Object-Level Anchors - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决的是自动驾驶中多智能体协同感知在时空错位情况下的鲁棒性问题，具体研究当协作车辆发送的消息因通信延迟和相对位姿噪声而同时产生时间陈旧与空间错位时，如何保持协同感知的检测性能。 应用场景为车-车（V2V）协同感知，涵盖仿真环境（OPV2V）和真实世界（V2V4Real）两种数据集。 核心研究问题是如何在统一的框架内联合处理空间对齐（位姿修正）与时间补偿（延迟信息传播），克服现有方法将空间、时间错位分开处理的局限性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.21055">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.21055.webp" alt="CoAnchor: Robust Collaborative Perception under Spatio-Temporal Misalignment via Object-Level Anchors" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决的是自动驾驶中多智能体协同感知在时空错位情况下的鲁棒性问题，具体研究当协作车辆发送的消息因通信延迟和相对位姿噪声而同时产生时间陈旧与空间错位时，如何保持协同感知的检测性能。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CoAnchor: Robust Collaborative Perception under Spatio-Temporal Misalignment via Object-Level Anchors</h1>
+            <div class="detail-meta">2026-08-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.21055" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.21055" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.21055</span></div>
+            <p class="detail-summary">本文解决的是自动驾驶中多智能体协同感知在时空错位情况下的鲁棒性问题，具体研究当协作车辆发送的消息因通信延迟和相对位姿噪声而同时产生时间陈旧与空间错位时，如何保持协同感知的检测性能。 应用场景为车-车（V2V）协同感知，涵盖仿真环境（OPV2V）和真实世界（V2V4Real）两种数据集。 核心研究问题是如何在统一的框架内联合处理空间对齐（位姿修正）与时间补偿（延迟信息传播），克服现有方法将空间、时间错位分开处理的局限性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">State Key Laboratory of Networking and Switching Technology, Beijing Univer…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.21055/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决的是自动驾驶中多智能体协同感知在时空错位情况下的鲁棒性问题，具体研究当协作车辆发送的消息因通信延迟和相对位姿噪声而同时产生时间陈旧与空间错位时，如何保持协同感知的检测性能。</p>
+  <ul class="reading-intro-points"><li>本文解决的是自动驾驶中多智能体协同感知在时空错位情况下的鲁棒性问题，具体研究当协作车辆发送的消息因通信延迟和相对位姿噪声而同时产生时间陈旧与空间错位时，如何保持协同感知的检测性能。</li><li>应用场景为车-车（V2V）协同感知，涵盖仿真环境（OPV2V）和真实世界（V2V4Real）两种数据集。</li><li>核心研究问题是如何在统一的框架内联合处理空间对齐（位姿修正）与时间补偿（延迟信息传播），克服现有方法将空间、时间错位分开处理的局限性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：State Key Laboratory of Networking and Switching Technology, Beijing University of Posts and Telecommunications；作者：Chi Li</li><li>机构：State Key Laboratory of Networking and Switching Technology, Beijing University of Posts and Telecommunications；作者：Rui Lin</li><li>机构：State Key Laboratory of Networking and Switching Technology, Beijing University of Posts and Telecommunications；作者：Aobo Ji</li><li>机构：State Key Laboratory of Networking and Switching Technology, Beijing University of Posts and Telecommunications；作者：Dongzhu Xu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决的是自动驾驶中多智能体协同感知在时空错位情况下的鲁棒性问题，具体研究当协作车辆发送的消息因通信延迟和相对位姿噪声而同时产生时间陈旧与空间错位时，如何保持协同感知的检测性能。</li><li>应用场景为车-车（V2V）协同感知，涵盖仿真环境（OPV2V）和真实世界（V2V4Real）两种数据集。</li><li>核心研究问题是如何在统一的框架内联合处理空间对齐（位姿修正）与时间补偿（延迟信息传播），克服现有方法将空间、时间错位分开处理的局限性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>分析了协同感知在联合时空错位下性能退化的原因，指出简单的空间对齐加时间补偿的级联方案（baseST）不稳定，且低质量检测与错误匹配会主导位姿优化，时间补偿又无法显式识别残差空间误差。</li><li>提出CoAnchor，一个以对象级时空锚点为中心的协同感知框架，将空间校正、时间传播和当前时间验证紧密连接在一个统一闭环中，替代独立分阶段处理。</li><li>构建稀疏对象级时空锚点作为共享接口，耦合延迟时间对应关系、位姿细化、当前时间传播与验证、闭环可靠性反馈以及锚点引导的特征融合。</li><li>相比在稠密BEV特征空间中直接进行位姿校正，CoAnchor主要作用于稀疏锚点，避免了重复调用高开销的BEV特征处理模块，在保持精度的同时实现更优的精度-效率权衡。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：多智能体协同感知中的时空特征对齐与鲁棒融合模块。</li><li>输入传感器：原文未明确指定单一传感器，实验基于LiDAR点云（使用PointPillars作为BEV骨干网络），但方法本身以对象级状态为输入，原文未报告是否包含其他传感器。</li><li>场景表示：构建稀疏对象级时空锚点作为共享接口，每个锚点对应一个匹配的跨智能体对象假设及其运动状态和随时间变化的可靠性线索；同时保留稠密BEV特征用于最终检测。</li><li>模型结构：整体流程包括四个阶段：(i) 时空锚点初始化（对象状态提取、二分图匹配、轨迹引导的位姿细化、锚点构建）；(ii) 对象时间传播（常速度运动模型预测、Kalman式当前时间更新、χ²门控）；(iii) 闭环后验评分（当前时间一致性 + 短历史一致性反馈，指数降权更新对可靠性权重）；(iv) 锚点引导的特征融合（基于细化位姿的特征重写、box-wise特征移动、下游多尺度特征融合与检测解码）。位姿细化采用迭代重加权最小二乘（IRLS），匹配采用匈牙利算法，传播采用规则化常速度模型与Kalman更新。</li><li>关键技术：对象级时空锚点、轨迹引导的位姿细化、闭环可靠性反馈、归一化创新平方（NIS）门控、box-wise非学习特征移动器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：OPV2V（大规模仿真V2V协同感知基准），V2V4Real（真实世界协同感知基准）。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：2块NVIDIA RTX 4090 GPU，统一代码库训练。</li><li>实车平台：原文未报告。</li><li>其他：BEV骨干统一使用PointPillars，体素大小0.4 m，通信范围限制70 m。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：OPV2V和V2V4Real，注入高斯位姿噪声与通信延迟，设置No Noise、Joint-Hard（200 ms延迟 + (0.6 m, 0.6°)、Pose-Hard（100 ms延迟 + (0.9 m, 0.9°)、Delay-Hard（300 ms延迟 + (0.3 m, 0.3°)）四种条件。</li><li>评估指标：AP@0.5和AP@0.7。</li><li>关键数值：在V2V4Real Joint-Hard下，CoAnchor达到67.04 AP@0.5，超过最强级联基线baseST（61.04）6.00 AP@0.5，相对提升9.83%；在OPV2V Joint-Hard下，CoAnchor达到95.15 / 87.96，超过baseST（90.19 / 81.21）。其余对比方法还包括CoAlign、ERMVP、V2X-ViT、CoST、TraF-Align。</li><li>对比方法：V2X-ViT、ERMVP、CoAlign、TraF-Align、CoST、baseST（CoAlign + TraF-Align级联），以及TraF-Align和CoAnchor的ego-only参考。</li><li>实验条件：本文使用开环检测评估，采用仿真注入方式模拟空间位姿噪声与时间延迟；不涉及闭环、端到端规划或实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2608.21032/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Roadside-Cooperative Autonomous Driving: From Data Platform to Vision-Language End-to-End Reasoning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

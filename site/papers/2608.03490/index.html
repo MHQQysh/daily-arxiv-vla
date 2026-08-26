@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lightweight 3D Object Detection via Mamba-Based Knowledge Distillation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶与机器人导航中 LiDAR 三维物体检测任务，面向车载嵌入式环境的实时感知需求。 核心研究问题是：如何在资源受限平台上实现计算开销与检测精度之间的平衡，即如何构建高精度的教师模型并通过知识蒸馏压缩得到轻量级学生模型。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.03490">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.03490.webp" alt="Lightweight 3D Object Detection via Mamba-Based Knowledge Distillation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶与机器人导航中 LiDAR 三维物体检测任务，面向车载嵌入式环境的实时感知需求。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Lightweight 3D Object Detection via Mamba-Based Knowledge Distillation</h1>
+            <div class="detail-meta">2026-08-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.03490" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.03490" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.03490</span></div>
+            <p class="detail-summary">解决自动驾驶与机器人导航中 LiDAR 三维物体检测任务，面向车载嵌入式环境的实时感知需求。 核心研究问题是：如何在资源受限平台上实现计算开销与检测精度之间的平衡，即如何构建高精度的教师模型并通过知识蒸馏压缩得到轻量级学生模型。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Viettel AI, Viettel Group, Vietnam · Quoc Cuong Ninh、Dinh Hoan Trinh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.03490/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶与机器人导航中 LiDAR 三维物体检测任务，面向车载嵌入式环境的实时感知需求。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶与机器人导航中 LiDAR 三维物体检测任务，面向车载嵌入式环境的实时感知需求。</li><li>核心研究问题是：如何在资源受限平台上实现计算开销与检测精度之间的平衡，即如何构建高精度的教师模型并通过知识蒸馏压缩得到轻量级学生模型。</li><li>提出多分支 Mamba 3D 骨干网络作为教师模型，通过浅层与深层双分支融合增强多尺度稀疏体素特征表示。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Viettel AI, Viettel Group, Vietnam；作者：Quoc Cuong Ninh、Dinh Hoan Trinh</li><li>机构：Artificial Intelligence in Robotics Laboratory (AiR Lab), Department of Electrical and Computer Engineering, Aarhus University, Denmark，以及 Upteko ApS, Denmark；作者：Huy Xuan Pham</li><li>机构：VIST, Viettel Group, Vietnam；作者：Anh Tung Nguyen</li><li>注：论文中 Quoc Cuong Ninh 与 Dinh Hoan Trinh 的隶属关系在作者列表中同时出现于 Viettel AI 与 Viettel Group，Dinh Hoan Trinh 为通讯作者；原文未明确区分各作者与所属机构之间的单独对应关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶与机器人导航中 LiDAR 三维物体检测任务，面向车载嵌入式环境的实时感知需求。</li><li>核心研究问题是：如何在资源受限平台上实现计算开销与检测精度之间的平衡，即如何构建高精度的教师模型并通过知识蒸馏压缩得到轻量级学生模型。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出多分支 Mamba 3D 骨干网络作为教师模型，通过浅层与深层双分支融合增强多尺度稀疏体素特征表示。</li><li>提出 Mamba 自适应蒸馏策略，结合检测头输出蒸馏与基于体素空间的框感知潜在状态对齐，实现对象级特征知识迁移。</li><li>设计基于 Mamba 编码器的特征投影模块，将学生特征映射到教师特征空间，解决师生模型间特征维度不一致问题。</li><li>改进 CPR 评估指标，以实测推理延迟替代激活数量，并采用 mAP 作为精度指标，用于指导学生模型的剪枝选择。</li><li>在公开数据集 nuScenes 与自采真实世界数据集 Livox-Legged 上验证，表明轻量学生模型在显著降低计算开销的同时保持竞争力精度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：3D 物体检测（背骨提取、BEV 编码、检测头输出）。</li><li>输入传感器：LiDAR 点云。</li><li>场景表示：稀疏体素（voxel）表示，采用 3D 稀疏窗口划分策略组织体素序列。</li><li>模型结构：教师模型由多分支 Mamba 3D 背骨（MBB 结构）、BEV 背骨和检测头构成；学生模型通过对教师网络各模块的宽度（通道数）和深度（层数）按比例剪枝得到；特征投影模块采用轻量 Mamba 编码器（对比实验中还考察 MLP 投影器、Transformer 投影器、1×1 卷积投影器等替代方案）。</li><li>关键技术：</li></ul>
+<p> - Mamba 层基于选择性状态空间模型，体素特征沿 X、Y 两个正交方向进行序列化处理与线性循环状态更新。</p>
+<p> - 多分支块（MBB）包含浅层 Mamba 分支（标准 Mamba 层+层归一化+3D 卷积）与深层 Mamba 分支（引入体素合并与体素扩展操作，来自 LION），两分支输出经残差连接融合后送入 BEV 背骨。</p>
+<p> - Mamba 自适应蒸馏：检测头蒸馏（分类、回归、热图输出按最高 IoU 匹配对齐）；潜在空间蒸馏仅对地面真值 3D 框内的共有体素索引特征计算 L2 损失，通过投影函数将学生特征映射至教师特征空间。</p>
+<p> - 总损失函数为真值监督损失加 Mamba 蒸馏损失（权重 α，设为 1.0）与检测头蒸馏损失（权重 β，设为 0.5）。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes LiDAR-only 赛道，1,000 场景，约 28,000 个 LiDAR 关键帧，10 个目标类别，训练 700 场景、验证 150 场景。</li><li>真实世界数据集：Livox-Legged（自采，多台 Livox Mid-360 LiDAR 安装在腿式机器人上，空间标定后融合为统一表示），2,000 训练场景、500 测试场景，包含行人、汽车、摩托车三类，训练与测试共含行人 13,933 实例、汽车 3,971 实例、摩托车 1,617 实例。</li><li>仿真器：原文未报告。</li><li>模型规模：教师模型参数 23.52M，激活 339.2M；学生模型参数范围为 1.74M（student-f）至 11.60M（student-a），其中 student-h 4.11M 参数、student-d 11.04M 参数。</li><li>训练资源：4 块 NVIDIA L40 GPU；推理延迟测量平台为单块 NVIDIA A4000 GPU；嵌入式平台为 NVIDIA Jetson Orin NX。</li><li>框架与工具：OpenPCDet 框架，PyTorch 深度学习后端；BEV 背骨与检测头设计沿用 DSVT。</li><li>实车平台：腿式巡逻机器人（安装 Livox Mid-360 多 LiDAR），用于真实场景部署验证。</li><li>训练配置：师生模型均训练 36 epochs，批大小 16，点云范围、体素化网格、数据增强、优化器与学习率调度遵循 DSVT 配置；训练采用固定随机种子。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>公开基准：nuScenes 验证集。</li><li>评估指标：mAP、NDS、mATE、mASE、mAOE、mAVE、mAAE；Livox-Legged 测试集上报告 mAP 与推理延迟。</li><li>关键数值（nuScenes 全量训练、验证集 mAP）：</li></ul>
+<p> - 教师模型（多分支 Mamba）：mAP 68.2%，参数 23.52M，延迟 199 ms（A4000 GPU）。</p>
+<p> - Student-d：mAP 67.9%，参数 11.04M，延迟 108 ms。</p>
+<p> - Student-g：mAP 67.1%，参数 10.50M，延迟 97 ms。</p>
+<p> - Student-h：mAP 65.6%，参数 4.11M，延迟 71 ms。</p>
+<ul><li>关键数值（20% 训练数据、student-d 对比）：</li></ul>
+<p> - 学生模型无 KD：mAP 58.54，NDS 65.25。</p>
+<p> - 学生模型 + FitNet：mAP 60.93，NDS 67.30；+ Mimic：mAP 60.27，NDS 66.83；+ FG：mAP 61.00，NDS 67.36；+ SparseKD：mAP 61.07，NDS 67.54；+ PointDistiller：mAP 59.84，NDS 66.32；+ itKD：mAP 60.35，NDS 66.92。</p>
+<p> - 学生模型 + 所提方法（Ours）：mAP 63.00，NDS 68.59，均优于其他 KD 方法且超过无 KD 教师基线。</p>
+<ul><li>剪枝结果（20% 训练数据）：</li></ul>
+<p> - Student-a：mAP 56.70，CPR 0.55；Student-b：mAP 54.76，CPR 0.53；Student-c：mAP 53.73，CPR 0.62；Student-d：mAP 58.54，CPR 0.72；Student-e：mAP 54.50，CPR 0.70；Student-f：mAP 50.73，CPR 0.69；Student-g：mAP 57.48，CPR 0.73；Student-h：mAP 54.56，CPR 0.72。</p>
+<ul><li>消融研究（student-d，20% 训练数据）：</li></ul>
+<p> - 无 KD：mAP 58.54；全量体素 KD（无框感知）：mAP 59.50，NDS 66.63；框感知 KD + 1×1 卷积投影器：mAP 61.85，NDS 67.23；+ MLP：mAP 62.28，NDS 68.25；+ Transformer：mAP 61.40，NDS 67.65；+ Mamba 编码器（最终方案）：mAP 63.00，NDS 68.59。</p>
+<p> - 教师骨干结构消融（全量训练）：浅层分支单独：mAP 67.39，NDS 71.78；深层分支单独：mAP 67.52，NDS 71.96；浅层+深层：mAP 68.22，NDS 72.13。</p>
+<ul><li>对比方法（nuScenes 全量训练，表 III）：CenterPoint（mAP 59.2）、VoxelNext（60.5）、Transfusion-L（64.6）、DSVT（66.4）、VoxelMamba（67.5）、LION（68.0）；其中带 † 的为 OpenPCDet 预训练权重结果，带 ∗ 的为原文报告结果，基线可能使用不同训练协议。</li><li>真实世界评估（Livox-Legged 测试集，Jetson Orin NX，批大小 1，从零训练 36 epochs）：</li></ul>
+<p> - CenterPoint：mAP 53.76%，延迟 142 ms；DSVT：mAP</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.04130/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Radar4D-VLM: Proposal-Grounded Temporal 4D Radar Reasoning Across Frozen Language Models</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.23405/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">MomADv2: Reliable Temporal Memory for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

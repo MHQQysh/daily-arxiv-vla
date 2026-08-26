@@ -10,6 +10,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import fitz
+import requests
+
 from fetch_paper_images import MANIFEST_PATH, load_manifest, save_manifest
 
 
@@ -57,6 +60,51 @@ def main() -> int:
             "height": result.get("height"),
         }
         updated += 1
+
+    # 没有 arXiv HTML 图形页面时，以论文 PDF 首页作为最终首图兜底。
+    for result in results:
+        if result.get("ok"):
+            continue
+
+        arxiv_id = result.get("arxiv_id", "")
+        queue_item = queue_by_id.get(arxiv_id)
+        if not queue_item:
+            continue
+
+        output_path = Path(queue_item["output_path"])
+        pdf_url = f"https://arxiv.org/pdf/{arxiv_id}"
+        try:
+            response = requests.get(pdf_url, timeout=60)
+            response.raise_for_status()
+            document = fitz.open(stream=response.content, filetype="pdf")
+            if document.page_count < 1:
+                raise RuntimeError("PDF 没有页面")
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            pixmap = document.load_page(0).get_pixmap(
+                matrix=fitz.Matrix(1.5, 1.5),
+                alpha=False,
+            )
+            pixmap.save(output_path)
+            document.close()
+        except Exception as exc:
+            print(f"PDF 首页兜底失败 {arxiv_id}: {exc!r}")
+            continue
+
+        manifest[arxiv_id] = {
+            "title": queue_item["title"],
+            "abs_url": queue_item["abs_url"],
+            "html_url": queue_item["html_url"],
+            "path": queue_item["relative_path"],
+            "image_url": pdf_url,
+            "source": "pdf:first-page",
+            "score": 50,
+            "content_type": "image/png",
+            "inside_figure": False,
+            "width": pixmap.width,
+            "height": pixmap.height,
+        }
+        updated += 1
+        print(f"PDF 首页兜底成功: {arxiv_id}")
 
     save_manifest(manifest)
     print(f"已注册截图兜底首图: {updated}")

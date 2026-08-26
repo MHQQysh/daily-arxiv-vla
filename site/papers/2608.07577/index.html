@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open-World Hierarchical Perception: Taxonomic Abstraction over Class-Agnostic Proposals for the Safe Handling of Out-of-Vocabulary Road Objects - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出了一种面向自动驾驶的开世界分层感知（Open-World Hierarchical Perception）方法，解决封闭词汇目标检测器无法安全处理词汇外（Out-of-Vocabulary）道路物体的安全问题。 研究问题聚焦于：当检测器遇到训练集中未出现的目标（如马车、路面碎片、牲畜等）时，现有封闭检测器要么强制赋予一个错误的具体标签，要么丢弃该物体，两者都存在安全隐患。 本论文将前期工作构建的分层分类法抽象层置于类不可知（class-agnostic）区域提议之上，使封闭检测器无法框出的物体也能被安全分类或标记为未知障碍物，并在真实标注数据上进行了词汇类别留出评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.07577">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.07577.webp" alt="Open-World Hierarchical Perception: Taxonomic Abstraction over Class-Agnostic Proposals for the Safe Handling of Out-of-Vocabulary Road Objects" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出了一种面向自动驾驶的开世界分层感知（Open-World Hierarchical Perception）方法，解决封闭词汇目标检测器无法安全处理词汇外（Out-of-Vocabulary）道路物体的安全问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Open-World Hierarchical Perception: Taxonomic Abstraction over Class-Agnostic Proposals for the Safe Handling of Out-of-Vocabulary Road Objects</h1>
+            <div class="detail-meta">2026-08-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.07577" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.07577" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.07577</span></div>
+            <p class="detail-summary">本文提出了一种面向自动驾驶的开世界分层感知（Open-World Hierarchical Perception）方法，解决封闭词汇目标检测器无法安全处理词汇外（Out-of-Vocabulary）道路物体的安全问题。 研究问题聚焦于：当检测器遇到训练集中未出现的目标（如马车、路面碎片、牲畜等）时，现有封闭检测器要么强制赋予一个错误的具体标签，要么丢弃该物体，两者都存在安全隐患。 本论文将前期工作构建的分层分类法抽象层置于类不可知（class-agnostic）区域提议之上，使封闭检测器无法框出的物体也能被安全分类或标记为未知障碍物，并在真实标注数据上进行了词汇类别留出评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Independent Researcher（独立研究者，迪拜/慕尼黑） · Felix Schaller</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.07577/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出了一种面向自动驾驶的开世界分层感知（Open-World Hierarchical Perception）方法，解决封闭词汇目标检测器无法安全处理词汇外（Out-of-Vocabulary）道路物体的安全问题。</p>
+  <ul class="reading-intro-points"><li>本文提出了一种面向自动驾驶的开世界分层感知（Open-World Hierarchical Perception）方法，解决封闭词汇目标检测器无法安全处理词汇外（Out-of-Vocabulary）道路物体的安全问题。</li><li>研究问题聚焦于：当检测器遇到训练集中未出现的目标（如马车、路面碎片、牲畜等）时，现有封闭检测器要么强制赋予一个错误的具体标签，要么丢弃该物体，两者都存在安全隐患。</li><li>本论文将前期工作构建的分层分类法抽象层置于类不可知（class-agnostic）区域提议之上，使封闭检测器无法框出的物体也能被安全分类或标记为未知障碍物，并在真实标注数据上进行了词汇类别留出评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Independent Researcher（独立研究者，迪拜/慕尼黑）；作者：Felix Schaller</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出了一种面向自动驾驶的开世界分层感知（Open-World Hierarchical Perception）方法，解决封闭词汇目标检测器无法安全处理词汇外（Out-of-Vocabulary）道路物体的安全问题。</li><li>研究问题聚焦于：当检测器遇到训练集中未出现的目标（如马车、路面碎片、牲畜等）时，现有封闭检测器要么强制赋予一个错误的具体标签，要么丢弃该物体，两者都存在安全隐患。</li><li>本论文将前期工作构建的分层分类法抽象层置于类不可知（class-agnostic）区域提议之上，使封闭检测器无法框出的物体也能被安全分类或标记为未知障碍物，并在真实标注数据上进行了词汇类别留出评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建了开世界感知层：将分类学抽象规则运行在类不可知区域提议上，使封闭检测器遗漏的物体仍可获得安全的分层标签或被标记为未知障碍物。</li><li>完成了三种开世界信号（类不可知分割、基于外观的分布外评分、单目深度）的可行性研究，报告了两个诚实的负面结果，证明没有任何单一二维线索足够，且召回（分割）与精度（几何）互补。</li><li>设计了基于真实标注的地面真值留类评估（leave-classes-out）基准：在 235 个真实词汇外物体上，扁平封闭头 100% 输出自信的错误具体标签（其中 37% 落入错误超类），而分层层自信错误率为 0%，安全处理率达 94%。</li><li>明确将该结果定性为&quot;安全&quot;而非&quot;特异性&quot;结果：正确超类仅恢复 26%，其余 69% 被保守标记为未知。</li><li>提供了完整的代码、分类法、基准脚本和历史记录（存放于 GitHub），保证可复现性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：开世界感知系统，采用&quot;提议-分类-验证&quot;三阶段流水线架构，将开世界扩展作为新提议器和验证器插入，不干扰语义核心。</li><li>输入传感器：原文未明确列出全部传感器，涉及单目图像、类不可知分割掩码和单目深度图；几何信号采用单目深度而非 LiDAR。</li><li>场景表示：对象组织为有向树结构分类法，叶节点为具体类别（如轿车、骑行者、马），内部节点为安全相关的抽象层（如车辆、生物、静态物体），每个分支声明一个安全底线（safety floor）。</li><li>模型结构：封闭前端使用预训练 YOLO 检测器（低置信度、类不可知 NMS）获取候选框；开世界前端使用 MobileSAM 进行类不可知分割；分类器使用 CLIP 图像嵌入与每个分类法叶节点的文本提示计算余弦相似度得到软最大化分布；几何验证器使用单目深度图进行前景/背景分离和平面/立体判断。</li><li>关键技术：质量聚合抽象（mass-aggregated abstraction）— 将叶节点概率质量向上聚合，内部节点得分为其后代叶节点质量之和；从根节点开始下降，仅当子节点集中了至少比例 m 的局部质量时继续下降，否则在当前节点停止并报告该抽象层；若最佳叶节点绝对相似度低于阈值 s_min，或下降低于分支安全底线，则报告为未知障碍物。几何作为提议流的可选精度过滤器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：COCO 验证集（用于留类评估），Road Anomaly / SegmentMeIfYouCan 异常基准（用于可行性研究），CODA 极端案例数据集（作为相关工作引用）。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告；使用 CLIP（Radford et al. 2021）、MobileSAM、单目深度估计器（Depth Anything）。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li><li>代码与数据：代码、分类法、基准脚本及完整历史已发布于 https://github.com/freshNfunky/IE2025-Research-Paper，基准脚本为 scripts/v3_openworld_benchmark.py。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：COCO 验证集上的留类评估（leave-classes-out），7 个类别作为留出集（卡车、公交车归入&quot;车辆&quot;超类；马、牛、羊、大象、熊归入&quot;生物&quot;超类），从 800 张验证图像中筛选出 235 个地面真值词汇外物体（箱体面积大于帧的 1%）。</li><li>评估指标：自信错误具体标签率、错误超类分支率、正确超类恢复率、诚实未知率、安全处理率。</li><li>关键数值（n=235）：扁平封闭头与分层层对比——</li></ul>
+<p> - 自信错误具体标签：扁平 100%，HOWC 0%；</p>
+<p> - 其中错误超分支：扁平 37%（如动物被命名为车辆），HOWC 6%；</p>
+<p> - 正确超类恢复：HOWC 26%；</p>
+<p> - 诚实未知：HOWC 69%；</p>
+<p> - 安全处理率：扁平 0%，HOWC 94%。</p>
+<ul><li>对比方法：扁平/封闭头（arg-max 叶节点）与 HOWC（分层开世界分类器，参数 m=0.40，τ=0.06，s_min=0.20）。</li><li>词汇内佐证：在分类法内异常集对象上，分层层产生 0% 离分支（类别性）错误，24% 校准弃权，而扁平 arg-max 头的离分支错误率为 53%。</li><li>可行性研究数值：封闭 YOLO 前端在异常图像样本上产生 19 个检测，MobileSAM 额外增加 148 个检测器遗漏的区域，分层未知门正确过滤其中 112 个为未知，剩余 36 个获得类别的区域多为背景（如植被被标为&quot;生物&quot;）。</li><li>条件说明：该评估为开环分类评估，隔离了分类环节（使用地面真值框），未涉及闭环驾驶或端到端系统评估；无仿真或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.04453/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">TwinIR: Coordinated Invisible Dual-Point Attacks on Online HD Map Construction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.04130/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Radar4D-VLM: Proposal-Grounded Temporal 4D Radar Reasoning Across Frozen Language Models</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

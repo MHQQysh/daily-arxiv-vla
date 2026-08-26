@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Impact of CutMix on Reliability and Robustness in Semantic Segmentation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文研究基于 CutMix 数据增强策略在语义分割任务中的可靠性（模型置信度与真实正确性的匹配程度）和鲁棒性（在扰动或分布偏移下维持性能的能力）。 应用场景为自动驾驶等安全关键系统中的语义分割，研究问题聚焦于 CutMix 是否会导致或改善模型可靠性的退化。 背景动机是近期研究表明以 CutMix 为核心组件的半监督分割方法会严重损害模型可靠性，本文旨在将 CutMix 的影响从半监督框架中剥离，单独系统性地评估其对精度、校准和不确定性质量的作用。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.18715">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.18715.webp" alt="The Impact of CutMix on Reliability and Robustness in Semantic Segmentation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文研究基于 CutMix 数据增强策略在语义分割任务中的可靠性（模型置信度与真实正确性的匹配程度）和鲁棒性（在扰动或分布偏移下维持性能的能力）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">The Impact of CutMix on Reliability and Robustness in Semantic Segmentation</h1>
+            <div class="detail-meta">2026-08-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.18715" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.18715" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.18715</span></div>
+            <p class="detail-summary">本文研究基于 CutMix 数据增强策略在语义分割任务中的可靠性（模型置信度与真实正确性的匹配程度）和鲁棒性（在扰动或分布偏移下维持性能的能力）。 应用场景为自动驾驶等安全关键系统中的语义分割，研究问题聚焦于 CutMix 是否会导致或改善模型可靠性的退化。 背景动机是近期研究表明以 CutMix 为核心组件的半监督分割方法会严重损害模型可靠性，本文旨在将 CutMix 的影响从半监督框架中剥离，单独系统性地评估其对精度、校准和不确定性质量的作用。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">卡尔加里理工学院（KIT）摄影测量与遥感研究所（IPF） · Steven Landgraf、Markus Ulrich</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.18715/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文研究基于 CutMix 数据增强策略在语义分割任务中的可靠性（模型置信度与真实正确性的匹配程度）和鲁棒性（在扰动或分布偏移下维持性能的能力）。</p>
+  <ul class="reading-intro-points"><li>本文研究基于 CutMix 数据增强策略在语义分割任务中的可靠性（模型置信度与真实正确性的匹配程度）和鲁棒性（在扰动或分布偏移下维持性能的能力）。</li><li>应用场景为自动驾驶等安全关键系统中的语义分割，研究问题聚焦于 CutMix 是否会导致或改善模型可靠性的退化。</li><li>背景动机是近期研究表明以 CutMix 为核心组件的半监督分割方法会严重损害模型可靠性，本文旨在将 CutMix 的影响从半监督框架中剥离，单独系统性地评估其对精度、校准和不确定性质量的作用。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：卡尔加里理工学院（KIT）摄影测量与遥感研究所（IPF）；作者：Steven Landgraf、Markus Ulrich</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文研究基于 CutMix 数据增强策略在语义分割任务中的可靠性（模型置信度与真实正确性的匹配程度）和鲁棒性（在扰动或分布偏移下维持性能的能力）。</li><li>应用场景为自动驾驶等安全关键系统中的语义分割，研究问题聚焦于 CutMix 是否会导致或改善模型可靠性的退化。</li><li>背景动机是近期研究表明以 CutMix 为核心组件的半监督分割方法会严重损害模型可靠性，本文旨在将 CutMix 的影响从半监督框架中剥离，单独系统性地评估其对精度、校准和不确定性质量的作用。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次系统性地将 CutMix 从半监督分割框架中分离，单独分析其对语义分割精度、校准及不确定性质量的影响。</li><li>在两个代表性架构（CNN 的 DeepLabV3+ 与 Transformer 的 SegFormer）上，跨同域与跨域场景进行评估，涵盖多种骨干规模。</li><li>实验发现 CutMix 对分割精度影响较小，但一致性地提升模型不确定性质量，尤其在分布偏移场景下校准和不确定性估计更可靠。</li><li>揭示 CutMix 主要增强的是模型表达不确定性的方式（可靠性），而非预测结果本身（精度），为安全关键部署提供关键区分。</li><li>结论表明半监督分割框架的可靠性退化不能归因于 CutMix 本身，而更可能源于伪标签或一致性正则化等其他组件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据增强策略（训练阶段离线增强）。</li><li>输入传感器：单目 RGB 图像（原文未明确指定传感器型号）。</li><li>场景表示：像素级语义标签（每像素类别标注）。</li><li>模型结构：DeepLabV3+（ResNet-34/101/152 骨干）与 SegFormer（MiT-B0/B3/B5 骨干）。</li><li>关键技术：CutMix 通过随机切割一张图像的矩形区域粘贴到另一张图像，同时按像素比例混合标签（公式：ẋ = M ⊙ xA + (1-M) ⊙ xB；ỹ = λyA + (1-λ)yB），混合比 λ 采样自 beta 分布，应用概率为 50%。训练采用交叉熵损失、AdamW 优化器、多项式学习率调度、250 轮训练、批大小 8。基线增强包括随机缩放、水平翻转和随机裁剪。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练数据集：Cityscapes。</li><li>跨域评估数据集：Foggy Cityscapes 验证集（β=0.005、β=0.01、β=0.2 三种雾浓度）。</li><li>模型规模：DeepLabV3+（RN34 ~21M、RN101 ~42M、RN152 ~58M）；SegFormer（MiT-B0 ~3.7M、MiT-B3 ~45M、MiT-B5 ~82M）。</li><li>训练配置：学习率 DeepLabV3+ 为 1×10⁻⁴（解码器×10）、SegFormer 为 5×10⁻⁶（解码器×10）；权重衰减 DeepLabV3+ 1×10⁻⁴、SegFormer 1×10⁻²；250 轮、批大小 8、多项式学习率调度。</li><li>硬件资源：推理时间测量在单张 NVIDIA A100 GPU 上完成；训练资源原文未报告具体 GPU 型号或数量。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Cityscapes 验证集（同域，开环评估）与 Foggy Cityscapes 三个雾浓度级别（跨域，不重训练）。</li><li>评估指标：mIoU（精度）、ECE（校准）、p(acc\|cer) 与 p(unc\|inacc)（条件不确定性质量）、RSS（综合可靠性得分，各权重设为 1.0）。</li><li>关键数值（同域，表 2）：DeepLabV3+ RN34 CutMix 后 mIoU 0.743 不变、ECE 0.033→0.027、p(unc\|inacc) 0.731→0.838、RSS 0.826→0.864；SegFormer MiT-B0 CutMix 后 mIoU 0.658→0.688、p(acc\|cer) 0.899→0.930、RSS 0.789→0.833；MiT-B5 CutMix 后 RSS 从 0.853 降至 0.831（原文解释为 checkpoint 选择不佳）。</li><li>关键数值（跨域，表 3）：CutMix 在多数配置下降低 ECE（如 RN152 在 Fog3 下 ECE 0.120→0.074）、提升 p(unc\|inacc)（如 RN34 在 Fog3 下 0.753→0.845）与 RSS（如 RN34 在 Fog1 下 0.813→0.850），而 mIoU 变化有限；SegFormer MiT-B5 在 Fog3 下 CutMix 后 RSS 0.822→0.808。</li><li>对比方法：有/无 CutMix 的 DeepLabV3+ 与 SegFormer 变体对比。</li><li>评估条件：全部为开环、离线评估；无仿真器闭环测试、无实车部署；原文未报告多种子统计或显著性检验。</li><li>附加定性评估：可视化精度图与不确定性图（图 3），显示 CutMix 训练的模型在错误或模糊区域表现出更高不确定性，预测类别分配基本不变。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.18900/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">TestifAI: Tomography-Based Testing for Deep Learning Systems</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.18254/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">GAPL: Grounded Action-effect Policy Learning for LLM-Based Trajectory Planning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

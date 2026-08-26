@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CRUISE: Vision-Language Model-Guided Uncertainty-Aware Cross-Modal Sensor Fusion for Robust Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶中跨模态传感器融合的鲁棒性问题，应用场景为复杂真实驾驶环境，包括恶劣天气、低能见度等分布外场景。 研究问题为：现有不确定性感知融合方法依赖简单的特征级不确定性估计，难以在复杂分布外场景中有效泛化，且缺乏对跨模态依赖关系的显式建模。 为此提出 CRUISE 框架，利用视觉-语言模型引导的细粒度像素级不确定性量化，并通过动态适应机制显式捕获跨模态依赖，提升 3D 目标检测和语义分割的鲁棒性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.09202">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.09202.webp" alt="CRUISE: Vision-Language Model-Guided Uncertainty-Aware Cross-Modal Sensor Fusion for Robust Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶中跨模态传感器融合的鲁棒性问题，应用场景为复杂真实驾驶环境，包括恶劣天气、低能见度等分布外场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CRUISE: Vision-Language Model-Guided Uncertainty-Aware Cross-Modal Sensor Fusion for Robust Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.09202" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.09202" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.09202</span></div>
+            <p class="detail-summary">本文解决自动驾驶中跨模态传感器融合的鲁棒性问题，应用场景为复杂真实驾驶环境，包括恶劣天气、低能见度等分布外场景。 研究问题为：现有不确定性感知融合方法依赖简单的特征级不确定性估计，难以在复杂分布外场景中有效泛化，且缺乏对跨模态依赖关系的显式建模。 为此提出 CRUISE 框架，利用视觉-语言模型引导的细粒度像素级不确定性量化，并通过动态适应机制显式捕获跨模态依赖，提升 3D 目标检测和语义分割的鲁棒性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">加州大学尔湾分校计算机科学系 · Junyao Wang、Mohammad Abdullah Al Faruque</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.09202/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶中跨模态传感器融合的鲁棒性问题，应用场景为复杂真实驾驶环境，包括恶劣天气、低能见度等分布外场景。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶中跨模态传感器融合的鲁棒性问题，应用场景为复杂真实驾驶环境，包括恶劣天气、低能见度等分布外场景。</li><li>研究问题为：现有不确定性感知融合方法依赖简单的特征级不确定性估计，难以在复杂分布外场景中有效泛化，且缺乏对跨模态依赖关系的显式建模。</li><li>为此提出 CRUISE 框架，利用视觉-语言模型引导的细粒度像素级不确定性量化，并通过动态适应机制显式捕获跨模态依赖，提升 3D 目标检测和语义分割的鲁棒性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：加州大学尔湾分校计算机科学系；作者：Junyao Wang、Mohammad Abdullah Al Faruque</li><li>机构：加州大学尔湾分校电气工程与计算机科学系；作者：Yulin Xu、Yu Li、Pramod Khargonekar</li><li>机构：加州大学尔湾分校机械与航空航天工程系；作者：Mohammad Abdullah Al Faruque</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶中跨模态传感器融合的鲁棒性问题，应用场景为复杂真实驾驶环境，包括恶劣天气、低能见度等分布外场景。</li><li>研究问题为：现有不确定性感知融合方法依赖简单的特征级不确定性估计，难以在复杂分布外场景中有效泛化，且缺乏对跨模态依赖关系的显式建模。</li><li>为此提出 CRUISE 框架，利用视觉-语言模型引导的细粒度像素级不确定性量化，并通过动态适应机制显式捕获跨模态依赖，提升 3D 目标检测和语义分割的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 CRUISE，一个新颖的不确定性感知跨模态传感器融合框架，包含 VLM 引导的不确定性量化模块和动态融合机制，在 3D 目标检测上平均提升 4.87%，在语义分割上平均提升 4.23%。</li><li>首次提出基于 VLM 的不确定性量化方法，利用先验知识和上下文理解生成上下文感知的像素级不确定性热力图，在分布外驾驶场景中平均超越 SOTA 不确定性量化技术 4.16%。</li><li>设计新颖的融合模块，通过显式建模跨模态依赖动态调整每个传感器的贡献，使模型能利用模态间的互补信息，提升各种真实场景下的鲁棒性。</li><li>引入动态适应机制，综合不确定性分数和模态间方差为每个模态分配权重，确保更可靠的模态在融合中贡献更大。</li><li>设计 UQ 损失和模态一致性损失，稳定高不确定性区域的表示并增强低不确定性区域的跨模态一致性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：多模态传感器融合框架，包含特征提取、VLM 引导的不确定性量化、不确定性感知融合三大阶段。</li><li>输入传感器：LiDAR 点云、雷达点云、多视角相机图像。</li><li>场景表示：所有模态特征通过视角变换投影到统一的鸟瞰图（BEV）表示，维度为 C×H×W。</li><li>模型结构：</li></ul>
+<p> - LiDAR 特征：使用 VoxelNet 与 SparseConvNet 提取，经高度压缩得到 BEV 表示。</p>
+<p> - 相机特征：使用 ResNet-50 提取，经视角变换和 1×1 卷积映射到共享特征空间。</p>
+<p> - 雷达特征：使用 PointPillars 提取柱状 BEV 表示，经 SparseCNN 处理并映射到共享特征空间。</p>
+<p> - VLM 模块：基于 AnomalyGPT 架构，通过 LoRA 微调，包含视觉流（ImageBind 编码器加轻量 transformer 解码器）和文本流（Vicuna-7B 大语言模型）。</p>
+<p> - 融合模块：空间注意力、通道注意力、像素注意力，以及基于模态不确定性和方差动态加权的动态适应机制。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 构建每个模态的特征池，通过核心采样选出代表性训练特征用于推理时的不确定性估计。</p>
+<p> - 推理时，计算测试样本特征与特征池中最接近特征的逐像素欧氏距离作为初始不确定性。</p>
+<p> - 提示适配器将不确定性估计、区域提示和定位图转换为结构化文本提示，供 VLM 进行上下文推理。</p>
+<p> - 最终不确定性热力图由视觉定位图和文本不确定性图加权融合生成。</p>
+<p> - 总损失为基线损失加上 UQ 损失和模态一致性损失的加权和。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：aiMotive 数据集（26,583 帧，含 14 类超 425,000 个物体的 3D 检测标注，覆盖 highway、night、rain、urban 场景）。</li><li>数据集：DeliVER 数据集（47,310 个样本，含 1,406 个分布外样本，六视角四传感器模态，用于恶劣天气下的语义分割）。</li><li>数据集：MFNet 数据集（1,569 对 RGB 与热红外图像，820 个白天样本和 749 个夜间样本）。</li><li>数据集：原文未报告。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：aiMotive 数据集的 3D 目标检测；DeliVER 和 MFNet 数据集的语义分割。</li><li>评估指标：aiMotive 采用 all-point AP 和 11-point 插值 AP；DeliVER 和 MFNet 采用 mIoU。</li><li>关键数值（aiMotive 检测，all-point AP/11-point AP）：</li></ul>
+<p> - Highway：76.27/74.09（对比第二优 BEVFusion 76.89/74.64，较基线 aiMotive 提升 +0.60/+0.59）</p>
+<p> - Urban：63.29/62.23（较基线提升 +2.19/+2.22）</p>
+<p> - Night：75.96/72.56（较基线提升 +2.52/+1.35）</p>
+<p> - Rain：44.17/43.14（较基线提升 +2.99/+2.93）</p>
+<p> - Mean：68.37/66.76（较基线提升 +2.52/+2.30）</p>
+<ul><li>关键数值（DeliVER 语义分割 mIoU，分布外测试/分布内验证）：</li></ul>
+<p> - Cloudy：53.93/58.25（较基线 CMNeXt 提升 +3.45/+1.64）</p>
+<p> - Foggy：54.27/57.94（较基线提升 +3.66/+2.81）</p>
+<p> - Night：47.19/49.72（较基线提升 +2.24/+1.70）</p>
+<p> - Rainy：55.52/58.03（较基线提升 +4.18/+2.98）</p>
+<p> - Sunny：52.25/58.01（较基线提升 +3.01/+0.87）</p>
+<p> - Mean：52.63/56.79（较基线提升 +3.31/+2.40）</p>
+<ul><li>对比方法：FocalFormer3D、MVP、BEVFusion、CMT、MSMDFusion、aiMotive（3D 检测）；StitchFusion、CMX、TokenFusion、HRFuser、CMNeXt（语义分割）；SwinT、SegFormer、ACNet、FuseSeg、FEANet、SegMiF（MFNet 语义分割）。</li><li>条件：所有实验在公开数据集上进行开环评估，结合模拟分布外样本（运动模糊、过度曝光、曝光不足、LiDAR 噪声等）进行鲁棒性验证，具体为仿真/离线评估；原文未报告闭环或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.09333/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DH-VLM: Dual-Horizon Cooperative Latent Reasoning for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.09144/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">How Roadside Units Enhance Intersection Safety? Cooperative Autonomous Driving System Design and A Proof of Concept</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

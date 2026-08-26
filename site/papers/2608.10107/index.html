@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>4D-WAM: 4D Consistent World Modeling for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="研究单位 机构：University of Science and Technology of China（中国科学技术大学）；作者：Jiacheng Fu、Yue Li、Jiangtong Zhu、Yueyi Zhang、Zhiwei Xiong 机构：Xi’an Jiaotong University（西安交通大学）；作者：Jianwu Fang、Jianru Xue 机构：Yinwang Intelligent Technology Co., Ltd.（引望智能科技有限公司）；作者：Yibo Yuan、Jianhua Han、Hang Xu 机构：Midea Group（美的集团）；作者：Meng Tian 注：原文未明确作者与机构的完整对应关系，以上为根据原文可推断的对应关系，其余作者归属原文未明确对应。 论文概述 本文解决自主驾驶中的世界动作模型（World-Action Model, WAM）训练问题。 针对现有 WAM 仅使用 2D 视频监督，导致无法理解底层 4D 驾驶场景结构，从而产生视觉上合理但 4D 不一致的未来预测，进而误导下游轨迹规划的问题。 提出 4D-WAM 模型，通过几何基础模型提供训练时监督，实现 4D 一致的世界建模。 应用场景为端到端自动驾驶的联合未来场景演化建模与轨迹规划，涵盖标准与困难驾驶场景（NAVSIM-v1 与 NAVSIM-v2 基准）。 核心贡献 开发了面向驾驶的 WAM 主干，采用非对称注意力掩码，保留可靠的历史条件并实现充分的视频-动作交互。 引入 4D 一致性监督，将预测的未来帧与冻结的几何基础模型（VGGT-Ω）提取的几何特征和深度线索对齐，构建特征一致性与深度一致性损失。 揭示 WAM 中的“早期决策”现象（视频与动作分支在最初一两个高噪声去噪步骤即形成驾驶决策），并提出决策导向时间步采样策略，强调决策区间的训练监督。 在 NAVSIM-v1 与 NAVSIM-v2 基准上达到最先进规划性能，包括 navtest 与 navhard 数据划分。 方法描述 所属模块：世界动作模型（WAM），联合建模未来场景演化与轨迹规划，采用流匹配（flow-matching）训练框架。 输入传感器：单目前视摄像头（1C）；输入包括历史前视帧（3 个历史帧加当前观测）、当前自车状态、文本驾驶指令。 场景表示：历史帧通过视频 VAE 编码为干净历史 latent；未来视频 latent 与动作轨迹 latent 联合去噪；通过 VAE 解码器生成预测未来视频。 模型结构：Mixture-of-Transformers（MoT）设计，包含视频专家（初始化自 Wan2.2 视频 DiT）与结构对齐的动作专家；采用非对称注意力掩码（历史条件 token 仅自注意力，视频与动作 token 可互相及对历史全注意力）；文本指令用 T5 编码，自车状态线性投影后附加。 关键技术： 4D 一致性监督：预测未来视频与真实未来视频分别送入冻结的 VGGT-Ω，获取多尺度几何特征与深度图，计算特征一致性损失（余弦距离）与深度一致性损失（基于可靠像素的 SmoothL1，作用于 log-depth）。 4D 一致性损失总式：L4D = λfeat·Lfeat + λdepth·Ldepth；训练中先从噪声 latent 恢复干净样本估计再 VAE 解码，使几何基础模型可处理。 决策导向时间步采样：定义决策区域 Rdec = [θdec, 1] 与细化区域 Rref = [0, θdec)，θdec = 0.90；通过 θ = su/(1+(s-1)u) 采样噪声水平，s=9.0 使决策区域概率质量占 50%。 场景表示、训练策略等额外细节：原文未报告。 数据集与资源 数据集：NAVSIM 基准，包括 NAVSIM-v1（navtest 划分）与 NAVSIM-v2（navtest、navhard 划分），以及 navtrain 训练集。 仿真器：原文未报告。 模型规模：原文未报告具体参数量。 训练资源：16 块 NVIDIA H200 GPU；两阶段训练：Stage I 在 navtrain 上训练 40 轮（学习率 1×10⁻⁴），Stage II 从 Stage I 初始化，再加 40 轮 4D 一致性监督训练（学习率 2×10⁻⁵）；AdamW + 余弦学习率调度。 实车平台：原文未报告。 推理设置：默认 10 步去噪。 评估与结果 评估基准：NAVSIM-v1 的 navtest 划分；NAVSIM-v2 的 navtest 与 navhard（两阶段闭环评估：S1 真实观测阶段，S2 合成后续观测阶段）。 评估指标：PDMS（NAVSIM-v1，含 NC 无过错碰撞、DAC 可行驶区域合规、EP 自车进度、TTC 碰撞时间、C 舒适度）；EPDMS（NAVSIM-v2，扩展 PDMS，含 DDC 驾驶方向合规、TLC 交通灯合规、LK 车道保持、HC 历史舒适度、EC 扩展舒适度）。 关键数值（4D-WAM）： NAVSIM-v2 navtest：EPDMS=90.6（最高），NC=99.1，DAC=97.9，DDC=99.7，EP=98.3，TTC=98.6；优于次优 DriveFine（EPDMS=89.7，差距 0.9）。 NAVSIM-v1 navtest：PDMS=90.9（最高），超越 ReCogDrive 0.1、DriveVLA-W0 0.7。 NAVSIM-v2 navhard：EPDMS=35.9（最高），超越先前最优 Metis（32.2）3.7 点；S1 阶段最优 DDC、EP、EC，S2 阶段最优 NC、DDC、EP、TTC、LK。 对比方法：TransFuser、DriveSuprim、DiffusionDrive、ReCogDrive、SGDrive、DriveFine、Epona、DriveVLA-W0、WorldRFT、DriveLaW、Metis 等（含强化学习微调方法）。 消融实验（NAVSIM-v2 navtest，EPDMS）：WAM Base=88.8，+History=89.6，+Feature Loss=90.1，+Depth Loss=90.4，+Sampling=90.6。 评估条件：闭环仿真评估（navhard 采用两阶段闭环，S1/S2）；定性分析对比有无 4D 监督，显示改善动态目标重建、距离感知与速度估计，避免碰撞。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.10107">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.10107.webp" alt="4D-WAM: 4D Consistent World Modeling for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">机构：University of Science and Technology of China（中国科学技术大学）；作者：Jiacheng Fu、Yue Li、Jiangtong Zhu、Yueyi Zhang、Zhiwei Xiong</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">4D-WAM: 4D Consistent World Modeling for Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.10107" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.10107" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.10107</span></div>
+            <p class="detail-summary">研究单位 机构：University of Science and Technology of China（中国科学技术大学）；作者：Jiacheng Fu、Yue Li、Jiangtong Zhu、Yueyi Zhang、Zhiwei Xiong 机构：Xi’an Jiaotong University（西安交通大学）；作者：Jianwu Fang、Jianru Xue 机构：Yinwang Intelligent Technology Co., Ltd.（引望智能科技有限公司）；作者：Yibo Yuan、Jianhua Han、Hang Xu 机构：Midea Group（美的集团）；作者：Meng Tian 注：原文未明确作者与机构的完整对应关系，以上为根据原文可推断的对应关系，其余作者归属原文未明确对应。 论文概述 本文解决自主驾驶中的世界动作模型（World-Action Model, WAM）训练问题。 针对现有 WAM 仅使用 2D 视频监督，导致无法理解底层 4D 驾驶场景结构，从而产生视觉上合理但 4D 不一致的未来预测，进而误导下游轨迹规划的问题。 提出 4D-WAM 模型，通过几何基础模型提供训练时监督，实现 4D 一致的世界建模。 应用场景为端到端自动驾驶的联合未来场景演化建模与轨迹规划，涵盖标准与困难驾驶场景（NAVSIM-v1 与 NAVSIM-v2 基准）。 核心贡献 开发了面向驾驶的 WAM 主干，采用非对称注意力掩码，保留可靠的历史条件并实现充分的视频-动作交互。 引入 4D 一致性监督，将预测的未来帧与冻结的几何基础模型（VGGT-Ω）提取的几何特征和深度线索对齐，构建特征一致性与深度一致性损失。 揭示 WAM 中的“早期决策”现象（视频与动作分支在最初一两个高噪声去噪步骤即形成驾驶决策），并提出决策导向时间步采样策略，强调决策区间的训练监督。 在 NAVSIM-v1 与 NAVSIM-v2 基准上达到最先进规划性能，包括 navtest 与 navhard 数据划分。 方法描述 所属模块：世界动作模型（WAM），联合建模未来场景演化与轨迹规划，采用流匹配（flow-matching）训练框架。 输入传感器：单目前视摄像头（1C）；输入包括历史前视帧（3 个历史帧加当前观测）、当前自车状态、文本驾驶指令。 场景表示：历史帧通过视频 VAE 编码为干净历史 latent；未来视频 latent 与动作轨迹 latent 联合去噪；通过 VAE 解码器生成预测未来视频。 模型结构：Mixture-of-Transformers（MoT）设计，包含视频专家（初始化自 Wan2.2 视频 DiT）与结构对齐的动作专家；采用非对称注意力掩码（历史条件 token 仅自注意力，视频与动作 token 可互相及对历史全注意力）；文本指令用 T5 编码，自车状态线性投影后附加。 关键技术： 4D 一致性监督：预测未来视频与真实未来视频分别送入冻结的 VGGT-Ω，获取多尺度几何特征与深度图，计算特征一致性损失（余弦距离）与深度一致性损失（基于可靠像素的 SmoothL1，作用于 log-depth）。 4D 一致性损失总式：L4D = λfeat·Lfeat + λdepth·Ldepth；训练中先从噪声 latent 恢复干净样本估计再 VAE 解码，使几何基础模型可处理。 决策导向时间步采样：定义决策区域 Rdec = [θdec, 1] 与细化区域 Rref = [0, θdec)，θdec = 0.90；通过 θ = su/(1+(s-1)u) 采样噪声水平，s=9.0 使决策区域概率质量占 50%。 场景表示、训练策略等额外细节：原文未报告。 数据集与资源 数据集：NAVSIM 基准，包括 NAVSIM-v1（navtest 划分）与 NAVSIM-v2（navtest、navhard 划分），以及 navtrain 训练集。 仿真器：原文未报告。 模型规模：原文未报告具体参数量。 训练资源：16 块 NVIDIA H200 GPU；两阶段训练：Stage I 在 navtrain 上训练 40 轮（学习率 1×10⁻⁴），Stage II 从 Stage I 初始化，再加 40 轮 4D 一致性监督训练（学习率 2×10⁻⁵）；AdamW + 余弦学习率调度。 实车平台：原文未报告。 推理设置：默认 10 步去噪。 评估与结果 评估基准：NAVSIM-v1 的 navtest 划分；NAVSIM-v2 的 navtest 与 navhard（两阶段闭环评估：S1 真实观测阶段，S2 合成后续观测阶段）。 评估指标：PDMS（NAVSIM-v1，含 NC 无过错碰撞、DAC 可行驶区域合规、EP 自车进度、TTC 碰撞时间、C 舒适度）；EPDMS（NAVSIM-v2，扩展 PDMS，含 DDC 驾驶方向合规、TLC 交通灯合规、LK 车道保持、HC 历史舒适度、EC 扩展舒适度）。 关键数值（4D-WAM）： NAVSIM-v2 navtest：EPDMS=90.6（最高），NC=99.1，DAC=97.9，DDC=99.7，EP=98.3，TTC=98.6；优于次优 DriveFine（EPDMS=89.7，差距 0.9）。 NAVSIM-v1 navtest：PDMS=90.9（最高），超越 ReCogDrive 0.1、DriveVLA-W0 0.7。 NAVSIM-v2 navhard：EPDMS=35.9（最高），超越先前最优 Metis（32.2）3.7 点；S1 阶段最优 DDC、EP、EC，S2 阶段最优 NC、DDC、EP、TTC、LK。 对比方法：TransFuser、DriveSuprim、DiffusionDrive、ReCogDrive、SGDrive、DriveFine、Epona、DriveVLA-W0、WorldRFT、DriveLaW、Metis 等（含强化学习微调方法）。 消融实验（NAVSIM-v2 navtest，EPDMS）：WAM Base=88.8，+History=89.6，+Feature Loss=90.1，+Depth Loss=90.4，+Sampling=90.6。 评估条件：闭环仿真评估（navhard 采用两阶段闭环，S1/S2）；定性分析对比有无 4D 监督，显示改善动态目标重建、距离感知与速度估计，避免碰撞。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">1 张阅读卡</span>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.10107/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">机构：University of Science and Technology of China（中国科学技术大学）；作者：Jiacheng Fu、Yue Li、Jiangtong Zhu、Yueyi Zhang、Zhiwei Xiong</p>
+  <ul class="reading-intro-points"><li>机构：University of Science and Technology of China（中国科学技术大学）；作者：Jiacheng Fu、Yue Li、Jiangtong Zhu、Yueyi Zhang、Zhiwei Xiong</li><li>机构：Xi’an Jiaotong University（西安交通大学）；作者：Jianwu Fang、Jianru Xue</li><li>机构：Yinwang Intelligent Technology Co., Ltd.（引望智能科技有限公司）；作者：Yibo Yuan、Jianhua Han、Hang Xu</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><h1>研究单位</h1>
+<ul><li>机构：University of Science and Technology of China（中国科学技术大学）；作者：Jiacheng Fu、Yue Li、Jiangtong Zhu、Yueyi Zhang、Zhiwei Xiong</li><li>机构：Xi’an Jiaotong University（西安交通大学）；作者：Jianwu Fang、Jianru Xue</li><li>机构：Yinwang Intelligent Technology Co., Ltd.（引望智能科技有限公司）；作者：Yibo Yuan、Jianhua Han、Hang Xu</li><li>机构：Midea Group（美的集团）；作者：Meng Tian</li><li>注：原文未明确作者与机构的完整对应关系，以上为根据原文可推断的对应关系，其余作者归属原文未明确对应。</li></ul>
+<h1>论文概述</h1>
+<ul><li>本文解决自主驾驶中的世界动作模型（World-Action Model, WAM）训练问题。</li><li>针对现有 WAM 仅使用 2D 视频监督，导致无法理解底层 4D 驾驶场景结构，从而产生视觉上合理但 4D 不一致的未来预测，进而误导下游轨迹规划的问题。</li><li>提出 4D-WAM 模型，通过几何基础模型提供训练时监督，实现 4D 一致的世界建模。</li><li>应用场景为端到端自动驾驶的联合未来场景演化建模与轨迹规划，涵盖标准与困难驾驶场景（NAVSIM-v1 与 NAVSIM-v2 基准）。</li></ul>
+<h1>核心贡献</h1>
+<ul><li>开发了面向驾驶的 WAM 主干，采用非对称注意力掩码，保留可靠的历史条件并实现充分的视频-动作交互。</li><li>引入 4D 一致性监督，将预测的未来帧与冻结的几何基础模型（VGGT-Ω）提取的几何特征和深度线索对齐，构建特征一致性与深度一致性损失。</li><li>揭示 WAM 中的“早期决策”现象（视频与动作分支在最初一两个高噪声去噪步骤即形成驾驶决策），并提出决策导向时间步采样策略，强调决策区间的训练监督。</li><li>在 NAVSIM-v1 与 NAVSIM-v2 基准上达到最先进规划性能，包括 navtest 与 navhard 数据划分。</li></ul>
+<h1>方法描述</h1>
+<ul><li>所属模块：世界动作模型（WAM），联合建模未来场景演化与轨迹规划，采用流匹配（flow-matching）训练框架。</li><li>输入传感器：单目前视摄像头（1C）；输入包括历史前视帧（3 个历史帧加当前观测）、当前自车状态、文本驾驶指令。</li><li>场景表示：历史帧通过视频 VAE 编码为干净历史 latent；未来视频 latent 与动作轨迹 latent 联合去噪；通过 VAE 解码器生成预测未来视频。</li><li>模型结构：Mixture-of-Transformers（MoT）设计，包含视频专家（初始化自 Wan2.2 视频 DiT）与结构对齐的动作专家；采用非对称注意力掩码（历史条件 token 仅自注意力，视频与动作 token 可互相及对历史全注意力）；文本指令用 T5 编码，自车状态线性投影后附加。</li><li>关键技术：</li></ul>
+<p> - 4D 一致性监督：预测未来视频与真实未来视频分别送入冻结的 VGGT-Ω，获取多尺度几何特征与深度图，计算特征一致性损失（余弦距离）与深度一致性损失（基于可靠像素的 SmoothL1，作用于 log-depth）。</p>
+<p> - 4D 一致性损失总式：L4D = λfeat·Lfeat + λdepth·Ldepth；训练中先从噪声 latent 恢复干净样本估计再 VAE 解码，使几何基础模型可处理。</p>
+<p> - 决策导向时间步采样：定义决策区域 Rdec = [θdec, 1] 与细化区域 Rref = [0, θdec)，θdec = 0.90；通过 θ = su/(1+(s-1)u) 采样噪声水平，s=9.0 使决策区域概率质量占 50%。</p>
+<ul><li>场景表示、训练策略等额外细节：原文未报告。</li></ul>
+<h1>数据集与资源</h1>
+<ul><li>数据集：NAVSIM 基准，包括 NAVSIM-v1（navtest 划分）与 NAVSIM-v2（navtest、navhard 划分），以及 navtrain 训练集。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：16 块 NVIDIA H200 GPU；两阶段训练：Stage I 在 navtrain 上训练 40 轮（学习率 1×10⁻⁴），Stage II 从 Stage I 初始化，再加 40 轮 4D 一致性监督训练（学习率 2×10⁻⁵）；AdamW + 余弦学习率调度。</li><li>实车平台：原文未报告。</li><li>推理设置：默认 10 步去噪。</li></ul>
+<h1>评估与结果</h1>
+<ul><li>评估基准：NAVSIM-v1 的 navtest 划分；NAVSIM-v2 的 navtest 与 navhard（两阶段闭环评估：S1 真实观测阶段，S2 合成后续观测阶段）。</li><li>评估指标：PDMS（NAVSIM-v1，含 NC 无过错碰撞、DAC 可行驶区域合规、EP 自车进度、TTC 碰撞时间、C 舒适度）；EPDMS（NAVSIM-v2，扩展 PDMS，含 DDC 驾驶方向合规、TLC 交通灯合规、LK 车道保持、HC 历史舒适度、EC 扩展舒适度）。</li><li>关键数值（4D-WAM）：</li></ul>
+<p> - NAVSIM-v2 navtest：EPDMS=90.6（最高），NC=99.1，DAC=97.9，DDC=99.7，EP=98.3，TTC=98.6；优于次优 DriveFine（EPDMS=89.7，差距 0.9）。</p>
+<p> - NAVSIM-v1 navtest：PDMS=90.9（最高），超越 ReCogDrive 0.1、DriveVLA-W0 0.7。</p>
+<p> - NAVSIM-v2 navhard：EPDMS=35.9（最高），超越先前最优 Metis（32.2）3.7 点；S1 阶段最优 DDC、EP、EC，S2 阶段最优 NC、DDC、EP、TTC、LK。</p>
+<ul><li>对比方法：TransFuser、DriveSuprim、DiffusionDrive、ReCogDrive、SGDrive、DriveFine、Epona、DriveVLA-W0、WorldRFT、DriveLaW、Metis 等（含强化学习微调方法）。</li><li>消融实验（NAVSIM-v2 navtest，EPDMS）：WAM Base=88.8，+History=89.6，+Feature Loss=90.1，+Depth Loss=90.4，+Sampling=90.6。</li><li>评估条件：闭环仿真评估（navhard 采用两阶段闭环，S1/S2）；定性分析对比有无 4D 监督，显示改善动态目标重建、距离感知与速度估计，避免碰撞。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.10278/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Chain of Spatial Thoughts: Modality-Agnostic Spatial Grounding for Vision Language Models</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.09591/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">FactorDrive: Adaptive Multi-Step Reasoning Driven by Planning-Critical Factors for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

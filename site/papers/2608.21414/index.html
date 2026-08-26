@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RiskWorld: Object-Centric Latent World Modeling for Autonomous Driving Risk Identification - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶中的目标级风险识别任务，即判断周围交通参与者与障碍物中哪个对象可能对自车构成安全威胁。 应用场景覆盖交互冲突（interactive）、碰撞（collision）、静态障碍物（obstacle）和非交互（non-interactive）驾驶场景。 研究问题是将目标级风险识别建模为未来自车-对象关系的想象演化过程，而非基于场景级事故预测或事后几何检查。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.21414">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.21414.webp" alt="RiskWorld: Object-Centric Latent World Modeling for Autonomous Driving Risk Identification" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶中的目标级风险识别任务，即判断周围交通参与者与障碍物中哪个对象可能对自车构成安全威胁。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">RiskWorld: Object-Centric Latent World Modeling for Autonomous Driving Risk Identification</h1>
+            <div class="detail-meta">2026-08-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.21414" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.21414" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.21414</span></div>
+            <p class="detail-summary">论文解决自动驾驶中的目标级风险识别任务，即判断周围交通参与者与障碍物中哪个对象可能对自车构成安全威胁。 应用场景覆盖交互冲突（interactive）、碰撞（collision）、静态障碍物（obstacle）和非交互（non-interactive）驾驶场景。 研究问题是将目标级风险识别建模为未来自车-对象关系的想象演化过程，而非基于场景级事故预测或事后几何检查。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未报告 · Jingzheng Li、Yufei Ge、Qianren Mao 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.21414/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶中的目标级风险识别任务，即判断周围交通参与者与障碍物中哪个对象可能对自车构成安全威胁。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶中的目标级风险识别任务，即判断周围交通参与者与障碍物中哪个对象可能对自车构成安全威胁。</li><li>应用场景覆盖交互冲突（interactive）、碰撞（collision）、静态障碍物（obstacle）和非交互（non-interactive）驾驶场景。</li><li>研究问题是将目标级风险识别建模为未来自车-对象关系的想象演化过程，而非基于场景级事故预测或事后几何检查。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未报告；作者：Jingzheng Li、Yufei Ge、Qianren Mao、Zhijun Chen、Bing Li、Xingyu Peng、Baochang Zhang、Xianglong Liu（原文未明确作者与机构对应关系）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶中的目标级风险识别任务，即判断周围交通参与者与障碍物中哪个对象可能对自车构成安全威胁。</li><li>应用场景覆盖交互冲突（interactive）、碰撞（collision）、静态障碍物（obstacle）和非交互（non-interactive）驾驶场景。</li><li>研究问题是将目标级风险识别建模为未来自车-对象关系的想象演化过程，而非基于场景级事故预测或事后几何检查。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将目标级驾驶风险识别形式化为未来自车-对象关系推演（future ego–object relation rollout），以预测的关系演化为证据来定位风险源。</li><li>提出 RiskWorld，一种目标中心的潜在世界模型，结合预训练预测性视频表示、关系感知场景编码、RSSM 风格潜在动力学以及风险导向的监督。</li><li>在 RiskBench 上，RiskWorld 相对最强的学习基线将整体 F1 提升 1.2 个百分点，并取得最低的误报率 2.1%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：风险识别与预测模块，属于自动驾驶感知-预测层中的风险监控组件。</li><li>输入传感器：前视 RGB 视频，以及对象框、对象跟踪轨迹和自车运动信息。</li><li>场景表示：目标中心的潜在状态表示，结合全局场景特征、对象对齐视觉特征和结构化对象状态。</li><li>模型结构：包含四阶段——冻结的 V-JEPA2 编码器提取预测性视觉上下文；对象状态编码器（MLP 与掩码 GRU）处理结构化历史；掩码多注意力关系融合；对象级 RSSM 风格潜在动力学（确定性-随机状态）进行未来推演；风险与关系解码头输出对象风险分数、未来关系轨迹与时间风险曲线。</li><li>关键技术：采用冻结 V-JEPA2 特征避免像素重建；RSSM 风格潜在状态多步推演；未来关系监督（位置、距离、最小距离回归）；时间风险曲线监督（指数衰减目标）；后验-先验 KL 正则化；推理时仅使用当前及历史观测，未来标注仅用于训练监督；最小距离和时间-风险从解码轨迹中派生而非单独预测。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：RiskBench（6,916 个 CARLA 场景，含交互冲突、碰撞、静态障碍物和非交互驾驶场景），采用基于地图的训练/验证/测试划分及前视设置。</li><li>仿真器：CARLA。</li><li>模型规模：冻结 V-JEPA2 ViT-L 编码器；观察历史 K=16 帧；未来推演步数 H=60（3 秒，20 FPS）；至多 64 个候选对象；256 维确定性状态；64 维随机状态；4 个关系注意力头。</li><li>训练资源：AdamW 优化器，训练 10 轮，批大小 64，初始学习率 1e-4；辅助未来损失在前两轮线性预热。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：RiskBench 测试集，所有场景类型；前视设置。</li><li>评估指标：局部化的精确率、召回率、整体微平均 F1；渐进递增代价（PIC）；非交互场景误报率（FA）；未来风险预测采用逐时间历程 Brier 分数；规划相关评估报告影响比率（IR）和碰撞率（CR）。</li><li>关键数值：RiskWorld 整体 F1 为 63.0%，FA 为 2.1%；交互、碰撞、障碍物精确率分别为 70.2%、91.5%、67.3%；相对 Range (10m) 提升 F1 9.4 分，相对 BADAS* 提升 14.2 分，相对 FLaRA* 提升 1.2 分。</li><li>对比方法：随机、Range（5m）、Range（10m）、Kalman 滤波、Social-GAN、MANTRA、QCNet、DSA、RRL、BP、BCP，以及 BADAS* 和 FLaRA*（原文对 BADAS 和 FLaRA 的目标级适配）。</li><li>实验条件：原文未明确声明为开环或闭环；在仿真环境（CARLA）中进行；规划相关评估采用 LBC 规划器，在滤波观测条件下评估所选对象信息保持能力，RiskWorld 在障碍物场景取得最优 IR（0.08）和 CR（24.2%），交互场景 CR 为 1.1%。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.11592/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Video2Track: From Real-World Interaction Videos to Steerable Adversarial Closed-Track Testing for Automated Driving Systems</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.11580/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RoadWeaver: Large-Scale Lane-Level HD Map Generation from Scratch for Autonomous Driving Simulation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

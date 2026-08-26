@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Radar4D-VLM: Proposal-Grounded Temporal 4D Radar Reasoning Across Frozen Language Models - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶中 4D 毫米波雷达作为独立感知模态的推理任务，该模态在恶劣天气下可靠性高且可直接测量径向速度。 研究问题包括：如何将时序汽车雷达点云组织为对象、场景和运动感知的标记；语言模型输出成功是源于传感器使用还是对齐语言监督带来的真实收益。 应用场景为基于纯 4D 雷达点云的多模态场景与运动推理，覆盖对象计数、空间分布、运动状态、碰撞风险、语义类别和径向速度等任务。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.04130">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.04130.webp" alt="Radar4D-VLM: Proposal-Grounded Temporal 4D Radar Reasoning Across Frozen Language Models" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶中 4D 毫米波雷达作为独立感知模态的推理任务，该模态在恶劣天气下可靠性高且可直接测量径向速度。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Radar4D-VLM: Proposal-Grounded Temporal 4D Radar Reasoning Across Frozen Language Models</h1>
+            <div class="detail-meta">2026-08-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.04130" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.04130" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.04130</span></div>
+            <p class="detail-summary">本文解决自动驾驶中 4D 毫米波雷达作为独立感知模态的推理任务，该模态在恶劣天气下可靠性高且可直接测量径向速度。 研究问题包括：如何将时序汽车雷达点云组织为对象、场景和运动感知的标记；语言模型输出成功是源于传感器使用还是对齐语言监督带来的真实收益。 应用场景为基于纯 4D 雷达点云的多模态场景与运动推理，覆盖对象计数、空间分布、运动状态、碰撞风险、语义类别和径向速度等任务。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">China University of Petroleum-Beijing at Karamay · Jiaju Han</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.04130/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶中 4D 毫米波雷达作为独立感知模态的推理任务，该模态在恶劣天气下可靠性高且可直接测量径向速度。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶中 4D 毫米波雷达作为独立感知模态的推理任务，该模态在恶劣天气下可靠性高且可直接测量径向速度。</li><li>研究问题包括：如何将时序汽车雷达点云组织为对象、场景和运动感知的标记；语言模型输出成功是源于传感器使用还是对齐语言监督带来的真实收益。</li><li>应用场景为基于纯 4D 雷达点云的多模态场景与运动推理，覆盖对象计数、空间分布、运动状态、碰撞风险、语义类别和径向速度等任务。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：China University of Petroleum-Beijing at Karamay；作者：Jiaju Han</li><li>机构：Shenzhen Research Institute of Big Data；作者：Xuemeng Sun</li><li>机构：Shanghai Jiao Tong University；作者：Qike Zhang, Xiang Chen</li><li>机构：Tianjin University；作者：Luwei Yang, Jiahuan Long</li><li>机构：North University of China；作者：Yiwei Wei, Jiujiang Guo</li><li>机构：原文未明确对应；作者：Chengyin Hu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶中 4D 毫米波雷达作为独立感知模态的推理任务，该模态在恶劣天气下可靠性高且可直接测量径向速度。</li><li>研究问题包括：如何将时序汽车雷达点云组织为对象、场景和运动感知的标记；语言模型输出成功是源于传感器使用还是对齐语言监督带来的真实收益。</li><li>应用场景为基于纯 4D 雷达点云的多模态场景与运动推理，覆盖对象计数、空间分布、运动状态、碰撞风险、语义类别和径向速度等任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出首个将 proposal-grounded 时序对象标记、全局场景上下文和显式运动学标记统一于冻结骨干接口的汽车雷达-语言架构，推理时无需相机或 LiDAR。</li><li>在 K-Radar 发展验证集上达到 Top-64 proposal 召回率 98.13%（4 米），分别超过固定格栅和均匀随机对照 6.40 和 22.83 个百分点。</li><li>开展包含 24 个运行、覆盖五个语言模型家族八个冻结骨干的受控评估矩阵，并设置对齐/置换/无语言目标及雷达输入干预。</li><li>通过消融实验系统评估时序历史、多普勒、proposal 与场景特征、全局标记池化和运动学标记的作用，并实现 LLM-free 直接推理导出。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：雷达-语言视觉模型，输入为连续十帧 4D 雷达点云扫描，推理阶段不使用相机、LiDAR、文本、轨迹或真值框。</li><li>场景表示：通过 RTNH 兼容的稀疏卷积编码器提出 64 个几何 grounded 对象 proposal 中心，构建 64 个对象标记、4 个场景标记和 1 个运动学标记，总状态为 69×256 维标记序列。</li><li>模型结构：对象标记结合冻结语义特征、归一化中心和分数、冻结类别/框/方向先验及学习到的多普勒描述符；场景标记由可学习查询通过多头注意力从 BEV 特征中提取；运动学标记通过加权对象状态与运动学统计量生成。</li><li>关键技术：参数高效低秩投影器（低于 120 万参数）将 69 个标记映射到冻结语言骨干；共享状态同时驱动直接预测头和语言路径；设置对齐、固定置换和无语言三种匹配训练条件以分离语言监督的影响。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：K-Radar 4D 汽车雷达数据集，训练使用序列 1-40，发展验证使用序列 41-48，报告清单含 4,208 个十帧窗口，另有 1,024 窗口用于检查点选择。</li><li>仿真器：原文未报告。</li><li>模型规模：投影器最多 120 万可训练参数，隐藏维度 256，每帧采样 10,240 雷达点，邻域 128。</li><li>训练资源：原文未报告具体 GPU 型号或数量。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：K-Radar 发展验证集，采用序列隔离的严格划分，所有结果明确为发展验证结果而非独立测试结果。</li><li>评估指标：核心五任务（移动计数、扇区、运动、碰撞风险、速度）宏平衡准确率、proposal 中心召回率、最近目标距离、径向速度误差。</li><li>关键数值：Top-64 proposal 召回率 0.9813（4 米），固定格栅 0.9173，随机 0.7530；最近目标距离 1.057 米对比格栅 2.426 米；直接头核心平衡准确率 0.5018，高于 RTNH+物理参考 0.3401 和宏机会 0.2833。</li><li>对比方法：对齐 vs 固定置换 vs 无语言目标（Qwen2.5-3B，种子 41-43）；proposal 中心 vs 固定格栅 vs 均匀随机；跨八个冻结骨干（Qwen、Phi、Mistral、Llama、Gemma）兼容性对比。</li><li>开闭环条件：开环评估，基于 K-Radar 发展验证集，不涉及训练仿真器或实车测试。</li><li>语言监督核心结果：对齐减置换直接头核心平衡准确率变化为 -0.0052（95% 区间 [-0.0305, 0.0220]），对齐减无语言变化为 -0.0024（[-0.0231, 0.0188]），均不支持稳定收益。</li><li>传感器依赖结果：严格置零雷达使语言路径降低 0.1215、直接路径降低 0.1370；场景局部洗牌分别降低 0.1532 和 0.1703；反转历史分别降低 0.0249 和 0.0277；零多普勒效应区间跨越零。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.07577/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Open-World Hierarchical Perception: Taxonomic Abstraction over Class-Agnostic Proposals for the Safe Handling of Out-of-Vocabulary Road Objects</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.03490/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Lightweight 3D Object Detection via Mamba-Based Knowledge Distillation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

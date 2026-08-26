@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A2DINOv3: Rethinking Multi-Modal Object Detection via Socialized Collaboration - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶与多模态感知中的可见光-红外（RGB-IR）多模态目标检测任务。 应用场景包括自动驾驶、低光照监控、航拍检测等具有挑战性的环境。 研究问题是：如何将视觉基础模型（如DINOv3）适配到多模态场景，避免密集跨模态融合带来的噪声传播和预训练表征退化，实现有选择、受约束的跨模态协作。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.21099">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.21099.webp" alt="A2DINOv3: Rethinking Multi-Modal Object Detection via Socialized Collaboration" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶与多模态感知中的可见光-红外（RGB-IR）多模态目标检测任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A2DINOv3: Rethinking Multi-Modal Object Detection via Socialized Collaboration</h1>
+            <div class="detail-meta">2026-08-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.21099" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.21099" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.21099</span></div>
+            <p class="detail-summary">解决自动驾驶与多模态感知中的可见光-红外（RGB-IR）多模态目标检测任务。 应用场景包括自动驾驶、低光照监控、航拍检测等具有挑战性的环境。 研究问题是：如何将视觉基础模型（如DINOv3）适配到多模态场景，避免密集跨模态融合带来的噪声传播和预训练表征退化，实现有选择、受约束的跨模态协作。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Artificial Intelligence, Tianjin University · Jiekang Feng、Yueyin…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.21099/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶与多模态感知中的可见光-红外（RGB-IR）多模态目标检测任务。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶与多模态感知中的可见光-红外（RGB-IR）多模态目标检测任务。</li><li>应用场景包括自动驾驶、低光照监控、航拍检测等具有挑战性的环境。</li><li>研究问题是：如何将视觉基础模型（如DINOv3）适配到多模态场景，避免密集跨模态融合带来的噪声传播和预训练表征退化，实现有选择、受约束的跨模态协作。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Artificial Intelligence, Tianjin University；作者：Jiekang Feng、Yueying Zhang、Yike Gao、Ranxin Li、Guanzuo Chen</li><li>机构：School of Sports Training, Tianjin University of Sport；作者：Zhihe Fan</li><li>机构：School of Computer Science and Engineering, University of New South Wales；作者：Yunqi Zhu</li><li>机构：Faculty of Information Engineering and Automation, Kunming University of Science and Technology；作者：Xinjie Yao</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶与多模态感知中的可见光-红外（RGB-IR）多模态目标检测任务。</li><li>应用场景包括自动驾驶、低光照监控、航拍检测等具有挑战性的环境。</li><li>研究问题是：如何将视觉基础模型（如DINOv3）适配到多模态场景，避免密集跨模态融合带来的噪声传播和预训练表征退化，实现有选择、受约束的跨模态协作。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>从社会互依理论视角重新审视多模态融合，将RGB和IR视为异构专家，主张通过受调节的信息交换而非无限制特征混合实现协作。</li><li>提出A2DINOv3框架，包含参数共享双流骨干和Socialized Collaboration Protocol（SCP），通过低秩瓶颈限制跨模态通信容量。</li><li>引入零初始化上投影矩阵，使通信路径在训练开始时关闭，随训练逐步激活，实现从模态独立学习到协作表征学习的平滑过渡。</li><li>在四个多模态基准数据集（GAIIC2024、FLIR、LLVIP、M3FD）上取得最先进结果，验证了方法的泛化性和鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：多模态融合模块与Transformer检测模型适配。</li><li>输入传感器：RGB可见光图像与红外（IR）图像，红外单通道图像被复制以匹配骨干输入格式。</li><li>场景表示：采用参数共享的DINOv3 ViT-S/16+骨干，RGB与IR各维护独立激活；在交互层（索引5、8、11）通过SCP进行跨模态通信。</li><li>模型结构：双流骨干 + 双向SCP低秩残差路径（下投影 \(W_{down}\in\mathbb{R}^{d\times r}\)、上投影 \(W_{up}\in\mathbb{R}^{r\times d}\)，带GELU激活）+ 参数无平均融合 + 混合编码器与DETR解码器（6层DEIM解码器、300个查询）。</li><li>关键技术：SCP采用有界通信（瓶颈限制秩 \(r\ll d\)）、零初始化上投影实现渐进式协作激活；训练目标为分类损失、L1损失和广义IoU损失的加权和。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：GAIIC2024（航拍检测，5类车辆）、FLIR（自动驾驶，5142对，3类）、LLVIP（低光监控，33672张/16836对，行人）、M3FD（多场景，4200对，6类）。</li><li>仿真器：原文未报告。</li><li>模型规模：DINOv3 ViT-S/16+骨干、6层DEIM解码器、300个查询；其他规模细节原文未报告。</li><li>训练资源：PyTorch实现，8块NVIDIA RTX 4090 GPU。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：GAIIC2024（验证集和测试集）、M3FD、FLIR、LLVIP。</li><li>评估指标：mAP、mAP50、mAP75（COCO风格协议，置信度阈值0.25）。</li><li>关键数值：GAIIC2024验证集64.00% mAP、测试集43.05% mAP；M3FD 61.78% mAP、FLIR 46.80% mAP、LLVIP 71.56% mAP。</li><li>对比方法：单模态基线（Faster R-CNN、DDQ-DETR、RF-DETR Large、YOLO26-X）、多模态方法（CSAA、ICAFusion、M2D-LIF、AFF-Net）。</li><li>消融研究：冻结骨干下，SCP比密集交叉注意力提升2.17% mAP（38.10%→40.27%）；零初始化比随机初始化进一步提升（42.43%→43.05%）。</li><li>测试条件：开环评估（检测精度），覆盖仿真条件与真实数据集；未做闭环评测；实车条件未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.21330/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">NeSAM: Neuro-Symbolic Kinodynamics with Soil Adaptation for Off-Road Mobility</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.24525/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RoG-DAgger: Rollout-Guided Post-Training for End-to-End Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

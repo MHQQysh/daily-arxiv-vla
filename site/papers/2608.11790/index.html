@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>High-Order Liquid Evidence Encoding for Gradual GNSS Spoofing Detection in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文针对自动驾驶中GNSS（全球导航卫星系统）定位易受欺骗攻击的问题，重点解决渐进式、隐蔽的GNSS欺骗攻击检测难题。 论文方法应用于自动驾驶车辆定位安全任务，场景为真实道路驾驶环境。 核心研究问题：单个GNSS观测值可能保持局部合理性，但GNSS推算位移与车载运动推算位移之间的不一致性会逐渐累积增强，现有方法难以显式建模这种时间演化过程。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.11790">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.11790.webp" alt="High-Order Liquid Evidence Encoding for Gradual GNSS Spoofing Detection in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文针对自动驾驶中GNSS（全球导航卫星系统）定位易受欺骗攻击的问题，重点解决渐进式、隐蔽的GNSS欺骗攻击检测难题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">High-Order Liquid Evidence Encoding for Gradual GNSS Spoofing Detection in Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.11790" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.11790" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.11790</span></div>
+            <p class="detail-summary">该论文针对自动驾驶中GNSS（全球导航卫星系统）定位易受欺骗攻击的问题，重点解决渐进式、隐蔽的GNSS欺骗攻击检测难题。 论文方法应用于自动驾驶车辆定位安全任务，场景为真实道路驾驶环境。 核心研究问题：单个GNSS观测值可能保持局部合理性，但GNSS推算位移与车载运动推算位移之间的不一致性会逐渐累积增强，现有方法难以显式建模这种时间演化过程。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">5 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Faculty of Information Technology, Beijing University of Technology · Muham…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.11790/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文针对自动驾驶中GNSS（全球导航卫星系统）定位易受欺骗攻击的问题，重点解决渐进式、隐蔽的GNSS欺骗攻击检测难题。</p>
+  <ul class="reading-intro-points"><li>该论文针对自动驾驶中GNSS（全球导航卫星系统）定位易受欺骗攻击的问题，重点解决渐进式、隐蔽的GNSS欺骗攻击检测难题。</li><li>论文方法应用于自动驾驶车辆定位安全任务，场景为真实道路驾驶环境。</li><li>核心研究问题：单个GNSS观测值可能保持局部合理性，但GNSS推算位移与车载运动推算位移之间的不一致性会逐渐累积增强，现有方法难以显式建模这种时间演化过程。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Faculty of Information Technology, Beijing University of Technology；作者：Muhammad Ayub Sabir, Junbiao Pang, Fatima Ashraf</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文针对自动驾驶中GNSS（全球导航卫星系统）定位易受欺骗攻击的问题，重点解决渐进式、隐蔽的GNSS欺骗攻击检测难题。</li><li>论文方法应用于自动驾驶车辆定位安全任务，场景为真实道路驾驶环境。</li><li>核心研究问题：单个GNSS观测值可能保持局部合理性，但GNSS推算位移与车载运动推算位移之间的不一致性会逐渐累积增强，现有方法难以显式建模这种时间演化过程。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将渐进式GNSS欺骗检测建模为GNSS与车载运动之间的因果位移一致性问题，并推导物理引导的残差证据。</li><li>构建高阶证据表示，包含残差水平及其一阶和二阶离散变化，并根据证据阶次选择相关上下文线索。</li><li>设计独立的自适应液体编码器建模三种证据阶次在窗口内的演化，并对其隐藏状态进行层次耦合，实现窗口端点处的因果欺骗预测。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：GNSS欺骗检测模块，面向自动驾驶定位安全。</li><li>输入传感器：GNSS观测（含平面位置和信号质量信息）与车载运动观测（包括速度、偏航角、偏航率和转向角）。</li><li>场景表示：定义因果证据窗口，窗口内由残差水平、一阶和二阶离散变化及其相关物理与感知线索组成完整证据向量；每个证据阶次形成独立的输入序列。</li><li>模型结构：三个独立的液体编码器构成，每个编码器包含证据与状态相关的时间常数和更新因子；采用输入依赖的液体状态更新方式。该模型未明确报告层数、隐藏层维度等具体参数。</li><li>关键技术：物理引导的高阶残差证据构建、基于液体神经网络的时序编码、层次化跨阶次时序状态耦合、端点级预测与正类加权二元交叉熵目标函数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：AV-GPS数据集，包含三个子集（Dataset 1、Dataset 2、Dataset 3），数据规模分别为62,042、6,890和636个样本，包含正常驾驶与GPS欺骗条件下的同步GNSS和车载运动测量。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li><li>公开资源：代码和数据公开在 https://github.com/pangjunbiao/GNSS_Spoofing.git。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：AV-GPS数据集三个子集；Dataset 1作为开发和受控域内测试，Dataset 2用于跨地点迁移压力测试，Dataset 3用于转换感知的顺序案例研究。</li><li>评估指标：准确率、精确率、召回率、F1分数、误报率（FAR）、漏报率（FNR）；Dataset 2额外报告ROC-AUC和PR-AUC。</li><li>关键数值：在Dataset 1上F1分数为0.9535，在Dataset 3上F1分数为0.9777；在Dataset 3上成功在四个采样步骤内检测到两个标注的正常到攻击转换。</li><li>对比方法：LSTM、GRU、TCN、Transformer时序基线方法。对比在开环条件下进行（原文未明确说明开闭环条件；实验基于真实数据集评估，表明为离线开环评估）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.12051/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Do Not Forget the Obvious - RISC: A Risk-Informed Slice-Coverage Protocol for Safe Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.11592/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Video2Track: From Real-World Interaction Videos to Steerable Adversarial Closed-Track Testing for Automated Driving Systems</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NeSAM: Neuro-Symbolic Kinodynamics with Soil Adaptation for Off-Road Mobility - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决自动驾驶车辆在非结构化的可变形地形（如松软土壤）上进行越野行驶时的运动预测问题。 应用场景为越野自动驾驶，研究问题是在车轮下陷、打滑和牵引力随局部土壤条件变化时，如何准确预测车辆六自由度（包括位置、姿态、线速度和角速度）的长时间动力学运动。 现有学习型运动动力学模型直接从数据中近似车辆-地形交互，但缺乏对土壤力学的显式表示和物理可解释性，因此论文提出神经符号框架 NeSAM，结合可微分的 Bekker-Wong 地面力学、学习到的地形表征和 Transformer 残差动力学模型。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.21330">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.21330.webp" alt="NeSAM: Neuro-Symbolic Kinodynamics with Soil Adaptation for Off-Road Mobility" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决自动驾驶车辆在非结构化的可变形地形（如松软土壤）上进行越野行驶时的运动预测问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">NeSAM: Neuro-Symbolic Kinodynamics with Soil Adaptation for Off-Road Mobility</h1>
+            <div class="detail-meta">2026-08-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.21330" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.21330" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.21330</span></div>
+            <p class="detail-summary">该论文解决自动驾驶车辆在非结构化的可变形地形（如松软土壤）上进行越野行驶时的运动预测问题。 应用场景为越野自动驾驶，研究问题是在车轮下陷、打滑和牵引力随局部土壤条件变化时，如何准确预测车辆六自由度（包括位置、姿态、线速度和角速度）的长时间动力学运动。 现有学习型运动动力学模型直接从数据中近似车辆-地形交互，但缺乏对土壤力学的显式表示和物理可解释性，因此论文提出神经符号框架 NeSAM，结合可微分的 Bekker-Wong 地面力学、学习到的地形表征和 Transformer 残差动力学模型。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">George Mason University, Department of Computer Science, USA · Chenhui Pan、…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.21330/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决自动驾驶车辆在非结构化的可变形地形（如松软土壤）上进行越野行驶时的运动预测问题。</p>
+  <ul class="reading-intro-points"><li>该论文解决自动驾驶车辆在非结构化的可变形地形（如松软土壤）上进行越野行驶时的运动预测问题。</li><li>应用场景为越野自动驾驶，研究问题是在车轮下陷、打滑和牵引力随局部土壤条件变化时，如何准确预测车辆六自由度（包括位置、姿态、线速度和角速度）的长时间动力学运动。</li><li>现有学习型运动动力学模型直接从数据中近似车辆-地形交互，但缺乏对土壤力学的显式表示和物理可解释性，因此论文提出神经符号框架 NeSAM，结合可微分的 Bekker-Wong 地面力学、学习到的地形表征和 Transformer 残差动力学模型。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：George Mason University, Department of Computer Science, USA；作者：Chenhui Pan, Tong Xu, Francesco Cancelliere, Xuesu Xiao</li><li>机构：University of Catania, Department of Electrical, Electronic and Computer Engineering, Italy；作者：Francesco Cancelliere</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决自动驾驶车辆在非结构化的可变形地形（如松软土壤）上进行越野行驶时的运动预测问题。</li><li>应用场景为越野自动驾驶，研究问题是在车轮下陷、打滑和牵引力随局部土壤条件变化时，如何准确预测车辆六自由度（包括位置、姿态、线速度和角速度）的长时间动力学运动。</li><li>现有学习型运动动力学模型直接从数据中近似车辆-地形交互，但缺乏对土壤力学的显式表示和物理可解释性，因此论文提出神经符号框架 NeSAM，结合可微分的 Bekker-Wong 地面力学、学习到的地形表征和 Transformer 残差动力学模型。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个神经符号运动动力学框架，整合可微分 Bekker-Wong 地面力学、学习到的地形表征和基于 Transformer 的残差动力学，用于长时间跨度、六自由度车辆运动预测。</li><li>开发基于扩展卡尔曼滤波（EKF）的在线土壤自适应方法，利用预测与实际车辆运动之间的差异，更新物理可解释的地面力学参数。</li><li>在基于 Chrono 的仿真和真实车辆轨迹上进行长时间自回归预测评估，并与地形感知和地形无关的学习型模型进行比较。</li><li>通过与 MPPI 控制器集成，在仿真和物理平台上验证在线土壤自适应在闭环导航中的有效性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：运动预测/车辆运动动力学模型。</li><li>输入传感器：车辆对齐的 128×128 高程图（单通道）和 RGB 语义地形图（三通道），以及车辆状态和控制输入（速度和转向角）。</li><li>场景表示：高程和语义地形观测分别由预训练的 U-Net 自编码器编码，得到地形上下文和名义土壤参数估计；地形被处理为可变形表面，而非刚体。</li><li>模型结构：模型包含地形编码器、因果 Transformer、沉降量预测头、状态残差预测头、可微分土壤力学模型（Bekker-Wong）、Newton-Euler 运动动力学模型和土壤先验头；Transformer 配置为两层、每层四个注意力头、隐藏维度 128，交互历史长度为 32 个 token（约 3.2 秒）。</li><li>关键技术：模型将地形上下文、历史状态和控制信息构成交互 token 序列，由 Transformer 编码后预测车轮沉降量和底盘状态残差；可微分 Bekker-Wong 模型结合车轮角速度、预测沉降量和土壤估计计算车轮-地形接触力，Newton-Euler 方程计算物理状态增量，最终与学习的状态残差相加。离线训练采用全自回归多步（32步）滚动预测，在线部署时使用 EKF 基于缓冲区内预测与实际速度差异更新土壤参数修正量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>仿真数据集：在 Verti-Bench 仿真器中收集，包含 500 条轨迹，每条约 25 秒，总计约 3.5 小时、125,000 个转换样本；仿真器基于 Chrono 多物理引擎构建。</li><li>物理数据集：使用 Verti-4-Wheeler 平台在 Verti-Arena 试验场收集，包含 50 条轨迹，每条约 30 秒，总计约 25 分钟、15,000 个转换样本。</li><li>模型规模：土壤预测器包含 28,262 个可训练参数；Transformer 和其余学习组件的总参数量原文未报告。</li><li>训练资源：原文未报告具体 GPU 型号或训练硬件信息。</li><li>实车平台：Verti-4-Wheeler。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在 Verti-Bench 仿真器和物理 Verti-Arena 试验场上评估，使用 80%/20% 按轨迹划分的训练/测试数据，长时程预测评估使用 32 步（3.2 秒）全自回归滚动。</li><li>评估指标：位置和姿态维度上的平均绝对误差（MAE），以及闭环轨迹跟踪中的轨迹完成率、通行时间、Hausdorff 距离和平均绝对横滚/俯仰角。</li><li>关键数值（仿真预测）：相比纯端到端 Transformer 基线，NeSAM 将 x、y、z 误差从 0.89 m、0.90 m、0.09 m 降至 0.80 m、0.78 m、0.06 m，偏航误差从 6.76° 降至 4.18°；相比最强的基线（TAL），预测精度提高最高 30%（真实数据上最高 29%）。</li><li>对比方法：纯端到端 Transformer、TAL（Terrain-Attentive Learning，使用高程+语义、单独高程或单独语义）、NeSAM w/o SR（去除状态残差分支）、NeSAM Sinkage=0（抑制沉降量预测）。</li><li>消融结果：去除状态残差使 x、y 误差升至 0.99 m、0.98 m；抑制沉降量使 x、y、z 误差分别增加约 7.1%、7.8%、18.3%。</li><li>闭环实验：在分布外（OOD）土壤条件下，将同一 NeSAM 模型和 MPPI 控制器分别配置固定土壤和自适应土壤（EKF 更新），自适应配置提升通行成功率并将到参考轨迹的 Hausdorff 距离降低 69.4%；每种配置在相同参考轨迹上运行 5 次。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.22549/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Scaling Curriculum Learning For Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.21099/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A2DINOv3: Rethinking Multi-Modal Object Detection via Socialized Collaboration</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DriveCache: Action-Aware Caching for Driving World Model Inference - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶场景中驾驶视频生成模型的推理加速问题。扩散式驾驶视频生成模型需要多次迭代去噪，计算开销大，限制了在线预测和离线场景生成的效率。 应用场景包括仿真、规划评估、离线数据生成等驾驶视频生成相关任务。 研究问题是：现有通用扩散加速方法（如特征缓存）未利用驾驶生成任务中预先可得的规划信息（如自车速度和规划轨迹），导致缓存分配不够高效。本文针对该问题提出行动感知的缓存控制方法。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.16354">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.16354.webp" alt="DriveCache: Action-Aware Caching for Driving World Model Inference" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶场景中驾驶视频生成模型的推理加速问题。扩散式驾驶视频生成模型需要多次迭代去噪，计算开销大，限制了在线预测和离线场景生成的效率。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DriveCache: Action-Aware Caching for Driving World Model Inference</h1>
+            <div class="detail-meta">2026-08-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.16354" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.16354" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.16354</span></div>
+            <p class="detail-summary">本文解决自动驾驶场景中驾驶视频生成模型的推理加速问题。扩散式驾驶视频生成模型需要多次迭代去噪，计算开销大，限制了在线预测和离线场景生成的效率。 应用场景包括仿真、规划评估、离线数据生成等驾驶视频生成相关任务。 研究问题是：现有通用扩散加速方法（如特征缓存）未利用驾驶生成任务中预先可得的规划信息（如自车速度和规划轨迹），导致缓存分配不够高效。本文针对该问题提出行动感知的缓存控制方法。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">武汉大学 · Jianchun Yang、Jian Liang、Xianda Guo 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.16354/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶场景中驾驶视频生成模型的推理加速问题。扩散式驾驶视频生成模型需要多次迭代去噪，计算开销大，限制了在线预测和离线场景生成的效率。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶场景中驾驶视频生成模型的推理加速问题。扩散式驾驶视频生成模型需要多次迭代去噪，计算开销大，限制了在线预测和离线场景生成的效率。</li><li>应用场景包括仿真、规划评估、离线数据生成等驾驶视频生成相关任务。</li><li>研究问题是：现有通用扩散加速方法（如特征缓存）未利用驾驶生成任务中预先可得的规划信息（如自车速度和规划轨迹），导致缓存分配不够高效。本文针对该问题提出行动感知的缓存控制方法。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：武汉大学；作者：Jianchun Yang, Jian Liang, Xianda Guo, Mang Ye</li><li>机构：南洋理工大学；作者：Pinhan Fu</li><li>机构：长城汽车；作者：Yanlun Peng, Conglang Zhang, Wenke Huang</li><li>注意：作者与机构的对应关系在原文中通过作者邮箱和单位标注部分体现，但作者列表中部分作者的机构归属未完全明确。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶场景中驾驶视频生成模型的推理加速问题。扩散式驾驶视频生成模型需要多次迭代去噪，计算开销大，限制了在线预测和离线场景生成的效率。</li><li>应用场景包括仿真、规划评估、离线数据生成等驾驶视频生成相关任务。</li><li>研究问题是：现有通用扩散加速方法（如特征缓存）未利用驾驶生成任务中预先可得的规划信息（如自车速度和规划轨迹），导致缓存分配不够高效。本文针对该问题提出行动感知的缓存控制方法。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次识别并验证了规划的自车运动（ego motion）可作为扩散缓存预生成信号，证明自车平移和旋转能够预测驾驶场景级别的缓存容忍度。</li><li>提出 DriveCache，一种无需训练的缓存控制器，根据规划运动分配场景级复用预算，并对连续复用误差进行建模。</li><li>利用精确动态规划在响应预算下选择复用数量和位置，并采用因果漂移校正，在推理过程中刷新特征并重新规划剩余调度。</li><li>在多种驾驶视频生成器上，DriveCache 在相同速度下相较现有缓存方法（如 TeaCache）在 PSNR 等指标上取得显著提升，例如在 Wan2.2 A14B 上 2 倍加速时 PSNR 提升 2.036 dB。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：驾驶视频生成的推理加速模块，具体为扩散模型特征缓存控制器。</li><li>输入传感器：原文未报告。</li><li>场景表示：基于计划的自车轨迹（ego poses）与航向角，计算出总平移距离和累计旋转角度，作为场景级运动统计量。</li><li>模型结构：将扩散模型解耦为昂贵的可复用主干网络与廉价输出接口，缓存主干网络输出。</li><li>关键技术：包括两项核心机制——(1) 通过两个锚点（低运动锚点、运动转弯锚点）进行运行校准，用计划运动插值得到场景级运行成本表；(2) 通过精确动态规划（复杂度 O(K^3)）在响应预算下优化复用调度，并结合预复用漂移否决与后缀重新规划实现因果校正。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Wan2.2 5B 和 A14B 使用 222 个 DrivingGen 场景，每个场景 10 个固定种子（共 2,220 个样本）；Epona 使用全部 150 个 nuScenes 验证集场景。</li><li>仿真器：原文未报告。</li><li>模型规模：Wan2.2 5B、Wan2.2 A14B、Epona 三种生成器配置。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：DrivingGen（Wan2.2）和 nuScenes 验证集（Epona）。</li><li>评估指标：峰值信噪比（PSNR）、结构相似性（SSIM）、学习感知图像块相似性（LPIPS）、轨迹质量（Traj.）、平均位移误差（ADE）、动态时间规整（DTW）和 VBench 指标（V-Q、V-S）。</li><li>关键数值：在 Wan2.2 5B 上，DriveCache 在约 1.84 倍加速下 PSNR 为 34.744，优于多数基线；在 Wan2.2 A14B 上，DriveCache 在 1.97 倍加速下 PSNR 为 32.778，相比 TeaCache 提升 2.036 dB；在 Epona 上达到 1.89 倍加速，PSNR 为 26.394。</li><li>对比方法：固定间隔缓存、PAB、TeaCache、EasyCache、MagCache、DiCache、TaylorSeer、SeaCache、Reduced steps、DeepCache、FasterCache、AdaCache、FlowCache。</li><li>实验条件：离线开环评估，使用 H20 GPU、batch size 1 进行端到端延迟测量，包含控制器开销，并报告配对场景级 95% 置信区间。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.16490/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Towards Real-Time and Adaptable LiDAR Scene Completion</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.16285/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Audio-Visual Segmentation via Depth-Guided Collaborative Modeling</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TestifAI: Tomography-Based Testing for Deep Learning Systems - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决的是深度学习系统的鲁棒性测试任务，应用场景包括自动驾驶、图像分类和自然语言处理等安全关键领域。 研究问题为在组合扰动空间中如何高效且准确地评估模型鲁棒性，尤其是当扰动数量和严重级别组合呈指数级增长时，现有方法无法系统性探索和总结多扰动交互下的鲁棒性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.18900">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.18900.webp" alt="TestifAI: Tomography-Based Testing for Deep Learning Systems" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决的是深度学习系统的鲁棒性测试任务，应用场景包括自动驾驶、图像分类和自然语言处理等安全关键领域。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">TestifAI: Tomography-Based Testing for Deep Learning Systems</h1>
+            <div class="detail-meta">2026-08-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.18900" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.18900" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.18900</span></div>
+            <p class="detail-summary">该论文解决的是深度学习系统的鲁棒性测试任务，应用场景包括自动驾驶、图像分类和自然语言处理等安全关键领域。 研究问题为在组合扰动空间中如何高效且准确地评估模型鲁棒性，尤其是当扰动数量和严重级别组合呈指数级增长时，现有方法无法系统性探索和总结多扰动交互下的鲁棒性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">6 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Northeastern University London · Arooj Arif、Tobias Hartung、Alexandros Kolio…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.18900/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决的是深度学习系统的鲁棒性测试任务，应用场景包括自动驾驶、图像分类和自然语言处理等安全关键领域。</p>
+  <ul class="reading-intro-points"><li>该论文解决的是深度学习系统的鲁棒性测试任务，应用场景包括自动驾驶、图像分类和自然语言处理等安全关键领域。</li><li>研究问题为在组合扰动空间中如何高效且准确地评估模型鲁棒性，尤其是当扰动数量和严重级别组合呈指数级增长时，现有方法无法系统性探索和总结多扰动交互下的鲁棒性。</li><li>提出TestifAI框架，支持用户将操作条件定义为语义输入扰动的结构化空间和离散严重级别，并可对任意组合进行鲁棒性查询。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Northeastern University London；作者：Arooj Arif、Tobias Hartung、Alexandros Koliousis</li><li>机构：University of Kent；作者：Elena Botoeva</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决的是深度学习系统的鲁棒性测试任务，应用场景包括自动驾驶、图像分类和自然语言处理等安全关键领域。</li><li>研究问题为在组合扰动空间中如何高效且准确地评估模型鲁棒性，尤其是当扰动数量和严重级别组合呈指数级增长时，现有方法无法系统性探索和总结多扰动交互下的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出TestifAI框架，支持用户将操作条件定义为语义输入扰动的结构化空间和离散严重级别，并可对任意组合进行鲁棒性查询。</li><li>引入部分模型层析成像（partial model tomography）方法，仅执行含一到两个扰动的低阶测试，重建多扰动空间中的模型行为。</li><li>训练随机森林辅助模型，基于最多两个扰动的测试结果预测三个及以上扰动的鲁棒性，避免执行指数数量的测试。</li><li>实现布尔查询接口，允许用户交互式查询鲁棒性；同时采用自适应采样策略与提前停止机制，减少每次测试所需的推理次数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：深度学习模型鲁棒性测试框架。</li><li>输入传感器：原文未报告。</li><li>场景表示：将扰动构建为参数化的蜕变关系，每个扰动具有离散严重级别（如0-5），组合构成完整测试空间。</li><li>模型结构：使用随机森林分类器作为预测模型，包含100棵树，禁用Bootstrap采样，不限制特征数，采用log-loss分裂准则，基于低阶测试结果训练。</li><li>关键技术：部分模型层析成像，将全空间按非零严重级别数划分为各阶子集，只评估零阶、一阶和二阶级测试，用χ²检验判断扰动独立性，并训练随机森林预测三阶及以上的鲁棒性；配合批量处理和基于窗口的提前停止（b=100，δ=0.005，w=3）提高样本效率。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：MNIST（10,000张）、CIFAR-10（10,000张）、Roboflow自动驾驶图像（1,000张）、GTSRB（12,630张）、QQP（1,000对）。</li><li>模型：LeNet-5、WideResNet-28-10、YOLOv11s、CNN-SE、RoBERTa_base。</li><li>训练资源：MGHPCC高性能GPU集群，NVIDIA Tesla T4 GPU，CUDA 12.3。</li><li>仿真器：原文未报告。</li><li>实车平台：原文未报告。</li><li>实现框架：Python 3.9，scikit-learn，sympy。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：MNIST、CIFAR-10、Roboflow、GTSRB、QQP五个图像和语言分类基准；使用完整模型层析成像作为真值基线。</li><li>评估指标：聚合鲁棒性估计误差、样本效率（推理次数减少比例）、逐测试误差。</li><li>关键数值：预测三阶和四阶扰动的测试结果时，聚合鲁棒性估计误差小于7%，推理次数减少60–80%。</li><li>对比方法：完整层析成像（全量穷举测试作为基线）。</li><li>测试条件：离线的分类任务评估，基于公开预训练模型和测试集，未涉及实车或闭环仿真测试。</li></ul>
+
+<ul><li>评估指标：聚合鲁棒性估计误差、样本效率（推理次数减少比例）、逐测试误差。</li><li>关键数值：预测三阶和四阶扰动的测试结果时，聚合鲁棒性估计误差小于7%，推理次数减少60–80%。</li><li>对比方法：完整层析成像（全量穷举测试作为基线）。</li><li>测试条件：离线的分类任务评估，基于公开预训练模型和测试集，未涉及实车或闭环仿真测试。</li><li>评估条件：开环离线测试，原文未报告实车验证或闭环仿真结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.19014/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">One-Stage Object Detectors in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.18715/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">The Impact of CutMix on Reliability and Robustness in Semantic Segmentation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

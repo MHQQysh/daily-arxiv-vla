@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy-Preserving Dataset Curation for Kuala Lumpur Urban Traffic: Grounded Vision-Language Detection with Spatial Vehicle-Context Filtering - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本论文针对自动驾驶与智能交通系统数据集构建中的隐私保护问题，提出了一种面向马来西亚吉隆坡城市交通图像的自动匿名化框架。 论文聚焦于在复杂热带城市交通场景下，对行人面部、头盔头部以及车辆牌照等个人识别信息（PII）进行自动模糊化处理。 研究面向的原始数据为吉隆坡道路数据集（Kuala Lumpur Road Dataset），该数据集由移动自行车平台搭载 iPhone 14 Pro 采集，视频以 2 FPS 抽帧生成图像。 论文的核心研究问题在于，传统检测方法（Haar 级联、YOLOv8 等）在摩托车密集、深色亚克力车牌、动态相机倾斜、强烈热带眩光等条件下失效，需设计更鲁棒的匿名化方案。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.14724">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.14724.webp" alt="Privacy-Preserving Dataset Curation for Kuala Lumpur Urban Traffic: Grounded Vision-Language Detection with Spatial Vehicle-Context Filtering" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本论文针对自动驾驶与智能交通系统数据集构建中的隐私保护问题，提出了一种面向马来西亚吉隆坡城市交通图像的自动匿名化框架。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Privacy-Preserving Dataset Curation for Kuala Lumpur Urban Traffic: Grounded Vision-Language Detection with Spatial Vehicle-Context Filtering</h1>
+            <div class="detail-meta">2026-08-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.14724" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.14724" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.14724</span></div>
+            <p class="detail-summary">本论文针对自动驾驶与智能交通系统数据集构建中的隐私保护问题，提出了一种面向马来西亚吉隆坡城市交通图像的自动匿名化框架。 论文聚焦于在复杂热带城市交通场景下，对行人面部、头盔头部以及车辆牌照等个人识别信息（PII）进行自动模糊化处理。 研究面向的原始数据为吉隆坡道路数据集（Kuala Lumpur Road Dataset），该数据集由移动自行车平台搭载 iPhone 14 Pro 采集，视频以 2 FPS 抽帧生成图像。 论文的核心研究问题在于，传统检测方法（Haar 级联、YOLOv8 等）在摩托车密集、深色亚克力车牌、动态相机倾斜、强烈热带眩光等条件下失效，需设计更鲁棒的匿名化方案。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">马来西亚理工大学人工智能学院（Faculty of Artificial Intelligence, Universiti Teknologi Mal…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.14724/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本论文针对自动驾驶与智能交通系统数据集构建中的隐私保护问题，提出了一种面向马来西亚吉隆坡城市交通图像的自动匿名化框架。</p>
+  <ul class="reading-intro-points"><li>本论文针对自动驾驶与智能交通系统数据集构建中的隐私保护问题，提出了一种面向马来西亚吉隆坡城市交通图像的自动匿名化框架。</li><li>论文聚焦于在复杂热带城市交通场景下，对行人面部、头盔头部以及车辆牌照等个人识别信息（PII）进行自动模糊化处理。</li><li>研究面向的原始数据为吉隆坡道路数据集（Kuala Lumpur Road Dataset），该数据集由移动自行车平台搭载 iPhone 14 Pro 采集，视频以 2 FPS 抽帧生成图像。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：马来西亚理工大学人工智能学院（Faculty of Artificial Intelligence, Universiti Teknologi Malaysia, Kuala Lumpur, Malaysia）；作者：Mohammed Abdul Al Arafat Tanzin</li><li>机构：马来西亚理工大学人工智能学院（Faculty of Artificial Intelligence, Universiti Teknologi Malaysia, Kuala Lumpur, Malaysia）；作者：Rudzidatul Akmam Dziyauddin</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本论文针对自动驾驶与智能交通系统数据集构建中的隐私保护问题，提出了一种面向马来西亚吉隆坡城市交通图像的自动匿名化框架。</li><li>论文聚焦于在复杂热带城市交通场景下，对行人面部、头盔头部以及车辆牌照等个人识别信息（PII）进行自动模糊化处理。</li><li>研究面向的原始数据为吉隆坡道路数据集（Kuala Lumpur Road Dataset），该数据集由移动自行车平台搭载 iPhone 14 Pro 采集，视频以 2 FPS 抽帧生成图像。</li><li>论文的核心研究问题在于，传统检测方法（Haar 级联、YOLOv8 等）在摩托车密集、深色亚克力车牌、动态相机倾斜、强烈热带眩光等条件下失效，需设计更鲁棒的匿名化方案。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了一套专为吉隆坡移动自行车平台采集的城市场景图像设计的隐私保护数据筛选流水线，重点处理人脸、头部和车辆牌照的匿名化。</li><li>采用 Grounding DINO 这一零样本开集视觉-语言Transformer进行隐私敏感目标的开放集检测，解决了封闭集CNN在极端旋转、遮挡、小目标等场景下的检测失败问题。</li><li>设计了空间车辆ROI包含引擎（Spatial Vehicle ROI Containment Engine），通过车牌质心必须落在车辆边界内的拓扑约束，有效抑制背景环境误检。</li><li>引入了时间持久性（temporal persistence）机制和自动化质量控制（QC）审计模块，用于识别检测遗漏并减少未处理隐私目标残留在数据集中的概率。</li><li>在 1,266 帧图像上完成了初步定性评估，记录了成功案例和典型失败模式，并开源了完整代码与演示Notebook，为后续量化评估提供了可复现基础。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向智能交通与自动驾驶数据集构建的图像匿名化与隐私保护模块。</li><li>输入传感器：单目光学相机，具体为 iPhone 14 Pro，安装在移动自行车平台上，视频以 2 FPS 抽帧。</li><li>场景表示：RGB 图像帧，检测目标划分为三类集合——宏车辆 ROI（𝒱，含 vehicle/car/motorcycle/bus/truck）、车牌候选（𝒫，含 license plate/number plate）和人脸/头部（ℱ，含 human face/head）。</li><li>模型结构：采用 Grounding DINO 视觉-语言Transformer，以 Swin Transformer 为视觉骨干提取多尺度视觉特征，以 BERT 提取文本提示特征，通过双向交叉注意力进行跨模态融合，并以视觉-语言对齐分数矩阵动态初始化目标查询。检测提示词包括&quot;vehicle, car, motorcycle, bus, truck, license plate, number plate, human face, head&quot;。</li><li>关键技术：</li></ul>
+<p> - 空间车辆ROI包含过滤：车牌候选质心须位于动态扩展 10%（ε=0.10）的车辆边界框内；若场景中无车辆检测且车牌置信度 &gt;0.35，则保留该候选。</p>
+<p> - 非对称掩膜扩张：车牌水平方向扩张 25%（α_x=0.25）、垂直方向扩张 15%（α_y=0.15）；人脸统一扩张 20%（α_face=0.20）。</p>
+<p> - 动态高斯模糊：模糊核尺寸随 ROI 分辨率动态调整（至少 3×3），以消除边界伪影。</p>
+<p> - 时间线性插值：若目标在 t-1 和 t+1 帧均被检测但在 t 帧缺失，则通过坐标平均插值补齐掩膜。</p>
+<p> - 自动化QC审计：使用 YOLOv8l 作为二次上下文模型，依据&quot;车辆面积 ≥3000 像素²但无车牌掩膜&quot;与&quot;行人框高度 ≥40 像素但无人脸掩膜&quot;两条规则对帧进行标记，通过帧进入 high_confidence/ 目录，标记帧进入 review_required/ 目录并生成 qc_summary_report.json 审计报告。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：吉隆坡道路数据集（Kuala Lumpur Road Dataset），通过移动自行车平台采集，视频以 2 FPS 抽帧，本文初步实验包含 1,266 帧。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告 Grounding DINO 模型参数量；QC 审计采用 YOLOv8l 作为大模型。</li><li>训练资源：原文未报告具体训练硬件和资源。</li><li>实车平台：移动自行车平台，搭载 iPhone 14 Pro 光学传感器。</li><li>开源资源：完整源代码、Spatial ROI 引擎实现及交互式 Jupyter Notebook（.ipynb）已在 GitHub 开源，地址为 https://github.com/TanzinAbdul/Kuala-Lumpur-Road-Dataset-Anonymizer。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：吉隆坡道路数据集中抽取的 1,266 帧图像，覆盖多种交通与环境场景。</li><li>评估指标：匿名化成功率，原文报告为约 95% 的帧成功完成匿名化。</li><li>关键数值：约 95% 成功率；剩余约 5% 的失败案例主要涉及小目标、严重遮挡、极端视角和模糊视觉结构。</li><li>对比方法：Haar 级联（在深色亚克力车牌上完全失败）、YOLOv8 微调模型（存在小目标漏检和背景误检问题）；本文方法为 Grounding DINO + 空间车辆ROI包含引擎。</li><li>评估条件：本文为定性评估（Qualitative Analysis），未报告定量指标（如精度/召回率）或开环/闭环/仿真/实车对比实验，原文明确说明这是&quot;初步定性评估，为后续量化评估建立基础&quot;。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.14725/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Spatial Attention Noise Masking for Causally Sufficient Interpretability</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.12051/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Do Not Forget the Obvious - RISC: A Risk-Informed Slice-Coverage Protocol for Safe Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -28,7 +28,8 @@ from pathlib import Path
 from typing import Dict, List
 from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlparse
-from urllib.request import Request, urlopen
+
+import requests
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -154,18 +155,16 @@ def to_ar5iv_url(html_url: str) -> str:
 
 
 def http_get(url: str, timeout: int = 30) -> tuple[bytes, str, str]:
-    request = Request(
+    response = requests.get(
         url,
+        timeout=timeout,
         headers={
             "User-Agent": "daily-arxiv-autodrive/paper-image-fetcher (+https://arxiv.org)",
         },
     )
-    with urlopen(request, timeout=timeout) as response:
-        return (
-            response.read(),
-            response.headers.get_content_type() or "",
-            response.geturl(),
-        )
+    response.raise_for_status()
+    content_type = response.headers.get("content-type", "").split(";", 1)[0].strip()
+    return response.content, content_type, response.url
 
 
 class ArxivAbsParser(HTMLParser):
@@ -512,7 +511,14 @@ def main() -> int:
                     save_manifest(manifest)
                     print(f"  saved: {manifest[record.arxiv_id]['path']}")
                     print(f"  image: {manifest[record.arxiv_id]['image_url']}")
-                except (HTTPError, URLError, RuntimeError, TimeoutError, OSError) as exc:
+                except (
+                    HTTPError,
+                    URLError,
+                    requests.RequestException,
+                    RuntimeError,
+                    TimeoutError,
+                    OSError,
+                ) as exc:
                     failed += 1
                     print(f"  failed: {exc}")
                 except Exception as exc:

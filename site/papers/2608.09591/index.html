@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FactorDrive: Adaptive Multi-Step Reasoning Driven by Planning-Critical Factors for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决端到端自动驾驶中的轨迹规划任务，提出 FactorDrive 框架，面向自动驾驶应用场景。 研究问题在于现有基于视觉语言模型（VLM）的端到端方法存在三个不足：一是规划推理中空间物理证据集成不足；二是推理适配粒度粗糙，无法根据场景规划需求精细调整推理路径；三是自动驾驶后训练中推理路径的优化（为获得更高规划质量）尚未被充分探索。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.09591">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.09591.webp" alt="FactorDrive: Adaptive Multi-Step Reasoning Driven by Planning-Critical Factors for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决端到端自动驾驶中的轨迹规划任务，提出 FactorDrive 框架，面向自动驾驶应用场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">FactorDrive: Adaptive Multi-Step Reasoning Driven by Planning-Critical Factors for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.09591" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.09591" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.09591</span></div>
+            <p class="detail-summary">该论文解决端到端自动驾驶中的轨迹规划任务，提出 FactorDrive 框架，面向自动驾驶应用场景。 研究问题在于现有基于视觉语言模型（VLM）的端到端方法存在三个不足：一是规划推理中空间物理证据集成不足；二是推理适配粒度粗糙，无法根据场景规划需求精细调整推理路径；三是自动驾驶后训练中推理路径的优化（为获得更高规划质量）尚未被充分探索。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Southeast University · Guolei Huang、Tengfei She、Yuxuan Lu 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.09591/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决端到端自动驾驶中的轨迹规划任务，提出 FactorDrive 框架，面向自动驾驶应用场景。</p>
+  <ul class="reading-intro-points"><li>该论文解决端到端自动驾驶中的轨迹规划任务，提出 FactorDrive 框架，面向自动驾驶应用场景。</li><li>研究问题在于现有基于视觉语言模型（VLM）的端到端方法存在三个不足：一是规划推理中空间物理证据集成不足；二是推理适配粒度粗糙，无法根据场景规划需求精细调整推理路径；三是自动驾驶后训练中推理路径的优化（为获得更高规划质量）尚未被充分探索。</li><li>提出 FactorDrive，一个由规划关键因素（PCFs）驱动的自适应多步推理端到端自动驾驶框架，并构建 PCF-CoT 数据集。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Southeast University；作者：Guolei Huang, Tengfei She, Yuxuan Lu, Yongjun Shen</li><li>机构：Universiti Malay；作者：原文未明确对应</li><li>机构：Ant Group；作者：原文未明确对应</li><li>机构：Tsinghua University；作者：原文未明确对应</li><li>机构：Peking University；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决端到端自动驾驶中的轨迹规划任务，提出 FactorDrive 框架，面向自动驾驶应用场景。</li><li>研究问题在于现有基于视觉语言模型（VLM）的端到端方法存在三个不足：一是规划推理中空间物理证据集成不足；二是推理适配粒度粗糙，无法根据场景规划需求精细调整推理路径；三是自动驾驶后训练中推理路径的优化（为获得更高规划质量）尚未被充分探索。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 FactorDrive，一个由规划关键因素（PCFs）驱动的自适应多步推理端到端自动驾驶框架，并构建 PCF-CoT 数据集。</li><li>PCF-CoT 数据集将规划推理建立在与轨迹相关的空间物理证据之上，并围绕场景特定的 PCFs 组织推理，使推理路径的组合与深度可适配不同规划需求。</li><li>引入 QS-GRPO（Quality Search-Guided Group Relative Policy Optimization）后训练方法，利用带轨迹级规划奖励的 MCTS 搜索更高规划质量的推理路径，并通过 GRPO 优化策略，从而提升轨迹规划性能。</li><li>在 nuScenes 与 NAVSIM 两个基准上取得最先进（SOTA）规划性能，验证了方法的有效性与泛化能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端轨迹规划框架，属于 VLM/VLA 类方法。</li><li>输入传感器：四帧前视相机图像（2Hz 采样）、当前速度、加速度、历史自车轨迹、高层面导航指令（直行、左转、右转）。</li><li>场景表示：构建以自车为中心的紧凑场景表示，包含关键智能体、车道结构、可行驶区域、道路边界、交通控制元素，并统一到自车中心坐标系；融合历史视频帧、自车运动状态、导航指令、规划相关智能体、地图信息与交通约束。</li><li>模型结构：采用 Qwen3-VL-8B 作为基础视觉语言模型，输出为结构化响应，包括推理路径、高层元动作以及未来 4 秒的轨迹（每个航点包含位置与航向角）。</li><li>关键技术：</li></ul>
+<p> - 两阶段有监督微调（SFT）：第一阶段使用大规模驾驶领域指令语料（约百万级问答对）进行指令微调，建立基础驾驶知识；第二阶段使用 PCF-CoT 数据集微调，学习由规划关键因素驱动的自适应多步推理。</p>
+<p> - PCF-CoT 数据集构建流程：自车场景表示构建、规划关键因素标注（使用 Seed-2.0-Pro）、以 PCF 为条件的自适应 CoT 生成（包含推理计划、空间/交互/反事实/运动推理单元），经格式校验与独立裁判评估（Qwen3.6-Plus）并迭代修正。</p>
+<p> - QS-GRPO 后训练：基于 SFT 模型规划性能选取难样本子集；质量引导 MCTS 搜索推理路径，奖励函数结合格式奖励与轨迹质量奖励（L2/FDE 或 PDMS 相关）；维护高质量响应缓冲区避免重复搜索；构建置信度感知候选组（保留最高奖励响应并选取高置信度响应）策略，通过 GRPO 优化目标训练。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：</li></ul>
+<p> - Driving-Domain Instruction Corpus：约一百万驾驶场景问答对，来源包括 DriveLM、LingoQA、OmniDrive、DriveLMM-o1、nuScenes-QA、Impromptu-VLA、STRIDE-QA。</p>
+<p> - PCF-CoT 数据集：包含 nuScenes-PCF 子集（14,802 个样本，来自 700 个 nuScenes 训练场景）和 NAVSIM-PCF 子集（102,623 个样本，来自 1,192 个 NAVSIM 训练场景）。</p>
+<ul><li>仿真器：NAVSIM（闭环导向评估）</li><li>模型规模：Qwen3-VL-8B 作为基础模型</li><li>训练资源：八张 NVIDIA A800 80GB GPU</li><li>实车平台：原文未报告</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：</li></ul>
+<p> - 开环：nuScenes</p>
+<p> - 闭环导向：NAVSIM</p>
+<ul><li>评估指标：</li></ul>
+<p> - nuScenes：轨迹 L2 误差（1s/2s/3s/平均，米）和碰撞率（1s/2s/3s/平均，%）</p>
+<p> - NAVSIM：PDMS（综合无责碰撞 NC、可行驶区域合规 DAC、碰撞时间 TTC、自车进度 EP、舒适度）</p>
+<ul><li>关键数值：</li></ul>
+<p> - nuScenes：L2 误差 1s/2s/3s/平均 分别为 0.12m/0.26m/0.52m/0.30m，平均碰撞率 0.08%</p>
+<p> - NAVSIM：PDMS 99.3（NC 99.3、DAC 98.2、EP 83.6、TTC 97.6、Comf. 100.0、PDMS 91.0）</p>
+<ul><li>对比方法：非自回归方法（ST-P3、UniAD、VAD）、自回归方法（DriveVLM、EMMA、RDA-Driver、OmniDrive、AutoVLA、OpenDriveVLA、Drive-R1、AutoDrive-P3）及相关闭环比对方法（TransFuser、PARA-Drive、DiffusionDrive、WoTE、AdaThinkDrive）。</li><li>实验条件：开环评估在 nuScenes 上进行；NAVSIM 使用闭环导向指标评估；QS-GRPO 后训练在仿真/离线条件下进行，原文未报告实车验证。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.10107/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">4D-WAM: 4D Consistent World Modeling for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.09541/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Towards Collaborative Joint Perception and Prediction: Framework, Baseline Evaluation, and Deployment Perspectives</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

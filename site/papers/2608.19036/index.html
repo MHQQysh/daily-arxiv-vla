@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>USR-Drive: Unified Driving Scene Representation via Joint Denoising of 3D Gaussians and Boxes - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决自动驾驶中的动态场景重建与实例级3D检测任务。 应用场景为基于多视角驾驶视频的离线动态三维场景理解与重建。 研究问题：现有方法将动态重建与实例级感知视为分离任务，导致重建缺乏约束、检测缺乏几何支撑；本文提出统一生成式框架，将稠密3D高斯与稀疏3D包围盒作为共同演化的状态变量进行联合去噪。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.19036">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.19036.webp" alt="USR-Drive: Unified Driving Scene Representation via Joint Denoising of 3D Gaussians and Boxes" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决自动驾驶中的动态场景重建与实例级3D检测任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">USR-Drive: Unified Driving Scene Representation via Joint Denoising of 3D Gaussians and Boxes</h1>
+            <div class="detail-meta">2026-08-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.19036" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.19036" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.19036</span></div>
+            <p class="detail-summary">该论文解决自动驾驶中的动态场景重建与实例级3D检测任务。 应用场景为基于多视角驾驶视频的离线动态三维场景理解与重建。 研究问题：现有方法将动态重建与实例级感知视为分离任务，导致重建缺乏约束、检测缺乏几何支撑；本文提出统一生成式框架，将稠密3D高斯与稀疏3D包围盒作为共同演化的状态变量进行联合去噪。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">NIO · Li-Heng Chen、Haokai Pang、Chengye Su 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.19036/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决自动驾驶中的动态场景重建与实例级3D检测任务。</p>
+  <ul class="reading-intro-points"><li>该论文解决自动驾驶中的动态场景重建与实例级3D检测任务。</li><li>应用场景为基于多视角驾驶视频的离线动态三维场景理解与重建。</li><li>研究问题：现有方法将动态重建与实例级感知视为分离任务，导致重建缺乏约束、检测缺乏几何支撑；本文提出统一生成式框架，将稠密3D高斯与稀疏3D包围盒作为共同演化的状态变量进行联合去噪。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：NIO；作者：Li-Heng Chen, Haokai Pang, Chengye Su, Jiarun Liu, Ziqian Ni, Jianxin Huang, Sheng Yang</li><li>机构：HKUST；作者：Qifeng Chen</li><li>机构：Beijing Normal University；作者：Shi-Sheng Huang</li><li>机构：原文未明确对应；作者：Hongbo Fu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决自动驾驶中的动态场景重建与实例级3D检测任务。</li><li>应用场景为基于多视角驾驶视频的离线动态三维场景理解与重建。</li><li>研究问题：现有方法将动态重建与实例级感知视为分离任务，导致重建缺乏约束、检测缺乏几何支撑；本文提出统一生成式框架，将稠密3D高斯与稀疏3D包围盒作为共同演化的状态变量进行联合去噪。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出统一驾驶场景表示，将物体中心结构（3D包围盒）与稠密几何（3D高斯）建模为共同演化的状态变量，突破分离式感知与无约束重建范式。</li><li>设计双分支自编码框架，分别编码稠密几何（基于冻结的Depth Anything V3）与稀疏包围盒序列为对齐的潜在表示。</li><li>提出统一位置编码（UPE），将稠密高斯token与稀疏盒子token在共享的度量时空坐标系中对齐。</li><li>构建基于多模态扩散Transformer（MMDiT）的生成框架，联合去噪几何与布局token，实现双向正则化：几何提供度量证据，盒子提供结构先验。</li><li>在nuScenes与VKitti数据集上，动态重建与3D检测两项任务均达到最优性能。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：统一生成式世界模型，联合动态三维重建与实例级3D检测。</li><li>输入传感器：多视角环绕相机图像（6个相机），输入为带位姿的多视角视频。</li><li>场景表示：稠密3D高斯（渲染原语）与稀疏3D包围盒（物体中心token）作为两个对齐的潜在token流。</li><li>模型结构：</li></ul>
+<p> - 第一阶段（双分支自编码器）：几何分支采用冻结的Depth Anything V3 Base作为几何编码器，配合RAE（Representation Autoencoder）与DPT解码器；包围盒分支采用槽对齐序列编码，经时空Transformer处理，对称解码器重建盒子参数。</p>
+<p> - 第二阶段（统一扩散架构）：采用Wan 2.1-1.3B的DiT块结构，构建MMDiT注意骨干；参考视频经冻结的Wan-VAE编码后作为跨注意力条件。</p>
+<p> - 统一位置编码（UPE）：对每个token的度量3D锚点与时间索引施加空间与时间傅里叶特征，经MLP映射，对齐异构token。</p>
+<ul><li>关键技术：连续时间rectified flow生成框架；联合去噪几何与布局潜在；盒子token附带置信度、锚点相对位置偏置、速度向量与属性向量的辅助布局预测；分类器自由引导（CFG）；50步去噪；重叠8帧滑窗处理长序列。</li><li>训练策略：几何分支MSE损失，布局分支仅对有效槽的masked MSE损失，另有辅助布局损失（置信度、位置偏置、速度与属性）；总损失为三者加权和。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（训练与验证），VKitti（零样本评估，采样400个案例）。</li><li>输入设置：6个环绕相机，时间剪辑T=8帧，图像分辨率112×168；相机位姿仅用于UPE锚点的度量对齐。</li><li>预训练模型：Depth Anything V3 Base（冻结），Wan-VAE（冻结，条件编码），Wan 2.1-1.3B DiT块结构。</li><li>模型规模：原文未报告具体参数量与训练资源。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes验证集（重建与3D检测），VKitti（零样本重建与检测）。</li><li>重建指标：PSNR、SSIM、LPIPS、深度RMSE（D-RMSE）；场景级与前景物体级评估。</li><li>重建结果（nuScenes场景级）：USR-Drive PSNR 27.55、SSIM 0.853、LPIPS 0.076、D-RMSE 4.59，均优于DGGT、STORM、AnySplat、DA3等基线；物体级前景重建PSNR 24.45、SSIM 0.833、LPIPS 0.083、D-RMSE 9.98，全面最佳。</li><li>检测指标：NDS、mAP、mATE、mASE、mAOE、mAVE、mAAE。</li><li>3D检测结果（nuScenes验证集）：USR-Drive NDS 0.625、mAP 0.552、mATE 0.525、mASE 0.211、mAOE 0.303、mAVE 0.251、mAAE 0.177，超越BEVDepth、BEVFormer、PETRv2、HoP、StreamPETR、RayDN、RoPETR等专用检测器。</li><li>零样本结果（VKitti）：USR-Drive重建PSNR 26.45、SSIM 0.743，检测mAP 0.518、mATE 0.812；基线仅擅长单一任务，检测基线mAP仅0.008–0.022。</li><li>开环/闭环/仿真/实车条件：原文未明确报告开环或闭环条件；实验在公开数据集（nuScenes、VKitti）上进行离线评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.19085/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DA-WAM: Decision-Aligned Future Latents for Driving World Models</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.19014/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">One-Stage Object Detectors in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

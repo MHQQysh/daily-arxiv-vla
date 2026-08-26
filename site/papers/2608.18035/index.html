@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plug-and-Play Traffic Element Awareness for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文研究端到端自动驾驶中交通元素（traffic elements，如交通灯和道路标志）感知对驾驶决策的影响，这是以往端到端驾驶研究中被忽视的因素。 论文针对主流端到端自动驾驶系统架构多样、训练范式差异大，且现有数据集缺乏交通元素结构化标注的问题，构建统一研究基础设施，并设计一种即插即用的交通元素感知集成机制。 在 nuScenes、NAVSIM-v1、NAVSIM-v2 与闭环 Bench2Drive 四个基准上，对感知-预测-规划、视觉-语言-动作（VLA）、回归式规划、扩散式策略和轨迹评分等多项现代范式进行系统性评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.18035">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.18035.webp" alt="Plug-and-Play Traffic Element Awareness for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文研究端到端自动驾驶中交通元素（traffic elements，如交通灯和道路标志）感知对驾驶决策的影响，这是以往端到端驾驶研究中被忽视的因素。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Plug-and-Play Traffic Element Awareness for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-18 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.18035" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.18035" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.18035</span></div>
+            <p class="detail-summary">该论文研究端到端自动驾驶中交通元素（traffic elements，如交通灯和道路标志）感知对驾驶决策的影响，这是以往端到端驾驶研究中被忽视的因素。 论文针对主流端到端自动驾驶系统架构多样、训练范式差异大，且现有数据集缺乏交通元素结构化标注的问题，构建统一研究基础设施，并设计一种即插即用的交通元素感知集成机制。 在 nuScenes、NAVSIM-v1、NAVSIM-v2 与闭环 Bench2Drive 四个基准上，对感知-预测-规划、视觉-语言-动作（VLA）、回归式规划、扩散式策略和轨迹评分等多项现代范式进行系统性评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute for AI Industry Research (AIR), Tsinghua University, Beijing, Chi…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.18035/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文研究端到端自动驾驶中交通元素（traffic elements，如交通灯和道路标志）感知对驾驶决策的影响，这是以往端到端驾驶研究中被忽视的因素。</p>
+  <ul class="reading-intro-points"><li>该论文研究端到端自动驾驶中交通元素（traffic elements，如交通灯和道路标志）感知对驾驶决策的影响，这是以往端到端驾驶研究中被忽视的因素。</li><li>论文针对主流端到端自动驾驶系统架构多样、训练范式差异大，且现有数据集缺乏交通元素结构化标注的问题，构建统一研究基础设施，并设计一种即插即用的交通元素感知集成机制。</li><li>在 nuScenes、NAVSIM-v1、NAVSIM-v2 与闭环 Bench2Drive 四个基准上，对感知-预测-规划、视觉-语言-动作（VLA）、回归式规划、扩散式策略和轨迹评分等多项现代范式进行系统性评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute for AI Industry Research (AIR), Tsinghua University, Beijing, China；作者：Zongzheng Zhang、Jijun Wang、Saining Zhang、Hao Zhao</li><li>机构：Bosch Corporate Research, Shanghai, China；作者：Wang Shuo、Yiru Wang、Hai Yang、Yang Chen、Yuwen Heng、Hao Sun、Anqing Jiang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文研究端到端自动驾驶中交通元素（traffic elements，如交通灯和道路标志）感知对驾驶决策的影响，这是以往端到端驾驶研究中被忽视的因素。</li><li>论文针对主流端到端自动驾驶系统架构多样、训练范式差异大，且现有数据集缺乏交通元素结构化标注的问题，构建统一研究基础设施，并设计一种即插即用的交通元素感知集成机制。</li><li>在 nuScenes、NAVSIM-v1、NAVSIM-v2 与闭环 Bench2Drive 四个基准上，对感知-预测-规划、视觉-语言-动作（VLA）、回归式规划、扩散式策略和轨迹评分等多项现代范式进行系统性评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次系统研究并量化交通元素感知对端到端自动驾驶性能的影响，填补领域空白。</li><li>构建统一研究基础设施，为多个公开驾驶数据集补全交通元素标注，并设计 3D 交通元素提取流水线。</li><li>提出一种最小化、通用的即插即用集成机制，通过轻量级 3D 交通元素辅助监督及可选的拓扑条件注入（语言引导拓扑编码），无需大幅修改现有架构即可应用。</li><li>在多项范式与多个基准上验证一致性能提升，并在 NAVSIM-v2 上显著提升最先进架构与数据流水线性能，取得新最优结果。</li><li>通过针对性消融实验揭示交通元素感知有效性的原因，如显式 3D 表示优于 2D、交通标志（不仅限于交通灯）至关重要、独立预测头与焦点损失对稀疏目标十分关键等。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶规划模块中的感知辅助任务与拓扑条件注入模块。</li><li>输入传感器：多视角摄像头图像（多视角图像），前视图像用于 2D 检测与单目深度估计，并利用 LiDAR 点云几何辅助 3D 定位。</li><li>场景表示：以 OpenLane-V2 风格的中心线、交通元素、LCTE（车道中心线-交通元素）拓扑与 LCLC（中心线-中心线）拓扑为场景表示，并结合 BEV 查询与拓扑查询。</li><li>模型结构：在原有规划器（如 VAD、Orion 等基线）基础上附加 3D 交通元素检测任务（L1 定位损失 + 焦点分类损失）；拓扑信息经 2D 检测与深度估计后生成 3D 中心点，再经拓扑预测模块（TopoMLP）估计邻接矩阵，并转化为语言描述后由冻结 BERT-base 编码器生成拓扑查询，与 BEV 查询拼接输入规划解码器。</li><li>关键技术：即插即用集成设计、3D 交通元素伪标签构建（2D YOLO 检测 + 单目深度模型 UniDepthv2 + LiDAR 融合）、ego-centric 拓扑过滤、语言引导拓扑条件编码、焦点损失与最大保留池化处理稀疏目标。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（含 OpenLane-V2 子集标注）、NAVSIM-v1（navtest）、NAVSIM-v2（navhard）、Bench2Drive（闭环 CARLA 场景）。</li><li>仿真器：CARLA（用于 Bench2Drive 闭环评估）；NAVSIM-v1/v2 采用数据驱动非反应式与两阶段伪闭环评估。</li><li>模型规模：语言编码器采用 BERT-base（约 110M 参数）；拓扑预测采用轻量 TopoMLP。</li><li>训练资源：nuScenes 与 Bench2Drive 上使用 8×A100、batch size 1；NAVSIM 上使用 4×RTX 3090、batch size 32。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes（开环）、NAVSIM-v1（开环/仿真评分）、NAVSIM-v2（开环/两阶段伪闭环）、Bench2Drive（闭环 CARLA）。</li><li>评估指标：nuScenes 使用 L2 轨迹误差和碰撞率；NAVSIM-v1 使用 PDMS；NAVSIM-v2 使用 EPDMS 及 Stage 1/Stage 2 分解；Bench2Drive 使用 Driving Score、Success Rate、Efficiency、Comfortness 及 open-loop Avg. L2。</li><li>关键数值（nuScenes）：VAD–Base 基线 L2 Avg. 0.72、CR Avg. 0.22；VAD + TE 为 L2 Avg. 0.63、CR Avg. 0.17；VAD + Topo 为 L2 Avg. 0.62、CR Avg. 0.16；VAD + Ours 为 L2 Avg. 0.60、CR Avg. 0.17。Orion† 基线 L2 Avg. 0.34、CR Avg. 0.37；Orion† + TE 为 L2 Avg. 0.29、CR Avg. 0.27；Orion† + Topo 为 L2 Avg. 0.27、CR Avg. 0.25；Orion† + Ours 为 L2 Avg. 0.26、CR Avg. 0.23。</li><li>对比方法（nuScenes）：NMP、FF、EO、ST-P3、UniAD、VAD-Tiny、BEV-Planner、PARA-Drive、LAW、GenAD、SparseDrive、UAD、MomAD、Qwen-2.5-VL、Senna、DriveVLM、OmniDrive、EMMA、ImpromptuVLA 等。</li><li>结果条件：nuScenes 为开环评估；NAVSIM 为开环仿真评分；Bench2Drive 为 CARLA 闭环评估；所有实验均未见实车部署。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.18254/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">GAPL: Grounded Action-effect Policy Learning for LLM-Based Trajectory Planning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.17882/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">ControlledShifts: Towards Standardizing Robustness Evaluation in Trajectory Prediction Under Distribution Shifts</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

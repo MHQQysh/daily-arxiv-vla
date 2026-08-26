@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cooking beyond Frames: A Stereo Event Camera Dataset in the Kitchen - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文任务：提出一个大规模、真实世界、自我中心（egocentric）视角的立体事件相机（stereo event camera）基准数据集，用于人类日常活动相关的事件感知任务。 应用场景：厨房环境中的自然烹饪活动，支持事件相机在自动驾驶之外的类人中心（human-centric）场景研究。 研究问题：现有事件相机数据集多聚焦于自动驾驶或无人机，而人类日常活动数据集规模小、真实感不足、环境多样性缺乏，且多为脚本化动作或固定视角，难以反映自然行为；同时存在的合成事件数据存在 sim-to-real 差距。论文旨在填补这一空白。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.04865">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.04865.webp" alt="Cooking beyond Frames: A Stereo Event Camera Dataset in the Kitchen" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文任务：提出一个大规模、真实世界、自我中心（egocentric）视角的立体事件相机（stereo event camera）基准数据集，用于人类日常活动相关的事件感知任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Cooking beyond Frames: A Stereo Event Camera Dataset in the Kitchen</h1>
+            <div class="detail-meta">2026-08-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.04865" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.04865" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.04865</span></div>
+            <p class="detail-summary">论文任务：提出一个大规模、真实世界、自我中心（egocentric）视角的立体事件相机（stereo event camera）基准数据集，用于人类日常活动相关的事件感知任务。 应用场景：厨房环境中的自然烹饪活动，支持事件相机在自动驾驶之外的类人中心（human-centric）场景研究。 研究问题：现有事件相机数据集多聚焦于自动驾驶或无人机，而人类日常活动数据集规模小、真实感不足、环境多样性缺乏，且多为脚本化动作或固定视角，难以反映自然行为；同时存在的合成事件数据存在 sim-to-real 差距。论文旨在填补这一空白。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Delft University of Technology, The Netherlands · Chengming Feng、Hesam Arag…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.04865/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文任务：提出一个大规模、真实世界、自我中心（egocentric）视角的立体事件相机（stereo event camera）基准数据集，用于人类日常活动相关的事件感知任务。</p>
+  <ul class="reading-intro-points"><li>论文任务：提出一个大规模、真实世界、自我中心（egocentric）视角的立体事件相机（stereo event camera）基准数据集，用于人类日常活动相关的事件感知任务。</li><li>应用场景：厨房环境中的自然烹饪活动，支持事件相机在自动驾驶之外的类人中心（human-centric）场景研究。</li><li>研究问题：现有事件相机数据集多聚焦于自动驾驶或无人机，而人类日常活动数据集规模小、真实感不足、环境多样性缺乏，且多为脚本化动作或固定视角，难以反映自然行为；同时存在的合成事件数据存在 sim-to-real 差距。论文旨在填补这一空白。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Delft University of Technology, The Netherlands；作者：Chengming Feng、Hesam Araghi、Liming Zheng、Xucong Zhang、Jan van Gemert、Nergis Tömen</li><li>机构：STMicroelectronics, France；作者：Julien Dupeyroux</li><li>注：作者 Xucong Zhang 同时隶属于 Delft University of Technology 与 STMicroelectronics，原文未明确该作者在两个机构间的主次归属关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文任务：提出一个大规模、真实世界、自我中心（egocentric）视角的立体事件相机（stereo event camera）基准数据集，用于人类日常活动相关的事件感知任务。</li><li>应用场景：厨房环境中的自然烹饪活动，支持事件相机在自动驾驶之外的类人中心（human-centric）场景研究。</li><li>研究问题：现有事件相机数据集多聚焦于自动驾驶或无人机，而人类日常活动数据集规模小、真实感不足、环境多样性缺乏，且多为脚本化动作或固定视角，难以反映自然行为；同时存在的合成事件数据存在 sim-to-real 差距。论文旨在填补这一空白。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建了首个在真实世界、日常场景、自我中心设置下使用立体事件相机采集的、支持多任务的大规模基准数据集 EventKitchen。</li><li>提供了丰富的人工标注，包括 10,762 个动作片段（268 个动作类别、32 个动词类别）和 13,482 个物体边界框（12 个物体类别）。</li><li>提供 297,547 张原始深度图以及传感器之间的标定矩阵，支持立体深度估计任务及跨传感器标注投影。</li><li>通过评估 7 个基线模型展示了 EventKitchen 的挑战性，覆盖事件动作识别、目标检测和立体深度估计三个任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据采集与多任务感知基准构建，涉及事件动作识别、目标检测、立体深度估计。</li><li>输入传感器：两个 Prophesee Gen4 立体事件相机、两个 CMOS RGB 相机、一个 Intel RealSense 深度相机（含 D-RGB 和 6 轴 IMU）。</li><li>场景表示：事件流（事件流聚合表示）、RGB 帧、深度图、IMU 数据。</li><li>模型结构：</li></ul>
+<p> - 动作识别：基于帧的 TSM（ResNet-50 骨干，Kinetics 400 预训练）和 Video Swin Transformer（Swin-Base 骨干，Kinetics 400 预训练），微调于 69 个动作类别和 18 个动词类别。</p>
+<p> - 目标检测：YOLOv10-x（MS-COCO 预训练）、RVT-Base（1 Mpx 预训练）、EvRT-DETR-B（RT-DETR-B 初始化）。</p>
+<p> - 立体深度估计：原文未报告具体模型结构。</p>
+<ul><li>关键技术：采用 E2Calib 进行事件相机内在校准，OpenCV 框架进行所有相机标定；以深度相机为参考进行外参标定，左事件相机为立体深度估计参考；通过三维点构造与投影将 D-RGB 标注和深度图对齐到左右事件相机；动作标注采用 VGG Image Annotator（VIA）工具，基于 EPIC-KITCHENS 动词列表，由三名标注员分三步协作完成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：EventKitchen，包含 14 个录制会话、110 个序列、13 个不同厨房环境（8 个私人厨房、5 个公共厨房）、10 名参与者，总计 5.5 小时。</li><li>传感器数据：5.5 小时立体事件记录、5.5 小时 30 fps 立体 RGB 视频、5.5 小时 15 fps D-RGB 视频、5.5 小时 16 位深度视频（15 fps）、5.5 小时 6 轴 IMU 数据（200 fps）。</li><li>标注规模：10,762 个动作片段、268 个动作类别、32 个动词类别，13,482 个边界框（12 个类），297,547 张原始深度图；动作片段和边界框标注于 D-RGB 视频，深度图由 Intel RealSense 提供。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告（本工作为可穿戴头盔式采集设备，非车辆平台）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：EventKitchen 数据集自建基准，采用厨房级划分，9 个厨房训练、4 个厨房测试，时长分配约 0.8:0.2（训练 79.4% 对测试 20.6%）。</li><li>评估指标：</li></ul>
+<p> - 动作识别：Top-1 和 Top-5 精度（动作类别 C_a^69 与动词类别 C_v^18）。</p>
+<p> - 目标检测：AP（IoU 0.5-0.95 步长 0.05）、AP_50（IoU 0.5）、AP_05（IoU 0.05）。</p>
+<p> - 立体深度估计：原文未报告。</p>
+<ul><li>关键数值：</li></ul>
+<p> - 动作识别：TSM 在动作 Top-1 为 19.23%、Top-5 为 42.26%；动词 Top-1 为 38.17%、Top-5 为 87.20%。Swin 在动作 Top-1 为 24.69%、Top-5 为 56.48%；动词 Top-1 为 46.08%、Top-5 为 90.67%。</p>
+<p> - 目标检测（全部 12 类平均）：YOLOv10 的 AP 为 16.2%（AP_50 为 29.9%，AP_05 为 38.1%）；RVT 的 AP 为 7.6%（AP_50 为 16.1%，AP_05 为 22.7%）；EvRT-DETR 的 AP 为 8.5%（AP_50 为 16.7%，AP_05 为 22.7%）。</p>
+<ul><li>对比方法：动作识别对比 TSM 与 Swin；目标检测对比 YOLOv10、RVT、EvRT-DETR，并提及各方法在其他数据集（COCO、1 Mpx）上的表现以凸显 EventKitchen 的挑战性。</li><li>评估条件：开环评估，全部在该真实世界数据集上进行；无闭环或仿真条件，亦无实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.05356/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">LoDA: A Level of Detection Aware Method and a Multimodal Sensing Benchmark for Object Level Change Detection</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.04776/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">NSF-HRPT: Neural Semantic Field meets Hierarchical Risk Perception Tree for Safety-Critical Scenario Assessment</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

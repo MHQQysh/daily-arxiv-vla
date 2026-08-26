@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LoViF 2026 The First Challenge on Unified Removal of Raindrops and Reflections: Methods and Results - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文介绍 LoViF 2026 首届雨滴与反射联合去除挑战赛（UR³）的组织流程、数据集、评估协议与最终结果。 该挑战赛面向自动驾驶场景中雨天雨滴与车窗反射的复合图像退化问题，目标为开发一个统一的单图像模型，同时去除两类退化，提升车载视觉系统在恶劣天气下的成像清晰度。 挑战赛与 ECCV 2026 第二届 Low-level Vision Frontiers（LoViF）Workshop 联合举办，共吸引 149 名注册参与者，最终收到 12 份有效参赛方案。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.22723">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.22723.webp" alt="LoViF 2026 The First Challenge on Unified Removal of Raindrops and Reflections: Methods and Results" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文介绍 LoViF 2026 首届雨滴与反射联合去除挑战赛（UR³）的组织流程、数据集、评估协议与最终结果。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">LoViF 2026 The First Challenge on Unified Removal of Raindrops and Reflections: Methods and Results</h1>
+            <div class="detail-meta">2026-08-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.22723" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.22723" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.22723</span></div>
+            <p class="detail-summary">本文介绍 LoViF 2026 首届雨滴与反射联合去除挑战赛（UR³）的组织流程、数据集、评估协议与最终结果。 该挑战赛面向自动驾驶场景中雨天雨滴与车窗反射的复合图像退化问题，目标为开发一个统一的单图像模型，同时去除两类退化，提升车载视觉系统在恶劣天气下的成像清晰度。 挑战赛与 ECCV 2026 第二届 Low-level Vision Frontiers（LoViF）Workshop 联合举办，共吸引 149 名注册参与者，最终收到 12 份有效参赛方案。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Huanjiang Laboratory, Zhuji, China · Zewei He、Xingyu Liu、Xi Tong 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.22723/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文介绍 LoViF 2026 首届雨滴与反射联合去除挑战赛（UR³）的组织流程、数据集、评估协议与最终结果。</p>
+  <ul class="reading-intro-points"><li>本文介绍 LoViF 2026 首届雨滴与反射联合去除挑战赛（UR³）的组织流程、数据集、评估协议与最终结果。</li><li>该挑战赛面向自动驾驶场景中雨天雨滴与车窗反射的复合图像退化问题，目标为开发一个统一的单图像模型，同时去除两类退化，提升车载视觉系统在恶劣天气下的成像清晰度。</li><li>挑战赛与 ECCV 2026 第二届 Low-level Vision Frontiers（LoViF）Workshop 联合举办，共吸引 149 名注册参与者，最终收到 12 份有效参赛方案。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Huanjiang Laboratory, Zhuji, China；作者：Zewei He、Xingyu Liu、Xi Tong、Yu Chen</li><li>机构：Zhejiang University, Hangzhou, China；作者：Zewei He、Xingyu Liu、Xi Tong、Yu Chen</li><li>机构：University of Science and Technology of China, Hefei, China；作者：Xin Li</li><li>机构：其余参赛队伍机构见补充材料，原文未报告；作者：参赛队伍成员（原文仅列出队伍队长，具体机构对应未在正文中明确）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文介绍 LoViF 2026 首届雨滴与反射联合去除挑战赛（UR³）的组织流程、数据集、评估协议与最终结果。</li><li>该挑战赛面向自动驾驶场景中雨天雨滴与车窗反射的复合图像退化问题，目标为开发一个统一的单图像模型，同时去除两类退化，提升车载视觉系统在恶劣天气下的成像清晰度。</li><li>挑战赛与 ECCV 2026 第二届 Low-level Vision Frontiers（LoViF）Workshop 联合举办，共吸引 149 名注册参与者，最终收到 12 份有效参赛方案。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次组织针对雨滴-反射复合退化联合去除（UR³）的专项挑战赛，填补了此前雨滴去除和反射去除被作为独立任务处理、缺乏统一基准的研究空白。</li><li>基于专用硬件采集系统构建并公开了实拍 RDRF（RainDrop and ReFlection）数据集，包含训练、验证与测试集，并为测试集提供了新的 100 对图像（55 个场景）。</li><li>制定了包含 PSNR、SSIM 与 LPIPS 三项指标的加权评分协议（Score = PSNR + 10×SSIM − 5×LPIPS），并明确指出多帧融合与单帧设置的区别，在严格单帧条件下重新测试并发布了修正后的排名。</li><li>总结分析了 12 支参赛队伍的方法，涵盖两阶段级联、扩散先验引导、多观测融合、语义-几何引导细化等多种技术路线，为后续研究提供了方法参考与对比基线。</li><li>发现部分队伍利用同一场景的多个退化观测进行推理以提升性能，并针对这一公平性问题进行了单独评估与说明。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：单图像/多观测图像低级视觉恢复（low-level vision restoration），面向车载摄像头的雨滴-反射复合退化去除。</li><li>输入传感器：单目 RGB 摄像头（退化图像）。</li><li>场景表示：二维图像像素空间，部分方法使用 YCbCr 亮度通道、FFT 频域特征、DINOv2 语义特征、深度与表面法线等额外表示。</li><li>模型结构：各队伍采用不同架构，主要包括：</li></ul>
+<p> - Xedit Master：两阶段级联（RDNet 去除器 + NAFNet 精化器），冻结 RDNet-XL 生成中间结果再训练 NAFNet。</p>
+<p> - tysl：扩散引导两阶段框架（GenSIRR + LoRA 生成先验 + 卷积分支与 HiT-SR、NAFNet 结合的监督精化器）。</p>
+<p> - GIST-IVL：三阶段多观测框架 MAFNet-UR³（WeatherRemover 微调 + FUMO/Stable Diffusion 2.1 + NAFNet + 掩膜感知融合）。</p>
+<p> - ACVLAB：RDNet-SGCR 单前馈网络，引入 DINOv2 语义与 Depth-Anything-V2 几何引导的可逆级联细化。</p>
+<p> - SNU-ISPL：DINOClear，基于 DINOLight 分层 Transformer + DINOv2 自监督特征 + SFDINO 块。</p>
+<p> - the_last_token：八个 Restormer 家族预测的频率分裂融合集成。</p>
+<p> - AIIA-Lab：MSDT 多尺度去雨 Transformer + 场景级检查点选择 + Flux 伪真值精化。</p>
+<p> - ISCAS Optics：XResformer 骨干 + 由粗到精四阶段训练策略。</p>
+<p> - sunsean：直接恢复模型（RD）与扩散模型（DAI）的双分支线性融合。</p>
+<p> - ULR：Stable Diffusion 2.1 条件扩散 + DINOv3 特征聚类（Affinity Propagation）+ 场景级伪参考。</p>
+<p> - ustc_pi_lab：Histoformer 两阶段恢复 + 带符号多波段残差减法器。</p>
+<p> - daniel0902：轻量级混合专家（MoE）网络，共享卷积骨干 + 八个专家 + 空间路由器 + 双层重建头。</p>
+<ul><li>关键技术：两阶段级联与分离式目标优化、扩散模型先验（LoRA 微调）、多观测融合与掩膜感知加权、DINOv2 自监督特征注入、几何（深度/法线）引导、频域损失与 FFT 卷积、测试时增强（TTA）与 D4 自集成、滑动窗口分块推理等。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：RDRF 数据集（RainDrop and ReFlection），共 307 个场景；训练集 216 个场景（9003 对）、验证集 91 个场景（277 对）、测试集 55 个场景（100 对，仅公开退化图像）。许可证为 CC BY-NC-SA 4.0。</li><li>外部数据：部分队伍使用了 DeRaindrop、RainDS、OpenRR-5K、RR4K、Cityscapes、SIR²+、Zhang et al. 等数据集（具体使用情况因队而异）。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：</li></ul>
+<p> - GIST-IVL：Stage I 24.32M、Stage II 1.873B、Stage III 38.14M 参数。</p>
+<p> - ACVLAB：约 428M 参数（267.2M 可训练 + 160.8M 冻结编码器）。</p>
+<p> - SNU-ISPL：9.51M 可训练参数。</p>
+<p> - daniel0902：10.23M 参数。</p>
+<p> - 其他队伍模型规模：原文未报告。</p>
+<ul><li>训练资源：NVIDIA A100（8 卡、4 卡）、H100（单卡）、RTX 5090、RTX 4060 等，原文按队伍分别报告。</li><li>实车平台：原文未报告实车平台，数据由专用硬件采集系统拍摄。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：UR³ 挑战赛测试集（100 对图像 / 55 个场景），另设有验证集评分阶段。</li><li>评估指标：PSNR（YCbCr Y 通道）、SSIM（Y 通道）、LPIPS（AlexNet，像素归一化至 [-1,1]），综合 Score = PSNR + 10×SSIM − 5×LPIPS。</li><li>关键数值（官方提交结果，含多帧融合，表 1）：</li></ul>
+<p> - 第 1 名 Xedit Master：PSNR 32.3993、SSIM 0.9645、LPIPS 0.0443、Score 41.8226（使用额外数据）。</p>
+<p> - 第 2 名 tysl：PSNR 32.3006、SSIM 0.9648、LPIPS 0.0416、Score 41.7405（使用额外数据）。</p>
+<p> - 第 3 名 GIST-IVL：PSNR 31.6556、SSIM 0.9680、LPIPS 0.0388、Score 41.1416（使用额外数据）。</p>
+<p> - 其余队伍 Score 从 40.3933 至 36.8909 不等。</p>
+<ul><li>关键数值（严格单帧重测，表 2）：</li></ul>
+<p> - 第 1 名 Xedit Master：Score 41.8226（与官方一致）。</p>
+<p> - 第 2 名 tysl：Score 41.7405。</p>
+<p> - 第 3 名 ACVLAB：Score 40.3933（不使用额外数据）。</p>
+<p> - GIST-IVL 降至第 5 名（39.8308），AIIA-Lab 降至第 9 名（38.9404），ULR 降至第 12 名（36.8534）。</p>
+<ul><li>对比方法：12 支参赛队伍方案互为对比，无独立基线模型对比。</li><li>评估条件：开发阶段收到 1176 次验证提交（56 名参与者）；测试阶段收到 406 次提交（38 名参与者）。官方排名基于测试集提交结果，部分队伍使用多帧/多观测融合；组织方随后在严格单帧条件下用提交的推理代码重测并发布修正排名，属于离线评估，未涉及实车或闭环仿真。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.23405/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MomADv2: Reliable Temporal Memory for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.22549/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Scaling Curriculum Learning For Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spatial Attention Noise Masking for Causally Sufficient Interpretability - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文面向计算机视觉图像分类任务，提出一种因果可解释性方法，从“哪些输入特征对预测充分且负责”的角度解释模型决策，而不是仅仅给出特征相关性。 应用场景包括医疗影像分析、自动驾驶、网络安全等安全关键的高风险领域，在这些场景中解释的忠实性（faithfulness）至关重要。 研究问题：现有被动式可解释性方法（如梯度归因、遮挡）只能提供相关性解释，而主动式方法（如注意力机制）缺乏对决定预测的特征的明确责任分配，本文旨在弥补这一空白。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.14725">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.14725.webp" alt="Spatial Attention Noise Masking for Causally Sufficient Interpretability" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文面向计算机视觉图像分类任务，提出一种因果可解释性方法，从“哪些输入特征对预测充分且负责”的角度解释模型决策，而不是仅仅给出特征相关性。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Spatial Attention Noise Masking for Causally Sufficient Interpretability</h1>
+            <div class="detail-meta">2026-08-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.14725" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.14725" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.14725</span></div>
+            <p class="detail-summary">本文面向计算机视觉图像分类任务，提出一种因果可解释性方法，从“哪些输入特征对预测充分且负责”的角度解释模型决策，而不是仅仅给出特征相关性。 应用场景包括医疗影像分析、自动驾驶、网络安全等安全关键的高风险领域，在这些场景中解释的忠实性（faithfulness）至关重要。 研究问题：现有被动式可解释性方法（如梯度归因、遮挡）只能提供相关性解释，而主动式方法（如注意力机制）缺乏对决定预测的特征的明确责任分配，本文旨在弥补这一空白。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Clemson University · Benjamin Formby</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.14725/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文面向计算机视觉图像分类任务，提出一种因果可解释性方法，从“哪些输入特征对预测充分且负责”的角度解释模型决策，而不是仅仅给出特征相关性。</p>
+  <ul class="reading-intro-points"><li>本文面向计算机视觉图像分类任务，提出一种因果可解释性方法，从“哪些输入特征对预测充分且负责”的角度解释模型决策，而不是仅仅给出特征相关性。</li><li>应用场景包括医疗影像分析、自动驾驶、网络安全等安全关键的高风险领域，在这些场景中解释的忠实性（faithfulness）至关重要。</li><li>研究问题：现有被动式可解释性方法（如梯度归因、遮挡）只能提供相关性解释，而主动式方法（如注意力机制）缺乏对决定预测的特征的明确责任分配，本文旨在弥补这一空白。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Clemson University；作者：Benjamin Formby</li><li>机构：Binghamton University；作者：Kuang-Ching Wang</li><li>机构：Clemson University；作者：D Hudson Smith</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文面向计算机视觉图像分类任务，提出一种因果可解释性方法，从“哪些输入特征对预测充分且负责”的角度解释模型决策，而不是仅仅给出特征相关性。</li><li>应用场景包括医疗影像分析、自动驾驶、网络安全等安全关键的高风险领域，在这些场景中解释的忠实性（faithfulness）至关重要。</li><li>研究问题：现有被动式可解释性方法（如梯度归因、遮挡）只能提供相关性解释，而主动式方法（如注意力机制）缺乏对决定预测的特征的明确责任分配，本文旨在弥补这一空白。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出空间注意力噪声掩蔽（Spatial Attention Noise Masking, SANM）框架，将特征归因图直接嵌入信息处理架构中，提供因果充分的视觉解释。</li><li>提出联合训练与正则化策略，通过KL散度约束掩蔽稀疏性、全变分约束空间平滑性，并采用嵌入一致性正则化，在大量掩蔽输入信息的同时保持接近基线的分类性能。</li><li>全面评估SANM：与SOTA特征归因方法相比具有竞争力的视觉解释、掩蔽忠实性、接近基线的分类表现，以及对背景变化分布偏移的鲁棒性提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：主动可解释性框架，包含掩蔽生成模块和分类模块，二者联合训练。</li><li>输入传感器：单目RGB图像（医学模态中为单通道灰度图像）。</li><li>场景表示：二维空间注意力噪声掩蔽图（单通道），作用于原始输入图像像素空间。</li><li>模型结构：</li></ul>
+<p> - 掩蔽生成器：UNet风格的对称编码器-解码器结构，带跳跃连接。</p>
+<p> - 分类网络：ResNet-18骨干网络和线性分类器，对掩蔽和未掩蔽图像分别进行一次前向传播。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 用与图像匹配的高斯噪声（按图像标准差缩放、均值平移）填充掩蔽外区域，避免数据分布剧烈偏移。</p>
+<p> - 稀疏性正则化：用KL散度将掩蔽像素强度的经验Beta分布拟合到目标Beta分布（αg=0.2, βg=0.5）。</p>
+<p> - 平滑性正则化：全变分损失，惩罚相邻像素差异。</p>
+<p> - 嵌入一致性损失：掩蔽图像与未掩蔽图像经ResNet-18编码后的嵌入向量均方误差。</p>
+<p> - 总损失由掩蔽分类损失、未掩蔽分类损失、稀疏性损失、平滑性损失和一致性损失五项构成，等权重相加。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>CIFAR-100：60k张图像，100类，3通道，32×32。</li><li>ImageNet-1k：1.2M张图像，1000类，3通道，224×224。</li><li>RadImageNet-Lung CT：152k张，6类，1通道，224×224。</li><li>RadImageNet-Brain MRI：44k张，10类，1通道，224×224。</li><li>RadImageNet-Abdomen/Pelvis US：297k张，13类，1通道，224×224。</li><li>ImageNet-A：7,500张自然对抗样本，覆盖200个ImageNet-1k类别。</li><li>ImageNet-S：用于背景替换实验的分割掩码来源。</li><li>仿真器：原文未报告。</li><li>模型规模：掩蔽生成器为UNet，分类器为ResNet-18；具体参数量原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CIFAR-100、ImageNet-1k、三个RadImageNet子集、ImageNet-A、背景交换的ImageNet-1k。</li><li>评估指标：top-1/top-k准确率、插入/删除曲线及AUC、背景交换和自然对抗样本下的分类准确率。</li><li>关键数值：</li></ul>
+<p> - CIFAR-100：基线top-1 75.47%，未掩蔽73.81%（-1.66），掩蔽67.04%（-8.43）。</p>
+<p> - ImageNet-1k：基线top-1 70.22%，未掩蔽69.76%（-0.46），掩蔽68.02%（-2.20）。</p>
+<p> - RadImageNet-Abdomen/Pelvis US：基线95.80%，未掩蔽95.80%（+0.00），掩蔽95.24%（-0.56）。</p>
+<p> - 插入AUC：SANM 57.46% vs Occlusion基线57.20%；删除AUC：SANM 16.01% vs Occlusion基线18.66%。</p>
+<p> - ImageNet-A：基线1.98%，未掩蔽1.87%，掩蔽2.09%。</p>
+<p> - ImageNet-1k背景替换：基线57.23%，未掩蔽57.31%，掩蔽59.97%。</p>
+<ul><li>对比方法：GradCAM、Guided GradCAM、Integrated Gradients、Occlusion。</li><li>实验条件：开环实验；分类实验在五个数据集上进行；忠实性实验在ImageNet-1k上随机采样500张图像进行插入/删除曲线评估；鲁棒性实验在ImageNet-A和背景替换的ImageNet-1k上进行；消融实验在CIFAR-100上进行。原文未报告闭环或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.12198/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Learning-Based Behavior Planning for Automated Driving: Real-World Integration and Deployment</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.14724/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Privacy-Preserving Dataset Curation for Kuala Lumpur Urban Traffic: Grounded Vision-Language Detection with Spatial Vehicle-Context Filtering</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FIRE-VLA: Failure-Informed Self-Evolution for Vision-Language-Action Models in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文针对自动驾驶中的视觉-语言-动作（VLA）模型的后训练问题。 研究问题是：当强化学习（RL）的组相对策略优化（GRPO）在一个 rollout 组内所有采样轨迹都表现不佳（即“未解决失败组”）时，其相对奖励信号只能对这些失败排序，无法提供如何逃离该失败区域的指导。 应用场景为基于 nuScenes 数据集的前视摄像头开放环路轨迹规划任务。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.13395">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.13395.webp" alt="FIRE-VLA: Failure-Informed Self-Evolution for Vision-Language-Action Models in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文针对自动驾驶中的视觉-语言-动作（VLA）模型的后训练问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">FIRE-VLA: Failure-Informed Self-Evolution for Vision-Language-Action Models in Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.13395" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.13395" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.13395</span></div>
+            <p class="detail-summary">本文针对自动驾驶中的视觉-语言-动作（VLA）模型的后训练问题。 研究问题是：当强化学习（RL）的组相对策略优化（GRPO）在一个 rollout 组内所有采样轨迹都表现不佳（即“未解决失败组”）时，其相对奖励信号只能对这些失败排序，无法提供如何逃离该失败区域的指导。 应用场景为基于 nuScenes 数据集的前视摄像头开放环路轨迹规划任务。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">哈尔滨工业大学（Harbin Institute of Technology） · Hao Dou</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.13395/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文针对自动驾驶中的视觉-语言-动作（VLA）模型的后训练问题。</p>
+  <ul class="reading-intro-points"><li>本文针对自动驾驶中的视觉-语言-动作（VLA）模型的后训练问题。</li><li>研究问题是：当强化学习（RL）的组相对策略优化（GRPO）在一个 rollout 组内所有采样轨迹都表现不佳（即“未解决失败组”）时，其相对奖励信号只能对这些失败排序，无法提供如何逃离该失败区域的指导。</li><li>应用场景为基于 nuScenes 数据集的前视摄像头开放环路轨迹规划任务。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：哈尔滨工业大学（Harbin Institute of Technology）；作者：Hao Dou</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文针对自动驾驶中的视觉-语言-动作（VLA）模型的后训练问题。</li><li>研究问题是：当强化学习（RL）的组相对策略优化（GRPO）在一个 rollout 组内所有采样轨迹都表现不佳（即“未解决失败组”）时，其相对奖励信号只能对这些失败排序，无法提供如何逃离该失败区域的指导。</li><li>应用场景为基于 nuScenes 数据集的前视摄像头开放环路轨迹规划任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>形式化了“失败信息引导的后训练”问题，即如何处理低奖励、低多样性的未解决 rollout 组。</li><li>提出了“特权在策略自蒸馏”（Privileged Self-Distillation, PSD）方法，使用一个冻结的、与当前策略同尺度的模型作为教师，该教师只能访问隐藏的未来轨迹信息，并沿学生生成的答案前缀提供监督。</li><li>设计了“失败信息引导路由”机制，通过组内奖励均值、标准差和有效比例等联合统计量来识别未解决失败组，并有选择地应用 PSD。</li><li>引入了“轮次式自进化”框架，使策略更新后能自动调整下一轮的失败分布和教师模型。</li><li>在实验条件匹配的情况下，相比标准 GRPO，FIRE-VLA 在保持单样本规划性能的同时，降低了评估中的持续失败率和严重的随机轨迹误差。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶 VLA 模型的后训练（Post-training）框架。</li><li>输入传感器：前视摄像头（Front-view Camera），以及自车历史状态描述。</li><li>场景表示：输入由前视图图像 <code>I_i</code> 和自车历史描述 <code>h_i</code> 组成；模型预测未来 3 秒内（0.5 秒间隔）的 6 个 BEV 坐标系下的轨迹点。</li><li>模型结构：基于 Qwen2.5-VL-3B-Instruct 作为骨干网络，采用全参数 BF16 训练，并启用视觉塔（Vision Tower）训练。原文未报告具体的视觉编码器细节。</li><li>关键技术：</li></ul>
+<p> - <strong>GRPO 基础目标</strong>：所有策略组均使用 GRPO 进行优化，其奖励函数定义为 <code>r = (1 + 平均L2误差)^-1</code>。</p>
+<p> - <strong>失败信息路由</strong>：在训练时，计算每个组的奖励均值 <code>r̄_i</code> 和标准差 <code>σ_i</code>，当这两个指标均低于当批次 30% 分位数且有效响应比例 <code>v_i &gt;= 0.5</code> 时，判定为“未解决失败组”，并激活 PSD 损失。</p>
+<p> - <strong>特权自蒸馏 (PSD)</strong>：学生与教师模型在同一轮开始时共享相同的初始化权重。仅教师模型的上下文包含隐藏的真值未来轨迹 <code>&lt;priv&gt; τ* &lt;/priv&gt;</code>，而学生模型不包含。两者均基于学生生成的响应前缀进行条件生成，以匹配分布。</p>
+<p> - <strong>损失函数</strong>：PSD 损失采用基于教师模型前 16 个 token 和 1 个残差桶的 Jensen–Shannon 散度（JSD），每个 token 的散度最大值被限制在 0.05。最终的组合损失为 <code>L_total = L_GRPO + 0.1 * z_train * L_PSD</code>，其中 <code>z_train</code> 是路由指示符。</p>
+<p> - <strong>轮次自进化</strong>：实验采用 2 轮进化，每轮进行 75 次策略更新。每轮结束后，更新后的策略将作为下一轮学生和教师的起点。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes。</li><li>训练数据：1,200 个唯一的 RL 提示词（prompt），每个提示词采样 4 个响应（G=4），共 4,800 个 on-policy rollout。每轮训练使用 600 个提示词的互斥子集。</li><li>评估数据：6,019 个固定样本，来源于 150 个与训练集场景完全不相交的 nuScenes 场景，包含 5,119 张唯一图像。</li><li>模型规模：Qwen2.5-VL-3B（约 30 亿参数）。</li><li>训练资源：4 张 Nvidia RTX 3090 显卡，使用全参数 BF16 训练和 FSDP 分布式策略。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在固定的 6,019 个来自 150 个 held-out nuScenes 场景的样本上进行评估。</li><li>评估指标：单样本低温度规划指标（Reward, L2@1s, L2@2s, L2@3s, Avg. L2）；G=4 随机采样评估指标（Reward, Avg. L2, Persistent Failure Rate, Any &gt;10m Rate, CVaR95, CVaR99, Worst-of-4, Within-sample std）。</li><li>关键数值（对比 FIRE-VLA 与 Standard GRPO）：</li></ul>
+<p> - <strong>单样本规划</strong>：Avg. L2 从 0.6421 降至 0.6023 米，但场景聚类的配对 95% 置信区间为 [-0.1104, 0.0087]，跨越零，因此结论为两者性能相当。</p>
+<p> - <strong>G=4 随机规划</strong>：Avg. L2 从 1.8478 降至 1.5001 米（降低了 18.8%），配对差异为 -0.3476 米，95% CI 为 [-0.7711, -0.0319]。</p>
+<p> - <strong>持续失败率</strong>：从 13.03%（784/6019）降至 11.20%（674/6019），差异为 -1.83 个百分点，95% CI 为 [-2.55, -1.11]。</p>
+<p> - <strong>严重随机错误</strong>：包含任一&gt;10米候选的样本率从 1.35%（81/6019）降至 0.83%（50/6019），差异为 -0.52 个百分点，95% CI 为 [-0.83, -0.22]。</p>
+<ul><li>对比方法：标准 GRPO，两者均从相同的 Qwen2.5-VL-3B SFT 检查点开始训练，匹配提示词数、rollout 数和策略更新数。</li><li>开环、闭环、仿真或实车条件：所有评估均为开环评估（open-loop），未涉及闭环、仿真或实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.13719/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Coverage Aware Active Evaluation for Failure Discovery with Paired Systems</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.13147/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Geometry-Grounded Unified 3D Perception for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
