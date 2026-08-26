@@ -1,3 +1,4 @@
+import re
 from typing import Dict, Optional
 
 
@@ -20,7 +21,8 @@ TOPIC_QUERIES: Dict[str, str] = {
         '(all:"localization" OR all:"mapping" OR all:"SLAM" OR all:"visual odometry" OR all:"HD map")'
     ),
     "prediction": DRIVING_CONTEXT + " AND " + (
-        '(all:"motion forecasting" OR all:"trajectory prediction" OR all:"behavior prediction")'
+        '(all:"motion forecasting" OR all:"trajectory forecasting" OR all:"motion prediction" OR '
+        'all:"trajectory prediction" OR all:"behavior prediction")'
     ),
     "planning_decision": DRIVING_CONTEXT + " AND " + (
         '(all:"motion planning" OR all:"trajectory planning" OR all:"decision making" OR all:"driving policy")'
@@ -29,10 +31,10 @@ TOPIC_QUERIES: Dict[str, str] = {
         '(all:"vehicle control" OR all:"model predictive control" OR all:"path tracking")'
     ),
     "end_to_end_foundation": (
-        'all:"end-to-end autonomous driving" OR all:"end-to-end driving" OR '
-        'all:"foundation model" AND ' + DRIVING_CONTEXT + ' OR '
-        'all:"vision language model" AND ' + DRIVING_CONTEXT + ' OR '
-        'all:"world model" AND ' + DRIVING_CONTEXT
+        '(all:"end-to-end autonomous driving") OR (all:"end-to-end driving") OR '
+        '(all:"foundation model" AND ' + DRIVING_CONTEXT + ') OR '
+        '(all:"vision language model" AND ' + DRIVING_CONTEXT + ') OR '
+        '(all:"world model" AND ' + DRIVING_CONTEXT + ')'
     ),
 }
 
@@ -48,9 +50,23 @@ DRIVING_CONTEXT_TERMS = ("driving", "road", "traffic", "automotive")
 TASK_TERMS = (
     "perception", "bev", "object detection", "tracking", "lane", "occupancy",
     "sensor fusion", "localization", "mapping", "slam", "odometry", "hd map",
-    "motion forecasting", "trajectory prediction", "behavior prediction", "planning",
+    "motion forecasting", "trajectory forecasting", "motion prediction",
+    "trajectory prediction", "behavior prediction", "planning",
     "decision making", "driving policy", "vehicle control", "path tracking",
     "foundation model", "vision language model", "world model",
+)
+
+STRONG_DRIVING_PATTERNS = tuple(
+    re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)", re.IGNORECASE)
+    for term in STRONG_DRIVING_TERMS
+)
+DRIVING_CONTEXT_PATTERNS = tuple(
+    re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)", re.IGNORECASE)
+    for term in DRIVING_CONTEXT_TERMS
+)
+TASK_PATTERNS = tuple(
+    re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)", re.IGNORECASE)
+    for term in TASK_TERMS
 )
 
 
@@ -61,9 +77,9 @@ def get_topic_queries(query_override: Optional[str] = None) -> Dict[str, str]:
 
 
 def is_relevant_paper(title: str, summary: str) -> bool:
-    text = f"{title} {summary}".lower()
-    if any(term in text for term in STRONG_DRIVING_TERMS):
+    text = f"{title} {summary}"
+    if any(pattern.search(text) for pattern in STRONG_DRIVING_PATTERNS):
         return True
-    has_context = any(term in text for term in DRIVING_CONTEXT_TERMS)
-    has_task = any(term in text for term in TASK_TERMS)
+    has_context = any(pattern.search(text) for pattern in DRIVING_CONTEXT_PATTERNS)
+    has_task = any(pattern.search(text) for pattern in TASK_PATTERNS)
     return has_context and has_task

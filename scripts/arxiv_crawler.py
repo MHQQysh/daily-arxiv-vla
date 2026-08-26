@@ -13,6 +13,18 @@ from autonomous_driving_topics import (
 )
 
 
+_ARXIV_ID_PATTERN = r"(?:\d{4}\.\d{4,5}|[a-z][a-z0-9.-]*/\d{7})(?:v\d+)?"
+_ARXIV_VALUE_PATTERN = re.compile(
+	r"^\s*(?:(?:https?://(?:(?:www|export)\.)?arxiv\.org/(?:abs|pdf)/)|arxiv:)?"
+	r"(?P<identifier>" + _ARXIV_ID_PATTERN + r")(?:\.pdf)?/?(?:[?#].*)?\s*$",
+	re.IGNORECASE,
+)
+_ARXIV_ABS_LINK_PATTERN = re.compile(
+	r"https?://(?:(?:www|export)\.)?arxiv\.org/abs/" + _ARXIV_ID_PATTERN,
+	re.IGNORECASE,
+)
+
+
 class ArxivCollector:
 	"""
 	/**
@@ -37,28 +49,45 @@ class ArxivCollector:
 		- ARXIV_DELAY_SECONDS: arXiv 请求间隔（默认 10 秒）
 		"""
 		self.papers_path = papers_path
-		self.init_results = init_results or int(os.getenv("ARXIV_INIT_RESULTS", "80"))
-		self.daily_results = daily_results or int(os.getenv("ARXIV_DAILY_RESULTS", "10"))
+		init_value = init_results if init_results is not None else int(os.getenv("ARXIV_INIT_RESULTS", "80"))
+		daily_value = daily_results if daily_results is not None else int(os.getenv("ARXIV_DAILY_RESULTS", "10"))
+		self.init_results = self._require_positive_int("init_results", init_value)
+		self.daily_results = self._require_positive_int("daily_results", daily_value)
 		override = query_keyword or os.getenv("ARXIV_QUERY_KEYWORD")
-		self.topic_queries = topic_queries or get_topic_queries(override)
-		self.arxiv_page_size = int(os.getenv("ARXIV_PAGE_SIZE", "20"))
+		self.topic_queries = topic_queries if topic_queries is not None else get_topic_queries(override)
+		self.arxiv_page_size = self._require_positive_int(
+			"ARXIV_PAGE_SIZE",
+			int(os.getenv("ARXIV_PAGE_SIZE", "20")),
+			maximum=2000,
+		)
+		self.arxiv_max_retries = self._require_positive_int(
+			"ARXIV_MAX_RETRIES",
+			int(os.getenv("ARXIV_MAX_RETRIES", "3")),
+		)
 		self.arxiv_delay_seconds = float(os.getenv("ARXIV_DELAY_SECONDS", "10"))
+		self._client = arxiv.Client(
+			page_size=self.arxiv_page_size,
+			delay_seconds=self.arxiv_delay_seconds,
+			num_retries=0,
+		)
+
+	@staticmethod
+	def _require_positive_int(name: str, value: int, maximum: Optional[int] = None) -> int:
+		if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+			raise ValueError(f"{name} 必须是正整数")
+		if maximum is not None and value > maximum:
+			raise ValueError(f"{name} 不能大于 {maximum}")
+		return value
 
 	def _search(self, query: str, max_results: int) -> List[arxiv.Result]:
 		"""
 		搜索 arXiv 论文，带重试机制
 		"""
-		max_retries = int(os.getenv("ARXIV_MAX_RETRIES", "3"))
+		self._require_positive_int("max_results", max_results)
 		retry_base_seconds = float(os.getenv("ARXIV_RETRY_BASE_SECONDS", "30"))
-		page_size = max(1, min(max_results, self.arxiv_page_size))
-		client = arxiv.Client(
-			page_size=page_size,
-			delay_seconds=self.arxiv_delay_seconds,
-			num_retries=0,
-		)
 
 		last_error = None
-		for attempt in range(max_retries):
+		for attempt in range(self.arxiv_max_retries):
 			try:
 				search = arxiv.Search(
 					query=query,
@@ -66,19 +95,20 @@ class ArxivCollector:
 					sort_by=arxiv.SortCriterion.SubmittedDate,
 					sort_order=arxiv.SortOrder.Descending,
 				)
-				return list(client.results(search))
+				return list(self._client.results(search))
 			except Exception as exc:
 				last_error = exc
-				if attempt < max_retries - 1:
+				if attempt < self.arxiv_max_retries - 1:
 					wait_seconds = retry_base_seconds * (2 ** attempt)
 					print(
 						f"arXiv 搜索失败，{wait_seconds:.0f} 秒后重试 "
-						f"{attempt + 1}/{max_retries}: {exc!r}"
+						f"{attempt + 1}/{self.arxiv_max_retries}: {exc!r}"
 					)
 					time.sleep(wait_seconds)
 		raise RuntimeError(f"arXiv 搜索达到最大重试次数: {last_error!r}")
 
 	def _collect(self, max_results: int) -> List[arxiv.Result]:
+		self._require_positive_int("max_results", max_results)
 		merged: Dict[str, arxiv.Result] = {}
 		failed_topics = []
 		for topic_name, query in self.topic_queries.items():
@@ -94,45 +124,45 @@ class ArxivCollector:
 					continue
 				if not is_relevant_paper(result.title or "", result.summary or ""):
 					continue
-				normalized_link = self._normalize_link(result.entry_id)
-				current = merged.get(normalized_link)
-				if current is None or result.published > current.published:
-					merged[normalized_link] = result
+				canonical_id = self._canonical_arxiv_id(result.entry_id)
+				if canonical_id is None:
+					print(f"跳过无法识别的 arXiv 链接: {result.entry_id!r}")
+					continue
+				current = merged.get(canonical_id)
+				if current is None or self._revision_time(result) > self._revision_time(current):
+					merged[canonical_id] = result
 		if len(failed_topics) == len(self.topic_queries):
 			raise RuntimeError(f"全部 {len(self.topic_queries)} 个自动驾驶主题检索失败")
-		return sorted(merged.values(), key=lambda result: result.published, reverse=True)
+		ordered = [merged[canonical_id] for canonical_id in sorted(merged)]
+		return sorted(ordered, key=lambda result: result.published, reverse=True)
+
+	@staticmethod
+	def _revision_time(result: arxiv.Result) -> datetime:
+		return getattr(result, "updated", None) or result.published
+
+	@staticmethod
+	def _canonical_arxiv_id(value: str) -> Optional[str]:
+		match = _ARXIV_VALUE_PATTERN.fullmatch(value or "")
+		if match is None:
+			return None
+		identifier = re.sub(r"v\d+$", "", match.group("identifier"), flags=re.IGNORECASE)
+		return identifier.lower()
 
 	def has_existing_papers(self) -> bool:
 		return bool(self._load_existing_links())
 
-	def _filter_categories(self, results: List[arxiv.Result]) -> List[arxiv.Result]:
-		"""
-		/**
-		 * @private 过滤到指定主类目
-		 * @param {List[Result]} results - 原始结果
-		 * @returns {List[Result]} 过滤后的结果
-		 */
-		"""
-		filtered: List[arxiv.Result] = []
-		for r in results:
-			if r.primary_category in self._ALLOWED_PRIMARY_CATEGORIES:
-				filtered.append(r)
-		return filtered
-
 	def _normalize_link(self, link: str) -> str:
 		"""
 		/**
-		 * @private 规范化 arXiv 链接，去掉版本号（如 v1, v2, v3）。
-		 * @param {str} link - 原始链接
+		 * @private 将新式或旧式 arXiv 链接/ID 规范化为 HTTPS abs 链接并去掉版本号。
+		 * @param {str} link - 原始链接或 arXiv ID
 		 * @returns {str} 规范化后的链接（无版本号）
 		 */
 		"""
-		# 先去掉首尾空格
-		link = link.strip()
-		# 匹配 arxiv.org/abs/ 后面的 arXiv ID 格式，去掉版本号部分
-		# 例如：http://arxiv.org/abs/2510.09607v2 -> http://arxiv.org/abs/2510.09607
-		# 只处理包含 arxiv.org/abs/ 的链接，避免误匹配其他数字格式
-		return re.sub(r"(arxiv\.org/abs/(\d+\.\d+))v\d+", r"\1", link, flags=re.IGNORECASE).strip()
+		identifier = self._canonical_arxiv_id(link)
+		if identifier is None:
+			return link.strip()
+		return f"https://arxiv.org/abs/{identifier}"
 
 	def _default_summary_cell(self) -> str:
 		"""
@@ -157,26 +187,24 @@ class ArxivCollector:
 
 	def _load_existing_links(self) -> Set[str]:
 		"""
-		解析 papers.md 已有的 arXiv 链接集合，用于去重。
-		返回规范化后的链接（去掉版本号）。
+		解析 papers.md 已有的 arXiv 链接，用规范化后的 arXiv ID 集合去重。
 		"""
 		if not os.path.exists(self.papers_path):
 			return set()
 
-		links: Set[str] = set()
-		link_pattern = re.compile(r"https?://arxiv\.org/abs/[\w\-\.\/]+", re.IGNORECASE)
-
+		identifiers: Set[str] = set()
 		try:
 			with open(self.papers_path, "r", encoding="utf-8") as f:
 				for line in f:
-					for m in link_pattern.findall(line):
-						normalized = self._normalize_link(m)
-						links.add(normalized)
+					for m in _ARXIV_ABS_LINK_PATTERN.findall(line):
+						canonical_id = self._canonical_arxiv_id(m)
+						if canonical_id is not None:
+							identifiers.add(canonical_id)
 		except Exception as e:
 			print(f"警告: 读取 papers.md 失败: {repr(e)}")
 			return set()
 
-		return links
+		return identifiers
 
 	def _format_row(self, r: arxiv.Result) -> str:
 		"""
@@ -228,9 +256,8 @@ class ArxivCollector:
 		results = self._collect(self.init_results)
 		rows: List[str] = []
 		for r in results:
-			# 使用规范化链接进行去重比较
-			normalized_link = self._normalize_link(r.entry_id)
-			if normalized_link in existing:
+			canonical_id = self._canonical_arxiv_id(r.entry_id)
+			if canonical_id is None or canonical_id in existing:
 				continue
 			rows.append(self._format_row(r))
 		if rows:
@@ -249,9 +276,8 @@ class ArxivCollector:
 		results = self._collect(self.daily_results)
 		rows: List[str] = []
 		for r in results:
-			# 使用规范化链接进行去重比较
-			normalized_link = self._normalize_link(r.entry_id)
-			if normalized_link in existing:
+			canonical_id = self._canonical_arxiv_id(r.entry_id)
+			if canonical_id is None or canonical_id in existing:
 				continue
 			rows.append(self._format_row(r))
 		if rows:
