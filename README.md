@@ -25,9 +25,10 @@
 
 未设置 `ARXIV_QUERY_KEYWORD` 时，爬虫使用 [`scripts/autonomous_driving_topics.py`](scripts/autonomous_driving_topics.py) 中的七组默认查询。每组查询独立执行；单组失败不会中断其他方向，全部失败时任务才会失败。结果经过自动驾驶相关性过滤，跨方向按去除版本号后的 arXiv ID 合并。
 
-- `ARXIV_INIT_RESULTS`：首次初始化时每个方向的最大结果数，默认 `80`
-- `ARXIV_DAILY_RESULTS`：每日更新时每个方向的最大结果数，默认 `10`
-- `ARXIV_DAILY_TOTAL_LIMIT`：排除已有论文后，单次运行全站最终写入的硬上限，可设为 `1`–`5`，默认且最高为 `5`
+- `ARXIV_INIT_RESULTS`：首次初始化时每个方向的最大候选数，默认 `80`
+- `ARXIV_INIT_TOTAL_LIMIT`：首次初始化或补齐时全站总量上限，最高 `100`
+- `ARXIV_DAILY_RESULTS`：每日更新时每个方向的最大候选数，GitHub 工作流使用 `20`
+- `ARXIV_DAILY_TOTAL_LIMIT`：排除已有论文后，每日最终新增硬上限，最高 `20`
 - `ARXIV_PAGE_SIZE`：单次 arXiv 请求页大小，默认 `20`
 - `ARXIV_DELAY_SECONDS`：arXiv 请求间隔，默认 `10` 秒
 - `ARXIV_RETRY_BASE_SECONDS`：失败后的指数退避基数，默认 `30` 秒
@@ -42,7 +43,7 @@ python scripts/arxiv_crawler.py
 Remove-Item Env:ARXIV_QUERY_KEYWORD
 ```
 
-首次运行且 `papers.md` 没有论文记录时使用每方向 `80` 条的初始化上限；后续运行自动使用每方向 `10` 条的每日上限。这两个数都是“每个方向的候选结果上限”。初始化和每日更新都会先完成相关性过滤、跨方向去重并排除已有论文，再按发布日期顺序最多写入 `ARXIV_DAILY_TOTAL_LIMIT` 篇，默认全站单次不超过 `5` 篇。
+首次运行且 `papers.md` 没有论文记录时最多建立 100 篇论文库；已有少量数据时可执行 `python scripts/arxiv_crawler.py --backfill-to 100`，只补充距离 100 篇所差的数量。后续定时运行会先完成相关性过滤、跨方向去重并排除已有论文，再按发布日期顺序每日新增最多 20 篇，历史论文持续保留。
 
 ## DeepSeek 摘要配置
 
@@ -52,7 +53,8 @@ Remove-Item Env:ARXIV_QUERY_KEYWORD
 - `DEEPSEEK_BASE_URL`：默认 `https://api.deepseek.com`
 - `DEEPSEEK_MODEL`：默认 `deepseek-v4-flash`
 - 摘要脚本每次固定最多处理 `5` 篇，失败条目保留“待生成”供下一次补齐
-- `SUMMARY_WORKERS`：摘要并发数，默认 `5`，实际不会超过本轮论文数和五篇硬上限
+- `SUMMARY_WORKERS`：摘要并发数，默认并最高为 `5`
+- `SUMMARY_MAX_ITEMS`：单轮最多处理的待生成摘要数，最高 `100`
 - `SUMMARY_MAX_TOKENS`：单篇摘要最大输出 token，默认 `2048`
 - `API_MAX_RETRIES`：同一模型的 API 调用次数，默认 `3`
 - `HTTP_MAX_RETRIES`：抓取论文 HTML 的最大次数，默认 `3`
@@ -103,10 +105,10 @@ python scripts/generate_summaries.py
 
 ```powershell
 # 直接从 arXiv HTML 提取图片
-python scripts/fetch_paper_images.py --max-items 30
+python scripts/fetch_paper_images.py --max-items 100
 
 # 为仍缺图的论文建立截图兜底队列
-python scripts/build_paper_image_fallback_queue.py --max-items 20
+python scripts/build_paper_image_fallback_queue.py --max-items 100
 
 # 截取首个 figure，并注册进图片 manifest
 npm run paper-image:fallbacks

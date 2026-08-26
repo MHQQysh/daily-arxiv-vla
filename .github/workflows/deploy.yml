@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       add_new_papers:
-        description: '新增最多 5 篇论文（不勾选则只验证爬虫并刷新现有内容）'
+        description: '新增最多 20 篇论文（不勾选则只验证爬虫并刷新现有内容）'
         required: false
         type: boolean
         default: false
@@ -63,9 +63,10 @@ jobs:
           fi
         env:
           ARXIV_INIT_RESULTS: 80
+          ARXIV_INIT_TOTAL_LIMIT: 100
           ARXIV_DAILY_RESULTS: 20
           ARXIV_DAILY_TOTAL_LIMIT: 20
-          ARXIV_PAGE_SIZE: 5
+          ARXIV_PAGE_SIZE: 20
           ARXIV_DELAY_SECONDS: 3
           ARXIV_REQUEST_TIMEOUT_SECONDS: 10
           ARXIV_RETRY_BASE_SECONDS: 5
@@ -83,15 +84,16 @@ jobs:
           DEEPSEEK_BASE_URL: https://api.deepseek.com
           DEEPSEEK_MODEL: deepseek-v4-flash
           SUMMARY_WORKERS: 5
+          SUMMARY_MAX_ITEMS: 100
           SUMMARY_MAX_TOKENS: 2048
 
       - name: 抓取论文首图
         run: |
-          python scripts/fetch_paper_images.py --max-items 30
+          python scripts/fetch_paper_images.py --max-items 100
 
       - name: 生成首图截图兜底队列
         run: |
-          python scripts/build_paper_image_fallback_queue.py --max-items 20
+          python scripts/build_paper_image_fallback_queue.py --max-items 100
 
       - name: Playwright 截图兜底
         run: |

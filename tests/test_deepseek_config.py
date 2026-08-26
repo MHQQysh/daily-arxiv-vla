@@ -180,7 +180,17 @@ class DeepSeekConfigTests(unittest.TestCase):
                 self.assertNotIn("MODELSCOPE", source.upper())
                 self.assertNotIn("api-inference.modelscope.cn", source)
 
-    def test_summary_workers_are_positive_and_capped_by_five_item_run(self):
+    def test_workflow_allows_one_hundred_summaries_with_five_workers(self):
+        workflow = (ROOT / ".github" / "workflows" / "deploy.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("SUMMARY_MAX_ITEMS: 100", workflow)
+        self.assertIn("SUMMARY_WORKERS: 5", workflow)
+
+    def test_summary_item_limit_is_one_hundred_and_workers_are_capped_at_five(self):
+        with patch.dict(os.environ, {"SUMMARY_MAX_ITEMS": "100"}, clear=True):
+            self.assertEqual(generate_summaries.get_summary_item_limit(), 100)
+
         with patch.dict(os.environ, {"SUMMARY_WORKERS": "99"}, clear=True):
             self.assertEqual(generate_summaries.get_summary_workers(8), 5)
             self.assertEqual(generate_summaries.get_summary_workers(3), 3)
@@ -188,6 +198,10 @@ class DeepSeekConfigTests(unittest.TestCase):
         with patch.dict(os.environ, {"SUMMARY_WORKERS": "0"}, clear=True):
             with self.assertRaisesRegex(ValueError, "SUMMARY_WORKERS"):
                 generate_summaries.get_summary_workers(5)
+
+        with patch.dict(os.environ, {"SUMMARY_MAX_ITEMS": "0"}, clear=True):
+            with self.assertRaisesRegex(ValueError, "SUMMARY_MAX_ITEMS"):
+                generate_summaries.get_summary_item_limit()
 
 
 class SummaryBatchTests(unittest.TestCase):
@@ -241,6 +255,7 @@ class SummaryBatchTests(unittest.TestCase):
             client = object()
             env = {
                 "SUMMARY_WORKERS": "3",
+                "SUMMARY_MAX_ITEMS": "5",
                 "BATCH_WRITE_SIZE": "5",
             }
             with patch.dict(os.environ, env, clear=True):

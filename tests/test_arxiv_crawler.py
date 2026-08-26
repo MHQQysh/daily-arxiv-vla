@@ -93,6 +93,11 @@ class CollectorTests(unittest.TestCase):
         self.assertIn("ARXIV_REQUEST_TIMEOUT_SECONDS: 10", workflow)
         self.assertIn("ARXIV_RETRY_BASE_SECONDS: 5", workflow)
         self.assertIn("ARXIV_MAX_RETRIES: 2", workflow)
+        self.assertIn("ARXIV_INIT_TOTAL_LIMIT: 100", workflow)
+        self.assertIn("ARXIV_DAILY_RESULTS: 20", workflow)
+        self.assertIn("ARXIV_DAILY_TOTAL_LIMIT: 20", workflow)
+        self.assertIn("fetch_paper_images.py --max-items 100", workflow)
+        self.assertIn("build_paper_image_fallback_queue.py --max-items 100", workflow)
 
     def test_arxiv_http_session_applies_default_timeout(self):
         session = _TimeoutSession(timeout_seconds=7)
@@ -197,6 +202,7 @@ class CollectorTests(unittest.TestCase):
             self.papers_path,
             init_results=10,
             daily_results=10,
+            init_total_limit=5,
             daily_total_limit=5,
             topic_queries={"one": "q1"},
         )
@@ -259,14 +265,44 @@ class CollectorTests(unittest.TestCase):
         self.assertNotIn("https://arxiv.org/abs/2608.00002", content)
         self.assertNotIn("https://arxiv.org/abs/2608.00001", content)
 
-    def test_daily_total_limit_defaults_to_five_and_reads_environment(self):
+    def test_initial_and_daily_total_limits_have_separate_defaults(self):
         with patch.dict(os.environ, {}, clear=True):
             collector = ArxivCollector(self.papers_path, topic_queries={"one": "q1"})
-        self.assertEqual(collector.daily_total_limit, 5)
+        self.assertEqual(collector.init_total_limit, 100)
+        self.assertEqual(collector.daily_total_limit, 20)
 
         with patch.dict(os.environ, {"ARXIV_DAILY_TOTAL_LIMIT": "3"}, clear=True):
             collector = ArxivCollector(self.papers_path, topic_queries={"one": "q1"})
         self.assertEqual(collector.daily_total_limit, 3)
+
+    def test_backfill_from_five_to_one_hundred_adds_exactly_ninety_five(self):
+        collector = ArxivCollector(
+            self.papers_path,
+            init_results=100,
+            daily_results=20,
+            init_total_limit=100,
+            daily_total_limit=20,
+            topic_queries={"one": "q1"},
+        )
+        existing = [paper(f"2608.{i:05d}v1", f"Existing {i}", 25) for i in range(1, 6)]
+        Path(self.papers_path).write_text(
+            "| 日期 | 标题 | 链接 | 简要总结 |\n"
+            "| --- | --- | --- | --- |\n"
+            + "".join(collector._format_row(item) for item in existing),
+            encoding="utf-8",
+        )
+        candidates = [
+            paper(f"2607.{i:05d}v1", f"Candidate {i}", 24)
+            for i in range(1, 121)
+        ]
+
+        with patch.object(collector, "_collect", return_value=candidates):
+            self.assertEqual(collector.backfill_to(100), 95)
+
+        self.assertEqual(len(collector._load_existing_links()), 100)
+        with patch.object(collector, "_collect") as collect:
+            self.assertEqual(collector.backfill_to(100), 0)
+        collect.assert_not_called()
 
     def test_existing_and_rendered_links_are_canonical(self):
         collector = self.make_collector()
@@ -305,9 +341,11 @@ class CollectorTests(unittest.TestCase):
             ("init_results", -1),
             ("daily_results", 0),
             ("daily_results", -1),
+            ("init_total_limit", 0),
+            ("init_total_limit", 101),
             ("daily_total_limit", 0),
             ("daily_total_limit", -1),
-            ("daily_total_limit", 6),
+            ("daily_total_limit", 21),
         ):
             with self.subTest(keyword=keyword, value=value):
                 with self.assertRaises(ValueError):
@@ -316,8 +354,10 @@ class CollectorTests(unittest.TestCase):
         for environment in (
             {"ARXIV_INIT_RESULTS": "0"},
             {"ARXIV_DAILY_RESULTS": "0"},
+            {"ARXIV_INIT_TOTAL_LIMIT": "0"},
+            {"ARXIV_INIT_TOTAL_LIMIT": "101"},
             {"ARXIV_DAILY_TOTAL_LIMIT": "0"},
-            {"ARXIV_DAILY_TOTAL_LIMIT": "6"},
+            {"ARXIV_DAILY_TOTAL_LIMIT": "21"},
             {"ARXIV_PAGE_SIZE": "0"},
             {"ARXIV_PAGE_SIZE": "2001"},
             {"ARXIV_MAX_RETRIES": "0"},

@@ -12,7 +12,8 @@ from tqdm import tqdm
 
 DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com"
 DEEPSEEK_DEFAULT_MODEL = "deepseek-v4-flash"
-MAX_SUMMARIES_PER_RUN = 5
+MAX_SUMMARIES_PER_RUN = 100
+MAX_SUMMARY_WORKERS = 5
 DEFAULT_SUMMARY_WORKERS = 5
 
 AUTONOMOUS_DRIVING_SUMMARY_PROMPT = """你是一名自动驾驶论文阅读专家。只能根据提供的 arXiv 论文 HTML 原文生成中文结构化总结，不得补造论文没有报告的实验信息。
@@ -81,15 +82,24 @@ def _get_positive_int_env(name: str, default: int) -> int:
     return value
 
 
+def get_summary_item_limit() -> int:
+    """返回本轮最多处理条目数，硬上限为 100。"""
+    configured_limit = _get_positive_int_env(
+        "SUMMARY_MAX_ITEMS",
+        MAX_SUMMARIES_PER_RUN,
+    )
+    return min(configured_limit, MAX_SUMMARIES_PER_RUN)
+
+
 def get_summary_workers(task_count: int) -> int:
-    """返回本轮实际并发数；永远不超过任务数和单轮五篇上限。"""
+    """返回本轮实际并发数；无论任务量多大都不超过 5。"""
     if task_count < 1:
         return 0
     configured_workers = _get_positive_int_env(
         "SUMMARY_WORKERS",
         DEFAULT_SUMMARY_WORKERS,
     )
-    return min(configured_workers, task_count, MAX_SUMMARIES_PER_RUN)
+    return min(configured_workers, task_count, MAX_SUMMARY_WORKERS)
 
 
 def _safe_error_repr(exc: Exception) -> str:
@@ -311,7 +321,7 @@ def update_papers_md() -> Tuple[int, int]:
             continue
         pending_entries.append((idx, date_str, title, link))
 
-    entries_to_update = pending_entries[:MAX_SUMMARIES_PER_RUN]
+    entries_to_update = pending_entries[:get_summary_item_limit()]
     need_count = len(entries_to_update)
     if need_count == 0:
         return 0, 0

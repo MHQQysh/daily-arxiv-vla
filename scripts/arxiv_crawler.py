@@ -25,7 +25,8 @@ _ARXIV_ABS_LINK_PATTERN = re.compile(
 	r"https?://(?:(?:www|export)\.)?arxiv\.org/abs/" + _ARXIV_ID_PATTERN,
 	re.IGNORECASE,
 )
-_DAILY_TOTAL_LIMIT_HARD_MAX = 5
+_INIT_TOTAL_LIMIT_HARD_MAX = 100
+_DAILY_TOTAL_LIMIT_HARD_MAX = 20
 
 
 class _TimeoutSession(requests.Session):
@@ -46,7 +47,7 @@ class ArxivCollector:
 	 * @class ArxivCollector
 	 * @description 每日分主题获取 arXiv 上的自动驾驶论文，并维护项目根目录下的
 	 * `papers.md` 表格（列：日期、标题、链接）。首次运行无数据时执行初始化，之后每日增量并去重；
-	 * 两种模式每次最终都最多写入 5 篇。
+	 * 初始化最多写入 100 篇，日常更新最多写入 20 篇。
 	 * 可通过环境变量 ARXIV_QUERY_KEYWORD 临时覆盖默认的七组自动驾驶检索主题。
 	 */
 	"""
@@ -55,30 +56,41 @@ class ArxivCollector:
 
 	def __init__(self, papers_path: str, init_results: int = None, daily_results: int = None,
 				 query_keyword: str = None, topic_queries: Optional[Dict[str, str]] = None,
-				 daily_total_limit: int = None):
+				 init_total_limit: int = None, daily_total_limit: int = None):
 		"""
 		初始化 ArxivCollector
 		参数可通过环境变量配置：
 		- ARXIV_QUERY_KEYWORD: 可选的单条自定义搜索查询
 		- ARXIV_INIT_RESULTS: 初始化时每个主题抓取数量（默认 80）
 		- ARXIV_DAILY_RESULTS: 每日每个主题抓取数量（默认 10）
-		- ARXIV_DAILY_TOTAL_LIMIT: 每次全站最终写入数量硬上限（默认 5）
+		- ARXIV_INIT_TOTAL_LIMIT: 首次初始化全站写入上限（默认 100）
+		- ARXIV_DAILY_TOTAL_LIMIT: 每日全站写入上限（默认 20）
 		- ARXIV_PAGE_SIZE: 单次请求返回数量（默认 20，避免 arxiv 库默认请求 100 条触发限流）
 		- ARXIV_DELAY_SECONDS: arXiv 请求间隔（默认 10 秒）
 		"""
 		self.papers_path = papers_path
 		init_value = init_results if init_results is not None else int(os.getenv("ARXIV_INIT_RESULTS", "80"))
 		daily_value = daily_results if daily_results is not None else int(os.getenv("ARXIV_DAILY_RESULTS", "10"))
-		total_limit_value = (
+		init_total_limit_value = (
+			init_total_limit
+			if init_total_limit is not None
+			else int(os.getenv("ARXIV_INIT_TOTAL_LIMIT", str(_INIT_TOTAL_LIMIT_HARD_MAX)))
+		)
+		daily_total_limit_value = (
 			daily_total_limit
 			if daily_total_limit is not None
 			else int(os.getenv("ARXIV_DAILY_TOTAL_LIMIT", str(_DAILY_TOTAL_LIMIT_HARD_MAX)))
 		)
 		self.init_results = self._require_positive_int("init_results", init_value)
 		self.daily_results = self._require_positive_int("daily_results", daily_value)
+		self.init_total_limit = self._require_positive_int(
+			"init_total_limit",
+			init_total_limit_value,
+			maximum=_INIT_TOTAL_LIMIT_HARD_MAX,
+		)
 		self.daily_total_limit = self._require_positive_int(
 			"daily_total_limit",
-			total_limit_value,
+			daily_total_limit_value,
 			maximum=_DAILY_TOTAL_LIMIT_HARD_MAX,
 		)
 		override = query_keyword or os.getenv("ARXIV_QUERY_KEYWORD")
@@ -291,8 +303,9 @@ class ArxivCollector:
 			print(f"错误: 写入 papers.md 失败: {repr(e)}")
 			raise
 
-	def _build_new_rows(self, results: List[arxiv.Result], existing: Set[str]) -> List[str]:
-		"""排除已有论文后，按结果顺序生成不超过全站硬上限的新行。"""
+	def _build_new_rows(self, results: List[arxiv.Result], existing: Set[str], limit: int) -> List[str]:
+		"""排除已有论文后，按结果顺序生成不超过指定上限的新行。"""
+		self._require_positive_int("limit", limit, maximum=_INIT_TOTAL_LIMIT_HARD_MAX)
 		rows: List[str] = []
 		seen_ids = set(existing)
 		for result in results:
@@ -301,7 +314,7 @@ class ArxivCollector:
 				continue
 			seen_ids.add(canonical_id)
 			rows.append(self._format_row(result))
-			if len(rows) >= self.daily_total_limit:
+			if len(rows) >= limit:
 				break
 		return rows
 
@@ -315,7 +328,7 @@ class ArxivCollector:
 		self._ensure_md_header()
 		existing = self._load_existing_links()
 		results = self._collect(self.init_results)
-		rows = self._build_new_rows(results, existing)
+		rows = self._build_new_rows(results, existing, self.init_total_limit)
 		if rows:
 			self._append_rows(rows)
 		return len(rows)
@@ -330,7 +343,7 @@ class ArxivCollector:
 		self._ensure_md_header()
 		existing = self._load_existing_links()
 		results = self._collect(self.daily_results)
-		rows = self._build_new_rows(results, existing)
+		rows = self._build_new_rows(results, existing, self.daily_total_limit)
 		if rows:
 			self._append_rows(rows)
 		return len(rows)
@@ -339,8 +352,29 @@ class ArxivCollector:
 		"""执行真实检索与去重，但不修改 papers.md。用于手动验证工作流。"""
 		existing = self._load_existing_links()
 		results = self._collect(self.daily_results)
-		rows = self._build_new_rows(results, existing)
+		rows = self._build_new_rows(results, existing, self.daily_total_limit)
 		print(f"预览完成：可新增 {len(rows)} 篇；未修改 {self.papers_path}", flush=True)
+		return len(rows)
+
+	def backfill_to(self, target_total: int) -> int:
+		"""补齐到指定总量；已有论文计入目标，重复执行不会超过目标。"""
+		target = self._require_positive_int(
+			"backfill target",
+			target_total,
+			maximum=_INIT_TOTAL_LIMIT_HARD_MAX,
+		)
+		self._ensure_md_header()
+		existing = self._load_existing_links()
+		remaining = target - len(existing)
+		if remaining <= 0:
+			print(f"论文库已有 {len(existing)} 篇，无需补齐", flush=True)
+			return 0
+
+		results = self._collect(self.init_results)
+		rows = self._build_new_rows(results, existing, remaining)
+		if rows:
+			self._append_rows(rows)
+		print(f"补齐完成：新增 {len(rows)} 篇，总目标 {target} 篇", flush=True)
 		return len(rows)
 
 
@@ -363,10 +397,19 @@ def main() -> int:
 		action="store_true",
 		help="执行真实检索和去重，但不修改 papers.md",
 	)
+	parser.add_argument(
+		"--backfill-to",
+		type=int,
+		help="将论文库补齐到指定总量（最高 100）",
+	)
 	args = parser.parse_args()
 
 	papers_md = _default_papers_path()
 	collector = ArxivCollector(papers_md)
+
+	if args.backfill_to is not None:
+		collector.backfill_to(args.backfill_to)
+		return 0
 
 	if args.dry_run:
 		collector.preview_daily()
