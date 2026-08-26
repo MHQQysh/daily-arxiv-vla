@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -42,11 +42,13 @@ jobs:
         run: python -m unittest discover -s tests -v
 
       - name: 安装 Playwright 依赖
+        if: github.event_name != 'push'
         run: |
           npm install
           npx playwright install --with-deps chromium
           
       - name: 运行 arXiv 爬虫
+        if: github.event_name != 'push'
         run: python scripts/arxiv_crawler.py
         env:
           ARXIV_INIT_RESULTS: 80
@@ -58,6 +60,7 @@ jobs:
           ARXIV_MAX_RETRIES: 4
 
       - name: 使用 DeepSeek Flash 生成论文摘要
+        if: github.event_name != 'push'
         run: |
           if [ -z "$DEEPSEEK_API_KEY" ]; then
             echo "未配置 DEEPSEEK_API_KEY，本次保留待生成摘要并继续部署"
@@ -72,18 +75,22 @@ jobs:
           SUMMARY_MAX_TOKENS: 2048
 
       - name: 抓取论文首图
+        if: github.event_name != 'push'
         run: |
           python scripts/fetch_paper_images.py --max-items 30
 
       - name: 生成首图截图兜底队列
+        if: github.event_name != 'push'
         run: |
           python scripts/build_paper_image_fallback_queue.py --max-items 20
 
       - name: Playwright 截图兜底
+        if: github.event_name != 'push'
         run: |
           npm run paper-image:fallbacks
 
       - name: 注册截图兜底首图
+        if: github.event_name != 'push'
         run: |
           python scripts/register_paper_image_fallbacks.py
           
