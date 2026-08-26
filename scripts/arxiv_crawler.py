@@ -1,3 +1,4 @@
+import argparse
 import os
 import re
 import time
@@ -5,6 +6,7 @@ from datetime import datetime
 from typing import Dict, List, Optional, Set
 
 import arxiv
+import requests
 
 from autonomous_driving_topics import (
 	ALLOWED_PRIMARY_CATEGORIES,
@@ -24,6 +26,18 @@ _ARXIV_ABS_LINK_PATTERN = re.compile(
 	re.IGNORECASE,
 )
 _DAILY_TOTAL_LIMIT_HARD_MAX = 5
+
+
+class _TimeoutSession(requests.Session):
+	"""为 arxiv.py 未设置 timeout 的 HTTP 请求补上硬超时。"""
+
+	def __init__(self, timeout_seconds: float):
+		super().__init__()
+		self.timeout_seconds = timeout_seconds
+
+	def request(self, method, url, **kwargs):
+		kwargs.setdefault("timeout", self.timeout_seconds)
+		return super().request(method, url, **kwargs)
 
 
 class ArxivCollector:
@@ -79,11 +93,16 @@ class ArxivCollector:
 			int(os.getenv("ARXIV_MAX_RETRIES", "3")),
 		)
 		self.arxiv_delay_seconds = float(os.getenv("ARXIV_DELAY_SECONDS", "10"))
+		self.arxiv_request_timeout_seconds = self._require_positive_float(
+			"ARXIV_REQUEST_TIMEOUT_SECONDS",
+			float(os.getenv("ARXIV_REQUEST_TIMEOUT_SECONDS", "15")),
+		)
 		self._client = arxiv.Client(
 			page_size=self.arxiv_page_size,
 			delay_seconds=self.arxiv_delay_seconds,
 			num_retries=0,
 		)
+		self._client._session = _TimeoutSession(self.arxiv_request_timeout_seconds)
 
 	@staticmethod
 	def _require_positive_int(name: str, value: int, maximum: Optional[int] = None) -> int:
@@ -92,6 +111,12 @@ class ArxivCollector:
 		if maximum is not None and value > maximum:
 			raise ValueError(f"{name} 不能大于 {maximum}")
 		return value
+
+	@staticmethod
+	def _require_positive_float(name: str, value: float) -> float:
+		if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
+			raise ValueError(f"{name} 必须是正数")
+		return float(value)
 
 	def _search(self, query: str, max_results: int) -> List[arxiv.Result]:
 		"""
@@ -103,20 +128,28 @@ class ArxivCollector:
 		last_error = None
 		for attempt in range(self.arxiv_max_retries):
 			try:
+				print(
+					f"arXiv 请求 {attempt + 1}/{self.arxiv_max_retries}，"
+					f"最多返回 {max_results} 篇",
+					flush=True,
+				)
 				search = arxiv.Search(
 					query=query,
 					max_results=max_results,
 					sort_by=arxiv.SortCriterion.SubmittedDate,
 					sort_order=arxiv.SortOrder.Descending,
 				)
-				return list(self._client.results(search))
+				results = list(self._client.results(search))
+				print(f"arXiv 请求完成，返回 {len(results)} 篇", flush=True)
+				return results
 			except Exception as exc:
 				last_error = exc
 				if attempt < self.arxiv_max_retries - 1:
 					wait_seconds = retry_base_seconds * (2 ** attempt)
 					print(
 						f"arXiv 搜索失败，{wait_seconds:.0f} 秒后重试 "
-						f"{attempt + 1}/{self.arxiv_max_retries}: {exc!r}"
+						f"{attempt + 1}/{self.arxiv_max_retries}: {exc!r}",
+						flush=True,
 					)
 					time.sleep(wait_seconds)
 		raise RuntimeError(f"arXiv 搜索达到最大重试次数: {last_error!r}")
@@ -126,12 +159,12 @@ class ArxivCollector:
 		merged: Dict[str, arxiv.Result] = {}
 		failed_topics = []
 		for topic_name, query in self.topic_queries.items():
-			print(f"检索主题: {topic_name}")
+			print(f"检索主题: {topic_name}", flush=True)
 			try:
 				results = self._search(query, max_results)
 			except Exception as exc:
 				failed_topics.append(topic_name)
-				print(f"主题检索失败，继续其他主题: {topic_name}: {exc!r}")
+				print(f"主题检索失败，继续其他主题: {topic_name}: {exc!r}", flush=True)
 				continue
 			for result in results:
 				if result.primary_category not in self._ALLOWED_PRIMARY_CATEGORIES:
@@ -302,6 +335,14 @@ class ArxivCollector:
 			self._append_rows(rows)
 		return len(rows)
 
+	def preview_daily(self) -> int:
+		"""执行真实检索与去重，但不修改 papers.md。用于手动验证工作流。"""
+		existing = self._load_existing_links()
+		results = self._collect(self.daily_results)
+		rows = self._build_new_rows(results, existing)
+		print(f"预览完成：可新增 {len(rows)} 篇；未修改 {self.papers_path}", flush=True)
+		return len(rows)
+
 
 def _default_papers_path() -> str:
 	"""
@@ -315,9 +356,21 @@ def _default_papers_path() -> str:
 	return os.path.join(root_dir, "papers.md")
 
 
-if __name__ == "__main__":
+def main() -> int:
+	parser = argparse.ArgumentParser(description="抓取每日自动驾驶 arXiv 论文")
+	parser.add_argument(
+		"--dry-run",
+		action="store_true",
+		help="执行真实检索和去重，但不修改 papers.md",
+	)
+	args = parser.parse_args()
+
 	papers_md = _default_papers_path()
 	collector = ArxivCollector(papers_md)
+
+	if args.dry_run:
+		collector.preview_daily()
+		return 0
 
 	if collector.has_existing_papers():
 		count = collector.run_daily()
@@ -325,3 +378,8 @@ if __name__ == "__main__":
 	else:
 		count = collector.initialize()
 		print(f"初始化完成，新增 {count} 篇论文，写入 {papers_md}")
+	return 0
+
+
+if __name__ == "__main__":
+	raise SystemExit(main())

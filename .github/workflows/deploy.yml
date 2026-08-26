@@ -2,6 +2,12 @@ name: 部署到 GitHub Pages
 
 on:
   workflow_dispatch:
+    inputs:
+      add_new_papers:
+        description: '新增最多 5 篇论文（不勾选则只验证爬虫并刷新现有内容）'
+        required: false
+        type: boolean
+        default: false
   push:
     branches: [ master, main ]
   schedule:
@@ -15,7 +21,8 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  # 不要让后续 push 抢占正在抓取论文的手动/定时任务。
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -49,15 +56,22 @@ jobs:
           
       - name: 运行 arXiv 爬虫
         if: github.event_name != 'push'
-        run: python scripts/arxiv_crawler.py
+        timeout-minutes: 6
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.add_new_papers }}" != "true" ]; then
+            python -u scripts/arxiv_crawler.py --dry-run
+          else
+            python -u scripts/arxiv_crawler.py
+          fi
         env:
           ARXIV_INIT_RESULTS: 80
-          ARXIV_DAILY_RESULTS: 10
+          ARXIV_DAILY_RESULTS: 5
           ARXIV_DAILY_TOTAL_LIMIT: 5
-          ARXIV_PAGE_SIZE: 10
-          ARXIV_DELAY_SECONDS: 15
-          ARXIV_RETRY_BASE_SECONDS: 60
-          ARXIV_MAX_RETRIES: 4
+          ARXIV_PAGE_SIZE: 5
+          ARXIV_DELAY_SECONDS: 3
+          ARXIV_REQUEST_TIMEOUT_SECONDS: 10
+          ARXIV_RETRY_BASE_SECONDS: 5
+          ARXIV_MAX_RETRIES: 2
 
       - name: 使用 DeepSeek Flash 生成论文摘要
         if: github.event_name != 'push'

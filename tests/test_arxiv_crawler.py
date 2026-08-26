@@ -7,10 +7,12 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+import requests
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from arxiv_crawler import ArxivCollector
+from arxiv_crawler import ArxivCollector, _TimeoutSession
 from autonomous_driving_topics import TOPIC_QUERIES, is_relevant_paper
 
 
@@ -75,6 +77,35 @@ class CollectorTests(unittest.TestCase):
     def tearDown(self):
         self.temp_dir.cleanup()
 
+    def test_workflow_does_not_cancel_crawler_and_bounds_retry_delay(self):
+        workflow = (ROOT / ".github" / "workflows" / "deploy.yml").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("cancel-in-progress: false", workflow)
+        self.assertIn("python -u scripts/arxiv_crawler.py --dry-run", workflow)
+        self.assertIn("python -u scripts/arxiv_crawler.py", workflow)
+        self.assertIn("add_new_papers:", workflow)
+        self.assertIn("default: false", workflow)
+        self.assertIn("timeout-minutes: 6", workflow)
+        self.assertIn("ARXIV_REQUEST_TIMEOUT_SECONDS: 10", workflow)
+        self.assertIn("ARXIV_RETRY_BASE_SECONDS: 5", workflow)
+        self.assertIn("ARXIV_MAX_RETRIES: 2", workflow)
+
+    def test_arxiv_http_session_applies_default_timeout(self):
+        session = _TimeoutSession(timeout_seconds=7)
+
+        with patch.object(requests.Session, "request", return_value="ok") as request:
+            response = session.get("https://export.arxiv.org/api/query")
+
+        self.assertEqual(response, "ok")
+        request.assert_called_once_with(
+            "GET",
+            "https://export.arxiv.org/api/query",
+            allow_redirects=True,
+            timeout=7,
+        )
+
     def make_collector(self):
         return ArxivCollector(
             self.papers_path,
@@ -82,6 +113,17 @@ class CollectorTests(unittest.TestCase):
             daily_results=1,
             topic_queries={"one": "q1", "two": "q2"},
         )
+
+    def test_preview_daily_queries_real_path_without_writing_papers(self):
+        collector = self.make_collector()
+        candidate = paper("2608.00030v1", "Preview Autonomous Driving", 25)
+
+        with patch.object(collector, "_collect", return_value=[candidate]) as collect:
+            count = collector.preview_daily()
+
+        collect.assert_called_once_with(1)
+        self.assertEqual(count, 1)
+        self.assertFalse(Path(self.papers_path).exists())
 
     def test_collect_deduplicates_versions_and_sorts_descending(self):
         collector = self.make_collector()

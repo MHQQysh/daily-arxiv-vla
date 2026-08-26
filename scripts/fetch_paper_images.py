@@ -144,10 +144,6 @@ def first_src_from_srcset(srcset: str | None) -> str:
     return srcset.split(",")[0].strip().split(" ")[0].strip()
 
 
-def as_directory_base(url: str) -> str:
-    return url if url.endswith("/") else f"{url}/"
-
-
 def to_ar5iv_url(html_url: str) -> str:
     return re.sub(
         r"^https://arxiv\.org/html/",
@@ -232,7 +228,10 @@ def resolve_html_url(link: str) -> tuple[str | None, str]:
 
 def parse_candidates_from_html_url(html_url: str) -> tuple[List[ImageCandidate], str]:
     html_bytes, _, final_html_url = http_get(html_url, timeout=30)
-    parser = ArxivImageParser(base_url=as_directory_base(final_html_url))
+    # arXiv emits paths such as `2608.24525v1/teaser.png` from an HTML URL
+    # ending in the paper ID. Treating that ID as a directory duplicates it
+    # and produces a guaranteed 404.
+    parser = ArxivImageParser(base_url=final_html_url)
     parser.feed(html_bytes.decode("utf-8", errors="replace"))
     return unique_candidates(parser.candidates), final_html_url
 
@@ -293,7 +292,12 @@ class ArxivImageParser(HTMLParser):
 
 def score_candidate(candidate: ImageCandidate) -> int:
     score = 0
-    hint_text = " ".join([candidate.url, candidate.alt, candidate.classes]).lower()
+    # Only inspect the resource path, not the hostname. Every valid arXiv image
+    # naturally contains `arxiv.org`, so matching the full URL penalized all
+    # candidates and rejected otherwise valid short/wide figures.
+    hint_text = " ".join(
+        [urlparse(candidate.url).path, candidate.alt, candidate.classes]
+    ).lower()
 
     if candidate.source == "og:image":
         score += 80

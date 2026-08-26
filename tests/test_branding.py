@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import build_site
+import fetch_paper_images
 import generate_summaries
 
 
@@ -224,6 +225,43 @@ class MarkdownSafetyTests(unittest.TestCase):
         self.assertIn("<strong>&lt;span onclick=evil&gt;粗体&lt;/span&gt;</strong>", rendered)
         self.assertIn("<code>&lt;img src=x onerror=evil&gt;</code>", rendered)
         self.assertIn("&lt;b&gt;链接&lt;/b&gt;</a>", rendered)
+
+
+class PaperImageUrlTests(unittest.TestCase):
+    def test_relative_figure_path_is_resolved_from_html_route(self):
+        html = (
+            '<figure><img src="2608.24525v1/teaser.png" width="1256" '
+            'height="353" alt="Refer to caption"></figure>'
+        ).encode("utf-8")
+
+        with patch.object(
+            fetch_paper_images,
+            "http_get",
+            return_value=(html, "text/html", "https://arxiv.org/html/2608.24525v1"),
+        ):
+            candidates, _ = fetch_paper_images.parse_candidates_from_html_url(
+                "https://arxiv.org/html/2608.24525v1"
+            )
+
+        self.assertEqual(
+            candidates[0].url,
+            "https://arxiv.org/html/2608.24525v1/teaser.png",
+        )
+
+    def test_arxiv_hostname_does_not_lower_valid_figure_score(self):
+        candidate = fetch_paper_images.ImageCandidate(
+            url="https://arxiv.org/html/2608.24282v1/fig_architecture_care_crop.png",
+            source="img",
+            inside_figure=True,
+            width=448,
+            height=167,
+            alt="Refer to caption",
+        )
+
+        self.assertGreaterEqual(
+            fetch_paper_images.score_candidate(candidate),
+            fetch_paper_images.MIN_CANDIDATE_SCORE,
+        )
 
 
 if __name__ == "__main__":

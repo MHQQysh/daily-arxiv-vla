@@ -1,1 +1,327 @@
-{}
+{
+  "2608.24282": {
+    "title": "CARE: Camera-Residual Reserves for First Sightings in Adaptive LiDAR Sensing",
+    "abs_url": "https://arxiv.org/abs/2608.24282",
+    "html_url": "https://arxiv.org/html/2608.24282v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.24282v1/fig_architecture_care_crop.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 448,
+        "height": 167,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24282v1/figures/fig_vehicle_accv.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 343,
+        "height": 85,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24282v1/figures/fig_carla_scene.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 191,
+        "height": 108,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2608.24282.webp",
+    "image_url": "https://arxiv.org/html/2608.24282v1/fig_architecture_care_crop.png",
+    "source": "img",
+    "score": 85,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 448,
+    "height": 167
+  },
+  "2608.23486": {
+    "title": "GeoWAM: Visual Geometry World Action Models for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2608.23486",
+    "html_url": "https://arxiv.org/html/2608.23486v2",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.23486v2/GeoWAM_teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 191,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.23486v2/GeoWAM_pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 191,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.23486v2/GeoWAM_viz.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 218,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2608.23486.webp",
+    "image_url": "https://arxiv.org/html/2608.23486v2/GeoWAM_teaser.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 191
+  },
+  "2608.24525": {
+    "title": "RoG-DAgger: Rollout-Guided Post-Training for End-to-End Driving",
+    "abs_url": "https://arxiv.org/abs/2608.24525",
+    "html_url": "https://arxiv.org/html/2608.24525v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.24525v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 1256,
+        "height": 353,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24525v1/overall.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 1047,
+        "height": 453,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24525v1/expert_comparison_main_text.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 834,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24525v1/qua_example_final.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 1395,
+        "height": 475,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24525v1/no_replan.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 1395,
+        "height": 433,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_figure_panel ltx_img_landscape",
+        "score": 120
+      }
+    ],
+    "path": "assets/paper-images/2608.24525.webp",
+    "image_url": "https://arxiv.org/html/2608.24525v1/teaser.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 1256,
+    "height": 353
+  },
+  "2608.24094": {
+    "title": "SIREN-Bench: Behavior-Driven Generation and Evaluation of Emergency-Vehicle Interactions",
+    "abs_url": "https://arxiv.org/abs/2608.24094",
+    "html_url": "https://arxiv.org/html/2608.24094v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.24094v1/Figures/concept.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 183,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24094v1/Figures/pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 438,
+        "height": 216,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24094v1/Figures/figure3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 405,
+        "height": 183,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2608.24094.webp",
+    "image_url": "https://arxiv.org/html/2608.24094v1/Figures/concept.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 183
+  },
+  "2608.24366": {
+    "title": "Variance-Guided Spatial Attention Fusion for Robust End-to-End Driving under Asymmetric Sensor Degradation",
+    "abs_url": "https://arxiv.org/abs/2608.24366",
+    "html_url": "https://arxiv.org/html/2608.24366v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.24366v1/intro_demo.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 546,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24366v1/workflow.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24366v1/qualitative_rgb_local_exposure_pulse.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 241,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24366v1/qualitative_lidar_frustum_occlusion.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 241,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.24366v1/live_debug_visual1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 297,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2608.24366.webp",
+    "image_url": "https://arxiv.org/html/2608.24366v1/intro_demo.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 546
+  }
+}
