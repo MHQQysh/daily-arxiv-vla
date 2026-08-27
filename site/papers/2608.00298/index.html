@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WM-Cov: Test Adequacy for Interactive World-Model-Style Autonomous Driving Simulation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究交互式世界模型（World-Model）风格的自动驾驶仿真测试充分性（Test Adequacy）问题。 该任务用于安全验证与仿真测试场景覆盖评估，研究对象是“交互式场景族”（interactive scenario family），即由地图、路线、初始条件、环境条件、背景代理策略、提示词和种子分布构成的场景集合，其演化依赖被测的自我规划器。 研究问题是：在交互式世界模型仿真中，需要多少闭环证据才能支持停止或继续测试的决策，而不仅仅是能否生成危险场景。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.00298">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.00298.webp" alt="WM-Cov: Test Adequacy for Interactive World-Model-Style Autonomous Driving Simulation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究交互式世界模型（World-Model）风格的自动驾驶仿真测试充分性（Test Adequacy）问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">WM-Cov: Test Adequacy for Interactive World-Model-Style Autonomous Driving Simulation</h1>
+            <div class="detail-meta">2026-07-31 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.00298" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.00298" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.00298</span></div>
+            <p class="detail-summary">论文研究交互式世界模型（World-Model）风格的自动驾驶仿真测试充分性（Test Adequacy）问题。 该任务用于安全验证与仿真测试场景覆盖评估，研究对象是“交互式场景族”（interactive scenario family），即由地图、路线、初始条件、环境条件、背景代理策略、提示词和种子分布构成的场景集合，其演化依赖被测的自我规划器。 研究问题是：在交互式世界模型仿真中，需要多少闭环证据才能支持停止或继续测试的决策，而不仅仅是能否生成危险场景。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Harbin Institute of Technology, School of Transportation Science and Engine…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.00298/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究交互式世界模型（World-Model）风格的自动驾驶仿真测试充分性（Test Adequacy）问题。</p>
+  <ul class="reading-intro-points"><li>论文研究交互式世界模型（World-Model）风格的自动驾驶仿真测试充分性（Test Adequacy）问题。</li><li>该任务用于安全验证与仿真测试场景覆盖评估，研究对象是“交互式场景族”（interactive scenario family），即由地图、路线、初始条件、环境条件、背景代理策略、提示词和种子分布构成的场景集合，其演化依赖被测的自我规划器。</li><li>研究问题是：在交互式世界模型仿真中，需要多少闭环证据才能支持停止或继续测试的决策，而不仅仅是能否生成危险场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Harbin Institute of Technology, School of Transportation Science and Engineering &amp; Chongqing Research Institute of HIT；作者：Jianxun Cui</li><li>机构：Chongqing Changan Automobile Co., Ltd.；作者：Ping Wu</li><li>机构：University of Nis, Faculty of Electronic Engineering, Department of Control Systems；作者：Stanisa Peric、Marko Milojkovic</li><li>机构：University of Belgrade, Faculty of Organizational Sciences；作者：Vladan Devedzic</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究交互式世界模型（World-Model）风格的自动驾驶仿真测试充分性（Test Adequacy）问题。</li><li>该任务用于安全验证与仿真测试场景覆盖评估，研究对象是“交互式场景族”（interactive scenario family），即由地图、路线、初始条件、环境条件、背景代理策略、提示词和种子分布构成的场景集合，其演化依赖被测的自我规划器。</li><li>研究问题是：在交互式世界模型仿真中，需要多少闭环证据才能支持停止或继续测试的决策，而不仅仅是能否生成危险场景。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将交互式世界模型风格的自动驾驶测试形式化为关于场景族的充分性与停止问题，区别于固定回放轨迹。</li><li>提出 WM-Cov：一个与提供者无关（provider-agnostic）的评估层，跟踪请求覆盖、实现覆盖和有效实现覆盖。</li><li>定义包含覆盖增长、有效失败发现、失败模式多样性、伪像剔除、重复计数、真实性、有效证据精度等内容的充分性报告。</li><li>在多种数据来源（执行的 TeraSim/SUMO 日志、混合轨迹池、DriveArena 轨迹）和真实闭环 DriveArena–WorldDreamer 提供者矩阵上评估该框架，使用 UniAD 和 VAD 规划器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：世界模型或生成式模拟器之上的评估层，不修改生成器本身。</li><li>输入传感器：原文未报告具体传感器输入。</li><li>场景表示：交互场景族 ℱ(q) = {m, ρ, x₀, e, π_bg, p, 𝒵}，每条轨迹映射为特征向量 φ(τ) = (o, u, r, b, f, v)，分别对应 ODD、交互类型、风险分箱、行为类别、失败模式、有效性标签。</li><li>模型结构：WM-Cov 由 Trace Adapter（轨迹适配器）、Feature Taxonomy（特征分类）、Validity Ledger（有效性账本）、Budgeted Selector（预算选择器）和 Adequacy Report（充分性报告）组成；四个模块流程为轨迹摄入、特征分类、有效性审计、预算选择。</li><li>关键技术：区分请求覆盖 C_req→real、实现覆盖 C_real→valid、有效覆盖 C_valid；用有效性账本区分有效失败、有效安全临界、有效安全、重复失败、条件失败、伪像/无效事件；提供停止准则（覆盖增长、失败发现和不确定性低于阈值）；预算化选择采用贪心策略，选择得分最大的轨迹或滚动请求。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：执行的 TeraSim/SUMO 事件（1219 个事件，含 529 个有效事件和 690 个伪像失败）；WM-like 混合轨迹池（1500 个候选）；真实 DriveArena–WorldDreamer 提供者矩阵。</li><li>仿真器：TeraSim、SUMO、DriveArena（TrafficManager–WorldDreamer）。</li><li>模型规模：原文未报告具体模型参数量。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：DriveArena–WorldDreamer 矩阵，评估 2 个规划器（UniAD、VAD）、2 个水平（horizon）、6 个提示条件、360 个 ego 路线请求；此外用 80 个分离路线切片检查判断会计行为是否在同一的 ego 路线切片之外持续。</li><li>评估指标：覆盖增长、有效失败发现（VF）、失败模式多样性（FM）、伪像计数（AI）、重复计数、真实性（Q）、风险（R）、有效证据精度 Πv = VF/(VF+AI)。</li><li>关键数值：主矩阵中 304 次尝试成为完全实现的证据，56 次保持部分实现；分离切片中 80 次中有 74 次完全实现、6 次部分实现；1219 个 TeraSim/SUMO 事件中 529 个有效、690 个伪像失败；在 B=100 预算下选中候选的 99/100 和 76/100 为有效失败、零伪像。</li><li>对比方法：随机选择、仅风险选择、仅真实性选择、仅覆盖选择作为基线与预算化选择进行对比。</li><li>开环/闭环/仿真/实车条件：所有评估均在闭环世界模型仿真条件下进行（DriveArena/TeraSim/SUMO），未涉及实车测试；部分使用日志回放作为受控代理。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.00625/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Learning-Based Motion Planning for Dynamic Environments: From Foundational Algorithms to Emerging Paradigms</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.00237/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Latent-Centroid Steering: Single-Pass Classifier-Free Guidance for Command-Aligned Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

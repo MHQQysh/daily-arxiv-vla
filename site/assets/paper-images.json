@@ -7446,5 +7446,1305 @@
     "inside_figure": false,
     "width": null,
     "height": null
+  },
+  "2608.02191": {
+    "title": "DerainSplat: Feed-Forward Clean 3D Gaussian Splatting from Sparse Rainy Views",
+    "abs_url": "https://arxiv.org/abs/2608.02191",
+    "html_url": "https://arxiv.org/html/2608.02191v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.02191v1/0teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 314,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02191v1/3two_stage.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 663,
+        "height": 325,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02191v1/5re10k_finetuned.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 663,
+        "height": 385,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02191v1/6mipnerf_result.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 551,
+        "height": 390,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02191v1/8real_results.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 593,
+        "height": 389,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      }
+    ],
+    "path": "assets/paper-images/2608.02191.webp",
+    "image_url": "https://arxiv.org/html/2608.02191v1/0teaser.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 698,
+    "height": 314
+  },
+  "2608.01761": {
+    "title": "DecoupleGS: Interactive 3D Gaussian Splatting for End-to-End Autonomous Driving Testing",
+    "abs_url": "https://arxiv.org/abs/2608.01761",
+    "html_url": "https://arxiv.org/html/2608.01761v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.01761v1/fig1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 324,
+        "height": 319,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01761v1/fig2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 215,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01761v1/fig4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 205,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01761v1/figures/fig8.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 215,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01761v1/fig7.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 214,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2608.01761.webp",
+    "image_url": "https://arxiv.org/html/2608.01761v1/fig1.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 324,
+    "height": 319
+  },
+  "2608.02449": {
+    "title": "MoRAL: Sensor-Grounded BEV Reasoning for Compact VLMs toward Edge-Oriented Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2608.02449",
+    "html_url": "https://arxiv.org/html/2608.02449v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.02449v1/rsz_fig3_2_bev_annotated.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 270,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02449v1/rsz_fig5_6_confusion_matrix.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 203,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2608.02449.webp",
+    "image_url": "https://arxiv.org/html/2608.02449v1/rsz_fig3_2_bev_annotated.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 270
+  },
+  "2608.01572": {
+    "title": "Enhancing Visual Perception in Foggy Conditions via Multiclass Fog Density Modeling",
+    "abs_url": "https://arxiv.org/abs/2608.01572",
+    "html_url": "https://arxiv.org/html/2608.01572v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.01572v1/img/611-6.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 589,
+        "height": 393,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01572v1/img/color-depth611-6.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 589,
+        "height": 393,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01572v1/img/color-distance611-6.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 589,
+        "height": 393,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01572v1/img/predict/ground-trouth.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 589,
+        "height": 393,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01572v1/img/predict/orginal_model_and_image.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 589,
+        "height": 393,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      }
+    ],
+    "path": "assets/paper-images/2608.01572.webp",
+    "image_url": "https://arxiv.org/html/2608.01572v1/img/611-6.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 589,
+    "height": 393
+  },
+  "2608.03084": {
+    "title": "SUV: Future Scene Understanding as Video Generation for End-to-End Driving",
+    "abs_url": "https://arxiv.org/abs/2608.03084",
+    "html_url": "https://arxiv.org/html/2608.03084v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.03084v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 516,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03084v1/vis.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 314,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03084v1/vis_supp_success.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 642,
+        "height": 835,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_portrait",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03084v1/pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 593,
+        "height": 333,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03084v1/vis_supp_conservative.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 642,
+        "height": 277,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2608.03084.webp",
+    "image_url": "https://arxiv.org/html/2608.03084v1/teaser.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 698,
+    "height": 516
+  },
+  "2608.02200": {
+    "title": "RSC-GestureNet: Reliability-Aware Selective Causal Recognition of Chinese Traffic Police Gestures",
+    "abs_url": "https://arxiv.org/abs/2608.02200",
+    "html_url": "https://arxiv.org/html/2608.02200v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.02200v1/figures/framework1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 471,
+        "height": 201,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02200v1/figures/robustness_curves.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 205,
+        "height": 162,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02200v1/figures/per_corruption_heatmap.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 205,
+        "height": 135,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02200v1/figures/official_raw_frame_examples.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 205,
+        "height": 136,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02200v1/figures/qualitative_timeline.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 205,
+        "height": 104,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2608.02200.webp",
+    "image_url": "https://arxiv.org/html/2608.02200v1/figures/framework1.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 471,
+    "height": 201
+  },
+  "2608.03330": {
+    "title": "Long-term Traffic Scene Prediction via Polynomial Representations in Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2608.03330",
+    "html_url": "https://arxiv.org/html/2608.03330v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.03330v1/out_of_dist_results_combined.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 499,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03330v1/data_representation.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 207,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03330v1/tradeoff_vehicle.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 256,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03330v1/tradeoff_cyclist_pedestrian.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 253,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.03330v1/prediction_vs_representation.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 280,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2608.03330.webp",
+    "image_url": "https://arxiv.org/html/2608.03330v1/out_of_dist_results_combined.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 499
+  },
+  "2608.01035": {
+    "title": "WAM-Diff2: Hierarchical AR-to-Diffusion Distillation for Highly Efficient Autonomous Driving VLA",
+    "abs_url": "https://arxiv.org/abs/2608.01035",
+    "html_url": "https://arxiv.org/html/2608.01035v4",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.01035v4/driving_understanding_fig9.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 350,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01035v4/perception_fig10.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 400,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01035v4/figure3-exweather.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 342,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01035v4/figure3-scenarios.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 685,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01035v4/figs/arch.drawio.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 273,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2608.01035.webp",
+    "image_url": "https://arxiv.org/html/2608.01035v4/driving_understanding_fig9.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 698,
+    "height": 350
+  },
+  "2608.01338": {
+    "title": "Driver2Map: Imitating Human Driving for Online High-Definition Map Construction",
+    "abs_url": "https://arxiv.org/abs/2608.01338",
+    "html_url": "https://arxiv.org/html/2608.01338v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.01338v1/pipline-Method.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 676,
+        "height": 314,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01338v1/Figure-Visualization-1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 598,
+        "height": 354,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01338v1/Figures/all_cameras_heatmap.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 409,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01338v1/MoreVisualization.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 688,
+        "height": 432,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01338v1/Figure-Driver.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 610,
+        "height": 244,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2608.01338.webp",
+    "image_url": "https://arxiv.org/html/2608.01338v1/pipline-Method.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 676,
+    "height": 314
+  },
+  "2607.29052": {
+    "title": "Outcome-Guided Distillation: A Teacher-Student Framework to Advance VLM Reasoning in Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2607.29052",
+    "html_url": "https://arxiv.org/html/2607.29052v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2607.29052v1/visual_analysis_compare.drawio.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 479,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.29052v1/model_structure_distillation.drawio.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 260,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.29052v1/model_structure_student.drawio.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 411,
+        "height": 414,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.29052v1/raw_input.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 411,
+        "height": 198,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2607.29052.webp",
+    "image_url": "https://arxiv.org/html/2607.29052v1/visual_analysis_compare.drawio.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 685,
+    "height": 479
+  },
+  "2608.00298": {
+    "title": "WM-Cov: Test Adequacy for Interactive World-Model-Style Autonomous Driving Simulation",
+    "abs_url": "https://arxiv.org/abs/2608.00298",
+    "html_url": "https://arxiv.org/html/2608.00298v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.00298v1/fig_drivearena_formal_realization_heatmap.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 168,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/icons/smileybones-small.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "",
+        "classes": "ds-announcement-glyph",
+        "score": -130
+      }
+    ],
+    "path": "assets/paper-images/2608.00298.webp",
+    "image_url": "https://arxiv.org/html/2608.00298v1/fig_drivearena_formal_realization_heatmap.png",
+    "source": "img",
+    "score": 85,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 168
+  },
+  "2608.00625": {
+    "title": "Learning-Based Motion Planning for Dynamic Environments: From Foundational Algorithms to Emerging Paradigms",
+    "abs_url": "https://arxiv.org/abs/2608.00625",
+    "html_url": "https://arxiv.org/html/2608.00625v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.00625v1/surveyoverview.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 238,
+        "height": 233,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00625v1/example1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 110,
+        "height": 72,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00625v1/example2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 110,
+        "height": 72,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00625v1/example3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 110,
+        "height": 72,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00625v1/example4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 110,
+        "height": 72,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2608.00625.webp",
+    "image_url": "https://arxiv.org/html/2608.00625v1/surveyoverview.png",
+    "source": "img",
+    "score": 85,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 238,
+    "height": 233
+  },
+  "2608.01535": {
+    "title": "STAR-VLM: Spatiotemporal Grounding Vision-Language Models for Motion and Velocity Estimation via Automotive Radar Supervision",
+    "abs_url": "https://arxiv.org/abs/2608.01535",
+    "html_url": "https://arxiv.org/html/2608.01535v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.01535v1/figures_/teaser_figure.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 413,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01535v1/figures_/mc.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 292,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01535v1/figures_/radvel.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 269,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01535v1/figures_/input_prompt.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 275,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.01535v1/figures_/egovel_training.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 278,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2608.01535.webp",
+    "image_url": "https://arxiv.org/html/2608.01535v1/figures_/teaser_figure.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 413
+  },
+  "2608.02953": {
+    "title": "RealWeather: Realistic and Scene-Faithful Weather Translation with Driving World Models",
+    "abs_url": "https://arxiv.org/abs/2608.02953",
+    "html_url": "https://arxiv.org/html/2608.02953v2",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.02953v2/mainfig.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 369,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02953v2/cmp_synthesis_part.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 310,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02953v2/cmp_removal_part.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 310,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02953v2/ood.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 346,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2608.02953v2/abl_bootstrap.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 448,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      }
+    ],
+    "path": "assets/paper-images/2608.02953.webp",
+    "image_url": "https://arxiv.org/html/2608.02953v2/mainfig.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 698,
+    "height": 369
+  },
+  "2608.00237": {
+    "title": "Latent-Centroid Steering: Single-Pass Classifier-Free Guidance for Command-Aligned Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2608.00237",
+    "html_url": "https://arxiv.org/html/2608.00237v2",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2608.00237v2/t-sne_v1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 299,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00237v2/framework2_v3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 163,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00237v2/media/123_wrong.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 115,
+        "height": 58,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00237v2/media/123_good.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 115,
+        "height": 58,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2608.00237v2/media/185_wrong.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 115,
+        "height": 58,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2608.00237.webp",
+    "image_url": "https://arxiv.org/html/2608.00237v2/t-sne_v1.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 299
+  },
+  "2607.29031": {
+    "title": "Auto-JEPA: A Latent World Model of Continuous Intent for End-to-End Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2607.29031",
+    "html_url": "https://arxiv.org/html/2607.29031v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2607.29031v1/intro_selective_future_intent.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 450,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.29031v1/trajectory_latent_and_intent_prediction.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 546,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.29031v1/intent_jepa_overview.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 365,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.29031v1/semantic_occlusion_three_scene_panels.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 656,
+        "height": 573,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.29031v1/selective_intent_three_scene_compact.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 251,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2607.29031.webp",
+    "image_url": "https://arxiv.org/html/2607.29031v1/intro_selective_future_intent.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 698,
+    "height": 450
+  },
+  "2607.26165": {
+    "title": "DVPSFormer: Efficient Online Depth-aware Video Panoptic Segmentation for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2607.26165",
+    "html_url": "https://arxiv.org/html/2607.26165v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2607.26165v1/Teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 408,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26165v1/ESD.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 350,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26165v1/Overview.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 672,
+        "height": 184,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26165v1/Components.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 278,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26165v1/input_depth.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 206,
+        "height": 121,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 70
+      }
+    ],
+    "path": "assets/paper-images/2607.26165.webp",
+    "image_url": "https://arxiv.org/html/2607.26165v1/Teaser.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 685,
+    "height": 408
+  },
+  "2607.26802": {
+    "title": "Risk-Aware Motion Planning with Learned Trajectory Primitives and Probabilistic Safety Assessment",
+    "abs_url": "https://arxiv.org/abs/2607.26802",
+    "html_url": "https://arxiv.org/html/2607.26802v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2607.26802v1/figs/FirstPage.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 424,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26802v1/figs/Sampling.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 442,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26802v1/ITSC26_neu2pdf.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 146,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26802v1/figs/scen1mpmpc.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 119,
+        "height": 118,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2607.26802v1/figs/scen1frenet.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 119,
+        "height": 118,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2607.26802.webp",
+    "image_url": "https://arxiv.org/html/2607.26802v1/figs/FirstPage.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 452,
+    "height": 424
+  },
+  "2607.27036": {
+    "title": "Mitigating Compounding Error via Video Representation Regularization",
+    "abs_url": "https://arxiv.org/abs/2607.27036",
+    "html_url": "https://arxiv.org/html/2607.27036v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2607.27036v1/vis_result.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 372,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2607.27036v1/Figures/figure1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 309,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.27036v1/real_video_erank.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 185,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.27036v1/model_arch.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 274,
+        "height": 179,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2607.27036.webp",
+    "image_url": "https://arxiv.org/html/2607.27036v1/vis_result.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 548,
+    "height": 372
+  },
+  "2607.27058": {
+    "title": "Object Detection for Autonomous Driving in Chinese Rural Scenes: An Experimental Study on Real-Synthetic Data Mixing and Model Evaluation",
+    "abs_url": "https://arxiv.org/abs/2607.27058",
+    "html_url": "https://arxiv.org/html/2607.27058v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2607.27058v1/weishi.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 396,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2607.27058v1/county.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 154,
+        "height": 87,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2607.27058v1/street.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 154,
+        "height": 87,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2607.27058v1/villiagestreet.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 154,
+        "height": 87,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2607.27058v1/origin2.0041.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 185,
+        "height": 104,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2607.27058.webp",
+    "image_url": "https://arxiv.org/html/2607.27058v1/weishi.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 396
   }
 }

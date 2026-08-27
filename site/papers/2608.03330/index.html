@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Long-term Traffic Scene Prediction via Polynomial Representations in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文是 Yue Yao 的博士论文，针对自动驾驶中的长期交通场景预测任务。 研究问题围绕三个核心挑战展开：数据表示的鲁棒性（序列表示易受噪声影响且缺乏物理可行性）、跨环境泛化能力不足（模型在分布偏移下性能下降）、以及多智能体场景下预测的合理性与多模态性。 论文提出以多项式表示为核心框架，覆盖从轨迹建模分析、单智能体预测模型到多智能体扩散生成模型的完整研究链路，旨在实现高效、可泛化、物理一致且能输出多模态未来场景的预测系统。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.03330">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.03330.webp" alt="Long-term Traffic Scene Prediction via Polynomial Representations in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文是 Yue Yao 的博士论文，针对自动驾驶中的长期交通场景预测任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Long-term Traffic Scene Prediction via Polynomial Representations in Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.03330" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.03330" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.03330</span></div>
+            <p class="detail-summary">该论文是 Yue Yao 的博士论文，针对自动驾驶中的长期交通场景预测任务。 研究问题围绕三个核心挑战展开：数据表示的鲁棒性（序列表示易受噪声影响且缺乏物理可行性）、跨环境泛化能力不足（模型在分布偏移下性能下降）、以及多智能体场景下预测的合理性与多模态性。 论文提出以多项式表示为核心框架，覆盖从轨迹建模分析、单智能体预测模型到多智能体扩散生成模型的完整研究链路，旨在实现高效、可泛化、物理一致且能输出多模态未来场景的预测系统。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Freie Universität Berlin · Yue Yao、Daniel Göhring、Matthias Schreier</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.03330/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文是 Yue Yao 的博士论文，针对自动驾驶中的长期交通场景预测任务。</p>
+  <ul class="reading-intro-points"><li>该论文是 Yue Yao 的博士论文，针对自动驾驶中的长期交通场景预测任务。</li><li>研究问题围绕三个核心挑战展开：数据表示的鲁棒性（序列表示易受噪声影响且缺乏物理可行性）、跨环境泛化能力不足（模型在分布偏移下性能下降）、以及多智能体场景下预测的合理性与多模态性。</li><li>论文提出以多项式表示为核心框架，覆盖从轨迹建模分析、单智能体预测模型到多智能体扩散生成模型的完整研究链路，旨在实现高效、可泛化、物理一致且能输出多模态未来场景的预测系统。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Freie Universität Berlin；作者：Yue Yao、Daniel Göhring、Matthias Schreier</li><li>机构：Aumovio SE；作者：Yue Yao、Andreas Philipp、Jörg Reichardt、Mohamed-Khalil Bouzidi、Jonas Neuhöfer、Christian Schlauch、Manas Kumar、Georgii Mikriukov、Moussa Kassem Sbeyti、Andreas Weinlich</li><li>机构：University of Freiburg；作者：Shengchao Yan</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文是 Yue Yao 的博士论文，针对自动驾驶中的长期交通场景预测任务。</li><li>研究问题围绕三个核心挑战展开：数据表示的鲁棒性（序列表示易受噪声影响且缺乏物理可行性）、跨环境泛化能力不足（模型在分布偏移下性能下降）、以及多智能体场景下预测的合理性与多模态性。</li><li>论文提出以多项式表示为核心框架，覆盖从轨迹建模分析、单智能体预测模型到多智能体扩散生成模型的完整研究链路，旨在实现高效、可泛化、物理一致且能输出多模态未来场景的预测系统。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出使用经验贝叶斯方法对多项式轨迹表示进行原理性论证，在真实轨迹数据上分析多项式阶数与拟合误差、观测噪声等之间的权衡，为多项式表示在预测系统中的使用提供了统计基础。</li><li>提出一种基于多项式表示的高效多模态单智能体预测模型（EP），同时用多项式表示轨迹历史、地图几何和预测输出，在分布内性能接近最先进水平，并在跨数据集分布偏移测试中展现出显著更优的泛化能力。</li><li>建立了一套跨数据集分布偏移测试协议，通过数据同质化（Data Homogenization）标准化 Argoverse 2 与 Waymo Open 两个数据集的格式和预测任务，构建了双向的 OOD 评估设置。</li><li>将多项式表示扩展至扩散生成框架（EP-Diffuser），实现多智能体联合场景生成与预测，生成的场景在合理性、运动学一致性和多样性方面优于传统回归模型。</li><li>揭示了常用分布内评估和基于回归的指标往往不能充分反映模型真实的泛化能力和预测合理性这一研究结论。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：预测模块，包含单智能体运动预测与多智能体联合场景预测（生成）。</li><li>输入传感器：原文未报告具体传感器类型；输入为已处理好的抽象环境模型，包括智能体历史轨迹与地图矢量信息。</li><li>场景表示：核心使用多项式表示（Bernstein 多项式）描述智能体历史轨迹、地图车道几何以及预测输出；多智能体场景通过 Traffic Scene Graph 建模，节点为智能体或地图元素，边为相对位置关系，条件令牌与未来轨迹均以多项式系数表示。</li><li>模型结构：</li></ul>
+<p> - 单智能体模型 EP（Encoder-Predictor）：包含编码器（Encoder）与解码器（Decoder），利用 Transformer 注意力机制融合智能体与地图元素的多项式特征，输出多模态预测轨迹。</p>
+<p> - 多智能体扩散模型 EP-Diffuser：建立在 EP 之上，包含扩散前向加噪与反向去噪过程、编码器（Encoder）与去噪器（Denoiser），联合生成多个智能体的未来轨迹多项式。</p>
+<ul><li>关键技术：经验贝叶斯回归用于建模轨迹先验与观测噪声；数据同质化协议用于跨数据集标准化；扩散模型用于多智能体联合预测；后处理步骤用于提升生成轨迹的物理合理性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Argoverse 2（A2）、Argoverse 1（A1）、Waymo Open Motion Dataset（WO）。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：原文未报告具体硬件与训练时长。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：采用跨数据集 OOD 测试协议，包括 A2→A2（分布内）、A2*→WO* 与 WO*→A2*（分布外，* 表示同质化后的数据）；另用 Waymo Open “Sim Agents” 指标评估场景生成合理性。</li><li>评估指标：最小平均位移误差（minADE）、最小最终位移误差（minFDE）、碰撞率、离路率、Realism Meta Score 等。</li><li>关键数值：原章文中摘要表明模型在分布内精度接近最先进水平；分布偏移（OOD）情况下泛化能力显著提升；扩散生成场景比传统模型更合理且运动学更一致。具体数值原文未在摘要与目录中完整给出。</li><li>对比方法：与两个最先进（SotA）预测模型进行基准对比，具体模型名称原文未在摘要与目录中明确列出。</li><li>测试条件：包含分布内（In-Distribution）与分布外（Out-of-Distribution）评估；预测时域涉及 6 秒与 4.1 秒两种设置；同时报告模型效率分析。开环与闭环条件原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2608.03084/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SUV: Future Scene Understanding as Video Generation for End-to-End Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

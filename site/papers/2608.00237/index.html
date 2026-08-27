@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Latent-Centroid Steering: Single-Pass Classifier-Free Guidance for Command-Aligned Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决端到端自动驾驶中视觉-语言-动作（VLA）模型对导航指令遵循能力不足的问题，即&quot;指令遵循鸿沟&quot;（command-following gap）。 应用场景为基于车载摄像头视觉输入与高层导航语言指令，直接预测未来轨迹的自动驾驶规划任务。 研究问题为：在回归训练目标下，VLA 模型容易产生&quot;条件策略坍缩&quot;（conditional policy collapse），即预测轨迹对视觉先验过于敏感、对语言指令不敏感，导致在关键决策点执行错误行为。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.00237">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.00237.webp" alt="Latent-Centroid Steering: Single-Pass Classifier-Free Guidance for Command-Aligned Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决端到端自动驾驶中视觉-语言-动作（VLA）模型对导航指令遵循能力不足的问题，即&quot;指令遵循鸿沟&quot;（command-following gap）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Latent-Centroid Steering: Single-Pass Classifier-Free Guidance for Command-Aligned Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-31 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.00237" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.00237" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.00237</span></div>
+            <p class="detail-summary">论文解决端到端自动驾驶中视觉-语言-动作（VLA）模型对导航指令遵循能力不足的问题，即&quot;指令遵循鸿沟&quot;（command-following gap）。 应用场景为基于车载摄像头视觉输入与高层导航语言指令，直接预测未来轨迹的自动驾驶规划任务。 研究问题为：在回归训练目标下，VLA 模型容易产生&quot;条件策略坍缩&quot;（conditional policy collapse），即预测轨迹对视觉先验过于敏感、对语言指令不敏感，导致在关键决策点执行错误行为。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Rochester Institute of Technology · Meibo Hu、Jiamian Wang、Zhiqiang Tao</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.00237/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决端到端自动驾驶中视觉-语言-动作（VLA）模型对导航指令遵循能力不足的问题，即&quot;指令遵循鸿沟&quot;（command-following gap）。</p>
+  <ul class="reading-intro-points"><li>论文解决端到端自动驾驶中视觉-语言-动作（VLA）模型对导航指令遵循能力不足的问题，即&quot;指令遵循鸿沟&quot;（command-following gap）。</li><li>应用场景为基于车载摄像头视觉输入与高层导航语言指令，直接预测未来轨迹的自动驾驶规划任务。</li><li>研究问题为：在回归训练目标下，VLA 模型容易产生&quot;条件策略坍缩&quot;（conditional policy collapse），即预测轨迹对视觉先验过于敏感、对语言指令不敏感，导致在关键决策点执行错误行为。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Rochester Institute of Technology；作者：Meibo Hu, Jiamian Wang, Zhiqiang Tao</li><li>机构：NVIDIA；作者：Pichao Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决端到端自动驾驶中视觉-语言-动作（VLA）模型对导航指令遵循能力不足的问题，即&quot;指令遵循鸿沟&quot;（command-following gap）。</li><li>应用场景为基于车载摄像头视觉输入与高层导航语言指令，直接预测未来轨迹的自动驾驶规划任务。</li><li>研究问题为：在回归训练目标下，VLA 模型容易产生&quot;条件策略坍缩&quot;（conditional policy collapse），即预测轨迹对视觉先验过于敏感、对语言指令不敏感，导致在关键决策点执行错误行为。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将指令遵循问题形式化分析为条件策略坍缩，为基于回归的 VLA 系统提供新见解。</li><li>引入分类器自由引导（CFG）用于轨迹引导，通过在动作空间中对条件与无条件预测做差，显式分离并放大指令引发的效果。</li><li>提出潜在质心引导（LCS），一种单次前向推理引导机制，利用预计算的命令专属质心做类级潜在偏移，替代 CFG 的实例级残差，提升稳定性与计算效率。</li><li>在闭环 Bench2Drive 与开环 nuScenes 基准上验证 LCS，相对强基线在成功率与轨迹预测误差上获得提升，同时单次推理降低约 50% 延迟。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端轨迹规划、推理时引导机制（后处理/测试时干预）。</li><li>输入传感器：摄像头视觉图像（原文未报告雷达、激光雷达等其他传感模态）。</li><li>场景表示：视觉观测 I 与高层导航语言指令 c，输出为未来 T 步轨迹航点。</li><li>模型结构：以 InternVL2-1B 为骨干，采用 LoRA 微调；训练使用条件丢弃（conditional dropout）策略，随机将指令替换为空标记，同时学习条件与无条件预测器。</li><li>关键技术：包括 CFG 残差引导公式（动作空间与潜在空间）、命令专属质心与全局质心的离线计算、LCS 单次前向推理时在条件潜在特征上加类级偏移向量 δ_c，用参数 γ 控制引导强度；完整算法分三阶段：条件丢弃训练、离线质心收集、在线潜在质心引导。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：SimLingo-Data（闭环训练）、Bench2Drive（闭环评估，220 条路线，Town01–Town12）、nuScenes（开环评估）。</li><li>仿真器：CARLA 模拟器（闭环部署）。</li><li>模型规模：InternVL2-1B 骨干 + LoRA（具体参数量原文未报告）。</li><li>训练资源：8× NVIDIA A100 GPU，Deepspeed 分布式训练；延迟测量使用单块 NVIDIA H100 GPU。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Bench2Drive（闭环）与 nuScenes（开环）。</li><li>评估指标：Driving Score (DS)、Success Rate (SR)、Efficiency、Comfortness（闭环）；平均 L2 误差（Avg. L2）与碰撞率（Collision）（开环）；延迟（表 II）。</li><li>关键数值：Bench2Drive 上，SimLingo 基线 DS=86.08±1.76、SR=65.78±3.90；LCS 达 DS=87.18±0.52、SR=71.16±1.23。nuScenes 上 LCS 平均 L2=0.85 m，优于 SimLingo 的 0.90 m。LCS 延迟 285.75ms，相对两遍 CFG（Latent-Space CFG 563.55ms）降低约 50%。</li><li>对比方法：ThinkTwice、DriveAdapter、SimLingo、AD-MLP、UniAD-Tiny/Base、VAD、GenAD、MomAD、DriveTransformer-L、ORION（闭环）；UniAD、OccWorld-T、ST-P3、GenAD、SimLingo（开环）。另对比 Action-Space CFG 与 Latent-Space CFG 两遍引导方案。</li><li>消融与参数分析：最优 dropout 比率 p_drop=0.3，最优引导尺度 w=3（CFG），LCS 最优 γ 详见图 4；对比从条件潜在基底 / 无条件潜在基底引导，条件基底设置更优。</li><li>实验条件：闭环评估在 CARLA 模拟器（Bench2Drive）；开环评估在 nuScenes 数据集；另有 CARLA 上的定性结果比较（SimLingo vs. LCS）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.00298/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">WM-Cov: Test Adequacy for Interactive World-Model-Style Autonomous Driving Simulation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.29052/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Outcome-Guided Distillation: A Teacher-Student Framework to Advance VLM Reasoning in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

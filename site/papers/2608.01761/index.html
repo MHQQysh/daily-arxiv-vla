@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DecoupleGS: Interactive 3D Gaussian Splatting for End-to-End Autonomous Driving Testing - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 DecoupleGS，一个面向端到端（E2E）自动驾驶测试的交互式 3D 高斯泼溅（3DGS）框架。 应用场景为自动驾驶闭环仿真测试，用于在仿真环境中完成高保真、强交互、实时性的 E2E 算法安全验证与动态多智能体评估。 研究问题为现有仿真方法（游戏引擎、2D 生成模型、静态神经渲染）在高保真、可交互性和实时性之间存在权衡冲突，难以满足大规模 E2E 闭环测试需求。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.01761">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.01761.webp" alt="DecoupleGS: Interactive 3D Gaussian Splatting for End-to-End Autonomous Driving Testing" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 DecoupleGS，一个面向端到端（E2E）自动驾驶测试的交互式 3D 高斯泼溅（3DGS）框架。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DecoupleGS: Interactive 3D Gaussian Splatting for End-to-End Autonomous Driving Testing</h1>
+            <div class="detail-meta">2026-08-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.01761" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.01761" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.01761</span></div>
+            <p class="detail-summary">本文提出 DecoupleGS，一个面向端到端（E2E）自动驾驶测试的交互式 3D 高斯泼溅（3DGS）框架。 应用场景为自动驾驶闭环仿真测试，用于在仿真环境中完成高保真、强交互、实时性的 E2E 算法安全验证与动态多智能体评估。 研究问题为现有仿真方法（游戏引擎、2D 生成模型、静态神经渲染）在高保真、可交互性和实时性之间存在权衡冲突，难以满足大规模 E2E 闭环测试需求。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">同济大学交通运输工程学院（College of Transportation, Tongji University） · Siying Li、Ying…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.01761/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 DecoupleGS，一个面向端到端（E2E）自动驾驶测试的交互式 3D 高斯泼溅（3DGS）框架。</p>
+  <ul class="reading-intro-points"><li>本文提出 DecoupleGS，一个面向端到端（E2E）自动驾驶测试的交互式 3D 高斯泼溅（3DGS）框架。</li><li>应用场景为自动驾驶闭环仿真测试，用于在仿真环境中完成高保真、强交互、实时性的 E2E 算法安全验证与动态多智能体评估。</li><li>研究问题为现有仿真方法（游戏引擎、2D 生成模型、静态神经渲染）在高保真、可交互性和实时性之间存在权衡冲突，难以满足大规模 E2E 闭环测试需求。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：同济大学交通运输工程学院（College of Transportation, Tongji University）；作者：Siying Li、Ying Ni、Jie Sun、Jian Sun、Haotian Shi</li><li>机构：道路与交通工程教育部重点实验室（Key Laboratory of Road and Traffic Engineering, Ministry of Education）；作者：Siying Li、Ying Ni、Jie Sun、Jian Sun、Haotian Shi</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 DecoupleGS，一个面向端到端（E2E）自动驾驶测试的交互式 3D 高斯泼溅（3DGS）框架。</li><li>应用场景为自动驾驶闭环仿真测试，用于在仿真环境中完成高保真、强交互、实时性的 E2E 算法安全验证与动态多智能体评估。</li><li>研究问题为现有仿真方法（游戏引擎、2D 生成模型、静态神经渲染）在高保真、可交互性和实时性之间存在权衡冲突，难以满足大规模 E2E 闭环测试需求。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了一个解耦的 3DGS 框架，将场景分解为静态背景和可操控的动态智能体（车辆），实现神经重建保真度与闭环 E2E 测试所需的交互性和吞吐量兼顾。</li><li>系统性解决效率、几何和光度三类冲突，开发了求解器无关的模块：车辆资产压缩、地图引导几何配准、代理式重光照。</li><li>验证了模块支持多车辆即插即用插入，并保持交互式渲染速率，可作为 E2E 算法的数据引擎。</li><li>实验表明 DecoupleGS 在保真度-效率之间取得均衡折衷，改善了度量一致性和光度一致性，并提供实用的闭环传感器仿真平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：传感器仿真/神经渲染框架，面向 E2E 自动驾驶闭环测试。</li><li>输入传感器：原文未明确报告具体输入传感器类型，但输出为多视角图像用于 E2E 策略评估。</li><li>场景表示：采用解耦的双流表示，静态背景用世界坐标系中的高斯原语表示，动态智能体用本地坐标系中的规范化高斯体积表示；通过 SE(3) 刚性变换与世界坐标统一融合。</li><li>模型结构：包含三大功能模块：(1) 资产压缩模块（显式重要性评分与剪枝、属性向量量化）；(2) 地图引导几何配准模块（语义拓扑/车道线对齐、DTW 序列对齐、SE(2) Procrustes 变换、不透明度累积垂直接地）；(3) 代理式重光照模块（局部探针采样、线性 SH 传递、代理接触阴影）。</li><li>关键技术：统一栅格化（保守视锥剔除、排序基数解耦、批量空间更新）；Wigner D 矩阵实现 SH 旋转保持视相关反射；显式重要性分数 s_i（可见性、颜色对比、熵加权）用于剪枝；向量量化（颜色码本 1024、形状码本 512，EMA 优化）；无需在线神经网络推理的重光照离线最小二乘标定。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（15 个动态剪辑）、PandaSet（10 个序列）、3DRealCar（20 个车辆资产，含轿车、SUV、大型商用车）。</li><li>仿真器：原文未报告自建仿真器名称，实验在闭环仿真平台中进行。</li><li>模型规模：原文未明确报告模型参数量；静态背景优化 30k 迭代，压缩阈值 τ_s 设为 0.005。</li><li>训练资源：单张 NVIDIA RTX 4090 GPU（24 GB VRAM），使用自定义 CUDA 内核。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：资产压缩对比 Plenoxels、Vanilla 3DGS、LightGaussian；仿真器级对比 HUGSIM、OASim、RealEngine；下游策略测试使用 UniAD 和 VAD。</li><li>评估指标：渲染保真度（PSNR-Veh、PSNR-All、SSIM、LPIPS）；运行时性能（FPS、VRAM）；几何一致性（轨迹 ADE、地面穿透率 GPR）；光度真实性（Masked PSNR、Peak Intensity Error PIE、Peak Angular Error PAE）；开环规划一致性（mADE、minTTC）；闭环 E2E（Driving Score DS、Success Rate SR、Route Completion RC、minTTC）。</li><li>关键数值：在 6-10+ 车辆密度下，DecoupleGS 的 PSNR-Veh 25.24、SSIM 0.772、FPS 38.5、VRAM 1.1GB；开环 mADE 0.82 为最佳，minTTC 3.3s 最佳；闭环 DS 0.884、RC 0.956、minTTC 3.3s、渲染 45 FPS 均为最佳；消融中移除压缩后 FPS 从 35.4 降至 8.5，移除配准后 ADE 从 0.05m 升至 0.48m，移除重光照后 PAE 从 6.8° 升至 48.5°。</li><li>开环/闭环/仿真/实车条件：开环 sim-to-real 一致性采用 UniAD 在真实图像与仿真渲染对比；闭环评估完全交互，规划器每步预测轨迹、背景智能体通过 IDM/MOBIL 在线反应，测试场景按难度（Easy、Medium、Hard、Extreme）划分；不涉及实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.02191/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DerainSplat: Feed-Forward Clean 3D Gaussian Splatting from Sparse Rainy Views</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.01572/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Enhancing Visual Perception in Foggy Conditions via Multiclass Fog Density Modeling</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
