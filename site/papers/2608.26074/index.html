@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gating Before Commitment: Anticipating Intent Divergence to Prevent Post-Interaction Decision Failures in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。 针对的核心应用场景为“交互后阶段”（post-interaction phase），即对向来车通过或汇入完成后，ego 车辆因尝试修正感知横向偏差而脱离道路的紧急情况。 研究问题为：决策层应如何在交互语义与 ego 承诺的机动动作不一致时，于轨迹承诺前（before commitment）检测出意图发散（intent divergence），从而通过门控（gating）与计划修复（plan repair）防止事故发生。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.26074">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.26074.webp" alt="Gating Before Commitment: Anticipating Intent Divergence to Prevent Post-Interaction Decision Failures in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Gating Before Commitment: Anticipating Intent Divergence to Prevent Post-Interaction Decision Failures in Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.26074" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.26074" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.26074</span></div>
+            <p class="detail-summary">本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。 针对的核心应用场景为“交互后阶段”（post-interaction phase），即对向来车通过或汇入完成后，ego 车辆因尝试修正感知横向偏差而脱离道路的紧急情况。 研究问题为：决策层应如何在交互语义与 ego 承诺的机动动作不一致时，于轨迹承诺前（before commitment）检测出意图发散（intent divergence），从而通过门控（gating）与计划修复（plan repair）防止事故发生。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of South Florida（iCONS Lab, Department of Electrical Engineering…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.26074/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。</p>
+  <ul class="reading-intro-points"><li>本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。</li><li>针对的核心应用场景为“交互后阶段”（post-interaction phase），即对向来车通过或汇入完成后，ego 车辆因尝试修正感知横向偏差而脱离道路的紧急情况。</li><li>研究问题为：决策层应如何在交互语义与 ego 承诺的机动动作不一致时，于轨迹承诺前（before commitment）检测出意图发散（intent divergence），从而通过门控（gating）与计划修复（plan repair）防止事故发生。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of South Florida（iCONS Lab, Department of Electrical Engineering）；作者：Cong Xu, Ravi Sankar。原文明确标注两位作者均隶属于该机构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。</li><li>针对的核心应用场景为“交互后阶段”（post-interaction phase），即对向来车通过或汇入完成后，ego 车辆因尝试修正感知横向偏差而脱离道路的紧急情况。</li><li>研究问题为：决策层应如何在交互语义与 ego 承诺的机动动作不一致时，于轨迹承诺前（before commitment）检测出意图发散（intent divergence），从而通过门控（gating）与计划修复（plan repair）防止事故发生。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种将交互驾驶中一类决策失败框定为意图层面失误（intent-level failure）的视角，而非单纯感知失败。</li><li>实现并公开了一个完全披露的意图门控决策层（语言引导的多智能体意图预测模块 + 门控与修复机制 + 意图条件安全包络），并给出可复现的回放协议。</li><li>诊断出 v1 版本中不确定性评分缺陷（将“不确定”计为半个冲突），该缺陷导致了名义驾驶中全部 9 次虚假触发以及一次虚假检测。</li><li>提出并预注册了 v2 重设计方案（将不确定性视为弃权并采用双阈值滞回），在保留所有意图层检测的同时将虚假触发率从 1.54/分钟降至 0.341/分钟。</li><li>通过两个消融实验界定了语言模型的贡献：在部署条件下全分数在五个失败案例中的四个上检测最快；在等误报率下，几何规则在域内轨道上的检测率是全分数的三倍以上。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li><strong>所属模块</strong>：决策层，位于轨迹承诺上游，与感知栈和解耦。</li><li><strong>输入传感器</strong>：单目 RGB 视频。</li><li><strong>场景表示</strong>：结构化文本描述符（serialized descriptors），包含相对纵向/横向位置、接近速度、航向偏移、车道分配、遮挡标志、交互阶段标签以及几何预测的运动模式；另有轻量级数字孪生提供鸟瞰车道走廊图。</li><li><strong>模型结构</strong>：意图模块基于 Qwen2.5-0.5B（496M 参数，含 LoRA 适配器，秩 16，alpha 32），输入为序列化描述符字符串，输出为五类意图标签（yield, block, merge, pass, uncertain）的 softmax 分布。</li><li><strong>关键技术</strong>：</li></ul>
+<p> - 意图-几何发散分数：s_t = (1-c_t) + λ·d_t，其中 c_t 为置信度，d_t 为意图标签与几何预测模式的一致性查询表值，经指数加权移动平均（EWMA，α=0.7）平滑后与阈值比较产生门控标志 g_t。</p>
+<p> - v2 重设计：将“uncertain”标签视为弃权（d=0），弃权周期仅可触发黄色咨询而不能触发红色门控；引入双阈值滞回（θ_on=0.35，θ_off=0.25）。</p>
+<p> - 门控与修复机制：门控限制可行机动集（抑制交互后窗口内的横向修正），计划修复以有界横向速率将轨迹拉回车道中心。</p>
+<p> - 安全包络：基于意图状态收紧走廊边界，作为反应式兜底，但仅作为信号实现，不执行最小风险机动。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：</li></ul>
+<p> - nuScenes v1.0-trainval：用于生成训练数据（55,433 个交互窗口，按场景 80/20 分割，规则生成标签）与域内验证/测试（394 个冲突标签正轨，1,863 个负轨）。</p>
+<p> - Car Crash Dataset (CCD)：801 个 ego 相关事故片段，筛选出 4 个符合条件的片段（000754, 000871, 000676, 000228）作为扩展测试集。</p>
+<p> - 真实事故视频（来源为 YouTube，Tesla FSD 13.2.8 事故）作为主案例，分辨率为 2896×1876，30 fps，时长 45.75 秒。</p>
+<p> - comma2k19：8 个高速公路片段（4,792 个周期，8.0 分钟）作为域外探针。</p>
+<ul><li>模型规模：Qwen2.5-0.5B（496M 参数）。</li><li>训练资源：单块 RTX 5090 笔记本 GPU（推理为 bfloat16，推理中位时延 32.7 ms）。</li><li>实车平台：原文未报告（无实车平台，使用离线视频回放与替代规划器）。</li><li>仿真器：原文未报告（使用替代 ego 规划器，即纯跟踪加横向偏移修正项进行回放）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li><strong>评估基准</strong>：主案例真实事故回放；CCD 4 个事故片段；nuScenes 域内交互轨道（394 正轨迹 vs 1863 负轨迹）；名义驾驶集（20 个无冲突事件的晴朗验证场景，703 周期，5.86 分钟）；comma2k19 域外高速公路探针。</li><li><strong>评估指标</strong>：门控触发延迟（相对 t0、漂移起始点、走廊出口）、虚假触发率（次/分钟）、检测率、误报率、预期提前量（lead time）、Yellow/Red 状态占比。</li><li><strong>关键数值</strong>（主案例回放，10 次/配置）：</li></ul>
+<p> - 基线（无门控）在所有回放中 10/10 次脱离走廊；意图门控在所有版本（v1/v2a/v2b）中 10/10 次修复计划。</p>
+<p> - v1 门控在漂移起始点后 72.2±2.0 ms 触发，在走廊出口前 161.1±2.0 ms 触发。</p>
+<p> - v2b 门控在漂移起始点后 67.7±3.7 ms 触发，在走廊出口前 165.6±3.7 ms 触发。</p>
+<p> - 安全包络在 t0 后 100.0±0.0 ms 检测到偏移，但不修复计划。</p>
+<ul><li><strong>对比方法</strong>：Baseline、Intent Only（意图门控）、Envelope Only（安全包络）、Full（意图门控+安全包络）。</li><li><strong>消融结果</strong>：</li></ul>
+<p> - v2b 在 4 个 CCD 片段中保留了全部意图层检测（000754：提前量从 700ms 增至 1000ms；000871：1400ms；000676：800ms），但 000228 的触发晚于起始点 1100ms。</p>
+<p> - 名义驾驶集：v1 产生 9 次触发（1.537/分钟），v2a/v2b 降至 2 次（0.341/分钟）。</p>
+<p> - 域外高速：v1 为 25.4/分钟，v2b 为 7.5/分钟。</p>
+<p> - 在等误报率（0.093）下，全分数检测率 0.234，几何规则检测率 0.800。</p>
+<ul><li><strong>实验条件</strong>：</li></ul>
+<p> - 开环：全部为离线回放研究。</p>
+<p> - 闭环：原文未报告。</p>
+<p> - 仿真：回放使用替代 ego 规划器（纯跟踪+横向偏移修正）。</p>
+<p> - 实车：无，使用真实世界视频数据离线处理。</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2608.26002/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DESCENT: Directed Edge Scene Encoding for Airport Surface Movement Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

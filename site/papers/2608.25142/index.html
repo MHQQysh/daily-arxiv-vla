@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SkyDrive: Learning to Drive in a New City from Aerial Traffic Monitoring - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。 提出 SkyDrive 框架，利用无人机（drone）空中交通监控作为高效、可扩展的监督数据源，为在新环境中的自动驾驶智能体提供驾驶行为监督，替代耗资源的车载传感器数据采集。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.25142">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.25142.webp" alt="SkyDrive: Learning to Drive in a New City from Aerial Traffic Monitoring" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SkyDrive: Learning to Drive in a New City from Aerial Traffic Monitoring</h1>
+            <div class="detail-meta">2026-08-25 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.25142" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.25142" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.25142</span></div>
+            <p class="detail-summary">本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。 提出 SkyDrive 框架，利用无人机（drone）空中交通监控作为高效、可扩展的监督数据源，为在新环境中的自动驾驶智能体提供驾驶行为监督，替代耗资源的车载传感器数据采集。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">École Polytechnique Fédérale de Lausanne (EPFL) · Weijiang Xiong、Lan Feng、A…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.25142/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。</p>
+  <ul class="reading-intro-points"><li>本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。</li><li>提出 SkyDrive 框架，利用无人机（drone）空中交通监控作为高效、可扩展的监督数据源，为在新环境中的自动驾驶智能体提供驾驶行为监督，替代耗资源的车载传感器数据采集。</li><li>提出一个可扩展且高效的流程，将空中交通监控转换为局部的驾驶监督数据。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：École Polytechnique Fédérale de Lausanne (EPFL)；作者：Weijiang Xiong、Lan Feng、Alexandre Alahi、Nikolas Geroliminis</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。</li><li>提出 SkyDrive 框架，利用无人机（drone）空中交通监控作为高效、可扩展的监督数据源，为在新环境中的自动驾驶智能体提供驾驶行为监督，替代耗资源的车载传感器数据采集。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个可扩展且高效的流程，将空中交通监控转换为局部的驾驶监督数据。</li><li>构建高质量数据集 SongdoDrive，包含约 650K 个真实驾驶场景，来源于 137.2 小时的空中观测，覆盖 20 个复杂现代交叉路口。</li><li>详细实验验证了轨迹规划和运动预测任务中零样本迁移的挑战，并展示了少量空中监督数据的效率（例如每个地点约30分钟监控即可显著提升性能）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：轨迹规划（Trajectory Planning）与运动预测（Motion Prediction）。</li><li>输入传感器：轨迹规划使用渲染的多相机语义视图（虚拟相机）、自车运动历史（位置、速度、朝向）和高层驾驶方向（左、右、直行）；运动预测使用地图结构（车道、停止线、可行驶区域）及自车与周围车辆的轨迹。</li><li>场景表示：轨迹规划将 2D 轨迹数据通过假设平坦地面和车辆高度提升到 3D 空间，并栅格化为自车为中心的多视角语义图像；运动预测使用向量化的轨迹和地图结构。</li><li>模型结构：轨迹规划采用 NavSim 基准中的 DrivoR 和 RAP 两种 SOTA 方法，均先生成多个轨迹提议，再用学习的评分器选择最优轨迹；运动预测采用 AutoBot、MTR、Wayformer 三种模型，基于 UniTraj 框架实现。</li><li>关键技术：利用空中视角同时观测多个道路使用者，将每个跟踪车辆作为虚拟自车来构建以自车为中心的驾驶场景，从而扩大监督数据量并保证数据质量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：SongdoDrive，基于 Songdo Traffic 数据集构建，包含 650K 个场景（训练集 549,929 个、测试集 99,629 个自车段），来源于 137.2 小时无人机监控日志（训练 680 个会话/116.23小时，测试 120 个会话/20.97小时），平均轨迹长度 33.8 秒，场景时长 8 秒。</li><li>仿真器：原文未报告使用特定仿真器。</li><li>模型规模：原文未报告具体参数数量；MTR 被描述为比 AutoBot 更大的模型。</li><li>训练资源：轨迹规划模型使用两张 H100 GPU，批量大小为 32，DrivoR 每 epoch 约 3 小时，RAP 每 epoch 约 10 小时。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：SongdoDrive 标准训练/测试划分；另有跨交叉口（cross-intersection）数据划分用于泛化分析。</li><li>评估指标：轨迹规划使用 ADE（平均位移误差）、FDE（最终位移误差）、TTC（碰撞时间）违章率、NCT（非合规轨迹百分比）；运动预测使用 BrierFDE、minADE、minFDE、Miss Rate。</li><li>关键数值（轨迹规划，标准划分）：</li></ul>
+<p> - DrivoR 零样本：ADE 3.702m，FDE 8.855m，TTC 38.10%，NCT 8.24%；全量训练后：ADE 1.589m，FDE 3.774m，TTC 10.82%，NCT 4.80%。</p>
+<p> - RAP 零样本：ADE 3.399m，FDE 8.116m，TTC 25.56%，NCT 1.12%；全量微调后：ADE 1.263m，FDE 2.730m，TTC 5.89%，NCT 0.13%（均为最佳）。</p>
+<p> - 缩放实验中 1% 数据（约 6 个会话/1.0 小时监控）即带来所有指标的显著提升。</p>
+<p> - 跨交叉口对比中，RAP 标准划分 ADE 1.145m/FDE 2.447m，跨交叉口划分 ADE 1.170m/FDE 2.506m，差距不显著。</p>
+<ul><li>关键数值（运动预测，标准划分）：</li></ul>
+<p> - Wayformer 最优：BrierFDE 1.763，minADE 0.564，minFDE 1.157，Miss Rate 0.148。</p>
+<p> - AutoBot：BrierFDE 1.847，minADE 0.588，minFDE 1.197，Miss Rate 0.154。</p>
+<p> - MTR：BrierFDE 1.902，minADE 0.680，minFDE 1.516，Miss Rate 0.273。</p>
+<p> - 零样本 MTR*（在 nuScenes 上训练）：BrierFDE 3.953，minADE 1.497，minFDE 3.369，Miss Rate 0.494，相比训练的 MTR 有显著性能下降。</p>
+<ul><li>对比方法：轨迹规划对比 DrivoR 与 RAP；运动预测对比 AutoBot、MTR、Wayformer。</li><li>开环/闭环：轨迹规划为开环评估（无反应式背景车辆）；运动预测为预测性评估（无仿真反馈）。</li></ul>
+
+<ul><li>仿真或实车条件：评估在数据驱动的非反应式基准（类似 NavSim 方式）下进行，属于开环评估，无闭环仿真或实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.26002/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DESCENT: Directed Edge Scene Encoding for Airport Surface Movement Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.22600/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Branch-Stochastic Model Predictive Control for Motion Planning under Multi-Modal Uncertainty with Scenario Clustering</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

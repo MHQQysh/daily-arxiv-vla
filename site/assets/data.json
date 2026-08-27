@@ -1,5 +1,121 @@
 [
   {
+    "date": "2026-08-26",
+    "title": "Gating Before Commitment: Anticipating Intent Divergence to Prevent Post-Interaction Decision Failures in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2608.26074",
+    "arxiv_id": "2608.26074",
+    "detail_path": "papers/2608.26074/",
+    "cover_path": "covers/2608.26074/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.26074.webp",
+    "paper_image_full_path": "assets/paper-images/2608.26074.webp",
+    "preview_text": "本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。 针对的核心应用场景为“交互后阶段”（post-interaction phase），即对向来车通过或汇入完成后，ego 车辆因尝试修正感知横向偏差而脱离道路的紧急情况。 研究问题为：决策层应如何在交互语义与 ego 承诺的机动动作不一致时，于轨迹承诺前（before commitment）检测出意图发散（intent divergence），从而通过门控（gating）与计划修复（plan repair）防止事故发生。",
+    "research_unit": "University of South Florida（iCONS Lab, Department of Electrical Engineering…",
+    "hook_text": "本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。",
+    "key_points": [
+      "本文研究自动驾驶中车辆交互阶段（如会车、超车、汇入）后发生的决策失败问题，将此类失败归因于意图层面的误解（ego 与其他车辆意图的误判），而非单纯的感知限制。",
+      "针对的核心应用场景为“交互后阶段”（post-interaction phase），即对向来车通过或汇入完成后，ego 车辆因尝试修正感知横向偏差而脱离道路的紧急情况。",
+      "研究问题为：决策层应如何在交互语义与 ego 承诺的机动动作不一致时，于轨迹承诺前（before commitment）检测出意图发散（intent divergence），从而通过门控（gating）与计划修复（plan repair）防止事故发生。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-26",
+    "title": "DESCENT: Directed Edge Scene Encoding for Airport Surface Movement Prediction",
+    "link": "https://arxiv.org/abs/2608.26002",
+    "arxiv_id": "2608.26002",
+    "detail_path": "papers/2608.26002/",
+    "cover_path": "covers/2608.26002/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.26002.webp",
+    "paper_image_full_path": "assets/paper-images/2608.26002.webp",
+    "preview_text": "论文解决机场地面运动预测任务，即预测飞机和地面车辆在机场跑道、滑行道等地面区域的未来轨迹。 应用场景为机场地面运行安全，包括跑道入侵检测、冲突预警等安全保障应用。 研究问题聚焦于机场地面运动相较于自动驾驶场景的动态异质性，即飞机在滑行、起飞、着陆等不同运行阶段的速度和空间尺度差异巨大，而传统自动驾驶轨迹预测方法的地图采样策略无法有效适应这一特点。",
+    "research_unit": "Graz University of Technology, Austria · Alexander Prutsch、David Schinagl、H…",
+    "hook_text": "论文解决机场地面运动预测任务，即预测飞机和地面车辆在机场跑道、滑行道等地面区域的未来轨迹。",
+    "key_points": [
+      "论文解决机场地面运动预测任务，即预测飞机和地面车辆在机场跑道、滑行道等地面区域的未来轨迹。",
+      "应用场景为机场地面运行安全，包括跑道入侵检测、冲突预警等安全保障应用。",
+      "研究问题聚焦于机场地面运动相较于自动驾驶场景的动态异质性，即飞机在滑行、起飞、着陆等不同运行阶段的速度和空间尺度差异巨大，而传统自动驾驶轨迹预测方法的地图采样策略无法有效适应这一特点。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-08-25",
+    "title": "SkyDrive: Learning to Drive in a New City from Aerial Traffic Monitoring",
+    "link": "https://arxiv.org/abs/2608.25142",
+    "arxiv_id": "2608.25142",
+    "detail_path": "papers/2608.25142/",
+    "cover_path": "covers/2608.25142/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.25142.webp",
+    "paper_image_full_path": "assets/paper-images/2608.25142.webp",
+    "preview_text": "本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。 提出 SkyDrive 框架，利用无人机（drone）空中交通监控作为高效、可扩展的监督数据源，为在新环境中的自动驾驶智能体提供驾驶行为监督，替代耗资源的车载传感器数据采集。",
+    "research_unit": "École Polytechnique Fédérale de Lausanne (EPFL) · Weijiang Xiong、Lan Feng、A…",
+    "hook_text": "本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。",
+    "key_points": [
+      "本文聚焦于自动驾驶中的跨城市泛化问题，即在新城市零样本部署轨迹规划器时，由于交通规则、道路布局和驾驶行为的域偏移而导致性能严重退化。",
+      "提出 SkyDrive 框架，利用无人机（drone）空中交通监控作为高效、可扩展的监督数据源，为在新环境中的自动驾驶智能体提供驾驶行为监督，替代耗资源的车载传感器数据采集。",
+      "提出一个可扩展且高效的流程，将空中交通监控转换为局部的驾驶监督数据。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-05-21",
+    "title": "Branch-Stochastic Model Predictive Control for Motion Planning under Multi-Modal Uncertainty with Scenario Clustering",
+    "link": "https://arxiv.org/abs/2605.22600",
+    "arxiv_id": "2605.22600",
+    "detail_path": "papers/2605.22600/",
+    "cover_path": "covers/2605.22600/",
+    "paper_image_path": "assets/paper-images/thumbs/2605.22600.webp",
+    "paper_image_full_path": "assets/paper-images/2605.22600.webp",
+    "preview_text": "该论文解决自动驾驶中运动规划任务，具体针对在动态交通环境中处理周围车辆（SVs）的多模态不确定性（包括意图不确定性和轨迹不确定性）的问题。 应用场景为高速公路环境，特别是在多车交互、意图模糊（如车道保持或变道）的挑战性场景下。 研究问题：现有随机模型预测控制（SMPC）在意图不确定性下过于保守，而分支模型预测控制（BMPC）存在组合复杂度和未显式处理轨迹不确定性的问题，如何结合二者实现安全、非保守且实时的运动规划。",
+    "research_unit": "Chair of Automatic Control Engineering, Technical University of Munich · Ze…",
+    "hook_text": "该论文解决自动驾驶中运动规划任务，具体针对在动态交通环境中处理周围车辆（SVs）的多模态不确定性（包括意图不确定性和轨迹不确定性）的问题。",
+    "key_points": [
+      "该论文解决自动驾驶中运动规划任务，具体针对在动态交通环境中处理周围车辆（SVs）的多模态不确定性（包括意图不确定性和轨迹不确定性）的问题。",
+      "应用场景为高速公路环境，特别是在多车交互、意图模糊（如车道保持或变道）的挑战性场景下。",
+      "研究问题：现有随机模型预测控制（SMPC）在意图不确定性下过于保守，而分支模型预测控制（BMPC）存在组合复杂度和未显式处理轨迹不确定性的问题，如何结合二者实现安全、非保守且实时的运动规划。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-08-03",
     "title": "Deferred Exposure of Future Trajectories for Verifiable Reasoning in Autonomous Driving VLMs",
     "link": "https://arxiv.org/abs/2608.01755",
