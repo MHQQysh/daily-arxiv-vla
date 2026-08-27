@@ -11,8 +11,8 @@ on:
   push:
     branches: [ master, main ]
   schedule:
-    # 临时自动触发验证：2026-08-27 北京时间 23:07（UTC 15:07）。
-    - cron: '7 15 * * *'
+    # 每日北京时间中午12:17（UTC 4:17）运行，避开 GitHub Actions 整点高峰。
+    - cron: '17 4 * * *'
 
 permissions:
   contents: write
