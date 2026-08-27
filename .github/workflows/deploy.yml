@@ -59,12 +59,12 @@ jobs:
           if [ "${{ github.event_name }}" = "schedule" ] || { [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.add_new_papers }}" = "true" ]; }; then
             python -u scripts/arxiv_crawler.py
           else
-            python -u scripts/arxiv_crawler.py --dry-run
+            ARXIV_DAILY_RESULTS=20 python -u scripts/arxiv_crawler.py --dry-run
           fi
         env:
           ARXIV_INIT_RESULTS: 80
           ARXIV_INIT_TOTAL_LIMIT: 100
-          ARXIV_DAILY_RESULTS: 20
+          ARXIV_DAILY_RESULTS: 80
           ARXIV_DAILY_TOTAL_LIMIT: 20
           ARXIV_PAGE_SIZE: 20
           ARXIV_DELAY_SECONDS: 3

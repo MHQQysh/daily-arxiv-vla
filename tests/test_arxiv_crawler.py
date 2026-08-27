@@ -84,7 +84,10 @@ class CollectorTests(unittest.TestCase):
 
         self.assertIn("cancel-in-progress: false", workflow)
         self.assertIn("python-version: '3.11'", workflow)
-        self.assertIn("python -u scripts/arxiv_crawler.py --dry-run", workflow)
+        self.assertIn(
+            "ARXIV_DAILY_RESULTS=20 python -u scripts/arxiv_crawler.py --dry-run",
+            workflow,
+        )
         self.assertIn("python -u scripts/arxiv_crawler.py", workflow)
         self.assertIn("add_new_papers:", workflow)
         self.assertIn("default: false", workflow)
@@ -95,7 +98,7 @@ class CollectorTests(unittest.TestCase):
         self.assertIn("ARXIV_RETRY_BASE_SECONDS: 5", workflow)
         self.assertIn("ARXIV_MAX_RETRIES: 2", workflow)
         self.assertIn("ARXIV_INIT_TOTAL_LIMIT: 100", workflow)
-        self.assertIn("ARXIV_DAILY_RESULTS: 20", workflow)
+        self.assertIn("ARXIV_DAILY_RESULTS: 80", workflow)
         self.assertIn("ARXIV_DAILY_TOTAL_LIMIT: 20", workflow)
         self.assertIn("fetch_paper_images.py --max-items 100", workflow)
         self.assertIn("build_paper_image_fallback_queue.py --max-items 100", workflow)
