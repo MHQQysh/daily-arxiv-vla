@@ -11,8 +11,8 @@ on:
   push:
     branches: [ master, main ]
   schedule:
-    # 临时自动触发验证：2026-08-27 北京时间 22:36（UTC 14:36）。
-    - cron: '36 14 * * *'
+    # 临时自动触发验证：2026-08-27 北京时间 22:54（UTC 14:54）。
+    - cron: '54 14 * * *'
 
 permissions:
   contents: write
