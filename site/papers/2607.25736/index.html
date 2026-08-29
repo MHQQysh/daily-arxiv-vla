@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Quality Dependent Degradation for AI Systems - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。 核心任务为行人检测（面向自动紧急制动），提出了一个&quot;失败降级系统&quot;（fail-degraded system）：当图像质量较低时，通过降低目标检测器的置信度阈值来提高召回率，从而避免漏检行人这一更严重的安全事故；在图像质量高时则保持精确预测。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.25736">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.25736.webp" alt="Image Quality Dependent Degradation for AI Systems" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Image Quality Dependent Degradation for AI Systems</h1>
+            <div class="detail-meta">2026-07-28 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.25736" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.25736" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.25736</span></div>
+            <p class="detail-summary">本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。 核心任务为行人检测（面向自动紧急制动），提出了一个&quot;失败降级系统&quot;（fail-degraded system）：当图像质量较低时，通过降低目标检测器的置信度阈值来提高召回率，从而避免漏检行人这一更严重的安全事故；在图像质量高时则保持精确预测。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">6 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">German Aerospace Center (DLR) Institute for AI Safety and Security · Yannic…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.25736/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。</p>
+  <ul class="reading-intro-points"><li>本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。</li><li>核心任务为行人检测（面向自动紧急制动），提出了一个&quot;失败降级系统&quot;（fail-degraded system）：当图像质量较低时，通过降低目标检测器的置信度阈值来提高召回率，从而避免漏检行人这一更严重的安全事故；在图像质量高时则保持精确预测。</li><li>提出了一个针对感知子系统的失败降级系统，利用输入监控器来触发降级行为，而不依赖后备方案（如切换至LiDAR）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：German Aerospace Center (DLR) Institute for AI Safety and Security；作者：Yannick Kees, Elena Hoemann, Frank Köster, Sven Hallerbach（原文未明确一一个对应关系，但所有作者均属上述机构）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。</li><li>核心任务为行人检测（面向自动紧急制动），提出了一个&quot;失败降级系统&quot;（fail-degraded system）：当图像质量较低时，通过降低目标检测器的置信度阈值来提高召回率，从而避免漏检行人这一更严重的安全事故；在图像质量高时则保持精确预测。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了一个针对感知子系统的失败降级系统，利用输入监控器来触发降级行为，而不依赖后备方案（如切换至LiDAR）。</li><li>提出了一种新的质量感知监控方法：基于人工设计的图像质量特征（如亮度、对比度、锐度等）训练Normalizing Flow模型，估计输入图像质量与训练数据的相似度。</li><li>该监控器与目标检测器解耦，可作为即插即用组件与不同检测器架构（如YOLO和DETR）结合，无需重新训练检测器。</li><li>设计了一个通过tanh函数将图像质量对数似然值转换为自适应置信度阈值的转换机制，以实现质量依赖的检测行为。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知子系统的输入监控模块（fail-degraded system的关键组件）。</li><li>输入传感器：单目相机图像。</li><li>场景表示：不使用局部特征或网格表示，而是使用12种无参考图像质量评估（NR-IQA）的手工特征组成全局质量向量，包括亮度、色彩丰富度、对比度、能量、过曝、PSNR、饱和度、锐度、SNR、偏度、频谱中心、欠曝。</li><li>模型结构：一个Real-NVP（real-valued non-volume preserving）Normalizing Flow网络，输入为上述质量特征向量，输出为对数似然值表示图像质量。</li><li>关键技术：</li></ul>
+<p> - 用训练集图像质量特征分布训练NF，定义&quot;高质量&quot;为与训练数据分布相符。</p>
+<p> - 通过 eq.(5) 将图像质量对数似然值转换为置信度阈值。τ设为训练集对数似然的中位数，α为缩放因子（实验中τ=33，α=0.15），并裁剪置信度上限为0.7。</p>
+<p> - 该实时实现基于ROS 2，质量评估节点和检测器节点可并行运行。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>BDD100k：用于训练NF、YOLOv11和DETR检测器，并作为OOD检测分布参考。原文未报告数据集使用数量。</li><li>Zenseact OpenDataset (ZOD)：用于OOD检测评估。</li><li>CARLA仿真数据集：用于OOD检测评估。</li><li>模型规模：NF网络结构细节未报告完整参数数量，原文描述其为&quot;相对小而轻量的神经网络&quot;。</li><li>训练资源：原文未报告具体GPU型号、训练时长等。</li><li>实车平台：原文未报告实车平台，但提供了基于ROS 2的实现，可连接实时相机图像流。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与指标：</li></ul>
+<p> - OOD检测：三个数据集的图像质量对数似然分布可视化比较。</p>
+<p> - 故障检测：5张随机图像、10种强度、6种增强类型（暗化、噪声、污渍、模糊、镜头光晕、滚动快门），观察对数似然变化。</p>
+<p> - 目标检测组合：IoU=0.5，计算每帧precision和recall。</p>
+<ul><li>关键数值：</li></ul>
+<p> - YOLO：固定阈值0.7时平均召回率0.428，采用本方法后提升至0.474；固定阈值时平均精确率0.996，采用本方法后降至0.984。</p>
+<p> - DETR：固定阈值时平均召回率0.605，采用本方法后提升至0.627；固定阈值时平均精确率0.366，采用本方法后降至0.349。</p>
+<p> - 方法提升377张图像的召回率，同时25张图像精确率下降、2张提升。</p>
+<ul><li>对比方法：与固定置信度阈值对比；此外，与使用ResNet-18潜在特征训练NF对比，该方法无法可靠检测六种增强类型。</li><li>评估条件：开环评估（离线在数据集上）。未报告闭环仿真或实车路径测试结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.26121/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Towards Trustworthy Embodied Intelligence: A Systems Framework and Graded Trustworthiness Levels</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.25570/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">The LAIA Dataset: Labelled Attention for Intelligent Automobiles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

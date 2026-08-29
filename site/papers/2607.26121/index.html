@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Towards Trustworthy Embodied Intelligence: A Systems Framework and Graded Trustworthiness Levels - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。 论文面向的任务场景包括机器人操作（manipulation）、导航（navigation）、人机交互（human interaction），以及自主驾驶作为工程类比。 核心研究问题包括：如何联合定义与评估任务能力与安全性；故障、不确定性、恶意输入、时序违例和无效假设如何跨层传播；哪些机制能在防止、约束、检测和恢复不安全行为的同时保留有用能力；哪些证据形式能支撑有界部署声明；以及从实验室评估到有约束部署和持续现场保障的机制与证据如何演变。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.26121">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.26121.webp" alt="Towards Trustworthy Embodied Intelligence: A Systems Framework and Graded Trustworthiness Levels" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Towards Trustworthy Embodied Intelligence: A Systems Framework and Graded Trustworthiness Levels</h1>
+            <div class="detail-meta">2026-07-28 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.26121" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.26121" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.26121</span></div>
+            <p class="detail-summary">本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。 论文面向的任务场景包括机器人操作（manipulation）、导航（navigation）、人机交互（human interaction），以及自主驾驶作为工程类比。 核心研究问题包括：如何联合定义与评估任务能力与安全性；故障、不确定性、恶意输入、时序违例和无效假设如何跨层传播；哪些机制能在防止、约束、检测和恢复不安全行为的同时保留有用能力；哪些证据形式能支撑有界部署声明；以及从实验室评估到有约束部署和持续现场保障的机制与证据如何演变。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">SparkLab@Xspark AI · 原文未明确对应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.26121/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。</p>
+  <ul class="reading-intro-points"><li>本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。</li><li>论文面向的任务场景包括机器人操作（manipulation）、导航（navigation）、人机交互（human interaction），以及自主驾驶作为工程类比。</li><li>核心研究问题包括：如何联合定义与评估任务能力与安全性；故障、不确定性、恶意输入、时序违例和无效假设如何跨层传播；哪些机制能在防止、约束、检测和恢复不安全行为的同时保留有用能力；哪些证据形式能支撑有界部署声明；以及从实验室评估到有约束部署和持续现场保障的机制与证据如何演变。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：SparkLab@Xspark AI；作者：原文未明确对应</li><li>机构：THU（清华大学）；作者：原文未明确对应</li><li>机构：MMLab@HKU（香港大学多媒体实验室）；作者：原文未明确对应</li><li>机构：PKU（北京大学）；作者：原文未明确对应</li><li>机构：HKUST (GZ)（香港科技大学（广州））；作者：原文未明确对应（脚注说明完整作者列表见 Contributors 部分，但原文未在本摘要中给出）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。</li><li>论文面向的任务场景包括机器人操作（manipulation）、导航（navigation）、人机交互（human interaction），以及自主驾驶作为工程类比。</li><li>核心研究问题包括：如何联合定义与评估任务能力与安全性；故障、不确定性、恶意输入、时序违例和无效假设如何跨层传播；哪些机制能在防止、约束、检测和恢复不安全行为的同时保留有用能力；哪些证据形式能支撑有界部署声明；以及从实验室评估到有约束部署和持续现场保障的机制与证据如何演变。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了面向部署的可信具身智能定义，将可信具身智能界定为“持续安全成功”，并区分了主要目标（能力与安全）与支撑属性（可靠性、物理可控性、可治理性、可评估性、可部署性）。</li><li>提出一个四层系统框架，将可信性机制组织为模型层、系统层、证据层和部署层，并明确各层职责及支撑端到端声明所需的跨层交互。</li><li>对跨层机制、失效与证据进行了综合，将具身AI与机器人学、控制、可靠计算、分布式系统、网络安全和自主驾驶等领域相联系，刻画了失效在层间的传播并按其作用（预防、遏制、检测、恢复、验证、治理）组织现有机制。</li><li>提出了非规范性 T0–T5 分级层次结构，从无可证实可信性到受治理变更下的持续可信性，每个级别刻画跨能力、安全、系统保障、证据和治理的渐进增强的有界声明，支持对比评估、有界部署、研究优先级排序和未来标准化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：综述论文，未提出具体算法或模型，提出的是四层系统框架（模型层、系统层、证据层、部署层）与 T0–T5 可信度分级体系。</li><li>输入传感器：原文未报告（作为综述论文未限定特定输入传感器）。</li><li>场景表示：原文未报告（框架讨论语义–物理鸿沟、状态表示、世界模型等概念，但未定义具体场景表示）。</li><li>模型结构：原文未报告（综述讨论感知、接地推理、规划、策略生成、世界模型等功能组件，但未提出统一模型结构）。</li><li>关键技术：</li><li>模型层涵盖接地感知与状态表示、语义与安全性接地推理、规划与策略生成（含约束强化学习、安全过滤器）、世界模型与长时域风险建模、模型完整性与可治理接口。</li><li>系统层涵盖硬件作为物理保障基底（感知可观测性、计算/通信/能量、执行机构与机械本体）、多速率系统集成、故障遏制与回退、信息物理与分布式执行、软硬件协同设计。</li><li>证据层涵盖评估对象与声明、能力与安全联合评估（提出 safe-success rate 指标）、四类互补证据（形式化、统计、经验、运行）、分阶段评估、压力/失效/长时域评估、基准与可复现性、保证论证。</li><li>部署层涵盖运行边界与运行时准入、运行监控、权限/干预/人类控制、退化/恢复/恢复运行、事故响应与运行证据、变更控制与再验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告（作为综述论文，未报告具体实验数据集）。</li><li>仿真器：原文未报告（仅在讨论中提到驾驶与机器人仿真器提供受控环境用于建模与评估，并以 SafeDojo 为例说明世界模型策略学习，但未报告具体仿真器名称）。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告（论文将自主驾驶作为工程类比进行讨论，但未报告具体实车平台）。</li><li>项目页面：https://xsparkai.com/sparklab/towards-trustworthy-eai</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：原文未报告（作为综述论文；提出评估方法学与指标，但未使用具体基准进行实验评估）。</li><li>评估指标：提出 safe-success rate (SSR) 作为主联合指标，即任务完成且无不可接受违例的试验数除以总试验数；并建议区分安全成功、安全失败、非安全成功、非安全失败四类结果，同时报告场景条件结果、暴露度、置信区间、违例严重度、最差观测结果和干预负担。</li><li>关键数值：原文未报告（未提供实验数值结果）。</li><li>对比方法：原文未报告（综述性质，未进行方法实验对比）。</li><li>评估条件：提出分阶段评估框架——从规格与形式分析、离线模型评估，到闭环仿真评估、物理交互与集成评估、现场暴露评估；并建议联合评估开环模型行为、闭环任务执行、时序与集成、物理交互和现场暴露。文中未报告具体的开环、闭环、仿真或实车实验结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.26533/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Barrier Function Conformal Safety Clearance Certification with CVaR for Driving Trajectory Selection</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.25736/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Image Quality Dependent Degradation for AI Systems</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

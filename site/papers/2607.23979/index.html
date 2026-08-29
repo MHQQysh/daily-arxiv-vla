@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mutual Modality Trust with Lightweight Reconstruction Regularization for Fine-grained Tire Pattern Recognition - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。 研究问题包括：现有方法过度依赖单一视觉模态、缺乏对细微胎面纹理的空间-频率联合建模能力，以及在标注轮胎图像有限的情况下存在严重过拟合问题。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.23979">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.23979.webp" alt="Mutual Modality Trust with Lightweight Reconstruction Regularization for Fine-grained Tire Pattern Recognition" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Mutual Modality Trust with Lightweight Reconstruction Regularization for Fine-grained Tire Pattern Recognition</h1>
+            <div class="detail-meta">2026-07-27 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.23979" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.23979" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.23979</span></div>
+            <p class="detail-summary">该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。 研究问题包括：现有方法过度依赖单一视觉模态、缺乏对细微胎面纹理的空间-频率联合建模能力，以及在标注轮胎图像有限的情况下存在严重过拟合问题。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">西安邮电大学通信与信息工程学院 · Jianning Yang、Jie Fang、Xinda Ma 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.23979/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。</p>
+  <ul class="reading-intro-points"><li>该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。</li><li>研究问题包括：现有方法过度依赖单一视觉模态、缺乏对细微胎面纹理的空间-频率联合建模能力，以及在标注轮胎图像有限的情况下存在严重过拟合问题。</li><li>设计了基于互模态信任（M²T）的双分支细粒度轮胎花纹识别框架，支持表面与压痕分支独立推理或融合推理，适应模态缺失场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：西安邮电大学通信与信息工程学院；作者：Jianning Yang, Jie Fang, Xinda Ma, Zirui Song, Dianwei Wang</li><li>机构：海南师范大学人工智能学院；作者：Nan Wang</li><li>机构：西北工业大学光电与智能研究院（iOPEN）；作者：Jie Fang（同时任职）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。</li><li>研究问题包括：现有方法过度依赖单一视觉模态、缺乏对细微胎面纹理的空间-频率联合建模能力，以及在标注轮胎图像有限的情况下存在严重过拟合问题。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>设计了基于互模态信任（M²T）的双分支细粒度轮胎花纹识别框架，支持表面与压痕分支独立推理或融合推理，适应模态缺失场景。</li><li>采用 MobileConvNeXt-Tiny 作为各分支主干，并引入轻量重建正则化（LR²）约束优化过程，缓解有限标注数据下的过拟合风险。</li><li>提出面向各模态编码器的分层带通滤波引导跨域加权策略，增强空间-频率协同表征能力。</li><li>构建大规模表面-压痕多源数据集 MTire299，覆盖 299 类别、共 14,795 对图像样本，推动细粒度轮胎花纹识别研究。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：细粒度轮胎花纹图像分类/识别，双分支编码器-解码器结构。</li><li>输入传感器：仅使用 RGB 视觉图像（轮胎表面图像与胎面压痕图像两种模态）。</li><li>场景表示：轮胎表面模态特征与胎面压痕模态特征，采用二维离散傅里叶变换将空间特征图转换至频率域进行联合建模。</li><li>模型结构：双分支结构，每个分支采用频率引导的 MobileConvNeXt-Tiny 编码器，分别处理表面与压痕模态；解码器为轻量结构，包含三个 {2层卷积+上采样} 块、三个 {卷积+上采样} 层及一个 {卷积+ReLU} 层。</li><li>关键技术：M²T 模块通过可学习的互模态信任系数（τ）实现跨分支特征交互，在模态缺失时采用硬规则分配权重；频率域分层引导模块使用带通滤波器（截止频率 r₀=0, r₁=85, r₂=170, r₃=255）将特征分解为高中低频分量并生成频率到空间的引导图；LR² 通过 Frobenius 范数重建损失保留特征嵌入中的内在信息；总损失函数为 L_cls + α·L_pull + β·L_rec，其中 α=0.5、β=0.3，L_cls 使用交叉熵，L_pull 使用 KL 距离促使各分支逼近融合分支的表征能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CIIP-TPID-V1.1（公开单模态数据集，983 张图像，分辨率约 3000×4000 像素，覆盖 30 个品牌 75 种胎面设计）；MTire299（自建表面-压痕多源数据集，299 类别，14,795 对表面-压痕样本，每类含 10 至 150 对样本）。</li><li>仿真器：原文未报告。</li><li>模型规模：完整框架参数为 2.0046 M，GFLOPs 为 1.3951。</li><li>训练资源：单张 NVIDIA RTX 3080 GPU，PyTorch 框架；消融实验另在 NVIDIA RTX 4090 平台及 RK3588 边缘计算板（INT8 量化、4 线程）上运行。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CIIP-TPID-V1.1 与 MTire299 两个数据集，按 4:1:5 固定比例划分训练/验证/测试集。</li><li>评估指标：分类准确率 Acc（%）、参数量 Para（M）、GFLOPs、帧率 FPS（Hz）；边缘设备上另报告 NPU 利用率（%）与占用内存（MB）。</li><li>关键数值：完整框架（LR²M²T-M_SI）在 CIIP-TPID-V1.1 上准确率 94.25%，在 MTire299 上准确率 97.65%；表面单分支（LR²M²T-M_S）在 CIIP-TPID-V1.1 上为 89.54%、在 MTire299 上为 95.34%；压痕单分支（LR²M²T-M_I）在 CIIP-TPID-V1.1 上为 85.40%、在 MTire299 上为 95.93%。参数量 2.0046 M，GFLOPs 1.3951，FPS 386.07 Hz。</li><li>对比方法：RiHOG、DWT-LBP（手工特征）；FD、TLCNN、ETL、PEFT、YOLO、LN（普通 CNN）；KDAM、LWLD、UMJL（复杂神经网络）。</li><li>开环/闭环/仿真/实车条件：仅在开环数据集评估条件下进行实验，未涉及闭环或实车测试。</li><li>消融实验：基线（无任何模块）准确率 92.81%；基线+LR²为 91.94%；基线+LR²+M²T 为 93.68%；完整框架（+FreG）为 94.25%。在 RK3588 边缘平台上，基线 91.93% 准确率、92.28 Hz；完整框架因 INT8 截断丢失高频细节，准确率降至 88.67%、83.55 Hz。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.24199/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Reasoning to Regulate: Chain-of-Thought for Traffic Rule Understanding</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.23962/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Development of Vision-Language Model-based GNSS Spoofing Detection for Autonomous Vehicle Navigation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

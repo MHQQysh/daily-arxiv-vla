@@ -1,5 +1,585 @@
 [
   {
+    "date": "2026-08-27",
+    "title": "Safety by Design: Realized-Cost Constraints for Contextual Bandits with Continuous Actions",
+    "link": "https://arxiv.org/abs/2608.26755",
+    "arxiv_id": "2608.26755",
+    "detail_path": "papers/2608.26755/",
+    "cover_path": "covers/2608.26755/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.26755.webp",
+    "paper_image_full_path": "assets/paper-images/2608.26755.webp",
+    "preview_text": "论文解决自动驾驶、药物剂量选择等安全关键场景中，上下文赌博机（contextual bandit）在异方差（heteroscedastic）设置下的安全约束问题。 研究问题：在动作同时影响奖励与成本信号的期望值及其观测变异性的情况下，如何设计算法在每一轮以高概率约束已实现成本（realized cost）低于安全阈值，而非仅约束期望成本。 应用场景：自适应剂量分配、自动驾驶、机器人控制等安全敏感的顺序决策任务。",
+    "research_unit": "Boston University · Spyros Dragazis",
+    "hook_text": "论文解决自动驾驶、药物剂量选择等安全关键场景中，上下文赌博机（contextual bandit）在异方差（heteroscedastic）设置下的安全约束问题。",
+    "key_points": [
+      "论文解决自动驾驶、药物剂量选择等安全关键场景中，上下文赌博机（contextual bandit）在异方差（heteroscedastic）设置下的安全约束问题。",
+      "研究问题：在动作同时影响奖励与成本信号的期望值及其观测变异性的情况下，如何设计算法在每一轮以高概率约束已实现成本（realized cost）低于安全阈值，而非仅约束期望成本。",
+      "应用场景：自适应剂量分配、自动驾驶、机器人控制等安全敏感的顺序决策任务。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-27",
+    "title": "DPA-I2P: Depth-Guided Projective Alignment for Image-to-Point-Cloud Registration in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2608.26589",
+    "arxiv_id": "2608.26589",
+    "detail_path": "papers/2608.26589/",
+    "cover_path": "covers/2608.26589/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.26589.webp",
+    "paper_image_full_path": "assets/paper-images/2608.26589.webp",
+    "preview_text": "本文解决自动驾驶中的图像到点云（Image-to-Point Cloud，I2P）配准任务，即估计给定图像在三维场景点云中的相机位姿。 该任务属于自动驾驶中的视觉定位、相机重定位、SLAM、运动规划与三维重建等应用的基础问题。 研究问题在于密集二维图像观测与稀疏三维点云表示之间存在固有的模态差异，导致跨模态对应学习不稳定，进而影响位姿估计精度。",
+    "research_unit": "Nankai University · Wenxin Zhang、Hang Li、Qiankun Dong 等",
+    "hook_text": "本文解决自动驾驶中的图像到点云（Image-to-Point Cloud，I2P）配准任务，即估计给定图像在三维场景点云中的相机位姿。",
+    "key_points": [
+      "本文解决自动驾驶中的图像到点云（Image-to-Point Cloud，I2P）配准任务，即估计给定图像在三维场景点云中的相机位姿。",
+      "该任务属于自动驾驶中的视觉定位、相机重定位、SLAM、运动规划与三维重建等应用的基础问题。",
+      "研究问题在于密集二维图像观测与稀疏三维点云表示之间存在固有的模态差异，导致跨模态对应学习不稳定，进而影响位姿估计精度。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-27",
+    "title": "Barrier Function Conformal Safety Clearance Certification with CVaR for Driving Trajectory Selection",
+    "link": "https://arxiv.org/abs/2608.26533",
+    "arxiv_id": "2608.26533",
+    "detail_path": "papers/2608.26533/",
+    "cover_path": "covers/2608.26533/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.26533.webp",
+    "paper_image_full_path": "assets/paper-images/2608.26533.webp",
+    "preview_text": "该论文针对自动驾驶运动规划器中轨迹选择阶段缺乏安全性保证的问题，提出了一种结合控制屏障函数（CBF）、条件风险价值（CVaR）与共形预测（Conformal Prediction）的框架，用于为规划器选定的轨迹提供校准后的安全净空（safety clearance）下限证书。 应用场景为自动驾驶车辆在动态交通环境中的轨迹规划与安全评估，属于运动规划与安全验证的交叉领域。 研究问题核心在于：规划器在规划时无法获得真实未来信息，如何为最终选定的轨迹（而非单个候选）提供有统计保证的物理安全净空下界，并且该保证不依赖于预测模型的正确性。",
+    "research_unit": "The Ohio State University, Department of Mechanical and Aerospace Engineeri…",
+    "hook_text": "该论文针对自动驾驶运动规划器中轨迹选择阶段缺乏安全性保证的问题，提出了一种结合控制屏障函数（CBF）、条件风险价值（CVaR）与共形预测（Conformal Prediction）的框架，用于为规划器选定的轨迹提供校准后的安全净空（safety clearance）下限证书。",
+    "key_points": [
+      "该论文针对自动驾驶运动规划器中轨迹选择阶段缺乏安全性保证的问题，提出了一种结合控制屏障函数（CBF）、条件风险价值（CVaR）与共形预测（Conformal Prediction）的框架，用于为规划器选定的轨迹提供校准后的安全净空（safety clearance）下限证书。",
+      "应用场景为自动驾驶车辆在动态交通环境中的轨迹规划与安全评估，属于运动规划与安全验证的交叉领域。",
+      "研究问题核心在于：规划器在规划时无法获得真实未来信息，如何为最终选定的轨迹（而非单个候选）提供有统计保证的物理安全净空下界，并且该保证不依赖于预测模型的正确性。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-28",
+    "title": "Towards Trustworthy Embodied Intelligence: A Systems Framework and Graded Trustworthiness Levels",
+    "link": "https://arxiv.org/abs/2607.26121",
+    "arxiv_id": "2607.26121",
+    "detail_path": "papers/2607.26121/",
+    "cover_path": "covers/2607.26121/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.26121.webp",
+    "paper_image_full_path": "assets/paper-images/2607.26121.webp",
+    "preview_text": "本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。 论文面向的任务场景包括机器人操作（manipulation）、导航（navigation）、人机交互（human interaction），以及自主驾驶作为工程类比。 核心研究问题包括：如何联合定义与评估任务能力与安全性；故障、不确定性、恶意输入、时序违例和无效假设如何跨层传播；哪些机制能在防止、约束、检测和恢复不安全行为的同时保留有用能力；哪些证据形式能支撑有界部署声明；以及从实验室评估到有约束部署和持续现场保障的机制与证据如何演变。",
+    "research_unit": "SparkLab@Xspark AI · 原文未明确对应",
+    "hook_text": "本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。",
+    "key_points": [
+      "本文是一篇综述性论文，针对具身智能（Embodied Intelligence）系统定义了“可信具身智能”概念，并将其界定为“持续安全成功”（sustained safe success），即系统在环境与系统变化下可靠完成任务且风险保持在可接受范围内。",
+      "论文面向的任务场景包括机器人操作（manipulation）、导航（navigation）、人机交互（human interaction），以及自主驾驶作为工程类比。",
+      "核心研究问题包括：如何联合定义与评估任务能力与安全性；故障、不确定性、恶意输入、时序违例和无效假设如何跨层传播；哪些机制能在防止、约束、检测和恢复不安全行为的同时保留有用能力；哪些证据形式能支撑有界部署声明；以及从实验室评估到有约束部署和持续现场保障的机制与证据如何演变。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-28",
+    "title": "Image Quality Dependent Degradation for AI Systems",
+    "link": "https://arxiv.org/abs/2607.25736",
+    "arxiv_id": "2607.25736",
+    "detail_path": "papers/2607.25736/",
+    "cover_path": "covers/2607.25736/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.25736.webp",
+    "paper_image_full_path": "assets/paper-images/2607.25736.webp",
+    "preview_text": "本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。 核心任务为行人检测（面向自动紧急制动），提出了一个\"失败降级系统\"（fail-degraded system）：当图像质量较低时，通过降低目标检测器的置信度阈值来提高召回率，从而避免漏检行人这一更严重的安全事故；在图像质量高时则保持精确预测。",
+    "research_unit": "German Aerospace Center (DLR) Institute for AI Safety and Security · Yannic…",
+    "hook_text": "本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。",
+    "key_points": [
+      "本文针对自动驾驶中基于图像的感知系统，研究在输入图像质量较差（如噪声、黑暗、污染等）时如何维持系统的安全性与可信度。",
+      "核心任务为行人检测（面向自动紧急制动），提出了一个\"失败降级系统\"（fail-degraded system）：当图像质量较低时，通过降低目标检测器的置信度阈值来提高召回率，从而避免漏检行人这一更严重的安全事故；在图像质量高时则保持精确预测。",
+      "提出了一个针对感知子系统的失败降级系统，利用输入监控器来触发降级行为，而不依赖后备方案（如切换至LiDAR）。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-07-28",
+    "title": "The LAIA Dataset: Labelled Attention for Intelligent Automobiles",
+    "link": "https://arxiv.org/abs/2607.25570",
+    "arxiv_id": "2607.25570",
+    "detail_path": "papers/2607.25570/",
+    "cover_path": "covers/2607.25570/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.25570.webp",
+    "paper_image_full_path": "assets/paper-images/2607.25570.webp",
+    "preview_text": "该论文介绍了LAIA（Labelled Attention for Intelligent Automobiles）数据集，这是一个用于自动驾驶端到端驾驶研究的合成数据集。 其核心研究问题是解决端到端驾驶模型的可解释性问题，通过将人类驾驶员注视数据与传感器数据和控制信号同步融合，使模型不仅学习驾驶员的操作，还能理解驾驶员“看什么”，从而实现基于注意力的人类与AI驾驶行为对比。 应用场景包括训练注意力感知的端到端AI驾驶模型、驾驶员行为预测、异常注意力模式检测以及提升模型可解释性。",
+    "research_unit": "Computer Vision Center · A. Contreras、D. Porres、R. Abad 等",
+    "hook_text": "该论文介绍了LAIA（Labelled Attention for Intelligent Automobiles）数据集，这是一个用于自动驾驶端到端驾驶研究的合成数据集。",
+    "key_points": [
+      "该论文介绍了LAIA（Labelled Attention for Intelligent Automobiles）数据集，这是一个用于自动驾驶端到端驾驶研究的合成数据集。",
+      "其核心研究问题是解决端到端驾驶模型的可解释性问题，通过将人类驾驶员注视数据与传感器数据和控制信号同步融合，使模型不仅学习驾驶员的操作，还能理解驾驶员“看什么”，从而实现基于注意力的人类与AI驾驶行为对比。",
+      "应用场景包括训练注意力感知的端到端AI驾驶模型、驾驶员行为预测、异常注意力模式检测以及提升模型可解释性。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-27",
+    "title": "MATS: A novel multi-modality multi-task learning framework for 3D perception in autonomous driving",
+    "link": "https://arxiv.org/abs/2607.24224",
+    "arxiv_id": "2607.24224",
+    "detail_path": "papers/2607.24224/",
+    "cover_path": "covers/2607.24224/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.24224.webp",
+    "paper_image_full_path": "assets/paper-images/2607.24224.webp",
+    "preview_text": "论文解决自动驾驶中基于相机与 LiDAR 多模态数据的 3D 感知任务，具体包括 3D 物体检测和 BEV 地图分割。 应用场景为自动驾驶系统的环境感知，研究问题为多模态多任务联合学习中的负迁移问题，即单一共享 BEV 特征图难以同时满足不同感知任务的需求。",
+    "research_unit": "School of Electrical and Information Engineering, Zhengzhou University · Ju…",
+    "hook_text": "论文解决自动驾驶中基于相机与 LiDAR 多模态数据的 3D 感知任务，具体包括 3D 物体检测和 BEV 地图分割。",
+    "key_points": [
+      "论文解决自动驾驶中基于相机与 LiDAR 多模态数据的 3D 感知任务，具体包括 3D 物体检测和 BEV 地图分割。",
+      "应用场景为自动驾驶系统的环境感知，研究问题为多模态多任务联合学习中的负迁移问题，即单一共享 BEV 特征图难以同时满足不同感知任务的需求。",
+      "提出 MATS（Multi-modality Multi-task learning with modality-adaptive BEV fusion and task-specific Mixture-of-Experts）框架，同时执行 3D 物体检测与地图分割。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-27",
+    "title": "Reasoning to Regulate: Chain-of-Thought for Traffic Rule Understanding",
+    "link": "https://arxiv.org/abs/2607.24199",
+    "arxiv_id": "2607.24199",
+    "detail_path": "papers/2607.24199/",
+    "cover_path": "covers/2607.24199/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.24199.webp",
+    "paper_image_full_path": "assets/paper-images/2607.24199.webp",
+    "preview_text": "解决自动驾驶中的交通规则理解任务，即理解交通标志的规则并将其与特定车道关联（规则-车道关联）。 应用场景为基于在线高精地图的自动驾驶规控。 研究问题为现有方法（如RuleVLM）将规则理解视为直接序列预测，忽略了标志语义与地图结构之间的推理过程，导致可解释性差和规则-车道关联准确性不足。",
+    "research_unit": "深圳市福田国家应用数学中心（Shenzhen-FNii）、香港中文大学（深圳） · Yueru Luo、Xu Yan、Zhen Li 等",
+    "hook_text": "解决自动驾驶中的交通规则理解任务，即理解交通标志的规则并将其与特定车道关联（规则-车道关联）。",
+    "key_points": [
+      "解决自动驾驶中的交通规则理解任务，即理解交通标志的规则并将其与特定车道关联（规则-车道关联）。",
+      "应用场景为基于在线高精地图的自动驾驶规控。",
+      "研究问题为现有方法（如RuleVLM）将规则理解视为直接序列预测，忽略了标志语义与地图结构之间的推理过程，导致可解释性差和规则-车道关联准确性不足。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-27",
+    "title": "Mutual Modality Trust with Lightweight Reconstruction Regularization for Fine-grained Tire Pattern Recognition",
+    "link": "https://arxiv.org/abs/2607.23979",
+    "arxiv_id": "2607.23979",
+    "detail_path": "papers/2607.23979/",
+    "cover_path": "covers/2607.23979/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.23979.webp",
+    "paper_image_full_path": "assets/paper-images/2607.23979.webp",
+    "preview_text": "该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。 研究问题包括：现有方法过度依赖单一视觉模态、缺乏对细微胎面纹理的空间-频率联合建模能力，以及在标注轮胎图像有限的情况下存在严重过拟合问题。",
+    "research_unit": "西安邮电大学通信与信息工程学院 · Jianning Yang、Jie Fang、Xinda Ma 等",
+    "hook_text": "该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。",
+    "key_points": [
+      "该论文面向自动驾驶感知、车辆安全监控和汽车自动化维护中的细粒度轮胎花纹识别任务。",
+      "研究问题包括：现有方法过度依赖单一视觉模态、缺乏对细微胎面纹理的空间-频率联合建模能力，以及在标注轮胎图像有限的情况下存在严重过拟合问题。",
+      "设计了基于互模态信任（M²T）的双分支细粒度轮胎花纹识别框架，支持表面与压痕分支独立推理或融合推理，适应模态缺失场景。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-27",
+    "title": "Development of Vision-Language Model-based GNSS Spoofing Detection for Autonomous Vehicle Navigation",
+    "link": "https://arxiv.org/abs/2607.23962",
+    "arxiv_id": "2607.23962",
+    "detail_path": "papers/2607.23962/",
+    "cover_path": "covers/2607.23962/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.23962.webp",
+    "paper_image_full_path": "assets/paper-images/2607.23962.webp",
+    "preview_text": "本论文解决自动驾驶车辆中GNSS欺骗检测的问题，目标是在导航层面检测能够误导车辆行驶方向的欺骗攻击。 应用场景为自动驾驶车辆在真实道路上的定位与导航，特别是对GNSS信号完整性的防御。 研究问题为如何在语义行为层面验证GNSS报告的机动动作与实际车辆行为的一致性，以检测传统的信号级和几何一致性方法难以识别的复杂欺骗攻击。",
+    "research_unit": "School of Computing, Clemson University · Mohammed Aldeen、Long Cheng",
+    "hook_text": "本论文解决自动驾驶车辆中GNSS欺骗检测的问题，目标是在导航层面检测能够误导车辆行驶方向的欺骗攻击。",
+    "key_points": [
+      "本论文解决自动驾驶车辆中GNSS欺骗检测的问题，目标是在导航层面检测能够误导车辆行驶方向的欺骗攻击。",
+      "应用场景为自动驾驶车辆在真实道路上的定位与导航，特别是对GNSS信号完整性的防御。",
+      "研究问题为如何在语义行为层面验证GNSS报告的机动动作与实际车辆行为的一致性，以检测传统的信号级和几何一致性方法难以识别的复杂欺骗攻击。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-27",
+    "title": "SimBEV2X: A Large-Scale Dataset and Data Generation Tool for Multi-Task Vehicle-to-Everything Cooperative Perception",
+    "link": "https://arxiv.org/abs/2607.23910",
+    "arxiv_id": "2607.23910",
+    "detail_path": "papers/2607.23910/",
+    "cover_path": "covers/2607.23910/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.23910.webp",
+    "paper_image_full_path": "assets/paper-images/2607.23910.webp",
+    "preview_text": "解决自动驾驶中V2X协同感知任务，针对鸟瞰视图（BEV）表示下的多模态、多任务协同感知算法训练数据缺乏的问题。 应用场景为多智能体自动驾驶环境下的车-车、车-路协同感知，覆盖3D目标检测、HD地图感知、BEV语义分割和语义占用网格预测等多个感知任务。",
+    "research_unit": "原文未明确作者与机构对应关系 · Goodarz Mehr、Sepideh Gohari、Montasir Abbas 等",
+    "hook_text": "解决自动驾驶中V2X协同感知任务，针对鸟瞰视图（BEV）表示下的多模态、多任务协同感知算法训练数据缺乏的问题。",
+    "key_points": [
+      "解决自动驾驶中V2X协同感知任务，针对鸟瞰视图（BEV）表示下的多模态、多任务协同感知算法训练数据缺乏的问题。",
+      "应用场景为多智能体自动驾驶环境下的车-车、车-路协同感知，覆盖3D目标检测、HD地图感知、BEV语义分割和语义占用网格预测等多个感知任务。",
+      "提出了SimBEV2X，一个基于CARLA模拟器的先进合成数据生成工具，可自动创建随机驾驶场景并采集多模态传感器数据及多种地面真值标注。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-26",
+    "title": "RoadVGGT: Road-Structure-Aware Feed-Forward Road Surface Reconstruction",
+    "link": "https://arxiv.org/abs/2607.23758",
+    "arxiv_id": "2607.23758",
+    "detail_path": "papers/2607.23758/",
+    "cover_path": "covers/2607.23758/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.23758.webp",
+    "paper_image_full_path": "assets/paper-images/2607.23758.webp",
+    "preview_text": "本文面向大尺度道路表面重建任务，服务于高清地图构建、自动驾驶感知、自动标注和仿真等应用场景。 针对既有道路专用重建方法需要逐场景优化训练、且需围绕行驶轨迹进行场景相关的覆盖设计，导致在大规模新采集道路上的扩展性受限的问题。 提出 RoadVGGT，一个道路结构感知的、前馈式（feed-forward）道路表面重建框架，无需测试时逐场景优化即可直接重建紧凑的高斯道路表面。",
+    "research_unit": "浙江大学 · Han Jiao、Jiakai Sun、Zhanjie Zhang 等",
+    "hook_text": "本文面向大尺度道路表面重建任务，服务于高清地图构建、自动驾驶感知、自动标注和仿真等应用场景。",
+    "key_points": [
+      "本文面向大尺度道路表面重建任务，服务于高清地图构建、自动驾驶感知、自动标注和仿真等应用场景。",
+      "针对既有道路专用重建方法需要逐场景优化训练、且需围绕行驶轨迹进行场景相关的覆盖设计，导致在大规模新采集道路上的扩展性受限的问题。",
+      "提出 RoadVGGT，一个道路结构感知的、前馈式（feed-forward）道路表面重建框架，无需测试时逐场景优化即可直接重建紧凑的高斯道路表面。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-26",
+    "title": "LabRobFail: A Benchmark for Robotic Failure Analysis in Chemical Self-driving Laboratory",
+    "link": "https://arxiv.org/abs/2607.23704",
+    "arxiv_id": "2607.23704",
+    "detail_path": "papers/2607.23704/",
+    "cover_path": "covers/2607.23704/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.23704.webp",
+    "paper_image_full_path": "assets/paper-images/2607.23704.webp",
+    "preview_text": "论文解决自动驾驶化学实验室中具身代理的故障分析（Robotic Failure Analysis）任务，针对自驱动实验室（Self-Driving Laboratories, SDLs）中部署具身代理时面临的可逆性和安全性关键问题。 应用场景为化学实验室自动化，涵盖短程操作（如拾取、放置、倒液）、中程链式操作（如搅拌）和长程多阶段工作流（如从干燥箱中取烧杯）。 研究问题为：由于真实失败数据稀缺、现有仿真器缺乏系统化的失败注入管线，以及现有评估基准粒度较粗（仅覆盖二元检测或粗粒度失败分类），难以支持安全关键化学环境中的精细故障理解与闭环恢复。",
+    "research_unit": "School of Software, Dalian University of Technology · Haobo Wang、Baoli Sun、…",
+    "hook_text": "论文解决自动驾驶化学实验室中具身代理的故障分析（Robotic Failure Analysis）任务，针对自驱动实验室（Self-Driving Laboratories, SDLs）中部署具身代理时面临的可逆性和安全性关键问题。",
+    "key_points": [
+      "论文解决自动驾驶化学实验室中具身代理的故障分析（Robotic Failure Analysis）任务，针对自驱动实验室（Self-Driving Laboratories, SDLs）中部署具身代理时面临的可逆性和安全性关键问题。",
+      "应用场景为化学实验室自动化，涵盖短程操作（如拾取、放置、倒液）、中程链式操作（如搅拌）和长程多阶段工作流（如从干燥箱中取烧杯）。",
+      "研究问题为：由于真实失败数据稀缺、现有仿真器缺乏系统化的失败注入管线，以及现有评估基准粒度较粗（仅覆盖二元检测或粗粒度失败分类），难以支持安全关键化学环境中的精细故障理解与闭环恢复。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-26",
+    "title": "ObsDriveBench: Benchmarking Multimodal Understanding under Adverse Weather with Observability Awareness",
+    "link": "https://arxiv.org/abs/2607.23537",
+    "arxiv_id": "2607.23537",
+    "detail_path": "papers/2607.23537/",
+    "cover_path": "covers/2607.23537/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.23537.webp",
+    "paper_image_full_path": "assets/paper-images/2607.23537.webp",
+    "preview_text": "本文提出 ObsDriveBench，一个面向真实恶劣天气条件下自动驾驶多模态理解的评测基准。 研究问题：在雾、雨、雪、低照度等真实恶劣天气下，视觉-语言模型（VLM）如何表现？其多模态理解与决策能力的局限性如何系统评估？ 核心关注点在于“环境可观测性退化”：恶劣天气下相机、LiDAR、雷达观测变得不可靠且跨模态不一致，影响场景理解、空间推理与安全决策。 任务类型为多模态多选题（MCQ）评测，覆盖观测性感知、空间可靠性与风险感知决策三个能力维度。",
+    "research_unit": "Department of Computer Science and Engineering, The Chinese University of H…",
+    "hook_text": "本文提出 ObsDriveBench，一个面向真实恶劣天气条件下自动驾驶多模态理解的评测基准。",
+    "key_points": [
+      "本文提出 ObsDriveBench，一个面向真实恶劣天气条件下自动驾驶多模态理解的评测基准。",
+      "研究问题：在雾、雨、雪、低照度等真实恶劣天气下，视觉-语言模型（VLM）如何表现？其多模态理解与决策能力的局限性如何系统评估？",
+      "核心关注点在于“环境可观测性退化”：恶劣天气下相机、LiDAR、雷达观测变得不可靠且跨模态不一致，影响场景理解、空间推理与安全决策。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-26",
+    "title": "MOJITO: Modal Joint Learning for Unified End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.23511",
+    "arxiv_id": "2607.23511",
+    "detail_path": "papers/2607.23511/",
+    "cover_path": "covers/2607.23511/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.23511.webp",
+    "paper_image_full_path": "assets/paper-images/2607.23511.webp",
+    "preview_text": "本论文解决端到端自动驾驶中传统级联“感知到规划”流水线带来的信息瓶颈问题。 提出统一的多模态“传感器到动作”框架 MOJITO，通过模态联合学习让规划器直接访问细粒度的多模态传感器特征。 应用场景包括 NAVSIM-v1 和 NAVSIM-v2 数据集上的规划任务，支持指令跟随和多样化轨迹生成。",
+    "research_unit": "University of Science and Technology of China · Zhijing Cheng、Xun Yang",
+    "hook_text": "本论文解决端到端自动驾驶中传统级联“感知到规划”流水线带来的信息瓶颈问题。",
+    "key_points": [
+      "本论文解决端到端自动驾驶中传统级联“感知到规划”流水线带来的信息瓶颈问题。",
+      "提出统一的多模态“传感器到动作”框架 MOJITO，通过模态联合学习让规划器直接访问细粒度的多模态传感器特征。",
+      "应用场景包括 NAVSIM-v1 和 NAVSIM-v2 数据集上的规划任务，支持指令跟随和多样化轨迹生成。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-24",
+    "title": "Explainable Reinforcement Learning for assisting Air Traffic Controllers",
+    "link": "https://arxiv.org/abs/2607.22525",
+    "arxiv_id": "2607.22525",
+    "detail_path": "papers/2607.22525/",
+    "cover_path": "covers/2607.22525/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.22525.webp",
+    "paper_image_full_path": "assets/paper-images/2607.22525.webp",
+    "preview_text": "本文研究可解释强化学习（XRL）在空管（ATC）辅助决策中的应用，属于航空交通管理（ATM）领域的安全关键任务。 采用一个简化的二维空域环境作为测试平台，训练强化学习智能体控制单架飞机在避开禁飞区（NFZ）的同时，从起点导航至目标位置。 研究重点是开发一个不仅能保证安全高效航路导航的决策支持系统，还引入可解释性层（显著性图）来提升系统对人工管制员的可解释性和可信度。 论文还探讨了可解释性在满足监管要求（如欧盟AI法案、EASA可解释性要求）和促进人机协作方面的价值。",
+    "research_unit": "Department of Engineering, University of Campania \"Luigi Vanvitelli\", Italy…",
+    "hook_text": "本文研究可解释强化学习（XRL）在空管（ATC）辅助决策中的应用，属于航空交通管理（ATM）领域的安全关键任务。",
+    "key_points": [
+      "本文研究可解释强化学习（XRL）在空管（ATC）辅助决策中的应用，属于航空交通管理（ATM）领域的安全关键任务。",
+      "采用一个简化的二维空域环境作为测试平台，训练强化学习智能体控制单架飞机在避开禁飞区（NFZ）的同时，从起点导航至目标位置。",
+      "研究重点是开发一个不仅能保证安全高效航路导航的决策支持系统，还引入可解释性层（显著性图）来提升系统对人工管制员的可解释性和可信度。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-24",
+    "title": "DB-VIO: Dual-Branch Visual Inertial Odometry with Enhanced Visual-Inertial Representation",
+    "link": "https://arxiv.org/abs/2607.22123",
+    "arxiv_id": "2607.22123",
+    "detail_path": "papers/2607.22123/",
+    "cover_path": "covers/2607.22123/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.22123.webp",
+    "paper_image_full_path": "assets/paper-images/2607.22123.webp",
+    "preview_text": "本文提出DB-VIO，一个用于自动驾驶和空中机器人平台的视觉惯性里程计（VIO）框架。 针对现有学习型VIO方法的三个问题：单目视觉特征缺乏显式几何结构、原始惯性编码隐含旋转运动学、以及使用单一时间模型对旋转和平移进行统一位姿估计。 通过引入深度线索增强视觉感知、提供积分姿态先验增强惯性感知，以及采用双分支解码器解耦旋转和平移建模来改进6自由度（6-DoF）位姿估计性能。",
+    "research_unit": "Department of Electrical and Computer Engineering, National University of S…",
+    "hook_text": "本文提出DB-VIO，一个用于自动驾驶和空中机器人平台的视觉惯性里程计（VIO）框架。",
+    "key_points": [
+      "本文提出DB-VIO，一个用于自动驾驶和空中机器人平台的视觉惯性里程计（VIO）框架。",
+      "针对现有学习型VIO方法的三个问题：单目视觉特征缺乏显式几何结构、原始惯性编码隐含旋转运动学、以及使用单一时间模型对旋转和平移进行统一位姿估计。",
+      "通过引入深度线索增强视觉感知、提供积分姿态先验增强惯性感知，以及采用双分支解码器解耦旋转和平移建模来改进6自由度（6-DoF）位姿估计性能。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-24",
+    "title": "CommandLM: Data driven behavior level descriptor for ego vehicles",
+    "link": "https://arxiv.org/abs/2607.22078",
+    "arxiv_id": "2607.22078",
+    "detail_path": "papers/2607.22078/",
+    "cover_path": "covers/2607.22078/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.22078.webp",
+    "paper_image_full_path": "assets/paper-images/2607.22078.webp",
+    "preview_text": "论文解决自动驾驶中行为级（behavior-level）决策的可解释性问题，核心任务是生成自车（ego vehicle）的简洁、人类可读的行为描述文本。 应用场景为多传感器输入下的自动驾驶场景理解，面向规划器监督、安全审计以及人机协同验证等下游任务。 研究问题是：如何将多摄像头与 LiDAR 融合后的时空感知信息，通过多模态大语言模型转化为意图感知、可解释的行为级自然语言描述，同时保持计算可行性。",
+    "research_unit": "Munich University of Applied Sciences, Munich, Germany · Boris Tokic",
+    "hook_text": "论文解决自动驾驶中行为级（behavior-level）决策的可解释性问题，核心任务是生成自车（ego vehicle）的简洁、人类可读的行为描述文本。",
+    "key_points": [
+      "论文解决自动驾驶中行为级（behavior-level）决策的可解释性问题，核心任务是生成自车（ego vehicle）的简洁、人类可读的行为描述文本。",
+      "应用场景为多传感器输入下的自动驾驶场景理解，面向规划器监督、安全审计以及人机协同验证等下游任务。",
+      "研究问题是：如何将多摄像头与 LiDAR 融合后的时空感知信息，通过多模态大语言模型转化为意图感知、可解释的行为级自然语言描述，同时保持计算可行性。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-23",
+    "title": "Boosting Robustness for All-Weather Self-Supervised Depth Estimation in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.21526",
+    "arxiv_id": "2607.21526",
+    "detail_path": "papers/2607.21526/",
+    "cover_path": "covers/2607.21526/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.21526.webp",
+    "paper_image_full_path": "assets/paper-images/2607.21526.webp",
+    "preview_text": "本文解决自动驾驶在恶劣天气条件下的自监督单目深度估计鲁棒性问题。 针对雨天、雾天、雪天和夜间等全天气场景，现有自监督方法会因亮度一致性假设被破坏而产生错误的深度预测。 研究问题包括：如何在不依赖配对合成数据和额外标注的情况下，利用真实全天气数据训练鲁棒的深度估计模型，以及如何有效融合稀疏的雷达点云以增强感知鲁棒性。",
+    "research_unit": "State Key Laboratory of Networking and Switching Technology, Beijing Univer…",
+    "hook_text": "本文解决自动驾驶在恶劣天气条件下的自监督单目深度估计鲁棒性问题。",
+    "key_points": [
+      "本文解决自动驾驶在恶劣天气条件下的自监督单目深度估计鲁棒性问题。",
+      "针对雨天、雾天、雪天和夜间等全天气场景，现有自监督方法会因亮度一致性假设被破坏而产生错误的深度预测。",
+      "研究问题包括：如何在不依赖配对合成数据和额外标注的情况下，利用真实全天气数据训练鲁棒的深度估计模型，以及如何有效融合稀疏的雷达点云以增强感知鲁棒性。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-23",
+    "title": "HGeo-TopoMap: Boosting Topological Mapping with Hierarchical Geometric Priors",
+    "link": "https://arxiv.org/abs/2607.21281",
+    "arxiv_id": "2607.21281",
+    "detail_path": "papers/2607.21281/",
+    "cover_path": "covers/2607.21281/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.21281.webp",
+    "paper_image_full_path": "assets/paper-images/2607.21281.webp",
+    "preview_text": "解决自动驾驶感知系统中拓扑地图构建任务，具体为在鸟瞰视图（BEV）下的交通标志与车道中心线实例检测及其拓扑关系推理。 针对真实环境中中心线缺乏显式视觉标记、导致复杂场景下中心线实例检测性能下降的问题，提出利用显式路网结构图与隐式中心线几何关系的分层几何先验来增强拓扑建图。",
+    "research_unit": "School of Automation and Electrical Engineering, Zhejiang University of Sci…",
+    "hook_text": "解决自动驾驶感知系统中拓扑地图构建任务，具体为在鸟瞰视图（BEV）下的交通标志与车道中心线实例检测及其拓扑关系推理。",
+    "key_points": [
+      "解决自动驾驶感知系统中拓扑地图构建任务，具体为在鸟瞰视图（BEV）下的交通标志与车道中心线实例检测及其拓扑关系推理。",
+      "针对真实环境中中心线缺乏显式视觉标记、导致复杂场景下中心线实例检测性能下降的问题，提出利用显式路网结构图与隐式中心线几何关系的分层几何先验来增强拓扑建图。",
+      "提出一种新型分层几何先验方法，用于增强拓扑中心线建图，可灵活插入不同基准（centerline 与 lane segment）。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-08-04",
     "title": "Long-term Traffic Scene Prediction via Polynomial Representations in Autonomous Driving",
     "link": "https://arxiv.org/abs/2608.03330",
