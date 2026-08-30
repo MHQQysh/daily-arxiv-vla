@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GeoWorldAD: Geometry World Action Model for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决自动驾驶中的轨迹规划任务，旨在动态3D环境中实现安全且高效的驾驶决策。 研究问题：现有Vision/Video-Action模型直接从视觉观测学习策略，但缺乏显式的几何基础与未来感知的空间引导，难以在碰撞避免与驾驶进度之间取得平衡。 应用场景为自动驾驶的闭环规划，基于视觉输入进行端到端的轨迹生成。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.17521">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.17521.webp" alt="GeoWorldAD: Geometry World Action Model for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决自动驾驶中的轨迹规划任务，旨在动态3D环境中实现安全且高效的驾驶决策。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">GeoWorldAD: Geometry World Action Model for Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-20 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.17521" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.17521" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.17521</span></div>
+            <p class="detail-summary">该论文解决自动驾驶中的轨迹规划任务，旨在动态3D环境中实现安全且高效的驾驶决策。 研究问题：现有Vision/Video-Action模型直接从视觉观测学习策略，但缺乏显式的几何基础与未来感知的空间引导，难以在碰撞避免与驾驶进度之间取得平衡。 应用场景为自动驾驶的闭环规划，基于视觉输入进行端到端的轨迹生成。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Nanyang Technological University, Xiaomi EV · Songyan Zhang、Hanbing Li、Daqi…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.17521/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决自动驾驶中的轨迹规划任务，旨在动态3D环境中实现安全且高效的驾驶决策。</p>
+  <ul class="reading-intro-points"><li>该论文解决自动驾驶中的轨迹规划任务，旨在动态3D环境中实现安全且高效的驾驶决策。</li><li>研究问题：现有Vision/Video-Action模型直接从视觉观测学习策略，但缺乏显式的几何基础与未来感知的空间引导，难以在碰撞避免与驾驶进度之间取得平衡。</li><li>应用场景为自动驾驶的闭环规划，基于视觉输入进行端到端的轨迹生成。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Nanyang Technological University, Xiaomi EV；作者：Songyan Zhang, Hanbing Li, Daqi Liu, Fang Li, Guang Chen, Hangjun Ye, Long Chen, Kuiyuan Yang</li><li>机构：Zhejiang University；作者：Jinyuan Tian, Hao Chen</li><li>机构：原文未明确对应；作者：Wenhui Huang, Chen Lv（原文未标注其机构信息）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决自动驾驶中的轨迹规划任务，旨在动态3D环境中实现安全且高效的驾驶决策。</li><li>研究问题：现有Vision/Video-Action模型直接从视觉观测学习策略，但缺乏显式的几何基础与未来感知的空间引导，难以在碰撞避免与驾驶进度之间取得平衡。</li><li>应用场景为自动驾驶的闭环规划，基于视觉输入进行端到端的轨迹生成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将自动驾驶规划形式化为“几何世界动作”（geometry world action）问题，提出GeoWorldAD，将轨迹规划锚定在显式的、自我对齐的3D几何空间中，并在同一几何空间内预测短时场景演化。</li><li>建立当前几何与未来几何作为互补的规划引导：多尺度当前几何提供安全运动的空间约束，潜在未来几何预测周围智能体与自车自由空间的演化，以支持高效驾驶进度。</li><li>提出Q-Former风格的几何世界模型，学习以自我状态为条件的潜在未来几何token，并通过未来深度预测提供监督。</li><li>提出几何导向的动作模型，通过迭代轨迹细化逐步聚合多尺度当前几何与潜在未来几何，兼顾安全性与效率。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：统一的视频几何世界动作模型，包含视频几何模型、几何世界模型和几何条件动作模型三个部分。</li><li>输入传感器：仅相机（C）。</li><li>场景表示：自我对齐的多尺度三维几何token（point maps与depth maps）以及潜在未来几何token，坐标系统一为自车相机坐标系。</li><li>模型结构：视频几何模型基于StreamVGGT（DINOv2视觉编码器 + 24层Transformer解码器），提取层{4,11,17,23}的多尺度几何token；几何世界模型采用Q-Former结构，包含4个几何引导聚合阶段（每阶段由几何-未来交叉注意力块和因果未来自注意力块组成）；动作模型初始化64个轨迹提案（R=64，Tp=8，d=1024），通过4个当前几何聚合阶段加1个未来几何细化阶段进行迭代优化。</li><li>关键技术：EgoStreamVGGT变体，将每帧点图表示为对应时刻的自车相机坐标系，相机位姿表示为相邻帧间相对变换；未来深度预测共享视频几何模型的DPT深度头；采用最小化提案损失（min-over-proposals）监督每个阶段；未来几何聚合块的输出投影零初始化以保留初始规划行为。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：OpenScene、nuScenes（真实世界）、ParallelDomain、RealDriveSim（合成数据），用于几何任务；NAVSIM（OpenScene的代表性子集）用于轨迹规划训练与评估。</li><li>仿真器：NAVSIM模拟器（v1为非反应式4秒环境，v2引入反应式交通）。</li><li>模型规模：视频几何模型为24层Transformer解码器，单层token数量N，token维度C（原文未报告具体数值）。</li><li>训练资源：32块NVIDIA H20 GPU，全局batch size为64，AdamW优化器。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1和v2的navtest split（闭环），视频深度估计在OpenScene、nuScenes、KITTI上评估。</li><li>评估指标：PDMS（包含NC、DAC、TTC、Comf、EP）、EPDMS（扩展指标含DDC、TL、LK、HC、EC）、深度估计的Abs Rel和δ&lt;1.25。</li><li>关键数值：</li></ul>
+<p> - NAVSIM v1：PDMS 91.0（NC 99.0，DAC 97.8，TTC 95.8，Comf 99.9，EP 85.9），优于最强密集几何基线DVGT-2（PDMS 90.3）与最强未来状态方法EponaV2（PDMS 90.4）。</p>
+<p> - NAVSIM v2：EPDMS 90.4（NC 99.0，DAC 97.8，DDC 99.6，TL 99.7，EP 89.1，TTC 98.6，LK 97.6，HC 98.0，EC 82.2），超过DVGT-2（89.6）和EponaV2（88.9）。</p>
+<p> - 消融研究：GeoWorldAD相对GeoAD在v1上PDMS提升1.7（89.3→91.0），EP提升3.3；v2上EPDMS提升2.8（87.6→90.4），EP提升2.8。</p>
+<ul><li>对比方法：PARA-Drive、VADv2、UniAD、iPad、Transfuser、GoalFlow、DiffusionDrive、WoTE、DriveSuprim、Epona、DriveLaW、WorldDrive、DriveVLA-W0、EponaV2、LFG、DVGT-2。</li><li>评估条件：闭环仿真评估（NAVSIM v1和v2），以及视频深度估计的离线评估；原文未报告开环或实车条件评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.17767/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">VLN-AVP: Zero-Shot Vision-Language Navigation with Hybrid Long-Short-Term Memory for Autonomous Valet Parking</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.16943/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SinD 2.0: A Multi-City UAV Dataset with Semantic Risk Annotations for SOTIF-Oriented Safety Validation at Signalized Intersections</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

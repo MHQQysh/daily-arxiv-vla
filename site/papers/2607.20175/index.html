@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PerceptDrive: Perception Prior World-Action Modeling with Adaptive Expert Routing for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：端到端自动驾驶轨迹规划，即从单目摄像头观测直接预测未来车辆轨迹。 应用场景：基于 NAVSIM 基准的开环规划（navtest 与 navhard 分割）与仿真评估。 研究问题：解决“先验到规划”（prior-to-plan）的迁移问题，即冻结感知基础模型（如几何、语义、动态先验）中的知识在压缩到规划器时可能被衰减，且静态融合方式无法根据场景自适应调整不同先验的贡献。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.20175">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.20175.webp" alt="PerceptDrive: Perception Prior World-Action Modeling with Adaptive Expert Routing for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：端到端自动驾驶轨迹规划，即从单目摄像头观测直接预测未来车辆轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PerceptDrive: Perception Prior World-Action Modeling with Adaptive Expert Routing for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.20175" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.20175" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.20175</span></div>
+            <p class="detail-summary">任务：端到端自动驾驶轨迹规划，即从单目摄像头观测直接预测未来车辆轨迹。 应用场景：基于 NAVSIM 基准的开环规划（navtest 与 navhard 分割）与仿真评估。 研究问题：解决“先验到规划”（prior-to-plan）的迁移问题，即冻结感知基础模型（如几何、语义、动态先验）中的知识在压缩到规划器时可能被衰减，且静态融合方式无法根据场景自适应调整不同先验的贡献。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Tsinghua University · Yushan Liu、Yifan Xie、Xiao-Ping Zhang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.20175/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：端到端自动驾驶轨迹规划，即从单目摄像头观测直接预测未来车辆轨迹。</p>
+  <ul class="reading-intro-points"><li>任务：端到端自动驾驶轨迹规划，即从单目摄像头观测直接预测未来车辆轨迹。</li><li>应用场景：基于 NAVSIM 基准的开环规划（navtest 与 navhard 分割）与仿真评估。</li><li>研究问题：解决“先验到规划”（prior-to-plan）的迁移问题，即冻结感知基础模型（如几何、语义、动态先验）中的知识在压缩到规划器时可能被衰减，且静态融合方式无法根据场景自适应调整不同先验的贡献。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Tsinghua University；作者：Yushan Liu、Yifan Xie、Xiao-Ping Zhang、Wenbo Ding</li><li>机构：AMap, Alibaba Group；作者：Yushan Liu、Tianxiong Lv、Bohua Wang、Hangqi Fan、Chenxu Zhao、He Zheng、Xuchang Zhong、Congyang Zhao、Zhihao Liao、Leigang Luo、Yang Cai</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：端到端自动驾驶轨迹规划，即从单目摄像头观测直接预测未来车辆轨迹。</li><li>应用场景：基于 NAVSIM 基准的开环规划（navtest 与 navhard 分割）与仿真评估。</li><li>研究问题：解决“先验到规划”（prior-to-plan）的迁移问题，即冻结感知基础模型（如几何、语义、动态先验）中的知识在压缩到规划器时可能被衰减，且静态融合方式无法根据场景自适应调整不同先验的贡献。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将“先验到规划”迁移问题形式化为冻结异构感知提供者与连续世界-动作规划器之间的表征接口问题，并分解为压缩层面与场景分配层面的失配。</li><li>提出两个耦合的规划器侧机制：逐分支先验保持（prior retention），通过重建停止梯度的专家表征来锚定各分支并防止表征坍缩；以及指标蒸馏的专家路由（metric-distilled expert routing），在训练时将特权子指标蒸馏进门控，保持推理为单轨迹直接生成。</li><li>引入自适应专家路由的世界-动作建模框架 PerceptDrive，包含冻结感知提供者（含几何、语义、动态三专家先验）与密集自监督视频表征的双流输入。</li><li>PerceptDrive 在 NAVSIM v1 上达到 90.4 PDMS、在 NAVSIM v2 上达到 90.2 EPDMS，刷新现有最优水平。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶规划器（perception-to-planning pipeline），包含冻结感知特征提取阶段与可训练世界-动作模型（WAM）规划阶段。</li><li>输入传感器：单个前视摄像头（1×C），无 LiDAR；输入包括前视图像历史、每帧自车状态（位置、朝向、速度、加速度、偏航率）以及导航指令。</li><li>场景表示：冻结 VLM 提供的高层专家先验表征（几何、语义、动态三组专家槽）与冻结自监督视频编码器提供的密集观测潜变量；两者投影后拼接为感知池，经查询银行压缩为分支读取结果。</li><li>模型结构：</li></ul>
+<p> - 冻结感知提供者：InternVL3-2B 经驾驶 QA 微调后，从冻结 VGGT（几何）、V-JEPA 2 ViT-g（语义）、Wan 2.1（动态）三个教师进行多教师蒸馏，构建三类专家表征——[GEO]、[SEM]、[DYN] 槽位。</p>
+<p> - 冻结低层编码器：V-JEPA 2-L，提供密集观测潜变量与未来潜变量目标。</p>
+<p> - 可训练 WAM：查询银行（全局上下文、动作、时间视频及各专家分支共 6 组查询）通过共享交叉注意力读取感知池；双向 Transformer 骨干融合读取结果、自车状态与指令嵌入，产出各专家条件、未来头条件、动作条件与场景向量；每个专家分支附保留探针；两层 MLP 路由器从场景向量预测软门控并加权融合专家条件；未来头预测动作无关未来潜变量，流匹配动作头据此生成单条轨迹。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 逐分支先验保持：保留探针从压缩读取结果重建停止梯度的专家槽目标，采用余弦相似度与 L2 组合损失。</p>
+<p> - 指标蒸馏路由：训练时用特权规则子指标对三种一次性分支草稿（one-hot 门控）打分，经温度控制转换为目标门控来监督路由器，测试时无候选打分或重排。</p>
+<p> - 双阶段优化：先构造冻结提供者，再训练 WAM；WAM 训练分预热（门控均匀）与联合阶段。</p>
+<p> - 推理：单次前馈生成一条轨迹，无测试时打分、重排或搜索。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM v1、NAVSIM v2（navtrain 训练，navtest 与 navhard 评估）；驾驶 QA 适应使用 DriveLM、LingoQA、DriveQA、NuScenes-QA、Reason2Drive 五数据集共 1,398,858 条清洗样本。</li><li>仿真器：NAVSIM（官方评估器，PDMS/EPDMS）。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：原文未报告具体 GPU 类型与数量。</li><li>实车平台：原文未报告实车平台。</li><li>其他资源：原文未报告模型权重与代码是否开源。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1 PDM Score（PDMS）与 NAVSIM v2 Extended PDM Score（EPDMS）在 navtest 上评估；NAVSIM v2 两阶段伪仿真在 navhard 上评估。</li><li>评估指标：PDMS、EPDMS 及其子指标 NC、DAC、EP、TTC、Comf. 等。</li><li>关键数值：NAVSIM v1 PDMS 90.4；NAVSIM v2 EPDMS 90.2；navhard 上 EPDMS 34.5；多训练种子稳定性为 PDMS 90.4±0.05、EPDMS 90.2±0.11。</li><li>对比方法：VLA 类（ReCogDrive、AutoVLA、DriveVLA-W0、Uni-World-VLA、DriveWorld-VLA、HiST-VLA）与基于世界模型的方法（LAW、WoTE、Epona、World4Drive、SeerDrive、PWM、DriveLaW、WorldDrive、DriveDreamer-Policy、DriveWAM、Drive-JEPA、Latent-WAM、DriveFuture、IDOL、GraphWorld）。</li><li>评估条件：开环（navtest 直接规划）与两阶段伪仿真（navhard）；单前视摄像头；所有监督池仅由 navtrain 构建；消融实验覆盖先验获取、世界-动作模型、设计选择、路由行为等维度。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.20947/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">RECO: Region-Aware Compensation for Extrinsic Perturbations in Roadside 3D Detection</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.20071/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">GaussianSeed: Hierarchical Gaussian Seeding for High-Resolution 3D Occupancy Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

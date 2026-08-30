@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GaussianSeed: Hierarchical Gaussian Seeding for High-Resolution 3D Occupancy Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶中的视觉中心 3D 占据预测任务。 旨在克服现有密集体素表示在高分辨率（如 0.1 米）下计算开销过大的问题。 面向自动驾驶与机器人导航应用，提出可在高分辨率下保持实时推理的稀疏占据预测框架。 同时构建了面向微移动与机器人导航的 TJScenes 数据集，含 0.1 米精细化标注。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.20071">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.20071.webp" alt="GaussianSeed: Hierarchical Gaussian Seeding for High-Resolution 3D Occupancy Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶中的视觉中心 3D 占据预测任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">GaussianSeed: Hierarchical Gaussian Seeding for High-Resolution 3D Occupancy Prediction</h1>
+            <div class="detail-meta">2026-07-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.20071" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.20071" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.20071</span></div>
+            <p class="detail-summary">解决自动驾驶中的视觉中心 3D 占据预测任务。 旨在克服现有密集体素表示在高分辨率（如 0.1 米）下计算开销过大的问题。 面向自动驾驶与机器人导航应用，提出可在高分辨率下保持实时推理的稀疏占据预测框架。 同时构建了面向微移动与机器人导航的 TJScenes 数据集，含 0.1 米精细化标注。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Tongji University（同济大学，中国上海） · Xinzhuo Li、Xianghui Pan、Jiayuan Du 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.20071/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶中的视觉中心 3D 占据预测任务。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶中的视觉中心 3D 占据预测任务。</li><li>旨在克服现有密集体素表示在高分辨率（如 0.1 米）下计算开销过大的问题。</li><li>面向自动驾驶与机器人导航应用，提出可在高分辨率下保持实时推理的稀疏占据预测框架。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Tongji University（同济大学，中国上海）；作者：Xinzhuo Li, Xianghui Pan, Jiayuan Du, Wei Wei, Liuyi Wang, Chengju Liu, Qijun Chen（原文未明确每位作者与机构的对应关系，但论文署名单位为同济大学）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶中的视觉中心 3D 占据预测任务。</li><li>旨在克服现有密集体素表示在高分辨率（如 0.1 米）下计算开销过大的问题。</li><li>面向自动驾驶与机器人导航应用，提出可在高分辨率下保持实时推理的稀疏占据预测框架。</li><li>同时构建了面向微移动与机器人导航的 TJScenes 数据集，含 0.1 米精细化标注。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 GaussianSeed，一种渐进式多尺度高斯占据预测框架，将基元组织为从粗到细的层次结构，突破高分辨率场景理解的立方级复杂度瓶颈。</li><li>提出三种协同技术：回归式高斯初始化（RBGI）、层次化高斯种子演化（HGSD）和高斯种子参数编码器（GSPE），构成纯相机、端到端的高效高分辨率占据预测流程。</li><li>构建 TJScenes，一个全景六相机、0.1 米分辨率的占据数据集，涵盖多样化非道路与人行道场景，补充现有以道路为中心的基准。</li><li>实验证明 GaussianSeed 在所有评估方法中延迟最低，同时保持极具竞争力的精度，推进高分辨率占据预测的效率-质量边界。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：视觉中心 3D 语义占据预测（稀疏高斯基元表示）。</li><li>输入传感器：仅相机（多视角图像）。</li><li>场景表示：一组语义 3D 高斯基元，每个基元由均值、尺度、旋转四元数、不透明度和语义 logit 向量参数化；通过可微体积渲染将其转换为稠密占据网格。</li><li>模型结构：2D 主干网络（ResNet-50）加 FPN 提取多尺度特征，级联解码器包含多个细化层；3D 查询通过交叉注意力采样并与多视角图像特征聚合；各层输出的高斯基元独立渲染并受 ground truth 监督。</li><li>关键技术：</li></ul>
+<p> - RBGI：通过轻量坐标回归锚定高斯中心（无需深度先验），并采用双向 Chamfer Distance 损失正则化位置。</p>
+<p> - HGSD：查询从单一高斯开始，随解码层层逐步演化为更细粒度的子代高斯，子代中心相对父代锚点通过学习偏移量回归。</p>
+<p> - GSPE：将上一层预测的高斯几何属性与语义 logit 编码为特征，以残差方式注入下一层查询嵌入。</p>
+<p> - 损失函数：负对数似然损失（NLL）、Lovász 损失、二值交叉熵损失和 Chamfer Distance 损失的加权组合。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Occ3D-nuScenes（0.4 米分辨率）；TJScenes（自建，0.1 米分辨率，7 个场景，27911 个标注样本，13 个语义类别，感知范围 [±20m, ±20m, -2m~4.4m]，由 6 相机阵列和 Livox Mid-360 LiDAR 采集）。</li><li>仿真器：原文未报告。</li><li>模型规模：主干为 ResNet-50；默认查询数 Q=800，默认总高斯数 G_total=28800。</li><li>训练资源：8 张 NVIDIA L40 GPU，batch size 为 32；AdamW 优化器，权重衰减 0.01，初始学习率 2×10⁻⁴，余弦退火调度，500 次迭代线性预热。</li><li>实车平台：定制移动机器人平台，搭载 6 相机阵列（用于 TJScenes 数据采集）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Occ3D-nuScenes 和 TJScenes（0.1 米分辨率）。</li><li>评估指标：mIoU（主要指标）；TJScenes 上额外报告动态类别平均 mIoU（mIoU_D，含行人、汽车、自行车、摩托车、公交车、卡车）；并报告延迟（ms）与内存（MB）。</li><li>关键数值：</li></ul>
+<p> - Occ3D-nuScenes 上，GaussianSeed 以 ResNet-50、256×704 输入实现 34.12% mIoU（全稀疏方法中最高）和 41.2ms 延迟（所有方法中最低）。</p>
+<p> - TJScenes（0.1 米）上，GaussianSeed 达到 12.37% mIoU、7.60% mIoU_D，优于 OPUS（7.87% mIoU、5.37% mIoU_D），同时延迟更低（66.7ms vs 97.8ms）、内存更小（931.93MB vs 1168.01MB）。</p>
+<p> - 消融实验：HGSD 与 GSPE 均带来一致增益；二者组合效果最佳（Occ3D 34.12%、TJScenes 12.36% vs 基线 25.81%、6.37%）。高斯数量消融显示 G_total=28800、Q=800 最优；Q=600 时（33.71%）仍略优于 OPUS-T（33.27%）。</p>
+<ul><li>对比方法：稠密网格方法（BEVFormer、TPVFormer、FB-Occ、SurroundOcc、PanoOcc、COTR、ProtoOcc、GSD-Occ、ALOcc）与全稀疏方法（SparseOcc、OPUS、GaussianFormer）。</li><li>开环、闭环、仿真或实车条件：仅进行开环（感知）评估，未报告闭环或实车部署测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.20175/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PerceptDrive: Perception Prior World-Action Modeling with Adaptive Expert Routing for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.19911/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">LoRFT: Benchmarking Long-Range Vehicle Trajectory Reconstruction from Fixed Highway Cameras</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

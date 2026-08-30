@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LoRFT: Benchmarking Long-Range Vehicle Trajectory Reconstruction from Fixed Highway Cameras - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决固定高速公路摄像头场景下的长距离车辆轨迹重建问题。 应用场景为高速公路固定摄像头监控，车辆在远距离区域因透视压缩、尺度衰减和跟踪不稳定导致自动轨迹碎片化或提前终止。 研究问题是从可靠的近场轨迹片段出发，重建同一车辆在远距离区域的连续轨迹，属于时空数据挖掘问题。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.19911">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.19911.webp" alt="LoRFT: Benchmarking Long-Range Vehicle Trajectory Reconstruction from Fixed Highway Cameras" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决固定高速公路摄像头场景下的长距离车辆轨迹重建问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">LoRFT: Benchmarking Long-Range Vehicle Trajectory Reconstruction from Fixed Highway Cameras</h1>
+            <div class="detail-meta">2026-07-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.19911" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.19911" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.19911</span></div>
+            <p class="detail-summary">本文解决固定高速公路摄像头场景下的长距离车辆轨迹重建问题。 应用场景为高速公路固定摄像头监控，车辆在远距离区域因透视压缩、尺度衰减和跟踪不稳定导致自动轨迹碎片化或提前终止。 研究问题是从可靠的近场轨迹片段出发，重建同一车辆在远距离区域的连续轨迹，属于时空数据挖掘问题。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Transportation, Changsha University of Science and Technology · Y…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.19911/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决固定高速公路摄像头场景下的长距离车辆轨迹重建问题。</p>
+  <ul class="reading-intro-points"><li>本文解决固定高速公路摄像头场景下的长距离车辆轨迹重建问题。</li><li>应用场景为高速公路固定摄像头监控，车辆在远距离区域因透视压缩、尺度衰减和跟踪不稳定导致自动轨迹碎片化或提前终止。</li><li>研究问题是从可靠的近场轨迹片段出发，重建同一车辆在远距离区域的连续轨迹，属于时空数据挖掘问题。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Transportation, Changsha University of Science and Technology；作者：Yufan Zhu, Kefu Yi, Xueju Zhang, Yunyang Tian, Long Chen, Zixuan Xiao</li><li>注：Yunyang Tian 的机构信息中列出了 Long Chen 和 Zixuan Xiao，但其余作者的机构归属未在原文中明确单独列出。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决固定高速公路摄像头场景下的长距离车辆轨迹重建问题。</li><li>应用场景为高速公路固定摄像头监控，车辆在远距离区域因透视压缩、尺度衰减和跟踪不稳定导致自动轨迹碎片化或提前终止。</li><li>研究问题是从可靠的近场轨迹片段出发，重建同一车辆在远距离区域的连续轨迹，属于时空数据挖掘问题。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 LoRFT 基准数据集，据作者所述为第一个面向固定高速公路摄像头长距离轨迹重建的开放基准，包含 22 个高速监控场景、366,109 帧视频、6,601 条人工验证轨迹、2,694,889 个边界框、路网几何标注、场景级划分和评估脚本。</li><li>提出 Map-RSTNet 模型，一种地图感知残差 Seq2Seq 重建网络，在道路对齐状态空间中表示轨迹，并使用几何感知解码减少透视引发的歧义。</li><li>在 LoRFT 上，Map-RSTNet 相比最强基线在 ADE、FDE 和 5 秒 RMSE 上分别降低 11.0%、15.4% 和 10.5%。</li><li>提供可复现的轨迹挖掘、小目标检测、远距离车辆跟踪和下游交通分析的评估支持。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：长距离车辆轨迹重建模型。</li><li>输入传感器：固定高速公路摄像头视频帧（352×288 像素，25 FPS）。</li><li>场景表示：使用场景级道路几何标注（道路边界、中心线、区域级交通方向），将图像空间轨迹转换为道路对齐状态空间。</li><li>模型结构：Map-RSTNet 为地图感知残差 Seq2Seq LSTM 框架。</li><li>关键技术：包括地图感知状态编码（将每帧编码为 10 维道路感知状态向量）、方向对齐残差解码（将相反方向轨迹归一化到共同参考方向，自回归预测残差位移）、动态几何刷新（解码时基于当前位置更新局部路网几何）、加权损失函数（位置、速度、端点和边界项），以及推理时坐标恢复。</li><li>训练配置：使用 Adam 优化器，批量大小 128，初始学习率 7×10⁻⁵；训练环境为 64 GB RAM 和两块 NVIDIA GeForce RTX 3090 GPU。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：LoRFT，包含 22 个四川省高速公路监控场景、366,109 帧视频、6,601 条人工验证轨迹、2,694,889 个边界框。</li><li>路网几何标注：包含道路中心线、左右道路边界、区域级交通方向元数据。</li><li>划分方式：14 个训练场景、4 个验证场景、4 个测试场景（约 60/20/20 比例），采用场景级划分。</li><li>实验配置：每轨迹观测帧数 60，参考段长 125 帧，视频分辨率 352×288，帧率 25 FPS。</li><li>实车平台：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：Ubuntu 工作站，64 GB RAM，两张 NVIDIA GeForce RTX 3090 GPU。</li><li>代码与数据：处理后的轨迹标注、路网几何文件、评估脚本和源代码公开于 https://github.com/YvfanZhu/LoRFT；原始监控视频在受控访问下提供。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：LoRFT 测试场景。</li><li>评估指标：ADE（平均位移误差）、FDE（最终位移误差）、RMSE@1s/2s/3s/4s/5s，以像素为单位，越低越好。</li><li>关键数值：Map-RSTNet 在 ADE 上 12.32（基线 CS-LSTM 13.85），FDE 上 21.71（基线 PRF 25.67），RMSE@5s 上 27.47（基线 PRF 30.70）；相比最强基线分别降低 11.0%、15.4%、10.5%。</li><li>对比方法：CS-LSTM、GRIP++、DeepTrack、MixNet、GNP、PRF，均在相同 LoRFT 重建协议下比较。</li><li>消融研究：地图感知状态编码（ADE 从 15.46 降至 14.20）、局部偏移编码（FDE 从 26.59 降至 25.45）、动态几何刷新（ADE 从 13.97 降至 12.32，FDE 从 25.45 降至 21.71）均逐步提升性能。</li><li>实验条件：开环（离线）重建评估，无闭环或实车测试；评估在图像坐标空间进行，未使用场景级相机标定。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.20071/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">GaussianSeed: Hierarchical Gaussian Seeding for High-Resolution 3D Occupancy Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.19781/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">WASABI: Whole-graph Assignment-based Stabilizer for lAne topology By Inter-frame tracking</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
