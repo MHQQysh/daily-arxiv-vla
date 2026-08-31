@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shift &amp; Drift: A Zero-Shot Benchmark for Generalizable and Robust Autonomous Driving Motion Planning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶运动规划器在训练环境表现良好但真实世界可靠性不足的问题，提出一个名为 Shift &amp; Drift 的双轨零样本基准。 该基准包含两个评估轴：语义漂移（Semantic Shift），通过将航空视角的 DeepScenario Open 3D 数据集（DSC3D）转换为 nuPlan 标准，对在北美和新加坡数据上训练的规划器进行跨地理域零样本评测；状态分布漂移（State-Distribution Drift），通过在闭环仿真中向自车动力学注入随机扰动来量化规划器对累积执行误差的鲁棒性。 应用场景聚焦于城市自动驾驶中的运动规划环节，特别关注高密度行人与自行车交互环境以及执行器噪声下的控制稳定性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.07844">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.07844.webp" alt="Shift &amp; Drift: A Zero-Shot Benchmark for Generalizable and Robust Autonomous Driving Motion Planning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶运动规划器在训练环境表现良好但真实世界可靠性不足的问题，提出一个名为 Shift &amp; Drift 的双轨零样本基准。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Shift &amp; Drift: A Zero-Shot Benchmark for Generalizable and Robust Autonomous Driving Motion Planning</h1>
+            <div class="detail-meta">2026-07-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.07844" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.07844" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.07844</span></div>
+            <p class="detail-summary">论文针对自动驾驶运动规划器在训练环境表现良好但真实世界可靠性不足的问题，提出一个名为 Shift &amp; Drift 的双轨零样本基准。 该基准包含两个评估轴：语义漂移（Semantic Shift），通过将航空视角的 DeepScenario Open 3D 数据集（DSC3D）转换为 nuPlan 标准，对在北美和新加坡数据上训练的规划器进行跨地理域零样本评测；状态分布漂移（State-Distribution Drift），通过在闭环仿真中向自车动力学注入随机扰动来量化规划器对累积执行误差的鲁棒性。 应用场景聚焦于城市自动驾驶中的运动规划环节，特别关注高密度行人与自行车交互环境以及执行器噪声下的控制稳定性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Mercedes-Benz AG, Research &amp; Development, Sindelfingen, Germany · Alessandr…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.07844/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶运动规划器在训练环境表现良好但真实世界可靠性不足的问题，提出一个名为 Shift &amp; Drift 的双轨零样本基准。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶运动规划器在训练环境表现良好但真实世界可靠性不足的问题，提出一个名为 Shift &amp; Drift 的双轨零样本基准。</li><li>该基准包含两个评估轴：语义漂移（Semantic Shift），通过将航空视角的 DeepScenario Open 3D 数据集（DSC3D）转换为 nuPlan 标准，对在北美和新加坡数据上训练的规划器进行跨地理域零样本评测；状态分布漂移（State-Distribution Drift），通过在闭环仿真中向自车动力学注入随机扰动来量化规划器对累积执行误差的鲁棒性。</li><li>应用场景聚焦于城市自动驾驶中的运动规划环节，特别关注高密度行人与自行车交互环境以及执行器噪声下的控制稳定性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Mercedes-Benz AG, Research &amp; Development, Sindelfingen, Germany；作者：Alessandro Canevaro, Hang Yu, Julian Schmidt, Peizheng Li, Silvan Lindner, Julian Jordan</li><li>机构：University of Tübingen, Tübingen, Germany；作者：Alessandro Canevaro, Peizheng Li, Georg Martius</li><li>机构：Karlsruhe Institute of Technology, ITIV, Karlsruhe, Germany；作者：Hang Yu, Wilhelm Stork</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶运动规划器在训练环境表现良好但真实世界可靠性不足的问题，提出一个名为 Shift &amp; Drift 的双轨零样本基准。</li><li>该基准包含两个评估轴：语义漂移（Semantic Shift），通过将航空视角的 DeepScenario Open 3D 数据集（DSC3D）转换为 nuPlan 标准，对在北美和新加坡数据上训练的规划器进行跨地理域零样本评测；状态分布漂移（State-Distribution Drift），通过在闭环仿真中向自车动力学注入随机扰动来量化规划器对累积执行误差的鲁棒性。</li><li>应用场景聚焦于城市自动驾驶中的运动规划环节，特别关注高密度行人与自行车交互环境以及执行器噪声下的控制稳定性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DeepPlan 数据集，即将 DSC3D 航空数据转换为 nuPlan 兼容格式的 1,182 个场景，覆盖慕尼黑、斯图加特、辛德尔芬根、柏林和旧金山五个城市，支持大规模跨域零样本闭环评估。</li><li>设计双轨基准框架：Track 1 评估语义泛化（跨数据集、跨地理域）；Track 2 采用 AWGN 和 Ornstein-Uhlenbeck 过程建模执行噪声，量化状态分布漂移下的鲁棒性。</li><li>系统性评测五种代表性规划器（PDM-Closed、PlanTF、PLUTO、Diffusion Planner、CaRL），揭示模仿学习方法在语义漂移下最高 76% 的性能衰减，以及 RL 方法 CaRL 在两项评测中的显著韧性（最多 8% 性能衰减）。</li><li>实证发现模仿保真度与闭环恢复能力之间存在权衡：IL 方法在行人密集环境下易发生安全关键失败，而规则方法虽安全但进展不足，RL 方法在两种漂移下均能优雅退化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：运动规划（Motion Planning）闭环评估。</li><li>输入传感器：原文未报告感知输入；评测基于对象级（object-level）数据，输入包含地图（向量地图）、智能体状态（位置、速度、加速度、航向）和自车里程计。</li><li>场景表示：基于 nuPlan 仿真框架的闭环场景，使用 GeoPackage 格式的高精向量地图（含车道边界、中心线、路口、限速），以及 20 Hz 的智能体轨迹日志。</li><li>模型结构：评测的规划器分三类——规则型（PDM-Closed 基于 IDM/MOBIL）、模仿学习型（PlanTF 基于 Transformer，Diffusion Planner 基于生成式扩散模型，PLUTO 为 IL 加规则后处理层）、强化学习型（CaRL 基于 PPO）。</li><li>关键技术：Track 1 的转换管线包括 OpenDRIVE 地图处理、自动路口检测、GPS/UTM 坐标对齐、R-tree 空间索引、候选自车筛选（车辆类型、峰值速度 &gt;1.0 m/s、无包围盒重叠）、8 秒滑动窗口切分（225 帧，12.5 Hz 到 20 Hz 线性插值）、自动化与人工两层后处理过滤。Track 2 在命令向量（加速度、转向速率）上注入两种噪声：AWGN 用于高频不相关抖动，OU 过程用于低频相关系统误差，均设低/中/高三档强度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：DSC3D（DeepScenario Open 3D Dataset）航拍数据；转换生成的 DeepPlan（1,182 个场景，分布为慕尼黑 205、斯图加特 206、辛德尔芬根 490、柏林 101、旧金山 180）；nuPlan Val14 作为分布内对比集；InterPlan 用于基准对比。</li><li>仿真器：nuPlan 仿真框架（含 Non-Reactive 与 Reactive 两种模式，Reactive 模式邻居车辆由 IDM 模型控制）。</li><li>模型规模：原文未报告各规划器参数量。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告；评测均为闭环仿真，无实车验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuPlan Val14（分布内）、DeepPlan（零样本语义漂移）、带噪声的 Val14 和 DeepPlan（状态分布漂移）。</li><li>评估指标：nuPlan 标准闭环评分（CLS）及其分解指标，含可行驶区域合规率（DAC）、行驶方向合规率（DDC）、舒适性（EIC）、进展（EMP）、沿专家路线进展（PER）、非碰撞率（NCR）、限速合规率（SLC）、碰撞时间（TTC）。针对 DeepPlan 场景调整了部分阈值（如 TTC 从 1.0s 降至 0.5s，可行驶区域违例从 0.3m 放宽至 3.0m）。</li><li>关键数值：语义漂移下 CaRL 取得最高 72.57 CLS（NR 模式），比次优 PDM-Closed 高 24.5 分；Diffusion Planner 在慕尼黑 CLS 降至 21.50，相对 Val14 衰减 76%；PDM-Closed NCR 最高（NR 89.25，R 90.10）但 PER 仅约 50；状态漂移下 CaRL 在所有条件下 CLS 保持 85 以上，其余方法在高噪声下衰减 20-30 分以上；PLUTO 在 R 模式下 CLS 从 36.74（NR）升至 63.03。</li><li>对比方法：Log（日志回放）、PDM-Closed（规则）、PlanTF（IL）、PLUTO（混合）、Diffusion Planner（IL/生成式）、CaRL（RL）。</li><li>评测条件：均为 nuPlan 闭环仿真评测，区分 Non-Reactive（日志回放）与 Reactive（IDM 反应式）两种模式；噪声实验报告为三个随机种子的均值±标准差；语义漂移为跨数据集零样本设置，无开环指标、无实车结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.08072/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Post-Training in End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.09787/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Adversarially Guided Diffusion for LiDAR Range Image Synthesis</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

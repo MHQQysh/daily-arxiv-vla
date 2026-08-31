@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Post-Training in End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文是一篇综述性论文，聚焦于端到端自动驾驶中的“后训练”（Post-Training）阶段，即对通过模仿学习初步训练的策略进行进一步的精细化优化。 论文指出，传统开环模仿学习难以应对自动驾驶安全关键、交互密集场景中的误差累积、恢复行为稀缺以及长时程目标（如安全与舒适性）无法被逐点标签捕获等问题。 作者提出一个统一视角，将后训练定义为独立于初始模仿学习和从零学习的阶段，并按照监督信号的形式将现有文献划分为四大类：蒸馏（Distillation）、基于偏好的对齐（Preference-based Alignment）、强化学习（Reinforcement Learning）和测试时精化（Test-time Refinement）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.08072">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.08072.webp" alt="Post-Training in End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文是一篇综述性论文，聚焦于端到端自动驾驶中的“后训练”（Post-Training）阶段，即对通过模仿学习初步训练的策略进行进一步的精细化优化。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Post-Training in End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.08072" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.08072" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.08072</span></div>
+            <p class="detail-summary">本文是一篇综述性论文，聚焦于端到端自动驾驶中的“后训练”（Post-Training）阶段，即对通过模仿学习初步训练的策略进行进一步的精细化优化。 论文指出，传统开环模仿学习难以应对自动驾驶安全关键、交互密集场景中的误差累积、恢复行为稀缺以及长时程目标（如安全与舒适性）无法被逐点标签捕获等问题。 作者提出一个统一视角，将后训练定义为独立于初始模仿学习和从零学习的阶段，并按照监督信号的形式将现有文献划分为四大类：蒸馏（Distillation）、基于偏好的对齐（Preference-based Alignment）、强化学习（Reinforcement Learning）和测试时精化（Test-time Refinement）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Northeastern University, Boston, USA · Ruining Yang、Muxing Wang、Yixiao Chen…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.08072/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文是一篇综述性论文，聚焦于端到端自动驾驶中的“后训练”（Post-Training）阶段，即对通过模仿学习初步训练的策略进行进一步的精细化优化。</p>
+  <ul class="reading-intro-points"><li>本文是一篇综述性论文，聚焦于端到端自动驾驶中的“后训练”（Post-Training）阶段，即对通过模仿学习初步训练的策略进行进一步的精细化优化。</li><li>论文指出，传统开环模仿学习难以应对自动驾驶安全关键、交互密集场景中的误差累积、恢复行为稀缺以及长时程目标（如安全与舒适性）无法被逐点标签捕获等问题。</li><li>作者提出一个统一视角，将后训练定义为独立于初始模仿学习和从零学习的阶段，并按照监督信号的形式将现有文献划分为四大类：蒸馏（Distillation）、基于偏好的对齐（Preference-based Alignment）、强化学习（Reinforcement Learning）和测试时精化（Test-time Refinement）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Northeastern University, Boston, USA；作者：Ruining Yang、Muxing Wang、Yixiao Chen、Tongfei Guo、Yi Xu、Yitian Zhang、Yun Fu、Lili Su</li><li>机构：Purdue University, West Lafayette, USA；作者：Can Cui、Zichong Yang、Ziran Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文是一篇综述性论文，聚焦于端到端自动驾驶中的“后训练”（Post-Training）阶段，即对通过模仿学习初步训练的策略进行进一步的精细化优化。</li><li>论文指出，传统开环模仿学习难以应对自动驾驶安全关键、交互密集场景中的误差累积、恢复行为稀缺以及长时程目标（如安全与舒适性）无法被逐点标签捕获等问题。</li><li>作者提出一个统一视角，将后训练定义为独立于初始模仿学习和从零学习的阶段，并按照监督信号的形式将现有文献划分为四大类：蒸馏（Distillation）、基于偏好的对齐（Preference-based Alignment）、强化学习（Reinforcement Learning）和测试时精化（Test-time Refinement）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出统一的后训练定义与分类体系，将后训练确立为独立阶段，并将其与初始模仿训练和从零学习区分开。</li><li>按照监督形式（教师策略、偏好比较、奖励信号、测试时反馈）将文献组织为四大类方法族。</li><li>对每一类方法族，系统梳理了监督信号如何构建、训练数据或轨迹如何收集、以及策略或其输出如何被改进。</li><li>总结了后训练策略评估中的主要挑战（包括基准饱和、闭环指标粗糙、实车评估有限、推理成本）并展望了未来方向。</li><li>在论文中提供了相关论文的合集资源链接（GitHub），便于后续研究者系统追踪该领域。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：规划与控制模块（端到端驾驶策略的后训练阶段）。</li><li>输入传感器：相机图像、导航指令、车辆自身状态等多模态输入；原文未限定单一传感器类型。</li><li>场景表示：论文主要讨论观测的构建方式，包括离线数据集中的观测、策略自身 rollout 访问的状态、伪闭环或闭环仿真中的观测；具体场景表示形式原文未报告。</li><li>模型结构：涵盖行为克隆模型、轨迹生成式规划器、视觉-语言-动作（VLA）模型以及包含流匹配生成器、扩散策略、actor-critic 架构的多种策略输出空间；具体模型结构细节原文未报告。</li><li>关键技术：</li></ul>
+<p> - 蒸馏：利用特权教师策略、专家演示、VLM 生成注释或策略自身的指数移动平均副本作为密集行为目标；代表方法包括 CRAFT、PaIR-Drive、RAPID、VLM-AD、CoPhy、Found-RL。</p>
+<p> - 偏好对齐：使用 DPO 等直接偏好优化方法，构建偏好对（如基于规则安全分数、VLM 自动生成、人类接管数据、个体驾驶习惯等）；代表方法包括 DriveDPO、VL-DPO、CSN、CPO++、TakeAD、Drive My Way。</p>
+<p> - 强化学习：奖励来源包括基于规则/基准分数（如 PDMS、EPDMS）、学习式奖励模型（VLM 评估器、critic）、世界模型耦合奖励、反事实与对比奖励、推理一致性与质量奖励；优化算法涵盖 GRPO 系列（含多意图、方差门控、锚定、模式分区变体）、Flow-GRPO、GSPO、PPO 和 actor-critic 等；代表方法包括 AutoDrive-R2、Drive-R1、IRL-VLA、VDRive、DIAL、SCORP、SafeAlign-VLA、Alpamayo-R1 等。</p>
+<p> - 测试时精化：不更新参数，通过生成多个候选轨迹并用验证器/重排器选择最佳输出，或采用自反思、反事实 CoT 推理等机制；代表方法包括 DriveCritic（作为重排器）、ReflectDrive、C-CoT、Seong et al. 等。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes、Waymo Open Dataset for End-to-End Driving (WOD-E2E)、NAVSIM v1/v2、Bench2Drive、nuReasoning；原文未报告具体训练数据规模。</li><li>仿真器：NAVSIM（伪闭环）、Bench2Drive（基于 CARLA 的完全闭环仿真）、AlpaSim（神经渲染的光照真实感传感器仿真）；原文未报告其他仿真平台。</li><li>模型规模：涉及不同基座模型，如 Qwen2.5-VL-7B/3B、InternVL3-8B/2B、Qwen3-VL-4B、Qwen2-VL-2B、InternVL2-4B、LLaVA-NeXT-8B、LLaDA-V-8B、Show-o-1.3B；这些为算法所采用的基础模型，具体参数量由模型名称体现。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告实车平台信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes、WOD-E2E、NAVSIM v1/v2（含 navhard）、Bench2Drive、nuReasoning。</li><li>评估指标：</li></ul>
+<p> - 开环：L2 位移误差（L2）、平均位移误差 ADE、5秒/3秒 ADE、碰撞率（Col.）、WOD-E2E 的 Rater Feedback Score (RFS)。</p>
+<p> - 伪闭环/闭环：NAVSIM 的 PDMS/EPDMS 分数、Bench2Drive 的 Driving Score (DS) 与 Success Rate (SR)、nuReasoning 的 NPS。</p>
+<ul><li>关键数值（原文报告的示例）：</li></ul>
+<p> - nuScenes 开环：AutoDrive-R2 的 L2 为 0.19、碰撞率 0.07；Reasoning-VLA L2 为 0.23、碰撞率 0.08；VDRive L2 为 0.29、碰撞率 0.18；AutoDrive-P3 L2 为 0.33、碰撞率 0.06（最低碰撞率）。</p>
+<p> - WOD-E2E：Fast-dDrive 的 RFS 为 7.823、ADE 5s 为 2.907、ADE 3s 为 1.254；Poutine RFS 为 7.990、ADE 5s 为 2.740、ADE 3s 为 1.210（均为表中最优）；NoRD RFS 为 7.709。</p>
+<p> - NAVSIM：Reasoning-VLA v1 为 91.7；FLARE v1 为 91.4、v2 为 86.3；LaST-VLA v1 为 91.3、v2 为 87.1；AutoDrive-P3 v1 为 90.6、v2 为 89.9（v2 最高）；EponaV2 v1 为 90.4、v2 为 88.9、navhard 为 52.0（navhard 最高）；SpanVLA navhard 为 40.1。</p>
+<p> - Bench2Drive：AutoVLA DS 为 78.84、SR 为 57.73。</p>
+<ul><li>对比方法：各表格中并列了多个后训练策略（如 AutoDrive-R2、Reasoning-VLA、VDRive、VLA-World、Drive-R1、LLaViDA、Fast-dDrive、AutoDrive-P3、MindDriver、LaST-VLA、AutoVLA、ExploreVLA、Poutine、NoRD、FLARE、ReflectDrive、ELF-VLA、EponaV2、SpanVLA、AdaThinkDrive、FeaXDrive、SafeAlign-VLA 等）。</li><li>评估条件：开环评估在固定场景上、动作不影响未来状态；NAVSIM v1 为单次非反应式仿真、v2 为两阶段伪闭环；Bench2Drive 为完全闭环仿真（CARLA + 反应式多智能体交通）；原文未报告实车条件下的评估，并明确指出当前后训练评估缺乏实车验证是主要挑战之一。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.09655/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">OpenLongTail: Generative Scaling of Long-Tail Driving Data</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.07844/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Shift &amp; Drift: A Zero-Shot Benchmark for Generalizable and Robust Autonomous Driving Motion Planning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

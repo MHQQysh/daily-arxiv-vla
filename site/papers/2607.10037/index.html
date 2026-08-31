@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plug-and-Play Reweighting for Resilient Collaborative Decision-Making in Connected Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶中协同决策（Collaborative Decision-Making）的安全性与可靠性问题，尤其是在感知噪声和恶意攻击导致协作观测信息被破坏的场景下。 应用场景为车联网（Connected Autonomous Driving, CAD）中的事故多发场景，包括超车、左转和闯红灯等，需要自车在遮挡导致的碰撞风险下做出及时刹车决策。 研究问题是如何在不重新训练模型的前提下，同时提升个体感知嵌入和协作融合决策对感知噪声与恶意攻击的鲁棒性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.10037">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.10037.webp" alt="Plug-and-Play Reweighting for Resilient Collaborative Decision-Making in Connected Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶中协同决策（Collaborative Decision-Making）的安全性与可靠性问题，尤其是在感知噪声和恶意攻击导致协作观测信息被破坏的场景下。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Plug-and-Play Reweighting for Resilient Collaborative Decision-Making in Connected Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.10037" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.10037" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.10037</span></div>
+            <p class="detail-summary">解决自动驾驶中协同决策（Collaborative Decision-Making）的安全性与可靠性问题，尤其是在感知噪声和恶意攻击导致协作观测信息被破坏的场景下。 应用场景为车联网（Connected Autonomous Driving, CAD）中的事故多发场景，包括超车、左转和闯红灯等，需要自车在遮挡导致的碰撞风险下做出及时刹车决策。 研究问题是如何在不重新训练模型的前提下，同时提升个体感知嵌入和协作融合决策对感知噪声与恶意攻击的鲁棒性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">North Carolina State University，Department of Computer Science · Jiewen Liu…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.10037/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶中协同决策（Collaborative Decision-Making）的安全性与可靠性问题，尤其是在感知噪声和恶意攻击导致协作观测信息被破坏的场景下。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶中协同决策（Collaborative Decision-Making）的安全性与可靠性问题，尤其是在感知噪声和恶意攻击导致协作观测信息被破坏的场景下。</li><li>应用场景为车联网（Connected Autonomous Driving, CAD）中的事故多发场景，包括超车、左转和闯红灯等，需要自车在遮挡导致的碰撞风险下做出及时刹车决策。</li><li>研究问题是如何在不重新训练模型的前提下，同时提升个体感知嵌入和协作融合决策对感知噪声与恶意攻击的鲁棒性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：North Carolina State University，Department of Computer Science；作者：Jiewen Liu, Xiaorui Liu, Peng Gao</li><li>机构：University of Maryland, College Park，Department of Computer Science；作者：Rui Liu, Ming C. Lin</li><li>机构：University of North Carolina at Chapel Hill；作者：Matthew Lee</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶中协同决策（Collaborative Decision-Making）的安全性与可靠性问题，尤其是在感知噪声和恶意攻击导致协作观测信息被破坏的场景下。</li><li>应用场景为车联网（Connected Autonomous Driving, CAD）中的事故多发场景，包括超车、左转和闯红灯等，需要自车在遮挡导致的碰撞风险下做出及时刹车决策。</li><li>研究问题是如何在不重新训练模型的前提下，同时提升个体感知嵌入和协作融合决策对感知噪声与恶意攻击的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种新型的弹性协同决策（Resilient Collaborative Decision-Making, RCDM）框架，由基于注意力机制的编码器提取个体感知嵌入、解码器融合协作感知并做出决策。</li><li>设计了一种即插即用（plug-and-play）的重加权模块，通过统计分析邻域点相对局部中位数的偏离程度，对与局部结构不一致的损坏输入降低权重。</li><li>该重加权模块无需额外训练参数，仅在执行阶段激活，可无缝集成到基于注意力的协同决策模型中，无需架构修改。</li><li>方法同时应对个体感知噪声和协作方共享的恶意攻击数据，在包括感知噪声和五种攻击类型的高保真仿真中，相较现有方法性能提升最高达26%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：多车协同决策（Collaborative Decision-Making）框架，包含注意力编码器和注意力解码器。</li><li>输入传感器：LiDAR点云，每辆车提供点云和速度信息，点云边界为x,y∈[-70,70]m、z∈[-2.5,-0.3]m。</li><li>场景表示：点云经体素化（0.5m分辨率）采样至2048点，本地邻域由k=16最近邻构成。</li><li>模型结构：基于PointTransformer骨干，将3D坐标投影到32维特征空间，两次降采样每阶段减少4倍点并增维至128，得到每车128个代表点；融合后进一步处理得到64个最终代表点，经最大化池化并与自车速度嵌入拼接后输出刹车logit。</li><li>关键技术：注意力编码器计算查询、键、值嵌入及位置嵌入；重加权因子通过计算值嵌入与聚合嵌入的欧氏距离、邻域中位数和绝对偏差来评估一致性，并对偏离中位数的异常点降权，重加权后的注意力重新归一化；训练采用Binary Cross Entropy loss，在干净数据上端到端优化，执行阶段再激活重加权。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未明确报告公开数据集名称；训练和测试分别生成12个连续驾驶episode，提供超过700个刹车决策样本。</li><li>仿真器：CARLA结合AutoCastSim生成三种事故多发CAD场景。</li><li>模型规模：点云采样2048点，骨干输出32维特征，两次降采样后128维，最终64个代表点。</li><li>训练资源：原文未明确报告GPU/硬件型号；优化使用Adam优化器，学习率10^-3，权重衰减10^-5，最多200 epoch并早停。</li><li>实车平台：原文未报告，所有实验均为高保真仿真。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARLA + AutoCastSim仿真中的三种事故多发场景（超车、左转、闯红灯），每场景包含1个自车和3-30个协作车，通信半径150m。</li><li>评估指标：ADR（Accident Detection Rate，正确预测比例）为主要指标；另报告chg（位移超过0.25m的点百分比）和p95（位移幅度95分位数）量化攻击强度。</li><li>关键数值：RCDM相较对比方法性能提升最高达26%。</li><li>对比方法：Vanilla（不启用重加权模块的RCDM）和RoboSAC（基于共识采样的防御方法，依赖自车观测可靠）。</li><li>攻击类型与条件：评估五种攻击，包括随机点扰动（Jitter噪声σ=1.0m、Dropout随机移除60%点）、几何操纵攻击（LNR定位60°扇区重定位、LRS将65%点径向移位1m）和梯度白盒攻击（PGD，ε=1.0m、步长0.4m、3次迭代）；攻击目标包括仅自车、前k个协作车（k=1,2,3）及所有车辆。</li><li>条件说明：实验为仿真环境下的闭环决策评估，训练在干净数据上进行，重加权仅执行阶段启用；评估同时覆盖感知噪声和恶意攻击场景。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.10438/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Large Language Model Enhanced Differentiable Trajectory Planning for IoT-Enabled Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.09655/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">OpenLongTail: Generative Scaling of Long-Tail Driving Data</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

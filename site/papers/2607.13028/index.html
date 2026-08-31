@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文提出 TerraZero，一个程序化驾驶仿真器与自博弈训练栈，用于大规模强化学习训练自动驾驶智能体。 应用场景为自动驾驶规划器（planner）训练与仿真智能体（sim agent）训练。 研究问题为：现有仿真器无法同时满足速度、保真度和场景多样性；TerraZero 通过程序化场景生成与快速仿真引擎解决该矛盾，实现零人类演示、从零开始的强化学习训练。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.13028">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.13028.webp" alt="TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文提出 TerraZero，一个程序化驾驶仿真器与自博弈训练栈，用于大规模强化学习训练自动驾驶智能体。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">TerraZero: Procedural Driving Simulation for Zero-Demonstration Self-Play at Scale</h1>
+            <div class="detail-meta">2026-07-14 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.13028" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.13028" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.13028</span></div>
+            <p class="detail-summary">论文提出 TerraZero，一个程序化驾驶仿真器与自博弈训练栈，用于大规模强化学习训练自动驾驶智能体。 应用场景为自动驾驶规划器（planner）训练与仿真智能体（sim agent）训练。 研究问题为：现有仿真器无法同时满足速度、保真度和场景多样性；TerraZero 通过程序化场景生成与快速仿真引擎解决该矛盾，实现零人类演示、从零开始的强化学习训练。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Applied Intuition · Zhouchonghao Wu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.13028/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文提出 TerraZero，一个程序化驾驶仿真器与自博弈训练栈，用于大规模强化学习训练自动驾驶智能体。</p>
+  <ul class="reading-intro-points"><li>论文提出 TerraZero，一个程序化驾驶仿真器与自博弈训练栈，用于大规模强化学习训练自动驾驶智能体。</li><li>应用场景为自动驾驶规划器（planner）训练与仿真智能体（sim agent）训练。</li><li>研究问题为：现有仿真器无法同时满足速度、保真度和场景多样性；TerraZero 通过程序化场景生成与快速仿真引擎解决该矛盾，实现零人类演示、从零开始的强化学习训练。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Applied Intuition；作者：Zhouchonghao Wu</li><li>机构：Applied Intuition；作者：Akshay Rangesh</li><li>机构：Applied Intuition；作者：Weixin Li</li><li>机构：Applied Intuition；作者：Wei-Jer Chang</li><li>机构：Applied Intuition；作者：Zachary Lee</li><li>机构：Applied Intuition；作者：Saeed Bonab</li><li>机构：Applied Intuition；作者：Tim Wang</li><li>机构：Applied Intuition；作者：Wei Zhan</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文提出 TerraZero，一个程序化驾驶仿真器与自博弈训练栈，用于大规模强化学习训练自动驾驶智能体。</li><li>应用场景为自动驾驶规划器（planner）训练与仿真智能体（sim agent）训练。</li><li>研究问题为：现有仿真器无法同时满足速度、保真度和场景多样性；TerraZero 通过程序化场景生成与快速仿真引擎解决该矛盾，实现零人类演示、从零开始的强化学习训练。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个快速、特征丰富的对象级交通仿真器，基于可配置的 C 引擎，支持 CPU 仿真与 GPU 策略推断间的零拷贝数据通路，吞吐量显著高于现有对象级仿真器（单个服务器级 GPU 上达 1.3M agent-steps/s，8-GPU 节点上达 2.8M）。</li><li>提出程序化场景生成器，将真实地图几何与随机化初始化、目标采样、智能体密度与尺寸随机化、规则型道路使用者（如施工区、事故车辆、行人）以及三种信号控制器结合，使单个地图产生近似无限的训练场景。</li><li>提出鲁棒的自博弈训练配方：采用显著性优先采样、V-trace off-policy 修正、PopArt 值归一化、奖励与运动学域随机化、目标丢弃（goal dropout）以及种群博弈（population play），在零人类演示条件下从随机初始化权重学习。</li><li>验证了同一训练栈同时适用于规划器与仿真智能体：一个检查点在 nuPlan val14 与 InterPlan 交互式长尾基准上均达到领先水平，并在 WOSAC 上优于其他无演示方法。</li><li>训练出的策略具有跨城市与跨数据集的零样本泛化能力，并涌现出无显式监督的左舵交通驾驶行为。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：仿真器（对象级）、程序化场景生成器、强化学习训练栈。</li><li>输入传感器：原文未报告（对象级仿真，直接基于结构化状态，不涉及原始传感器输入）。</li><li>场景表示：车道拓扑图、道路几何、信号灯与停止线、智能体状态（位置、速度、朝向、尺寸、类型）。</li><li>模型结构：</li></ul>
+<p> - 规划器：紧凑型 MLP，约 3.5M 参数，包含 ego MLP 与对道路、伙伴、交通集合的置换不变 Deep Sets 编码器，后接三层 1024 单元共享 MLP，用于 actor 和 value head。</p>
+<p> - 仿真智能体：约 6.7M 参数，采用分离的按类型动作头（车辆 jerk 网格、行人 unicycle 网格、骑行者紧凑自行车网格）。</p>
+<ul><li>关键技术：</li></ul>
+<p> - CPU/GPU 分工：C 引擎在 CPU 运行仿真，PyTorch 在 GPU 运行策略推断与学习，基于 PufferLib。</p>
+<p> - 零拷贝数据路径：16 位观测、按实际受控智能体数尺寸化缓冲区、NUMA 感知编排。</p>
+<p> - 可组合仿真基板：每个智能体类别拥有独立动力学模型（行人 unicycle、自行车 bicycle、卡车带轮胎侧偏力的自行车模型），车辆按 jerk 控制。</p>
+<p> - 交通规则执行：碰撞与偏离道路通过分离轴测试与路缘边界检测；车道方向合规通过航向残差衡量；信号灯与停止线基于几何通行测试，红灯违规为边沿触发判定，停止线需低于速度阈值并保持停留时间。</p>
+<p> - 场景初始化：log、random、hybrid 三种模式，随机模式下采用拒绝采样进行程序化放置，确保无碰撞且合规。</p>
+<p> - 目标分配：沿车道拓扑图前向行走采样目标，支持目标丢弃概率。</p>
+<p> - 非玩家角色：反应式车辆（IDM 与 PDM-Closed 风格闭路规划器）、静态角色（停放车辆、事故车辆簇、施工区、静态障碍物）、行人（ORCA 避碰、交叉口过街与中途乱穿）。</p>
+<p> - 信号控制：NEMA 双环八相位控制器、Christmas 控制器（默认，每停止线独立循环）、round-robin 控制器。</p>
+<p> - 训练：PPO 与 GAE，配合显著性优先采样（按优势绝对值加权）、V-trace 修正、PopArt 归一化、奖励与运动学系数域随机化、目标丢弃（默认 0.3 车辆）、种群博弈（奖励随机化与规则型 NPC 混合）。</p>
+<p> - 分布式训练：数据并行，跨 rank 同步归一化统计量。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo Open Motion Dataset（WOMD，约 576K 场景，训练分割约 487K）、nuPlan（约 262K 场景，四城市：拉斯维加斯、匹兹堡、新加坡、波士顿）、CARLA（五个合成小镇）。</li><li>仿真器：TerraZero 自身（程序化对象级仿真器）。</li><li>模型规模：规划器约 3.5M 参数；仿真智能体约 6.7M 参数。</li><li>训练资源：规划器在 16 张 NVIDIA A100 80GB GPU 上以 bf16 混合精度分布式训练；仿真智能体在 32 张 GPU 上训练。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：</li></ul>
+<p> - nuPlan val14（闭路反应式，经 PlanTF 评估套件），官方 nuPlan 闭路反应式得分。</p>
+<p> - InterPlan 交互式长尾套件。</p>
+<p> - Waymo Open Sim Agents Challenge（WOSAC）真实性评估。</p>
+<p> - 泛化研究：跨数据集传输（WOMD、nuPlan、CARLA）、跨城市传输、左舵交通涌现。</p>
+<ul><li>评估指标：</li></ul>
+<p> - nuPlan 闭路反应式得分（0-100），含 Ego Progress、No At-Fault Collision、Comfort、TTC、Driving Direction、Speed Limit、Drivable Area、Making Progress 等分量。</p>
+<p> - WOSAC 真实性度量（具体数值原文未报告）。</p>
+<p> - 仿真吞吐量：agent-steps per second（SPS）。</p>
+<ul><li>关键数值：</li></ul>
+<p> - 吞吐量：单张消费级 GPU 560K SPS，单张服务器级 GPU 1.3M SPS，8-GPU 服务器节点 2.8M SPS。</p>
+<p> - val14 得分对比：Log Replay (iLQR) 82.05、IDM 77.33、PDM-Closed 92.13、SPDM (Np=15) 92.28、SPDM (Np=60) 91.60、PLUTO 89.66、FlowDrive w/ guidance + PDM scoring 92.96、G2DP† +ref. 部分数据未在截断中给出，TerraZero 具体得分未在截断原文中报告。</p>
+<p> - TerraZero 声称是首个在 val14 与 InterPlan 均登顶的纯学习策略。</p>
+<ul><li>对比方法：IDM、PDM-Closed、SPDM、PLUTO、FlowDrive w/ guidance、G2DP、Gigaflow（自博弈 RL 基线）、Log Replay (iLQR)。</li><li>评估条件：</li></ul>
+<p> - 规划器评估为闭路（closed-loop）反应式，通过基准标准 nuPlan LQR 控制器执行动作。</p>
+<p> - 仿真智能体在 WOSAC 验证集上零样本评分。</p>
+<p> - 泛化研究包括跨数据集、跨城市、以及左舵交通行为的零样本评估。</p>
+<p> - 仿真吞吐量在训练作业中测量，比较了消费级 GPU、服务器级 GPU 与 8-GPU 节点配置。</p>
+<p> - WOSAC 与泛化部分的精确数值与部分对比结论在截断原文中未完整给出，故未报告。</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.13494/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">A VAE-Driven Multi-Task Satellite-Aided Semantic Communication Framework for 6G-Enabled Connected Autonomous Vehicles</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.10630/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">World Models as Adversaries: Multi-Agent Self-Play Fine-Tuning for Robust Motion Planning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
