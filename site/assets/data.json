@@ -1,5 +1,585 @@
 [
   {
+    "date": "2026-08-31",
+    "title": "Driving on Memory",
+    "link": "https://arxiv.org/abs/2608.31029",
+    "arxiv_id": "2608.31029",
+    "detail_path": "papers/2608.31029/",
+    "cover_path": "covers/2608.31029/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.31029.webp",
+    "paper_image_full_path": "assets/paper-images/2608.31029.webp",
+    "preview_text": "本文针对端到端自动驾驶规划任务，研究当前主流仿真基准（如 NAVSIM）的评分是否存在“记忆捷径”问题。 核心研究问题：一个自动驾驶模型在完全无法观察当前场景动态信息的情况下，仅凭先前在同一位置驾驶所积累的“记忆”能获得多高的基准分数？ 应用场景包括基于仿真器的闭环/开环自动驾驶规划评估，以及真实驾驶数据（RealEngine）上的性能验证。",
+    "research_unit": "Bosch Research · Christian Löwens、Thorben Funke、Alexandru Paul Condurache",
+    "hook_text": "本文针对端到端自动驾驶规划任务，研究当前主流仿真基准（如 NAVSIM）的评分是否存在“记忆捷径”问题。",
+    "key_points": [
+      "本文针对端到端自动驾驶规划任务，研究当前主流仿真基准（如 NAVSIM）的评分是否存在“记忆捷径”问题。",
+      "核心研究问题：一个自动驾驶模型在完全无法观察当前场景动态信息的情况下，仅凭先前在同一位置驾驶所积累的“记忆”能获得多高的基准分数？",
+      "应用场景包括基于仿真器的闭环/开环自动驾驶规划评估，以及真实驾驶数据（RealEngine）上的性能验证。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-31",
+    "title": "Physical Adversarial Examples for Person Detectors in Thermal Images Based on 3D Modeling",
+    "link": "https://arxiv.org/abs/2608.30839",
+    "arxiv_id": "2608.30839",
+    "detail_path": "papers/2608.30839/",
+    "cover_path": "covers/2608.30839/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.30839.webp",
+    "paper_image_full_path": "assets/paper-images/2608.30839.webp",
+    "preview_text": "论文主要研究了基于3D建模的红外热成像图像中行人检测器的物理对抗攻击问题。 应用场景为自动驾驶、医学AI等领域中广泛使用的热红外成像系统，重点关注其安全性。 研究问题是如何设计并物理实现一种对抗服装，使穿着者在真实红外场景中能够躲避热红外行人检测器（如YOLOv9）的识别。 与已有的基于2D补丁或QR码的对抗方法相比，本文首次引入3D建模方法，以覆盖0-360度视角，并能更真实地模拟物理世界中的攻击效果。",
+    "research_unit": "清华大学计算机科学与技术系、人工智能研究院、BNRist · Xiaopei Zhu、Siyuan Huang、Zhanhao Hu 等",
+    "hook_text": "论文主要研究了基于3D建模的红外热成像图像中行人检测器的物理对抗攻击问题。",
+    "key_points": [
+      "论文主要研究了基于3D建模的红外热成像图像中行人检测器的物理对抗攻击问题。",
+      "应用场景为自动驾驶、医学AI等领域中广泛使用的热红外成像系统，重点关注其安全性。",
+      "研究问题是如何设计并物理实现一种对抗服装，使穿着者在真实红外场景中能够躲避热红外行人检测器（如YOLOv9）的识别。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-31",
+    "title": "What Emerges and What Breaks in Self-Play Driving",
+    "link": "https://arxiv.org/abs/2608.30819",
+    "arxiv_id": "2608.30819",
+    "detail_path": "papers/2608.30819/",
+    "cover_path": "covers/2608.30819/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.30819.webp",
+    "paper_image_full_path": "assets/paper-images/2608.30819.webp",
+    "preview_text": "本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。 应用场景为城市道路自动驾驶，场景表示基于对象级抽象（车辆、车道等），而非原始传感器数据。 研究问题包括：在真实城市高清地图上通过自博弈训练能否复现Gigaflow的成果；Transformer架构相比MLP在此任务上的表现；自博弈中涌现出哪些交通规则以及哪些规则未能涌现。",
+    "research_unit": "University of Tartu · Laur Sisask、Ardi Tampuu、Tambet Matiisen",
+    "hook_text": "本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。",
+    "key_points": [
+      "本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。",
+      "应用场景为城市道路自动驾驶，场景表示基于对象级抽象（车辆、车道等），而非原始传感器数据。",
+      "研究问题包括：在真实城市高清地图上通过自博弈训练能否复现Gigaflow的成果；Transformer架构相比MLP在此任务上的表现；自博弈中涌现出哪些交通规则以及哪些规则未能涌现。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-31",
+    "title": "Real-Time Scene-Adaptive Tone Mapping for High-Dynamic Range Object Detection",
+    "link": "https://arxiv.org/abs/2608.30400",
+    "arxiv_id": "2608.30400",
+    "detail_path": "papers/2608.30400/",
+    "cover_path": "covers/2608.30400/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.30400.webp",
+    "paper_image_full_path": "assets/paper-images/2608.30400.webp",
+    "preview_text": "本文面向自动驾驶场景下的高动态范围（HDR，24-bit）物体检测任务，解决HDR RAW图像与现有面向LDR sRGB输入的检测网络之间的不兼容问题。 核心研究问题是：高动态范围导致的像素值极端分布使检测网络出现梯度不稳定（甚至NAN）和性能退化，需要一种能够桥接HDR RAW输入与LDR检测网络需求的实时色调映射方法。 应用场景包括自动驾驶中的白天、夜间及混合光照场景，以及嵌入式平台（NVIDIA Jetson）上的实时处理需求。",
+    "research_unit": "香港中文大学（深圳）数据科学学院 · Gongzhe Li、Qilin Sun",
+    "hook_text": "本文面向自动驾驶场景下的高动态范围（HDR，24-bit）物体检测任务，解决HDR RAW图像与现有面向LDR sRGB输入的检测网络之间的不兼容问题。",
+    "key_points": [
+      "本文面向自动驾驶场景下的高动态范围（HDR，24-bit）物体检测任务，解决HDR RAW图像与现有面向LDR sRGB输入的检测网络之间的不兼容问题。",
+      "核心研究问题是：高动态范围导致的像素值极端分布使检测网络出现梯度不稳定（甚至NAN）和性能退化，需要一种能够桥接HDR RAW输入与LDR检测网络需求的实时色调映射方法。",
+      "应用场景包括自动驾驶中的白天、夜间及混合光照场景，以及嵌入式平台（NVIDIA Jetson）上的实时处理需求。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-31",
+    "title": "Rethinking Language's Role in Efficient VLA for Autonomous Vehicles: Toward Smarter, Trustworthy Driving",
+    "link": "https://arxiv.org/abs/2608.30144",
+    "arxiv_id": "2608.30144",
+    "detail_path": "papers/2608.30144/",
+    "cover_path": "covers/2608.30144/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.30144.webp",
+    "paper_image_full_path": "assets/paper-images/2608.30144.webp",
+    "preview_text": "本论文是一篇关于自动驾驶中视觉-语言-动作（VLA）模型效率的综述论文。 论文聚焦于自动驾驶场景下，语言模型在VLA中的推理时成本问题，探讨\"何时何地\"语言应在推理时被激活，以在保证语义理解、可解释决策和长尾泛化能力的同时，满足车载硬实时（约20-100ms控制循环）的部署约束。",
+    "research_unit": "Department of Electrical and Computer Engineering, Northeastern University…",
+    "hook_text": "本论文是一篇关于自动驾驶中视觉-语言-动作（VLA）模型效率的综述论文。",
+    "key_points": [
+      "本论文是一篇关于自动驾驶中视觉-语言-动作（VLA）模型效率的综述论文。",
+      "论文聚焦于自动驾驶场景下，语言模型在VLA中的推理时成本问题，探讨\"何时何地\"语言应在推理时被激活，以在保证语义理解、可解释决策和长尾泛化能力的同时，满足车载硬实时（约20-100ms控制循环）的部署约束。",
+      "提出\"Language Residue taxonomy\"分类法，按语言在推理时的使用方式将方法分为四类：L1（仅训练时使用语言）、L2（潜在非文本推理）、L3（条件触发语言调用）、L4（每帧完整语言生成）。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-30",
+    "title": "Towards Continual Test-Time Adaptation of Vision-Language Models in Open-Vocabulary Semantic Segmentation",
+    "link": "https://arxiv.org/abs/2608.29923",
+    "arxiv_id": "2608.29923",
+    "detail_path": "papers/2608.29923/",
+    "cover_path": "covers/2608.29923/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.29923.webp",
+    "paper_image_full_path": "assets/paper-images/2608.29923.webp",
+    "preview_text": "本文研究自动驾驶等部署场景中，视觉-语言模型（VLM）在开放词汇语义分割（OVSS）任务下的持续测试时自适应（CTTA）问题。 应用场景包括自然场景、自动驾驶、水下图像和遥感等多个视觉域，且面临天气、传感器变化、图像损坏等多种持续分布偏移。 研究问题：在连续域偏移下，标准的熵最小化自适应方法会导致 patch 级类别坍缩、损坏视觉-语言对齐，本文提出稳定化框架 DAF（Diversify, Anchor, and Filter）以保持开放词汇预测的稳定性。",
+    "research_unit": "Faculty of Science and Technology (REALTEK), Norwegian University of Life S…",
+    "hook_text": "本文研究自动驾驶等部署场景中，视觉-语言模型（VLM）在开放词汇语义分割（OVSS）任务下的持续测试时自适应（CTTA）问题。",
+    "key_points": [
+      "本文研究自动驾驶等部署场景中，视觉-语言模型（VLM）在开放词汇语义分割（OVSS）任务下的持续测试时自适应（CTTA）问题。",
+      "应用场景包括自然场景、自动驾驶、水下图像和遥感等多个视觉域，且面临天气、传感器变化、图像损坏等多种持续分布偏移。",
+      "研究问题：在连续域偏移下，标准的熵最小化自适应方法会导致 patch 级类别坍缩、损坏视觉-语言对齐，本文提出稳定化框架 DAF（Diversify, Anchor, and Filter）以保持开放词汇预测的稳定性。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-30",
+    "title": "Self-Aware Active Learning Enables Continual Improvement in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2608.29772",
+    "arxiv_id": "2608.29772",
+    "detail_path": "papers/2608.29772/",
+    "cover_path": "covers/2608.29772/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.29772.webp",
+    "paper_image_full_path": "assets/paper-images/2608.29772.webp",
+    "preview_text": "本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。 研究问题聚焦于训练后的自动驾驶策略在遇到罕见分布偏移和长尾安全关键事件时，缺乏对自身能力边界的感知、无法主动求助专家，并难以将专家干预转化为安全的策略提升。",
+    "research_unit": "The Hong Kong Polytechnic University · Dong Hu、Carman K.M. Lee",
+    "hook_text": "本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。",
+    "key_points": [
+      "本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。",
+      "研究问题聚焦于训练后的自动驾驶策略在遇到罕见分布偏移和长尾安全关键事件时，缺乏对自身能力边界的感知、无法主动求助专家，并难以将专家干预转化为安全的策略提升。",
+      "提出 SAGE，一种将预测性自监控、选择性专家干预与部署后策略改进耦合在一起的持续驾驶自适应主动学习框架。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-30",
+    "title": "MotionSync: Non-Causal Refinement of Causal Tracker for Label-Efficient 3D Perception",
+    "link": "https://arxiv.org/abs/2608.29567",
+    "arxiv_id": "2608.29567",
+    "detail_path": "papers/2608.29567/",
+    "cover_path": "covers/2608.29567/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.29567.webp",
+    "paper_image_full_path": "assets/paper-images/2608.29567.webp",
+    "preview_text": "该论文针对自动驾驶数据引擎中 3D 框与轨迹人工标注的成本瓶颈，提出 MotionSync 框架，在在线因果跟踪器与离线非因果标注系统之间建立统一架构。 应用场景包括实车在线 3D 感知与离线自动标注（auto-labelling）、仿真真值生成、基准数据集筛选与轨迹挖掘。 核心研究问题是：如何让一套系统同时满足因果（车载）与非因果（数据引擎）两种约束，并在低标注预算下逼近全监督检测性能。",
+    "research_unit": "Qualcomm Technologies, Inc, Automated Driving · Rahul Ahuja、Bala Murali Man…",
+    "hook_text": "该论文针对自动驾驶数据引擎中 3D 框与轨迹人工标注的成本瓶颈，提出 MotionSync 框架，在在线因果跟踪器与离线非因果标注系统之间建立统一架构。",
+    "key_points": [
+      "该论文针对自动驾驶数据引擎中 3D 框与轨迹人工标注的成本瓶颈，提出 MotionSync 框架，在在线因果跟踪器与离线非因果标注系统之间建立统一架构。",
+      "应用场景包括实车在线 3D 感知与离线自动标注（auto-labelling）、仿真真值生成、基准数据集筛选与轨迹挖掘。",
+      "核心研究问题是：如何让一套系统同时满足因果（车载）与非因果（数据引擎）两种约束，并在低标注预算下逼近全监督检测性能。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-29",
+    "title": "Polis: 3D Self-Supervision at City Scale",
+    "link": "https://arxiv.org/abs/2608.29426",
+    "arxiv_id": "2608.29426",
+    "detail_path": "papers/2608.29426/",
+    "cover_path": "covers/2608.29426/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.29426.webp",
+    "paper_image_full_path": "assets/paper-images/2608.29426.webp",
+    "preview_text": "本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。 应用场景包括城市规划、基础设施监测、自动驾驶系统以及文化遗产保护等领域中，对航拍获得的广域城市点云进行语义理解。 研究问题在于，现有 3D 自监督模型大多在室内或物体级、以及以自车为中心的自动驾驶 LiDAR 数据上预训练，难以适应城市尺度数据的感知异质性；本文探讨能否通过针对户外数据与几何特性专门设计的自监督方法，在该场景中取得更强的迁移效果。",
+    "research_unit": "École Polytechnique Fédérale de Lausanne · Alexander M. Rusnak、Sophia Koval…",
+    "hook_text": "本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。",
+    "key_points": [
+      "本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。",
+      "应用场景包括城市规划、基础设施监测、自动驾驶系统以及文化遗产保护等领域中，对航拍获得的广域城市点云进行语义理解。",
+      "研究问题在于，现有 3D 自监督模型大多在室内或物体级、以及以自车为中心的自动驾驶 LiDAR 数据上预训练，难以适应城市尺度数据的感知异质性；本文探讨能否通过针对户外数据与几何特性专门设计的自监督方法，在该场景中取得更强的迁移效果。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-29",
+    "title": "OPUS-V2: Bridging the Gap between Sparse Points and Dense Voxels",
+    "link": "https://arxiv.org/abs/2608.29187",
+    "arxiv_id": "2608.29187",
+    "detail_path": "papers/2608.29187/",
+    "cover_path": "covers/2608.29187/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.29187.webp",
+    "paper_image_full_path": "assets/paper-images/2608.29187.webp",
+    "preview_text": "本文针对自动驾驶中的三维占据预测（occupancy prediction）任务。 应用场景为基于多视角相机输入的自驾车环境感知，为下游规划提供稠密体素级占据语义信息。 研究问题：基于稀疏点集建模的占据预测范式（如OPUS）虽在精度与效率间取得较好平衡，但其稀疏点预测与自动驾驶系统所需的稠密体素表达之间存在表示鸿沟，必须依赖手工设计的启发式操作（如最近邻标签分配、训练/推理中的后处理）来完成两者转换，这限制了模型性能上限。",
+    "research_unit": "Nankai University · Jiabao Wang、Qibin Hou、Ming-Ming Cheng",
+    "hook_text": "本文针对自动驾驶中的三维占据预测（occupancy prediction）任务。",
+    "key_points": [
+      "本文针对自动驾驶中的三维占据预测（occupancy prediction）任务。",
+      "应用场景为基于多视角相机输入的自驾车环境感知，为下游规划提供稠密体素级占据语义信息。",
+      "研究问题：基于稀疏点集建模的占据预测范式（如OPUS）虽在精度与效率间取得较好平衡，但其稀疏点预测与自动驾驶系统所需的稠密体素表达之间存在表示鸿沟，必须依赖手工设计的启发式操作（如最近邻标签分配、训练/推理中的后处理）来完成两者转换，这限制了模型性能上限。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-29",
+    "title": "A Degradation-Tolerance Benchmark for Camera-Only End-to-End Driving",
+    "link": "https://arxiv.org/abs/2608.29005",
+    "arxiv_id": "2608.29005",
+    "detail_path": "papers/2608.29005/",
+    "cover_path": "covers/2608.29005/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.29005.webp",
+    "paper_image_full_path": "assets/paper-images/2608.29005.webp",
+    "preview_text": "本文提出 DriveDegrade 基准，用于评估相机纯端到端（E2E）驾驶模型对图像退化的容忍能力。 研究问题聚焦于：在模糊、噪声、低光、天气、帧丢失和内存故障等真实部署场景下，规划输出在何种退化程度下开始失效，以及哪些退化类型影响最大。 与现有仅评估检测或鸟瞰图感知的鲁棒性基准不同，本文直接在规划输出层面进行评估，涵盖开环（nuScenes、NAVSIM）和闭环（CARLA）测试。",
+    "research_unit": "College of Engineering, University of Georgia, Athens, Georgia, USA · Haohu…",
+    "hook_text": "本文提出 DriveDegrade 基准，用于评估相机纯端到端（E2E）驾驶模型对图像退化的容忍能力。",
+    "key_points": [
+      "本文提出 DriveDegrade 基准，用于评估相机纯端到端（E2E）驾驶模型对图像退化的容忍能力。",
+      "研究问题聚焦于：在模糊、噪声、低光、天气、帧丢失和内存故障等真实部署场景下，规划输出在何种退化程度下开始失效，以及哪些退化类型影响最大。",
+      "与现有仅评估检测或鸟瞰图感知的鲁棒性基准不同，本文直接在规划输出层面进行评估，涵盖开环（nuScenes、NAVSIM）和闭环（CARLA）测试。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-08-29",
+    "title": "Coding What Matters: A Semantic-Aware Memory Interface for Energy-Efficient Perception in Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2608.29000",
+    "arxiv_id": "2608.29000",
+    "detail_path": "papers/2608.29000/",
+    "cover_path": "covers/2608.29000/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.29000.webp",
+    "paper_image_full_path": "assets/paper-images/2608.29000.webp",
+    "preview_text": "该论文解决自动驾驶车辆中传感器到内存路径的能耗问题，具体针对环视高分辨率相机帧在写入 DRAM/SRAM 帧缓冲区之前的数据移动能耗。 应用场景为自动驾驶感知系统的能量管理，研究问题是如何在降低相机到内存接口能量的同时保持下游感知任务的精度。 论文提出了语义感知内存接口编码器 MotiMem-Ω，通过语义重要性场将能耗优化与场景内容语义信息结合。",
+    "research_unit": "College of Engineering, University of Georgia · Haohua Que、Handong Yao",
+    "hook_text": "该论文解决自动驾驶车辆中传感器到内存路径的能耗问题，具体针对环视高分辨率相机帧在写入 DRAM/SRAM 帧缓冲区之前的数据移动能耗。",
+    "key_points": [
+      "该论文解决自动驾驶车辆中传感器到内存路径的能耗问题，具体针对环视高分辨率相机帧在写入 DRAM/SRAM 帧缓冲区之前的数据移动能耗。",
+      "应用场景为自动驾驶感知系统的能量管理，研究问题是如何在降低相机到内存接口能量的同时保持下游感知任务的精度。",
+      "论文提出了语义感知内存接口编码器 MotiMem-Ω，通过语义重要性场将能耗优化与场景内容语义信息结合。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-28",
+    "title": "From the Loss Landscape to Diverse Feature Learning in Neural Networks",
+    "link": "https://arxiv.org/abs/2608.28948",
+    "arxiv_id": "2608.28948",
+    "detail_path": "papers/2608.28948/",
+    "cover_path": "covers/2608.28948/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.28948.webp",
+    "paper_image_full_path": "assets/paper-images/2608.28948.webp",
+    "preview_text": "该论文为一篇计算机科学哲学博士学位论文，聚焦于理解神经网络损失景观中的特殊结构——\"帽子结构\"（hat structure），即模式连通性（mode connectivity）现象。 论文并非直接针对自动驾驶特定任务，但明确指出神经网络在自动驾驶、建筑、法律、招聘和健康等领域的部署中已产生并将持续产生意外后果，这些风险是该研究的动机之一。 研究问题包括：模式连通的本质与普遍性、权重谱动力学（奇异值与奇异向量的行为）如何解释损失景观结构、以及如何利用这种理解改进神经网络训练以克服虚假相关。",
+    "research_unit": "Toyota Technological Institute at Chicago · David Aram Yunis（论文作者）、Matthew…",
+    "hook_text": "该论文为一篇计算机科学哲学博士学位论文，聚焦于理解神经网络损失景观中的特殊结构——\"帽子结构\"（hat structure），即模式连通性（mode connectivity）现象。",
+    "key_points": [
+      "该论文为一篇计算机科学哲学博士学位论文，聚焦于理解神经网络损失景观中的特殊结构——\"帽子结构\"（hat structure），即模式连通性（mode connectivity）现象。",
+      "论文并非直接针对自动驾驶特定任务，但明确指出神经网络在自动驾驶、建筑、法律、招聘和健康等领域的部署中已产生并将持续产生意外后果，这些风险是该研究的动机之一。",
+      "研究问题包括：模式连通的本质与普遍性、权重谱动力学（奇异值与奇异向量的行为）如何解释损失景观结构、以及如何利用这种理解改进神经网络训练以克服虚假相关。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-26",
+    "title": "Projection-Aware End-to-End Learned Video Compression for 360-Degree Video",
+    "link": "https://arxiv.org/abs/2608.28689",
+    "arxiv_id": "2608.28689",
+    "detail_path": "papers/2608.28689/",
+    "cover_path": "covers/2608.28689/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.28689.webp",
+    "paper_image_full_path": "assets/paper-images/2608.28689.webp",
+    "preview_text": "论文面向360度全景视频的压缩任务，应用场景包括虚拟现实（VR）、自动驾驶车辆、教育等。 研究问题在于360度视频以球面形式存在，无法直接用标准视频编码技术处理，需先投影到2D平面；论文旨在评估并比较不同的投影格式在基于深度学习的端到端视频压缩网络下的压缩效率。 采用scale-space flow网络作为压缩模型，并遵循JVET（Joint Video Exploration Team）为360度视频制定的通用测试条件和评估流程。",
+    "research_unit": "Friedrich-Alexander-Universität Erlangen-Nürnberg（埃尔朗根-纽伦堡大学），Lehrstuhl für…",
+    "hook_text": "论文面向360度全景视频的压缩任务，应用场景包括虚拟现实（VR）、自动驾驶车辆、教育等。",
+    "key_points": [
+      "论文面向360度全景视频的压缩任务，应用场景包括虚拟现实（VR）、自动驾驶车辆、教育等。",
+      "研究问题在于360度视频以球面形式存在，无法直接用标准视频编码技术处理，需先投影到2D平面；论文旨在评估并比较不同的投影格式在基于深度学习的端到端视频压缩网络下的压缩效率。",
+      "采用scale-space flow网络作为压缩模型，并遵循JVET（Joint Video Exploration Team）为360度视频制定的通用测试条件和评估流程。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-25",
+    "title": "Cognitively-Grounded On-Device Runtime Learning for Ground Robots in Unknown Physical Environments",
+    "link": "https://arxiv.org/abs/2608.28677",
+    "arxiv_id": "2608.28677",
+    "detail_path": "papers/2608.28677/",
+    "cover_path": "covers/2608.28677/",
+    "paper_image_path": "assets/paper-images/thumbs/2608.28677.webp",
+    "paper_image_full_path": "assets/paper-images/2608.28677.webp",
+    "preview_text": "本文提出 CogRun 框架，解决安全关键地面机器人在未知物理环境中的运行时学习问题，应用场景包括灾后区域和野外森林的导航与探索。 研究问题聚焦于三大挑战：非平稳未知环境导致的领域与仿真到现实差距、通信受限环境中云计算架构的高延迟与不可靠性、以及现有经验回放策略未考虑经验与当前状态相关性导致的低样本效率。",
+    "research_unit": "Department of Electrical and Computer Engineering, Wayne State University ·…",
+    "hook_text": "本文提出 CogRun 框架，解决安全关键地面机器人在未知物理环境中的运行时学习问题，应用场景包括灾后区域和野外森林的导航与探索。",
+    "key_points": [
+      "本文提出 CogRun 框架，解决安全关键地面机器人在未知物理环境中的运行时学习问题，应用场景包括灾后区域和野外森林的导航与探索。",
+      "研究问题聚焦于三大挑战：非平稳未知环境导致的领域与仿真到现实差距、通信受限环境中云计算架构的高延迟与不可靠性、以及现有经验回放策略未考虑经验与当前状态相关性导致的低样本效率。",
+      "提出 CogRun 框架，包含 Learning-Agent、Rational-Agent 和 Coordinator 三个组件，使机器人完全在边缘 AI 设备上执行感知、学习与控制，不依赖无线通信。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-06",
+    "title": "A Reliable Context-Aware and Temporal Planning Framework for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.04689",
+    "arxiv_id": "2607.04689",
+    "detail_path": "papers/2607.04689/",
+    "cover_path": "covers/2607.04689/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.04689.webp",
+    "paper_image_full_path": "assets/paper-images/2607.04689.webp",
+    "preview_text": "任务：面向密集城市交通的自动驾驶感知与轨迹规划，特别针对车载传感退化（如遮挡、运动模糊、光照变化与传感器噪声）下的稳定性与安全性问题。 应用场景：真实驾驶条件下相机观测受污染时的端到端自动驾驶规划。 研究问题：现有BEV（鸟瞰图）方法在时域融合时未评估观测可靠性，导致轨迹规划不稳定、碰撞风险上升；本文提出显式建模特征质量与时间一致性的规划框架。",
+    "research_unit": "原文未明确 · Argho Dey、Yunfei Yin、Swachha Ray 等",
+    "hook_text": "任务：面向密集城市交通的自动驾驶感知与轨迹规划，特别针对车载传感退化（如遮挡、运动模糊、光照变化与传感器噪声）下的稳定性与安全性问题。",
+    "key_points": [
+      "任务：面向密集城市交通的自动驾驶感知与轨迹规划，特别针对车载传感退化（如遮挡、运动模糊、光照变化与传感器噪声）下的稳定性与安全性问题。",
+      "应用场景：真实驾驶条件下相机观测受污染时的端到端自动驾驶规划。",
+      "研究问题：现有BEV（鸟瞰图）方法在时域融合时未评估观测可靠性，导致轨迹规划不稳定、碰撞风险上升；本文提出显式建模特征质量与时间一致性的规划框架。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-06",
+    "title": "PixelPilot: Scalable Vision-Language-Action Models for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.04637",
+    "arxiv_id": "2607.04637",
+    "detail_path": "papers/2607.04637/",
+    "cover_path": "covers/2607.04637/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.04637.webp",
+    "paper_image_full_path": "assets/paper-images/2607.04637.webp",
+    "preview_text": "论文提出 PixelPilot，一种面向端到端自动驾驶的可扩展视觉-语言-动作模型（VLA）。 解决的任务包括端到端场景理解、2D 轨迹规划、元动作预测，以及开环和闭环轨迹规划。 核心研究问题为：现有 VLA 直接从 2D 图像预测 3D 轨迹，导致传感器耦合、数据可扩展性受限，并易退化为依赖自我状态而非视觉推理的平凡解。 应用场景为多视角相机输入的自动驾驶规划，覆盖开环评估（nuScenes、Waymo）与闭环仿真（Bench2Drive/CARLA）。",
+    "research_unit": "MoE Key Lab of Artificial Intelligence, Institute of AI · Pin Tang、Guoqing…",
+    "hook_text": "论文提出 PixelPilot，一种面向端到端自动驾驶的可扩展视觉-语言-动作模型（VLA）。",
+    "key_points": [
+      "论文提出 PixelPilot，一种面向端到端自动驾驶的可扩展视觉-语言-动作模型（VLA）。",
+      "解决的任务包括端到端场景理解、2D 轨迹规划、元动作预测，以及开环和闭环轨迹规划。",
+      "核心研究问题为：现有 VLA 直接从 2D 图像预测 3D 轨迹，导致传感器耦合、数据可扩展性受限，并易退化为依赖自我状态而非视觉推理的平凡解。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-05",
+    "title": "CRISP: A Spatiotemporal Camera-Radar Backbone for Driving via Forecasting-Based World-Model Pretraining",
+    "link": "https://arxiv.org/abs/2607.04541",
+    "arxiv_id": "2607.04541",
+    "detail_path": "papers/2607.04541/",
+    "cover_path": "covers/2607.04541/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.04541.webp",
+    "paper_image_full_path": "assets/paper-images/2607.04541.webp",
+    "preview_text": "解决自动驾驶中相机-雷达（CR）融合的表示学习问题，提出基于预测的世界模型预训练框架。 应用场景为以低成本相机和雷达为输入、无LiDAR依赖的自动驾驶感知、预测与规划。 研究问题是如何让CR融合模型通过预测未来LiDAR点云学习可迁移的时空BEV表示，同时保持推理时仅使用相机和雷达。",
+    "research_unit": "Department of Robotics, University of Michigan, Ann Arbor · Jingyu Song、Yi…",
+    "hook_text": "解决自动驾驶中相机-雷达（CR）融合的表示学习问题，提出基于预测的世界模型预训练框架。",
+    "key_points": [
+      "解决自动驾驶中相机-雷达（CR）融合的表示学习问题，提出基于预测的世界模型预训练框架。",
+      "应用场景为以低成本相机和雷达为输入、无LiDAR依赖的自动驾驶感知、预测与规划。",
+      "研究问题是如何让CR融合模型通过预测未来LiDAR点云学习可迁移的时空BEV表示，同时保持推理时仅使用相机和雷达。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-03",
+    "title": "AnchorVLA: Bridging Discrete Decisions and Continuous Trajectories for Vision-Language-Action Planning",
+    "link": "https://arxiv.org/abs/2607.03182",
+    "arxiv_id": "2607.03182",
+    "detail_path": "papers/2607.03182/",
+    "cover_path": "covers/2607.03182/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.03182.webp",
+    "paper_image_full_path": "assets/paper-images/2607.03182.webp",
+    "preview_text": "论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。 应用场景是CARLA仿真环境下的闭环自动驾驶规划，涵盖车道保持、制动、让行、转弯、超车等多种行为决策与多模态连续轨迹生成。",
+    "research_unit": "School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China…",
+    "hook_text": "论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。",
+    "key_points": [
+      "论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。",
+      "应用场景是CARLA仿真环境下的闭环自动驾驶规划，涵盖车道保持、制动、让行、转弯、超车等多种行为决策与多模态连续轨迹生成。",
+      "提出AnchorVLA，一种分层决策锚定的VLA规划框架，将轨迹模式锚点作为高层VLA推理与连续轨迹执行之间的显式决策接口。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-07-03",
+    "title": "SWIFT: A Small-World Interaction Framework for Flow-Aware Trajectory Prediction in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2607.09741",
+    "arxiv_id": "2607.09741",
+    "detail_path": "papers/2607.09741/",
+    "cover_path": "covers/2607.09741/",
+    "paper_image_path": "assets/paper-images/thumbs/2607.09741.webp",
+    "paper_image_full_path": "assets/paper-images/2607.09741.webp",
+    "preview_text": "本文解决自动驾驶中的轨迹预测任务，具体研究交通场景中智能体（车辆）之间的动态和上下文相关交互建模问题。 针对现有轨迹预测方法纯数据驱动、缺乏结构先验，导致在分布偏移下泛化能力受限的问题，提出一个统一框架 SWIFT。 SWIFT 将小世界网络与交通流理论相结合，引入结构归纳偏置，旨在同时捕捉局部和全局依赖，并根据交通流状态自适应调整交互结构，提升预测精度、泛化性、鲁棒性和样本效率。",
+    "research_unit": "State Key Laboratory of Internet of Things for Smart City, University of Ma…",
+    "hook_text": "本文解决自动驾驶中的轨迹预测任务，具体研究交通场景中智能体（车辆）之间的动态和上下文相关交互建模问题。",
+    "key_points": [
+      "本文解决自动驾驶中的轨迹预测任务，具体研究交通场景中智能体（车辆）之间的动态和上下文相关交互建模问题。",
+      "针对现有轨迹预测方法纯数据驱动、缺乏结构先验，导致在分布偏移下泛化能力受限的问题，提出一个统一框架 SWIFT。",
+      "SWIFT 将小世界网络与交通流理论相结合，引入结构归纳偏置，旨在同时捕捉局部和全局依赖，并根据交通流状态自适应调整交互结构，提升预测精度、泛化性、鲁棒性和样本效率。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-08-28",
     "title": "How Far Can 5,500 Hours of Driving Take You? A Scaling Law Analysis of Video Diffusion Models",
     "link": "https://arxiv.org/abs/2608.28404",

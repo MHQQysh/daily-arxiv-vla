@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Emerges and What Breaks in Self-Play Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。 应用场景为城市道路自动驾驶，场景表示基于对象级抽象（车辆、车道等），而非原始传感器数据。 研究问题包括：在真实城市高清地图上通过自博弈训练能否复现Gigaflow的成果；Transformer架构相比MLP在此任务上的表现；自博弈中涌现出哪些交通规则以及哪些规则未能涌现。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.30819">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.30819.webp" alt="What Emerges and What Breaks in Self-Play Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">What Emerges and What Breaks in Self-Play Driving</h1>
+            <div class="detail-meta">2026-08-31 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.30819" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.30819" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.30819</span></div>
+            <p class="detail-summary">本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。 应用场景为城市道路自动驾驶，场景表示基于对象级抽象（车辆、车道等），而非原始传感器数据。 研究问题包括：在真实城市高清地图上通过自博弈训练能否复现Gigaflow的成果；Transformer架构相比MLP在此任务上的表现；自博弈中涌现出哪些交通规则以及哪些规则未能涌现。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Tartu · Laur Sisask、Ardi Tampuu、Tambet Matiisen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.30819/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。</p>
+  <ul class="reading-intro-points"><li>本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。</li><li>应用场景为城市道路自动驾驶，场景表示基于对象级抽象（车辆、车道等），而非原始传感器数据。</li><li>研究问题包括：在真实城市高清地图上通过自博弈训练能否复现Gigaflow的成果；Transformer架构相比MLP在此任务上的表现；自博弈中涌现出哪些交通规则以及哪些规则未能涌现。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Tartu；作者：Laur Sisask、Ardi Tampuu、Tambet Matiisen</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文研究基于自博弈（self-play）强化学习的自动驾驶策略训练，以纯自博弈方式（不依赖人类驾驶数据）训练驾驶策略，最终目标是在爱沙尼亚塔尔图市部署到真实车辆上。</li><li>应用场景为城市道路自动驾驶，场景表示基于对象级抽象（车辆、车道等），而非原始传感器数据。</li><li>研究问题包括：在真实城市高清地图上通过自博弈训练能否复现Gigaflow的成果；Transformer架构相比MLP在此任务上的表现；自博弈中涌现出哪些交通规则以及哪些规则未能涌现。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>在塔尔图市的高清地图上训练自博弈驾驶策略（而非Gigaflow使用的合成地图），使训练环境更接近真实部署环境。</li><li>将模型从MLP扩展至Transformer架构（基于Wayformer设计），并探索其在自博弈驾驶任务中的表现。</li><li>详细分析策略与Gigaflow的性能差距，定位到具体失败模式：交通灯奖励黑客、缺乏停车让行（stop sign）的激励机制。</li><li>系统性分析自博弈涌现的交通规则与人类驾驶的差异，包括转弯车道选择、停车线、行人过街等行为。</li><li>验证奖励条件化（reward conditioning）能产生预期的驾驶行为多样性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端强化学习驾驶策略训练，基于自博弈范式，使用PPO-clip算法。</li><li>输入传感器：原文未使用真实传感器；输入为对象级观测（privileged states），包括最近63个物体的位置与速度、200个道路要素、信号灯状态等，观测范围100米。场景表示基于高清地图的向量化要素（lane centerlines, road edges, stop lines等）。</li><li>模型结构：训练两种模型——Deep Sets架构（模内编码+逐元素最大值池化+MLP+LSTM，含LSTM，参数596K）和Wayformer风格Transformer（特征向量经FiLM层调制后输入Transformer编码器，解码器使用单查询嵌入，参数638K）。</li><li>关键技术：多模态特征编码；奖励条件化，各奖励项系数独立随机采样并输入模型；交通灯随机化（50%概率禁用）；隐藏动态变量（摩擦系数、转向增益、加速度增益）增加鲁棒性；离散动作空间，转向动作空间经过定制；训练时限制轮胎摩擦防止过弯速度不真实。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo Open Motion Dataset (WOMD) 1.2.0验证集（用于Waymax基准测试）。</li><li>仿真器：PufferDrive（训练环境）、CARLA（评测）、Waymax（评测）。</li><li>训练地图：塔尔图市高清地图，436公里可驾驶车道。</li><li>模型规模：Deep Sets约596K参数，Transformer约638K参数（Gigaflow约600万参数）。</li><li>训练资源：单张NVIDIA B200 GPU、32个CPU核心；Deep Sets模型16,384并行环境，Transformer模型4,096并行环境。</li><li>训练数据量：Deep Sets模型训练期间观察到630年等效驾驶数据；Transformer模型57年等效驾驶数据。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARLA Leaderboard 1.0 Testing Routes、LAV benchmark、Longest6 benchmark、Waymax benchmark（WOMD验证集），以及塔尔图地图上的自定义场景（含128个转弯车道场景、63个停车线场景、64个行人横穿场景）。</li><li>评估指标：Driving Score (DS)、Route Completion (RC)、Infraction Penalty (IP)及各类违规率；Waymax使用Off-road rate、Collision rate、Kinematic infeasibility、Log ADE、Route progress、Driven ratio和自定义Score。</li><li>关键数值：CARLA Leaderboard上Deep Sets DS=30±1、RC=56±5，Transformer DS=29±2、RC=84±4，Gigaflow DS=93±1、RC=97±2；LAV上Deep Sets DS=27±3、Transformer DS=17±2、Gigaflow DS=99±1；Longest6上Deep Sets DS=18±1、Transformer DS=23±0.3、Gigaflow DS=92±2。Waymax上Transformer碰撞率2.20%、离路率1.70%（Gigaflow分别为0.43%、0.43%）。</li><li>评估条件：均为闭环仿真评估，覆盖CARLA（每条路线运行三次）、Waymax及自定义合成场景；无开环评估，无实车测试。</li><li>对比方法：Gigaflow模型作为主要对比基线。</li><li>额外分析：对Transformer策略在117次停车标违规和110次红灯违规中进行人工审查，归类失败原因；在63+64+128个合成场景中评估转向车道、停车线、人行横道遵守情况；基于最后10%训练数据分析奖励条件化对行为多样性的影响。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.30839/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Physical Adversarial Examples for Person Detectors in Thermal Images Based on 3D Modeling</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.30400/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Real-Time Scene-Adaptive Tone Mapping for High-Dynamic Range Object Detection</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

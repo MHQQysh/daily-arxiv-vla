@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AnchorVLA: Bridging Discrete Decisions and Continuous Trajectories for Vision-Language-Action Planning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。 应用场景是CARLA仿真环境下的闭环自动驾驶规划，涵盖车道保持、制动、让行、转弯、超车等多种行为决策与多模态连续轨迹生成。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.03182">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.03182.webp" alt="AnchorVLA: Bridging Discrete Decisions and Continuous Trajectories for Vision-Language-Action Planning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">AnchorVLA: Bridging Discrete Decisions and Continuous Trajectories for Vision-Language-Action Planning</h1>
+            <div class="detail-meta">2026-07-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.03182" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.03182" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.03182</span></div>
+            <p class="detail-summary">论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。 应用场景是CARLA仿真环境下的闭环自动驾驶规划，涵盖车道保持、制动、让行、转弯、超车等多种行为决策与多模态连续轨迹生成。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.03182/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。</li><li>应用场景是CARLA仿真环境下的闭环自动驾驶规划，涵盖车道保持、制动、让行、转弯、超车等多种行为决策与多模态连续轨迹生成。</li><li>提出AnchorVLA，一种分层决策锚定的VLA规划框架，将轨迹模式锚点作为高层VLA推理与连续轨迹执行之间的显式决策接口。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Vehicle and Mobility, Tsinghua University, Beijing 100084, China；作者：Qi Liu, Lei He</li><li>机构：State Key Laboratory of Intelligent Green Vehicle and Mobility, Tsinghua University, Beijing 100084, China；作者：Qi Liu, Lei He</li><li>机构：School of Computer Science and Engineering, Southeast University, Nanjing 210096, China；作者：Qi Liu, Hongsong Wang</li><li>机构：Meituan Inc.；作者：Yabei Li</li><li>机构：Dongfeng Motor Corporation；作者：Lei He</li><li>注：作者 Heng Zhang 的机构对应关系原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶中的端到端轨迹规划任务，核心研究问题为：如何弥合高层语言推理（VLA）与低层连续轨迹执行之间的“抽象鸿沟”。</li><li>应用场景是CARLA仿真环境下的闭环自动驾驶规划，涵盖车道保持、制动、让行、转弯、超车等多种行为决策与多模态连续轨迹生成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出AnchorVLA，一种分层决策锚定的VLA规划框架，将轨迹模式锚点作为高层VLA推理与连续轨迹执行之间的显式决策接口。</li><li>设计Decision-as-Anchor Representation（DAAR），以轨迹模式码本表示行为级驾驶决策，每个锚点编码完整的局部运动模式而非单一坐标点。</li><li>提出Decision-Anchored Residual Flow（DARF），在选中锚点定义的残差空间中用流匹配生成多模态连续轨迹细化。</li><li>在Bench2Drive闭环基准上取得SOTA成功率77.28%和具有竞争力的驾驶分数89.92%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶规划（VLA规划器），具体为分层决策规划+生成式轨迹生成。</li><li>输入传感器：前视图图像（front-view image tiles）、语言指令、导航输入（GPS目标点通过MLP投影为token）。</li><li>场景表示：基于VLM多模态token表示场景上下文与链式推理token，轨迹模式码本由训练轨迹聚类构建。</li><li>模型结构：InternVL2-1B VLM作为骨干（图像编码器为InternViT-300M，文本模型为Qwen2-0.5B-Instruct），DAAR锚点决策模型（含query-based与autoregressive两种实例化），DARF残差流解码器。</li><li>关键技术：DAAR将行为级决策表示为轨迹模式锚点（轨迹模式码本K=100），软锚点目标监督（top-N最近锚点加权），autoregressive建模将K个锚点token加入LLM词表；DARF在锚点定义的残差坐标系中执行流匹配，融合时间步噪声以建模多模态残差分布，训练时选择与GT最接近的候选锚点计算流匹配损失，推理时以置信度分数在top-M个候选轨迹中选最终输出。</li><li>其他关键技术点：原文未报告显式场景表示（如BEV或向量化场景）的具体形式。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：遵循SimLingo的训练数据设置，包括专家轨迹、指令条件dream轨迹，以及VQA、驾驶解说、无语言样本等混合语言监督。</li><li>仿真器：Bench2Drive闭环基准（基于CARLA）。</li><li>模型规模：原文未报告模型总参数量；VLA骨干为InternVL2-1B（InternViT-300M + Qwen2-0.5B-Instruct）。</li><li>训练资源：第一阶段（DAAR锚点决策模型）在8张NVIDIA A100 GPU上训练15个epoch，batch size为16；第二阶段（DARF）冻结VLA骨干，在4张NVIDIA A100 GPU上训练15个epoch，batch size为32。</li><li>其他资源：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Bench2Drive闭环基准（基于CARLA）。</li><li>评估指标：驾驶分数（Driving Score, DS）、成功率（Success Rate, SR）、效率（Efficiency）、舒适度（Comfort）、多能力分数（Multi-Ability，含Merging、Overtake、Brake、Give-Way、Traffic-Sign、Mean）。</li><li>关键数值：AnchorVLA在Bench2Drive上取得DS=89.92、SR=77.28（最佳）、Efficiency=251.14、Comfort=28.94；多能力均值74.22（最佳），其中Overtake=81.11为最佳，Traffic-Sign=85.00。</li><li>对比方法：TCP-traj、ThinkTwice、DriveAdapter、AD-MLP、UniAD-Base、VAD、DriveTransformer、Orion-VAE、Orion-Diffusion、AutoVLA、DiffusionDrive、SimLingo、TransFuser++、LinkVLA、BridgeDrive。</li><li>开环/闭环条件：闭环仿真评测。</li><li>消融实验：DAAR建模消融（LinkVLA-AR、无显式决策、query-based、autoregressive）显示autoregressive最佳；流匹配消融（确定性预测、全轨迹流、DARF）显示DARF最佳且额外延迟为18 ms。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.04541/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">CRISP: A Spatiotemporal Camera-Radar Backbone for Driving via Forecasting-Based World-Model Pretraining</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.09741/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SWIFT: A Small-World Interaction Framework for Flow-Aware Trajectory Prediction in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

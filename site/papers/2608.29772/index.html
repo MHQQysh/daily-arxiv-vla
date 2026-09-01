@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Self-Aware Active Learning Enables Continual Improvement in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。 研究问题聚焦于训练后的自动驾驶策略在遇到罕见分布偏移和长尾安全关键事件时，缺乏对自身能力边界的感知、无法主动求助专家，并难以将专家干预转化为安全的策略提升。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.29772">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.29772.webp" alt="Self-Aware Active Learning Enables Continual Improvement in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Self-Aware Active Learning Enables Continual Improvement in Autonomous Driving</h1>
+            <div class="detail-meta">2026-08-30 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.29772" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.29772" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.29772</span></div>
+            <p class="detail-summary">本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。 研究问题聚焦于训练后的自动驾驶策略在遇到罕见分布偏移和长尾安全关键事件时，缺乏对自身能力边界的感知、无法主动求助专家，并难以将专家干预转化为安全的策略提升。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The Hong Kong Polytechnic University · Dong Hu、Carman K.M. Lee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.29772/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。</p>
+  <ul class="reading-intro-points"><li>本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。</li><li>研究问题聚焦于训练后的自动驾驶策略在遇到罕见分布偏移和长尾安全关键事件时，缺乏对自身能力边界的感知、无法主动求助专家，并难以将专家干预转化为安全的策略提升。</li><li>提出 SAGE，一种将预测性自监控、选择性专家干预与部署后策略改进耦合在一起的持续驾驶自适应主动学习框架。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The Hong Kong Polytechnic University；作者：Dong Hu、Carman K.M. Lee</li><li>机构：Adelaide University；作者：Chao Huang</li><li>机构：University College London；作者：Dimitrios Kanoulas</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出自感知主动学习框架 SAGE，用于自动驾驶系统在部署后的持续改进与安全自适应。</li><li>研究问题聚焦于训练后的自动驾驶策略在遇到罕见分布偏移和长尾安全关键事件时，缺乏对自身能力边界的感知、无法主动求助专家，并难以将专家干预转化为安全的策略提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SAGE，一种将预测性自监控、选择性专家干预与部署后策略改进耦合在一起的持续驾驶自适应主动学习框架。</li><li>定义了“恐惧”（fear）作为短时域预测性风险信号，由期望安全代价与认知不确定性构成；并利用“好奇”（curiosity）自适应校准干预阈值。</li><li>设计安全正则化的学习目标，将干预轨迹通过价值加权模仿学习融入，并以恐惧正则化约束策略更新，减少不安全探索与性能回退。</li><li>在仿真、记录驾驶场景、长尾危险场景及真实世界移动机器人导航中进行了全面评估，验证了在路线转移、对抗交互、遮挡行人事件和 UGV 导航中鲁棒性与安全性的提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶策略的持续学习与安全自适应框架。</li><li>输入传感器：原文未明确报告。</li><li>场景表示：自车中心（ego-centric）状态表示，包含最多六个最近车辆（200 m 感知范围、预定义相对扇区）的相对距离、相对航向、相对速度、相对速度方向，以及自车速度、航向、到交通灯距离、红绿灯状态、到下一个路线目标的距离，构成 29 维观察向量。</li><li>模型结构：世界模型为 N 个概率动力学模型的集成，每个模型输出对角高斯分布；策略网络采用 SAC（连续控制）或 D3QN（离散控制）作为骨干；批判网络采用集成结构并使用最小目标值减少乐观偏差。</li><li>关键技术：</li></ul>
+<p> - 恐惧信号定义为预测代价与模型不确定性（集合预测标准差）的加权组合，并扩展为 m 步短时域滚动预测。</p>
+<p> - 好奇信号定义为世界模型预测下一状态与实际观测下一状态的二范数误差；据此通过指数移动平均归一化得到好奇调节的自适应安全阈值。</p>
+<p> - 当预测恐惧超过好奇调节的阈值时，控制权转移给专家策略，并记录接管轨迹作为监督。</p>
+<p> - 恐惧正则化强化学习采用拉格朗日松弛求解约束优化，通过恐惧正则化贝尔曼算子进行策略评估与改进。</p>
+<p> - 采用价值加权行为克隆：按专家动作与 agent 动作的 Q 值差通过指数变换得到软性重要性权重并加权模仿损失。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo 记录的驾驶场景（normal 与 adversarial 场景）。</li><li>仿真器：原文提及 SUMO（路线转移实验图）、Waymo 场景仿真、CARLA（遮挡危险实验），但实验细节原文未完全报告。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：原文未报告。</li><li>实车平台：实验四使用了真实世界无人地面车辆（UGV）导航测试。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：路线转移实验（SUMO 仿真，Route 1 与 Route 2 两阶段迁移）、Waymo 对抗驾驶场景、CARLA 长尾安全关键实验、真实 UGV 场测。</li><li>评估指标：成功率（S.R.）、碰撞率（C.R.）、平均速度、平均加速度、红灯违规率、接管频率、平均恐惧、平均好奇。</li><li>关键数值（Waymo 实验）：</li></ul>
+<p> - 训练集正常场景：SAGE-RL 成功率 91.5%、碰撞率 4.8%，优于 SAC、TD3、FNI-RL；对抗场景下 SAGE-RL 成功率 83.9%、碰撞率 9.1%，明显优于基线。</p>
+<p> - 测试集正常场景：SAGE-RL 成功率高于基线；对抗场景下 SAGE-RL 成功率 70%（表中测试集对抗场景 SAGE-RL 数值部分被截断，原文未完全报告）。</p>
+<ul><li>对比方法：SAC、TD3、D3QN、HG-DAgger、FNI-RL、Diffusion-BC、Diffusion-QL、Multi-Hug RL、TEB 规划器。</li><li>开环/闭环/仿真/实车条件：路线转移与 Waymo 场景为闭环仿真；CARLA 实验为闭环仿真；UGV 场测为真实世界实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.29923/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Towards Continual Test-Time Adaptation of Vision-Language Models in Open-Vocabulary Semantic Segmentation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.29567/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">MotionSync: Non-Causal Refinement of Causal Tracker for Label-Efficient 3D Perception</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

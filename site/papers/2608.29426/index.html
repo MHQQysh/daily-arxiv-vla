@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Polis: 3D Self-Supervision at City Scale - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。 应用场景包括城市规划、基础设施监测、自动驾驶系统以及文化遗产保护等领域中，对航拍获得的广域城市点云进行语义理解。 研究问题在于，现有 3D 自监督模型大多在室内或物体级、以及以自车为中心的自动驾驶 LiDAR 数据上预训练，难以适应城市尺度数据的感知异质性；本文探讨能否通过针对户外数据与几何特性专门设计的自监督方法，在该场景中取得更强的迁移效果。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2608.29426">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2608.29426.webp" alt="Polis: 3D Self-Supervision at City Scale" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Polis: 3D Self-Supervision at City Scale</h1>
+            <div class="detail-meta">2026-08-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2608.29426" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2608.29426" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2608.29426</span></div>
+            <p class="detail-summary">本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。 应用场景包括城市规划、基础设施监测、自动驾驶系统以及文化遗产保护等领域中，对航拍获得的广域城市点云进行语义理解。 研究问题在于，现有 3D 自监督模型大多在室内或物体级、以及以自车为中心的自动驾驶 LiDAR 数据上预训练，难以适应城市尺度数据的感知异质性；本文探讨能否通过针对户外数据与几何特性专门设计的自监督方法，在该场景中取得更强的迁移效果。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">École Polytechnique Fédérale de Lausanne · Alexander M. Rusnak、Sophia Koval…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2608.29426/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。</p>
+  <ul class="reading-intro-points"><li>本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。</li><li>应用场景包括城市规划、基础设施监测、自动驾驶系统以及文化遗产保护等领域中，对航拍获得的广域城市点云进行语义理解。</li><li>研究问题在于，现有 3D 自监督模型大多在室内或物体级、以及以自车为中心的自动驾驶 LiDAR 数据上预训练，难以适应城市尺度数据的感知异质性；本文探讨能否通过针对户外数据与几何特性专门设计的自监督方法，在该场景中取得更强的迁移效果。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：École Polytechnique Fédérale de Lausanne；作者：Alexander M. Rusnak、Sophia Kovalenko、Jingru Wang、Ismail Moudden、Xiru Wang、Frédéric Kaplan</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 Polis，一个面向城市尺度户外三维点云的自监督学习系统，核心任务是提升大规模城市场景点云语义分割的迁移性能。</li><li>应用场景包括城市规划、基础设施监测、自动驾驶系统以及文化遗产保护等领域中，对航拍获得的广域城市点云进行语义理解。</li><li>研究问题在于，现有 3D 自监督模型大多在室内或物体级、以及以自车为中心的自动驾驶 LiDAR 数据上预训练，难以适应城市尺度数据的感知异质性；本文探讨能否通过针对户外数据与几何特性专门设计的自监督方法，在该场景中取得更强的迁移效果。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次将 Sketched Isotropic Gaussian Regularization (SIGReg) 作为原生点云编码器的训练目标，并结合几何匹配的余弦不变性与 VICReg 风格的反坍缩正则项，构建了单编码器架构的自监督预训练方案。</li><li>构建了一个包含 22 个语料、总计约 12,800 场景的户外城市规模预训练混合数据集，并设计重力保持的空间视图采样策略，以适配城市尺度数据的获取几何与空间上下文。</li><li>对 4 种 3D 自监督模型（Polis、Sonata、Concerto、Utonia）在 14 个城市与建筑尺度数据集上进行系统化冻结特征评估，并引入匹配预算与模型专属高容量两种探测协议，从迁移质量与实际场景容量两个维度进行对比。</li><li>大规模实验表明，Polis 在预训练未见过的城市尺度数据集上显著优于现有最强模型：高容量探测下平均 mIoU 达 23.8%，而次优模型仅 16.3%；匹配预算下为 17.3% 对 16.1%。但在局部地面采集的精细立面与街景任务上，优势发生逆转，揭示了领域特化带来的局限。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：3D 点云自监督预训练，属于自动驾驶/城市感知系统的离线表示学习部分。</li><li>输入传感器：原生点云，输入特征为 LitePT 默认的 8 维特征向量，包含 XYZ、RGB、法向量以及缺失模态的二值指示位；训练和推理完全不使用法向量。</li><li>场景表示：以体素化的点云 token 表示，采用分层压缩策略，将体素聚合为粗粒度 token 再形成场景级结构；预训练视图包括一个全局视图与两个局部视图。</li><li>模型结构：使用 LitePT-L 点编码器作为骨干网络，该结构在前几层用卷积替代注意力，在层级压缩后于深层采用注意力机制，并引入 PointROPE 旋转位置编码；对比模型中除 Polis 外均采用 vanilla Point Transformer 骨干。</li><li>关键技术：结合 SIGReg 分布正则化、全局-局部 token 的余弦不变性（按原始坐标最近邻匹配）、VICReg 风格方差/协方差约束；预训练时对每个视图独立施加重力保持的几何与颜色增强，局部视图恒施加偏航旋转，全局视图以 0.5 概率施加，俯仰/翻滚限制在 ±π/64；多视图采样与增强仅用于预训练，探测时采用独立解码协议。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>预训练数据集：22 个户外与城市尺度语料库，涵盖航拍影像、LiDAR、摄影测量、网格、遗产建筑（部分含室内）及驾驶序列；头部运行使用 12,759 个场景。</li><li>评估数据集：共 14 个城市与建筑尺度语料，其中包括 5 个预训练未见过的 held-out 数据集：UNS-Geo、HRHD-HK、WHU-Urban3D、SemanticUrban、UnderOneFacade。</li><li>模型规模：原文未报告具体参数量；Pretraining 配置为 50 epoch、全局 batch size 512（4×128）、128 个 GPU。</li><li>训练资源：128 个 GPU；运行时容量测试在 H100 80GB GPU 上进行。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：14 个城市与建筑尺度三维点云语义分割数据集，包括 DALES、Swiss3DCities、Turin3D、SUM、YTU3D、Hessigheim3D、UrbanBIS、SensatUrban 等城市尺度数据集，以及 ArCH、SemanticUrban、UnderOneFacade 等建筑尺度数据集。</li><li>评估指标：冻结特征语义分割的 mean IoU (mIoU)，以及线性 CKA、特征方差解释率（R²）、径向探测精度、岭回归 mIoU 等多种诊断指标。</li><li>关键数值：高容量探测下，Polis 在 3 个预训练未见过的城市数据上平均 mIoU 23.8%，次优 16.3%；匹配预算下 17.3% vs 16.1%；城市尺度全部 11 个数据集高容量平均 21.4% vs 次优 Utonia 15.2%；建筑尺度 held-out 平均 Polis 15.1% vs Utonia 27.5%。</li><li>对比方法：Sonata、Concerto、Utonia 三个现有最强 3D 自监督模型，以及随机初始化的 LitePT-L、全监督 KPConv。</li><li>实验条件：冻结特征探测协议，采用 Efficient Probing 改编为密集分割任务；部分评估在预训练见过的数据集上进行，部分在预训练未见过（held-out）数据集上进行；包含开环语义分割评估、消融实验、径向精度分析、几何捷径诊断、密度稳定性分析及运行时容量测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2608.29567/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MotionSync: Non-Causal Refinement of Causal Tracker for Label-Efficient 3D Perception</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2608.29187/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">OPUS-V2: Bridging the Gap between Sparse Points and Dense Voxels</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
