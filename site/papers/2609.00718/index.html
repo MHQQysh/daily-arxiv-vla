@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Closed-Loop Evaluation of Capability Loss and Recovery in Compressed Driving Policies - 自动驾驶每日论文卡</title>
+    <meta name="description" content="研究在自动驾驶嵌入式平台上部署学习型驾驶策略时，因资源有限而必须进行的模型压缩（剪枝、知识蒸馏、量化）对策略驾驶能力的影响。 将驾驶任务建模为部分可观测马尔可夫决策过程（POMDP），训练基于信念状态的PPO策略，并在Gym-Duckietown仿真环境中进行车道跟随、行人避让和停车线合规任务。 核心研究问题是：压缩流程中驾驶能力何时首次丧失、能否恢复、恢复受什么制约、恢复后能否在后续精度降低中存活。 提出了逐阶段的闭环评估方法，将压缩视为一系列行为转变而非仅用静态精度指标衡量。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.00718">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.00718.webp" alt="A Closed-Loop Evaluation of Capability Loss and Recovery in Compressed Driving Policies" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">研究在自动驾驶嵌入式平台上部署学习型驾驶策略时，因资源有限而必须进行的模型压缩（剪枝、知识蒸馏、量化）对策略驾驶能力的影响。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Closed-Loop Evaluation of Capability Loss and Recovery in Compressed Driving Policies</h1>
+            <div class="detail-meta">2026-09-01 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.00718" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.00718" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.00718</span></div>
+            <p class="detail-summary">研究在自动驾驶嵌入式平台上部署学习型驾驶策略时，因资源有限而必须进行的模型压缩（剪枝、知识蒸馏、量化）对策略驾驶能力的影响。 将驾驶任务建模为部分可观测马尔可夫决策过程（POMDP），训练基于信念状态的PPO策略，并在Gym-Duckietown仿真环境中进行车道跟随、行人避让和停车线合规任务。 核心研究问题是：压缩流程中驾驶能力何时首次丧失、能否恢复、恢复受什么制约、恢复后能否在后续精度降低中存活。 提出了逐阶段的闭环评估方法，将压缩视为一系列行为转变而非仅用静态精度指标衡量。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Universitas Muhammadiyah Yogyakarta（印度尼西亚） · Ahmad Alfan Alfian Irfan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.00718/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">研究在自动驾驶嵌入式平台上部署学习型驾驶策略时，因资源有限而必须进行的模型压缩（剪枝、知识蒸馏、量化）对策略驾驶能力的影响。</p>
+  <ul class="reading-intro-points"><li>研究在自动驾驶嵌入式平台上部署学习型驾驶策略时，因资源有限而必须进行的模型压缩（剪枝、知识蒸馏、量化）对策略驾驶能力的影响。</li><li>将驾驶任务建模为部分可观测马尔可夫决策过程（POMDP），训练基于信念状态的PPO策略，并在Gym-Duckietown仿真环境中进行车道跟随、行人避让和停车线合规任务。</li><li>核心研究问题是：压缩流程中驾驶能力何时首次丧失、能否恢复、恢复受什么制约、恢复后能否在后续精度降低中存活。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Universitas Muhammadiyah Yogyakarta（印度尼西亚）；作者：Ahmad Alfan Alfian Irfan</li><li>机构：奈良先端科学技术大学院大学（NAIST）（日本）；作者：Nur Ahmad Khatim</li><li>机构：法赫德国王石油与矿产大学（KFUPM）（沙特阿拉伯）；作者：Mansur Arief</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>研究在自动驾驶嵌入式平台上部署学习型驾驶策略时，因资源有限而必须进行的模型压缩（剪枝、知识蒸馏、量化）对策略驾驶能力的影响。</li><li>将驾驶任务建模为部分可观测马尔可夫决策过程（POMDP），训练基于信念状态的PPO策略，并在Gym-Duckietown仿真环境中进行车道跟随、行人避让和停车线合规任务。</li><li>核心研究问题是：压缩流程中驾驶能力何时首次丧失、能否恢复、恢复受什么制约、恢复后能否在后续精度降低中存活。</li><li>提出了逐阶段的闭环评估方法，将压缩视为一系列行为转变而非仅用静态精度指标衡量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种逐阶段闭环评估方法，跟踪驾驶策略在剪枝、知识蒸馏和量化压缩流水线中的行为表现，并在每个阶段以统一验收标准评估。</li><li>表征了信念状态视觉运动驾驶策略在“结构化剪枝→蒸馏→低精度部署”序列中的能力丧失规律，并发现结构化剪枝是能力首次丧失的阶段。</li><li>证明剪枝后能力恢复程度取决于蒸馏排练数据（rehearsal）覆盖范围：任务局限的蒸馏仅恢复部分能力，均衡覆盖的排练可使压缩后的FP32 actor完全恢复所有行为。</li><li>证明成功的恢复不能保证后续精度降低下的鲁棒性：INT8量化会使需停-再启的课程失败，而FP16则保持恢复后的行为，表明仅靠动作层面相似度不足以保证驾驶能力。</li><li>基于实证表明，动作精度指标在压缩策略接受判定上会出现假阳性和假阴性，因此闭环任务层面的验收必须逐阶段实际测量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端驾驶策略中的actor网络压缩与评估。</li><li>输入传感器：单目相机帧，以及由YOLO11n检测器和MobileNetV3-small车道回归器得到的感知测量。</li><li>场景表示：状态为仿真器状态；观测为单目相机帧；部分可观测性由检测器漏检/误检、行人转瞬即逝、停车线处停止标志不可见等来源构成。</li><li>基于信念状态的表示：感知测量经扩展卡尔曼滤波（EKF）融合（车道EKF、行人和停车标志各自EKF与伯努利存在滤波器），最终组装成固定的29维信念向量输入策略；信念由代理里程计差分获得自身运动估计。</li><li>模型结构：actor为含tanh激活的三层感知机（29输入→两层各256隐单元→2维输出），共73,986个参数；训练用Belief-PPO。</li><li>关键技术：结构化剪枝（按L2连接和为单元打分，剪至宽度64，参数降至6,210，削减91.6%）；知识蒸馏（Smooth-L1损失，教师固定，两分支排练数据不同：C4历史状态或62,176个均衡跨五类课程状态）；量化（PTQ：x86后端的eager静态INT8、per-channel对称权重、per-tensor仿射激活；QAT；以及FP16 cast并做原生半精度有效性校验）。</li><li>评估接受准则：每个候选在每个课程上跑8个种子，每个课程需通过多核验收准则（覆盖完成率、碰撞、不安全接近、停车违例、停车完成与重启、车道失守、非法位姿、最小行人净距等）；同时设置相对参考actor A0的回退容差。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：未报告；训练与评估在Gym-Duckietown仿真器中完成。</li><li>仿真器：Gym-Duckietown环境。</li><li>模型规模：原始actor为73,986参数（宽度256）；剪枝后actor为6,210参数（宽度64）。</li><li>蒸馏排练数据：历史集来自C4开发状态；均衡集含62,176个跨五个课程的公共状态。</li><li>训练资源：原文未报告具体训练硬件与计算资源。</li><li>实车平台：无，仅限于Gym-Duckietown小规模仿真平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：五个驾驶课程C0–C4（纯车道跟随、大环车道跟随、大环行人横穿、停车标志、行人横穿+停车标志双倍horizon），覆盖难度递增。</li><li>评估指标：多核验收准则，单一课程必须所有检查均通过才算PASS，检查内容包括完成率、碰撞、非法位姿、停车违例、停车重启等。</li><li>关键数值：A1（剪枝，宽64）五课程全失败；A2（剪枝+针对C4的蒸馏）完成所有C3和C4但C0–C2全失败；A3（剪枝+均衡蒸馏）通过全部五课程；A4（仅PTQ、未剪枝，宽256）保留全部课程；A5（剪枝+PTQ无蒸馏）全部失败；A6（剪枝+均衡蒸馏+PTQ）通过C0–C2但在C3上仅完成3/8（其余停在停车线）且C4失败；A8（A3配置经QAT）以“穿过停车线”方式失败（C3中8次中有4次违例，C4中8次中有7次违例）；A9（A3的FP16 cast）通过全部五课程。</li><li>对比方法：评估候选包括A0（原actor参考）、A1–A9不同剪枝/蒸馏/量化组合，其中A4与A5为对照设置、A9为降半浮点对照，C4单次无效A7（剪枝+KD(C4)+PTQ+QAT(C4)）则对C0–C2失败。</li><li>测试类型：闭环评估，在Gym-Duckietown仿真室内完成；每候选每课程8种子，共40个episode每候选、400个episode总规模。</li><li>期间实验条件与额外观察：A6在停车线前约0.2 m处冻结、命令速度v_cmd=0.000直到超时；A8在穿越停车线时发出v_cmd=0.077 m/s；INT8时为12.9 µs（对比FP32的19.4 µs约1.5×快），FP16在x86后端反而增加26%的中位数延迟。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.00898/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Vision-Language-Guided Pseudo-Labels for Unsupervised Domain Adaptation in Semantic Segmentation for Waste Sorting</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.00682/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Context-Aware Intelligent Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

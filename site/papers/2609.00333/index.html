@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scene Graph-based Driving Scenario Extraction for Automotive Egocentric Datasets - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本论文解决自动驾驶系统（ADS）开发中的驾驶场景提取问题，即从无标注的真实世界传感器数据流中自动定位关键驾驶场景。 应用场景为基于场景的 ADS 数据集覆盖度分析，帮助开发人员判断数据集对目标运行设计域（ODD）内场景的覆盖程度。 研究问题为：如何在保留传统规则方法可解释性、确定性的同时，提取基于视觉语义（如天气、道路条件、校车停车标志状态等）的复杂场景——这是仅依赖轨迹标注的现有方法无法实现的。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.00333">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.00333.webp" alt="Scene Graph-based Driving Scenario Extraction for Automotive Egocentric Datasets" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本论文解决自动驾驶系统（ADS）开发中的驾驶场景提取问题，即从无标注的真实世界传感器数据流中自动定位关键驾驶场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Scene Graph-based Driving Scenario Extraction for Automotive Egocentric Datasets</h1>
+            <div class="detail-meta">2026-08-31 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.00333" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.00333" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.00333</span></div>
+            <p class="detail-summary">本论文解决自动驾驶系统（ADS）开发中的驾驶场景提取问题，即从无标注的真实世界传感器数据流中自动定位关键驾驶场景。 应用场景为基于场景的 ADS 数据集覆盖度分析，帮助开发人员判断数据集对目标运行设计域（ODD）内场景的覆盖程度。 研究问题为：如何在保留传统规则方法可解释性、确定性的同时，提取基于视觉语义（如天气、道路条件、校车停车标志状态等）的复杂场景——这是仅依赖轨迹标注的现有方法无法实现的。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">McMaster Centre for Software Certification (McSCert), McMaster University ·…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.00333/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本论文解决自动驾驶系统（ADS）开发中的驾驶场景提取问题，即从无标注的真实世界传感器数据流中自动定位关键驾驶场景。</p>
+  <ul class="reading-intro-points"><li>本论文解决自动驾驶系统（ADS）开发中的驾驶场景提取问题，即从无标注的真实世界传感器数据流中自动定位关键驾驶场景。</li><li>应用场景为基于场景的 ADS 数据集覆盖度分析，帮助开发人员判断数据集对目标运行设计域（ODD）内场景的覆盖程度。</li><li>研究问题为：如何在保留传统规则方法可解释性、确定性的同时，提取基于视觉语义（如天气、道路条件、校车停车标志状态等）的复杂场景——这是仅依赖轨迹标注的现有方法无法实现的。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：McMaster Centre for Software Certification (McSCert), McMaster University；作者：Stefan Ramdhan、Kyanna Dagenais、Vera Pantelic、Victor Bandur、Mark Lawford</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本论文解决自动驾驶系统（ADS）开发中的驾驶场景提取问题，即从无标注的真实世界传感器数据流中自动定位关键驾驶场景。</li><li>应用场景为基于场景的 ADS 数据集覆盖度分析，帮助开发人员判断数据集对目标运行设计域（ODD）内场景的覆盖程度。</li><li>研究问题为：如何在保留传统规则方法可解释性、确定性的同时，提取基于视觉语义（如天气、道路条件、校车停车标志状态等）的复杂场景——这是仅依赖轨迹标注的现有方法无法实现的。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了一种基于场景图与线性时序逻辑（LTL）的场景提取方法，相较于现有最先进方法，能够提取依赖于视频数据视觉语义的场景（如天气、道路条件、物体特征），同时保留规则方法的确定性白盒优势。</li><li>对开源场景图生成器 RoadScene2Vec (RS2V) 进行了改进，实现了两个关键增强：(1) 通过基于轨迹的标签实现跨帧一致的对象跟踪；(2) 细化了原本粗糙的三车道识别，利用 HD 地图数据实现更精确的车道分配。</li><li>强调了方法的集成性质——不引入新算法，而是将现有多系统（目标检测、跟踪、多模态大模型、模型检查器）进行整合并增加必要的支撑工具链。</li><li>发布了全部源代码（匿名 GitHub 仓库），支持结果复现与后续扩展。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据驱动的自动驾驶道路场景分析与场景提取模块。</li><li>输入传感器：单目前视相机图像流、可选的轨迹标注（含多传感器融合的状态估计）、可选的 HD 地图数据。</li><li>场景表示：采用场景图（Scene Graph）序列。单个场景图编码一帧图像中的物体节点、属性及空间关系；整个场景被表示为跨时间的场景图序列。</li><li>模型结构：流程分为四步：(1) 场景图生成：使用 RoadScene2Vec (RS2V)（基于 Detectron2 目标检测 + 规则启发式关系推理）生成原始场景图序列，并通过 Kalman Filter 与 Hungarian 算法实现多目标跟踪，建立时间一致的对象标签（perception tracks）；通过 Hungarian 算法将感知轨迹关联到数据集提供的标注轨迹上，以获得噪声更低的运动状态（位置、速度、朝向）并修正空间关系；利用 HD 地图修正车道分配并增加道路几何边（如 opposes、toLeftOf）；使用多模态大语言模型 (MLLM) gemini-2.5-flash-lite 进行视觉问答以提取天气、道路表面状况及校车停车标志是否展开等视觉语义属性添加到场景图中；(2) 场景图富化——将上述来自传感器状态与 HD 地图的语义信息与 MLLM 视觉语义加入场景图中，但以功能、逻辑、具体三个抽象层次定义场景，其中天气等条件可作为元数据嵌入每个场景图中；(3) 场景规格化——使用 LTL 公式（基于自定义原子谓词）在语义层面正式定义感兴趣场景，可将多个场景事件组合为时序谓词链；(4) LTL 检查——使用现成的模型检查器 SceneFlow 的修改版本（改为标记满足而非违反），评估每个场景图序列是否满足 LTL 规范。</li><li>关键技术：场景图序列 + LTL 模型检查；多目标跟踪（卡尔曼滤波 + Hungarian）；感知轨迹与标注轨迹关联；HD 地图车道校正；MLLM 视觉问答富化（非确定性在场景图生成后即不再传播）。</li><li>原文未报告：具体的多模态大模型网络架构细节及训练信息（使用 API 服务）；视觉问答的具体提示词细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Argoverse 2 (AV2) 数据集训练集与验证集，共 850 条 15 秒真实驾驶日志（含 2D 检测、3D 轨迹、多传感器融合状态、环视相机图像及 HD 地图）；另外采集了 7 段包含校车停车标志展开的在线行车记录仪（dashcam）视频，用于校车停驶类场景提取。</li><li>仿真器：未使用仿真器（论文强调该方法可用于仿真与真实数据）。</li><li>模型规模：原文未报告具体模型参数量。</li><li>训练资源：原文未报告具体训练硬件信息；检测器 Detectron2 为预训练模型（非针对驾驶数据训练）；MLLM 用 gemini-2.5-flash-lite API。</li><li>实车平台：原文未报告（使用公开数据集与采集的行车记录视频，未进行真实车辆平台部署）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：基于 AV2 轨迹标注与 HD 地图构建的规则基准（该基准为场景提取的基线方法），与论文方法进行一致性比较。人类人工验证了随机子集。</li><li>评估指标：实例级精确率、召回率、F1 分数（含 track-aware 判定，需正确识别关键轨迹及≥50% 时间覆盖）以及时间戳级 temporal localization 的精准率、召回率、F1；日志级 log-balanced accuracy 及 TP/TN Rate。</li><li>关键数值（Level III 场景图，即含跟踪/状态/地图增强的场景图，多数指标为最优配置）：</li></ul>
+<p> - 纵向跟驰场景（30 m 跟随距离）：F1（track-aware）0.607，非 track-aware F1 0.802；long-following 对应日志级 log-balanced accuracy 0.822。</p>
+<p> - 纵向跟驰场景（60 m 跟随距离）：F1（track-aware）0.552，非 track-aware F1 0.827；log-balanced accuracy 0.819。</p>
+<p> - 从右侧切入场景（cut-in）：F1 0.855；log-balanced accuracy 0.901。</p>
+<p> - 校车出现场景：F1 0.721（Level I）；log-balanced accuracy 接近 1；precision 0.969 明显高于 recall 0.574，反映检测器对部分被遮挡校车的漏检。</p>
+<p> - 校车停驶（停车标志展开）场景：interval matching F1 0.400（Level I），temporal localization F1 0.742；日志级 TP Rate 1.0、TN Rate 0.992、log-balanced accuracy 0.996。</p>
+<p> - 对 MLLM 在天气及路面估计的单独评估：在 AV2 图像统计显著样本上，天气分类 F1=0.94，路面估计 F1=0.98。</p>
+<p> - 跟踪质量：平均每个 AV2 轨迹产生 1.587 个感知轨迹片段；34.1% 的 AV2 轨迹存在多个感知片段；主导感知轨迹对轨迹生命周期的平均覆盖率为 63.6%。</p>
+<ul><li>对比方法：与 LLM/VLM 方法 RefProg（在轨迹标注上的 log-balanced accuracy 0.811）进行了间接比较，三个场景（30m 跟驰、60m 跟驰、切入）的 log-balanced accuracy 均略高于该数值，但作者指出二者基准与场景集合不同，并非直接可比。</li><li>开环/闭环/仿真/实车条件：实车数据开环评估（基于公开数据集与行车记录视频离线回放）；无闭环或仿真器评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.00682/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Context-Aware Intelligent Vehicles</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.00242/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">CoLT-Drive: Counterfactual Long-Tail Benchmarking and Knowledge-Preserving Adaptation for Driving Affordance Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

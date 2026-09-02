@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Do Vision-Language-Action Models Mean What They Say? On the Role of Faithfulness in Embodied Reasoning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文研究自动驾驶（作为具身智能的代表性测试平台）中视觉-语言-动作模型（VLA）生成的思维链（Chain-of-Thought, CoT）是否忠实地反映其底层决策过程。 论文区分“功能性推理”（functional reasoning，即推理是否提升任务表现）与“忠实性推理”（faithful reasoning，即推理是否真实反映策略的内部决策过程），并指出当前先进的对齐策略仅提供必要但不充分的忠实性概念。 研究问题包括：推理质量是否与策略性能耦合、如何量化并优化具身推理的忠实性、以及忠实性推理是否有助于长尾（long-tail）场景下的泛化。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.04681">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.04681.webp" alt="Do Vision-Language-Action Models Mean What They Say? On the Role of Faithfulness in Embodied Reasoning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文研究自动驾驶（作为具身智能的代表性测试平台）中视觉-语言-动作模型（VLA）生成的思维链（Chain-of-Thought, CoT）是否忠实地反映其底层决策过程。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Do Vision-Language-Action Models Mean What They Say? On the Role of Faithfulness in Embodied Reasoning</h1>
+            <div class="detail-meta">2026-07-06 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.04681" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.04681" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.04681</span></div>
+            <p class="detail-summary">本文研究自动驾驶（作为具身智能的代表性测试平台）中视觉-语言-动作模型（VLA）生成的思维链（Chain-of-Thought, CoT）是否忠实地反映其底层决策过程。 论文区分“功能性推理”（functional reasoning，即推理是否提升任务表现）与“忠实性推理”（faithful reasoning，即推理是否真实反映策略的内部决策过程），并指出当前先进的对齐策略仅提供必要但不充分的忠实性概念。 研究问题包括：推理质量是否与策略性能耦合、如何量化并优化具身推理的忠实性、以及忠实性推理是否有助于长尾（long-tail）场景下的泛化。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Stanford University · Matthew Foutter、Yunshan Wang、Michelle Li 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.04681/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文研究自动驾驶（作为具身智能的代表性测试平台）中视觉-语言-动作模型（VLA）生成的思维链（Chain-of-Thought, CoT）是否忠实地反映其底层决策过程。</p>
+  <ul class="reading-intro-points"><li>本文研究自动驾驶（作为具身智能的代表性测试平台）中视觉-语言-动作模型（VLA）生成的思维链（Chain-of-Thought, CoT）是否忠实地反映其底层决策过程。</li><li>论文区分“功能性推理”（functional reasoning，即推理是否提升任务表现）与“忠实性推理”（faithful reasoning，即推理是否真实反映策略的内部决策过程），并指出当前先进的对齐策略仅提供必要但不充分的忠实性概念。</li><li>研究问题包括：推理质量是否与策略性能耦合、如何量化并优化具身推理的忠实性、以及忠实性推理是否有助于长尾（long-tail）场景下的泛化。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Stanford University；作者：Matthew Foutter, Yunshan Wang, Michelle Li, Daniele Gammelli, Marco Pavone</li><li>机构：Politecnico di Milano；作者：Matteo Cercola</li><li>机构：KTH Royal Institute of Technology；作者：Lena Wild</li><li>机构：Italian Institute of Artificial Intelligence (AI4I)；作者：Daniele Gammelli</li><li>机构：NVIDIA Research；作者：Marco Pavone</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文研究自动驾驶（作为具身智能的代表性测试平台）中视觉-语言-动作模型（VLA）生成的思维链（Chain-of-Thought, CoT）是否忠实地反映其底层决策过程。</li><li>论文区分“功能性推理”（functional reasoning，即推理是否提升任务表现）与“忠实性推理”（faithful reasoning，即推理是否真实反映策略的内部决策过程），并指出当前先进的对齐策略仅提供必要但不充分的忠实性概念。</li><li>研究问题包括：推理质量是否与策略性能耦合、如何量化并优化具身推理的忠实性、以及忠实性推理是否有助于长尾（long-tail）场景下的泛化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>对自动驾驶领域的先进（SoTA）推理模型进行人类评估，揭示推理质量与下游轨迹改进之间存在不一致且不确定的耦合关系。</li><li>将具身推理的忠实性形式化为可操作的行为一致性目标，从结构化推理轨迹上的成对语义一致性约束推导出可扩展的替代目标，用于强化学习后训练。</li><li>提出一个学习型评判器（critic）“Pinocchio”，用于识别观测、中间推理与动作之间的不一致性，并作为稠密奖励信号来改进具身推理。</li><li>在大型驾驶基准和合成分布外场景上评估所提出的方法，发现针对具身忠实性进行优化可提升推理一致性、策略可信度和分布偏移下的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶中的推理策略后训练（RL post-training），具体用于路径规划与决策。</li><li>输入传感器：多视角相机图像（第一视角摄像头视图）以及自我状态信息；在评判器中还使用鸟瞰轨迹可视化与自我速度曲线。</li><li>场景表示：一个生成式有向无环图（DAG）模型 G_gen，其节点为结构化推理轨迹变量，包括观测 o、场景描述 z₁、动作理由 z₂、元动作 z₃（包含纵向与横向决策）以及最终低层动作 a。</li><li>模型结构：策略为一个推理型 VLA 模型，其生成过程分解为 πθ(a,z\|o)=πθ(z₁\|o)∏πθ(z_k\|z_{k-1})·πθ(a\|z_K)；忠实性评判器 Pinocchio 使用 Qwen3-VL-4B-Instruct 微调而成，在每条图边上预测“CONSISTENT”或“INCONSISTENT”二元判断。</li><li>关键技术：提出机械忠实性（mechanistic faithfulness）与行为忠实性（behavioral faithfulness）的区分，并以轨迹一致性作为行为替代指标。用五个成对一致性边（(o,z₁),(z₁,z₂),(z₂,z₃),(z₃,a),(z₂,a)）定义轨迹一致性函数 F(τ)=∏R(u,v)，并通过拉格朗日松弛将约束优化转化为带有忠诚度稠密奖励的策略梯度目标，优化采用 GRPO（Group Relative Policy Optimization）。评判器在训练时固定，梯度通过策略的推理 token 传递。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：基于专家演示数据集的 CoT 标注场景，约 100,000 个均匀采样的驾驶场景用于后训练；构建了一个具身忠实性数据集 D_faith，包含 (o_t,z_t,a_t) 三元组并标注了每条边的语义一致性。</li><li>数据集构建来源：专家演示的推理标注轨迹、SFT 检查点的自由生成策略轨迹、机械扰动轨迹（图边交换引入不一致性）以及 LLM 注入对抗性不一致的轨迹。</li><li>仿真器：原文未报告。</li><li>模型规模：策略为 SoTA VLA 模型（Alpamayo 系列的比较对象）；评判器为 Qwen3-VL-4B-Instruct 微调版本。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：公开验证集中包含专家驾驶数据的驾驶基准，以及一个合成的分布外（OOD）反事实场景集。</li><li>评估指标：平均位移误差（ADE，包含横向与纵向分量）、忠实性得分（一致性边上的判断结果）、胜率（对比 RL 与 SFT 基线在不同分层上的表现）、平衡准确率；在 OOD 场景中还评估策略对反事实情景的响应程度。</li><li>关键数值：在 Pilot 评估中，Gemini 与人类多数共识在五个忠实性边上的准确率为 87–95%，Cohen&#x27;s κ 介于 0.385 至 0.720；Pinocchio 在各边上的平衡准确率介于 0.78 至 0.94，总体达到 0.87。后训练后的规划器在忠实性上相较于先进对齐方法和轨迹误差后训练基线分别提升 4% 和 18%，同时保持竞争性的下游任务表现。在合成的 OOD 测试集上，针对忠实性的后训练将策略对罕见反事实场景的响应提升至 SoTA 策略的 1.6 倍。</li><li>对比方法：ADE（仅轨迹误差的后训练基线）、RL 后训练检查点（SoTA 对齐）、SFT 基线，以及 VLM-Judge、ADE-Reason、ADE-Swap 等实现细节中提到的各类基线。</li><li>开环/闭环条件：基于驾驶员数据集进行开环轨迹评估（以 ADE 与专家轨迹比较）；OOD 评估属于合成反事实场景下的测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.06328/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Driving the Wrong Way: Leveraging Interpretability in End2End Autonomous Driving Models</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.03155/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Hope for the Best, Prepare for the Worst: Occlusion-Aware Contingency Planning for Autonomous Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

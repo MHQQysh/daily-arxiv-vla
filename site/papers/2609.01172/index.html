@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Monocular Depth Estimation from a Single Image: Progress and Opportunities - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文是一篇关于单目深度估计（MDE）的综述文章，回顾了从早期基于学习的方法到近年来基础模型（foundation model）的演变。 覆盖应用场景包括：3D重建、机器人、自动驾驶、增强现实、计算摄影等。 核心研究问题包括：相对深度与度量深度估计的区别、基础模型时代的判别式与生成式方法、数据集构建与统一、模型在不同领域的泛化与零样本性能等。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.01172">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.01172.webp" alt="Monocular Depth Estimation from a Single Image: Progress and Opportunities" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文是一篇关于单目深度估计（MDE）的综述文章，回顾了从早期基于学习的方法到近年来基础模型（foundation model）的演变。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Monocular Depth Estimation from a Single Image: Progress and Opportunities</h1>
+            <div class="detail-meta">2026-09-01 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.01172" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.01172" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.01172</span></div>
+            <p class="detail-summary">本文是一篇关于单目深度估计（MDE）的综述文章，回顾了从早期基于学习的方法到近年来基础模型（foundation model）的演变。 覆盖应用场景包括：3D重建、机器人、自动驾驶、增强现实、计算摄影等。 核心研究问题包括：相对深度与度量深度估计的区别、基础模型时代的判别式与生成式方法、数据集构建与统一、模型在不同领域的泛化与零样本性能等。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确对应 · Muxin Liu、Xiaoyang Lyu、Yang-Tian Sun 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.01172/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文是一篇关于单目深度估计（MDE）的综述文章，回顾了从早期基于学习的方法到近年来基础模型（foundation model）的演变。</p>
+  <ul class="reading-intro-points"><li>本文是一篇关于单目深度估计（MDE）的综述文章，回顾了从早期基于学习的方法到近年来基础模型（foundation model）的演变。</li><li>覆盖应用场景包括：3D重建、机器人、自动驾驶、增强现实、计算摄影等。</li><li>核心研究问题包括：相对深度与度量深度估计的区别、基础模型时代的判别式与生成式方法、数据集构建与统一、模型在不同领域的泛化与零样本性能等。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未明确对应；作者：Muxin Liu, Xiaoyang Lyu, Yang-Tian Sun, Yi-Hua Huang, Ziyi Yang, Peng Dai, Xiaojuan Qi（原文未明确机构与作者对应关系）</li><li>项目主页：CVMI-Lab/Depth-Survey（GitHub）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文是一篇关于单目深度估计（MDE）的综述文章，回顾了从早期基于学习的方法到近年来基础模型（foundation model）的演变。</li><li>覆盖应用场景包括：3D重建、机器人、自动驾驶、增强现实、计算摄影等。</li><li>核心研究问题包括：相对深度与度量深度估计的区别、基础模型时代的判别式与生成式方法、数据集构建与统一、模型在不同领域的泛化与零样本性能等。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>对单目深度估计进行了系统梳理，区分了度量深度估计与相对深度估计（含尺度不变与仿射不变），并讨论了该问题的病态性与关键挑战。</li><li>总结了基础模型时代之前的进展，覆盖CNN到Vision Transformer的架构演化、以及回归、尺度不变、仿射不变、分类、序数回归、几何一致性等损失函数设计。</li><li>深入分析了深度基础模型的三个关键维度：数据集收集与统一、判别式方法（相对/度量深度）、生成式方法（扩散模型等），并总结了模型向视频、任意相机等方向的扩展。</li><li>提出引入统一的评估流程，对代表性模型进行定量与定性对比，以解决现有工作评估协议不一致的问题。</li><li>概述了深度估计在SLAM与3D/4D重建、图像编辑与内容创作、机器人（导航、操作、自动驾驶）等下游应用中的集成，并给出了七项未来研究方向。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：单目深度估计（仅依赖单张RGB图像进行稠密深度预测）。</li><li>输入传感器：单目RGB相机。</li><li>场景表示：深度图，逐像素表示沿相机光线的场景距离；文中也讨论了点云与离散深度分箱等表示形式。</li><li>模型结构与关键技术：文中将方法分为判别式与生成式两大类。判别式方法以ViT（DINOv3等）为骨干，结合CNN解码器，采用回归、尺度不变、仿射不变、分类、序数回归等目标；生成式方法以扩散模型为核心的框架；还讨论了为提升效率与细节、超越扩散模型的新思路、以及度量深度中对相机内参的建模（如归一化到基准相机模型）与将相对深度模型改造为度量深度预测的策略。</li><li>数据集构建：强调多域数据的混合与对齐，以及高质量合成数据（如NVIDIA Omniverse、Unreal Engine等）与困难条件（如雨天、夜间）下数据的作用。原文未报告作者自有数据集的具体构建细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集（按类别）：TartanAir、FSD、KenBurns、Spring、HyperSim、IRS、Replica、UnrealStereo4K、Virtual KITTI 2、MVS-Synth、MatrixCity、MidAir、GTA-SfM、Sintel等（合成）；NYU Depth v2、SUN RGB-D、ScanNet、ScanNet++、Hammer、iBims-1、Taskonomy、ARKitScenes等（室内）；Make3D、KITTI、A2D2、Argoverse2、Waymo、DDAD、NuScenes等（室外/驾驶）；DIW、ReDWeb、MegaDepth、BlendedMVS、Depth in the Wild等（互联网/野外）。</li><li>仿真器：NVIDIA Omniverse（用于生成FSD）、Unreal Engine（MatrixCity等）、GTA V（MVS-Synth）、开源3D电影“Sintel”等。</li><li>模型规模：文中提及采用DINOv3等大规模预训练骨干，但未报告具体参数量。</li><li>训练资源：未报告。</li><li>实车平台：未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：未在本文摘要与导论部分列出具体精确数值。原文提到为公平对比而引入统一评估流程，但具体基准名称与数值表格位于被截断部分，原文未报告。</li><li>评估指标：原文提及相对误差、阈值准确率等典型指标，但未给出具体数值。</li><li>关键数值：原文仅提到DPT相比CNN基线相对误差降低最高28%，其余具体数值未在本截断文本中报告。</li><li>对比方法：概览式比较了Eigen等、Monodepth、Garg等、Laina等、SfM Learner、DORN、Monodepth2、MiDaS、LeReS、DPT、Omnidata、ZoeDepth、Metric3D、Marigold、UniDepth、Depth Anything、DiffusionE2E、Geowizard、Depth Pro、MoGe、MoGe-2、VGGT、DAv3等模型，但截断文本未给出表格化定量结果。</li><li>测试条件：作者称进行了统一的定量与定性评测（疑似为开环/零样本评测），但具体条件（开环、闭环、仿真或实车）在本截断部分原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.01120/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DNC-IMM: Early Lane-Change Intention Recognition via Neural Calibration Based on Driving Context Information</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

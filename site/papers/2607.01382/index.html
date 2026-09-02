@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CommonRoad-Game: A Human-in-the-Loop Simulation Framework for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 CommonRoad-Game，一个轻量级、与 CommonRoad 平台紧密集成的人机协同仿真框架，旨在让人参与的系统性测试运动规划算法，以及分析交互场景中的人类驾驶行为。 该框架解决的任务是自动驾驶中的运动规划算法在人机交互环境下的评估问题，应用场景包括合流、让行、共享道路空间等交互式驾驶场景。 研究问题是如何克服现有仿真平台依赖录制数据集、缺乏实时人机交互接口以及与自动驾驶生态集成薄弱等局限，提供快速原型开发与灵活实验的平台。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2607.01382">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2607.01382.webp" alt="CommonRoad-Game: A Human-in-the-Loop Simulation Framework for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 CommonRoad-Game，一个轻量级、与 CommonRoad 平台紧密集成的人机协同仿真框架，旨在让人参与的系统性测试运动规划算法，以及分析交互场景中的人类驾驶行为。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CommonRoad-Game: A Human-in-the-Loop Simulation Framework for Autonomous Driving</h1>
+            <div class="detail-meta">2026-07-01 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2607.01382" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2607.01382" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2607.01382</span></div>
+            <p class="detail-summary">本文提出 CommonRoad-Game，一个轻量级、与 CommonRoad 平台紧密集成的人机协同仿真框架，旨在让人参与的系统性测试运动规划算法，以及分析交互场景中的人类驾驶行为。 该框架解决的任务是自动驾驶中的运动规划算法在人机交互环境下的评估问题，应用场景包括合流、让行、共享道路空间等交互式驾驶场景。 研究问题是如何克服现有仿真平台依赖录制数据集、缺乏实时人机交互接口以及与自动驾驶生态集成薄弱等局限，提供快速原型开发与灵活实验的平台。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">6 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Technical University of Munich · Yunfei Bi、Youran Wang</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2607.01382/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 CommonRoad-Game，一个轻量级、与 CommonRoad 平台紧密集成的人机协同仿真框架，旨在让人参与的系统性测试运动规划算法，以及分析交互场景中的人类驾驶行为。</p>
+  <ul class="reading-intro-points"><li>本文提出 CommonRoad-Game，一个轻量级、与 CommonRoad 平台紧密集成的人机协同仿真框架，旨在让人参与的系统性测试运动规划算法，以及分析交互场景中的人类驾驶行为。</li><li>该框架解决的任务是自动驾驶中的运动规划算法在人机交互环境下的评估问题，应用场景包括合流、让行、共享道路空间等交互式驾驶场景。</li><li>研究问题是如何克服现有仿真平台依赖录制数据集、缺乏实时人机交互接口以及与自动驾驶生态集成薄弱等局限，提供快速原型开发与灵活实验的平台。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Technical University of Munich；作者：Yunfei Bi, Youran Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 CommonRoad-Game，一个轻量级、与 CommonRoad 平台紧密集成的人机协同仿真框架，旨在让人参与的系统性测试运动规划算法，以及分析交互场景中的人类驾驶行为。</li><li>该框架解决的任务是自动驾驶中的运动规划算法在人机交互环境下的评估问题，应用场景包括合流、让行、共享道路空间等交互式驾驶场景。</li><li>研究问题是如何克服现有仿真平台依赖录制数据集、缺乏实时人机交互接口以及与自动驾驶生态集成薄弱等局限，提供快速原型开发与灵活实验的平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提供一种用于在涉及真实人类参与的场景中评估 CommonRoad 运动规划器的安全性和鲁棒性的标准化设置。</li><li>支持录制和回放人类驾驶日志，并可以直接导出为 CommonRoad 场景格式，用于复用收集到的交互数据，训练数据驱动的驾驶模型以及进行运动规划器的系统评估和基准测试。</li><li>提供对人类驾驶行为的高保真记录，以支持人类与自动驾驶汽车（AV）交互的定量分析。</li><li>支持多自动驾驶汽车和多类型人类输入接口（如键盘、方向盘）的仿真，并通过多线程架构保持仿真执行与规划器场景时间之间的时间一致性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：仿真框架，包含 CommonRoad 接口模块、多线程仿真架构、HV 模拟器模块、可行驶性检测模块、可视化模块和场景生成模块。</li><li>输入传感器：Logitech G923 方向盘和踏板、键盘等人类输入设备。</li><li>场景表示：使用 CommonRoad 场景格式，该格式标准化描述道路网络、静/动态障碍物、车辆模型、规划目标、约束和代价函数；仿真和规划器共享由 CommonRoad 场景定义的全局公制坐标系。</li><li>模型结构：包含多个子模块。CommonRoad 接口模块通过空间同步（固定刚体变换）和时间同步（步调一致地更新 HV 和 AV 状态）实现同步；HV 模拟器模块负责处理设备输入；可行驶性检测模块检查碰撞和道路合规性；可视化模块将 CommonRoad 场景转换为定制可视化环境；场景生成模块记录状态并导出为 CommonRoad 场景。</li><li>关键技术：采用多线程架构，将 HV 模拟器模块和可视化模块与计算密集的重新规划过程解耦，增强时间同步的确定性和一致性；使用具有刚性变换和对齐机制的接口，处理仿真坐标系和场景坐标系之间的初始位姿差异；使用场景生成模块记录驾驶日志以生成可复现的测试用例。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未特别报告具体数据规模。</li><li>仿真器：轻量级人机协同仿真框架（CommonRoad-Game），采用模拟时间与墙钟时间对齐机制。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li><li>源代码：公开在 https://github.com/Yunfei-Bi8/CommonRoad-Game。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：原文未报告，未使用 CommonRoad 基准场景之外的特定评估指标。</li><li>评估指标：原文未报告具体数值指标，仅强调概念验证。</li><li>关键数值：实验结果表明框架实现了稳定的时间同步（即模拟时间与墙钟时间对齐）、支持可扩展的多代理仿真，并能与 CommonRoad 兼容的运动规划器无缝集成。</li><li>对比方法：原文提及与基准平台对比，但未给出明确的定量对比数值。</li><li>开环、闭环、仿真或实车条件：采用仿真条件下的闭环（人机协同）评估，通过 IDM 规划器与反应式规划器验证概念。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2607.01658/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Teaching Vision-Language-Action Models What to See and Where to Look</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2607.01133/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Towards Metric-Agnostic Trajectory Forecasting</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
