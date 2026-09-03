@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶及相关多相机系统中的任务：跨多个同步视图、在相机运动和布局变化条件下的长期 3D 任意点跟踪（multi-view TAP-3D）。 提出 TAPVid-MV，首个针对“多移动相机 + 多视图 + 相机运动”设置的长期 3D 点跟踪基准。 应用场景覆盖室内外多个领域，包括机器人操作、人类活动、驾驶场景以及合成程序化场景。 研究问题：区分误差来源——错误来自点对应（correspondence）还是重建几何（geometry），并检验现有模型在三维点跟踪上的能力与瓶颈。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.01899">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.01899.webp" alt="TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶及相关多相机系统中的任务：跨多个同步视图、在相机运动和布局变化条件下的长期 3D 任意点跟踪（multi-view TAP-3D）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views</h1>
+            <div class="detail-meta">2026-09-01 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.01899" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.01899" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.01899</span></div>
+            <p class="detail-summary">论文解决自动驾驶及相关多相机系统中的任务：跨多个同步视图、在相机运动和布局变化条件下的长期 3D 任意点跟踪（multi-view TAP-3D）。 提出 TAPVid-MV，首个针对“多移动相机 + 多视图 + 相机运动”设置的长期 3D 点跟踪基准。 应用场景覆盖室内外多个领域，包括机器人操作、人类活动、驾驶场景以及合成程序化场景。 研究问题：区分误差来源——错误来自点对应（correspondence）还是重建几何（geometry），并检验现有模型在三维点跟踪上的能力与瓶颈。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Google DeepMind · Skanda Koppula、Yi Yang、Ignacio Rocco 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.01899/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶及相关多相机系统中的任务：跨多个同步视图、在相机运动和布局变化条件下的长期 3D 任意点跟踪（multi-view TAP-3D）。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶及相关多相机系统中的任务：跨多个同步视图、在相机运动和布局变化条件下的长期 3D 任意点跟踪（multi-view TAP-3D）。</li><li>提出 TAPVid-MV，首个针对“多移动相机 + 多视图 + 相机运动”设置的长期 3D 点跟踪基准。</li><li>应用场景覆盖室内外多个领域，包括机器人操作、人类活动、驾驶场景以及合成程序化场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Google DeepMind；作者：Skanda Koppula、Yi Yang、Ignacio Rocco、Rishabh Kabra、Andrew Zisserman、Joao Carreira、Carl Doersch</li><li>机构：University College London；作者：Abdullah Faiz Ur Rahman、Jeet Thakwani、Rishabh Kabra、Gabriel Brostow</li><li>机构：University of Oxford；作者：Andrew Zisserman（标注为共同贡献）</li><li>机构：ETH Zürich；作者：Siyu Tang</li><li>说明：Frano Rajič 未标注单位；Zisserman 同时隶属于 Google DeepMind 和 University of Oxford</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶及相关多相机系统中的任务：跨多个同步视图、在相机运动和布局变化条件下的长期 3D 任意点跟踪（multi-view TAP-3D）。</li><li>提出 TAPVid-MV，首个针对“多移动相机 + 多视图 + 相机运动”设置的长期 3D 点跟踪基准。</li><li>应用场景覆盖室内外多个领域，包括机器人操作、人类活动、驾驶场景以及合成程序化场景。</li><li>研究问题：区分误差来源——错误来自点对应（correspondence）还是重建几何（geometry），并检验现有模型在三维点跟踪上的能力与瓶颈。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 TAPVid-MV 基准：包含 284 个序列、1,142 个已标定相机流、109,769 条真实 3D 点轨迹，横跨七个子集（DROID、Ego-Exo4D、Harmony4D、PACE、Hi4D、Waymo、Perpetua），覆盖室内外、机器人、人类活动、驾驶与合成场景。</li><li>提出多视图 TAP-3D 任务定义与三个评估框架：查询视角 (Q)、其他视角 (N)、世界坐标 (W)，并适配 TAP-3D 指标（AJ³ᴰ、δ³ᴰ、OA）。</li><li>在统一数据上同时报告 3D 点跟踪与重建质量指标，从而在几何误差与对应误差之间做出区分。</li><li>系统评估 30 余个基线，发现现有方法远未解决该任务，多视图跟踪器并不稳定优于单目跟踪器，重建几何环节是主要瓶颈。</li><li>发布额外资源：程序化数据生成器 Perpetua、5,371 个机器人片段的度量 3D 轨迹、基线实现与评估代码，可支持单目 2D/3D 点跟踪、未来轨迹预测与 4D 重建等任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：3D 任意点跟踪（multi-view TAP-3D 任务定义），属于视频点轨迹追踪与场景重建的交叉方向。</li><li>输入传感器：多路同步 RGB 相机视频流；任务输入仅含 RGB 与单一视图的查询点像素，不提供地面真值深度或相机位姿。</li><li>场景表示：共同世界坐标系中的 3D 轨迹，跨所有视图共享，并输出各视图各帧的可见性。</li><li>模型结构：论文不做单一定义的方法，而是总结四种类型的基线：单目 2D 点追踪器、单目 3D 点追踪器、多视图 2D 点追踪器、多视图 3D 点追踪器，以及单目/多视图 4D 重建+跟踪方法。</li><li>关键技术：任务要求由多个可能运动的相机同步观测；模型需定义自身世界坐标系并输出 3D 轨迹；预测在相似变换（Sim(3)）对齐后进行评分。采用自适应阈值与度量缩放。论文还系统化对比“固定重建”与“联合重建+跟踪”的差异（如 SpatialTrackerV2 与共享 VGGT-Ω 重建的对比）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：TAPVid-MV 基准含 7 个子集，284 条序列、1,142 路已标定相机流、109,769 条轨迹；轨迹来自传感深度、LiDAR、SLAM/SfM 点、人体网格、物体网格姿态或合成几何，并全部经过人工视觉验证。</li><li>具体来源：DROID（机器人操作）、Ego-Exo4D（足球，头戴+静态相机）、Harmony4D（舞蹈/体育，双头戴+双静态）、PACE（桌面物体重排），Hi4D（两两交互捕获渲染）、Waymo（驾驶，三相机前视）、Perpetua（Infinigen+Kimodo 的合成动态室内场景）。</li><li>仿真器：Perpetua 为其自家程序化生成器，基于 Infinigen 合成房间；数据集带有相机、动态物体与精确轨迹的真值。</li><li>模型规模：原文未报告基线模型的参数规模。</li><li>训练资源：原文未报告具体训练计算资源。</li><li>实车平台：原文未报告用于自动驾驶的实车平台；Waymo 子集使用驾驶场景中固定的车辆多相机系统，属于公开数据集的既有配置。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：TAPVid-MV 已定义的多视图 3D 点跟踪指标体系（查询视角 Q、其他视角 N、世界坐标 W）。</li><li>评估指标：平均 Jaccard 指标 AJ³ᴰ、平均 3D 位置精度 δ³ᴰ、遮挡精度 OA，并在 Q/N/W 三种视角下分别衡量。</li><li>关键数值（overall δ³ᴰ）：</li></ul>
+<p> - OmniX（多视图联合）：δ_W³ᴰ=10.3，δ_N³ᴰ=9.4，δ_Q³ᴰ=13.8</p>
+<p> - MV-TAP（多视图 2D）：δ_W³ᴰ=19.1，δ_N³ᴰ=17.5，δ_Q³ᴰ=23.0</p>
+<p> - CoWTracker（单目 2D）：δ_W³ᴰ=20.8，δ_N³ᴰ=17.8，δ_Q³ᴰ=26.7</p>
+<p> - MVTracker（多视图 3D）：δ_W³ᴰ=22.0，δ_N³ᴰ=20.8（best），δ_Q³ᴰ=24.0</p>
+<p> - MVTracker（微调，在子集数据上训练）：δ_W³ᴰ=23.7（gray），δ_N³ᴰ=22.3，δ_Q³ᴰ=25.5；在 PACE、Hi4D、Perpetua 等子集上表现更好</p>
+<ul><li>统计结果说明：单目抬升跟踪器在某些配置下优于多视图跟踪器；在非查询视角 (N) 上，MVTracker 的水平（20.8）与单目 TAPIP3D（20.5 级别）接近；没有方法能完全解决该任务，跨视角对应关系仍未解决的问题。</li><li>验证条件：使用仿真（Perpetua）、真实世界捕获（DROID、Ego-Exo4D、Harmony4D、PACE、Waymo）、及从真实捕获资产渲染的 Hi4D；既有闭环、开环与实车条件在此任务中没有明确分类——任务本质属于跟踪基准，无开环/闭环/实车形式；论文明确指出是数据集间评估而非自走仿真。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.02252/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DiffuSearch: How Hybrid Trajectory Planning Benefits from Aligned Objectives in Diffusion and Action Space</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.01799/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Designing Versatile Samples for Learned Trajectory Scoring</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

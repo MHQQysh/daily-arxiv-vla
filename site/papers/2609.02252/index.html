@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DiffuSearch: How Hybrid Trajectory Planning Benefits from Aligned Objectives in Diffusion and Action Space - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶中的混合轨迹规划问题，指出当前混合规划架构常被实现为多个目标各异的解耦模块，缺乏统一原则，导致初选与精修轨迹之间不一致，最终产生次优驾驶行为。 论文提出一种新型混合规划器 DiffuSearch，采用在生成（扩散模型）与精修（动作空间中的 Monte Carlo Tree Search, MCTS）阶段共享的同一组驾驶目标（碰撞避免、可行区域合规、舒适性、进度），使所有组件协同优化。 应用场景为城市与结构化道路下的自主驾驶轨迹规划，重点面向强交互、高难度的动态交通场景。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.02252">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.02252.webp" alt="DiffuSearch: How Hybrid Trajectory Planning Benefits from Aligned Objectives in Diffusion and Action Space" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶中的混合轨迹规划问题，指出当前混合规划架构常被实现为多个目标各异的解耦模块，缺乏统一原则，导致初选与精修轨迹之间不一致，最终产生次优驾驶行为。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DiffuSearch: How Hybrid Trajectory Planning Benefits from Aligned Objectives in Diffusion and Action Space</h1>
+            <div class="detail-meta">2026-09-02 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.02252" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.02252" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.02252</span></div>
+            <p class="detail-summary">论文针对自动驾驶中的混合轨迹规划问题，指出当前混合规划架构常被实现为多个目标各异的解耦模块，缺乏统一原则，导致初选与精修轨迹之间不一致，最终产生次优驾驶行为。 论文提出一种新型混合规划器 DiffuSearch，采用在生成（扩散模型）与精修（动作空间中的 Monte Carlo Tree Search, MCTS）阶段共享的同一组驾驶目标（碰撞避免、可行区域合规、舒适性、进度），使所有组件协同优化。 应用场景为城市与结构化道路下的自主驾驶轨迹规划，重点面向强交互、高难度的动态交通场景。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Robert Bosch GmbH, Germany · Steffen Hagedorn、Aron Distelzweig、Alexandru P…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.02252/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶中的混合轨迹规划问题，指出当前混合规划架构常被实现为多个目标各异的解耦模块，缺乏统一原则，导致初选与精修轨迹之间不一致，最终产生次优驾驶行为。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶中的混合轨迹规划问题，指出当前混合规划架构常被实现为多个目标各异的解耦模块，缺乏统一原则，导致初选与精修轨迹之间不一致，最终产生次优驾驶行为。</li><li>论文提出一种新型混合规划器 DiffuSearch，采用在生成（扩散模型）与精修（动作空间中的 Monte Carlo Tree Search, MCTS）阶段共享的同一组驾驶目标（碰撞避免、可行区域合规、舒适性、进度），使所有组件协同优化。</li><li>应用场景为城市与结构化道路下的自主驾驶轨迹规划，重点面向强交互、高难度的动态交通场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Robert Bosch GmbH, Germany；作者：Steffen Hagedorn、Aron Distelzweig、Alexandru P. Condurache</li><li>机构：Institute for Neuro- and Bioinformatics, University of Lübeck, Germany；作者：Steffen Hagedorn、Alexandru P. Condurache</li><li>机构：Department of Computer Science, University of Freiburg, Germany；作者：Aron Distelzweig</li><li>注：每位作者的详细隶属关系在原文中仅以邮件地址体现，上述对应关系依据邮件前缀与附录联系方式合理推断，原文未逐句明示。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶中的混合轨迹规划问题，指出当前混合规划架构常被实现为多个目标各异的解耦模块，缺乏统一原则，导致初选与精修轨迹之间不一致，最终产生次优驾驶行为。</li><li>论文提出一种新型混合规划器 DiffuSearch，采用在生成（扩散模型）与精修（动作空间中的 Monte Carlo Tree Search, MCTS）阶段共享的同一组驾驶目标（碰撞避免、可行区域合规、舒适性、进度），使所有组件协同优化。</li><li>应用场景为城市与结构化道路下的自主驾驶轨迹规划，重点面向强交互、高难度的动态交通场景。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DiffuSearch，一种将引导扩散主干预测与动作空间中 MCTS 精修结合的两阶段混合规划器，利用联合预测作为强先验来约束搜索空间。</li><li>证明 MCTS 精修是性能提升的主要来源，而使用同一目标函数作为分类器无关扩散引导与 MCTS 奖励可为性能带来额外增益。</li><li>在 nuPlan 与 interPlan 反应式闭环仿真基准上实现了较强且常达最先进的水平，尤其显著降低碰撞率并提升乘坐舒适度，综合表现优于多个主流混合规划器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：规划（trajectory planning），包括联合预测（joint prediction）与 MCTS 精修，总体采用混合规划架构。</li><li>输入传感器：利用对象级输入，原文具体传感器类型未详细报告。</li><li>场景表示：以固定半径内的当前交通场景作为条件信息，对自车与所有周边智能体的未来轨迹进行联合预测；采用扩散模型生成场景一致的联合轨迹提议，再利用 MCTS 对自车轨迹进行局部精修。</li><li>模型结构：使用基于 DiT（Diffusion Transformer）架构的引导扩散模型作为骨干，进行条件生成与去噪；第二阶段采用动作空间（离散的加速度与转向角组合）的 MCTS 树搜索，结合 PUCT 选择、扩展、仿真与反向传播进行精修。</li><li>关键技术：</li></ul>
+<p> - 扩散阶段利用分类器无关引导（classifier-free guidance），以可微分的驾驶目标（碰撞、可行区域、进度、舒适）作为引导函数，隐式引导去噪过程。</p>
+<p> - MCTS 阶段通过同一组驾驶目标定义奖励函数，并利用动力学自行车模型模拟自车运动，对提议轨迹进行显示且可解释的局部优化。</p>
+<p> - 采用统一的权重优先顺序（碰撞 &gt; 可行区域 &gt;&gt; 进度 ≈ 舒适），实现安全优先的规划。</p>
+<p> - 搜索步数固定为 256，作为实验中性能与计算开销的平衡点。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuPlan 数据集，包含约 1,300 小时真实驾驶数据；nuPlan 与 interPlan lane-change 基准用于闭环反应式仿真评估。</li><li>仿真器：nuPlan 闭环仿真器（15s，10Hz）与 interPlan lane-change 基准，包含低、中、高密度交通设定；使用 IDM（规则驱动）与 SMART（学习式反应驱动）两类背景交通智能体。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告具体硬件。</li><li>实车平台：原文未报告，未涉及实车部署。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuPlan 闭环仿真中的 Val14、Test14、Test14-hard 数据集，采用反应式（R）与 SMART 反应式（SR）两种仿真协议；interPlan lane-change 基准，覆盖低/中/高交通密度。</li><li>评估指标：反应式 R-score 与 SMART 反应式 SR-score（归一化至 [0,100]），以及碰撞次数（NC）、时间到碰撞（TTC）、可行区域合规（DAC）、舒适度、进度等细分指标。</li><li>关键数值（原文报告）：</li></ul>
+<p> - 在 Val14 上，DiffuSearch 达到 R=91.39（为第二好）且 SR=89.55（最好），对比 DiffusionPlanner 的 R=91.33 与 SR=88.84。</p>
+<p> - 在 Test14 上，DiffuSearch 取得 R=93.03 与 SR=91.12（均为最好），相比 DiffusionPlanner（R=92.28，SR=88.97）提升显著。</p>
+<p> - 在 Test14-hard 上，DiffuSearch 取得 R=79.98 与 SR=77.07（均为最好），对比最接近的 PDM-Hybrid（R=76.07，SR=72.15）实现明显领先。</p>
+<p> - 相比 DiffusionPlanner，碰撞次数降低（如 Test14-hard 上 NC 由 96.63 提升至 98.50），TTC改善，舒适度大幅提高（如舒适度由 65.92 提升至 83.90），而 DAC 与进度略有下降。</p>
+<p> - 在 interPlan 上，DiffuSearch 各密度设定下均优于 DiffusionPlanner，如高密度 SMART 交通下由 0.350 提升至 0.419。</p>
+<ul><li>对比方法：PDM-Hybrid、GameFormer、DTPP、PLUTO、DiffusionPlanner。</li><li>实验条件：全部为反应式闭环仿真；开环评估仅在方法论述中提到但与本研究无直接数值报告，没有涉及实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.02270/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">CrashDiffuser: VLM-Guided Collision Intent Reasoning for Fine-Grained Safety-Critical Traffic Scenario Generation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.01899/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">TAPVid-MV: A Benchmark for Tracking Any Point in 3D Across Multiple Views</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

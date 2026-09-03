@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PlanRL: A Trajectory Planning Architecture for Reinforcement Learning-based Driving Experts - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶中基于强化学习（RL）的驾驶专家通常直接输出低层控制指令（如油门、转向）所带来的问题，包括缺乏可解释性、学习复杂道路几何所需空间复杂度高，以及与主流端到端规划架构兼容性差。 为此提出一种用于RL驾驶专家的新型轨迹规划架构PlanRL，将RL策略与基于多项式的轨迹规划器集成，使RL策略输出高层命令（纵向加速度与目标横向偏移），由规划模块据此生成可行的局部轨迹。 应用场景为CARLA模拟环境下的城市自动驾驶基准测试，包括CARLA Offline Leaderboard v1与NoCrash。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2606.26858">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2606.26858.webp" alt="PlanRL: A Trajectory Planning Architecture for Reinforcement Learning-based Driving Experts" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶中基于强化学习（RL）的驾驶专家通常直接输出低层控制指令（如油门、转向）所带来的问题，包括缺乏可解释性、学习复杂道路几何所需空间复杂度高，以及与主流端到端规划架构兼容性差。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PlanRL: A Trajectory Planning Architecture for Reinforcement Learning-based Driving Experts</h1>
+            <div class="detail-meta">2026-06-25 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2606.26858" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2606.26858" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2606.26858</span></div>
+            <p class="detail-summary">论文解决自动驾驶中基于强化学习（RL）的驾驶专家通常直接输出低层控制指令（如油门、转向）所带来的问题，包括缺乏可解释性、学习复杂道路几何所需空间复杂度高，以及与主流端到端规划架构兼容性差。 为此提出一种用于RL驾驶专家的新型轨迹规划架构PlanRL，将RL策略与基于多项式的轨迹规划器集成，使RL策略输出高层命令（纵向加速度与目标横向偏移），由规划模块据此生成可行的局部轨迹。 应用场景为CARLA模拟环境下的城市自动驾驶基准测试，包括CARLA Offline Leaderboard v1与NoCrash。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Korea Advanced Institute of Science and Technology (KAIST)，Robotics Program…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2606.26858/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶中基于强化学习（RL）的驾驶专家通常直接输出低层控制指令（如油门、转向）所带来的问题，包括缺乏可解释性、学习复杂道路几何所需空间复杂度高，以及与主流端到端规划架构兼容性差。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶中基于强化学习（RL）的驾驶专家通常直接输出低层控制指令（如油门、转向）所带来的问题，包括缺乏可解释性、学习复杂道路几何所需空间复杂度高，以及与主流端到端规划架构兼容性差。</li><li>为此提出一种用于RL驾驶专家的新型轨迹规划架构PlanRL，将RL策略与基于多项式的轨迹规划器集成，使RL策略输出高层命令（纵向加速度与目标横向偏移），由规划模块据此生成可行的局部轨迹。</li><li>应用场景为CARLA模拟环境下的城市自动驾驶基准测试，包括CARLA Offline Leaderboard v1与NoCrash。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Korea Advanced Institute of Science and Technology (KAIST)，Robotics Program；作者：Joonhee Lim</li><li>机构：Korea Advanced Institute of Science and Technology (KAIST)，Cho Chun Shik Graduate School of Mobility；作者：Yongjae Lee、Dongsuk Kum</li><li>机构：Hyundai Motor Company；作者：Jangho Shin</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶中基于强化学习（RL）的驾驶专家通常直接输出低层控制指令（如油门、转向）所带来的问题，包括缺乏可解释性、学习复杂道路几何所需空间复杂度高，以及与主流端到端规划架构兼容性差。</li><li>为此提出一种用于RL驾驶专家的新型轨迹规划架构PlanRL，将RL策略与基于多项式的轨迹规划器集成，使RL策略输出高层命令（纵向加速度与目标横向偏移），由规划模块据此生成可行的局部轨迹。</li><li>应用场景为CARLA模拟环境下的城市自动驾驶基准测试，包括CARLA Offline Leaderboard v1与NoCrash。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首创在CARLA基准下为RL驾驶专家设计轨迹规划架构，区别于现有直接输出控制指令的RL专家。</li><li>构建混合规划框架，将Frenet坐标系与运动学可行性检查无缝集成，将复杂道路几何投影到曲线坐标系，减少环境建模的空间复杂度，提升规划稳定性。</li><li>引入运动学可行性检查，确保生成的横向轨迹在车辆物理限制内，缓解加入规划器带来的累积轨迹跟踪误差。</li><li>在CARLA Offline Leaderboard v1与NoCrash基准上大幅优于现有基于控制指令的最先进RL专家，驾驶分数分别提高5%与11%，成功率分别提高8%与19%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶轨迹规划模块（RL策略+轨迹规划器），面向规划阶段。</li><li>输入传感器：原文未明确区分传感器，但输入为鸟瞰图（BEV）语义分割图像（192×192像素、15通道、5 px/m分辨率），覆盖可行驶区域、目标路线、车道边界、车辆与行人矩形框（含历史时刻t∈{-1.5,-1.0,-0.5,0}s）、交通灯与停车标志等；此外接入6维自车测量向量（转向、油门、刹车、档位、纵向与横向速度）。</li><li>场景表示：使用Frenet坐标系（曲线坐标），参考线由路线航点经三次样条插值平滑得到，将自车状态（位置、速度、加速度）投影至Frenet坐标。</li><li>模型结构：策略网络与价值网络共享特征提取器，其中BEV编码器为6个卷积层（提取256维特征），测量编码器为2个全连接层；策略头由2个FC层（各256隐单元）构成，输出Beta分布参数；价值头为独立2层FC分支输出标量值。</li><li>关键技术：RL策略输出二维高层动作向量（纵向加速度a_lon∈[-3.2,3.5]m/s²、目标横向偏移a_lat∈[-3.5,3.5]m），使用Beta分布参数化动作；纵向运动采用常数加速度下的二阶多项式，横向运动采用连接初始和终态的五阶多项式，规划周期T=1.0s；运动学可行性检查对横向运动加限制（最大横向加速度d̈_max=3 m/s²），若所需位移超过物理可实现范围，则将终点状态截断为当前可达到的状态；自车状态通过PID控制器跟踪生成的轨迹；监督学习采用PPO训练并辅以熵正则项、事件条件化探索先验及价值损失。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告具体用于RL训练的数据集，仅说明使用了CARLA模拟器中的基准场景。</li><li>仿真器：CARLA，具体版本原文未明确指定。</li><li>模型规模：原文未报告参数量级或FLOPs等信息。</li><li>训练资源：原文未报告GPU类型、数量或训练时长。</li><li>实车平台：无，纯仿真评估。</li><li>其他：评价基准确认使用CARLA Offline Leaderboard v1（LB-all）与NoCrash基准。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARLA Offline Leaderboard v1（含LB-all全部路线）与NoCrash基准。</li><li>评估指标：成功率（Success rate）、驾驶分数（Driving score）、路线完成率（Route completion）、违规扣分（Infraction penalty）、碰撞次数（与其他物体、行人、车辆）、闯红灯次数。</li><li>关键数值（原文表格，部分选取代表值）：</li></ul>
+<p> - 在LB-all上，Ours+Rule取得成功率70±1%、驾驶分数81±1%、路线完成率93±1%、违规扣分87±1%；Ours为成功率67±3%、驾驶分数80±3%、违规扣分81±3%。</p>
+<p> - 与Autopilot比较：Autopilot成功率61±14%、驾驶分数72±3%；与Roach比较：Roach成功率59±3%、驾驶分数75±2%；Roach+Rule成功率68±3%、驾驶分数79±3%；CaRL（*标注，部分代码不可用未直接参与全部对比）成功率39±3%、驾驶分数58±4%。</p>
+<p> - 自车碰撞检测：Ours+Rule在LB-all上“collision other”为0.00，“collision pedestrian”为0.14±0.03；“agent blocked”0.26±0.06；Ours的“collision vehicle”为0.31±0.08、“red light infraction”0.09±0.01、“agent blocked”0.04±0.02（表中部分数值为最小化指标，加粗表最优）。</p>
+<p> - 消融实验对比Ours w/o KF（去掉运动学可行性检查）与Ours，显示加入可行性检查可提升性能：Ours成功率67±3%高于w/o KF的61±2%，驾驶分数80±3%高于79±2%，路线完成率99±1%高于96±3%。</p>
+<ul><li>对比方法：Autopilot（CARLA规则自动驾驶）、Roach（RL控制指令专家）、Roach+Rule（Roach加刹车规则）、CaRL（RL专家），以及论文自身的消融变体。</li><li>开环/闭环/仿真/实车条件：全部在CARLA仿真环境中闭环评估，无实车测试。</li><li>附加说明：论文提到部分相关方法如AdaWM、Raw2Drive因官方源码未公开未纳入对比；定性分析章节显示了不同基准条件下的驾驶行为分析，但原文未报告完整定性图像结果数值，这里不完全列出。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2606.27644/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">CascadeOcc: Rethinking 3D Occupancy World Models with Cascaded VQ Representations</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2606.26661/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">LAMP: Lane-Aligned Motion Primitives for Feasible Trajectory Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

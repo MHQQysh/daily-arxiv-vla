@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A DVDrive Approach for doScenes Instructed Driving Challenge - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文是团队 MIC Lab 参加 doScenes Instructed Driving Challenge 的技术方案报告。 挑战任务为指令条件下的自车轨迹预测：给定多视角相机图像、历史自车运动、地图相关信息和一条自然语言驾驶指令，模型需预测未来6秒的自车轨迹（12个二维航路点）。 研究问题是在基于视觉-语言-动作（Vision-Language-Action）的自动驾驶框架中，如何实现指令条件下的长时程轨迹预测，并改进多视角特征的视觉定位能力，以更好地将自然语言指令与局部驾驶相关的视觉信息进行对齐。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2606.21623">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2606.21623.webp" alt="A DVDrive Approach for doScenes Instructed Driving Challenge" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文是团队 MIC Lab 参加 doScenes Instructed Driving Challenge 的技术方案报告。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A DVDrive Approach for doScenes Instructed Driving Challenge</h1>
+            <div class="detail-meta">2026-06-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2606.21623" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2606.21623" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2606.21623</span></div>
+            <p class="detail-summary">该论文是团队 MIC Lab 参加 doScenes Instructed Driving Challenge 的技术方案报告。 挑战任务为指令条件下的自车轨迹预测：给定多视角相机图像、历史自车运动、地图相关信息和一条自然语言驾驶指令，模型需预测未来6秒的自车轨迹（12个二维航路点）。 研究问题是在基于视觉-语言-动作（Vision-Language-Action）的自动驾驶框架中，如何实现指令条件下的长时程轨迹预测，并改进多视角特征的视觉定位能力，以更好地将自然语言指令与局部驾驶相关的视觉信息进行对齐。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">北京邮电大学 · Zijian Fu、Mengshi Qi、Huadong Ma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2606.21623/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文是团队 MIC Lab 参加 doScenes Instructed Driving Challenge 的技术方案报告。</p>
+  <ul class="reading-intro-points"><li>该论文是团队 MIC Lab 参加 doScenes Instructed Driving Challenge 的技术方案报告。</li><li>挑战任务为指令条件下的自车轨迹预测：给定多视角相机图像、历史自车运动、地图相关信息和一条自然语言驾驶指令，模型需预测未来6秒的自车轨迹（12个二维航路点）。</li><li>研究问题是在基于视觉-语言-动作（Vision-Language-Action）的自动驾驶框架中，如何实现指令条件下的长时程轨迹预测，并改进多视角特征的视觉定位能力，以更好地将自然语言指令与局部驾驶相关的视觉信息进行对齐。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：北京邮电大学；作者：Zijian Fu、Mengshi Qi、Huadong Ma</li><li>机构：Xiaomi EV；作者：Xiangyang Chu</li><li>机构：Xiaomi EV；作者：Guanghao Zhang</li><li>机构：Xiaomi EV；作者：Wei Li（注：Wei Li 为项目负责人，工作完成于 Zijian Fu 在 Xiaomi EV 实习期间）</li><li>机构：原创者：Xiaomi EV？原文未明确团队的完整归属信息，仅以联系邮箱（qms@bupt.edu.cn）作为通讯方式，团队名为“MIC Lab”。原文未明确 MIC Lab 与各机构的一一对应关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文是团队 MIC Lab 参加 doScenes Instructed Driving Challenge 的技术方案报告。</li><li>挑战任务为指令条件下的自车轨迹预测：给定多视角相机图像、历史自车运动、地图相关信息和一条自然语言驾驶指令，模型需预测未来6秒的自车轨迹（12个二维航路点）。</li><li>研究问题是在基于视觉-语言-动作（Vision-Language-Action）的自动驾驶框架中，如何实现指令条件下的长时程轨迹预测，并改进多视角特征的视觉定位能力，以更好地将自然语言指令与局部驾驶相关的视觉信息进行对齐。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将OmniDrive这一视觉-语言-动作自动驾驶框架成功适配到doScenes指令条件轨迹预测任务，通过重构训练数据并将监督时域从3秒扩展到6秒，使模型具备预测未来6秒轨迹的能力。</li><li>引入DVDrive模块——一种基于DVPE思想的分视角多视角感知模块：将全局3D空间划分为多个局部视角，并让查询只对所在局部视角内的视觉token进行注意力计算，从而降低无关跨视角干扰。</li><li>在局部视角内进行基于位置编码的可见性感知交叉注意力，并将自车坐标系下的3D几何信息转换为视角局部坐标系下的位置编码，以降低大视角差异带来的学习难度。</li><li>系统在挑战赛的隐藏测试集上取得第一名，验证了导航条件训练与分视角感知设计的泛化能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：多视角感知模块（DVDrive），以及任务适配和轨迹预测部分。</li><li>输入传感器：围绕自车的多个摄像头采集的多视角图像（原文仅说明C个摄像机，具体传感器型号原文未报告）。</li><li>场景表示：基于3D几何感知的特征空间，其中视觉token通过在其对应相机光线上采样多个深度点并反投影到自车坐标系来获得3D位置。</li><li>模型结构：采用OmniDrive作为基线框架，是视觉-语言-动作自动驾驶agent。DVDrive模块融入其感知头。</li><li>关键技术：分视角感知——将全局3D空间分解为多个局部虚拟视图，并根据3D空间位置将查询和图像token分配到对应局部视图。每个局部视图内，查询使用视图特定坐标系下的位置编码参与交叉注意力，并应用有效区域注意力掩码。感知分支保留时序记忆建模，融合历史场景信息以支持长时程预测。</li><li>任务适配流程：训练前从场景中提取相应未来轨迹，将监督时域从3秒延长至6秒（对应12个未来航路点）；训练时随机采样一条场景相关的导航指令拼接到文本提示中。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：doScenes Instructed Driving Challenge 数据集（基于 nuScenes 构建，含自然语言指令标注）。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：8块 NVIDIA RTX A6000 GPU，训练约24小时，批大小2每GPU，共6个epoch，30万次迭代。优化器为AdamW，初始学习率1×10⁻⁴，权重衰减1×10⁻⁴，余弦退火学习率调度，含500次预热迭代、最小学习率比例10⁻³。</li><li>仿真器/实车平台：原文未报告。</li><li>代码：公开可用，地址为 https://github.com/feel12348/doscenes-omnidrive。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：doScenes Instructed Driving Challenge，验证集和官方隐藏测试集（Full Multimodal track）。</li><li>评估指标：验证集以 ADE@1s、ADE@2s、ADE@3s 和 mADE 为主，隐藏测试集以 ADE 和 FDE 为主。</li><li>关键数值（验证集）：</li></ul>
+<p> - 对比方法“OmniDrive w/ Nav.”：A@1s 0.151，A@2s 0.328，A@3s 0.637，mADE 0.372。</p>
+<p> - 本方法“Ours w/ Nav.”：A@1s 0.145，A@2s 0.316，A@3s 0.613，mADE 0.358。</p>
+<p> - 在所有指标上均有改进，mADE从0.372降至0.358。</p>
+<ul><li>关键数值（隐藏测试集）：</li></ul>
+<p> - MIC Lab（本方法，排名第一）：ADE 2.0913，FDE 5.5946。</p>
+<p> - History-IV Baselines（历史轨迹基线、指令基线）：ADE 分别为7.1086和7.2046。</p>
+<p> - 第二名 NudgeVAD：ADE 2.6774，FDE 5.5673。</p>
+<p> - 第三名 UCF UrbanITY Lab：ADE 2.7577，FDE 6.3753。</p>
+<p> - 第四名 why：ADE 3.3309，FDE 8.1090。</p>
+<ul><li>评估条件：验证集评估为开环方式，隐藏测试集官方排行榜为开环评估；未见闭环或仿真器评估的信息。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2606.26017/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">G2DP: Diffusion Planning with Spatio-Temporal Grid Guidance</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.01172/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Monocular Depth Estimation from a Single Image: Progress and Opportunities</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

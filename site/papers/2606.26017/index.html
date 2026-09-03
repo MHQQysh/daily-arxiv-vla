@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>G2DP: Diffusion Planning with Spatio-Temporal Grid Guidance - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 G2DP（Grid-Guided Diffusion Planning），一种面向自动驾驶密集交互场景的扩散式运动规划方法。 任务为在闭环动态交通环境中生成安全且沿导航路线前进的自车未来轨迹。 研究问题：现有扩散规划器在去噪过程的随机性下缺乏显式约束机制，稀疏几何引导或事后规则修正难以在交互场景中保证安全性与路线一致性。 本文通过在去噪循环中直接注入基于时空栅格的稠密可微代价场来引导轨迹生成。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2606.26017">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2606.26017.webp" alt="G2DP: Diffusion Planning with Spatio-Temporal Grid Guidance" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 G2DP（Grid-Guided Diffusion Planning），一种面向自动驾驶密集交互场景的扩散式运动规划方法。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">G2DP: Diffusion Planning with Spatio-Temporal Grid Guidance</h1>
+            <div class="detail-meta">2026-06-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2606.26017" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2606.26017" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2606.26017</span></div>
+            <p class="detail-summary">本文提出 G2DP（Grid-Guided Diffusion Planning），一种面向自动驾驶密集交互场景的扩散式运动规划方法。 任务为在闭环动态交通环境中生成安全且沿导航路线前进的自车未来轨迹。 研究问题：现有扩散规划器在去噪过程的随机性下缺乏显式约束机制，稀疏几何引导或事后规则修正难以在交互场景中保证安全性与路线一致性。 本文通过在去噪循环中直接注入基于时空栅格的稠密可微代价场来引导轨迹生成。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Mercedes-Benz AG · Hang Yu、Alessandro Canevaro、Julian Schmidt 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2606.26017/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 G2DP（Grid-Guided Diffusion Planning），一种面向自动驾驶密集交互场景的扩散式运动规划方法。</p>
+  <ul class="reading-intro-points"><li>本文提出 G2DP（Grid-Guided Diffusion Planning），一种面向自动驾驶密集交互场景的扩散式运动规划方法。</li><li>任务为在闭环动态交通环境中生成安全且沿导航路线前进的自车未来轨迹。</li><li>研究问题：现有扩散规划器在去噪过程的随机性下缺乏显式约束机制，稀疏几何引导或事后规则修正难以在交互场景中保证安全性与路线一致性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Mercedes-Benz AG；作者：Hang Yu、Alessandro Canevaro、Julian Schmidt、Julian Jordan、Peizheng Li、Silvan Lindner</li><li>机构：Karlsruhe Institute of Technology；作者：Hang Yu、Wilhelm Stork</li><li>机构：TU Munich；作者：Ye Jin、Marc Kaufeld、Johannes Betz</li><li>机构：University of Tübingen；作者：Alessandro Canevaro、Peizheng Li</li><li>机构：German Federal Ministry for Economic Affairs and Energy (BMWE)（资助方）；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 G2DP（Grid-Guided Diffusion Planning），一种面向自动驾驶密集交互场景的扩散式运动规划方法。</li><li>任务为在闭环动态交通环境中生成安全且沿导航路线前进的自车未来轨迹。</li><li>研究问题：现有扩散规划器在去噪过程的随机性下缺乏显式约束机制，稀疏几何引导或事后规则修正难以在交互场景中保证安全性与路线一致性。</li><li>本文通过在去噪循环中直接注入基于时空栅格的稠密可微代价场来引导轨迹生成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种新的扩散规划引导方法，将稠密的分布式代价场直接注入去噪过程，克服稀疏确定性几何查询的局限。</li><li>构建可微分的时空能量泛函，在自车几何足迹上评估动态碰撞风险，使轨迹生成可被解析梯度主动引导，且无需修改生成骨干网络。</li><li>实验表明 G2DP 在 nuPlan 上达到模仿学习规划器中的最优闭环表现，并在 interPlan 和 DeepScenario 上具备稳健的零样本泛化能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：运动规划（闭环轨迹生成模块）。</li><li>输入传感器：原文未报告（使用栅格化历史状态与静态地图输入）。</li><li>场景表示：采用以自车为中心的鸟瞰图（BEV）栅格表示，动态历史为 P∈R^(C_dyn×T_hist×H×W)，静态地图为 M∈R^(C_stat×H×W)；代价图由未来占用网格（30 帧、10 Hz、400×400 栅格、0.25 m/px，范围 100m×100m）与路线前进图融合而成。</li><li>模型结构：</li></ul>
+<p> - 扩散主干：Diffusion Transformer（DiT）骨干，采用自适应层归一化与注意力调制，对带噪自车轨迹做自注意力及对场景上下文做交叉注意力，在轨迹空间中进行方差保持（variance-preserving）的扩散过程建模；推理时采用 DPM-Solver。</p>
+<p> - 占用预测：轻量级 U-Net 模型，从栅格化历史和静态场景上下文预测未来时空占用网格，离线训练后保持冻结。</p>
+<p> - 引导机制：将占用网格与路线前进图融合为代价栅格 ψ_τ，通过 Top-K（K=15）足迹聚合构造能量泛函 E(x)，将解析梯度 −λ_t∇E 注入去噪循环（最后阶段步骤 8–9，λ_t=0.5）。</p>
+<ul><li>关键技术：密度代价体积融合（占用与路线前进）、Top-K 车辆足迹聚合、分类器引导式去噪转向；轨迹表示采用自车状态序列 (x_τ, y_τ, cosθ_τ, sinθ_τ)，规划 3 秒、10 Hz。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuPlan（训练于 1M 训练集）、interPlan（335 个对抗场景）、DeepScenario（无人机记录城区数据集，411 个可行场景）；代码发布于 https://github.com/HangYuu/G2DP。</li><li>仿真器：nuPlan 仿真器（含非反应性 NR 与反应性 R 两种模式，配 LQR 控制器）。</li><li>模型规模：原文未明确报告模型参数量。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuPlan 的 Val14、Test14-hard、Test14（均基于 closed-loop 14 类场景）、零样本条件下的 interPlan 与 DeepScenario。</li><li>评估指标：nuPlan driving score、reactive score，以及碰撞避免（Collision avoidance）、可行驶区域（Drivable area）、行驶方向（Driving direction）、舒适度（Comfort）、进度（Progress）、沿专家路线（Along expert route）、TTC 等子指标。</li><li>关键数值：nuPlan Test14-hard 反应式评估中，相对最强监督学习基线（Flow Planner +ref.，80.25）与 Diffusion Planner +ref. +7.2 分提升；G2DP 核心反应式得分 77.61，较 Diffusion Planner 69.22 提升 +8.4；零样本测试中，Test14-hard 上 G2DP 最高得分为 80.05（NR）与 77.61（R）；interPlan 上整体得分 61.74（较 Diffusion Planner +8.84/+9.65），碰撞避免达 +10.15；DeepScenario 相比 Diffusion Planner 碰撞避免约 +11.0，进度约 +10.5。</li><li>对比方法：IDM、PDM-Closed、PDM-Hybrid、PlanTF、PLUTO、GameFormer、Flow Planner、Diffusion Planner、PDM-Open 等，部分含事后规则优化 (+ref.)。</li><li>实验条件：闭环仿真（nuPlan 仿真器、LQR 控制器），同时报告 non-reactive（NR）与 reactive（R）结果，以及零样本跨数据集迁移结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2606.26424/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Rethinking Training &amp; Inference for Forecasting: Linking Winner-Take-All back to GMMs</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2606.21623/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A DVDrive Approach for doScenes Instructed Driving Challenge</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
