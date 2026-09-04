@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EventDrive: Event Cameras for Vision-Language Driving Intelligence - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶中基于事件相机（event cameras）的视觉-语言推理任务，覆盖从感知、理解、预测到规划的全栈驾驶环。 应用场景为低光、运动模糊及快速运动等帧式相机容易失效的挑战性驾驶环境，旨在利用事件相机的微秒级时序精度和高动态范围感知优势。 研究问题包括：事件流如何处理并编码到多尺度时序表示、如何与大型语言模型语义空间对齐，以及事件信号在整个驾驶推理栈中的增量贡献。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2606.18242">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2606.18242.webp" alt="EventDrive: Event Cameras for Vision-Language Driving Intelligence" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶中基于事件相机（event cameras）的视觉-语言推理任务，覆盖从感知、理解、预测到规划的全栈驾驶环。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">EventDrive: Event Cameras for Vision-Language Driving Intelligence</h1>
+            <div class="detail-meta">2026-06-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2606.18242" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2606.18242" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2606.18242</span></div>
+            <p class="detail-summary">论文解决自动驾驶中基于事件相机（event cameras）的视觉-语言推理任务，覆盖从感知、理解、预测到规划的全栈驾驶环。 应用场景为低光、运动模糊及快速运动等帧式相机容易失效的挑战性驾驶环境，旨在利用事件相机的微秒级时序精度和高动态范围感知优势。 研究问题包括：事件流如何处理并编码到多尺度时序表示、如何与大型语言模型语义空间对齐，以及事件信号在整个驾驶推理栈中的增量贡献。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">NUS · Dongyue Lu、Ao Liang、Lingdong Kong 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2606.18242/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶中基于事件相机（event cameras）的视觉-语言推理任务，覆盖从感知、理解、预测到规划的全栈驾驶环。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶中基于事件相机（event cameras）的视觉-语言推理任务，覆盖从感知、理解、预测到规划的全栈驾驶环。</li><li>应用场景为低光、运动模糊及快速运动等帧式相机容易失效的挑战性驾驶环境，旨在利用事件相机的微秒级时序精度和高动态范围感知优势。</li><li>研究问题包括：事件流如何处理并编码到多尺度时序表示、如何与大型语言模型语义空间对齐，以及事件信号在整个驾驶推理栈中的增量贡献。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：NUS；作者：Dongyue Lu, Ao Liang, Lingdong Kong, Wei Tsang Ooi</li><li>机构：IPAL, CNRS IRL 2955, Singapore；作者：Dongyue Lu, Benoit R. Cottereau, Wei Tsang Ooi</li><li>机构：HKUST(GZ)；作者：Rong Li</li><li>机构：A*STAR, IR；作者：Rong Li</li><li>机构：CNRS@CREATE；作者：Lingdong Kong</li><li>机构：Horizon Robotics；作者：Wei Yin</li><li>机构：University Toulouse, CNRS, CerCo, Toulouse, France；作者：Benoit R. Cottereau</li><li>机构：ETIS UMR 8051, CY Cergy Paris University, ENSEA, CNRS, France；作者：Camille Simon Chane</li><li>作者 Lai Xing Ng 的机构原文未明确对应。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶中基于事件相机（event cameras）的视觉-语言推理任务，覆盖从感知、理解、预测到规划的全栈驾驶环。</li><li>应用场景为低光、运动模糊及快速运动等帧式相机容易失效的挑战性驾驶环境，旨在利用事件相机的微秒级时序精度和高动态范围感知优势。</li><li>研究问题包括：事件流如何处理并编码到多尺度时序表示、如何与大型语言模型语义空间对齐，以及事件信号在整个驾驶推理栈中的增量贡献。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 EventDrive，首个全栈式的事件-视觉-语言自动驾驶基准数据集，统一感知、理解、预测与规划四个维度的语言接地任务，共 17 个子任务。</li><li>提出 EventDrive-VLM，一个统一的事件驱动视觉-语言模型，可在多模态推理中自适应编码和融合异步事件与RGB帧信息。</li><li>提出 Dynamic Horizon Event Encoder，通过多时域体素化与 MoE 门控自适应选择信息最丰富的时序表示。</li><li>提出 Event Q-Former Alignment 模块，通过跨注意力将事件特征对齐到 LLM 语义空间，支持与文本和帧的联合推理。</li><li>建立涵盖帧式、事件式与融合式的统一评测协议，揭示事件与帧在驾驶推理中的互补性，并公开数据集与工具包。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端事件驱动视觉-语言模型，面向自动驾驶推理（感知、理解、预测、规划）。</li><li>输入传感器：事件流（异步亮度变化）、同步 RGB 帧、文本指令；训练数据还使用 LiDAR 与 ego-pose 作为标注来源。</li><li>场景表示：事件被体素化为多时域（temporal bins{20,50,100}）的 4D voxel tensor，RGB帧采用原始帧表示。</li><li>模型结构：以 Qwen2.5-VL-7B-Instruct 为 LLM 主干，RVT 作为事件编码器；事件编码器+Event Q-Former+线性投影构成事件通路，RGB 视觉编码器保持冻结。</li><li>关键技术：Dynamic Horizon Encoding（多时域体素化+moE噪声门控 softmax top-k gating）；Event Q-Former 交叉注意力提取运动感知 token；两阶段训练课程（事件-语言预适应 + 指令微调），采用 packed sequences、FlashAttention 2 与 bf16 混合精度。</li><li>训练条件原文未报告完整。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：EventDrive，471,543 个事件-帧-语言样本，数据来源为 DSEC、M3ED、PKU-DAVIS-SOD；Event-Chat 数据集用于跨数据集评估；数据集公开于 Hugging Face。</li><li>仿真器：原文未报告。</li><li>模型规模：EventDrive-VLM 基于 Qwen2.5-VL-7B 与 RVT 事件编码器。</li><li>训练资源：16 张 NVIDIA H20 GPU 进行预适应与指令微调。</li><li>实车平台：原文未报告。</li><li>代码与工具：项目页面与数据集/工具包链接已在论文中公开。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：主要在自建的 EventDrive 基准（感知、理解、预测、规划）与事件聊天（Event-Chat）基准上评估。</li><li>评估指标：感知用 QA Accuracy（分别报告在 DSEC、M3ED、PKU 数据子集上的指标）；理解用 QA Accuracy、Top-1 grounding Accuracy（IoU≥0.6）与 mIoU；预测与规划分别报告 Speed Accuracy 与 Path Accuracy；规划额外报告 mean L2 Error（单位米）。</li><li>对比方法：帧式方法包括 LLaVA-1.5/1.6/OneVision、InternVL2.5/3、Qwen2-VL/Qwen2.5-VL（含微调版）；事件式方法为 EventGPT；融合式为 EventDrive-VLM。</li><li>关键结果（自建基准，括号内为最优值）：EventDrive-VLM 在了解任务上的 Acc@D/Acc@M/Acc@P 达到 85.44/86.64/78.89；在理解任务上 Acc 为65.46，Acc@60（IoU0.6）为72.86，mIoU最高为72.56；在规划 Path Accuracy 上达92.35，L2误差采用最低值3.66米。</li><li>评估条件：融合模型精度在若干指标上为最优；Qwen2.5-VL-7B 微调版与 InternVL3 在部分指标上为第二名。比对方式包含 zero-shot 与微调、开环/闭环与仿真/实车条件原文未另外报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2606.20274/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Lagrange: An Open-Vocabulary, Energy-Based Sparse Framework for Generalized End-to-End Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2606.17897/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Learn to Quantify Social Interaction with Constraints for Pedestrian Walking</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

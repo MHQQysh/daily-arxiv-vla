@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AIS-Based Vessel Trajectory Prediction Using Memory-Augmented Neural Networks - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文针对基于AIS数据的船舶轨迹预测任务，研究基于记忆增强神经网络（MANN）在该任务中的有效性。 应用场景为海事态势感知、船舶碰撞规避和航线优化。 研究问题在于：尽管记忆增强方法在行人和道路车辆轨迹预测中性能优异，但其在船舶轨迹预测方面的潜力尚未得到充分探索。论文通过实证研究验证该方法是否能提升AIS船舶轨迹预测的准确性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2606.06311">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2606.06311.webp" alt="AIS-Based Vessel Trajectory Prediction Using Memory-Augmented Neural Networks" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文针对基于AIS数据的船舶轨迹预测任务，研究基于记忆增强神经网络（MANN）在该任务中的有效性。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">AIS-Based Vessel Trajectory Prediction Using Memory-Augmented Neural Networks</h1>
+            <div class="detail-meta">2026-06-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2606.06311" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2606.06311" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2606.06311</span></div>
+            <p class="detail-summary">该论文针对基于AIS数据的船舶轨迹预测任务，研究基于记忆增强神经网络（MANN）在该任务中的有效性。 应用场景为海事态势感知、船舶碰撞规避和航线优化。 研究问题在于：尽管记忆增强方法在行人和道路车辆轨迹预测中性能优异，但其在船舶轨迹预测方面的潜力尚未得到充分探索。论文通过实证研究验证该方法是否能提升AIS船舶轨迹预测的准确性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Department of Industrial and Systems Engineering, Korea Advanced Institute…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2606.06311/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文针对基于AIS数据的船舶轨迹预测任务，研究基于记忆增强神经网络（MANN）在该任务中的有效性。</p>
+  <ul class="reading-intro-points"><li>该论文针对基于AIS数据的船舶轨迹预测任务，研究基于记忆增强神经网络（MANN）在该任务中的有效性。</li><li>应用场景为海事态势感知、船舶碰撞规避和航线优化。</li><li>研究问题在于：尽管记忆增强方法在行人和道路车辆轨迹预测中性能优异，但其在船舶轨迹预测方面的潜力尚未得到充分探索。论文通过实证研究验证该方法是否能提升AIS船舶轨迹预测的准确性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Department of Industrial and Systems Engineering, Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Republic of Korea；作者：Wonmo Koo</li><li>机构：Department of Industrial and Systems Engineering, Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Republic of Korea；作者：Sanha Chang</li><li>机构：Department of Industrial and Systems Engineering, Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Republic of Korea；作者：Heeyoung Kim</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文针对基于AIS数据的船舶轨迹预测任务，研究基于记忆增强神经网络（MANN）在该任务中的有效性。</li><li>应用场景为海事态势感知、船舶碰撞规避和航线优化。</li><li>研究问题在于：尽管记忆增强方法在行人和道路车辆轨迹预测中性能优异，但其在船舶轨迹预测方面的潜力尚未得到充分探索。论文通过实证研究验证该方法是否能提升AIS船舶轨迹预测的准确性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次在AIS船舶轨迹预测中实证研究基于记忆的轨迹预测方法（据作者所述）。</li><li>采用MANTRA（一种典型的记忆增强轨迹预测网络），并针对AIS数据特点进行修改：在记忆写入与检索的特征中，除空间位置外还加入了SOG与COG信息。</li><li>在墨西哥湾和纽约湾的AIS数据上，相比多种不采用外部记忆的深度学习基线，在多个预测时间范围上取得了显著的性能提升，例如在墨西哥湾数据集上ADE最高降低46.4%、FDE最高降低54.7%。</li><li>验证了即使不显式建模船舶间交互，基于记忆的预测方法也能在船舶轨迹预测中取得有竞争力的表现。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于记忆增强的轨迹预测模型（轨迹编码-记忆检索-解码）。</li><li>输入传感器：AIS数据（含经纬度、SOG、COG）。</li><li>场景表示：每个记忆单元存储“过去-未来”轨迹编码对；输入特征为归一化后的纬度、经度、SOG，以及COG的cos/sin值和观测缺失指示符。</li><li>模型结构：采用两个单层GRU编码器（过去编码器，未来编码器，隐藏维度96）和一个单层GRU解码器（隐藏维度192）构成自编码器；另有一个基于Sigmoid的记忆控制器，用于决定是否将某个轨迹段写入外部记忆。</li><li>关键技术：通过自动编码器的重构损失训练编码器/解码器；利用记忆控制器根据预测误差计算写入得分（p&gt;Sigmoid(w·e+b)），误差越高越倾向于写入记忆；预测时，将当前过去编码与记忆中存储的过去编码进行余弦相似度计算，选取相似度最高的前K个记忆，将对应的未来编码与当前过去编码拼接后分别送入解码器得到K条候选轨迹。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NOAA（美国国家海洋与大气管理局）提供的AIS数据，时间范围2023年3月6日至3月8日；包括墨西哥湾（经纬度范围[27.0°,29.0°]×[-94.0°,-89.0°]，130,126条记录、369艘船）与纽约湾（[39.6°,40.6°]×[-74.0°,-72.2°]，22,741条记录、55艘船）；仅考虑船长至少70米的船舶。</li><li>数据预处理：移除SOG超过30节的记录，重采样至1分钟间隔，对超过1小时的航程间隙进行分割，较短航程被丢弃；训练/验证/测试按时间顺序按60%/20%/20%划分。</li><li>轨迹分段：滑动窗口长度T_P+T_F（T_P=30分钟），窗口步长为5；当T_F=30分钟时，墨西哥湾产生18,259/6,398/5,529个训练/验证/测试段，纽约湾产生2,799/715/952个段。</li><li>仿真器：原文未报告。</li><li>模型规模：编码器隐藏大小96，解码器隐藏大小192。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：墨西哥湾和纽约湾AIS数据集上的船舶轨迹预测。</li><li>评估指标：ADE（平均位移误差）与FDE（最终位移误差），采用K=5条多模态预测中的最小误差。</li><li>对比方法：STGAT、Social-STGCNN、TransformerTF、AgentFormer、Social-Implicit、TUTR（均为不使用外部记忆的深度学习模型）。</li><li>关键数值：在墨西哥湾数据集中，相比最佳基线，ADE在10/20/30分钟预测时分别降低43.8%/46.4%/46.0%，FDE降低54.7%/50.7%/47.1%；在纽约湾数据集中，ADE分别降低33.3%/28.5%/27.3%，FDE降低27.7%/26.0%/25.7%。全部为离线（开环）轨迹预测实验评估，非闭环或实车测试。</li><li>实验条件：原文未报告仿真器、实车平台或闭环相关内容；预测历史窗口T_P=30分钟，预测范围T_F为10/20/30分钟；K=5；每个设置运行5次独立实验报告平均值与标准误。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2606.14956/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">A Comparative Study of Graph Neural Network Layer Selection for Interaction Modelling in Driving Trajectory Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2606.05774/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">LiAuto-GeoX: Efficient Grounded Driving Transformer</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

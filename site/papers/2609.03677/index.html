@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Understanding Autonomous Driving Datasets by Describing Differences between Image Subsets in Natural Language - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文研究自动驾驶数据集的内省（dataset introspection）问题，针对大规模图像数据集的构成理解困难、现有方法依赖元数据或人工检查、可扩展性差等挑战展开。 引入“集合差异描述”（set difference captioning）任务：给定两个图像子集，自动生成自然语言描述，以解释目标集合相对于参考集合的差异。 该任务面向自动驾驶领域，用于检测分布偏移、数据偏差和罕见长尾视觉差异，支持跨地点部署时的安全与可靠性评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.03677">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.03677.webp" alt="Understanding Autonomous Driving Datasets by Describing Differences between Image Subsets in Natural Language" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文研究自动驾驶数据集的内省（dataset introspection）问题，针对大规模图像数据集的构成理解困难、现有方法依赖元数据或人工检查、可扩展性差等挑战展开。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Understanding Autonomous Driving Datasets by Describing Differences between Image Subsets in Natural Language</h1>
+            <div class="detail-meta">2026-09-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.03677" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.03677" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.03677</span></div>
+            <p class="detail-summary">该论文研究自动驾驶数据集的内省（dataset introspection）问题，针对大规模图像数据集的构成理解困难、现有方法依赖元数据或人工检查、可扩展性差等挑战展开。 引入“集合差异描述”（set difference captioning）任务：给定两个图像子集，自动生成自然语言描述，以解释目标集合相对于参考集合的差异。 该任务面向自动驾驶领域，用于检测分布偏移、数据偏差和罕见长尾视觉差异，支持跨地点部署时的安全与可靠性评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">FZI Research Center for Information Technology · Julian Truetsch、Felix Haus…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.03677/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文研究自动驾驶数据集的内省（dataset introspection）问题，针对大规模图像数据集的构成理解困难、现有方法依赖元数据或人工检查、可扩展性差等挑战展开。</p>
+  <ul class="reading-intro-points"><li>该论文研究自动驾驶数据集的内省（dataset introspection）问题，针对大规模图像数据集的构成理解困难、现有方法依赖元数据或人工检查、可扩展性差等挑战展开。</li><li>引入“集合差异描述”（set difference captioning）任务：给定两个图像子集，自动生成自然语言描述，以解释目标集合相对于参考集合的差异。</li><li>该任务面向自动驾驶领域，用于检测分布偏移、数据偏差和罕见长尾视觉差异，支持跨地点部署时的安全与可靠性评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：FZI Research Center for Information Technology；作者：Julian Truetsch、Felix Hauser、Frank Bieder</li><li>机构：Karlsruhe Institute of Technology (KIT)；作者：Julian Truetsch、Felix Hauser、Christoph Stiller、Frank Bieder</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文研究自动驾驶数据集的内省（dataset introspection）问题，针对大规模图像数据集的构成理解困难、现有方法依赖元数据或人工检查、可扩展性差等挑战展开。</li><li>引入“集合差异描述”（set difference captioning）任务：给定两个图像子集，自动生成自然语言描述，以解释目标集合相对于参考集合的差异。</li><li>该任务面向自动驾驶领域，用于检测分布偏移、数据偏差和罕见长尾视觉差异，支持跨地点部署时的安全与可靠性评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出对象中心集合差异描述（object-centric set difference captioning）方法，通过对象检测生成的图像块代替完整图像进行比较，解决复杂交通场景下聚合并关注安全相关对象的难题。</li><li>构建了首个面向自动驾驶领域的集合差异描述基准数据集 AD-Diff Bench，包含 Web 抓取、标注过滤和 CLIP 过滤三个划分，并提供评估协议。</li><li>首次对高稀疏性（low-concentration）真实差异场景进行评估，探讨集合差异描述方法在现实应用中检测罕见或稀疏差异的适用性。</li><li>对比了多种提议器（图像基础、描述基础、特征基础方案）及两阶段 vs 单阶段架构的表现，确认两阶段与特征排序器对稀疏差异更具鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>模块结构：两阶段流程（分离的 proposer 和 ranker）及单阶段联合推理变体。</li><li>输入传感器与场景表示：原文未报告具体传感器来源；将对象作为检测到的局部图像块（相对原始标注框扩大 50%，以红色框标记目标对象）来表示场景。</li><li>模型结构：三种提议器均采用开权重模型 Qwen3-VL-30B-A3B-Instruct；图像法直接输入采样子集生成候选差异描述；描述法先对图像生成文本描述再交由大语言模型处理；特征法基于均值嵌入空间差并配合文本嵌入生成。排序器采用 SigLIP 2 Giant 模型计算图像-文本余弦相似度 AUROC 得分。评估用 gpt-oss-120b 作裁判。单阶段方法直接输入每个划分 100 张图像并生成候选与排名。</li><li>采样子集规模：proposer 使用每轮每数据集 20 张图像，平均三轮，每轮给出十个候选；rank 基于完整目标/参考数据集评估所有候选。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>模型规模：原文未报告训练/推理计算量或模型参数量。</li><li>评估与基准数据集：新构建的 AD-Diff Bench，包括三个划分：web-scraped（60 对集合，共 180 对，按类别与难度分层，核心集合各 100 张图像）、annotation-filtered（60 对，单集合大小 10 至 8000）、CLIP-filtered（80 对，各 100 张）。图像源自 KITTI、nuImages、Waymo Open Perception 及 Bing 图库搜索。</li><li>稀释集合实验使用 annotation-filtered-39 划分（从 annotation-filtered 中抽取并保证可稀释至浓度低于 0.001）。</li><li>开源资源：代码和基准数据在 https://github.com/KIT-MRT/AD-Diff 公开发布；训练及推理在 NHR@KIT 的 HoreKa 高性能计算集群上开展。</li><li>实车平台：未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：AD-Diff Bench；并另与 VisDiffBench 校准裁判一致性；采用 gpt-oss-120b 作 LLM 评判，与 1000+ 人工标注的一致性 80.3%，平均绝对误差 0.104。</li><li>评估指标：top-1 与 top-5 准确率（Acc@1、Acc@5）（judge 语义等价格式），以及稀释浓度、纯度等参数化试验。</li><li>关键数值（表 2，三次运行平均）：两阶段/图像法在 web-scraped 上 Acc@1=0.73、Acc@5=0.88；annotation-filtered-60 上 0.56/0.78；CLIP-filtered 上 0.64/0.80。两阶段/描述法与之相差不大且最优；特征法显著低于前两者。单阶段/图像法低于两阶段/图像法。</li><li>Web 抓取划分内按易/中/难分组的 Acc@1 依次 0.84/0.75/0.59；两阶段法的性能差异最小，annotation（最难）显著低于 web/clip 划分。</li><li>稀释与噪声实验：annotation-filtered-39 上浓度和纯度在约 0.5 以下性能迅速下降，两阶段架构相对单阶段更稳；纯度 0 时单阶段仍可恢复到 35 %，两阶段排序器更低，但该差异被认为是误导性有效。</li><li>实验均在离线/仿真数据上进行，原文未报告实车路测或闭环评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.03760/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Virtual Testing of Automated Driving Systems through Credible Simulations</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.03602/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SV-WAM: An Efficient Surround-View World-Action Model for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

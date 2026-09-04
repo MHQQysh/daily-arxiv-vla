@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Continuous Actions from Discrete Minds: Latent-Aligned Planning for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决的是自动驾驶中的端到端规划问题，具体任务是从多模态感知输入（多视角图像、历史动作、文本指令）直接生成连续、符合物理约束的车辆轨迹。 研究问题聚焦于弥合视觉-语言模型（VLM）的离散语义推理与自动驾驶所需的连续、受运动学约束的动作之间的鸿沟。 应用场景为开放道路环境下的端到端自动驾驶，包括遵循导航指令、避障、并道等多种驾驶工况。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.04070">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.04070.webp" alt="Continuous Actions from Discrete Minds: Latent-Aligned Planning for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决的是自动驾驶中的端到端规划问题，具体任务是从多模态感知输入（多视角图像、历史动作、文本指令）直接生成连续、符合物理约束的车辆轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Continuous Actions from Discrete Minds: Latent-Aligned Planning for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.04070" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.04070" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.04070</span></div>
+            <p class="detail-summary">本文解决的是自动驾驶中的端到端规划问题，具体任务是从多模态感知输入（多视角图像、历史动作、文本指令）直接生成连续、符合物理约束的车辆轨迹。 研究问题聚焦于弥合视觉-语言模型（VLM）的离散语义推理与自动驾驶所需的连续、受运动学约束的动作之间的鸿沟。 应用场景为开放道路环境下的端到端自动驾驶，包括遵循导航指令、避障、并道等多种驾驶工况。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The Hong Kong University of Science and Technology (Guangzhou) · Jun Ma（作为通…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.04070/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决的是自动驾驶中的端到端规划问题，具体任务是从多模态感知输入（多视角图像、历史动作、文本指令）直接生成连续、符合物理约束的车辆轨迹。</p>
+  <ul class="reading-intro-points"><li>本文解决的是自动驾驶中的端到端规划问题，具体任务是从多模态感知输入（多视角图像、历史动作、文本指令）直接生成连续、符合物理约束的车辆轨迹。</li><li>研究问题聚焦于弥合视觉-语言模型（VLM）的离散语义推理与自动驾驶所需的连续、受运动学约束的动作之间的鸿沟。</li><li>应用场景为开放道路环境下的端到端自动驾驶，包括遵循导航指令、避障、并道等多种驾驶工况。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The Hong Kong University of Science and Technology (Guangzhou)；作者：Jun Ma（作为通讯作者，项目负责人），其余作者的具体机构对应关系未在原文中明确列出。</li><li>机构：Central Media Technology Institute, Huawei；作者：Xiaolong Wang。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决的是自动驾驶中的端到端规划问题，具体任务是从多模态感知输入（多视角图像、历史动作、文本指令）直接生成连续、符合物理约束的车辆轨迹。</li><li>研究问题聚焦于弥合视觉-语言模型（VLM）的离散语义推理与自动驾驶所需的连续、受运动学约束的动作之间的鸿沟。</li><li>应用场景为开放道路环境下的端到端自动驾驶，包括遵循导航指令、避障、并道等多种驾驶工况。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了LaPla，一种统一的视觉-语言-动作（VLA）框架，将自动驾驶形式化为“潜空间对齐的序列建模任务”，在单一前向传播中融合多模态上下文并生成高精度轨迹。</li><li>开创性地提出隐式潜空间对齐规划机制，通过冻结的残差VQ-VAE解码器作为“运动学梯度预处理器”，将原始欧氏误差转换为物理一致的梯度更新，引导VLM优化，同时避开量化瓶颈。</li><li>通过冻结后端解码器作为运动学先验，将动作表示与策略学习解耦，缓解了联合学习中表示探索与策略求解的优化负担，使模型专注于在不变空间中执行策略。</li><li>在nuScenes上取得了有竞争力的开环性能，显著减少了长时域规划漂移；在AlpaSim仿真器上的闭环评估证明了成功率与推理速度的显著提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶统一Vision-Language-Action（VLA）框架，包含轨迹先验学习与VLA策略学习两个阶段。</li><li>输入传感器：多视角相机图像（前视、前左、前右、后视）、历史车辆动作（位移与航向特征）、文本导航指令。</li><li>场景表示：采用单一因果Transformer处理的统一多模态Token序列，由历史视觉Token、历史动作Token、文本指令Token、学习动作查询Token及VQA文本Token组成。</li><li>模型结构：使用Emu3-8B作为VLM主干，并采用LoRA进行参数高效微调；动作预测头将主干隐藏状态经过共享MLP投影为连续潜码，再输入预训练冻结的残差VQ-VAE解码器生成轨迹；历史动作通过冻结的VQ-VAE编码器与量化层编码。</li><li>关键技术：基于残差向量量化变分自编码器的轨迹先验预训练；并行Prefill处理所有未来动作查询，避免自回归生成；使用“Best-of-N”学习多样性轨迹候选；通过可学习基向量与其规模的加性及乘性扰动生成多样性轨迹；支持多轮视觉问答辅助任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（约30K帧，2Hz标注）用于开环评估与训练，包括轨迹与VQA标注；另从AlpaSim仿真器收集20K帧用于闭环微调。</li><li>仿真器：NVIDIA AlpaSim，用于闭环评估，测试集含60个代表性场景（约20秒，10FPS）。</li><li>模型规模：VLM主干为Emu3-8B；VQ-VAE码本设置为4层残差量化，各层码本大小分别为{64,64,128,128}，理论组合码空间约为6.7×10^7。</li><li>训练资源：华为昇腾910B3 NPU（64G显存）分布式平台，原文未报告具体芯片数量。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes数据集开环评测；NVIDIA AlpaSim仿真器闭环评测。</li><li>评估指标：开环使用L2误差（m，1s/2s/3s/Avg）与碰撞率（%）；闭环使用故障碰撞率、偏离道路率、路线完成率、成功率与FPS。</li><li>关键数值：开环UniAD平均L2误差降至0.60m，优于OpenDriveVLA-7B（0.66m）与AutoVLA（0.70m）；长时域3s预测UniAD L2误差为0.98m，相比AutoVLA的1.16m降低15.52%；闭环成功率较现有最优方法提升33.34个百分点。消融显示：引入预训练VQ-VAE解码器将UniAD平均L2从1.81m降至1.13m，完整LaPla进一步降至0.60m。</li><li>对比方法：开环对比ST-P3、VAD、UniAD、GenAD、EMMA、OpenEMMA、OmniDrive、OpenDriveVLA-3B/7B、AutoVLA、DrivePI；闭环对比方法原文详细报告见IV节，文中提及“baselines are reproduced locally”但未全部列出名称。</li><li>条件区分：开环评测与闭环仿真评测均完成；开环采用BoN推理（N=20）并使用oracle选择器，闭环测试时禁用扰动与BoN以进行确定性执行。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.04103/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Corner Cases: Headland Coverage Path Planning for Autonomous Driving in Arable Farming</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.03760/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Virtual Testing of Automated Driving Systems through Credible Simulations</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
