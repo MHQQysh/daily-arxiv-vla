@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PEDESTRIANQA: A Benchmark for Vision-Language Models on Pedestrian Intention and Trajectory Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶中的行人意图预测（PIP）与行人轨迹预测（PTP）任务，属于安全关键的行人行为建模与可解释性研究。 应用场景覆盖结构化交通（如信号灯人行横道）与非结构化交通（如无标识的拥挤城市道路）下的行人过街行为理解，面向 ADAS 与自动驾驶车辆的可信部署。 研究问题为将行人预测任务重构为视频问答与解释生成任务，使视觉-语言模型能够同时完成意图分类、轨迹预测及生成支撑预测的自然语言推理依据，弥补以往黑箱预测缺乏解释的不足。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2605.24562">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2605.24562.webp" alt="PEDESTRIANQA: A Benchmark for Vision-Language Models on Pedestrian Intention and Trajectory Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶中的行人意图预测（PIP）与行人轨迹预测（PTP）任务，属于安全关键的行人行为建模与可解释性研究。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PEDESTRIANQA: A Benchmark for Vision-Language Models on Pedestrian Intention and Trajectory Prediction</h1>
+            <div class="detail-meta">2026-05-23 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2605.24562" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2605.24562" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2605.24562</span></div>
+            <p class="detail-summary">解决自动驾驶中的行人意图预测（PIP）与行人轨迹预测（PTP）任务，属于安全关键的行人行为建模与可解释性研究。 应用场景覆盖结构化交通（如信号灯人行横道）与非结构化交通（如无标识的拥挤城市道路）下的行人过街行为理解，面向 ADAS 与自动驾驶车辆的可信部署。 研究问题为将行人预测任务重构为视频问答与解释生成任务，使视觉-语言模型能够同时完成意图分类、轨迹预测及生成支撑预测的自然语言推理依据，弥补以往黑箱预测缺乏解释的不足。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">CVIT, IIIT-Hyderabad, India · Naman Mishra、Shankar Gangisetty、C.V. Jawahar（…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2605.24562/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶中的行人意图预测（PIP）与行人轨迹预测（PTP）任务，属于安全关键的行人行为建模与可解释性研究。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶中的行人意图预测（PIP）与行人轨迹预测（PTP）任务，属于安全关键的行人行为建模与可解释性研究。</li><li>应用场景覆盖结构化交通（如信号灯人行横道）与非结构化交通（如无标识的拥挤城市道路）下的行人过街行为理解，面向 ADAS 与自动驾驶车辆的可信部署。</li><li>研究问题为将行人预测任务重构为视频问答与解释生成任务，使视觉-语言模型能够同时完成意图分类、轨迹预测及生成支撑预测的自然语言推理依据，弥补以往黑箱预测缺乏解释的不足。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：CVIT, IIIT-Hyderabad, India；作者：Naman Mishra、Shankar Gangisetty、C.V. Jawahar（原文以脚注形式标注该机构，三位作者均通过邮箱 {naman.mishra@research., shankar.gangisetty@ihub-data., jawahar@}iiit.ac.in 关联，推断均属该单位，原文未明确每位作者的独立对应关系）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶中的行人意图预测（PIP）与行人轨迹预测（PTP）任务，属于安全关键的行人行为建模与可解释性研究。</li><li>应用场景覆盖结构化交通（如信号灯人行横道）与非结构化交通（如无标识的拥挤城市道路）下的行人过街行为理解，面向 ADAS 与自动驾驶车辆的可信部署。</li><li>研究问题为将行人预测任务重构为视频问答与解释生成任务，使视觉-语言模型能够同时完成意图分类、轨迹预测及生成支撑预测的自然语言推理依据，弥补以往黑箱预测缺乏解释的不足。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建 PedestrianQA 数据集：一个大规模基于视频的多模态问答数据集，将行人意图与轨迹预测与细粒度、基于推理的问答注释统一起来，每个序列包含问题、答案及五类结构化推理依据。</li><li>建立基线：通过参数高效 LoRA 微调 Qwen2.5-VL-3B-Instruct，在不做架构改动的前提下，展示 VLM 可同时用于意图预测、轨迹预测与推理依据生成。</li><li>提供基准评测：实验证明在 PedestrianQA 上微调的 VLM 在行人意图分类、轨迹预测精度及推理依据质量上均优于零样本基线及其它对比模型。</li><li>数据生成管线：提出可扩展的以 LLM 驱动的注释生成流程，将多源数据集的真值与企业级元数据整合为统一的自然语言 Q-A-R 三元组。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据构建与 VLM 微调范式；将行人预测重构为视频问答与解释任务，无需专用任务架构。</li><li>输入传感器：单目车载摄像头视频帧（来自 JAAD、PIE、TITAN、IDD-PeD 四个公开为第一视角数据集的视频；原文未报告雷达或 LiDAR 等其它传感器）。</li><li>场景表示：以 TSV 表格式的结构化元数据表示目标行人、交互行人/车辆的边界框、行为标签、自车运动与场景上下文；配合以目标行人为中心的 448×448 裁剪帧叠加红色边界框的视觉输入。</li><li>模型结构：以 Qwen2.5-VL-3B-Instruct 为基座进行 LoRA（rank=8, α=16）参数高效微调，训练与零样本评估在全部数据集上进行；数据注释生成阶段使用 claude-sonnet-4 LLM API 和另一个 SOTA VLM 生成运动化描述。</li><li>关键技术：时间到事件采样（TTE 1–2 s）、结构化多类推理依据生成（空间、时间、数学、自车、场景上下文、最终目的地预测与结论）、双人注意力合规清单强制规则、以及用裁剪序列代替全帧以提升生成质量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据：由 JAAD、PIE、TITAN（结构化）和 IDD-PeD（非结构化）四个公开数据集整合，训练集包含 10,251 条样本，测试集 4,059 条样本。</li><li>每条样本含目标行人及其交互行人、交互车辆、交通控制元素（交叉口、信号灯），辅助以自动生成的运动字幕（14 个分类提示驱动）。</li><li>模型：基线模型为 Qwen2.5-VL-3B-Instruct（LoRA rank=8, α=16），对比模型有 Dolphins-9B、InternVL3-8B/2B-Instruct、Kwai-Keye-8B、LLaVA-NeXT-7B、Qwen2.5-VL-7B-Instruct。</li><li>训练资源：2×Nvidia RTX-A6000 GPU，3 epoch（15 帧观测为约 0.5 s，TITAN 用 10 帧约 1 s）；原文未报告具体训练总时长或其他算力明细。</li><li>数据集和模型发布：可在 github.com/botmahn/PedestrianQA 获取。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>PIP 评估：在 PIE、JAAD、TITAN、IDD-PeD 上以 Accuracy 和 F1 作为指标，与其他 VLMs 做零样本对比；微调模型“Ours (All Datasets)”在 PIE 获得 0.633 Acc、0.709 F1，JAAD 0.531 Acc、0.497 F1，TITAN 0.808 Acc、0.201 F1，IDD-PeD 0.880 Acc、0.205 F1，总体 0.783 Acc、0.542 F1（表格中加粗部分标注为最优，下划线部分标注为次优）。</li><li>PTP 评估：在 PIE、JAAD、TITAN、IDD-PeD 上以像素空间（图像坐标）的 ADE 与 FDE 作为指标，与 InternVL3、Kwai-Keye、LLaVA-NeXT、Qwen2.5-VL-7B 对比，Dolphins 被排除因无法生成轨迹框；微调模型“Ours (All Datasets)”整体 ADE=37, FDE=68（PIE ADE=41, FDE=70；JAAD ADE=41, FDE=87；TITAN ADE=31, FDE=60；IDD-PeD ADE=46, FDE=80）。</li><li>Rationale 生成评估：在 7 类推理依据（SR、TR、MR、EVR、SCR、FDP、C）上以 Claude-Sonnet-4 评定 0–100 分，微调模型表现优于零样本模型；Dolphins-9B 仅生成简短结论而未生成分类专属推理依据，其列为 0.00。</li><li>评估条件：PIP、PTP 及 Rationale 均在真实行车视频数据集上以开环方式评估（非闭环仿真），部分基线模型为零样本，微调模型以各数据集独立微调或跨全数据集微调进行评估；原文未见闭环驾驶仿真评测或实车平台部署记录。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2605.25947/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">A Pedestrian-Vehicle Interaction Benchmark and Annotation Framework for Unstructured Scenes via Uncalibrated Cameras</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.24354/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SparseWorld: Enhancing End-to-End Autonomous Driving via World Models with Sparse Scene Representation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lateral String Stability for Vehicle Platoons: Formulation, Definition, and Analysis - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶车队（vehicle platoons）在横向控制中的横向弦稳定性（lateral string stability）问题。 研究任务与场景：连接自动驾驶车辆队列在跟随同一期望路径行驶时，路径跟踪误差（尤其是横向/侧向误差）如何在车队中沿车辆传递与放大，重点是传感器遮挡（sensor occlusion）和地图无关导航（map-free navigation）条件下的安全风险。 研究问题：缺乏对横向弦稳定性的严格定义与通用分析框架；传统的时间域比较无法反映同一点位的空间误差传播；同时需探究仅靠车载感知与依赖车车通信（V2V）两种信息获取方式在误差衰减能力上的差异。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2605.01731">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2605.01731.webp" alt="Lateral String Stability for Vehicle Platoons: Formulation, Definition, and Analysis" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶车队（vehicle platoons）在横向控制中的横向弦稳定性（lateral string stability）问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Lateral String Stability for Vehicle Platoons: Formulation, Definition, and Analysis</h1>
+            <div class="detail-meta">2026-05-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2605.01731" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2605.01731" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2605.01731</span></div>
+            <p class="detail-summary">解决自动驾驶车队（vehicle platoons）在横向控制中的横向弦稳定性（lateral string stability）问题。 研究任务与场景：连接自动驾驶车辆队列在跟随同一期望路径行驶时，路径跟踪误差（尤其是横向/侧向误差）如何在车队中沿车辆传递与放大，重点是传感器遮挡（sensor occlusion）和地图无关导航（map-free navigation）条件下的安全风险。 研究问题：缺乏对横向弦稳定性的严格定义与通用分析框架；传统的时间域比较无法反映同一点位的空间误差传播；同时需探究仅靠车载感知与依赖车车通信（V2V）两种信息获取方式在误差衰减能力上的差异。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Texas A&amp;M University · Sixu Li、Swaroop Darbha、Yang Zhou</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2605.01731/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶车队（vehicle platoons）在横向控制中的横向弦稳定性（lateral string stability）问题。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶车队（vehicle platoons）在横向控制中的横向弦稳定性（lateral string stability）问题。</li><li>研究任务与场景：连接自动驾驶车辆队列在跟随同一期望路径行驶时，路径跟踪误差（尤其是横向/侧向误差）如何在车队中沿车辆传递与放大，重点是传感器遮挡（sensor occlusion）和地图无关导航（map-free navigation）条件下的安全风险。</li><li>研究问题：缺乏对横向弦稳定性的严格定义与通用分析框架；传统的时间域比较无法反映同一点位的空间误差传播；同时需探究仅靠车载感知与依赖车车通信（V2V）两种信息获取方式在误差衰减能力上的差异。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Texas A&amp;M University；作者：Sixu Li、Swaroop Darbha、Yang Zhou</li><li>机构：Zachry Department of Civil &amp; Environmental Engineering, Texas A&amp;M University；作者：Yang Zhou</li><li>机构：J. Mike Walker ’66 Department of Mechanical Engineering, Texas A&amp;M University；作者：Sixu Li、Swaroop Darbha</li></ul>
+
+<p>注：原文对作者与具体机构的对应关系描述如下：Swaroop Darbha 的联系邮箱（dswaroop@tamu.edu）与 Yang Zhou 的邮箱（yangzhou295@tamu.edu）同时关联两个系（土木与环境工程系、机械工程系），原文未明确指明每位作者各自的所属机构，因此作者与机构的精确对应关系原文未明确说明。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶车队（vehicle platoons）在横向控制中的横向弦稳定性（lateral string stability）问题。</li><li>研究任务与场景：连接自动驾驶车辆队列在跟随同一期望路径行驶时，路径跟踪误差（尤其是横向/侧向误差）如何在车队中沿车辆传递与放大，重点是传感器遮挡（sensor occlusion）和地图无关导航（map-free navigation）条件下的安全风险。</li><li>研究问题：缺乏对横向弦稳定性的严格定义与通用分析框架；传统的时间域比较无法反映同一点位的空间误差传播；同时需探究仅靠车载感知与依赖车车通信（V2V）两种信息获取方式在误差衰减能力上的差异。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出基于路径弧长（arc-length，欧拉视角）重参数化的车队横向控制问题系统化建模框架，以便在相同空间点上比较不同车辆的跟踪误差。</li><li>提出车辆队列横向弦稳定性的形式化定义——ℒ₂ 横向弦稳定性，并给出其充要条件。</li><li>提出一种新型“向前车学习”（learn-from-predecessor）控制策略，利用 V2V 通信传递前车输出与学习控制项，用于提升误差衰减能力。</li><li>系统分析比较了两种跟踪方案（predecessor-tracking PT 与 desired-path tracking DT）、两种控制策略（反馈-前馈 FF 与 LFP）以及两种误差度量（跟踪误差向量与横向误差），得出仅靠车载感知无法保证误差衰减的不可行性结论，并识别出控制器结构上必要的反馈需求。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：车队横向路径跟踪控制与弦稳定性分析，非端到端自动驾驶全栈方法。</li><li>输入传感器：车载感知模式依赖立体视觉、LiDAR 跟踪或相机-LiDAR 融合及 GNSS 位姿估计来记录前车行驶路径；V2V 模式利用车车通信接收期望路径与前车输出数据。具体传感器型号原文未报告。</li><li>场景表示：将各车相对期望路径的跟踪误差沿路径弧长重参数化，以弧长 l_d 作为空间坐标，实现跨车辆一致比较。</li><li>模型结构：采用自行车动力学模型，结合路径跟踪误差（横向误差 e_lat 与航向误差 θ̃）动力学；对误差模型进行弧长重参数化后，形成基于期望路径弧长的线性定常空间域方程；在此基础上分别建立 FF 控制器与 LFP 控制器（包含 PD 反馈与学习/前馈项等结构）。</li><li>关键技术：弧长重参数化（欧拉视角）、反馈-前馈控制、V2V 通信下的前车学习控制、ℒ₂ 横向弦稳定性分析及其充要条件推导。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告使用任何公开或私有数据集。</li><li>仿真器：原文未报告具体仿真器名称；仅提及通过数值仿真（numerical simulations）验证理论结果。</li><li>模型规模：原文未报告模型参数量或网络规模（本文为控制理论方法，不涉及神经网络模型）。</li><li>训练资源：原文未报告训练资源。</li><li>实车平台：原文未报告实车平台或实车实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：以 ℒ₂ 横向弦稳定性定义作为理论基准进行验证；数值仿真针对两种情况开展：V2V 模式下的 LFP 策略（含 K_LD=0 的变体）和车载感知模式下的 FF 策略。</li><li>评估指标：围绕横向跟踪误差向量及横向（cross-track）误差在车队中的衰减行为进行评估。</li><li>关键数值：原文未报告具体的定量数值结果（如误差衰减率、超调量等）。</li><li>对比方法：对比 FF 策略（仅靠车载感知，predecessor-tracking）与 LFP 策略（V2V，desired-path tracking）；另对比 LFP 策略在 K_LD≠0 与 K_LD=0 两种增益设置下的表现。</li><li>开环、闭环、仿真或实车条件：本文为控制理论分析，涉及闭环分析；验证采用数值仿真，处于仿真条件（非实车、非真实闭环道路或公开基准测试）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2605.01860/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Optimizing Trajectory-Trees in Belief Space: An Application from Model Predictive Control to Task and Motion Planning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.00362/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Time-series Meets Complex Motion Modeling: Robust and Computational-effective Motion Predictor for Multi-object Tracking</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

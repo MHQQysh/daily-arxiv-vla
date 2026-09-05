@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Multistep Belief Space Dynamics Learning For Risk-Aware Control - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文面向自动驾驶中的越野（off-road）高速无人驾驶场景，目标是使得车辆能够在数英里、多样化且未预先测绘的真实地形上进行长时间的自主导航与风险避让。 研究问题为：如何高效地学习并传播系统动力学的不确定性，从而在模型预测控制（MPC）中实现风险感知的规划与控制，且不会过于保守，能够像人类驾驶员一样根据环境自动调节速度与路径。 任务定义在给定 GPS 航路点的导航上，不依赖先验地图，适用于灾后搜救、农业、采矿及星外探索等场景。 核心思路是将参数化物理模型与神经网络学习结合，在信念空间（belief space）中学习高斯分布化的多步动力学，并通过在真实越野环境中部署验证其有效性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2605.12628">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2605.12628.webp" alt="Multistep Belief Space Dynamics Learning For Risk-Aware Control" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文面向自动驾驶中的越野（off-road）高速无人驾驶场景，目标是使得车辆能够在数英里、多样化且未预先测绘的真实地形上进行长时间的自主导航与风险避让。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Multistep Belief Space Dynamics Learning For Risk-Aware Control</h1>
+            <div class="detail-meta">2026-05-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2605.12628" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2605.12628" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2605.12628</span></div>
+            <p class="detail-summary">本文面向自动驾驶中的越野（off-road）高速无人驾驶场景，目标是使得车辆能够在数英里、多样化且未预先测绘的真实地形上进行长时间的自主导航与风险避让。 研究问题为：如何高效地学习并传播系统动力学的不确定性，从而在模型预测控制（MPC）中实现风险感知的规划与控制，且不会过于保守，能够像人类驾驶员一样根据环境自动调节速度与路径。 任务定义在给定 GPS 航路点的导航上，不依赖先验地图，适用于灾后搜救、农业、采矿及星外探索等场景。 核心思路是将参数化物理模型与神经网络学习结合，在信念空间（belief space）中学习高斯分布化的多步动力学，并通过在真实越野环境中部署验证其有效性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Autonomous Control and Decision Systems Lab, Georgia Institute of Technolog…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2605.12628/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文面向自动驾驶中的越野（off-road）高速无人驾驶场景，目标是使得车辆能够在数英里、多样化且未预先测绘的真实地形上进行长时间的自主导航与风险避让。</p>
+  <ul class="reading-intro-points"><li>本文面向自动驾驶中的越野（off-road）高速无人驾驶场景，目标是使得车辆能够在数英里、多样化且未预先测绘的真实地形上进行长时间的自主导航与风险避让。</li><li>研究问题为：如何高效地学习并传播系统动力学的不确定性，从而在模型预测控制（MPC）中实现风险感知的规划与控制，且不会过于保守，能够像人类驾驶员一样根据环境自动调节速度与路径。</li><li>任务定义在给定 GPS 航路点的导航上，不依赖先验地图，适用于灾后搜救、农业、采矿及星外探索等场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Autonomous Control and Decision Systems Lab, Georgia Institute of Technology；作者：Jason Gibson、Bogdan Vlahov、Evangelos A. Theodorou</li><li>机构：NASA Jet Propulsion Laboratory, California Institute of Technology；作者：Patrick Spieler</li><li>注：作者 Jason Gibson 与 Bogdan Vlahov 同属 Georgia Institute of Technology；Patrick Spieler 属于 NASA Jet Propulsion Laboratory；Evangelos A. Theodorou 同时与两个机构相关（标注为 Georgia Institute of Technology 的通讯作者，脚注声明研究在 Jet Propulsion Laboratory 进行），原文作者与机构对应关系如此，若按正文逐字对应则 Evangelos A. Theodorou 的归属为 Georgia Institute of Technology 实验室并有 JPL 脚注，可视为两处均有，但原文未明确区分主次。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文面向自动驾驶中的越野（off-road）高速无人驾驶场景，目标是使得车辆能够在数英里、多样化且未预先测绘的真实地形上进行长时间的自主导航与风险避让。</li><li>研究问题为：如何高效地学习并传播系统动力学的不确定性，从而在模型预测控制（MPC）中实现风险感知的规划与控制，且不会过于保守，能够像人类驾驶员一样根据环境自动调节速度与路径。</li><li>任务定义在给定 GPS 航路点的导航上，不依赖先验地图，适用于灾后搜救、农业、采矿及星外探索等场景。</li><li>核心思路是将参数化物理模型与神经网络学习结合，在信念空间（belief space）中学习高斯分布化的多步动力学，并通过在真实越野环境中部署验证其有效性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了一个新颖的、计算高效的分布化动力学学习框架，适用于一般非线性系统的多步信念动态学习。</li><li>深入研究了学习过程中的结构设计（如网络结构、参数化与学习成分的混合方式），并强调结构在不确定性预测中的重要性。</li><li>在真实越野车辆的大规模数据上进行了细致的消融研究，说明了偏离论文所提出结构的性能影响。</li><li>将所学模型与规划控制架构部署到全尺寸越野车（Polaris S4 1000 RZR）上，在具有挑战性的条件下实现了基于不确定性的自调节速度，并在数英里多样化地形上表现出稳定的智能控制行为。</li><li>在代价函数设计上采用了基于物理的通用性模型（如悬挂系统受力）而不是几何地形分类模式，从而提高了泛化性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：风险感知的模型预测控制（MPC）与基于信念空间的动力学学习（模型学习模块融合参数化与神经网络）。</li><li>输入传感器：原文未系统报告完整传感器清单；提及使用 CAN 总线获取制动、发动机转速等标签，并使用高程图（elevation map）查询车轮处法向与高程，高程图生成方法引用另文[39–41]。</li><li>场景表示：以高斯分布近似状态不确定性，在车辆质心建立含 16 个状态的非线性模型，划分为主受力模型、延迟模型和悬挂系统三组；动力学分为纵向速度/横向速度/偏航率为主的力空间描述。</li><li>模型结构：采用混合结构，参数化自行车模型（含 Pacejka 型轮胎模型的变体、发动机扭矩二阶多项式、滚动阻力等）加上基于神经网络的补偿项；不确定性传播使用线性化状态雅可比与过程噪声矩阵；过程噪声由结构化输出（力或非子集状态独立噪声，经雅可比映射）与非结构化上三角输出两部分组成。</li><li>神经网络架构采用初始化 LSTM（I-LSTM），其中初始化网络输出隐藏/细胞状态给预测 LSTM，另增设全连接输出层；主物理模型训练使用轨迹级负对数似然（NLL）损失并对过程噪声与均值端到端训练。</li><li>关键技术：在运行时把反馈增益叠加进状态雅可比，以近似闭环不确定性；训练使用多步前向积分并施加 NLL（含轨迹正则化）损失以强制预测稳定，改进低维模型稳定性；损失中只对协方差相关的子集状态应用 NLL 而对其他状态使用带权重的 L2 损失。</li><li>原文未报告：输入传感器的具体型号与完整配置、障碍或路径上采样的详细实现参数、以及网络训练的其他超参细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：大规模真实世界越野驾驶数据（用于训练与消融），但数据集名称与规模未报告。</li><li>仿真器：原文未报告。</li><li>模型规模：神经网络使用了 I-LSTM 结构（含初始化与预测两个 LSTM），并带有全连接输出层；网络尺寸与参数数量未报告。</li><li>训练资源：训练硬件/软件平台未报告。</li><li>实车平台：Polaris S4 1000 RZR；此外还提及 AutoRally (AR) 作为缩写但未在实验细节中说明其是否用于硬件测试。</li><li>公开资源：论文附带演示视频链接（https://youtu.be/CaPhMgXMPG4），未见会公开代码或数据集或模型权重的说明。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：大范围真实世界越野驾驶数据下的消融研究，以及全尺寸车辆上的长时间野外实车测试；未报告公开标准化基准。</li><li>评估指标：主要使用多步负对数似然（NLL）损失与轨迹级误差；对于延迟模型等使用 MSE；NLL 仅作用于协方差子集的状态；另有结构/网络规模的消融比较。</li><li>关键数值：原文未报告具体数值结果。</li><li>对比方法：论文在消融中对多种网络结构（对比 FNN、GRU、LSTM、CNN/ConvLSTM 等，见缩写表）及不加结构的网络进行了比较；在架构层面比较了加入/去掉结构化过程噪声设计的变体；实验表明结构化版本优于无结构版本。</li><li>开环/闭环：训练中对动力学使用开环多步传播并用状态估计器标签监督；不确定性的传播考虑了运行时闭环（对雅可比加入反馈增益）与开环两种模式的对比；硬件部署中的轨迹优化基于 MPC 闭环方式执行。</li><li>仿真/实车条件：硬件实验在真实越野条件的全尺寸车辆上进行，涵盖长距离穿越、有趣的案例及小径驾驶对比；未见仿真验证。</li><li>消融研究在真实采集的越野数据上进行（既有离线数据），而硬件测试则是关环实车部署，测试场地跨越多种地形。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2605.13591/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Real2Sim: A Physics-driven and Editable Gaussian Splatting Framework for Autonomous Driving Scenes</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.10388/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Temporal Sampling Frequency Matters: A Capacity-Aware Study of End-to-End Driving Trajectory Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

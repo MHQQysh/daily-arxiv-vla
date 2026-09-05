@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Task-Agnostic Algebraic Integrity Metric for Event-Camera Streams Toward SOTIF-Compliant Perception using Pearson Correlation Coefficient - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的是自动驾驶系统中事件相机流完整性评估问题，面向安全关键感知（如自动/辅助驾驶中的目标检测、跟踪等）的质量监控场景。研究背景聚焦于事件相机高带宽、低延迟等优势在自动驾驶感知中的应用。 研究指出当前缺少直接作用于异步事件流的任务无关质量指标，现有方法依赖下游任务性能（如检测精度、跟踪误差），与ISO 21448（SOTIF）及ISO/PAS 8800:2024的安全认证要求不兼容。 论文提出一个统一代数框架，将皮尔逊相关系数（PCC，Pearson Correlation Coefficient）从基于帧的图像应用（先前用于冗余过滤和ROI选择）扩展至三种标准事件表示，并形式化推导出三个完整性度量，用于提高事件相机感知系统符合功能安全（SOTIF）认证要求的能力。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2605.21500">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2605.21500.webp" alt="A Task-Agnostic Algebraic Integrity Metric for Event-Camera Streams Toward SOTIF-Compliant Perception using Pearson Correlation Coefficient" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的是自动驾驶系统中事件相机流完整性评估问题，面向安全关键感知（如自动/辅助驾驶中的目标检测、跟踪等）的质量监控场景。研究背景聚焦于事件相机高带宽、低延迟等优势在自动驾驶感知中的应用。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Task-Agnostic Algebraic Integrity Metric for Event-Camera Streams Toward SOTIF-Compliant Perception using Pearson Correlation Coefficient</h1>
+            <div class="detail-meta">2026-05-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2605.21500" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2605.21500" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2605.21500</span></div>
+            <p class="detail-summary">论文研究的是自动驾驶系统中事件相机流完整性评估问题，面向安全关键感知（如自动/辅助驾驶中的目标检测、跟踪等）的质量监控场景。研究背景聚焦于事件相机高带宽、低延迟等优势在自动驾驶感知中的应用。 研究指出当前缺少直接作用于异步事件流的任务无关质量指标，现有方法依赖下游任务性能（如检测精度、跟踪误差），与ISO 21448（SOTIF）及ISO/PAS 8800:2024的安全认证要求不兼容。 论文提出一个统一代数框架，将皮尔逊相关系数（PCC，Pearson Correlation Coefficient）从基于帧的图像应用（先前用于冗余过滤和ROI选择）扩展至三种标准事件表示，并形式化推导出三个完整性度量，用于提高事件相机感知系统符合功能安全（SOTIF）认证要求的能力。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未报告机构信息 · Arthur de Miranda Neto。由于论文仅列出作者姓名且未披露机构、作者与机构的对应关系在原文中未明确给出。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2605.21500/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的是自动驾驶系统中事件相机流完整性评估问题，面向安全关键感知（如自动/辅助驾驶中的目标检测、跟踪等）的质量监控场景。研究背景聚焦于事件相机高带宽、低延迟等优势在自动驾驶感知中的应用。</p>
+  <ul class="reading-intro-points"><li>论文研究的是自动驾驶系统中事件相机流完整性评估问题，面向安全关键感知（如自动/辅助驾驶中的目标检测、跟踪等）的质量监控场景。研究背景聚焦于事件相机高带宽、低延迟等优势在自动驾驶感知中的应用。</li><li>研究指出当前缺少直接作用于异步事件流的任务无关质量指标，现有方法依赖下游任务性能（如检测精度、跟踪误差），与ISO 21448（SOTIF）及ISO/PAS 8800:2024的安全认证要求不兼容。</li><li>论文提出一个统一代数框架，将皮尔逊相关系数（PCC，Pearson Correlation Coefficient）从基于帧的图像应用（先前用于冗余过滤和ROI选择）扩展至三种标准事件表示，并形式化推导出三个完整性度量，用于提高事件相机感知系统符合功能安全（SOTIF）认证要求的能力。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未报告机构信息；作者：Arthur de Miranda Neto。由于论文仅列出作者姓名且未披露机构，作者与机构的对应关系在原文中未明确给出。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的是<strong>自动驾驶系统中事件相机流完整性评估</strong>问题，面向安全关键感知（如自动/辅助驾驶中的目标检测、跟踪等）的质量监控场景。研究背景聚焦于事件相机高带宽、低延迟等优势在自动驾驶感知中的应用。</li><li>研究指出当前缺少直接作用于异步事件流的任务无关质量指标，现有方法依赖下游任务性能（如检测精度、跟踪误差），与ISO 21448（SOTIF）及ISO/PAS 8800:2024的安全认证要求不兼容。</li><li>论文提出一个统一代数框架，将皮尔逊相关系数（PCC，Pearson Correlation Coefficient）从基于帧的图像应用（先前用于冗余过滤和ROI选择）扩展至三种标准事件表示，并形式化推导出三个完整性度量，用于提高事件相机感知系统符合功能安全（SOTIF）认证要求的能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li><strong>提出任务无关的事件流代数完整性度量</strong>：表述为一种不依赖任何下游感知任务、直接基于事件流本身的度量方案，从而与SOTIF认证兼容性目标对齐。</li><li><strong>构造相机并发机制与PCC变化准则间的结构同构</strong>：基于事件相机对比度阈值触发机制（\|ΔL\|≥ C）与PCC变化准则之间的结构对应关系，给出理论依据以支持相关指标的操作语义。</li><li><strong>形式化定义并泛化三个提升的可靠性度量</strong>：提出的三个指标分别为：（i）r-TS，用于对照自车运动预测时间曲面的流完整性监控；（ii）r²-EF，用于自适应感兴趣区域（ROI）选择且仅需整数比较；（iii）r-VG，用于时域冗余门控。</li><li><strong>对称分析流水线延迟与信息损失</strong>：与原始流相比，处理流水线可能引入的延迟和信息损失被明确对称化分析（即统一考虑并衡量两类系统开销）。</li><li><strong>引入显式认识论状态约定</strong>：在文内建立的每个结论/贡献上标注确定的认知状态（[ESTABLISHED]、[SOLID]、[HYPOTH.]、[OPEN]），以区分不同可靠程度的结论，服务于该领域的知识管理。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶感知系统中的安全性与可靠性监测模块，聚焦于事件流层面而非某一具体任务输出层面的质量评估。</li><li>输入传感器：事件相机（event camera），输入为异步事件流。</li><li>场景表示：基于三种标准事件表示——时间曲面（Time Surface）、事件帧（Event Frame）和体素网格（Voxel Grid）。</li><li>模型结构：原文未报告具体模型结构（未定义模型包含网络层/参数结构）；提出的是一个代数度量框架。</li><li>关键技术：pipeline中依赖<strong>Pearson相关系数的代数变换与度量推理</strong>为主要关键技术，将历史用帧处理中的PCC操作“提升”到事件流表征中；所提出的方法与相机本身的对比度阈值触发模式建立了同构关系，使度量能直接用事件触发原理予以解释。</li><li>关于实际网络实现细节、处理架构、硬件加速或其内部组件，原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集/数据来源：利用了程序化合成的场景事件流，通过直接模拟事件相机的发射模型生成的“procedural-synthetic event stream”，而非来自任何真实或视频衍生数据集。原文未报告真实公开数据集的验证。</li><li>仿真器：事件相机发射模型的直接仿真（具体仿真器名称原文未报告）。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告（作为无监督/无标记代数度量框架，未见训练流程）。</li><li>实车平台：原文未报告。</li><li>其他资源：论文提及代码和演示视频可获得，但原文页未提供具体链接或库名。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：原文未报告基于标准基准的实证评估。本文明确为理论框架论文，采用的说明为程序化合成的事件流，不采用当前真实/视频数据集，也未使用已知评测榜单类基准。</li><li>评估指标：提出的三个度量指标，即（i）r-TS（用于完整性监控）、（ii）r²-EF（用于自适应ROI）与（iii）r-VG（用于时域冗余门控）。此外给出具体说明性例子，其中隧道沉降异常场景中 r_C 从0.93（相干流）降至0以下（报警阈值）。</li><li>关键数值：在隧道沉降完整性异常示例中，r_C 由 0.93（相干流）→ 负值（低于0，触发报警），一具体的关键数值体现。</li><li>对比方法：与当前最先进（SOTA）的代理方法相对照——后者仍须依赖下游任务（如检测准确率、跟踪误差），而本提案为任务无关；没有报告与其他同等任务无关度量进行定量对比实验。</li><li>开环/闭环/仿真/实车条件：所有验证以仿真/合成方法进行，具体为程序化合成事件流，无开环或闭环实车结果。原文明确指出，基于真实数据集的实证验证被预留到后续工作，当前论文为纯理论性构建加程序化说明。</li></ul>
+
+<p>（概括原文确认的开环或闭环状态：论文声明本文为“理论框架论文，附程序化合成示例；真实数据集上的实证验证留作后续工作”，因此无开环/闭环、仿真器闭环或实车测试条件的评估内容。）</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2605.08572/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">ECTraj: Enhanced Consistency Training for Multi-Agent Trajectory Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.02716/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Parking Assistance for Trailer-Truck Transport Vehicles Using Sensor Fusion and Motion Planning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

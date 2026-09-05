@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>4DLidarOpen: An Open 4D FMCW Lidar Dataset for Motion-Aware Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文提出了4DLidarOpen，一个以4D FMCW激光雷达为核心的大规模开放多模态自动驾驶数据集，用于运动感知的4D场景理解与端到端驾驶研究。 数据采集于北京亦庄和首钢工业园区等复杂城市环境，覆盖密集行人交互、拥堵交通、高速驾驶和无保护转弯等挑战性场景。 论文建立3D目标检测、BEV分割与流预测、运动预测与规划三个统一基准，系统研究4D FMCW激光雷达点级径向速度测量对运动感知与下游预测规划任务的价值。 论文试图回答的关键问题：相比仅几何感知的传感模式，4D FMCW激光雷达如何通过更丰富的4D场景理解增强自动驾驶能力，尤其是在弱势道路使用者（VRU）和快速移动物体的场景中。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2605.18074">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2605.18074.webp" alt="4DLidarOpen: An Open 4D FMCW Lidar Dataset for Motion-Aware Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文提出了4DLidarOpen，一个以4D FMCW激光雷达为核心的大规模开放多模态自动驾驶数据集，用于运动感知的4D场景理解与端到端驾驶研究。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">4DLidarOpen: An Open 4D FMCW Lidar Dataset for Motion-Aware Autonomous Driving</h1>
+            <div class="detail-meta">2026-05-18 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2605.18074" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2605.18074" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2605.18074</span></div>
+            <p class="detail-summary">该论文提出了4DLidarOpen，一个以4D FMCW激光雷达为核心的大规模开放多模态自动驾驶数据集，用于运动感知的4D场景理解与端到端驾驶研究。 数据采集于北京亦庄和首钢工业园区等复杂城市环境，覆盖密集行人交互、拥堵交通、高速驾驶和无保护转弯等挑战性场景。 论文建立3D目标检测、BEV分割与流预测、运动预测与规划三个统一基准，系统研究4D FMCW激光雷达点级径向速度测量对运动感知与下游预测规划任务的价值。 论文试图回答的关键问题：相比仅几何感知的传感模式，4D FMCW激光雷达如何通过更丰富的4D场景理解增强自动驾驶能力，尤其是在弱势道路使用者（VRU）和快速移动物体的场景中。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">清华大学（Tsinghua University） · Kane Qian、Yining Shi、Rujun Yan 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2605.18074/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文提出了4DLidarOpen，一个以4D FMCW激光雷达为核心的大规模开放多模态自动驾驶数据集，用于运动感知的4D场景理解与端到端驾驶研究。</p>
+  <ul class="reading-intro-points"><li>该论文提出了4DLidarOpen，一个以4D FMCW激光雷达为核心的大规模开放多模态自动驾驶数据集，用于运动感知的4D场景理解与端到端驾驶研究。</li><li>数据采集于北京亦庄和首钢工业园区等复杂城市环境，覆盖密集行人交互、拥堵交通、高速驾驶和无保护转弯等挑战性场景。</li><li>论文建立3D目标检测、BEV分割与流预测、运动预测与规划三个统一基准，系统研究4D FMCW激光雷达点级径向速度测量对运动感知与下游预测规划任务的价值。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：清华大学（Tsinghua University）；作者：Kane Qian、Yining Shi、Rujun Yan、Mengmeng Yang、Diange Yang、Kun Jiang</li><li>机构：禾赛科技有限公司（Hesai Technology Co., Ltd.）；作者：Xin Zhao、Zhengqing Pan、Kaojin Zhu、Kai Sun</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文提出了4DLidarOpen，一个以4D FMCW激光雷达为核心的大规模开放多模态自动驾驶数据集，用于运动感知的4D场景理解与端到端驾驶研究。</li><li>数据采集于北京亦庄和首钢工业园区等复杂城市环境，覆盖密集行人交互、拥堵交通、高速驾驶和无保护转弯等挑战性场景。</li><li>论文建立3D目标检测、BEV分割与流预测、运动预测与规划三个统一基准，系统研究4D FMCW激光雷达点级径向速度测量对运动感知与下游预测规划任务的价值。</li><li>论文试图回答的关键问题：相比仅几何感知的传感模式，4D FMCW激光雷达如何通过更丰富的4D场景理解增强自动驾驶能力，尤其是在弱势道路使用者（VRU）和快速移动物体的场景中。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>发布4DLidarOpen数据集，集成前向4D FMCW激光雷达、旋转OT激光雷达、固态AT激光雷达、两台ATX盲区激光雷达、环视相机和6-DOF自车位姿，并提供五类物体带持久轨迹ID的3D包围框标注。</li><li>提供标准的三大基准：3D目标检测、BEV分割与流预测、运动预测与规划，能够从物体级感知评估到下游驾驶任务的全链路评测。</li><li>采用混合标注策略，包含225个人工标注场景（167训练/58验证）和3个自动标注训练层级（500/1,000/2,000序列），支持大规模自监督和半监督研究。</li><li>通过系统性实验量化点级径向速度的作用，证明4D FMCW的瞬时速度通道为动态场景理解提供互补运动线索，在BEV流预测、运动预测和规划中表现优于仅几何传感，尤其在弱势道路使用者场景。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：该论文为数据集论文，评测了感知（3D检测、BEV分割与流预测）和端到端预测规划模块。</li><li>输入传感器：前向4D FMCW激光雷达（输出(x,y,z,v)点云，含逐点径向速度）、360°旋转OT激光雷达（300米量程）、固态AT激光雷达、两台ATX盲区激光雷达、5个环视相机（4个广角加1个前向长焦），以及轮式里程计和IMU融合的自车位姿。</li><li>场景表示：BEV栅格、体素化表示（voxelized）用于感知与预测任务；4D FMCW激光雷达点云额外带有逐点径向速度通道。</li><li>模型结构：3D检测采用CenterPoint和PointPillars骨干网络配合Sparse4D head；BEV分割与流预测对比MotionNet、STI（BE-STI）、PriorMotion和LEGO-Motion架构；端到端运动预测与规划采用SparseDrive（稀疏查询transformer）与DiffusionDrive（基于扩散策略），两者均调整以在BEV特征图上进行可变形交叉注意力。</li><li>关键技术：4D FMCW激光雷达提供瞬时径向速度的直接测量，无需帧间差分即可获取运动线索；传感器硬件同步精度达到[-1.39, 1.39]毫秒（比Waymo Open的[-6,7]毫秒紧密三倍）；利用gPTP实现亚毫秒级同步；采用自动标注后人工两阶段审核的标注管线；速度融合方式为在BEV输入特征中增加径向速度通道。</li><li>文中未报告的其它细节：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：4DLidarOpen，包含225个人工标注场景（167训练+58验证）和2,000个自动标注序列；人工标注训练集驱动距离11.60 km、时长0.58小时、21,044个Lidar帧、105,220个相机帧、1,457,552个标注实例、730条轨迹；人工标注验证集驱动距离3.49 km、时长0.19小时、7,000个Lidar帧、35,000个相机帧、439,675个标注实例、592条轨迹；自动标注层级驱动距离295.70 km、时长10.89小时、394,896个Lidar帧、1,974,480个相机帧、22,952,926个标注实例、1,741条轨迹。</li><li>标注类别：5类（Car、Van、Cyclist、Pedestrian、Traffic Cone），30米内物体完整标注，150米内反射超过5个Lidar返回的物体被标注，自车车道障碍物即使稀疏也保留。</li><li>数据集公开地址：https://github.com/haopen-dataset/haopen</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：原文未报告具体GPU配置和训练硬件。</li><li>实车平台：原文未报告具体车辆型号；数据采集于北京亦庄和首钢工业园区，使用五激光雷达加五相机的实车平台。</li><li>仿真器：未使用仿真器，文中提到CARLA仅作为相关工作背景提及。</li><li>对比数据集：与KITTI、nuScenes、Waymo Open、PandaSet等对比。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估条件：所有评估均基于自采数据集的真实道路数据（开环），未涉及闭环仿真评估。</li><li>3D目标检测基准：使用KITTI AP和nuScenes mAP/NDS指标；在跨三种Lidar传感器对比中，AT128整体最优（mAP 69.62%、NDS 76.32%），OT128次之（mAP 64.89%、NDS 74.51%），4D FMCW较低（mAP 63.62%、NDS 72.05%）。</li><li>速度通道消融：4D FMCW去除速度后（xyzi）mAP跌至21.58%、NDS 41.86%；加入速度（xyziv）提升mAP至28.75%、NDS 51.49%；行人AP从17.59%大幅提升至48.28%，表明运动线索对动态弱势道路使用者检测价值显著。</li><li>BEV分割与流预测基准：对比MotionNet、STI、PriorMotion三种架构×三种传感器配置；PriorMotion+FMCW 4D+速度融合整体最优（静态误差0.0011、慢速0.6218、快速1.0033，MCA 0.8541、OA 0.9864）；速度融合将静态单元误差降低约一个数量级；速度通道主要改善径向运动估计，对侧向运动改善较小。</li><li>定性分析（实车数据）：在滚动锥桶场景中4D FMCW在第1帧检测到目标，而无速度基线需第8帧；在突然穿行行人场景中4D FMCW第1帧检测，基线第2帧；在天洋穿行测试中电动自行车场景4D FMCW第2帧检测（3D Lidar需第6帧），并且第4帧即稳定（3D配置需第29帧）。</li><li>运动预测与规划基准：采用SparseDrive和DiffusionDrive（统一报告SparseDrive结果）；4D FMCW在运动预测中整体最优，ADE(6) 1.47、FDE(6) 2.58、AHE(6) 0.63、FHE(6) 0.89，优于AT128（ADE(6) 1.58、FDE(6) 2.87）和OT128（ADE(6) 1.98、FDE(6) 3.61）；规划上4D FMCW同样领先，ADE(6) 0.38、FDE(6) 0.79，优于AT128（ADE(6) 0.40、FDE(6) 0.95）和OT128（ADE(6) 0.57、FDE(6) 1.01），尽管4D FMCW原始检测指标较低，但直接径向速度测量使预测规划任务受益更大。</li><li>评估指标：包括KITTI AP（IoU=0.5车辆/货车，0.25弱势道路使用者）、nuScenes mAP与NDS、BEV预测的均值和单位移误差（分静态≤0.2 m/s、慢速0.2-5 m/s、快速&gt;5 m/s）、径向与侧向分解误差、分类的OA（总体准确率）和MCA（平均类别准确率），以及运动预测规划的minADE_k和minFDE_k（k=6和k=1，预测3秒30帧）。</li><li>对比方法：CenterPoint、PointPillars、MotionNet、BE-STI（STI）、PriorMotion、LEGO-Motion、SparseDrive、DiffusionDrive。</li><li>原文未报告的其它评估细节：原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2605.20255/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Multi-Agent Reinforcement Learning for Safe Autonomous Driving Under Pedestrian Behavioral Uncertainty</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.13646/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Causality-Aware End-to-End Autonomous Driving via Ego-Centric Joint Scene Modeling</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

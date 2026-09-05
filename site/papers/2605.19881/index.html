@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trajectory Planning and Control near the Limits: an Open Experimental Benchmark on the RoboRacer Platform - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决自动驾驶中高加速度、极限操控（race-like 场景）下的轨迹规划与控制问题。 应用场景为 1:10 比例的自主赛车平台 RoboRacer，研究在接近车辆动力学极限时的轨迹跟踪与速度规划。 研究问题包括：缺乏开源基准来评估高加速度赛车场景中的规划与控制方法；以及 MS-NN 转向控制和在线时间最优速度重规划在真实赛车中的闭环性能未得到验证。 该工作构建了一个模块化框架，并在真实赛道上进行了消融实验验证。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2605.19881">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2605.19881.webp" alt="Trajectory Planning and Control near the Limits: an Open Experimental Benchmark on the RoboRacer Platform" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决自动驾驶中高加速度、极限操控（race-like 场景）下的轨迹规划与控制问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Trajectory Planning and Control near the Limits: an Open Experimental Benchmark on the RoboRacer Platform</h1>
+            <div class="detail-meta">2026-05-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2605.19881" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2605.19881" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2605.19881</span></div>
+            <p class="detail-summary">论文解决自动驾驶中高加速度、极限操控（race-like 场景）下的轨迹规划与控制问题。 应用场景为 1:10 比例的自主赛车平台 RoboRacer，研究在接近车辆动力学极限时的轨迹跟踪与速度规划。 研究问题包括：缺乏开源基准来评估高加速度赛车场景中的规划与控制方法；以及 MS-NN 转向控制和在线时间最优速度重规划在真实赛车中的闭环性能未得到验证。 该工作构建了一个模块化框架，并在真实赛道上进行了消融实验验证。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Professorship of Autonomous Vehicle Systems, Technical University of Munich…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2605.19881/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决自动驾驶中高加速度、极限操控（race-like 场景）下的轨迹规划与控制问题。</p>
+  <ul class="reading-intro-points"><li>论文解决自动驾驶中高加速度、极限操控（race-like 场景）下的轨迹规划与控制问题。</li><li>应用场景为 1:10 比例的自主赛车平台 RoboRacer，研究在接近车辆动力学极限时的轨迹跟踪与速度规划。</li><li>研究问题包括：缺乏开源基准来评估高加速度赛车场景中的规划与控制方法；以及 MS-NN 转向控制和在线时间最优速度重规划在真实赛车中的闭环性能未得到验证。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Professorship of Autonomous Vehicle Systems, Technical University of Munich, 85748 Garching, Germany; Munich Institute of Robotics and Machine Intelligence (MIRMI)；作者：Mattia Piccinini, Felix Jahncke, Johannnes Betz</li><li>机构：Avilus GmbH, Germany；作者：Patrick Zambiasi</li><li>机构：Department of Information Technology and Electrical Engineering (DIETI), University of Naples Federico II, Naples 80125, Italy；作者：Aniello Mungiello</li><li>机构：Dept. of Industrial Engineering, University of Trento, 38123 Trento, Italy；作者：Mattia Piazza</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决自动驾驶中高加速度、极限操控（race-like 场景）下的轨迹规划与控制问题。</li><li>应用场景为 1:10 比例的自主赛车平台 RoboRacer，研究在接近车辆动力学极限时的轨迹跟踪与速度规划。</li><li>研究问题包括：缺乏开源基准来评估高加速度赛车场景中的规划与控制方法；以及 MS-NN 转向控制和在线时间最优速度重规划在真实赛车中的闭环性能未得到验证。</li><li>该工作构建了一个模块化框架，并在真实赛道上进行了消融实验验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>对时间和处理极限附近的规划和控制器进行基准评测，包括几何控制器、MS-NN 转向控制器和在线速度规划器，并首次在真实世界统一闭环栈中评估其组合。</li><li>提出一种新的 MS-NN 架构，学习高加速度下的非线性纵横向耦合动力学，同时保持可解释性。</li><li>通过多项消融实验，分析各模块及其组合的性能，量化 MS-NN 和在线速度重规划对规划、跟踪和圈速的影响。</li><li>在 1:10 比例自动驾驶赛车上进行了真实世界实验，并公开了所有软件模块、数据集和结果（代码、数据集、视频）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：轨迹规划与控制（规划、跟踪、转向控制、速度重规划）。</li><li>输入传感器：原文未明确报告外部传感器，但状态估计依赖外部 OptiTrack 动作捕捉系统提供位姿和速度；车载 IMU 提供横摆率和纵横向加速度数据。</li><li>场景表示：基于赛道边界生成时间最优的赛车线（raceline），采用点质量模型与用户定义的 g-g-v 图约束。</li><li>模型结构：</li></ul>
+<p> - 全局轨迹：基于点质量模型离线生成时间最优赛车线。</p>
+<p> - 路径跟踪控制器：比较了 Pure Pursuit (PP) 和基于 G2 clothoid 的控制器 (CL)。</p>
+<p> - 在线速度重规划：采用 FBGA（前向-后向）优化器，考虑 g-g-v 约束。</p>
+<p> - 转向控制：提出新的模型结构化神经网络 (MS-NN)，其结构包含准稳态项（学习转向角与曲率、速度、加加速度的关系）和瞬态项（用随速度变化的门控函数和全连接层组合）。</p>
+<ul><li>关键技术：框架以 150 Hz 实时运行；MS-NN 采用监督学习训练，损失函数为 RMSE；超参数通过 AIC 指标进行网格搜索调节；MS-NN 的网络权重可以被解释，反映车辆转向延迟。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：使用 RoboRacer 车辆闭环实验采集数据；训练和验证约 18 秒和 6 秒的数据（Track B 跟随 nominal 赛车线）。原文未明确报告具体的数据集接口或公开下载地址。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：原文未明确报告 MS-NN 的参数规模，但提到最佳配置为 n=1 通道，w=9（即窗口长度 10），相关超参数在表 II 中给出，并提到模型紧凑以保持可解释性。</li><li>训练资源：使用 NVIDIA Jetson Orin Nano 车载平台运行框架；MS-NN 基于开源框架 nnodely 实现。</li><li>实车平台：1:10 比例 RoboRacer 车辆，全轮驱动，300 W Velineon 3351R/3500 无刷直流电机，Veddar VESC 电调；软件基于 ROS 2 中间件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：两个室内的赛道（Track A 和 Track B），Track A 近似椭圆形，长度约 18 米，宽 1.6-2.1 米；Track B 增加弯道以提高几何复杂度。</li><li>评估指标：路径跟踪误差（平均值、最大值）、圈速（Lap Time）、RMS 转向速率（评估转向平滑度）、MS-NN 预测误差（RMSE、FVU）。以及实验中的最大速度、最大纵向和横向加速度。</li><li>关键数值：</li></ul>
+<p> - MS-NN 模型：相比基线 [19]，训练集 RMSE 降低 8.4%，FVU 降低 20.9%；验证集 RMSE 降低 10.6%，FVU 降低 22.7%。最佳配置为 n=1, w=9 (AIC=-486.8)。</p>
+<p> - 轨迹跟踪 (Track A, cautious raceline, 无速度重规划)：最佳配置 PP + MS-NN 的平均路径误差为 4.04 cm，最大误差为 7.92 cm，圈速 6.919 s，RMS 转向速率 0.0841 rad/s。相比单独 PP，平均路径误差降低 21.2%，圈速降低 1.7%，RMS 转向速率降低 36.4%。</p>
+<p> - 接近极限 (Track B, extended raceline, 速度重规划)：最佳配置 PP + MS-NN + FBGA 达到最大速度 4.522 米/秒，最大纵向加速度 3.018 米/秒²，最大横向加速度 9.050 米/秒²，圈速 6.089 秒。相比没有 FBGA 的 PP + MS-NN，圈速提升 8.3% (0.554 秒)。在 extended envelope 下无 FBGA 会导致车辆撞出赛道。</p>
+<ul><li>对比方法：对比了四种控制器组合（CL, PP, CL + MS-NN, PP + MS-NN），并分析了将 baselines MS-NN [19] 作为对比方法在预测精度上的差距。</li><li>实验条件：本文所有结果为真实世界实验，部署在 RoboRacer 平台上，利用 OptiTrack 进行外部定位和性能评估。涵盖开环和闭环评估，但全部在实车上进行，未使用仿真器验证。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2605.20082/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">VL-DPO: Vision-Language-Guided Finetuning for Preference-Aligned Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.20255/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Multi-Agent Reinforcement Learning for Safe Autonomous Driving Under Pedestrian Behavioral Uncertainty</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

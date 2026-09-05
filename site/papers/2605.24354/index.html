@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SparseWorld: Enhancing End-to-End Autonomous Driving via World Models with Sparse Scene Representation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文研究“SparseWorld：通过稀疏场景表示的世界模型增强端到端自动驾驶”问题。 针对当前驾驶世界模型依赖密集场景表示（如像素级图像或 dense BEV 特征）导致的高计算开销和冗余信息问题，探索是否一种轻量、实例中心的世界模型，仅预测关键场景布局（agents 和地图元素）能够更高效地用于端到端驾驶系统的未来态势预测与运动规划改进。 应用场景为端到端自动驾驶中的未来场景预测、运动预测和轨迹规划（含开环和闭环规划）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2605.24354">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2605.24354.webp" alt="SparseWorld: Enhancing End-to-End Autonomous Driving via World Models with Sparse Scene Representation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文研究“SparseWorld：通过稀疏场景表示的世界模型增强端到端自动驾驶”问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SparseWorld: Enhancing End-to-End Autonomous Driving via World Models with Sparse Scene Representation</h1>
+            <div class="detail-meta">2026-05-23 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2605.24354" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2605.24354" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2605.24354</span></div>
+            <p class="detail-summary">该论文研究“SparseWorld：通过稀疏场景表示的世界模型增强端到端自动驾驶”问题。 针对当前驾驶世界模型依赖密集场景表示（如像素级图像或 dense BEV 特征）导致的高计算开销和冗余信息问题，探索是否一种轻量、实例中心的世界模型，仅预测关键场景布局（agents 和地图元素）能够更高效地用于端到端驾驶系统的未来态势预测与运动规划改进。 应用场景为端到端自动驾驶中的未来场景预测、运动预测和轨迹规划（含开环和闭环规划）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute of Cyber-Systems and Control, Zhejiang University · Ruoyu Wang、Ji…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2605.24354/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文研究“SparseWorld：通过稀疏场景表示的世界模型增强端到端自动驾驶”问题。</p>
+  <ul class="reading-intro-points"><li>该论文研究“SparseWorld：通过稀疏场景表示的世界模型增强端到端自动驾驶”问题。</li><li>针对当前驾驶世界模型依赖密集场景表示（如像素级图像或 dense BEV 特征）导致的高计算开销和冗余信息问题，探索是否一种轻量、实例中心的世界模型，仅预测关键场景布局（agents 和地图元素）能够更高效地用于端到端驾驶系统的未来态势预测与运动规划改进。</li><li>应用场景为端到端自动驾驶中的未来场景预测、运动预测和轨迹规划（含开环和闭环规划）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute of Cyber-Systems and Control, Zhejiang University；作者：Ruoyu Wang、Jingke Wang、Yukai Ma、Yuehao Huang、Shuangming Lei、Yong Liu</li><li>机构：2012 Labs, Huawei；作者：Guanglin Xu、Aixue Ye</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文研究“SparseWorld：通过稀疏场景表示的世界模型增强端到端自动驾驶”问题。</li><li>针对当前驾驶世界模型依赖密集场景表示（如像素级图像或 dense BEV 特征）导致的高计算开销和冗余信息问题，探索是否一种轻量、实例中心的世界模型，仅预测关键场景布局（agents 和地图元素）能够更高效地用于端到端驾驶系统的未来态势预测与运动规划改进。</li><li>应用场景为端到端自动驾驶中的未来场景预测、运动预测和轨迹规划（含开环和闭环规划）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SparseWorld，一种轻量级、视觉中心且基于稀疏场景表示的世界模型，仅对未来目标实例（agents 与地图元素）进行预测，并能为端到端驾驶系统提供未来场景信息，减少计算开销与冗余。</li><li>引入 Sparse Dreamer（SPD）模块，通过自动回归的方式结合历史实例与动作条件，在潜在空间中预测未来场景。</li><li>提出运动规划优化机制：将世界模型预测的实例信息反向输入运动预测器与轨迹规划器（“Motion Planning Refinement”），提高运动预测与规划轨迹的准确性与安全性。</li><li>提出 Safety-Critical Loss 与 Adaptive Trajectory Selection（ATS）推理模块，过滤并筛选安全候选轨迹。</li><li>在 nuScenes 与 Bench2Drive 基准的仿真/评测中，相比基线方法在运动预测、开环/闭环规划上均有提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶中的世界模型、未来场景预测与轨迹规划。</li><li>输入传感器：原文节选未明确报告，推测涉及视觉输入；原文未报告详细传感器配置。</li><li>场景表示：稀疏实例集由 agent 边界框与地图元素组成，每个实例包含几何信息（中心点、长宽高、偏航角、速度等）与语义特征。</li><li>模型结构：采用 Sparse Dreamer（SPD）中的 SparseWorld Decoder，为 N 层 transformer 解码器，内部含自注意力、时间交叉注意力、动作条件交叉注意力、FFN、分类与细化模块，并采用自动回归生成下一帧实例；同时包含 Instance Memory Queue（IMQ）存储历史与预测未来实例。</li><li>关键技术：通过 Global Instance Alignment（GIA）进行坐标投影与运动补偿（旋转、位移）；注入时间位置与相对位置嵌入；引入 Fourier 编码的动作条件嵌入（参考 Drive-OccWorld）；通过 Safety-Critical Loss 进行损失计算与 Adaptive Trajectory Selection 推理轨迹选择。该模块也可作为插件集成到现有实例级端到端系统（本文验证了集成 SparseDrive-S 与 VAD-Tiny 的结果）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（1000 个场景，700 训练、150 验证）；Bench2Drive（CARLA Leaderboard v2.0 协议，220 条测试路线，44 种交互类型；训练基于 1000-clip 基础集）。</li><li>仿真器：Bench2Drive（CARLA Leaderboard v2.0 兼容评测）。</li><li>模型规模与类型：SparseDrive-S、VAD-Tiny 作为基线；SparseWorld-S（基于 SparseDrive-S）与 SparseWorld-V（基于 VAD-Tiny）；原文未报告参数规模具体数值。</li><li>训练资源：原文节选未报告具体 GPU 等硬件资源。</li><li>实车平台：原文未报告实车平台信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes（validation）；Bench2Drive 闭环/开环评估。</li><li>评估指标：开环 L2（1s/2s/3s）、碰撞率（Col. Rate）；闭环 Driving Score（DS）、Success Rate（SR）、Comfortness（Comf）、Efficiency（Effi）；运动预测 EPA（End-to-End Prediction Accuracy）、MR（Miss Rate）、mADE、mFDE；检测 NDS，mAP。</li><li>关键数值：</li></ul>
+<p> - 基于 SparseDrive-S 集成：开环平均碰撞率达 0.05%（0.08% -&gt; 0.05%，降 37.5%），对应 SOTA；平均 L2 为 0.65m。</p>
+<p> - 基于 VAD-Tiny 集成：L2 从 0.78m 降至 0.59m，碰撞率从 0.38% 降至 0.24%。</p>
+<p> - 闭环 Bench2Drive：SparseWorld-S 取得 DS 48.95（相对 SparseDrive-S 提升 9.9%），SR 提高 9.1%。</p>
+<p> - 运动预测：SparseWorld-S 取得 EPA 0.488，MR 0.128；SparseWorld-V 为 EPA 0.619，MR 0.113。</p>
+<p> - 未来场景预测（nuScenes）：在 2s 时可达 3D 检测 baseline 性能的 82.8%（NDS 0.433 vs baseline NDS 0.523），画 mAP 的 86.4%（48.96 vs 56.66），优于 Copy&amp;Paste 与 Projection 基准。</p>
+<ul><li>对比方法：SparseDrive、VAD（上述两个基线）、UniAD、AD-MLP、Law、MomAD 等；主要进行开环（nuScenes）与闭环（Bench2Drive）对比。</li><li>开环/闭环条件：基于 nuScenes 的 VAD 评测协议进行开环评测；利用 Bench2Drive 的闭环评测（CARLA Leaderboard v2.0 协议）；均为仿真环境评测，无本文报告指明实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2605.24562/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PEDESTRIANQA: A Benchmark for Vision-Language Models on Pedestrian Intention and Trajectory Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.22089/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">LVDrive: Latent Visual Representation Enhanced Vision-Language-Action Autonomous Driving Model</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
