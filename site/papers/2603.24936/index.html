@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TIGFlow-GRPO: Trajectory Forecasting via Interaction-Aware Flow Matching and Reward-Guided Optimization - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。 论文提出两阶段生成方法 TIGFlow-GRPO：第一阶段使用带 Trajectory-Interaction-Graph (TIG) 模块的 CFM 预测器建模精细的视觉空间交互；第二阶段通过 Flow-GRPO 后训练，用复合奖励将生成轨迹与行为规则对齐。应用场景包括自动驾驶、人群监控、人机交互等视觉复杂环境。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2603.24936">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2603.24936.webp" alt="TIGFlow-GRPO: Trajectory Forecasting via Interaction-Aware Flow Matching and Reward-Guided Optimization" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">TIGFlow-GRPO: Trajectory Forecasting via Interaction-Aware Flow Matching and Reward-Guided Optimization</h1>
+            <div class="detail-meta">2026-03-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2603.24936" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2603.24936" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2603.24936</span></div>
+            <p class="detail-summary">本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。 论文提出两阶段生成方法 TIGFlow-GRPO：第一阶段使用带 Trajectory-Interaction-Graph (TIG) 模块的 CFM 预测器建模精细的视觉空间交互；第二阶段通过 Flow-GRPO 后训练，用复合奖励将生成轨迹与行为规则对齐。应用场景包括自动驾驶、人群监控、人机交互等视觉复杂环境。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Tianjin University · Xuepeng Jing、Wenhuan Lu、Hao Meng 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2603.24936/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。</li><li>论文提出两阶段生成方法 TIGFlow-GRPO：第一阶段使用带 Trajectory-Interaction-Graph (TIG) 模块的 CFM 预测器建模精细的视觉空间交互；第二阶段通过 Flow-GRPO 后训练，用复合奖励将生成轨迹与行为规则对齐。应用场景包括自动驾驶、人群监控、人机交互等视觉复杂环境。</li><li>提出 TIG-GAT 交互感知模块：以目标为中心、基于视场（FoV）的邻居选择与边感知门控特征细化，提供更丰富的社会上下文条件表示。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Tianjin University；作者：Xuepeng Jing, Wenhuan Lu, Hao Meng, Zhizhi Yu（通讯作者）, Jianguo Wei</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。</li><li>论文提出两阶段生成方法 TIGFlow-GRPO：第一阶段使用带 Trajectory-Interaction-Graph (TIG) 模块的 CFM 预测器建模精细的视觉空间交互；第二阶段通过 Flow-GRPO 后训练，用复合奖励将生成轨迹与行为规则对齐。应用场景包括自动驾驶、人群监控、人机交互等视觉复杂环境。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 TIG-GAT 交互感知模块：以目标为中心、基于视场（FoV）的邻居选择与边感知门控特征细化，提供更丰富的社会上下文条件表示。</li><li>设计面向轨迹预测的复合奖励函数：整合视线感知的社会交互规则与基于符号距离场（SDF）的场景可行性约束，引导流式生成朝行为合理方向优化。</li><li>将 Flow-GRPO 风格后训练适配到基于流的轨迹预测：用 ODE-to-SDE 随机 rollout 提供探索，在保持流式先验兼容性的同时进行非可微行为约束的对齐优化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：行人轨迹预测的两阶段框架（生成式预训练 + 后训练对齐）。</li><li>输入传感器：原文未明确区分传感器类型；输入为历史轨迹（2D 位置，8 帧，3.2 秒）及可选的场景语义地图信息。</li><li>场景表示：历史观测、局部社会交互（感知视场规则下）、场景拓扑与 SDF 字段；SDD 上从原始语义场景图像预计算符号距离场。</li><li>模型结构：</li></ul>
+<p> - 双分支时空编码器：隐式 Social Context Encoder（社交/全局自注意力）+ TIG-GAT Encoder（动态图构建，视场为 120° 的 TopK 邻居选择）。</p>
+<p> - Flow Matching Backbone（CFM，高斯 OT-CFM 路径）执行 ODE rollout 生成未来轨迹。</p>
+<p> - Flow-GRPO 后训练：ODE-to-SDE 转换获得随机高斯策略，每组采样 G=4 条轨迹，计算组相对优势并用 PPO 裁剪目标与冻结参考策略 KL 正则项优化。</p>
+<ul><li>关键技术：视场感知邻居选择、边感知门控注意力（Gated Attention）、时间门控池化、交互强度估计标量、基于 heading 向量的社会区域划分（强/弱视区、后视区）奖励设计、SDF 相对清空度奖励、SDE 随机 rollout。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：ETH/UCY 行人数据集（ETH、HOTEL、UNIV、ZARA1、ZARA2，leave-one-out 交叉验证）；Stanford Drone Dataset (SDD)（像素单位误差）。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告参数量。</li><li>训练资源：PyTorch 实现，单个 NVIDIA RTX 3090 GPU；AdamW 优化器，初始学习率 1e-4；Flow-GRPO 组采样数 G=4；轨迹重采样至 2.5 Hz，观测 8 帧 / 预测 12 帧。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：ETH/UCY、SDD。</li><li>评估指标：ADE_min/FDE_min（K=20 best-of-K）、ADE_avg/FDE_avg、碰撞率（Col，任意两智能体距离低于安全阈值判断）；扩展预测鲁棒性（ETH 上不同时间步长）。</li><li>关键数值：</li></ul>
+<p> - ETH/UCY 平均 ADE/FDE = 0.20 / 0.31，最佳整体表现（对比 GroupNet、MID、EqMotion、EigenTraj、LED、SingularTraj、MoFlow、DD-MDN）。</p>
+<p> - SDD 像素 ADE = 7.37，FDE = 11.67；MoFlow 基线为 7.63/12.25。</p>
+<p> - 表 3 报告 ETH 扩展预测时 TIGFlow-GRPO 持续优于 MoFlow 基线（具体数值原文未在此截取中完整给出）。</p>
+<ul><li>对比方法：GroupNet、MID、EqMotion、EigenTraj、LED、SingularTrajectory、MoFlow、DD-MDN；MoFlow 为主架构对齐基线。</li><li>条件：开环评估（非闭环）；消融研究验证 TIG-GAT、社交/地图奖励与 GRPO 后训练必要性；可视化展示交互模式与语义场景区域。原文未明确报告仿真器或实车闭环评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2603.26462/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DTP-Attack: A decision-based black-box adversarial attack on trajectory prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2603.23393/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Rectify, Don&#x27;t Regret: Avoiding Pitfalls of Differentiable Simulation in Trajectory Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

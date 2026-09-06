@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2604.03463">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2604.03463.webp" alt="Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction</h1>
+            <div class="detail-meta">2026-04-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2604.03463" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2604.03463" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2604.03463</span></div>
+            <p class="detail-summary">以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">7 张阅读卡</span>
+              <span class="meta-pill">弗莱堡大学计算机科学系（Department of Computer Science, University of Freiburg, Germany…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2604.03463/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：</p>
+  <ul class="reading-intro-points"><li>以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：</li><li>采用基于Shapley值的特征归因方法，在单个智能体级别上系统分析轨迹预测模型对周围智能体信息的利用情况。</li><li>发现预测性能仅由一小部分“超级智能体”提升，而更多“混淆智能体”会因引入虚假或误导信息而降低性能，两者的正负贡献几乎相互抵消。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><p>以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：弗莱堡大学计算机科学系（Department of Computer Science, University of Freiburg, Germany）；作者：Daniel Jost, Raghu Rajan, Joschka Bödecker</li><li>机构：博世人工智能中心（Bosch Center for Artificial Intelligence, Renningen, Germany）；作者：Luca Paparusso, Martin Stoll, Jörg Wagner</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文聚焦于高度交互驾驶场景下的车辆轨迹预测任务。</li><li>研究问题：系统分析当前主流的轨迹预测模型在利用周围智能体（车辆、行人）信息时，普遍存在的一个关键缺陷——许多“混淆智能体”不仅无助于提升，反而会降低预测精度。模型学习到的决策机制不稳定且非因果。</li><li>应用场景：自动驾驶中的运动预测，特别是对周围交通参与者进行轨迹预测。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>采用基于Shapley值的特征归因方法，在单个智能体级别上系统分析轨迹预测模型对周围智能体信息的利用情况。</li><li>发现预测性能仅由一小部分“超级智能体”提升，而更多“混淆智能体”会因引入虚假或误导信息而降低性能，两者的正负贡献几乎相互抵消。</li><li>揭示了模型间的一致性差异：同一模型内归因稳定，但不同训练种子训练的模型在智能体影响上存在显著分歧，其行为接近随机基线。</li><li>提出将条件信息瓶颈（CIB）模块集成到现有模型中，无需额外监督即可压缩智能体特征并忽略无用信息，在多数情况下提升预测性能并增强鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：轨迹预测中的智能体特征选择与上下文信息整合模块（作为后处理分析及模型增强模块）。</li><li>输入传感器：主要由多模态传感器数据构成，包括目标智能体和周围智能体的历史轨迹（包含位置 x, y、速度 vx, vy、尺寸 w, l 和朝向角 θ）、车道图（多边形节点、中心线）。原文未报告具体使用的传感器类型。</li><li>场景表示：使用向量化的场景表示，将智能体历史轨迹和车道图编码为多段线/向量特征。</li><li>模型结构：基于编码器-交互器-解码器（Encoder-Interactor-Decoder）架构的多种轨迹预测模型，包括QEANet、LAformer、MTR、EDA以及用于联合预测的BeTop。集成的CIB模块被插入在周围智能体编码器和交互器之间，以目标智能体的状态为条件来压缩周围智能体特征。</li><li>关键技术：采用Shapley值（及其高效近似算法ApproShapley）进行特征归因分析；定义了“超级智能体”（性能改善）与“混淆智能体”（性能恶化）的概念，并提出了插入测试来评估模型；集成条件信息瓶颈（CIB）来过滤虚假和误导性的智能体信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo Open Motion Dataset (WOMD) 和 nuScenes 数据集。对于WOMD，实验使用了20%的数据子集进行训练（报告称该策略可保持数据分布相似）；对BeTop模型则在完整Waymo数据集上训练。</li><li>仿真器：原文未报告使用任何仿真器。</li><li>模型规模：原文未报告模型具体规模。</li><li>训练资源：原文未报告具体训练资源。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 07</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在nuScenes和WOMD数据集上进行评估。对于nuScenes，测试了QEANet和LAformer模型；对于WOMD，测试了MTR和EDA模型；对于WOMD上的联合预测任务，测试了BeTop模型。</li><li>评估指标：平均位移误差（ADE）、最终位移误差（FDE）、Miss Rate（MR）、负对数似然（NLL）。对于nuScenes报告minADE10、minADE5、MissRate10、MissRate5和NLL；对于WOMD报告minADE、minFDE和MissRate。</li><li>关键数值（以nuScenes数据集上的minADE10为例）：</li></ul>
+<p> - QEANet：1.053 ± 0.010；QEANet + IB：1.042 ± 0.016。</p>
+<p> - LAformer：0.948 ± 0.012（作为基线是最优的）；LAformer + IB：0.985 ± 0.006。</p>
+<p> - 对于QEANet模型，仅使用“超级智能体”（理论上的最优子集）时性能提升至0.961；不使用任何智能体（No Agents）时性能下降至1.116。</p>
+<p> - 结果显示，加入CIB后，QLANet的性能在所有指标上均有提升，而LAformer则略微下降。</p>
+<ul><li>对比方法：主要对比了不同模型架构在集成或不集成CIB模块时的性能差异，以及模型在“全部智能体”、“仅超级智能体”和“无智能体”三种条件下的表现。</li><li>条件：实验属于开环仿真评估。例如，在nuScenes测试集上评估QEANet和LAformer；在WOMD验证集上评估MTR和EDA。此外，还使用了基于人类标注的CausalAgents基准进行评估，以及通过移除因果/非因果智能体和添加高斯噪声来进行鲁棒性测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2604.07126/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">RankFormer: A Propose-then-Select Transformer for Multi-Agent Multimodal Trajectory Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2604.02714/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">ExploreVLA: Dense World Modeling and Exploration for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,5 +1,411 @@
 [
   {
+    "date": "2026-04-26",
+    "title": "ESIA: An Energy-Based Spatiotemporal Interaction-Aware Framework for Pedestrian Intention Prediction",
+    "link": "https://arxiv.org/abs/2604.23728",
+    "arxiv_id": "2604.23728",
+    "detail_path": "papers/2604.23728/",
+    "cover_path": "covers/2604.23728/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.23728.webp",
+    "paper_image_full_path": "assets/paper-images/2604.23728.webp",
+    "preview_text": "该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。 研究问题是现有方法存在多智能体交互建模过度简化、推理逻辑不透明（黑盒）、以及预测结果缺乏全局一致性这三大瓶颈。 论文提出一个基于条件随机场（CRF）的能量框架 ESIA（Energy-based Spatiotemporal Interaction-Aware framework），将行人意图预测重构为在统一的图表示上的结构化预测能量最小化问题。",
+    "research_unit": "University of Glasgow, James Watt School of Engineering · Yanping Wu、Meitin…",
+    "hook_text": "该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。",
+    "key_points": [
+      "该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。",
+      "研究问题是现有方法存在多智能体交互建模过度简化、推理逻辑不透明（黑盒）、以及预测结果缺乏全局一致性这三大瓶颈。",
+      "论文提出一个基于条件随机场（CRF）的能量框架 ESIA（Energy-based Spatiotemporal Interaction-Aware framework），将行人意图预测重构为在统一的图表示上的结构化预测能量最小化问题。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-23",
+    "title": "Frozen LLMs as Map-Aware Spatio-Temporal Reasoners for Vehicle Trajectory Prediction",
+    "link": "https://arxiv.org/abs/2604.21479",
+    "arxiv_id": "2604.21479",
+    "detail_path": "papers/2604.21479/",
+    "cover_path": "covers/2604.21479/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.21479.webp",
+    "paper_image_full_path": "assets/paper-images/2604.21479.webp",
+    "preview_text": "本文研究自动驾驶中的车辆轨迹预测任务，旨在评估和利用大规模语言模型（LLM）的时空推理能力进行轨迹预测。 论文聚焦于将静态高清地图（HD map）语义与动态交通智能体（自车及周围车辆）的轨迹信息相结合，构建一个多模态评估框架。 该框架利用冻结的 LLM 作为推理引擎，通过重新编程适配器将场景特征映射为 LLM 可兼容的token，以统一平台量化评估不同 LLM 的时空推理性能，并分析地图信息对轨迹预测精度的影响。",
+    "research_unit": "吉林大学人工智能学院 · Yanjiao Liu、Jiawei Liu、Xun Gong 等",
+    "hook_text": "本文研究自动驾驶中的车辆轨迹预测任务，旨在评估和利用大规模语言模型（LLM）的时空推理能力进行轨迹预测。",
+    "key_points": [
+      "本文研究自动驾驶中的车辆轨迹预测任务，旨在评估和利用大规模语言模型（LLM）的时空推理能力进行轨迹预测。",
+      "论文聚焦于将静态高清地图（HD map）语义与动态交通智能体（自车及周围车辆）的轨迹信息相结合，构建一个多模态评估框架。",
+      "该框架利用冻结的 LLM 作为推理引擎，通过重新编程适配器将场景特征映射为 LLM 可兼容的token，以统一平台量化评估不同 LLM 的时空推理性能，并分析地图信息对轨迹预测精度的影响。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-20",
+    "title": "Xiaomi OneVL: One-Step Latent Reasoning and Planning with Vision-Language Explanation",
+    "link": "https://arxiv.org/abs/2604.18486",
+    "arxiv_id": "2604.18486",
+    "detail_path": "papers/2604.18486/",
+    "cover_path": "covers/2604.18486/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.18486.webp",
+    "paper_image_full_path": "assets/paper-images/2604.18486.webp",
+    "preview_text": "该论文提出 Xiaomi OneVL，面向基于 VLA（视觉-语言-动作模型）的自动驾驶轨迹预测任务。 研究问题：显式链式推理（CoT）虽然能改善轨迹预测质量，但其自回归生成导致推理延迟过高，难以满足实时部署；而现有隐式/潜在 CoT 方法因仅以纯语言抽象为监督信号，性能始终低于显式 CoT。 OneVL 提出“单步潜在推理与规划 + 视觉-语言解释”的统一 VLA 与世界模型框架，通过以未来帧视觉预测作为世界模型监督，引导压缩潜在空间编码真实因果动态，实现精度超越显式 CoT 且延迟与仅答案预测相当的性能。",
+    "research_unit": "小米集团（小米具身智能团队，Xiaomi Embodied Intelligence Team） · 原文未明确对应（作者栏仅标注团队名称、未列出个人…",
+    "hook_text": "该论文提出 Xiaomi OneVL，面向基于 VLA（视觉-语言-动作模型）的自动驾驶轨迹预测任务。",
+    "key_points": [
+      "该论文提出 Xiaomi OneVL，面向基于 VLA（视觉-语言-动作模型）的自动驾驶轨迹预测任务。",
+      "研究问题：显式链式推理（CoT）虽然能改善轨迹预测质量，但其自回归生成导致推理延迟过高，难以满足实时部署；而现有隐式/潜在 CoT 方法因仅以纯语言抽象为监督信号，性能始终低于显式 CoT。",
+      "OneVL 提出“单步潜在推理与规划 + 视觉-语言解释”的统一 VLA 与世界模型框架，通过以未来帧视觉预测作为世界模型监督，引导压缩潜在空间编码真实因果动态，实现精度超越显式 CoT 且延迟与仅答案预测相当的性能。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-14",
+    "title": "Forecasting the Past: Gradient-Based Distribution Shift Detection in Trajectory Prediction",
+    "link": "https://arxiv.org/abs/2604.12425",
+    "arxiv_id": "2604.12425",
+    "detail_path": "papers/2604.12425/",
+    "cover_path": "covers/2604.12425/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.12425.webp",
+    "paper_image_full_path": "assets/paper-images/2604.12425.webp",
+    "preview_text": "论文解决自动驾驶中轨迹预测模型在真实世界场景下因训练与测试条件之间的分布偏移（如环境变化、行为异常）而导致的预测错误和安全隐患问题。 应用场景为自动驾驶系统中的轨迹预测任务，研究问题是不依赖未来标签、在测试时检测输入轨迹是否属于分布外（OOD）样本，以提升系统的鲁棒性和安全性。",
+    "research_unit": "Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany · Michele De Vita",
+    "hook_text": "论文解决自动驾驶中轨迹预测模型在真实世界场景下因训练与测试条件之间的分布偏移（如环境变化、行为异常）而导致的预测错误和安全隐患问题。",
+    "key_points": [
+      "论文解决自动驾驶中轨迹预测模型在真实世界场景下因训练与测试条件之间的分布偏移（如环境变化、行为异常）而导致的预测错误和安全隐患问题。",
+      "应用场景为自动驾驶系统中的轨迹预测任务，研究问题是不依赖未来标签、在测试时检测输入轨迹是否属于分布外（OOD）样本，以提升系统的鲁棒性和安全性。",
+      "提出一种后验（post-hoc）的轨迹预测分布偏移检测方法，在保持预训练轨迹预测模型性能不变的前提下进行检测。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-04-11",
+    "title": "MAVEN-T: Reinforced Heterogeneous Distillation for Real-Time Multi-Agent Trajectory Prediction",
+    "link": "https://arxiv.org/abs/2604.10169",
+    "arxiv_id": "2604.10169",
+    "detail_path": "papers/2604.10169/",
+    "cover_path": "covers/2604.10169/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.10169.webp",
+    "paper_image_full_path": "assets/paper-images/2604.10169.webp",
+    "preview_text": "论文解决自动驾驶中的实时多智能体轨迹预测任务，面向密集交互、异构智能体行为、多模态未来以及车载计算资源受限等实际场景。 研究问题聚焦于：如何在保持高精度轨迹预测的同时满足边缘设备实时推理需求，并纠正传统知识蒸馏中教师模型可能存在的安全相关偏差。 论文提出 MAVEN-T，一种基于增强学习与异构蒸馏的框架，将高容量教师模型与紧凑学生模型分工优化，并通过多粒度知识迁移和任务级强化学习精炼实现可部署的轨迹预测。",
+    "research_unit": "上海交通大学数学科学学院 · Wenchang Duan、Zhenguo Gao、Jinguo Xian",
+    "hook_text": "论文解决自动驾驶中的实时多智能体轨迹预测任务，面向密集交互、异构智能体行为、多模态未来以及车载计算资源受限等实际场景。",
+    "key_points": [
+      "论文解决自动驾驶中的实时多智能体轨迹预测任务，面向密集交互、异构智能体行为、多模态未来以及车载计算资源受限等实际场景。",
+      "研究问题聚焦于：如何在保持高精度轨迹预测的同时满足边缘设备实时推理需求，并纠正传统知识蒸馏中教师模型可能存在的安全相关偏差。",
+      "论文提出 MAVEN-T，一种基于增强学习与异构蒸馏的框架，将高容量教师模型与紧凑学生模型分工优化，并通过多粒度知识迁移和任务级强化学习精炼实现可部署的轨迹预测。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-09",
+    "title": "On-Policy Distillation of Language Models for Autonomous Vehicle Motion Planning",
+    "link": "https://arxiv.org/abs/2604.07944",
+    "arxiv_id": "2604.07944",
+    "detail_path": "papers/2604.07944/",
+    "cover_path": "covers/2604.07944/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.07944.webp",
+    "paper_image_full_path": "assets/paper-images/2604.07944.webp",
+    "preview_text": "本文研究自动驾驶中的运动规划任务，具体为如何将 LLM 教师模型的知识蒸馏到更小、更适合车载部署的学生模型。 构建于 GPT-Driver 框架之上，将驾驶场景转化为语言提示，并以结构化文本（含思维链推理）生成未来轨迹航点。 研究核心问题是：在模型尺度受限的自动驾驶系统中，如何通过有效的蒸馏方法压缩 LLM 规划器，同时逼近教师模型性能并提升输出安全性与可靠性。",
+    "research_unit": "Stanford University · Amirhossein Afsharrad、Sanjay Lall",
+    "hook_text": "本文研究自动驾驶中的运动规划任务，具体为如何将 LLM 教师模型的知识蒸馏到更小、更适合车载部署的学生模型。",
+    "key_points": [
+      "本文研究自动驾驶中的运动规划任务，具体为如何将 LLM 教师模型的知识蒸馏到更小、更适合车载部署的学生模型。",
+      "构建于 GPT-Driver 框架之上，将驾驶场景转化为语言提示，并以结构化文本（含思维链推理）生成未来轨迹航点。",
+      "研究核心问题是：在模型尺度受限的自动驾驶系统中，如何通过有效的蒸馏方法压缩 LLM 规划器，同时逼近教师模型性能并提升输出安全性与可靠性。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-08",
+    "title": "RankFormer: A Propose-then-Select Transformer for Multi-Agent Multimodal Trajectory Prediction",
+    "link": "https://arxiv.org/abs/2604.07126",
+    "arxiv_id": "2604.07126",
+    "detail_path": "papers/2604.07126/",
+    "cover_path": "covers/2604.07126/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.07126.webp",
+    "paper_image_full_path": "assets/paper-images/2604.07126.webp",
+    "preview_text": "本文解决自动驾驶中的多智能体多模态轨迹预测问题，即预测多个交通智能体（车辆/行人）未来多条可能的轨迹及其概率。 应用场景包括自动驾驶、交通运营与交通安全分析。 针对现有方法依赖图结构（如GNN）或人工标注意图的局限，本文提出纯Transformer架构模型RankFormer，通过“先提议后选择”（propose-then-select）策略，在无需意图标注的前提下实现多模态轨迹生成与概率估计。",
+    "research_unit": "北京工业大学（Beijing University of Technology）城市交通学院 · Diyi Liu、Zihan Niu、Xingche…",
+    "hook_text": "本文解决自动驾驶中的多智能体多模态轨迹预测问题，即预测多个交通智能体（车辆/行人）未来多条可能的轨迹及其概率。",
+    "key_points": [
+      "本文解决自动驾驶中的多智能体多模态轨迹预测问题，即预测多个交通智能体（车辆/行人）未来多条可能的轨迹及其概率。",
+      "应用场景包括自动驾驶、交通运营与交通安全分析。",
+      "针对现有方法依赖图结构（如GNN）或人工标注意图的局限，本文提出纯Transformer架构模型RankFormer，通过“先提议后选择”（propose-then-select）策略，在无需意图标注的前提下实现多模态轨迹生成与概率估计。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-03",
+    "title": "Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction",
+    "link": "https://arxiv.org/abs/2604.03463",
+    "arxiv_id": "2604.03463",
+    "detail_path": "papers/2604.03463/",
+    "cover_path": "covers/2604.03463/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.03463.webp",
+    "paper_image_full_path": "assets/paper-images/2604.03463.webp",
+    "preview_text": "以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：",
+    "research_unit": "弗莱堡大学计算机科学系（Department of Computer Science, University of Freiburg, Germany…",
+    "hook_text": "以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：",
+    "key_points": [
+      "以下是基于论文《Super Agents and Confounders: Influence of surrounding agents on vehicle trajectory prediction》原文生成的中文结构化总结：",
+      "采用基于Shapley值的特征归因方法，在单个智能体级别上系统分析轨迹预测模型对周围智能体信息的利用情况。",
+      "发现预测性能仅由一小部分“超级智能体”提升，而更多“混淆智能体”会因引入虚假或误导信息而降低性能，两者的正负贡献几乎相互抵消。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 7,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-03",
+    "title": "ExploreVLA: Dense World Modeling and Exploration for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2604.02714",
+    "arxiv_id": "2604.02714",
+    "detail_path": "papers/2604.02714/",
+    "cover_path": "covers/2604.02714/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.02714.webp",
+    "paper_image_full_path": "assets/paper-images/2604.02714.webp",
+    "preview_text": "解决自动驾驶中端到端 Vision-Language-Action (VLA) 模型的两大问题：模仿学习缺乏超出专家演示的探索能力，以及轨迹监督信号稀疏导致场景表征不充分。 应用场景为端到端自动驾驶的轨迹规划，任务为基于前视相机图像、语言指令和自车状态的未来轨迹预测与未来场景生成。 研究问题：如何利用世界模型为离线训练的驾驶策略提供密集监督，并利用图像预测不确定性作为内在探索信号，通过强化学习提升策略在分布外场景中的泛化能力。",
+    "research_unit": "Bosch Research North America & Bosch Center for Artificial Intelligence (BC…",
+    "hook_text": "解决自动驾驶中端到端 Vision-Language-Action (VLA) 模型的两大问题：模仿学习缺乏超出专家演示的探索能力，以及轨迹监督信号稀疏导致场景表征不充分。",
+    "key_points": [
+      "解决自动驾驶中端到端 Vision-Language-Action (VLA) 模型的两大问题：模仿学习缺乏超出专家演示的探索能力，以及轨迹监督信号稀疏导致场景表征不充分。",
+      "应用场景为端到端自动驾驶的轨迹规划，任务为基于前视相机图像、语言指令和自车状态的未来轨迹预测与未来场景生成。",
+      "研究问题：如何利用世界模型为离线训练的驾驶策略提供密集监督，并利用图像预测不确定性作为内在探索信号，通过强化学习提升策略在分布外场景中的泛化能力。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-04-02",
+    "title": "UniDriveVLA: Unifying Understanding, Perception, and Action Planning for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2604.02190",
+    "arxiv_id": "2604.02190",
+    "detail_path": "papers/2604.02190/",
+    "cover_path": "covers/2604.02190/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.02190.webp",
+    "paper_image_full_path": "assets/paper-images/2604.02190.webp",
+    "preview_text": "本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。 解决的任务包括：自动驾驶场景中的语义理解（driving understanding）、空间感知（spatial perception，包括 3D 检测、在线建图、occupancy 预测）与动作规划（action planning）。 应用场景覆盖开环规划（nuScenes 数据集）与闭环驾驶（Bench2Drive 仿真基准），并扩展到运动预测、驾驶场景问答等多项任务。 核心研究问题：解决 VLA 模型中\"空间感知\"与\"语义推理\"之间的矛盾。论文认为该矛盾源于两者在共享模型参数中的耦合优化，导致表示干扰，削弱 VLM 原生推理能力。",
+    "research_unit": "华中科技大学（Huazhong University of Science and Technology） · 原文未明确对应",
+    "hook_text": "本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。",
+    "key_points": [
+      "本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。",
+      "解决的任务包括：自动驾驶场景中的语义理解（driving understanding）、空间感知（spatial perception，包括 3D 检测、在线建图、occupancy 预测）与动作规划（action planning）。",
+      "应用场景覆盖开环规划（nuScenes 数据集）与闭环驾驶（Bench2Drive 仿真基准），并扩展到运动预测、驾驶场景问答等多项任务。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-04-01",
+    "title": "COTTA: Context-Aware Transfer Adaptation for Trajectory Prediction in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2604.00402",
+    "arxiv_id": "2604.00402",
+    "detail_path": "papers/2604.00402/",
+    "cover_path": "covers/2604.00402/",
+    "paper_image_path": "assets/paper-images/thumbs/2604.00402.webp",
+    "paper_image_full_path": "assets/paper-images/2604.00402.webp",
+    "preview_text": "研究任务：解决自动驾驶中轨迹预测模型跨地理区域迁移的性能退化问题，属于运动预测与领域自适应交叉研究。 应用场景：将基于美国道路数据（Argoverse 2）预训练的QCNet模型，迁移到韩国高密度、交互复杂的城市道路环境。 研究问题：系统性比较预训练QCNet在韩国数据集上四种训练策略（零样本迁移、从零训练、全量微调、编码器冻结）的领域适应效果，探究最优迁移学习策略。",
+    "research_unit": "Ewha Womans University · Seohyoung Park",
+    "hook_text": "研究任务：解决自动驾驶中轨迹预测模型跨地理区域迁移的性能退化问题，属于运动预测与领域自适应交叉研究。",
+    "key_points": [
+      "研究任务：解决自动驾驶中轨迹预测模型跨地理区域迁移的性能退化问题，属于运动预测与领域自适应交叉研究。",
+      "应用场景：将基于美国道路数据（Argoverse 2）预训练的QCNet模型，迁移到韩国高密度、交互复杂的城市道路环境。",
+      "研究问题：系统性比较预训练QCNet在韩国数据集上四种训练策略（零样本迁移、从零训练、全量微调、编码器冻结）的领域适应效果，探究最优迁移学习策略。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-03-27",
+    "title": "DTP-Attack: A decision-based black-box adversarial attack on trajectory prediction",
+    "link": "https://arxiv.org/abs/2603.26462",
+    "arxiv_id": "2603.26462",
+    "detail_path": "papers/2603.26462/",
+    "cover_path": "covers/2603.26462/",
+    "paper_image_path": "assets/paper-images/thumbs/2603.26462.webp",
+    "paper_image_full_path": "assets/paper-images/2603.26462.webp",
+    "preview_text": "本文解决自动驾驶中轨迹预测系统的对抗攻击问题。 提出一种基于决策的黑盒对抗攻击框架 DTP-Attack，用于在无法获取模型内部结构或梯度信息的真实场景下，攻击轨迹预测系统。 该框架支持两类攻击目标：驾驶意图误分类攻击（如将直行误判为变道或转弯）与预测精度降级攻击。",
+    "research_unit": "College of Electronics and Information Engineering, Tongji University · Jia…",
+    "hook_text": "本文解决自动驾驶中轨迹预测系统的对抗攻击问题。",
+    "key_points": [
+      "本文解决自动驾驶中轨迹预测系统的对抗攻击问题。",
+      "提出一种基于决策的黑盒对抗攻击框架 DTP-Attack，用于在无法获取模型内部结构或梯度信息的真实场景下，攻击轨迹预测系统。",
+      "该框架支持两类攻击目标：驾驶意图误分类攻击（如将直行误判为变道或转弯）与预测精度降级攻击。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-03-26",
+    "title": "TIGFlow-GRPO: Trajectory Forecasting via Interaction-Aware Flow Matching and Reward-Guided Optimization",
+    "link": "https://arxiv.org/abs/2603.24936",
+    "arxiv_id": "2603.24936",
+    "detail_path": "papers/2603.24936/",
+    "cover_path": "covers/2603.24936/",
+    "paper_image_path": "assets/paper-images/thumbs/2603.24936.webp",
+    "paper_image_full_path": "assets/paper-images/2603.24936.webp",
+    "preview_text": "本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。 论文提出两阶段生成方法 TIGFlow-GRPO：第一阶段使用带 Trajectory-Interaction-Graph (TIG) 模块的 CFM 预测器建模精细的视觉空间交互；第二阶段通过 Flow-GRPO 后训练，用复合奖励将生成轨迹与行为规则对齐。应用场景包括自动驾驶、人群监控、人机交互等视觉复杂环境。",
+    "research_unit": "Tianjin University · Xuepeng Jing、Wenhuan Lu、Hao Meng 等",
+    "hook_text": "本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。",
+    "key_points": [
+      "本文解决自动驾驶与智能多媒体系统中的行人轨迹预测任务，核心问题是如何让基于条件流匹配（CFM）的生成式轨迹预测不仅拟合经验数据分布，还能严格符合社会规范与物理场景约束。",
+      "论文提出两阶段生成方法 TIGFlow-GRPO：第一阶段使用带 Trajectory-Interaction-Graph (TIG) 模块的 CFM 预测器建模精细的视觉空间交互；第二阶段通过 Flow-GRPO 后训练，用复合奖励将生成轨迹与行为规则对齐。应用场景包括自动驾驶、人群监控、人机交互等视觉复杂环境。",
+      "提出 TIG-GAT 交互感知模块：以目标为中心、基于视场（FoV）的邻居选择与边感知门控特征细化，提供更丰富的社会上下文条件表示。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-03-24",
+    "title": "Rectify, Don't Regret: Avoiding Pitfalls of Differentiable Simulation in Trajectory Prediction",
+    "link": "https://arxiv.org/abs/2603.23393",
+    "arxiv_id": "2603.23393",
+    "detail_path": "papers/2603.23393/",
+    "cover_path": "covers/2603.23393/",
+    "paper_image_path": "assets/paper-images/thumbs/2603.23393.webp",
+    "paper_image_full_path": "assets/paper-images/2603.23393.webp",
+    "preview_text": "该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。 应用场景为闭环（closed-loop）自动驾驶车辆决策与规划，强调预测模型在下游规划器迭代重规划中的可靠性。 论文的核心研究问题是：当前全可微闭环仿真器在轨迹预测训练中会引发“捷径学习”（shortcut learning），即损失梯度经由诱导状态输入将未来Ground Truth信息泄露回模型自身既往预测，使模型无法学习真实的反应性恢复（reactive recovery）策略。",
+    "research_unit": "University of Wuppertal · Harsh Yadav、Christian Bohn、Tobias Meisen",
+    "hook_text": "该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。",
+    "key_points": [
+      "该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。",
+      "应用场景为闭环（closed-loop）自动驾驶车辆决策与规划，强调预测模型在下游规划器迭代重规划中的可靠性。",
+      "论文的核心研究问题是：当前全可微闭环仿真器在轨迹预测训练中会引发“捷径学习”（shortcut learning），即损失梯度经由诱导状态输入将未来Ground Truth信息泄露回模型自身既往预测，使模型无法学习真实的反应性恢复（reactive recovery）策略。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 7,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
     "date": "2026-05-25",
     "title": "A Pedestrian-Vehicle Interaction Benchmark and Annotation Framework for Unstructured Scenes via Uncalibrated Cameras",
     "link": "https://arxiv.org/abs/2605.25947",

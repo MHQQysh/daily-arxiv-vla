@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ESIA: An Energy-Based Spatiotemporal Interaction-Aware Framework for Pedestrian Intention Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。 研究问题是现有方法存在多智能体交互建模过度简化、推理逻辑不透明（黑盒）、以及预测结果缺乏全局一致性这三大瓶颈。 论文提出一个基于条件随机场（CRF）的能量框架 ESIA（Energy-based Spatiotemporal Interaction-Aware framework），将行人意图预测重构为在统一的图表示上的结构化预测能量最小化问题。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2604.23728">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2604.23728.webp" alt="ESIA: An Energy-Based Spatiotemporal Interaction-Aware Framework for Pedestrian Intention Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ESIA: An Energy-Based Spatiotemporal Interaction-Aware Framework for Pedestrian Intention Prediction</h1>
+            <div class="detail-meta">2026-04-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2604.23728" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2604.23728" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2604.23728</span></div>
+            <p class="detail-summary">该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。 研究问题是现有方法存在多智能体交互建模过度简化、推理逻辑不透明（黑盒）、以及预测结果缺乏全局一致性这三大瓶颈。 论文提出一个基于条件随机场（CRF）的能量框架 ESIA（Energy-based Spatiotemporal Interaction-Aware framework），将行人意图预测重构为在统一的图表示上的结构化预测能量最小化问题。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Glasgow, James Watt School of Engineering · Yanping Wu、Meitin…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2604.23728/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。</p>
+  <ul class="reading-intro-points"><li>该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。</li><li>研究问题是现有方法存在多智能体交互建模过度简化、推理逻辑不透明（黑盒）、以及预测结果缺乏全局一致性这三大瓶颈。</li><li>论文提出一个基于条件随机场（CRF）的能量框架 ESIA（Energy-based Spatiotemporal Interaction-Aware framework），将行人意图预测重构为在统一的图表示上的结构化预测能量最小化问题。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Glasgow, James Watt School of Engineering；作者：Yanping Wu, Meiting Dang, Lin Wu, Zhenghua Chen, Chongfeng Wei</li><li>机构：University of Glasgow, School of Computing Science；作者：Edmond S. L. Ho</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决自动驾驶中人-车交互场景下的行人过街意图预测任务，目标是在未来 1–2 秒内判断行人是否横穿马路（crossing vs. not crossing）。</li><li>研究问题是现有方法存在多智能体交互建模过度简化、推理逻辑不透明（黑盒）、以及预测结果缺乏全局一致性这三大瓶颈。</li><li>论文提出一个基于条件随机场（CRF）的能量框架 ESIA（Energy-based Spatiotemporal Interaction-Aware framework），将行人意图预测重构为在统一的图表示上的结构化预测能量最小化问题。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 ESIA 框架，将行人意图预测重构为结构化能量最小化问题；通过将个体目标、社交互动与环境约束显式解耦为 unary 和 pairwise potentials，ESIA 提供可解释推理并实现即插即用的灵活架构。</li><li>引入结构一致性能量项（structural consistency energy terms），在无真值监督的推理阶段惩罚逻辑矛盾，以增强全局一致性。</li><li>提出 Unary-Seeded Simulated Annealing（U-SSA）优化算法，利用高置信度的 unary 先验作为搜索种子，高效遍历能量景观并跳出局部最优。</li><li>在 JAAD 和 PIE 两大标准基准数据集上的大量实验表明，ESIA 达到最先进的性能且可解释性优于现有方法。</li><li>论文指出该工作是首次将 CRF 引入复杂交通场景中的行人意图一致性建模。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶感知/预测模块中的行人意图预测组件。</li><li>输入传感器：原文未报告明确传感器类别；输入包括车载前视图像序列、行人 2D 边界框序列及车辆速度序列。</li><li>场景表示：将场景建模为无向图 G=(V,E)，其中节点集合包含行人节点（根据头部朝向聚类为左向/右向组）和一个全局环境节点；边集合包含行人–行人（P–P）边和行人–环境（P–E）边。</li><li>模型结构：三类 learner 共享训练框架：</li></ul>
+<p> - PNFE（行人节点特征提取器）：双流架构，视觉流采用轻量级深度可分离 3D 卷积（DS-Conv3D）+GRU，坐标流采用 Linear-ReLU+GRU；输出 unary potential。</p>
+<p> - ENFE（环境节点特征提取器）：双流架构，基于 SSIM 选取关键帧并由预训练 MobileViT 提取静态场景特征，velocity stream 编码车体运动；输出环境特征。</p>
+<p> - PPIL（行人-行人交互学习器）：将两个行人特征沿序列维度拼接后经 Multi-Head Attention (MHA)+MLP，输出三类交互状态分布，构建 P–P pairwise potential。</p>
+<p> - PEIL（行人-环境交互学习器）：将行人与环境特征拼接后经 MHA+MLP，输出环境允许横穿概率，构建 P–E pairwise potential。</p>
+<ul><li>关键技术：总能量为 unary/pairwise potentials 的加权和；训练用式 (15) 的负对数似然 + L2 正则端到端优化；推理通过加入非可微的结构一致性指示项，采用 U-SSA 模拟退火求解能量最小值。</li><li>原文未报告的输入传感器类型具体是摄像头型号还是其他传感器未明确说明。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：JAAD（含 JAAD-beh 和 JAAD-all 子集）与 PIE 两大数据集</li><li>仿真器：原文未报告使用仿真器</li><li>模型规模：原文未报告具体参数量或层数设置</li><li>训练资源：原文未报告 GPU 型号或作业平台</li><li>实车平台：原文未报告实车测试平台；在标准实车采集数据集上评估</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：JAAD-beh、JAAD-all 和 PIE 标准基准，全部采用标注的过街意图二分类任务。</li><li>评估指标：Accuracy (Acc)、Precision (P)、Recall (R)、F1-score、AUC，均为越高越好。</li><li>关键数值（原文表 I 报告，代表方法对比；最高者加粗）：</li></ul>
+<p> - ESIA 在 JAAD-beh 上 Acc、P、R、F1、AUC 的关键数值与 PedGraph+、PIT、FFSTP、PCPA、TrouSPI-Net、Single-GRU 等对比，多个指标最优（论文声称 state-of-the-art，但正文表格中加粗的具体条目数目和数值位置因表格显示问题未能在原文中明确读出 ESIA 行）。</p>
+<p> - 表格中显示 PedGraph+（*, 32 输入帧）在 JAAD-beh 的 Acc=0.70、P=0.77、AUC=0.70；TrouSPI-Net 在 PIE 的 P=0.89 等为参考对比项中的高值。</p>
+<p> - 原文未给出 ESIA 自己的精确数值可能因 HTML 渲染截断，故此处只能报告对比方法而非 ESIA 的可验证精确数值；论文明确声明&quot;ESIA achieves state-of-the-art performance&quot;。</p>
+<ul><li>对比方法：Single-GRU、Single-LSTM、TrouSPI-Net、PCPA、PedGraph+、FFSTP、PIT 等方法。</li><li>评估条件：在公开离线数据集上进行开环评估；原文未报告闭环仿真或实车在环实验。</li><li>除此表外的定性可解释性分析、效率对比、消融实验、U-SSA 优化定性分析与参数敏感性分析在原文章节中均有提及，但具体数值因截断缺失原文未报告的部分。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2604.21479/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Frozen LLMs as Map-Aware Spatio-Temporal Reasoners for Vehicle Trajectory Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

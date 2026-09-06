@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UniDriveVLA: Unifying Understanding, Perception, and Action Planning for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。 解决的任务包括：自动驾驶场景中的语义理解（driving understanding）、空间感知（spatial perception，包括 3D 检测、在线建图、occupancy 预测）与动作规划（action planning）。 应用场景覆盖开环规划（nuScenes 数据集）与闭环驾驶（Bench2Drive 仿真基准），并扩展到运动预测、驾驶场景问答等多项任务。 核心研究问题：解决 VLA 模型中&quot;空间感知&quot;与&quot;语义推理&quot;之间的矛盾。论文认为该矛盾源于两者在共享模型参数中的耦合优化，导致表示干扰，削弱 VLM 原生推理能力。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2604.02190">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2604.02190.webp" alt="UniDriveVLA: Unifying Understanding, Perception, and Action Planning for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">UniDriveVLA: Unifying Understanding, Perception, and Action Planning for Autonomous Driving</h1>
+            <div class="detail-meta">2026-04-02 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2604.02190" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2604.02190" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2604.02190</span></div>
+            <p class="detail-summary">本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。 解决的任务包括：自动驾驶场景中的语义理解（driving understanding）、空间感知（spatial perception，包括 3D 检测、在线建图、occupancy 预测）与动作规划（action planning）。 应用场景覆盖开环规划（nuScenes 数据集）与闭环驾驶（Bench2Drive 仿真基准），并扩展到运动预测、驾驶场景问答等多项任务。 核心研究问题：解决 VLA 模型中&quot;空间感知&quot;与&quot;语义推理&quot;之间的矛盾。论文认为该矛盾源于两者在共享模型参数中的耦合优化，导致表示干扰，削弱 VLM 原生推理能力。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">华中科技大学（Huazhong University of Science and Technology） · 原文未明确对应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2604.02190/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。</p>
+  <ul class="reading-intro-points"><li>本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。</li><li>解决的任务包括：自动驾驶场景中的语义理解（driving understanding）、空间感知（spatial perception，包括 3D 检测、在线建图、occupancy 预测）与动作规划（action planning）。</li><li>应用场景覆盖开环规划（nuScenes 数据集）与闭环驾驶（Bench2Drive 仿真基准），并扩展到运动预测、驾驶场景问答等多项任务。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：华中科技大学（Huazhong University of Science and Technology）；作者：原文未明确对应</li><li>机构：小米汽车（Xiaomi EV）；作者：原文未明确对应</li><li>机构：澳门大学智慧城市物联网国家重点实验室（SKL-IOTSC, University of Macau）；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 UniDriveVLA，一个统一的视觉-语言-动作（Vision-Language-Action，VLA）自动驾驶大模型。</li><li>解决的任务包括：自动驾驶场景中的语义理解（driving understanding）、空间感知（spatial perception，包括 3D 检测、在线建图、occupancy 预测）与动作规划（action planning）。</li><li>应用场景覆盖开环规划（nuScenes 数据集）与闭环驾驶（Bench2Drive 仿真基准），并扩展到运动预测、驾驶场景问答等多项任务。</li><li>核心研究问题：解决 VLA 模型中&quot;空间感知&quot;与&quot;语义推理&quot;之间的矛盾。论文认为该矛盾源于两者在共享模型参数中的耦合优化，导致表示干扰，削弱 VLM 原生推理能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 UniDriveVLA，一个基于 Mixture-of-Transformers（MoT）架构的统一 VLA 模型，通过任务专家解耦（understanding、perception、action 三个专家）减轻空间感知与语义推理间的优化冲突。</li><li>引入稀疏感知范式（Sparse Spatial Perception），直接从 2D VLM 特征中提取空间先验，避免注入稠密 3D/BEV 表示对 VLM 推理能力的破坏。</li><li>设计三阶段渐进式训练策略，在保持模型语义理解能力的同时，逐步装备感知与规划能力。</li><li>大量实验表明，UniDriveVLA 在 nuScenes 开环评测与 Bench2Drive 闭环评测上取得最优表现，并在 3D 检测、在线建图、运动预测及驾驶 VQA 等多个任务上展示出较强的通用性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶 Vision-Language-Action（VLA）统一模型，涵盖感知、理解与规划模块。</li><li>输入传感器：原文主要报告多视角相机图像（multi-view camera），未报告激光雷达等其他传感器输入；规划模块另使用历史自车轨迹与导航指令。</li><li>场景表示：采用稀疏查询驱动的感知范式（感知 token），并结合 VLM token 进行语义理解；没有采用稠密 BEV 或体素表示作为主要场景表征。</li><li>模型结构：基于 Qwen3-VL 作为基础视觉-语言骨干，采用 Mixture-of-Transformers（MoT）架构。模型中包含三个专家：driving understanding expert（承载自回归语言建模）、perception expert（承担结构化的稀疏感知任务）、action expert（执行基于 flow matching 的轨迹生成）。</li><li>关键技术：</li></ul>
+<p> - 专家级 Q/K/V 投影与 Masked Joint Attention（遮蔽联合注意力）：理解专家采用因果掩码且不关注后续感知/动作 token；感知 token 可关注此前理解 token 获取语义上下文；动作 token 聚合语义与空间两类信息。</p>
+<p> - 稀疏感知模块：任务专属稀疏 queries 由实例库（K-Means 聚类）初始化，经时间交互、任务内推理、任务间通信、可变形特征聚合与任务级精炼完成 3D 检测、在线建图、自车状态、运动预测等任务；occupancy 作为辅助潜在分支。</p>
+<p> - 感知特征提升到 VLM 隐空间并与理解/动作分支交互，再投影回稀疏感知空间继续精炼，形成语义增强的闭环。</p>
+<p> - 动作分支采用 flow-matching 插值生成轨迹（Gaussian noise 向目标速度序列插值）。</p>
+<p> - 三阶段训练：Stage 1 大规模多模态预训练（冻结 VLM）；Stage 2 联合优化（对 VLM 使用 LoRA 与减半学习率）；Stage 3 冻结 VLM 后对感知专家与动作专家精调并引入运动预测目标。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（开环规划与感知）、Bench2Drive（闭环 CARLA 仿真）、DriveBench（驾驶理解 VQA）、通用 VQA 基准（MMStar、MMMU、RealWorldQA、AI2D、MME、VLMsAreBlind、ChartQA）。</li><li>仿真器：Bench2Drive 构建于 CARLA 模拟器；专家示范由 Think2Drive 范式生成。</li><li>模型规模：提供 UniDriveVLA-Base（Qwen3-VL-2B）与 UniDriveVLA-Large（Qwen3-VL-8B）两个规模版本（表中报告）。</li><li>训练资源：原文未报告具体 GPU 数量/型号与训练天数。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes（开环）、Bench2Drive（闭环）、DriveBench（驾驶 VQA）、通用 VQA 若干。</li><li>评估指标：</li></ul>
+<p> - Bench2Drive 闭环：Driving Score、Success Rate (%)、Efficiency、Comfortness；开环：Avg. L2（2 秒 horizon、2 Hz）。</p>
+<p> - Bench2Drive 多能力：Merging、Overtaking、Emergency Brake、Give Way、Traffic Sign、Mean（%）。</p>
+<p> - nuScenes 规划：ST-P3 与 UniAD 两套协议下的 L2（1s/2s/3s/Avg.）与碰撞率（1s/2s/3s/Avg.）。</p>
+<ul><li>关键数值（原文报告的重点结果）：</li></ul>
+<p> - Bench2Drive 闭环：Driving Score 78.37、Success Rate 51.82%、Efficiency 198.86、Comfortness 11.78；开环 Avg. L2 0.72。</p>
+<p> - Bench2Drive 多能力：Merging 38.75%、Overtaking 80.00%、Emergency Brake 50.00%、Give Way 30.00%、Traffic Sign 58.95%、Mean 51.53%。</p>
+<p> - nuScenes 开环（无 ego status 协议）：UniDriveVLA-Large 在 UniAD 协议下 L2 1s/2s/3s/Avg. 为 0.27/0.49/0.77/0.51；ST-P3 协议下相应指标报告为 0.27/0.49/0.77/0.51 等（表格中并列两协议数据）。</p>
+<ul><li>对比方法：AutoVLA、SimLingo、R2SE、AD-MLP、VAD、SparseDrive、GenAD、UniAD、MomAD、SeerDrive、DriveDPO、ThinkTwice、DriveTransformer、DriveAdapter、RAP、ReCogDrive、DriveMOE、Orion、OmniDrive、OpenDriveVLA、FSDrive、HPP、BEV-Planner、ELM、OccWorld 等。</li><li>实验条件：nuScenes 为开环评测；Bench2Drive 为闭环仿真评测；部分规划实验报告带 ego-state（*）的变体。原文也报告了针对规划组件的消融（Ablation on Planning Components）、MoT 解耦影响（Effect of MoT Decoupling）与通用视觉能力（General Visual Capabilities，含通用 VQA 基准），但具体数值在所提供的截断文本中未完整呈现。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2604.02714/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">ExploreVLA: Dense World Modeling and Exploration for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2604.00402/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">COTTA: Context-Aware Transfer Adaptation for Trajectory Prediction in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

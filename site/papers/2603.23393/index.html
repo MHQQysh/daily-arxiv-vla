@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rectify, Don&#x27;t Regret: Avoiding Pitfalls of Differentiable Simulation in Trajectory Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。 应用场景为闭环（closed-loop）自动驾驶车辆决策与规划，强调预测模型在下游规划器迭代重规划中的可靠性。 论文的核心研究问题是：当前全可微闭环仿真器在轨迹预测训练中会引发“捷径学习”（shortcut learning），即损失梯度经由诱导状态输入将未来Ground Truth信息泄露回模型自身既往预测，使模型无法学习真实的反应性恢复（reactive recovery）策略。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2603.23393">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2603.23393.webp" alt="Rectify, Don&#x27;t Regret: Avoiding Pitfalls of Differentiable Simulation in Trajectory Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Rectify, Don&#x27;t Regret: Avoiding Pitfalls of Differentiable Simulation in Trajectory Prediction</h1>
+            <div class="detail-meta">2026-03-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2603.23393" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2603.23393" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2603.23393</span></div>
+            <p class="detail-summary">该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。 应用场景为闭环（closed-loop）自动驾驶车辆决策与规划，强调预测模型在下游规划器迭代重规划中的可靠性。 论文的核心研究问题是：当前全可微闭环仿真器在轨迹预测训练中会引发“捷径学习”（shortcut learning），即损失梯度经由诱导状态输入将未来Ground Truth信息泄露回模型自身既往预测，使模型无法学习真实的反应性恢复（reactive recovery）策略。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">7 张阅读卡</span>
+              <span class="meta-pill">University of Wuppertal · Harsh Yadav、Christian Bohn、Tobias Meisen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2603.23393/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。</p>
+  <ul class="reading-intro-points"><li>该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。</li><li>应用场景为闭环（closed-loop）自动驾驶车辆决策与规划，强调预测模型在下游规划器迭代重规划中的可靠性。</li><li>论文的核心研究问题是：当前全可微闭环仿真器在轨迹预测训练中会引发“捷径学习”（shortcut learning），即损失梯度经由诱导状态输入将未来Ground Truth信息泄露回模型自身既往预测，使模型无法学习真实的反应性恢复（reactive recovery）策略。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Wuppertal；作者：Harsh Yadav, Christian Bohn, Tobias Meisen</li><li>机构与作者对应关系：原文中仅作者Tobias Meisen标注了隶属机构（University of Wuppertal），其余作者机构对应原文未明确说明。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文研究自动驾驶中的多模态目标轨迹预测（trajectory prediction），具体任务为车辆运动轨迹的多模态预测。</li><li>应用场景为闭环（closed-loop）自动驾驶车辆决策与规划，强调预测模型在下游规划器迭代重规划中的可靠性。</li><li>论文的核心研究问题是：当前全可微闭环仿真器在轨迹预测训练中会引发“捷径学习”（shortcut learning），即损失梯度经由诱导状态输入将未来Ground Truth信息泄露回模型自身既往预测，使模型无法学习真实的反应性恢复（reactive recovery）策略。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>实证证明了全可微仿真器会鼓励模型通过非因果的梯度泄露进行“对过去的后悔”（regret of the past），从而导致模型在高重规划频率评估下出现性能崩溃，无法学习真实的反应性恢复行为。</li><li>提出一种基于非可微（detached receding horizon）闭环训练范式，通过切断仿真步骤间计算图，阻止反向梯度经由诱导状态输入将未来Ground-Truth信息泄露进既往预测，将过去错误设为“不可改动”，从而迫使模型经历由复合误差导致的漂移状态。</li><li>将基于Transformer的轨迹预测模型LMFormer改造为纯decoder-only架构LMFormer-D，显著降低计算开销，使其可支撑高频自回归闭环展开。</li><li>在nuScenes与DeepScenario两个数据集上开展了广泛评估，验证了非可微闭环范式在高重规划频率下的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：闭环轨迹预测训练模块，涉及非可微分运动仿真器与预测网络架构。</li><li>输入传感器：地图相关信息与智能体历史运动信息（原文未明确区分传感器模态类型，场景相关输入主要基于HD地图与历史轨迹）。</li><li>场景表示：以预测目标车辆为核心，采用基于log-replay的场景仿真；周围智能体严格按其Ground Truth轨迹运动，不响应目标车辆行为。</li><li>模型结构：将LMFormer改造为纯decoder-only架构LMFormer-D，去除编码器层；以适应迭代顺序预测需求。</li><li>关键技术：</li></ul>
+<p> - 非可微闭环展开：预测模型先输出全长预测轨迹，仿真器执行短时段的delta-action模型，随后更新全局场景状态并重新查询目标车辆，形成“预测-执行”循环。</p>
+<p> - 梯度截断：将已执行轨迹与随后的场景输入状态之间的计算图显式分离（gradient detachment），阻断BPTT通过诱导状态输入的梯度传播，从而阻止未来Ground Truth泄露。</p>
+<p> - 训练损失设计：整体优化可写为封闭式。修改标准负对数似然以在同一优化中同时考虑开环和闭环样本，并按权重缩放各样本贡献。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes数据集合DeepScenario数据集（Busy Frankfurt，保证未来轨迹日志可见）。</li><li>仿真器：非可微分闭环仿真器，采用log-replay机制。</li><li>模型资源：LMFormer-D模型参数由1.2M（mil）降至约1.207M（较LMFormer降低45%）；推理GFLOPs由3.365降至1.249（较LMFormer降低62%）。</li><li>训练资源：原文未报告具体训练硬件配置与训练耗时。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes测试集与DeepScenario（Busy Frankfurt）测试集，采用6.0s闭环rollout，在不同重规划频率下统计Collision（碰撞率）。</li><li>评估指标：minADE、minFDE、MR、OffRoad多模态指标，以及best-mode（k=1）的碰撞率（以Oriented Bounding Box重叠定义为碰撞）。</li><li>关键数值：</li></ul>
+<p> - 在高重规划频率下，CL+Non_Diff较CL+Diff在最高replanning频率H_step=0.5s时，碰撞率下降：nuScenes达23.12%（文中表述为25.14%存在前后不一致，另在0.5s时提出降低23.14%）；DeepScenario达32.38%-33.24%。</p>
+<p> - 对比标准开环基线（OL），在H_step=0.5s时nuScenes上降低23.19%，DeepScenario上降低27.74%。</p>
+<p> - 空窗：在闭环评估的所有H_step较高范围（6.0s-1.5s）大多数情况下，CL+Non_Diff与CL+Diff碰撞率指标相近，而CL+Diff在H_step较低时出现碰撞率上升；CL+Non_Diff在低H_step下维持较低碰撞水平。</p>
+<p> - CL+Non_Diff在多模态预测方面同时提升minADE、minFDE、MR和OffRoad（降低改模型在低H_step之间）质量。</p>
+<ul><li>方法对比：CL+Diff（全可微闭环训练模型）与标准开环（OL）基线、CL+Non_Diff（本文方法）。</li><li>评估条件：闭环仿真评估（6.0秒，不同重规划周期）、开环标准指标评估、高重规划频率压力测试，未进行实体车辆部署。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 07</span>
+    <span class="reading-step-note">评估与结果——关键补充</span>
+  </div>
+  <h2>评估与结果——关键补充</h2>
+  <div class="reading-card-content"><ul><li>在nuScenes上于H_step=0.5s条件下与CL+Diff相比，碰撞率从3.33%降至2.56%，降幅为23.12%（表中列示），另一处表述为23.14%；在DeepScenario训练H_step=1.5s、评估H_step=0.5s时，碰撞率从17.30%降至11.55%，降幅33.24%。</li><li>对比开环训练于DeepScenario、H_step=0.5s时，碰撞率从15.50%降至11.20%，降幅27.74%。</li><li>在nuScenes、开环评估阶段输出H_step=0.5s时，Open-Loop baseline的多模态碰撞率显著上升（OL：MR达0.606、OffRoad 0.032），而CL+Non_Diff在上述指标上更低。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2603.24936/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">TIGFlow-GRPO: Trajectory Forecasting via Interaction-Aware Flow Matching and Reward-Guided Optimization</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2605.25947/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A Pedestrian-Vehicle Interaction Benchmark and Annotation Framework for Unstructured Scenes via Uncalibrated Cameras</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
