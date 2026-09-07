@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DriveVLM-RL: Neuroscience-Inspired Reinforcement Learning with Vision-Language Models for Safe and Deployable Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶中基于强化学习（RL）的决策制定安全问题，核心是奖励函数设计。 针对传统RL依赖人工设计的奖励或稀疏碰撞信号而缺乏语义理解、不安全探索无法避免的问题，以及现有VLM-as-Reward方法计算开销大、缺乏动态时序风险感知的问题，提出集成视觉语言模型（VLM）的RL框架。 应用场景为城市道路自动驾驶，包括应对行人、非机动车等弱势道路使用者的复杂场景，以及跨城镇分布偏移和不同交通密度下的鲁棒性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2603.18315">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2603.18315.webp" alt="DriveVLM-RL: Neuroscience-Inspired Reinforcement Learning with Vision-Language Models for Safe and Deployable Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶中基于强化学习（RL）的决策制定安全问题，核心是奖励函数设计。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DriveVLM-RL: Neuroscience-Inspired Reinforcement Learning with Vision-Language Models for Safe and Deployable Autonomous Driving</h1>
+            <div class="detail-meta">2026-03-18 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2603.18315" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2603.18315" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2603.18315</span></div>
+            <p class="detail-summary">本文解决自动驾驶中基于强化学习（RL）的决策制定安全问题，核心是奖励函数设计。 针对传统RL依赖人工设计的奖励或稀疏碰撞信号而缺乏语义理解、不安全探索无法避免的问题，以及现有VLM-as-Reward方法计算开销大、缺乏动态时序风险感知的问题，提出集成视觉语言模型（VLM）的RL框架。 应用场景为城市道路自动驾驶，包括应对行人、非机动车等弱势道路使用者的复杂场景，以及跨城镇分布偏移和不同交通密度下的鲁棒性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">6 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Wisconsin-Madison · Zilin Huang、Zihao Sheng、Zhengyang Wan 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2603.18315/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶中基于强化学习（RL）的决策制定安全问题，核心是奖励函数设计。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶中基于强化学习（RL）的决策制定安全问题，核心是奖励函数设计。</li><li>针对传统RL依赖人工设计的奖励或稀疏碰撞信号而缺乏语义理解、不安全探索无法避免的问题，以及现有VLM-as-Reward方法计算开销大、缺乏动态时序风险感知的问题，提出集成视觉语言模型（VLM）的RL框架。</li><li>应用场景为城市道路自动驾驶，包括应对行人、非机动车等弱势道路使用者的复杂场景，以及跨城镇分布偏移和不同交通密度下的鲁棒性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Wisconsin-Madison；作者：Zilin Huang, Zihao Sheng, Zhengyang Wan, Junwei You, Sikai Chen</li><li>机构：Purdue University；作者：Yansong Qu</li><li>机构：McGill University；作者：Sicong Jiang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶中基于强化学习（RL）的决策制定安全问题，核心是奖励函数设计。</li><li>针对传统RL依赖人工设计的奖励或稀疏碰撞信号而缺乏语义理解、不安全探索无法避免的问题，以及现有VLM-as-Reward方法计算开销大、缺乏动态时序风险感知的问题，提出集成视觉语言模型（VLM）的RL框架。</li><li>应用场景为城市道路自动驾驶，包括应对行人、非机动车等弱势道路使用者的复杂场景，以及跨城镇分布偏移和不同交通密度下的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出DriveVLM-RL框架，首次将人脑双通路认知架构（习惯性与深思熟虑式视觉处理）显式整合到自动驾驶的VLM-as-Reward范式中，包含用于连续空间安全评估的静态通路和用于注意力门控多帧语义风险推理的动态通路。</li><li>设计注意力门控机制，模拟人脑选择性注意，利用轻量级感知模型过滤常规驾驶帧，仅在检测到安全关键对象时触发计算昂贵的LVLM推理，大幅降低计算开销。</li><li>提出层次化奖励合成机制，融合静态视觉-语言相似性、动态多帧语义推理和车辆状态信息，生成密集且主动的奖励信号。</li><li>设计异步批量处理训练流水线，将昂贵的VLM推理与环境交互解耦，同时所有VLM组件仅在离线训练阶段使用并在部署时完全移除，消除测试时的推理延迟。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于RL的自动驾驶决策模块，包括奖励设计、策略学习。</li><li>输入传感器：前视相机图像与鸟瞰图（BEV）表征。</li><li>场景表示：BEV图像用于静态通路空间安全评估；前视相机多帧时间窗口用于动态通路语义推理。</li><li>模型结构：包括CLIP模型（静态和动态通路）、YOLOv8检测模型（注意力门控）、Qwen3-VL大型视觉语言模型（动态语义推理）、深度RL策略网络。</li><li>关键技术：静态通路采用对比语言目标（CLG），计算BEV图像与正负语言目标的CLIP余弦相似度作为连续空间安全奖励；动态通路在门控被触发（检测到11类安全关键对象，如行人、自行车、摩托车等）时，利用Qwen3-VL对K=3的多帧时间窗口进行推理，生成动态语言目标，再用CLIP计算奖励；层次化奖励合成采用乘法组合策略（速度因子集成语义安全分数、车道中心、航向对齐、稳定性），最终结合稀疏碰撞惩罚；训练采用异步批量处理流水线将LVLM推断与策略更新解耦。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告。</li><li>仿真器：CARLA仿真器。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li><li>公开资源：演示视频、代码和模型检查点可在项目网站获取（https://zilin-huang.github.io/DriveVLM-RL-website/）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARLA仿真器中的自动驾驶任务，包括碰撞避免、任务成功率，以及跨城镇泛化、交通密度鲁棒性评估。</li><li>评估指标：成功率、碰撞率、碰撞严重程度（km/h）、与弱势道路使用者的碰撞率。</li><li>关键数值：DriveVLM-RL达到最高成功率，碰撞严重程度从10.09降低到1.75公里/小时（对比最强VLM基线）；在无碰撞奖励设置下碰撞率最低。</li><li>对比方法：包含传统RL基线及最强的VLM-based baseline（原文具体方法名称未在截取文本中完整报告）。</li><li>评估条件：开环训练与闭环测试，在CARLA仿真环境中进行（具体城镇名称未在截取文本中完整报告）；在不可见城镇中的分布偏移测试中，每个测试城镇均取得最低碰撞严重程度。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2603.20525/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">High-Speed, All-Terrain Autonomy: Ensuring Safety at the Limits of Mobility</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2603.17802/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">An HMDP-MPC Decision-making Framework with Adaptive Safety Margins and Hysteresis for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

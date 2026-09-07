@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文是一篇综述性论文，探讨从语言模型发展到能够在数字、社会、虚拟和物理环境中行动的智能体系统（Agentic AI）的进展与局限。 研究任务聚焦于大型语言模型如何通过工具调用、计算机控制、多智能体协作、世界模型以及机器人与实验室控制系统等，从生成文本的输出者转变为能够改变外部状态的行动系统的过程。 核心研究问题在于梳理并评估：在多大程度上，配置好的智能体系统能够执行外部委托的任务、保持时间持续性，并在不同环境耦合程度下安全可靠地运行，而非简单地沿着一条线性的“自主性阶梯”进行演进。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.04894">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.04894.webp" alt="From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文是一篇综述性论文，探讨从语言模型发展到能够在数字、社会、虚拟和物理环境中行动的智能体系统（Agentic AI）的进展与局限。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments</h1>
+            <div class="detail-meta">2026-09-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.04894" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.04894" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.04894</span></div>
+            <p class="detail-summary">该论文是一篇综述性论文，探讨从语言模型发展到能够在数字、社会、虚拟和物理环境中行动的智能体系统（Agentic AI）的进展与局限。 研究任务聚焦于大型语言模型如何通过工具调用、计算机控制、多智能体协作、世界模型以及机器人与实验室控制系统等，从生成文本的输出者转变为能够改变外部状态的行动系统的过程。 核心研究问题在于梳理并评估：在多大程度上，配置好的智能体系统能够执行外部委托的任务、保持时间持续性，并在不同环境耦合程度下安全可靠地运行，而非简单地沿着一条线性的“自主性阶梯”进行演进。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确机构信息 · Linsen Zhu、Mengqing Cai</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.04894/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文是一篇综述性论文，探讨从语言模型发展到能够在数字、社会、虚拟和物理环境中行动的智能体系统（Agentic AI）的进展与局限。</p>
+  <ul class="reading-intro-points"><li>该论文是一篇综述性论文，探讨从语言模型发展到能够在数字、社会、虚拟和物理环境中行动的智能体系统（Agentic AI）的进展与局限。</li><li>研究任务聚焦于大型语言模型如何通过工具调用、计算机控制、多智能体协作、世界模型以及机器人与实验室控制系统等，从生成文本的输出者转变为能够改变外部状态的行动系统的过程。</li><li>核心研究问题在于梳理并评估：在多大程度上，配置好的智能体系统能够执行外部委托的任务、保持时间持续性，并在不同环境耦合程度下安全可靠地运行，而非简单地沿着一条线性的“自主性阶梯”进行演进。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未明确机构信息；作者：Linsen Zhu、Mengqing Cai</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文是一篇综述性论文，探讨从语言模型发展到能够在数字、社会、虚拟和物理环境中行动的智能体系统（Agentic AI）的进展与局限。</li><li>研究任务聚焦于大型语言模型如何通过工具调用、计算机控制、多智能体协作、世界模型以及机器人与实验室控制系统等，从生成文本的输出者转变为能够改变外部状态的行动系统的过程。</li><li>核心研究问题在于梳理并评估：在多大程度上，配置好的智能体系统能够执行外部委托的任务、保持时间持续性，并在不同环境耦合程度下安全可靠地运行，而非简单地沿着一条线性的“自主性阶梯”进行演进。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了一个分析框架，将智能体系统解构为模型（M）、外围装备（H）、环境（E）和委托者（U）四个相互分离的要素，并基于“委托权限”、“时间持续性”和“环境耦合度”三个独立维度进行综合对比。</li><li>论证了一个由证据支持的结论：目前公开研究中，行动接口的扩展比可验证的自主性证据更具说服力，特别是在成功验证、故障恢复、授权管理和独立核查等方面仍存在明显不足。</li><li>区分了“政策能力”、“行动覆盖范围”和“保障能力”三种不同的“更好”的含义，避免将模型能力的提升、接口的扩展和系统安全保障的增强混为一谈。</li><li>提出了“有依据的委托”作为分析和规范性的启发性概念，主张只有在证据支持可追溯性、受限权限、故障检测、安全恢复和经过校准的人类控制时，才应扩大系统的行动范围。</li><li>批判性地审视了包括MCP、A2A、MHS等多种协议和系统，指出这些技术提高了互操作性，但并未建立可信任的委托关系或保证任务完成的正确性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于范围广泛的综述性研究，覆盖了数字、社会、虚拟和物理环境中的各种智能体系统实现范式。</li><li>输入传感器：多种输入方式，包括屏幕截图、辅助功能树、文本、鼠标键盘操作、视觉图像和语言指令等。</li><li>场景表示：涵盖了从真实的网页和操作系统界面，到多智能体模拟环境（如Sims风格社会模拟）、生成式虚拟世界（如Genie 3、Project Eden）以及物理机器人平台等多种场景。</li><li>模型结构：讨论了多种模型结构，包括ReAct、Toolformer、Reflexion等推理-行动循环范式，以及视觉-语言-行动模型，还包括用于任务执行的多智能体框架。</li><li>关键技术：分析了模型上下文协议、智能体间通信协议、智能体-计算机接口设计、用于世界模型的自监督学习、用于计算机使用和图形界面交互的模型等技术。</li><li>分析单元：主张将“配置好的行动系统”作为分析的基本单位。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集与基准：文中提及了多个评估基准和数据集，如WebArena、OSWorld、SWE-bench、AgentBench、tau-bench、AgentDojo、ToolEmu和Agent Security Bench等，但未在本文中提供这些资源的详细信息。</li><li>仿真器：提到了用于智能体评估的各种仿真器，包括带有可复制环境（如e-commerce和social discussion网站）的虚拟环境，以及用于生成虚拟世界和持久化模拟环境的平台。</li><li>模型规模：原文中具体报告了部分模型规模信息，如OpenVLA为70亿参数模型；但许多所引用的模型或系统并未报告其具体规模信息。</li><li>训练资源：原文未报告。</li><li>实车平台：原文中未涉及自动驾驶实车平台；物理平台涉及实验室自动化仪器和机器人平台，但具体型号未在本文中详述。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：文中提及的评估基准包括WebArena、OSWorld、SWE-bench、AgentBench、tau-bench、AgentDojo和Agent Security Bench等。</li><li>评估指标：主要依赖端到端任务成功率、一致性通过率、针对代理漏洞的攻击成功率等指标，并特别关注agent在重复尝试中的表现一致性。</li><li>关键数值：在WebArena基准上，报告的最强GPT-4智能体完成率为14.41%，人类为78.24%；在OSWorld上，原始研究显示最佳智能体配置性能低于12.2%，人类为72.4%。SWE-agent在原始论文中的pass@1率为12.5%。τ-bench分析表明系统的一致成功率远低于单次成功率。OpenAI的计算机使用代理（CUA）在OSWorld报告了38.1%的完成率，在WebArena为58.1%。</li><li>对比方法：通过与人类表现进行比较（例如，在WebArena和OSWorld上与人类表现对比），并对不同模型和框架变体之间的性能进行对比。</li><li>评测条件：论文强调评估条件的区分，包括开环与闭环评估、仿真环境与实车平台测试，并特别指出从仿真到物理部署必须通过分阶段验证进行。</li><li>关键结论：该论文通过跨域综合分析得出的核心结果是，行动接口和范围的扩展能力要比验证、恢复、授权和独立验证的实现能力更显著和更具说服力，尤其是在进行精确部署和保障时。对于自动驾驶而言，论文的相关性在于强调配置安全环境、动作范围扩展和获取可验证证据的重要性。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.04921/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.04860/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Mitigating Performance Discrepancy in Cross-Domain 3D Class-Incremental Learning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

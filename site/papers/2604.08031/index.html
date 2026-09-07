@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open-Ended Instruction Realization with LLM-Enabled Multi-Planner Scheduling in Autonomous Vehicles - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文聚焦于自动驾驶（AD）中乘客与车辆之间的人机交互（HMI）任务，特别是面向 L4-L5 级自动驾驶（如 Robotaxi）场景下的开放式指令实现问题。 研究问题是将乘客以自然语言表达的开放式、操作级指令（如超车、变道、靠边停车等）转化为车辆控制信号，同时保持决策链条的透明性与可追溯性。 论文提出了一个由大语言模型（LLM）驱动的多规划器调度框架，用于在真实交通环境中闭环执行乘客的开放式指令，并构建了一个用于高保真闭环评估的基准测试集。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2604.08031">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2604.08031.webp" alt="Open-Ended Instruction Realization with LLM-Enabled Multi-Planner Scheduling in Autonomous Vehicles" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文聚焦于自动驾驶（AD）中乘客与车辆之间的人机交互（HMI）任务，特别是面向 L4-L5 级自动驾驶（如 Robotaxi）场景下的开放式指令实现问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Open-Ended Instruction Realization with LLM-Enabled Multi-Planner Scheduling in Autonomous Vehicles</h1>
+            <div class="detail-meta">2026-04-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2604.08031" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2604.08031" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2604.08031</span></div>
+            <p class="detail-summary">该论文聚焦于自动驾驶（AD）中乘客与车辆之间的人机交互（HMI）任务，特别是面向 L4-L5 级自动驾驶（如 Robotaxi）场景下的开放式指令实现问题。 研究问题是将乘客以自然语言表达的开放式、操作级指令（如超车、变道、靠边停车等）转化为车辆控制信号，同时保持决策链条的透明性与可追溯性。 论文提出了一个由大语言模型（LLM）驱动的多规划器调度框架，用于在真实交通环境中闭环执行乘客的开放式指令，并构建了一个用于高保真闭环评估的基准测试集。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Jilin University, China · Jiawei Liu、Xun Gong、Yunfeng Hu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2604.08031/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文聚焦于自动驾驶（AD）中乘客与车辆之间的人机交互（HMI）任务，特别是面向 L4-L5 级自动驾驶（如 Robotaxi）场景下的开放式指令实现问题。</p>
+  <ul class="reading-intro-points"><li>该论文聚焦于自动驾驶（AD）中乘客与车辆之间的人机交互（HMI）任务，特别是面向 L4-L5 级自动驾驶（如 Robotaxi）场景下的开放式指令实现问题。</li><li>研究问题是将乘客以自然语言表达的开放式、操作级指令（如超车、变道、靠边停车等）转化为车辆控制信号，同时保持决策链条的透明性与可追溯性。</li><li>论文提出了一个由大语言模型（LLM）驱动的多规划器调度框架，用于在真实交通环境中闭环执行乘客的开放式指令，并构建了一个用于高保真闭环评估的基准测试集。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Jilin University, China；作者：Jiawei Liu、Xun Gong、Yunfeng Hu</li><li>机构：Engineering Research Center of Knowledge-Driven Human-Machine Intelligence, MOE, China；作者：Jiawei Liu、Xun Gong、Yunfeng Hu</li><li>机构：Agency for Science, Technology and Research (A*STAR), Singapore；作者：Fen Fang、Muli Yang、Bohao Qu、Xulei Yang</li><li>机构：Tongji University, China；作者：Hong Chen</li><li>机构：NKIARI, China；作者：Qing Guo</li><li>机构：Nankai University, China；作者：Qing Guo</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文聚焦于自动驾驶（AD）中乘客与车辆之间的人机交互（HMI）任务，特别是面向 L4-L5 级自动驾驶（如 Robotaxi）场景下的开放式指令实现问题。</li><li>研究问题是将乘客以自然语言表达的开放式、操作级指令（如超车、变道、靠边停车等）转化为车辆控制信号，同时保持决策链条的透明性与可追溯性。</li><li>论文提出了一个由大语言模型（LLM）驱动的多规划器调度框架，用于在真实交通环境中闭环执行乘客的开放式指令，并构建了一个用于高保真闭环评估的基准测试集。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li><strong>提出 POINT 基准测试集</strong>：在 nuPlan 混合仿真器上构建了一个包含 1,050 对指令-场景配对的高保真、闭环评估数据集，并包含开放式指令、多种闭环评估指标和竞争性基线方法。</li><li><strong>提出以调度为中心的框架</strong>：该框架利用 LLM 对开放式指令进行意图推断，生成可执行脚本，调度多个基于 MPC 的运动规划器，并利用异步触发机制实现实时反馈驱动的规划器切换，保持语言到控制的透明决策链。</li><li><strong>开展全面的实验评估</strong>：与基于 LLM 的、数据驱动的和基于规则的方法进行了多指标对比。结果显示，所提框架在指令实现率上比指令实现基线方法提升 64%-200%，且仅需单次 LLM 查询；安全性和合规性与专用的自动驾驶方法相当。</li><li><strong>验证对 LLM 推理延迟的鲁棒性</strong>：实验表明，该框架在引入受控延迟的情况下，指令实现率虽有下降但安全指标保持稳定。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li><strong>所属模块</strong>：高层决策与运动规划（LLM 驱动的调度器 + MPC 运动规划器 + LQR 控制器），属于模块化自动驾驶架构中的规划决策模块。</li><li><strong>输入传感器</strong>：原文未明确列出具体传感器类型；框架采用文本场景描述为 LLM 提供环境上下文，而底层规划器使用“3D detections 和 HD maps”进行轨迹规划。</li><li><strong>场景表示</strong>：高层 LLM 接收“textual scene description”进行意图推断；底层调度-规划-控制闭环直接作用于“structured perception signals”（如道路几何、动态目标状态等）。</li><li><strong>模型结构</strong>：整体框架分为两层。高层：LLM（如 DeepSeek-V3、Qwen-2.5 等开源模型）进行低频率意图推断并生成调度脚本；底层：由 5 个行为特定的 MPC 规划器（车道保持、左变道、右变道、加速、减速）负责高频轨迹规划，再用 LQR 控制器输出连续控制信号。</li><li><strong>关键技术</strong>：采用任务调度视角将 LLM 驱动的 AD 方法分为三种模式（I：静态参数配置；II：持续决策；III：单次生成调度脚本），本文采用模式 III；引入“coroutine mechanisms”与“asynchronous triggers”（异步定时触发条件）实现基于场景图的规划器切换。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li><strong>数据集</strong>：POINT 基准测试集，包含 1,050 条开放式指令及配对场景，基于 nuPlan 仿真器。</li><li><strong>仿真器</strong>：nuPlan（hybrid simulator），基于 1,300 小时真实驾驶数据构建，支持高保真城市交通闭环模拟。</li><li><strong>模型规模</strong>：LLM 评估涉及多种开源模型（原文未报告参数量），包括 Qwen-2.5-72B、DeepSeek-V3、DeepSeek-R1 等；意图识别准确率随 LLM 规模增大而提高。</li><li><strong>训练资源</strong>：采用 Intel Xeon Gold 5220 CPU 与 NVIDIA A40 GPU 的工作站；基线方法使用其原始论文或项目仓库推荐的超参数与检查点。</li><li><strong>实车平台</strong>：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li><strong>评估基准</strong>：在 POINT 基准上开展闭环评估，涵盖意图识别（REC）、指令实现（REA）、安全性（防碰撞、TTC）与合规性（可行驶区域、限速、方向一致性）指标，另含效率指标（专家轨迹进度）。</li><li><strong>评估指标</strong>：任务相关指标包括意图识别（Intent Recognition，正确解析比例）、指令实现率（Instruction Realization，成功执行比例）；安全指标包括防碰撞率（Collision Avoidance）、最小碰撞时间（TTC）；合规指标包括可行驶区域（Drivable Area）、限速得分（Speed Limit Score）、方向一致性（Direction Consistency）。</li><li><strong>关键数值</strong>：单次 LLM 查询条件下，所提框架在指令实现率达到 0.84，相较 Diffusion-ES（0.28）和 DiLu++（0.51）分别显著提升；消融研究显示，加入交通上下文使 DeepSeek-V3 的意图识别性能提升约 10%（从 0.78 提升至 0.86）；仅使用单一规划器（如车道保持）时指令实现率降至 0.12-0.18。</li><li><strong>对比方法</strong>：专用 AD 方法（LogReplay、IDM、PDMClosed、DiLu+）与指令实现方法（Diffusion-ES、DiLu++）；所有 LLM 驱动方法使用相同的 DeepSeek-V3 主干网络。</li><li><strong>评估条件</strong>：闭环仿真；实验在工作室（Intel Xeon Gold 5220 CPU、NVIDIA A40 GPU）上进行。LLM 在默认对话温度下运行；延迟敏感性分析在 LLM 决策过程中注入受控延迟进行测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2604.13891/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Beyond Conservative Automated Driving in Multi-Agent Scenarios via Coupled Model Predictive Control and Deep Reinforcement Learning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2604.01790/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Set-Theoretic Receding Horizon Control for Obstacle Avoidance and Overtaking in Autonomous Highway Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

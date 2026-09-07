@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mitigating Performance Discrepancy in Cross-Domain 3D Class-Incremental Learning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文聚焦自动驾驶与机器人等真实世界应用中 3D 感知模型面临的新挑战：在类别增量学习（CIL）场景下，3D 点云同类目标常由 CAD 网格、RGB-D 扫描、视频重建甚至受损观测等异构域混合构成，导致模型性能不仅发生整体灾难性遗忘，而且不同域之间的性能退化幅度差异显著，论文将此现象定义为“performance discrepancy”（性能差异）。 论文建立了 Domain3D-CIL 训练与评估协议，模拟真实场景中同语义类混合异源 3D 数据的增量学习任务。 论文提出 PolyMem 方法，以缓解跨域性能差异并提升各域上的分类精度，属于无示例（exemplar-free）的基于预训练模型的 CIL 范式。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.04860">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.04860.webp" alt="Mitigating Performance Discrepancy in Cross-Domain 3D Class-Incremental Learning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文聚焦自动驾驶与机器人等真实世界应用中 3D 感知模型面临的新挑战：在类别增量学习（CIL）场景下，3D 点云同类目标常由 CAD 网格、RGB-D 扫描、视频重建甚至受损观测等异构域混合构成，导致模型性能不仅发生整体灾难性遗忘，而且不同域之间的性能退化幅度差异显著，论文将此现象定义为“performance discrepancy”（性能差异）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Mitigating Performance Discrepancy in Cross-Domain 3D Class-Incremental Learning</h1>
+            <div class="detail-meta">2026-09-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.04860" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.04860" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.04860</span></div>
+            <p class="detail-summary">本文聚焦自动驾驶与机器人等真实世界应用中 3D 感知模型面临的新挑战：在类别增量学习（CIL）场景下，3D 点云同类目标常由 CAD 网格、RGB-D 扫描、视频重建甚至受损观测等异构域混合构成，导致模型性能不仅发生整体灾难性遗忘，而且不同域之间的性能退化幅度差异显著，论文将此现象定义为“performance discrepancy”（性能差异）。 论文建立了 Domain3D-CIL 训练与评估协议，模拟真实场景中同语义类混合异源 3D 数据的增量学习任务。 论文提出 PolyMem 方法，以缓解跨域性能差异并提升各域上的分类精度，属于无示例（exemplar-free）的基于预训练模型的 CIL 范式。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Purdue University · Jinge Ma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.04860/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文聚焦自动驾驶与机器人等真实世界应用中 3D 感知模型面临的新挑战：在类别增量学习（CIL）场景下，3D 点云同类目标常由 CAD 网格、RGB-D 扫描、视频重建甚至受损观测等异构域混合构成，导致模型性能不仅发生整体灾难性遗忘，而且不同域之间的性能退化幅度差异显著，论文将此现象定义为“performance discrepancy”（性能差异）。</p>
+  <ul class="reading-intro-points"><li>本文聚焦自动驾驶与机器人等真实世界应用中 3D 感知模型面临的新挑战：在类别增量学习（CIL）场景下，3D 点云同类目标常由 CAD 网格、RGB-D 扫描、视频重建甚至受损观测等异构域混合构成，导致模型性能不仅发生整体灾难性遗忘，而且不同域之间的性能退化幅度差异显著，论文将此现象定义为“performance discrepancy”（性能差异）。</li><li>论文建立了 Domain3D-CIL 训练与评估协议，模拟真实场景中同语义类混合异源 3D 数据的增量学习任务。</li><li>论文提出 PolyMem 方法，以缓解跨域性能差异并提升各域上的分类精度，属于无示例（exemplar-free）的基于预训练模型的 CIL 范式。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Purdue University；作者：Jinge Ma</li><li>机构：Purdue University；作者：Gautham Vinod</li><li>机构：Purdue University；作者：Bruce Coburn</li><li>机构：Purdue University；作者：Jui-Feng Chi</li><li>机构：Purdue University；作者：Siddeshwar Raghavan</li><li>机构：Purdue University；作者：Fengqing Zhu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文聚焦自动驾驶与机器人等真实世界应用中 3D 感知模型面临的新挑战：在类别增量学习（CIL）场景下，3D 点云同类目标常由 CAD 网格、RGB-D 扫描、视频重建甚至受损观测等异构域混合构成，导致模型性能不仅发生整体灾难性遗忘，而且不同域之间的性能退化幅度差异显著，论文将此现象定义为“performance discrepancy”（性能差异）。</li><li>论文建立了 Domain3D-CIL 训练与评估协议，模拟真实场景中同语义类混合异源 3D 数据的增量学习任务。</li><li>论文提出 PolyMem 方法，以缓解跨域性能差异并提升各域上的分类精度，属于无示例（exemplar-free）的基于预训练模型的 CIL 范式。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>形式化定义了 3D CIL 中跨域“性能差异”现象，并建立含异质 3D 数据的 Domain3D-CIL 协议以模拟真实应用场景。</li><li>将多种主流 CIL 基线方法迁移至 3D 模态，并在跨域设置下分析了统计记忆类基线产生性能差异的机理——低阶统计量无法充分刻画高阶域间差异。</li><li>提出 PolyMem 框架，利用 RBF 核的泰勒多项式展开与 TensorSketch 近似，以结构化方式隐式建模高阶特征统计，在保持无示例、内存高效的同时提升跨域鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：预训练模型（PTM）基类增量学习框架下的分类器/统计记忆模块（无示例）。</li><li>输入传感器：输入为 3D 点云；原文未报告具体传感器型号或采集配置。</li><li>场景表示：3D 点云特征由冻结的预训练主干网络 Uni3D-Base（在 Objaverse 上预训练）提取，得到 L2 归一化的特征向量。</li><li>模型结构：采用基于 Transformer 的 Uni3D-Base 骨干（与 Vision Transformer 架构一致），增量侧保留统计记忆（Q 与 G 累积量），并由岭回归闭式解得到分类器权重。</li><li>关键技术：将 RBF 核做泰勒展开至 L 阶，用 TensorSketch 近似各阶多项式项，构造具有阶次含义的提升特征向量，仍以累积 Q、G 与闭式岭回归完成训练，避免显式存储高阶统计张量，同时比 RanPAC 的随机投影更具结构性与可解析性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：ModelNet40、ShapeNetCore(v2)、ScanObjectNN、CO3D、OmniObject3D、ShapeNet-C。</li><li>仿真器：论文未报告使用仿真器。</li><li>模型规模：骨干为 Uni3D-Base；原文未报告详细参数量与权重尺寸。</li><li>训练资源：原文未报告 GPU 型号与数量等具体训练硬件配置。</li><li>实车平台：论文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在 Domain3D-CIL 协议下，由 CAD 域（D1）与其余域（D2：ScanObjectNN / CO3D / OmniObject3D / ShapeNet-C）构成的 4 个异构混合数据集。</li><li>评估指标：Last Accuracy（LA）与 Cumulative Accuracy（CA），并按域分别报告 D1、D2 及非对称差值 Gap（D1-D2），Gap 越小跨域平衡越好；结果平均三次运行。</li><li>对比方法：Joint-Training 上界，以及 L2P、DualPrompt、CODA-Prompt、SLCA、SimpleCIL、APER、EASE、RanPAC、MOS、TUNA 等 PTM-based CIL 基线。</li><li>关键数值：在 ModelNet+ScanObjectNN 上 LA（D1/D2/Gap）为 92.50/87.90/4.60，Cum. 为 95.90/93.41/2.48；ModelNet+CO3D 上 LA 为 90.67/84.35/6.32；ShapeNet+OmniObject3D 上 LA 为 87.15/83.52/3.63，Cum. 为 92.42/89.63/2.79；ShapeNet+ShapeNet-C 上 LA 为 83.72/77.85/5.87，Cum. 为 93.21/89.45/3.76，均为各设置中最佳或显著缩小 Gap。</li><li>实验条件：论文未报告开环/闭环之分，未涉及实车或运动规划闭环评估；全部为离线点云分类任务上的评价，方法采用冻结主干+无示例统计记忆的训练方式。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.04894/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.04807/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">CoLMIN: LLM-based Multi-Decision Path Negotiation for Cooperative Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

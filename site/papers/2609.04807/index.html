@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoLMIN: LLM-based Multi-Decision Path Negotiation for Cooperative Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决多车协同自动驾驶中的决策协商问题，任务为多智能体路径规划与意图协商。 应用场景为存在意图冲突的复杂交互交通场景（如交叉口、并道等）。 研究问题：现有基于 LLM 的协商方法采用单决策路径范式，忽视驾驶决策天然的多解性，易过早收敛到次优解，导致共识失败；本文提出 CoLMIN 框架以实现稳定、高质量的多车决策共识。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.04807">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.04807.webp" alt="CoLMIN: LLM-based Multi-Decision Path Negotiation for Cooperative Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决多车协同自动驾驶中的决策协商问题，任务为多智能体路径规划与意图协商。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CoLMIN: LLM-based Multi-Decision Path Negotiation for Cooperative Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.04807" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.04807" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.04807</span></div>
+            <p class="detail-summary">该论文解决多车协同自动驾驶中的决策协商问题，任务为多智能体路径规划与意图协商。 应用场景为存在意图冲突的复杂交互交通场景（如交叉口、并道等）。 研究问题：现有基于 LLM 的协商方法采用单决策路径范式，忽视驾驶决策天然的多解性，易过早收敛到次优解，导致共识失败；本文提出 CoLMIN 框架以实现稳定、高质量的多车决策共识。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Chang&#x27;an University · Zhe Huang、Xuan Zhao</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.04807/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决多车协同自动驾驶中的决策协商问题，任务为多智能体路径规划与意图协商。</p>
+  <ul class="reading-intro-points"><li>该论文解决多车协同自动驾驶中的决策协商问题，任务为多智能体路径规划与意图协商。</li><li>应用场景为存在意图冲突的复杂交互交通场景（如交叉口、并道等）。</li><li>研究问题：现有基于 LLM 的协商方法采用单决策路径范式，忽视驾驶决策天然的多解性，易过早收敛到次优解，导致共识失败；本文提出 CoLMIN 框架以实现稳定、高质量的多车决策共识。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Chang&#x27;an University；作者：Zhe Huang、Xuan Zhao</li><li>机构：Hangzhou International Innovation Institute, Beihang University；作者：Zhaoxin Fan、Wenjun Wu</li><li>机构：Renmin University of China；作者：Shuo Wang</li><li>机构：Hunan University, National Engineering Research Center for Robot Visual Perception and Control Technology；作者：Min Liu</li><li>说明：Zhaoxin Fan 为通讯作者（*标记）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决多车协同自动驾驶中的决策协商问题，任务为多智能体路径规划与意图协商。</li><li>应用场景为存在意图冲突的复杂交互交通场景（如交叉口、并道等）。</li><li>研究问题：现有基于 LLM 的协商方法采用单决策路径范式，忽视驾驶决策天然的多解性，易过早收敛到次优解，导致共识失败；本文提出 CoLMIN 框架以实现稳定、高质量的多车决策共识。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 CoLMIN，一个基于 LLM 的多决策路径协商框架，通过生成多个候选驾驶意图并进行联合评估，实现稳定鲁棒的决策共识。</li><li>设计 LLM-based Multi-Intent Negotiation Module (LMin)，采用 Negotiator–Evaluator 范式，在单轮协商中生成并评估多个可行候选意图，扩大协商空间。</li><li>提出 Evaluation-based Shallow Reflection Module (ESRM)，针对低分候选方案生成短期改进建议并反馈到下一轮协商，加速局部共识收敛。</li><li>提出 LLM-based Deep Reflection Module (LDRM)，对多轮协商历史进行长期反思，识别过度自信与推理固化，抑制认知僵化，避免收敛到次优解。</li><li>在 CARLA 仿真环境中完成大量实验，在多个具有挑战性的交互驾驶场景下取得最先进性能，代码发布于 https://github.com/HuangZhe885/CoLMIN。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知模块、意图预测器、协商决策模块（LMin、ESRM、LDRM）以及低级控制模块组成的完整决策管线。</li><li>输入传感器：原文报告感知模块生成中间表示包括 BEV 感知特征与 BEV occupancy 图，具体传感器类型（如相机、激光雷达）原文未明确报告具体型号。</li><li>场景表示：BEV 感知特征、BEV occupancy 地图用于规划任务的辅助输入；对象级 3D 感知结果与交互相关信息转化为文本描述用于 LLM 协商。</li><li>模型结构：LMin 采用 Negotiator–Evaluator 双重结构；Negotiator 通过语言交互顺序发言并生成多个候选方案；Evaluator 将意图分发给各车、利用低层规划生成未来 waypoints，并综合安全性、效率与共识三个维度打分（S_score = w_S·S + w_E·E + w_C·C）。</li><li>关键技术：多轮迭代协商，协商终止条件为最佳分数超过阈值 τ 或达到最大轮数 R_max；ESRM 在每轮评估后对低分方案生成安全性与效率方面改进建议；LDRM 在协商超过预设轮数 k 后触发，依据重复率高、评估分数低、表达过度自信、偏离群体共识四条标准检测长期认知偏差并生成纠正性指导；低级控制模块采用 CoLMDriver [25] 的低级控制设计，仅在检测到意图冲突时介入控制管线。</li><li>目标函数：协商建模为带约束的迭代共识优化问题，优化联合策略以在满足安全约束下提升效率与共识质量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告使用真实数据集。</li><li>仿真器：CARLA 仿真环境，以及 V2Xverse 模拟器（表格 I 中报告）。</li><li>模型规模：原文未报告具体 LLM 参数规模。</li><li>训练资源：原文未报告具体训练硬件资源。</li><li>实车平台：原文未报告实车测试平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在 CARLA 封闭环路仿真环境中对十个具有挑战性的交通场景进行实验，并在 V2Xverse 模拟器中报告驾驶性能。</li><li>评估指标：Driving Score (DS)、Route Completion (RC)、Infraction Score (IS)、Success Rate (SR)。</li><li>关键结果（无交通参与者设置下，Total 列）：CoLMIN 的 DS 为 90.12、RC 为 94.36、IS 为 0.92、SR 为 0.81；对照方法中 CoLMDriver 的 DS 为 88.53。</li><li>场景结果（Total 维度）：CoLMIN 在 IC 场景中 DS 为 90.71（Best）、LC 场景中 DS 为 98.75（Best）。</li><li>对比方法：VAD、UniAD、TCP、LMDriver、CoDriving（TPAMI2025）、CoLMDriver（ICCV2025）等。</li><li>评估条件：闭环仿真评估；原文强调在复杂场景（如 LC 换道场景）相比现有方法安全性提升 8%、整体成功率提升 13%。</li><li>定性评估：论文进行了定性评估（QUALITATIVE EVALUATION 小节），但具体定性案例细节原文在此截断中未完整呈现。</li><li>消融实验：论文包含消融研究（Ablation Study 小节），但具体消融结果数值原文在本次截断中未完整呈现。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.04860/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Mitigating Performance Discrepancy in Cross-Domain 3D Class-Incremental Learning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.04564/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">La Agente Óptima: Towards Agentic Self-Driving Laboratories</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

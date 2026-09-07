@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VLM-VPI: A Vision-Language Reasoning Framework for Improving Automated Vehicle-Pedestrian Interactions - 自动驾驶每日论文卡</title>
+    <meta name="description" content="针对自动驾驶系统中行人让行行为推断过度依赖几何与运动学线索、缺乏视觉场景上下文与年龄相关行为差异推理能力的问题。 应用场景为城市道路中的车辆-行人交互（Vehicle-Pedestrian Interaction, VPI），研究问题包括行人意图理解与让行感知控制。 任务属于自动驾驶中的多模态推理框架设计，目标是在保证安全的同时提升通行效率。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2604.23934">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2604.23934.webp" alt="VLM-VPI: A Vision-Language Reasoning Framework for Improving Automated Vehicle-Pedestrian Interactions" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">针对自动驾驶系统中行人让行行为推断过度依赖几何与运动学线索、缺乏视觉场景上下文与年龄相关行为差异推理能力的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">VLM-VPI: A Vision-Language Reasoning Framework for Improving Automated Vehicle-Pedestrian Interactions</h1>
+            <div class="detail-meta">2026-04-27 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2604.23934" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2604.23934" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2604.23934</span></div>
+            <p class="detail-summary">针对自动驾驶系统中行人让行行为推断过度依赖几何与运动学线索、缺乏视觉场景上下文与年龄相关行为差异推理能力的问题。 应用场景为城市道路中的车辆-行人交互（Vehicle-Pedestrian Interaction, VPI），研究问题包括行人意图理解与让行感知控制。 任务属于自动驾驶中的多模态推理框架设计，目标是在保证安全的同时提升通行效率。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">5 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文仅提供 arXiv 元数据，未列出研究单位信息 · 原文未明确对应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2604.23934/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">针对自动驾驶系统中行人让行行为推断过度依赖几何与运动学线索、缺乏视觉场景上下文与年龄相关行为差异推理能力的问题。</p>
+  <ul class="reading-intro-points"><li>针对自动驾驶系统中行人让行行为推断过度依赖几何与运动学线索、缺乏视觉场景上下文与年龄相关行为差异推理能力的问题。</li><li>应用场景为城市道路中的车辆-行人交互（Vehicle-Pedestrian Interaction, VPI），研究问题包括行人意图理解与让行感知控制。</li><li>任务属于自动驾驶中的多模态推理框架设计，目标是在保证安全的同时提升通行效率。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文仅提供 arXiv 元数据，未列出研究单位信息；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>针对自动驾驶系统中行人让行行为推断过度依赖几何与运动学线索、缺乏视觉场景上下文与年龄相关行为差异推理能力的问题。</li><li>应用场景为城市道路中的车辆-行人交互（Vehicle-Pedestrian Interaction, VPI），研究问题包括行人意图理解与让行感知控制。</li><li>任务属于自动驾驶中的多模态推理框架设计，目标是在保证安全的同时提升通行效率。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 VLM-VPI（Vision-Language Model-based Vehicle-Pedestrian Interaction）多模态推理框架，融合行人意图理解与让行感知控制。</li><li>构建包含多模态感知层、视觉-语言推理层、分层安全控制器的三组件系统架构。</li><li>利用 Qwen3-VL 8B 进行视觉场景理解，GPT-OSS 20B 进行少样本意图推理，并引入年龄分层的制动裕度策略。</li><li>在仿真与真实数据上验证了意图分类准确率、通行效率与安全性指标的显著提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：完整的自动驾驶感知-决策-控制框架，覆盖行人意图识别与让行控制。</li><li>输入传感器：视觉观测与运动学观测（相机图像与行人运动数据；原文未报告具体传感器模态细节）。</li><li>场景表示：视觉场景语义信息与行人运动学状态联合表征（原文未报告具体场景表征结构）。</li><li>模型结构：包括多模态感知层、推理层与分层安全控制器；推理层使用 Qwen3-VL 8B（视觉理解）和 GPT-OSS 20B（少样本意图推理）。</li><li>分层安全控制器：实现年龄定制化制动策略，按儿童、成人、老年人施加不同的制动安全裕度，儿童与老年人获得更保守的安全边界。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>仿真数据集：CARLA 场景 112 个（意图分类），200 个仿真控制案例（安全与效率评估）。</li><li>真实数据集：PIE 场景 24 个（真实世界验证）。</li><li>模型规模：Qwen3-VL 8B、GPT-OSS 20B（原文仅给出参数量，未提供训练资源配置信息）。</li><li>仿真器：CARLA；其余实车平台与训练资源未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估设置：仿真开环测试与真实场景验证；对照方法包括基于规则基线、监督轨迹模型、零样本 LLM 配置与统一控制策略。</li><li>意图分类准确率：仿真 112 个 CARLA 场景中为 92.3%，优于规则基线（78.4%）、监督轨迹模型（73.5–82.4%）和零样本 LLM（88.4%）；真实 PIE 24 个场景中为 87.5%，验证了 sim-to-real 迁移能力。</li><li>安全与效率指标（200 仿真工况）：误报警率由 7.4% 将至 2.8%；平均交叉口通行时间由 13.5 s 缩至 11.8 s；冲突发生次数由 124 减至 33；平均最小碰撞时间（TTC）由 1.92 s 提升至 4.47 s。</li><li>年龄自适应控制效果：与统一制动策略相比，儿童场景冲突减少 60%，老年人场景冲突减少 54.5%。</li><li>评估条件：全部基于仿真（CARLA）与真实数据集（PIE 视频数据），文中未提到闭环测试或实车路测条件。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.04364/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Scalable Edge-assisted Fusion and Path Prediction for Connected Autonomous Vehicles</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2604.19452/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Robust Nonlinear Trajectory Tracking Control for Autonomous Racing on Three-Dimensional Tracks</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
