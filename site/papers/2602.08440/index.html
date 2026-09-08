@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SteerVLA: Steering Vision-Language-Action Models in Long-Tail Driving Scenarios - 自动驾驶每日论文卡</title>
+    <meta name="description" content="解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。 研究问题为如何将 VLM 的高层语义推理能力与 VLA 模型的低层反应式控制能力相结合，利用 VLM 世界知识引导 VLA 驾驶策略做出鲁棒控制。 提出 SteerVLA 框架，通过分层策略结构，让高层VLM推理生成细粒度语言指令（meta-actions）来引导低层VLA策略执行精确的控制动作。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2602.08440">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2602.08440.webp" alt="SteerVLA: Steering Vision-Language-Action Models in Long-Tail Driving Scenarios" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SteerVLA: Steering Vision-Language-Action Models in Long-Tail Driving Scenarios</h1>
+            <div class="detail-meta">2026-02-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2602.08440" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2602.08440" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2602.08440</span></div>
+            <p class="detail-summary">解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。 研究问题为如何将 VLM 的高层语义推理能力与 VLA 模型的低层反应式控制能力相结合，利用 VLM 世界知识引导 VLA 驾驶策略做出鲁棒控制。 提出 SteerVLA 框架，通过分层策略结构，让高层VLM推理生成细粒度语言指令（meta-actions）来引导低层VLA策略执行精确的控制动作。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Stanford University · Tian Gao、Jiankai Sun、Shirley Wu 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2602.08440/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。</p>
+  <ul class="reading-intro-points"><li>解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。</li><li>研究问题为如何将 VLM 的高层语义推理能力与 VLA 模型的低层反应式控制能力相结合，利用 VLM 世界知识引导 VLA 驾驶策略做出鲁棒控制。</li><li>提出 SteerVLA 框架，通过分层策略结构，让高层VLM推理生成细粒度语言指令（meta-actions）来引导低层VLA策略执行精确的控制动作。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Stanford University；作者：Tian Gao、Jiankai Sun、Shirley Wu、Dorsa Sadigh、Chelsea Finn</li><li>机构：University of California, Berkeley；作者：Celine Tan、Catherine Glossop、Timothy Gao、Kyle Stachowicz、Oier Mees、Sergey Levine</li><li>机构：Microsoft；作者：Oier Mees（原文同时标注 UCB 与 Microsoft）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。</li><li>研究问题为如何将 VLM 的高层语义推理能力与 VLA 模型的低层反应式控制能力相结合，利用 VLM 世界知识引导 VLA 驾驶策略做出鲁棒控制。</li><li>提出 SteerVLA 框架，通过分层策略结构，让高层VLM推理生成细粒度语言指令（meta-actions）来引导低层VLA策略执行精确的控制动作。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SteerVLA 框架，采用 VLM-VLA 分层结构，由高层策略进行语义与常识推理并输出细粒度 meta-actions，低层策略据此生成精确控制动作。</li><li>设计全自动数据标注流水线，基于已有驾驶轨迹自动生成与车辆控制对齐的细粒度语言标签，无需人工标注或特权仿真信息。</li><li>在标注时通过叠加中间层表示（如包围框或轨迹投影）增强轨迹信息，并利用轨迹细化出包含运动强度和方向调整细节的 meta-action 标签。</li><li>在 Bench2Drive 闭环基准上相较于 SOTA 方法 SimLingo 将整体驾驶分数提升 4.77 分，在长尾子集 Bench2Drive-LongTail 上提升 8.04 分。</li><li>所提出的流水线不依赖特权仿真信息，可自然迁移至真实世界数据，并在 NuScenes 开环评估中得到验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：分层端到端自动驾驶策略，由高层推理策略与低层控制策略串联组成。</li><li>输入传感器：单一前视相机图像；附带 6 秒历史自车状态（速度与航向，采样频率 0.5 Hz，k=3），以及导航系统提供的路由指令（原文未报告多相机输入）。</li><li>场景表示：高层输入为当前前视相机图像（可叠加包围框或轨迹投影）、历史自车状态与路由命令，输出为推理轨迹和 meta-action 文本；低层输入为相机图像与 meta-action 文本，输出预测的未来路点。</li><li>模型结构：高层与低层策略均基于 InternVL2-1B 预训练 VLM 微调（CARLA 闭环场景）；NuScenes 开环实验采用 Gemma3-4B 作为高层、PaliGemma-3B 作为低层；动作通过 VLM 输出后的轻量 MLP 头预测路点，采用 Smooth L1 损失训练。</li><li>关键技术：</li></ul>
+<p> - 在低层策略中不输入推理轨迹，仅以 meta-action 作为语言控制输入，使低层专注执行，避免语义推理干扰。</p>
+<p> - 自动标注流水线采用两阶段 Gemini 2.5 Flash-Lite 查询，先识别车辆基线动作，再用轨迹信息细化生成精细行为描述。</p>
+<p> - 推理轨迹由 3D 包围盒标注转换得到结构化自然语言描述，涵盖其他车辆的速度与相对位置。</p>
+<p> - 高低层策略以相同频率（CARLA 中 20 Hz）查询并串联，低层等待高层 meta-action 后输出动作。</p>
+<p> - 预测路点包括 4 Hz 时间采样路点（控制车速与时间运动）和 1 m 间隔几何路点（描述路径并引导转向），经 PID 控制器转为控制信号。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练数据源于 SimLingo 数据集中的驾驶轨迹与 meta-action 标签，并经 SteerVLA 自动标注流水线细化标签并生成推理轨迹。</li><li>用于标注的 VLM 为 Gemini 2.5 Flash-Lite，原文未报告具体训练与推理硬件规模；推理部署采用 NVIDIA L40 GPU。</li><li>开环评估使用 NuScenes 数据集，模型规模为 Gemma3-4B 高层和 PaliGemma-3B 低层，原文未报告具体训练资源。</li><li>原文未报告任何实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准主要为 CARLA 模拟器中的 Bench2Drive 基准（220 个驾驶场景，12 个城镇，涵盖恶劣天气和长尾场景）和自建 Bench2Drive-LongTail 子集（11 个长尾场景），另包含 NuScenes 真实数据开环评估。</li><li>评估指标为驾驶分数（driving score），即路线完成率乘以违规惩罚。</li><li>基准驱动分数结果为：SteerVLA 90.71，SimLingo 85.94；SteerVLA 在整体上比 SimLingo 高出 4.77 分，在 Bench2Drive-LongTail 上高 8.04 分。共现 SimLingo 对比方法为 DriveMoE、ORION、AutoVLA，均在不同场景标注中定位其相对表现（原文未给出除 SimLingo 之外的精确数值，详见附录）。</li><li>实验条件包括 CARLA 闭环仿真评估（20 Hz 推理频率）和 NuScenes 开环评估（原文声明 NuScenes 结果与现有方法可比但未给出精确数值）。</li><li>消融研究显示：SteerVLA（分层结构 + 原始 meta-action）88.81 分高于 SimLingo（85.94）表明分层结构有效；进一步引入细化 meta-action 和推理轨迹后最高达 90.71 分，证实了细粒度语言监督与推理轨迹的关键作用。</li><li>案例研究显示在施工区、事故导致的堵路、换道不让行等长尾场景中，SteerVLA 能产生及时且合理的推理与 meta-action，而 SimLingo 或开源 VLM 表现不佳（如推理受限、减速过迟导致碰撞）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2602.12616/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">When Environments Shift: Safe Planning with Generative Priors and Robust Conformal Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2602.01892/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Path Tracking with Dynamic Control Point Blending for Autonomous Vehicles: An Experimental Study</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

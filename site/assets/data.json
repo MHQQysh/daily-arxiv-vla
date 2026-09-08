@@ -1,5 +1,585 @@
 [
   {
+    "date": "2026-03-11",
+    "title": "A Survey of Reasoning in Autonomous Driving Systems: Open Challenges and Emerging Paradigms",
+    "link": "https://arxiv.org/abs/2603.11093",
+    "arxiv_id": "2603.11093",
+    "detail_path": "papers/2603.11093/",
+    "cover_path": "covers/2603.11093/",
+    "paper_image_path": "assets/paper-images/thumbs/2603.11093.webp",
+    "paper_image_full_path": "assets/paper-images/2603.11093.webp",
+    "preview_text": "该论文是一篇综述性论文，聚焦自动驾驶系统（AD）中的推理（Reasoning）能力。 研究问题：自动驾驶系统的瓶颈正从感知与控制的物理限制，转向缺乏鲁棒且可泛化的推理能力，特别是应对长尾场景和复杂社会交互时的不足。 主张将推理从传统模块化流水线中的一个组件，提升为整个自动驾驶系统的“认知核心”（Cognitive Core）。 以此动机为基础，论文提出“认知层级”（Cognitive Hierarchy）、七大核心推理挑战的分类法，并分别从系统实现视角与评估验证视角展开系统综述。",
+    "research_unit": "清华大学 · Kejin Yu、Ruixu Zhang、Zhiqiang Lin 等",
+    "hook_text": "该论文是一篇综述性论文，聚焦自动驾驶系统（AD）中的推理（Reasoning）能力。",
+    "key_points": [
+      "该论文是一篇综述性论文，聚焦自动驾驶系统（AD）中的推理（Reasoning）能力。",
+      "研究问题：自动驾驶系统的瓶颈正从感知与控制的物理限制，转向缺乏鲁棒且可泛化的推理能力，特别是应对长尾场景和复杂社会交互时的不足。",
+      "主张将推理从传统模块化流水线中的一个组件，提升为整个自动驾驶系统的“认知核心”（Cognitive Core）。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-03-08",
+    "title": "Emergency Lane-Change Simulation: A Behavioral Guidance Approach for Risky Scenario Generation",
+    "link": "https://arxiv.org/abs/2603.20234",
+    "arxiv_id": "2603.20234",
+    "detail_path": "papers/2603.20234/",
+    "cover_path": "covers/2603.20234/",
+    "paper_image_path": "assets/paper-images/thumbs/2603.20234.webp",
+    "paper_image_full_path": "assets/paper-images/2603.20234.webp",
+    "preview_text": "本文解决的是自动驾驶虚拟仿真测试中高风险场景生成的问题，具体针对紧急换道（emergency lane-change）这一典型高风险驾驶场景。 论文提出一种行为引导（behavioral guidance）方法，通过从有限数据中学习人类的紧急换道行为，并引导攻击车辆主动制造冲突，从而在CARLA仿真平台中生成物理可行且贴近真实驾驶行为的高风险碰撞场景。 该方法旨在克服现有基于强化学习的场景生成方法难以从少量数据中高效学习真实紧急行为的缺陷。",
+    "research_unit": "中山大学智能系统工程学院、广东省智能交通系统重点实验室 · Chen Xiong、Cheng Wang、Yuhang Liu",
+    "hook_text": "本文解决的是自动驾驶虚拟仿真测试中高风险场景生成的问题，具体针对紧急换道（emergency lane-change）这一典型高风险驾驶场景。",
+    "key_points": [
+      "本文解决的是自动驾驶虚拟仿真测试中高风险场景生成的问题，具体针对紧急换道（emergency lane-change）这一典型高风险驾驶场景。",
+      "论文提出一种行为引导（behavioral guidance）方法，通过从有限数据中学习人类的紧急换道行为，并引导攻击车辆主动制造冲突，从而在CARLA仿真平台中生成物理可行且贴近真实驾驶行为的高风险碰撞场景。",
+      "该方法旨在克服现有基于强化学习的场景生成方法难以从少量数据中高效学习真实紧急行为的缺陷。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-03-06",
+    "title": "Feasibility Restoration under Conflicting STL Specifications with Pareto-Optimal Refinement",
+    "link": "https://arxiv.org/abs/2603.06947",
+    "arxiv_id": "2603.06947",
+    "detail_path": "papers/2603.06947/",
+    "cover_path": "covers/2603.06947/",
+    "paper_image_path": "assets/paper-images/thumbs/2603.06947.webp",
+    "paper_image_full_path": "assets/paper-images/2603.06947.webp",
+    "preview_text": "论文解决自动驾驶中在冲突的STL（信号时序逻辑）规格下，优化控制模型因不可行而冻结（保守停车）的问题。 通过两阶段框架，先以最小L1范数松弛恢复MPC可行性，再以帕累托最优细化多目标权衡，以提升安全关键场景的决策质量与可解释性。",
+    "research_unit": "University of Southern California · Tianhao Wu",
+    "hook_text": "论文解决自动驾驶中在冲突的STL（信号时序逻辑）规格下，优化控制模型因不可行而冻结（保守停车）的问题。",
+    "key_points": [
+      "论文解决自动驾驶中在冲突的STL（信号时序逻辑）规格下，优化控制模型因不可行而冻结（保守停车）的问题。",
+      "通过两阶段框架，先以最小L1范数松弛恢复MPC可行性，再以帕累托最优细化多目标权衡，以提升安全关键场景的决策质量与可解释性。",
+      "提出基于最小L1范数松弛的不可行恢复机制，在仅松弛可协商规格、严格保留硬安全约束的条件下，以最小规范违例恢复MPC可行性，避免冻结。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-02-26",
+    "title": "Risk-Aware World Model Predictive Control for Generalizable End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2602.23259",
+    "arxiv_id": "2602.23259",
+    "detail_path": "papers/2602.23259/",
+    "cover_path": "covers/2602.23259/",
+    "paper_image_path": "assets/paper-images/thumbs/2602.23259.webp",
+    "paper_image_full_path": "assets/paper-images/2602.23259.webp",
+    "preview_text": "本文针对端到端自动驾驶（E2E-AD）中基于模仿学习（IL）方法“仅模仿专家行为”导致的泛化能力不足问题，提出了一种无需专家动作监督的统一框架。 核心任务为在闭环、端到端的自动驾驶场景中做出安全、合规且可泛化的驾驶决策，应用场景包括城市道路、高速等具长尾风险的复杂交通环境。 研究问题聚焦于“在无专家示范的情况下，端到端自动驾驶系统能否通过显式风险评估做出可靠决策”，尤其面向分布外场景及罕见高险场景的泛化挑战。",
+    "research_unit": "University of Trento · Jiangxin Sun、Feng Xue、Teng Long 等",
+    "hook_text": "本文针对端到端自动驾驶（E2E-AD）中基于模仿学习（IL）方法“仅模仿专家行为”导致的泛化能力不足问题，提出了一种无需专家动作监督的统一框架。",
+    "key_points": [
+      "本文针对端到端自动驾驶（E2E-AD）中基于模仿学习（IL）方法“仅模仿专家行为”导致的泛化能力不足问题，提出了一种无需专家动作监督的统一框架。",
+      "核心任务为在闭环、端到端的自动驾驶场景中做出安全、合规且可泛化的驾驶决策，应用场景包括城市道路、高速等具长尾风险的复杂交通环境。",
+      "研究问题聚焦于“在无专家示范的情况下，端到端自动驾驶系统能否通过显式风险评估做出可靠决策”，尤其面向分布外场景及罕见高险场景的泛化挑战。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-02-19",
+    "title": "Dodging the Moose: Experimental Insights in Real-Life Automated Collision Avoidance",
+    "link": "https://arxiv.org/abs/2602.17512",
+    "arxiv_id": "2602.17512",
+    "detail_path": "papers/2602.17512/",
+    "cover_path": "covers/2602.17512/",
+    "paper_image_path": "assets/paper-images/thumbs/2602.17512.webp",
+    "paper_image_full_path": "assets/paper-images/2602.17512.webp",
+    "preview_text": "论文解决自动驾驶中静态障碍物突然出现（即麋鹿测试）这一紧急场景下的实时自动碰撞避免问题。 应用场景为道路中静态障碍物的紧急避撞，涉及运动规划与控制。 研究问题聚焦于：在有限计算资源条件下，基于MPC的碰撞避免难以实时求解；当MPC优化问题不可行或初始解质量差时，需要一种人类化前馈规划器辅助求解。",
+    "research_unit": "Delft Center for Systems and Control, Delft University of Technology · Leil…",
+    "hook_text": "论文解决自动驾驶中静态障碍物突然出现（即麋鹿测试）这一紧急场景下的实时自动碰撞避免问题。",
+    "key_points": [
+      "论文解决自动驾驶中静态障碍物突然出现（即麋鹿测试）这一紧急场景下的实时自动碰撞避免问题。",
+      "应用场景为道路中静态障碍物的紧急避撞，涉及运动规划与控制。",
+      "研究问题聚焦于：在有限计算资源条件下，基于MPC的碰撞避免难以实时求解；当MPC优化问题不可行或初始解质量差时，需要一种人类化前馈规划器辅助求解。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-02-13",
+    "title": "When Environments Shift: Safe Planning with Generative Priors and Robust Conformal Prediction",
+    "link": "https://arxiv.org/abs/2602.12616",
+    "arxiv_id": "2602.12616",
+    "detail_path": "papers/2602.12616/",
+    "cover_path": "covers/2602.12616/",
+    "paper_image_path": "assets/paper-images/thumbs/2602.12616.webp",
+    "paper_image_full_path": "assets/paper-images/2602.12616.webp",
+    "preview_text": "本文解决自动驾驶等自主系统在动态环境中因分布偏移而导致的安全规划问题。 主要应用场景为自主车辆在行人及人类驾驶车辆等动态不可控智能体环境中进行安全运动规划。 研究问题在于环境部署数据与训练数据分布不一致时，基于保形预测的规划安全保证失效。",
+    "research_unit": "Department of Electrical Engineering, Indian Institute of Technology Kharag…",
+    "hook_text": "本文解决自动驾驶等自主系统在动态环境中因分布偏移而导致的安全规划问题。",
+    "key_points": [
+      "本文解决自动驾驶等自主系统在动态环境中因分布偏移而导致的安全规划问题。",
+      "主要应用场景为自主车辆在行人及人类驾驶车辆等动态不可控智能体环境中进行安全运动规划。",
+      "研究问题在于环境部署数据与训练数据分布不一致时，基于保形预测的规划安全保证失效。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-02-09",
+    "title": "SteerVLA: Steering Vision-Language-Action Models in Long-Tail Driving Scenarios",
+    "link": "https://arxiv.org/abs/2602.08440",
+    "arxiv_id": "2602.08440",
+    "detail_path": "papers/2602.08440/",
+    "cover_path": "covers/2602.08440/",
+    "paper_image_path": "assets/paper-images/thumbs/2602.08440.webp",
+    "paper_image_full_path": "assets/paper-images/2602.08440.webp",
+    "preview_text": "解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。 研究问题为如何将 VLM 的高层语义推理能力与 VLA 模型的低层反应式控制能力相结合，利用 VLM 世界知识引导 VLA 驾驶策略做出鲁棒控制。 提出 SteerVLA 框架，通过分层策略结构，让高层VLM推理生成细粒度语言指令（meta-actions）来引导低层VLA策略执行精确的控制动作。",
+    "research_unit": "Stanford University · Tian Gao、Jiankai Sun、Shirley Wu 等",
+    "hook_text": "解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。",
+    "key_points": [
+      "解决自动驾驶中长尾事件场景下的任务，如施工区、事故堵路、被堵路口等需要常识推理的罕见情况。",
+      "研究问题为如何将 VLM 的高层语义推理能力与 VLA 模型的低层反应式控制能力相结合，利用 VLM 世界知识引导 VLA 驾驶策略做出鲁棒控制。",
+      "提出 SteerVLA 框架，通过分层策略结构，让高层VLM推理生成细粒度语言指令（meta-actions）来引导低层VLA策略执行精确的控制动作。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-02-02",
+    "title": "Path Tracking with Dynamic Control Point Blending for Autonomous Vehicles: An Experimental Study",
+    "link": "https://arxiv.org/abs/2602.01892",
+    "arxiv_id": "2602.01892",
+    "detail_path": "papers/2602.01892/",
+    "cover_path": "covers/2602.01892/",
+    "paper_image_path": "assets/paper-images/thumbs/2602.01892.webp",
+    "paper_image_full_path": "assets/paper-images/2602.01892.webp",
+    "preview_text": "论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。 横向转向命令通过重心混合两个互补控制器获得：作用于前轴的 Stanley 控制器与作用于后轴的曲率几何控制器，实现转向行为的连续过渡与更优的跟踪稳定性。 同时引入一种基于曲率的纵向控制策略，利用虚拟轨道边界和射线追踪，将前方几何约束转换为虚拟障碍物距离，从而调节车速。 整体方法在统一控制栈中实现，并通过仿真和搭载 GPS-RTK、雷达、里程计与 IMU 的真实自动驾驶车辆进行验证，涉及闭环跟踪与倒车机动。",
+    "research_unit": "UTBM（勃艮第-弗朗什-孔泰技术大学），CIAD（复杂系统智能与自动化实验室） · Alexandre Lombard、Florent Perron…",
+    "hook_text": "论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。",
+    "key_points": [
+      "论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。",
+      "横向转向命令通过重心混合两个互补控制器获得：作用于前轴的 Stanley 控制器与作用于后轴的曲率几何控制器，实现转向行为的连续过渡与更优的跟踪稳定性。",
+      "同时引入一种基于曲率的纵向控制策略，利用虚拟轨道边界和射线追踪，将前方几何约束转换为虚拟障碍物距离，从而调节车速。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-02-02",
+    "title": "Co-Design of Rover Wheels and Control using Bayesian Optimization and Rover-Terrain Simulations",
+    "link": "https://arxiv.org/abs/2602.01535",
+    "arxiv_id": "2602.01535",
+    "detail_path": "papers/2602.01535/",
+    "cover_path": "covers/2602.01535/",
+    "paper_image_path": "assets/paper-images/thumbs/2602.01535.webp",
+    "paper_image_full_path": "assets/paper-images/2602.01535.webp",
+    "preview_text": "本文研究自动驾驶领域中的越野/非结构化地形移动机器人（火星车/漫游车）的轮式设计与控制协同优化问题。 针对现有基于离散元法（DEM）的仿真成本过高、只能进行单轮测试、无法考虑整车-车轮-控制器耦合效应的局限性，提出基于贝叶斯优化的轮式几何与转向控制器参数协同设计框架。 应用场景为松软可变形地形上的自主越野移动，任务包括直线牵引测试、正弦轨迹跟踪测试以及泛化性环形赛道测试。",
+    "research_unit": "威斯康星大学麦迪逊分校机械工程系（University of Wisconsin–Madison, Department of Mechanical…",
+    "hook_text": "本文研究自动驾驶领域中的越野/非结构化地形移动机器人（火星车/漫游车）的轮式设计与控制协同优化问题。",
+    "key_points": [
+      "本文研究自动驾驶领域中的越野/非结构化地形移动机器人（火星车/漫游车）的轮式设计与控制协同优化问题。",
+      "针对现有基于离散元法（DEM）的仿真成本过高、只能进行单轮测试、无法考虑整车-车轮-控制器耦合效应的局限性，提出基于贝叶斯优化的轮式几何与转向控制器参数协同设计框架。",
+      "应用场景为松软可变形地形上的自主越野移动，任务包括直线牵引测试、正弦轨迹跟踪测试以及泛化性环形赛道测试。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-01-29",
+    "title": "LLM-Driven Scenario-Aware Planning for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2601.21876",
+    "arxiv_id": "2601.21876",
+    "detail_path": "papers/2601.21876/",
+    "cover_path": "covers/2601.21876/",
+    "paper_image_path": "assets/paper-images/thumbs/2601.21876.webp",
+    "paper_image_full_path": "assets/paper-images/2601.21876.webp",
+    "preview_text": "论文解决自动驾驶中混合规划器切换框架（HPSF）的场景适应问题，即在高速行驶效率与密集交通下的安全精准操控之间进行平衡。 应用场景包括低复杂度稀疏障碍物环境下的高速行驶以及高复杂度密集障碍物场景下的精准穿越与超车，模拟环境基于澳门格兰披治大赛车赛道。 研究问题在于现有 HPSF 依赖启发式场景识别且控制频率较低，难以可靠地进行模式切换或在拥堵环境中保持高效行驶；论文提出 LAP 方法，利用大语言模型（LLM）进行场景理解，并将其推理结果集成到模式配置与运动规划的联合优化中。",
+    "research_unit": "University of Macau · He Li、Zhaowei Chen、Rui Gao 等",
+    "hook_text": "论文解决自动驾驶中混合规划器切换框架（HPSF）的场景适应问题，即在高速行驶效率与密集交通下的安全精准操控之间进行平衡。",
+    "key_points": [
+      "论文解决自动驾驶中混合规划器切换框架（HPSF）的场景适应问题，即在高速行驶效率与密集交通下的安全精准操控之间进行平衡。",
+      "应用场景包括低复杂度稀疏障碍物环境下的高速行驶以及高复杂度密集障碍物场景下的精准穿越与超车，模拟环境基于澳门格兰披治大赛车赛道。",
+      "研究问题在于现有 HPSF 依赖启发式场景识别且控制频率较低，难以可靠地进行模式切换或在拥堵环境中保持高效行驶；论文提出 LAP 方法，利用大语言模型（LLM）进行场景理解，并将其推理结果集成到模式配置与运动规划的联合优化中。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-01-04",
+    "title": "HanoiWorld : A Joint Embedding Predictive Architecture BasedWorld Model for Autonomous Vehicle Controller",
+    "link": "https://arxiv.org/abs/2601.01577",
+    "arxiv_id": "2601.01577",
+    "detail_path": "papers/2601.01577/",
+    "cover_path": "covers/2601.01577/",
+    "paper_image_path": "assets/paper-images/thumbs/2601.01577.webp",
+    "paper_image_full_path": "assets/paper-images/2601.01577.webp",
+    "preview_text": "论文提出一种名为 HanoiWorld 的基于联合嵌入预测架构（JEPA）的世界模型，用于自动驾驶车辆控制器。 解决的任务是自动驾驶中的长期规划与控制，应用场景包括高速公路、环岛和匝道合流等驾驶环境。 核心研究问题：当前基于强化学习的自动驾驶控制器数据需求大、训练不稳定、难以锚定安全概念，且像素级重建忽略了决策相关特征；论文探索利用自监督学习的高质量表征结合循环状态空间模型实现高效、安全感知的驾驶规划。",
+    "research_unit": "Faculty of Mathematics and Informatics, Hanoi University of Science and Tec…",
+    "hook_text": "论文提出一种名为 HanoiWorld 的基于联合嵌入预测架构（JEPA）的世界模型，用于自动驾驶车辆控制器。",
+    "key_points": [
+      "论文提出一种名为 HanoiWorld 的基于联合嵌入预测架构（JEPA）的世界模型，用于自动驾驶车辆控制器。",
+      "解决的任务是自动驾驶中的长期规划与控制，应用场景包括高速公路、环岛和匝道合流等驾驶环境。",
+      "核心研究问题：当前基于强化学习的自动驾驶控制器数据需求大、训练不稳定、难以锚定安全概念，且像素级重建忽略了决策相关特征；论文探索利用自监督学习的高质量表征结合循环状态空间模型实现高效、安全感知的驾驶规划。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2025-12-22",
+    "title": "A Gauss-Newton-Induced Structure-Exploiting Algorithm for Differentiable Optimal Control",
+    "link": "https://arxiv.org/abs/2512.19447",
+    "arxiv_id": "2512.19447",
+    "detail_path": "papers/2512.19447/",
+    "cover_path": "covers/2512.19447/",
+    "paper_image_path": "assets/paper-images/thumbs/2512.19447.webp",
+    "paper_image_full_path": "assets/paper-images/2512.19447.webp",
+    "preview_text": "该论文聚焦于可微最优控制（尤其是可微非线性模型预测控制 NMPC）的加速问题，任务为解决将学习与最优控制结合时反向传播阶段的轨迹导数（trajectory derivatives）计算瓶颈。 应用场景为自动驾驶中的人类似（human-like）轨迹跟踪控制的模仿学习，旨在从人类驾驶示范数据中学习个性化驾驶风格。 研究问题为：如何在保证导数正确性的前提下，利用微分 KKT 系统的结构特性（块稀疏与正半定性）显著降低计算复杂度。",
+    "research_unit": "School of Artificial Intelligence, Jilin University, Changchun, China · Yua…",
+    "hook_text": "该论文聚焦于可微最优控制（尤其是可微非线性模型预测控制 NMPC）的加速问题，任务为解决将学习与最优控制结合时反向传播阶段的轨迹导数（trajectory derivatives）计算瓶颈。",
+    "key_points": [
+      "该论文聚焦于可微最优控制（尤其是可微非线性模型预测控制 NMPC）的加速问题，任务为解决将学习与最优控制结合时反向传播阶段的轨迹导数（trajectory derivatives）计算瓶颈。",
+      "应用场景为自动驾驶中的人类似（human-like）轨迹跟踪控制的模仿学习，旨在从人类驾驶示范数据中学习个性化驾驶风格。",
+      "研究问题为：如何在保证导数正确性的前提下，利用微分 KKT 系统的结构特性（块稀疏与正半定性）显著降低计算复杂度。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2025-12-21",
+    "title": "CauTraj: A Causal-Knowledge-Guided Framework for Lane-Changing Trajectory Planning of Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2512.18703",
+    "arxiv_id": "2512.18703",
+    "detail_path": "papers/2512.18703/",
+    "cover_path": "covers/2512.18703/",
+    "paper_image_path": "assets/paper-images/thumbs/2512.18703.webp",
+    "paper_image_full_path": "assets/paper-images/2512.18703.webp",
+    "preview_text": "该论文解决自动驾驶中人机混合交通场景下的换道轨迹规划问题。 提出一种将人类驾驶员先验知识（以因果知识形式）融入轨迹规划控制过程的框架 CauTraj。 研究问题聚焦于如何在换道规划中利用可解释的车辆交互因果信息，使规划轨迹更贴近人类驾驶行为，同时提升安全性、稳定性和真实感。",
+    "research_unit": "原文未明确对应机构 · Cailin Lei、Haiyang Wu、Yuxiong Ji 等",
+    "hook_text": "该论文解决自动驾驶中人机混合交通场景下的换道轨迹规划问题。",
+    "key_points": [
+      "该论文解决自动驾驶中人机混合交通场景下的换道轨迹规划问题。",
+      "提出一种将人类驾驶员先验知识（以因果知识形式）融入轨迹规划控制过程的框架 CauTraj。",
+      "研究问题聚焦于如何在换道规划中利用可解释的车辆交互因果信息，使规划轨迹更贴近人类驾驶行为，同时提升安全性、稳定性和真实感。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2025-12-15",
+    "title": "A Convex Obstacle Avoidance Formulation",
+    "link": "https://arxiv.org/abs/2512.13836",
+    "arxiv_id": "2512.13836",
+    "detail_path": "papers/2512.13836/",
+    "cover_path": "covers/2512.13836/",
+    "paper_image_path": "assets/paper-images/thumbs/2512.13836.webp",
+    "paper_image_full_path": "assets/paper-images/2512.13836.webp",
+    "preview_text": "论文解决自动驾驶车辆在动态环境中可靠避障的任务。 研究问题是非线性模型预测控制器（NMPC）在需要高频执行的时间关键场景中计算负担过重的问题。 论文提出一种新颖的凸避障公式化方法，即“松弛凸避障”（Relaxed Convex Obstacle Avoidance，RCOA），将其集成到凸模型预测控制（MPC）框架中，以提高计算效率。 RCOA 的一个关键特性是即使障碍物位于预测范围之外，避障仍然有效，因此允许使用更短的预测范围实现实时部署。",
+    "research_unit": "Laboratory for AI, Robotics and Automation, University of California at Dav…",
+    "hook_text": "论文解决自动驾驶车辆在动态环境中可靠避障的任务。",
+    "key_points": [
+      "论文解决自动驾驶车辆在动态环境中可靠避障的任务。",
+      "研究问题是非线性模型预测控制器（NMPC）在需要高频执行的时间关键场景中计算负担过重的问题。",
+      "论文提出一种新颖的凸避障公式化方法，即“松弛凸避障”（Relaxed Convex Obstacle Avoidance，RCOA），将其集成到凸模型预测控制（MPC）框架中，以提高计算效率。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2025-12-15",
+    "title": "Tackling Snow-Induced Challenges: Safe Autonomous Lane-Keeping with Robust Reinforcement Learning",
+    "link": "https://arxiv.org/abs/2512.12987",
+    "arxiv_id": "2512.12987",
+    "detail_path": "papers/2512.12987/",
+    "cover_path": "covers/2512.12987/",
+    "paper_image_path": "assets/paper-images/thumbs/2512.12987.webp",
+    "paper_image_full_path": "assets/paper-images/2512.12987.webp",
+    "preview_text": "本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。 研究问题聚焦于如何在感知层和控制层同时存在不确定性的情况下，使强化学习控制器保持稳健的车道跟踪能力。 论文将车道保持任务建模为鲁棒强化学习问题，基于 Action-Robust Markov Decision Process 框架，提出两种新的决策算法。",
+    "research_unit": "Department of Mechanical Engineering, Amirkabir University of Technology, T…",
+    "hook_text": "本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。",
+    "key_points": [
+      "本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。",
+      "研究问题聚焦于如何在感知层和控制层同时存在不确定性的情况下，使强化学习控制器保持稳健的车道跟踪能力。",
+      "论文将车道保持任务建模为鲁棒强化学习问题，基于 Action-Robust Markov Decision Process 框架，提出两种新的决策算法。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2025-12-05",
+    "title": "Situation-Aware Interactive MPC Switching for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2512.06182",
+    "arxiv_id": "2512.06182",
+    "detail_path": "papers/2512.06182/",
+    "cover_path": "covers/2512.06182/",
+    "paper_image_path": "assets/paper-images/thumbs/2512.06182.webp",
+    "paper_image_full_path": "assets/paper-images/2512.06182.webp",
+    "preview_text": "该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。 核心研究问题是如何在保证高级交互能力（如主动信息寻求）的同时，显著降低计算开销。 论文对五种 MPC 控制器进行统一评估并建立交互能力层级，随后设计一种基于神经网络分类器的情境感知切换策略，仅在罕见但关键的场景中调用最先进的 MPC，在大多数场景中依赖基础 MPC。",
+    "research_unit": "Eindhoven University of Technology · Shuhao Qi、Qiling Aori、Mircea Lazar 等",
+    "hook_text": "该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。",
+    "key_points": [
+      "该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。",
+      "核心研究问题是如何在保证高级交互能力（如主动信息寻求）的同时，显著降低计算开销。",
+      "论文对五种 MPC 控制器进行统一评估并建立交互能力层级，随后设计一种基于神经网络分类器的情境感知切换策略，仅在罕见但关键的场景中调用最先进的 MPC，在大多数场景中依赖基础 MPC。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2025-12-03",
+    "title": "Safety Reinforced Model Predictive Control (SRMPC): Improving MPC with Reinforcement Learning for Motion Planning in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2512.03774",
+    "arxiv_id": "2512.03774",
+    "detail_path": "papers/2512.03774/",
+    "cover_path": "covers/2512.03774/",
+    "paper_image_path": "assets/paper-images/thumbs/2512.03774.webp",
+    "paper_image_full_path": "assets/paper-images/2512.03774.webp",
+    "preview_text": "论文解决自动驾驶中的运动规划任务，具体为高速公路场景下的轨迹生成与控制问题。 研究问题：标准线性时变模型预测控制（LTV-MPC）因凸近似限制只能找到局部最优解，而纯强化学习（RL）难以保证安全约束。论文提出将安全强化学习（SRL）与MPC相结合，利用SRL生成的安全参考轨迹引导MPC跳出局部最优，从而提升安全性和规划性能。",
+    "research_unit": "Karlsruhe Institute of Technology (KIT) · Johannes Fischer、Marlon Steiner、C…",
+    "hook_text": "论文解决自动驾驶中的运动规划任务，具体为高速公路场景下的轨迹生成与控制问题。",
+    "key_points": [
+      "论文解决自动驾驶中的运动规划任务，具体为高速公路场景下的轨迹生成与控制问题。",
+      "研究问题：标准线性时变模型预测控制（LTV-MPC）因凸近似限制只能找到局部最优解，而纯强化学习（RL）难以保证安全约束。论文提出将安全强化学习（SRL）与MPC相结合，利用SRL生成的安全参考轨迹引导MPC跳出局部最优，从而提升安全性和规划性能。",
+      "提出将基于安全索引（Safety Index）和状态相关拉格朗日乘子的安全强化学习方法应用于自动驾驶任务。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2025-12-03",
+    "title": "Context-Triggered Contingency Games for Strategic Multi-Agent Interaction",
+    "link": "https://arxiv.org/abs/2512.03639",
+    "arxiv_id": "2512.03639",
+    "detail_path": "papers/2512.03639/",
+    "cover_path": "covers/2512.03639/",
+    "paper_image_path": "assets/paper-images/thumbs/2512.03639.webp",
+    "paper_image_full_path": "assets/paper-images/2512.03639.webp",
+    "preview_text": "论文解决自动驾驶与机器人导航中多智能体的战略交互问题，要求同时兼顾长期战略目标（如按时到达出口、完成配送任务）与短期动态适应（如避让、汇入车流）。 应用场景包括移动机器人导航（非结构化环境中的未知动态障碍，需完成时序任务）和自动驾驶高速公路场景（保持巡航速度并随时返回右侧车道）。 研究问题为如何在未知其他智能体目标的前提下，通过分层架构融合高层战略博弈与低层动态博弈，从而既保证安全又保证任务推进，并满足实时性要求。",
+    "research_unit": "Max Planck Institute for Software Systems, Kaiserslautern, Germany · Kilian…",
+    "hook_text": "论文解决自动驾驶与机器人导航中多智能体的战略交互问题，要求同时兼顾长期战略目标（如按时到达出口、完成配送任务）与短期动态适应（如避让、汇入车流）。",
+    "key_points": [
+      "论文解决自动驾驶与机器人导航中多智能体的战略交互问题，要求同时兼顾长期战略目标（如按时到达出口、完成配送任务）与短期动态适应（如避让、汇入车流）。",
+      "应用场景包括移动机器人导航（非结构化环境中的未知动态障碍，需完成时序任务）和自动驾驶高速公路场景（保持巡航速度并随时返回右侧车道）。",
+      "研究问题为如何在未知其他智能体目标的前提下，通过分层架构融合高层战略博弈与低层动态博弈，从而既保证安全又保证任务推进，并满足实时性要求。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2025-11-24",
+    "title": "Development of a Testbed for Autonomous Vehicles: Integrating MPC Control with Monocular Camera Lane Detection",
+    "link": "https://arxiv.org/abs/2511.19655",
+    "arxiv_id": "2511.19655",
+    "detail_path": "papers/2511.19655/",
+    "cover_path": "covers/2511.19655/",
+    "paper_image_path": "assets/paper-images/thumbs/2511.19655.webp",
+    "paper_image_full_path": "assets/paper-images/2511.19655.webp",
+    "preview_text": "该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。 应用场景为搭载单目摄像头的智能车辆，在仿真环境与真实环境中进行道路行驶。 研究问题聚焦于：结合车道识别与模型预测控制（MPC），提升轨迹跟踪的精度与稳定性，并搭建用于自动驾驶车辆测试的实验平台。",
+    "research_unit": "原文未报告 · Shantanu Rahman、Nayeb Hasin、Mainul Islam 等",
+    "hook_text": "该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。",
+    "key_points": [
+      "该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。",
+      "应用场景为搭载单目摄像头的智能车辆，在仿真环境与真实环境中进行道路行驶。",
+      "研究问题聚焦于：结合车道识别与模型预测控制（MPC），提升轨迹跟踪的精度与稳定性，并搭建用于自动驾驶车辆测试的实验平台。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2025-11-10",
+    "title": "Dynamics-Decoupled Trajectory Alignment for Sim-to-Real Transfer in Reinforcement Learning for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2511.07155",
+    "arxiv_id": "2511.07155",
+    "detail_path": "papers/2511.07155/",
+    "cover_path": "covers/2511.07155/",
+    "paper_image_path": "assets/paper-images/thumbs/2511.07155.webp",
+    "paper_image_full_path": "assets/paper-images/2511.07155.webp",
+    "preview_text": "本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。 核心挑战在于真实车辆动力学复杂且难以精确建模，导致仿真中训练的 RL 策略直接部署时性能下降。 应用场景为真实车辆在封闭测试场内的路径跟踪任务，覆盖直线和弯道等城市驾驶场景。 研究问题是如何在不依赖高保真仿真器或车辆特定动力学模型的情况下，实现 RL 运动规划的零样本、鲁棒的真车部署。",
+    "research_unit": "University of the Bundeswehr Munich, Germany · Thomas Steinecker、Alexander…",
+    "hook_text": "本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。",
+    "key_points": [
+      "本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。",
+      "核心挑战在于真实车辆动力学复杂且难以精确建模，导致仿真中训练的 RL 策略直接部署时性能下降。",
+      "应用场景为真实车辆在封闭测试场内的路径跟踪任务，覆盖直线和弯道等城市驾驶场景。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-04",
     "title": "CrossDepth: Geometry-Constrained Attention for Generalizable Multi-View Surround Depth Estimation",
     "link": "https://arxiv.org/abs/2609.05397",

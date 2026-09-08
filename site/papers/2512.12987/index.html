@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tackling Snow-Induced Challenges: Safe Autonomous Lane-Keeping with Robust Reinforcement Learning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。 研究问题聚焦于如何在感知层和控制层同时存在不确定性的情况下，使强化学习控制器保持稳健的车道跟踪能力。 论文将车道保持任务建模为鲁棒强化学习问题，基于 Action-Robust Markov Decision Process 框架，提出两种新的决策算法。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2512.12987">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2512.12987.webp" alt="Tackling Snow-Induced Challenges: Safe Autonomous Lane-Keeping with Robust Reinforcement Learning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Tackling Snow-Induced Challenges: Safe Autonomous Lane-Keeping with Robust Reinforcement Learning</h1>
+            <div class="detail-meta">2025-12-15 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2512.12987" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2512.12987" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2512.12987</span></div>
+            <p class="detail-summary">本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。 研究问题聚焦于如何在感知层和控制层同时存在不确定性的情况下，使强化学习控制器保持稳健的车道跟踪能力。 论文将车道保持任务建模为鲁棒强化学习问题，基于 Action-Robust Markov Decision Process 框架，提出两种新的决策算法。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Department of Mechanical Engineering, Amirkabir University of Technology, T…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2512.12987/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。</li><li>研究问题聚焦于如何在感知层和控制层同时存在不确定性的情况下，使强化学习控制器保持稳健的车道跟踪能力。</li><li>论文将车道保持任务建模为鲁棒强化学习问题，基于 Action-Robust Markov Decision Process 框架，提出两种新的决策算法。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Department of Mechanical Engineering, Amirkabir University of Technology, Tehran, Iran；作者：Amin Jalal Aghdasian, Ali Kamali Iglie</li><li>机构：Department of Electrical Engineering, Amirkabir University of Technology, Tehran, Iran；作者：Farzaneh Abdollahi</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶车辆在雪天路面条件下车道保持系统的安全性问题，应用场景为低摩擦、低可见度的雪地环境。</li><li>研究问题聚焦于如何在感知层和控制层同时存在不确定性的情况下，使强化学习控制器保持稳健的车道跟踪能力。</li><li>论文将车道保持任务建模为鲁棒强化学习问题，基于 Action-Robust Markov Decision Process 框架，提出两种新的决策算法。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种针对雪天不确定性的车道保持奖励函数，同时惩罚横向偏差、过度控制动作和不安全轨迹跟踪。</li><li>提出 AR-RDPG 算法，将循环神经网络引入行动鲁棒 DDPG 框架的 actor、critic 和对抗分支，利用时序记忆处理部分可观测性。</li><li>提出 AR-CADPG 算法，一种端到端视觉控制管线，将 CNN 与空间注意力机制、对抗鲁棒性集成于 DRL 框架中。</li><li>在 CARLA 模拟器中多种雪天场景下训练和验证所提算法，并在 Jetson Nano 机器人小车上完成真实世界实验验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：算法属于决策与控制层，并包含感知层处理模块。</li><li>输入传感器：前置摄像头图像；用于状态输入的车辆运动学变量包括纵向速度、横向偏差和航向角。</li><li>场景表示：AR-RDPG 方法中感知模块从摄像头图像中提取道路中线多项式的四个系数，与控制层观测共同构成输入状态；AR-CADPG 直接使用原始图像与运动学变量的端到端输入。</li><li>模型结构：AR-RDPG 利用深度多尺度密集网络进行除雪预处理，DCNN 用于车道中线系数提取，RNN 用于策略、值与对抗网络中的时序建模。AR-CADPG 采用 CNN 编码图像特征，经空间注意力掩码后融合全连接层投影的运动学嵌入，再经全连接融合输入 actor 网络。</li><li>关键技术：对动作执行施加对抗扰动，当动作按混合因子与对抗策略动作进行混合，最小化最坏情况期望回报的鲁棒策略学习。AR-CADPG 的注意力机制采用平均池化、最大池化拼接后经卷积与 sigmoid 生成空间掩码，点乘原特征图。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告大规模公用数据集；用于 DCNN 预测训练的数据集包含 1000 张雪景图像和 1000 张晴天图像，标签由 Clothoid 方法自动提取中线后拟合所得。</li><li>仿真器：CARLA 开源模拟器，采用 Town04、Town05、Town06、Town07 四张地图进行训练与验证。</li><li>模型规模：原文未报告具体的模型参数量。</li><li>训练资源：12th Gen Intel Core i9-12900HX CPU 与 NVIDIA GeForce RTX 3080 Ti GPU（16 GB 显存）。</li><li>实车平台：NVIDIA JetRacer 平台，配备 Jetson Nano（四核 ARM Cortex-A57 CPU，128 核 Maxwell GPU）、广角高清摄像头、Intel RealSense T265 视觉惯性里程计，有 JetCam、torch2trt、JetRacer 软件栈。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在 CARLA 模拟器中随机生成的 50 条不同路线下进行车道保持评估，验证时路面摩擦系数设置为 0.5。</li><li>评估指标：RMSE、归一化 RMSE、横向偏差误差的标准差。</li><li>关键数值：DDPG 的 RMSE 0.42 m、nRMSE 0.120、标准差 0.22 m；AR-DDPG 的 RMSE 0.34 m、nRMSE 0.097、标准差 0.17 m；AR-RDPG 的 RMSE 0.27 m、nRMSE 0.077、标准差 0.14 m；AR-CADPG 的 RMSE 0.23 m、nRMSE 0.066、标准差 0.11 m。</li><li>对比方法：DDPG、AR-DDPG、AR-RDPG，以及本文提出的 AR-CADPG。</li><li>评估条件：训练阶段在 CARLA 模拟器中进行，路面摩擦系数 0.6，附加模拟雪花和随机移除车道标记；验证为模拟环境中的开环独立策略测试，采用 A* 全局规划随机起终点，并对四条算法进行回归指标比较；真实世界测试在由防滑垫铺设的专用试验跑道上进行，包含反光路面、遮挡区、缺失车道段、干扰粒子与油污低摩擦区域，采用迁移学习微调预训练策略，实车条件下 AR-CADPG 优于 AR-RDPG。</li><li>训练结果曲线显示 AR-CADPG 最终回报最高，训练曲线平稳；AR-RDPG 亦获得良好回报，训练动态平滑；DDPG 最终回报较低且曲线变化较大。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2512.13836/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">A Convex Obstacle Avoidance Formulation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2512.06182/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Situation-Aware Interactive MPC Switching for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

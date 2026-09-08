@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Development of a Testbed for Autonomous Vehicles: Integrating MPC Control with Monocular Camera Lane Detection - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。 应用场景为搭载单目摄像头的智能车辆，在仿真环境与真实环境中进行道路行驶。 研究问题聚焦于：结合车道识别与模型预测控制（MPC），提升轨迹跟踪的精度与稳定性，并搭建用于自动驾驶车辆测试的实验平台。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2511.19655">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2511.19655.webp" alt="Development of a Testbed for Autonomous Vehicles: Integrating MPC Control with Monocular Camera Lane Detection" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Development of a Testbed for Autonomous Vehicles: Integrating MPC Control with Monocular Camera Lane Detection</h1>
+            <div class="detail-meta">2025-11-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2511.19655" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2511.19655" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2511.19655</span></div>
+            <p class="detail-summary">该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。 应用场景为搭载单目摄像头的智能车辆，在仿真环境与真实环境中进行道路行驶。 研究问题聚焦于：结合车道识别与模型预测控制（MPC），提升轨迹跟踪的精度与稳定性，并搭建用于自动驾驶车辆测试的实验平台。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">4 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未报告 · Shantanu Rahman、Nayeb Hasin、Mainul Islam 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2511.19655/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。</p>
+  <ul class="reading-intro-points"><li>该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。</li><li>应用场景为搭载单目摄像头的智能车辆，在仿真环境与真实环境中进行道路行驶。</li><li>研究问题聚焦于：结合车道识别与模型预测控制（MPC），提升轨迹跟踪的精度与稳定性，并搭建用于自动驾驶车辆测试的实验平台。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未报告；作者：Shantanu Rahman、Nayeb Hasin、Mainul Islam、Golam Sarowar（原文未明确作者与机构的对应关系）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文研究自动驾驶车辆在道路场景中的轨迹跟踪问题。</li><li>应用场景为搭载单目摄像头的智能车辆，在仿真环境与真实环境中进行道路行驶。</li><li>研究问题聚焦于：结合车道识别与模型预测控制（MPC），提升轨迹跟踪的精度与稳定性，并搭建用于自动驾驶车辆测试的实验平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种将单目相机车道识别与MPC控制相结合的新颖方法，用于提升自动驾驶汽车轨迹跟踪精度。</li><li>采用边缘识别、滑动窗口直线检测和动态感兴趣区域（ROI）提取等技术实现车道线提取。</li><li>基于自行车车辆动力学模型构建了用于车道跟随的MPC控制器。</li><li>利用ROS Gazebo建立了单车道道路仿真模型，对控制器性能进行了验证。</li><li>仿真结果表明，最优跟踪轨迹与目标轨迹之间的均方根误差降低了27.65%，体现了控制器的高鲁棒性与灵活性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知（车道线检测）与运动控制（路径跟踪），属于局部规划/底层控制模块。</li><li>输入传感器：单目摄像头。</li><li>场景表示：原文未报告。</li><li>模型结构：MPC控制器基于自行车车辆动力学模型构建。</li><li>关键技术：车道线提取方面采用边缘识别、滑动窗口直线检测与动态感兴趣区域（ROI）提取；轨迹跟踪方面采用基于自行车模型的MPC控制。车辆具备阿克曼转向机构特征。实验在仿真（ROS Gazebo）与真实环境中进行，但原文摘要未详细展开真实环境的具体细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告。</li><li>仿真器：ROS Gazebo。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文提及在真实环境中开展实验，但未报告具体实车平台信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：单车道道路仿真环境中的轨迹跟踪任务；摘要中提及也进行真实环境实验，但此处给出的是仿真评估结果。</li><li>评估指标：最优跟踪轨迹与目标轨迹之间的均方根误差（RMSE）。</li><li>关键数值：RMSE降低了27.65%。</li><li>对比方法：原文摘要未明确列出对比的基准方法。</li><li>开环/闭环/仿真/实车条件：仿真结果来自闭环轨迹跟踪实验（ROS Gazebo环境），论文同时涉及真实环境实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2512.03639/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Context-Triggered Contingency Games for Strategic Multi-Agent Interaction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2511.07155/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Dynamics-Decoupled Trajectory Alignment for Sim-to-Real Transfer in Reinforcement Learning for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

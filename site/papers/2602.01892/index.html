@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Path Tracking with Dynamic Control Point Blending for Autonomous Vehicles: An Experimental Study - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。 横向转向命令通过重心混合两个互补控制器获得：作用于前轴的 Stanley 控制器与作用于后轴的曲率几何控制器，实现转向行为的连续过渡与更优的跟踪稳定性。 同时引入一种基于曲率的纵向控制策略，利用虚拟轨道边界和射线追踪，将前方几何约束转换为虚拟障碍物距离，从而调节车速。 整体方法在统一控制栈中实现，并通过仿真和搭载 GPS-RTK、雷达、里程计与 IMU 的真实自动驾驶车辆进行验证，涉及闭环跟踪与倒车机动。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2602.01892">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2602.01892.webp" alt="Path Tracking with Dynamic Control Point Blending for Autonomous Vehicles: An Experimental Study" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Path Tracking with Dynamic Control Point Blending for Autonomous Vehicles: An Experimental Study</h1>
+            <div class="detail-meta">2026-02-02 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2602.01892" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2602.01892" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2602.01892</span></div>
+            <p class="detail-summary">论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。 横向转向命令通过重心混合两个互补控制器获得：作用于前轴的 Stanley 控制器与作用于后轴的曲率几何控制器，实现转向行为的连续过渡与更优的跟踪稳定性。 同时引入一种基于曲率的纵向控制策略，利用虚拟轨道边界和射线追踪，将前方几何约束转换为虚拟障碍物距离，从而调节车速。 整体方法在统一控制栈中实现，并通过仿真和搭载 GPS-RTK、雷达、里程计与 IMU 的真实自动驾驶车辆进行验证，涉及闭环跟踪与倒车机动。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">6 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">UTBM（勃艮第-弗朗什-孔泰技术大学），CIAD（复杂系统智能与自动化实验室） · Alexandre Lombard、Florent Perron…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2602.01892/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。</p>
+  <ul class="reading-intro-points"><li>论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。</li><li>横向转向命令通过重心混合两个互补控制器获得：作用于前轴的 Stanley 控制器与作用于后轴的曲率几何控制器，实现转向行为的连续过渡与更优的跟踪稳定性。</li><li>同时引入一种基于曲率的纵向控制策略，利用虚拟轨道边界和射线追踪，将前方几何约束转换为虚拟障碍物距离，从而调节车速。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：UTBM（勃艮第-弗朗什-孔泰技术大学），CIAD（复杂系统智能与自动化实验室）；作者：Alexandre Lombard、Florent Perronnet、Nicolas Gaud、Abdeljalil Abbas-Turki</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文提出一种自动驾驶路径跟踪框架，其核心创新在于横向控制命令作用于轮距上的动态控制点，可在车辆前后轴之间连续插值，适应低速机动与倒车等多种驾驶场景。</li><li>横向转向命令通过重心混合两个互补控制器获得：作用于前轴的 Stanley 控制器与作用于后轴的曲率几何控制器，实现转向行为的连续过渡与更优的跟踪稳定性。</li><li>同时引入一种基于曲率的纵向控制策略，利用虚拟轨道边界和射线追踪，将前方几何约束转换为虚拟障碍物距离，从而调节车速。</li><li>整体方法在统一控制栈中实现，并通过仿真和搭载 GPS-RTK、雷达、里程计与 IMU 的真实自动驾驶车辆进行验证，涉及闭环跟踪与倒车机动。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出将横向控制命令应用于动态控制点的横向控制律，通过重心混合前轴 Stanley 控制器与后轴曲率几何控制器，实现控制点在车轴间连续、平滑过渡。</li><li>设计基于虚拟边界和射线追踪的曲率感知纵向控制策略，将路径几何约束转化为虚拟障碍物距离并调节车速，无需显式曲率阈值或复杂优化。</li><li>在仿真与真实车辆上验证，结果显示相较固定控制点基线方法，轨迹跟踪精度更优、转向平稳性更好、适应性更强。</li><li>中间位置控制点在倒车场景中实现较前轴控制平均横向距离减少 81.2%，证明命令在两个控制器间有效融合。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：横向控制与纵向控制（路径跟踪控制栈）。</li><li>输入传感器：GPS-RTK、雷达、里程计（odometer）、惯性测量单元（IMU）。</li><li>场景表示：参考轨迹；横向控制基于前后轴误差、航向误差与曲率变化量；纵向控制基于由中心线和参数化宽度生成的虚拟边界定义安全行驶走廊。</li><li>模型结构：基于非完整约束的车辆运动学自行车模型；横向命令为前轴 Stanley 控制器与后轴曲率几何控制器的重心混合；纵向控制采用 IDM（智能驾驶模型）自由流加速度与基于反应时间的避障命令的最小值。</li><li>关键技术：基于运动学模型的对称性修改后轴曲率控制器以适配倒车；通过射线追踪，从车辆位置沿航向发射射线，检测射线与虚拟边界首次交点作为虚拟障碍物；采用参数化宽度的虚拟边界表征可行走廊。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告。</li><li>仿真器：自研模拟器（https://alexandrelombard.github.io/autonomous-driving-sim/），模拟车辆运动学模型，并模拟传感器均匀噪声与感知至命令执行的延迟。</li><li>模型规模：原文未报告（命令实现于 Rust 语言编写的库中，未披露网络参数量）。</li><li>训练资源：原文未报告。</li><li>实车平台：搭载 GPS-RTK（天线位于轮距中心附近）、雷达、里程计、IMU 的真实无人车。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：仿真采用缩放的纽博格林赛道，含多种曲率；实车在封闭环路赛道设置 6 个测试（3 个前进、3 个倒车，控制点分别位于后轴、中间与前轴），车辆起始偏置 4 米观察回轨过程。</li><li>评估指标：横向偏差、航向误差、控制平滑度、平均横向距离；结果表示为控制点到轨迹投影的距离。</li><li>关键数值：仿真中横向误差小于纯追踪与 Stanley；中间控制点倒车平均距离 0.049 米，前轴控制平均 0.260 米；实测各测试平均距离分别为 0.043/0.042/0.026/0.050/0.049/0.260 米。</li><li>对比方法：pure-pursuit 与 Stanley 控制器作为固定控制点基线。</li><li>条件说明：仿真为开环基准场景（初始横向偏置、跟踪缩放赛道）且考虑传感器噪声/延迟；实车为闭环测试，前向测试速度约 3.0 m/s，倒车约 1.0 m/s，部分结果报告仿真及真实场景中，未报告闭环/开环作为显式标签之外的细节。实车测试结果以“平均跟踪误差约 0.05 米且控制量平滑”总结。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2602.08440/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SteerVLA: Steering Vision-Language-Action Models in Long-Tail Driving Scenarios</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2602.01535/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Co-Design of Rover Wheels and Control using Bayesian Optimization and Rover-Terrain Simulations</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

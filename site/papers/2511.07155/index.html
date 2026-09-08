@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dynamics-Decoupled Trajectory Alignment for Sim-to-Real Transfer in Reinforcement Learning for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。 核心挑战在于真实车辆动力学复杂且难以精确建模，导致仿真中训练的 RL 策略直接部署时性能下降。 应用场景为真实车辆在封闭测试场内的路径跟踪任务，覆盖直线和弯道等城市驾驶场景。 研究问题是如何在不依赖高保真仿真器或车辆特定动力学模型的情况下，实现 RL 运动规划的零样本、鲁棒的真车部署。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2511.07155">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2511.07155.webp" alt="Dynamics-Decoupled Trajectory Alignment for Sim-to-Real Transfer in Reinforcement Learning for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Dynamics-Decoupled Trajectory Alignment for Sim-to-Real Transfer in Reinforcement Learning for Autonomous Driving</h1>
+            <div class="detail-meta">2025-11-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2511.07155" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2511.07155" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2511.07155</span></div>
+            <p class="detail-summary">本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。 核心挑战在于真实车辆动力学复杂且难以精确建模，导致仿真中训练的 RL 策略直接部署时性能下降。 应用场景为真实车辆在封闭测试场内的路径跟踪任务，覆盖直线和弯道等城市驾驶场景。 研究问题是如何在不依赖高保真仿真器或车辆特定动力学模型的情况下，实现 RL 运动规划的零样本、鲁棒的真车部署。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of the Bundeswehr Munich, Germany · Thomas Steinecker、Alexander…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2511.07155/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。</li><li>核心挑战在于真实车辆动力学复杂且难以精确建模，导致仿真中训练的 RL 策略直接部署时性能下降。</li><li>应用场景为真实车辆在封闭测试场内的路径跟踪任务，覆盖直线和弯道等城市驾驶场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of the Bundeswehr Munich, Germany；作者：Thomas Steinecker, Alexander Bienemann, Denis Trescher, Thorsten Luettel, Mirko Maehlisch</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶中强化学习策略从仿真环境迁移到真实车辆的 sim-to-real 问题。</li><li>核心挑战在于真实车辆动力学复杂且难以精确建模，导致仿真中训练的 RL 策略直接部署时性能下降。</li><li>应用场景为真实车辆在封闭测试场内的路径跟踪任务，覆盖直线和弯道等城市驾驶场景。</li><li>研究问题是如何在不依赖高保真仿真器或车辆特定动力学模型的情况下，实现 RL 运动规划的零样本、鲁棒的真车部署。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出了一个将运动规划与车辆控制解耦的框架，通过虚拟车辆与真实车辆之间的空间和时间对齐实现 sim-to-real 迁移。</li><li>利用轨迹蒸馏将单步控制 RL 智能体转化为有限的轨迹预测智能体，从而提供预测视界用于对齐。</li><li>设计了一套纵向对齐策略，结合前馈与反馈控制（Stanley 控制器用于横向），并采用“冻结”和“快进”两种自适应更新机制来处理真实的纵向偏差。</li><li>在真实自动驾驶车辆上进行了验证，证明该方法能够实现 RL 策略从仿真到现实的零样本、鲁棒迁移，且对真实世界动力学变化（如轮胎特性、摩擦）具有鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：运动规划与控制（sim-to-real 迁移框架），采用解耦的分层方法。</li><li>输入传感器：原文未明确报告感知传感器，主要使用轮速传感器估计车速，以及用于定位的高精度惯性导航系统（含 RTK-GNSS）和记录 UTM 坐标。</li><li>场景表示：路径用一系列在车辆坐标系中表示的航点描述；车辆状态用曲率坐标系中的纵向位移、横向偏差和航向偏差表示。</li><li>模型结构：第一阶段为一个 TD3 强化学习智能体，输出连续动作；第二阶段通过模仿学习/知识蒸馏将 RL 智能体蒸馏为一个轨迹生成智能体，该智能体为多层感知机（MLP），含四个全连接层，每层 512 个神经元，SiLU 激活函数。</li><li>关键技术：1) 在仿真中使用运动学自行车模型进行 RL 训练；2) 通过行为克隆生成轨迹，虚拟车辆只用第一个控制输入，进行自回归和动作加噪以增强鲁棒性；3) 横向控制采用 Stanley 控制器，纵向采用带前馈和可调反馈增益的控制律，并通过轨迹序列执行“冻结”或“快进”步骤实现虚拟车辆位置的双向调整。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：包含 1,000,000 个样本的数据集，由强化学习智能体的经验收集而成。</li><li>仿真器：一个轻量级的基于运动学的自制仿真器，能生成受 OU 过程影响的随机噪声路径。</li><li>模型规模：原文未明确报告参数量级，但轨迹生成 MLP 包含四层 512 个神经元。</li><li>训练资源：轨迹生成模型用 PyTorch 实现，使用 AdamW 优化器，学习率 5e-4，beta=(0.9,0.9)，批量大小 1024，训练轮数 20，目标是时域衰减因子 λ=0.8 的预测位姿欧氏损失。</li><li>实车平台：真实自动驾驶车辆 MuCAR-4。训练/推理边缘计算平台是 Nvidia Jetson AGX Orin，配备 ROS2 中间件和额外的嵌入式计算机用于执行器命令转换，定位使用带实时运动学差分（RTK）的 GNSS 高精度惯性导航系统。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估条件：真实车辆闭环部署，在大学的封闭测试场地进行，路面为完全铺砌。测试路线全长 1.9 公里，行驶方向为逆时针，速度范围为 0 至 11 m/s（约 40 km/h）。</li><li>评估指标：纵向平均绝对误差为 6.8 厘米，最大误差为 50.0 厘米（出现在起始阶段）；横向平均绝对误差为 2.9 厘米，最大误差为 18.5 厘米（在起始阶段）；最大速度误差为 0.71 m/s（出现在运动开始时），平均绝对速度误差为 0.11 m/s。</li><li>关键结果：横向偏差在速度高达 11 m/s 时保持在 10 厘米以内，显示出较强的鲁棒性。纵向偏差在大部分时间内保持在虚拟车辆参考点附近，仅在低速启停阶段触发快进和冻结机制时出现明显偏差。</li><li>对比方法：原文未报告与现成方法的定量对比，仅定性讨论了与直接控制、数字孪生方法等的区别。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2511.19655/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Development of a Testbed for Autonomous Vehicles: Integrating MPC Control with Monocular Camera Lane Detection</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.05397/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">CrossDepth: Geometry-Constrained Attention for Generalizable Multi-View Surround Depth Estimation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

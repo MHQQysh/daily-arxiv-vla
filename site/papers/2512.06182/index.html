@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Situation-Aware Interactive MPC Switching for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。 核心研究问题是如何在保证高级交互能力（如主动信息寻求）的同时，显著降低计算开销。 论文对五种 MPC 控制器进行统一评估并建立交互能力层级，随后设计一种基于神经网络分类器的情境感知切换策略，仅在罕见但关键的场景中调用最先进的 MPC，在大多数场景中依赖基础 MPC。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2512.06182">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2512.06182.webp" alt="Situation-Aware Interactive MPC Switching for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Situation-Aware Interactive MPC Switching for Autonomous Driving</h1>
+            <div class="detail-meta">2025-12-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2512.06182" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2512.06182" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2512.06182</span></div>
+            <p class="detail-summary">该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。 核心研究问题是如何在保证高级交互能力（如主动信息寻求）的同时，显著降低计算开销。 论文对五种 MPC 控制器进行统一评估并建立交互能力层级，随后设计一种基于神经网络分类器的情境感知切换策略，仅在罕见但关键的场景中调用最先进的 MPC，在大多数场景中依赖基础 MPC。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Eindhoven University of Technology · Shuhao Qi、Qiling Aori、Mircea Lazar 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2512.06182/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。</p>
+  <ul class="reading-intro-points"><li>该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。</li><li>核心研究问题是如何在保证高级交互能力（如主动信息寻求）的同时，显著降低计算开销。</li><li>论文对五种 MPC 控制器进行统一评估并建立交互能力层级，随后设计一种基于神经网络分类器的情境感知切换策略，仅在罕见但关键的场景中调用最先进的 MPC，在大多数场景中依赖基础 MPC。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Eindhoven University of Technology；作者：Shuhao Qi、Qiling Aori、Mircea Lazar、Sofie Haesaert</li><li>机构：Delft University of Technology；作者：Sofie Haesaert</li><li>机构：原文未明确对应；作者：Luyao Zhang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文针对自动驾驶在交互式交通场景（如匝道合流、无信号交叉口）中的挑战，研究不同交互建模能力的模型预测控制（MPC）方法。</li><li>核心研究问题是如何在保证高级交互能力（如主动信息寻求）的同时，显著降低计算开销。</li><li>论文对五种 MPC 控制器进行统一评估并建立交互能力层级，随后设计一种基于神经网络分类器的情境感知切换策略，仅在罕见但关键的场景中调用最先进的 MPC，在大多数场景中依赖基础 MPC。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出统一框架比较五种 MPC 控制器（Robust、Non-reactive branch、Reactive branch、Explicit dual、Implicit dual），使其差异仅在于交互建模（多模态未来、对手反应、信息寻求）。</li><li>通过蒙特卡洛研究对控制器进行经验性交互能力分级，将前车并入率等作为衡量交互能力的量化指标。</li><li>设计基于神经网络分类器的情境感知控制器切换机制，输入为自车状态、对手状态与信念状态。</li><li>验证表明切换策略能基本保持隐式双 MPC 的最高交互性能，同时显著降低平均计算时间。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：交互式运动规划与决策模块，采用模型预测控制（MPC）框架。</li><li>输入传感器：原文未报告具体传感器类型，输入为可观测的车辆状态信息。</li><li>场景表示：两车沿预定义路径行驶的交互场景，用纵向动力学状态（位置s、速度v）表示，并基于交互距离阈值与对手行为策略判断交互场景。</li><li>模型结构：采用全连接神经网络分类器（原文未报告其结构与超参数细节）。</li><li>关键技术：</li><li>首先定义了统一的双积分器车辆动力学模型与参数化对手行为模型（基于高斯噪声与潜变量）以构建评估环境。</li><li>定义了五种 MPC 控制器，分别建模多模态未来（Robust MP 不具备，而Branch类支持）、对手反应（Non-reactive 与 Reactive、Dual 类的区分）、信息寻求（Dual 类）三类交互能力特征，采用场景树与信念状态机制。</li><li>对比评估在共享的控制器参数下进行（针对非交互场景调参），由随机种子保证控制器之间的初始状态与采样一致。</li><li>切换策略：在每一控制时步，通过神经网络分类器接收当前自车与对手状态及各操作者行为参数的后验信念信息，预测各控制器的选择概率，再选取概率最高的控制器输出控制序列并提取首个控制输入。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告使用真实数据集。</li><li>仿真器：采用自行构造的蒙特卡洛仿真平台，基于 Python 实现，并针对两种场景（匝道合流与无信号交叉口）进行了设计（后者在评估章节中声称使用）。</li><li>模型规模：原文未报告具体网络参数量。</li><li>训练资源：使用内点优化器 IPOPT（CasADi 框架）在 Intel Core i9-14900HX CPU 的笔记本电脑上运行，未报告专门的GPU训练资源。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：蒙特卡洛仿真，针对匝道合流场景进行了 600 次运行；控制器类型包括 Robust、Non-reactive branch、Reactive branch、Explicit dual、Implicit dual 以及 Switching 策略；对手分为攻击型（aggressive）与谨慎型（cautious）。</li><li>评估指标：安全性（事故率、最小间距）、效率（前车并入率、完成时间）、舒适性/能量（控制力、最大绝对加速度）及总轨迹成本。</li><li>关键数值：</li><li>Robust MPC：最小间距最高 4.13 ± 0.29 m，但完成时间最长（5.85 ± 0.48 s）且控制力/轨迹成本最高（578.8 ± 42.6）；其平均计算时间低至 0.047 ± 0.005 s。</li><li>Non-reactive branch MPC：较大程度提升效率与舒适性，中间档次计算时间（0.324 ± 0.020 s）。</li><li>Reactive branch MPC：在前车并入率方面明显提升（24.6 %），计算时间 0.431 ± 0.115 s。</li><li>Explicit dual MPC：前车并入率最高（47.3 %），完成时间最短（4.62 ± 0.32 s），但计算时间与 Reactive 接近。</li><li>Implicit dual MPC：轨迹成本与最大绝对加速度最小（68.9 ± 22.3、0.93 ± 0.42 m/s²），但平均计算时间 1.148 ± 0.148 s，是最耗时的控制器。</li><li>Switching 策略：平均计算时间降至 0.313 ± 0.279 s，轨迹成本接近最低值（72.3 ± 19.8），最小间距与运行时间与隐式双 MPC 相当（3.24 ± 0.35 m、4.67 ± 0.21 s）。</li><li>评估条件：开环仿真（非闭环真实测试）；所有 MPC 在统一参数与固定随机种子条件下执行以达到公平比较。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2512.12987/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Tackling Snow-Induced Challenges: Safe Autonomous Lane-Keeping with Robust Reinforcement Learning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2512.03774/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Safety Reinforced Model Predictive Control (SRMPC): Improving MPC with Reinforcement Learning for Motion Planning in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
