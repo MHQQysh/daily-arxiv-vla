@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Drones as Annotators: Amodal 3D Auto-Labeling for Ground LiDAR with Aerial Priors - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。 应用场景为城市场景下具有俯拍视角无人机（UAV）与地面 LiDAR（车载、路侧或融合）协同采集数据的路口环境，用于降低车辆检测标注的人力成本。 研究问题：单地面视角 LiDAR 存在遮挡与点云稀疏问题，难以恢复完整的目标几何形状，导致伪标签质量下降；本文利用无人机鸟瞰视角提供低遮挡的目标检测先验，解决地面 LiDAR 自动标注的困惑。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.06819">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.06819.webp" alt="Drones as Annotators: Amodal 3D Auto-Labeling for Ground LiDAR with Aerial Priors" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Drones as Annotators: Amodal 3D Auto-Labeling for Ground LiDAR with Aerial Priors</h1>
+            <div class="detail-meta">2026-09-06 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.06819" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.06819" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.06819</span></div>
+            <p class="detail-summary">本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。 应用场景为城市场景下具有俯拍视角无人机（UAV）与地面 LiDAR（车载、路侧或融合）协同采集数据的路口环境，用于降低车辆检测标注的人力成本。 研究问题：单地面视角 LiDAR 存在遮挡与点云稀疏问题，难以恢复完整的目标几何形状，导致伪标签质量下降；本文利用无人机鸟瞰视角提供低遮挡的目标检测先验，解决地面 LiDAR 自动标注的困惑。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Lyles School of Civil and Construction Engineering, Purdue University, West…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.06819/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。</p>
+  <ul class="reading-intro-points"><li>本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。</li><li>应用场景为城市场景下具有俯拍视角无人机（UAV）与地面 LiDAR（车载、路侧或融合）协同采集数据的路口环境，用于降低车辆检测标注的人力成本。</li><li>研究问题：单地面视角 LiDAR 存在遮挡与点云稀疏问题，难以恢复完整的目标几何形状，导致伪标签质量下降；本文利用无人机鸟瞰视角提供低遮挡的目标检测先验，解决地面 LiDAR 自动标注的困惑。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Lyles School of Civil and Construction Engineering, Purdue University, West Lafayette, IN, USA；作者：Tianheng Zhu</li><li>机构：Lyles School of Civil and Construction Engineering, Purdue University, West Lafayette, IN, USA；作者：Zhenhao Wang</li><li>机构：Lyles School of Civil and Construction Engineering, Purdue University, West Lafayette, IN, USA；作者：Yiheng Feng</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。</li><li>应用场景为城市场景下具有俯拍视角无人机（UAV）与地面 LiDAR（车载、路侧或融合）协同采集数据的路口环境，用于降低车辆检测标注的人力成本。</li><li>研究问题：单地面视角 LiDAR 存在遮挡与点云稀疏问题，难以恢复完整的目标几何形状，导致伪标签质量下降；本文利用无人机鸟瞰视角提供低遮挡的目标检测先验，解决地面 LiDAR 自动标注的困惑。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DAA（Drones as Annotators），首个无需训练的 3D 自动标注框架，充分利用航拍图像与地面 LiDAR 的互补优势。</li><li>设计两阶段标注流程：阶段一实现空中-地面坐标对齐，将 UAV 检测结果变换到共享地图坐标系并生成粗糙 3D 框；阶段二采用 EM 式非模态框细化，交替进行前景点识别与基于前景点和空中先验的框更新。</li><li>验证 DAA 在车载、路侧与多智能体融合 LiDAR 三种配置下的跨平台零样本迁移能力，无需参数重新调整。</li><li>基于真实数据实验，证明 DAA 生成的伪标签训练的 LiDAR 检测器在中等 IoU 阈值下可与手工标注训练的模型相当。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：3D 自动标注 / 伪标签生成框架（面向自动驾驶感知数据扩展）。</li><li>输入传感器：UAV 下视相机捕获的 4K 视频（29.97 fps）中的检测结果；地面 64 通道车载 LiDAR 与 32/64 通道路侧 LiDAR 点云扫描。</li><li>场景表示：共享地图坐标系（基于 FAST-LIO2 构建的 LiDAR 地图），辅以正射影像、摄影测量点云与数字地形模型（DTM）。</li><li>模型结构：两阶段流水线：1) 空气-地面坐标对齐（图像平面→UTM→地图框架，利用 DTM 完成 3D 提升）；2) EM 式非模态框细化，包含初始化粗细标注框、软责任度估计（结合点到框距离和高程一致性的 logistic 函数）、kNN 图平滑、前景点提取（阈值 τ_f）、尺寸更新（基于分位数观察范围与空中先验下界）、中心点重定位（基于两侧点平衡度加权）与偏航角细化（最小化前景点在水平面上轴向足迹面积）。</li><li>关键技术：训练-free 而非学习式方法，无监督粗标注生成（基于 Geo-trax 框架的 YOLO 检测器与 BoT-SORT 追踪器）；ICP 配准（FAST-LIO2 地图与摄影测量点云）；EM 式迭代与收敛准则（最大维度变化 &lt;0.01 m，偏航角变化 &lt;0.01°）。</li><li>场景表示、模型结构与关键技术的具体设计原文已报告，EM 过程不涉及神经网络训练。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：作者自建真实空气-地面协同感知数据集，收集于城市路口，包含 6,145 帧同步传感器数据，超过 400k 手工标注 3D 边界框。</li><li>仿真器：原文未报告（未使用仿真器）。</li><li>模型规模：原文未报告参数量；DAA 为训练-free 算法，不包含学习模型，但用于对比的检测器模型包括 PointPillars 与 CenterPoint，原文未报告其规模。</li><li>训练资源：原文未报告（未使用 GPU 训练 DAA 本征流程）。</li><li>实车平台：带 64 通道车载 LiDAR 的 ego 车辆（主平台）与带车载 LiDAR 的第二辆参考车辆（提供绝对真值）；路侧感知单元含 32 通道（视场角 -30° 至 +10°）与 64 通道（垂直视场角 -11.25° 至 0°）的 LiDAR 系统；UAV 悬停在交叉口上空 400 英尺，下视相机。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：作者自建数据集，按帧连续性分段，并按约 80/20 划分训练与测试集（防止时间泄漏）；测试限于 UAV 检测范围且每个框至少包含 20 点 LiDAR 观测。</li><li>评估指标：BEV 与 3D 交并比（IoU）下的平均精度 AP（阈值 0.5、0.7）、平均平移误差 ATE（m）、平均朝向误差 AOE（°）。</li><li>关键数值：全 DAA 模型在手工标注真值上达到 AP_BEV^0.5=90.34%、AP_BEV^0.7=67.28%、AP_3D^0.5=87.89%、AP_3D^0.7=42.18%，ATE=0.314 m，AOE=2.8°；对照参考车辆真值（447 帧），DAA 达到 AP_BEV^0.5=99.55%、AP_BEV^0.7=73.15%（手工标注为 87.92%）；PointPillars (PP) 使用 DAA 伪标签训练 AP_BEV^0.5=79.14%（手工标注 GT 为 85.82%），CenterPoint (CP) 使用 DAA 伪标签 AP_BEV^0.5=80.25%，3D IoU 0.5 下 PP 73.54% 对 GT 83.38%、CP 68.15% 对 GT 79.77%；跨平台分析（融合点云 GT 选择约 49,000 框）：DAA (full) 在 Ego 配置 AP_BEV^0.5=86.11%、Roadside=88.74%、Fused=90.44%，AP_3D^0.5 相应为 80.47%、76.22%、86.00%。</li><li>对比方法：DBSCAN 聚类、LISO（原生自监督于 LiDAR）、LISO + prior（替换为 UAV 检测先验的目标发现阶段）以及 DAA (Stage 1) 与 DAA (full) 消融、手工标注真值作为参考上界。</li><li>实验条件：真实路侧场景实车与路侧 LiDAR 点云实验（非仿真器或闭环模拟）；包含与实际数据同步帧上的开环离线评估；跨平台实验使用车载、路侧及融合 LiDAR 配置，原文未报告闭环模拟。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.07049/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Large Discrete Policy: Advancing Explicit Behavior Modeling with Stochastic Iterative Scoring</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.06331/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Geometric Distributional Control: Learning Progress with Partial Structural Knowledge</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Geometric Distributional Control: Learning Progress with Partial Structural Knowledge - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。 论文提出的任务是：在已知部分几何、规则、约束、响应映射等显式结构的前提下，仅需短程已知可行的轨迹片段与弱符号进度证书，学习局部进度值梯度的方向性控制。 研究聚焦于如何以数据支持的可行进度几何替代不可用的解析解几何，并让学习到的进度得分在场架上引导可行动作方向而不需要全局贝尔曼递归或黑盒策略学习。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.06331">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.06331.webp" alt="Geometric Distributional Control: Learning Progress with Partial Structural Knowledge" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Geometric Distributional Control: Learning Progress with Partial Structural Knowledge</h1>
+            <div class="detail-meta">2026-09-06 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.06331" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.06331" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.06331</span></div>
+            <p class="detail-summary">该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。 论文提出的任务是：在已知部分几何、规则、约束、响应映射等显式结构的前提下，仅需短程已知可行的轨迹片段与弱符号进度证书，学习局部进度值梯度的方向性控制。 研究聚焦于如何以数据支持的可行进度几何替代不可用的解析解几何，并让学习到的进度得分在场架上引导可行动作方向而不需要全局贝尔曼递归或黑盒策略学习。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">6 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Central Florida · Tong Wu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.06331/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。</p>
+  <ul class="reading-intro-points"><li>该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。</li><li>论文提出的任务是：在已知部分几何、规则、约束、响应映射等显式结构的前提下，仅需短程已知可行的轨迹片段与弱符号进度证书，学习局部进度值梯度的方向性控制。</li><li>研究聚焦于如何以数据支持的可行进度几何替代不可用的解析解几何，并让学习到的进度得分在场架上引导可行动作方向而不需要全局贝尔曼递归或黑盒策略学习。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Central Florida；作者：Tong Wu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。</li><li>论文提出的任务是：在已知部分几何、规则、约束、响应映射等显式结构的前提下，仅需短程已知可行的轨迹片段与弱符号进度证书，学习局部进度值梯度的方向性控制。</li><li>研究聚焦于如何以数据支持的可行进度几何替代不可用的解析解几何，并让学习到的进度得分在场架上引导可行动作方向而不需要全局贝尔曼递归或黑盒策略学习。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建可行进度支架（Feasible progress scaffold）：从已知可行的动作片段构造经验流形，并根据观测、目标和显式已知约束对其进行条件化，替代不可得的解析解几何。</li><li>提出进度倾斜概率路径：带符号的进度证书在期望上将短程可行片段的条件分布向局部更优行为倾斜，不要求每个片段都能单调改进。</li><li>提出得分引导的几何控制：学习的得分作为黎曼潜变量流内的进度能量方向，与已知约束势能、候选过滤和最终投影结合，概率提供方向而显式物理保证可行性。</li><li>建立了进度数据与控制方向的正式联系：在最大熵演示模型下证明得分近似于数据诱导的软进度值的负梯度，并推导了稳定性、得分鲁棒性、离散化漂移不累积和物理-数据插值等性质。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：文中未明确属于某一模块，总体可归纳为离线学习与在线控制两阶段框架。离线构建阶段训练可行动作片段嵌入与进度密度，在线阶段执行进度能量导航控制。</li><li>输入传感器：原文未报告。</li><li>场景表示：使用经验流形作为潜空间中的可行进度映射，潜空间可用欧氏子空间与若干个李群因子的积表示，以编码已知几何自由度；场景条件的表述为观测、目标与已知约束的联合条件。</li><li>模型结构：包括后验/编码器、解码器，以及参数化的进度倾斜条件密度与相应得分。扩散风格路径是其中一种实现方式，也可使用任意能产生得分的可微路径或密度模型。</li><li>关键技术：离线阶段通过进度证书的指数倾斜构造进度倾斜目标分布，使用正则化变分动作片段自编码器学习可行片段嵌入；选择最小可靠正进度时域作为控制时域；在线阶段通过进度得分与已知约束势能及任务势能组合成黎曼潜流，解码后投影并执行。</li></ul>
+
+<p>论文方法中的离线阶段输出包括：时域选择器、后验模型、解码器或似然模型、进度路径模型和得分。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>仿真器：SUMO 路线进度驾驶场景作为实验验证应用之一，文中将 SUMO 作为结构化多层级优化的一个应用。</li><li>额外应用与验证：参数化双层与三层优化族，以及 SUMO 路线进度驾驶。数据集大小等细节未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>应用 I：SUMO 路线进度控制。任务为路线进度控制，已知支架包含控制动作的可行集。评估中对比了规则策略、模仿学习和强化学习基线，使用的度量与具体数值在原 HTML 文档中被截断，未报告关键数值。</li><li>应用 II：参数化双层优化。评估协议与性能指标在原文中定义，但具体数值未报告。</li><li>评估条件：两个实验均在仿真环境中进行，原文未报告开环/闭环条件的区分及相关指标细节。</li><li>理论保证：论文证明了条件，说明得分可下降一个数据诱导的软进度值；与纯已知求解器和学习基线相比，该框架在保持支架强制可行性的同时表现更好。原文多数性能对比与数值结果的具体实现细节在原 HTML 内容中缺失。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.06819/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Drones as Annotators: Amodal 3D Auto-Labeling for Ground LiDAR with Aerial Priors</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.06055/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DriveZero: End-to-End Driving Beyond Human Demonstrations</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

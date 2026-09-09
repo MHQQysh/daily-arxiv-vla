@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The convergent laboratory: when AI reasoning, autonomous experiments, high performance and quantum computing reshape chemistry - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。 论文讨论了人工智能（AI）、自主智能体、自驱动实验室、机器学习原子间势、高性能计算和容错量子计算在化学与材料科学中的融合。 研究问题聚焦于如何将这些技术集成到一个统一平台中，以加速化学与材料发现，实现从假设生成到实验验证的自动化闭环。 应用场景包括催化剂发现、分子设计、反应网络探索和材料合成。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.05643">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.05643.webp" alt="The convergent laboratory: when AI reasoning, autonomous experiments, high performance and quantum computing reshape chemistry" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">The convergent laboratory: when AI reasoning, autonomous experiments, high performance and quantum computing reshape chemistry</h1>
+            <div class="detail-meta">2026-09-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.05643" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.05643" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.05643</span></div>
+            <p class="detail-summary">该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。 论文讨论了人工智能（AI）、自主智能体、自驱动实验室、机器学习原子间势、高性能计算和容错量子计算在化学与材料科学中的融合。 研究问题聚焦于如何将这些技术集成到一个统一平台中，以加速化学与材料发现，实现从假设生成到实验验证的自动化闭环。 应用场景包括催化剂发现、分子设计、反应网络探索和材料合成。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Data Science and Learning Division, Argonne National Laboratory · Eliu Huer…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.05643/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。</p>
+  <ul class="reading-intro-points"><li>该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。</li><li>论文讨论了人工智能（AI）、自主智能体、自驱动实验室、机器学习原子间势、高性能计算和容错量子计算在化学与材料科学中的融合。</li><li>研究问题聚焦于如何将这些技术集成到一个统一平台中，以加速化学与材料发现，实现从假设生成到实验验证的自动化闭环。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Data Science and Learning Division, Argonne National Laboratory；作者：Eliu Huerta</li><li>机构：Department of Computer Science, The University of Chicago；作者：Eliu Huerta</li><li>机构：NVIDIA Corporation；作者：Xiaoyun Wang, Geetika Gupta</li><li>机构：Department of Chemistry, Northwestern University；作者：Edward H. Sargent</li><li>机构：Department of Electrical and Computer Engineering, Northwestern University；作者：Edward H. Sargent</li><li>机构：Lila Sciences, Inc.；作者：Cameron J. Owen, Victor Fung</li><li>机构：PsiQuantum；作者：Abhishek Mitra</li><li>机构：Department of Computer Science, University of Toronto；作者：Austin Cheng</li><li>机构：Vector Institute for Artificial Intelligence；作者：Austin Cheng</li><li>机构：Department of Chemistry, University of Toronto；作者：Austin Cheng</li><li>机构：Department of Chemistry, Mellon College of Science, Carnegie Mellon University；作者：Emma Bouchard, Shams Mehdi</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。</li><li>论文讨论了人工智能（AI）、自主智能体、自驱动实验室、机器学习原子间势、高性能计算和容错量子计算在化学与材料科学中的融合。</li><li>研究问题聚焦于如何将这些技术集成到一个统一平台中，以加速化学与材料发现，实现从假设生成到实验验证的自动化闭环。</li><li>应用场景包括催化剂发现、分子设计、反应网络探索和材料合成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出“汇聚型实验室”（convergent laboratory）范式，将AI推理、自主实验、机器学习势与量子计算结合为统一的发现平台。</li><li>阐述了五项关键技术协同放大的机制：LLM科学推理模型（Nemotron系列）、自驱动实验室（SDLs）、机器学习原子间势（AIMNet2及其变体）、容错量子计算（PsiQuantum平台）和自主智能体框架（Lila Sciences）。</li><li>强调人类领域知识与可编辑“玻璃盒”模型的结合，将CO2制C3烃催化剂的发现周期从约60周缩短至5周。</li><li>展示量子计算资源估算的显著进展，例如通过BLISS-THC和DFTHC方法将FeMoco活性空间模拟成本降低上百倍。</li><li>指出开放基础设施（开源模型、公开代码、透明资源）对可复现科学研究的关键作用。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：综合平台集成模块，覆盖科学推理、自主实验、机器学习势和量子计算。</li><li>输入传感器：原文未报告传感器信息（涉及文本、图表、实验测量数据等多模态输入）。</li><li>场景表示：分子结构、晶体结构、反应路径、活性空间模型等化学场景表示。</li><li>模型结构：Nemotron 3系列LLM（含Omni多模态版本）、NeMo-RL强化学习框架、NeMo Gym环境构建框架、AIMNet2机器学习势（嵌入电荷平衡与库仑作用等物理机制）。</li><li>关键技术：包括自驱动实验室的机器人合成与并行化测试平台、GAM Changer可编辑玻璃盒机器学习分类器、SHAP可解释分析、MLIPilot语言模型智能体自动化MLIP开发、RLEASE强化学习驱动的自动活性空间构建、BLISS-THC/DFTHC量子化学资源优化方法。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告具体训练数据集名称。</li><li>仿真器：原文未报告特定仿真器。</li><li>模型规模：原文未报告具体模型参数数量。</li><li>训练资源：NeMo-RL支持单GPU至数百加速器的分布式训练；AIMNet2在单GPU上秒级完成能量与力预测，提及在CPU上数分钟内完成整个Suzuki–Miyaura催化循环表征。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：LabBench基准套件。</li><li>评估指标：文献检索oracle分数、热化学精度、量子资源估算值（Toffoli成本与运行时间）。</li><li>关键数值：Nemotron 3 Nano Omni在文献检索上达到89% oracle分数（对比GPT-4o-mini为87%）；AIMNet2-Rxn在Diels-Alder热化学精度达0.5 kcal mol⁻¹误差内，可区分650个反应的endo/exo选择性；量子资源估算中BLISS-THC将细胞色素P450活性空间运行时间降低约234倍，FeMoco降低约278倍，DFTHC将FeMoco Toffoli成本额外降低4.3倍。</li><li>对比方法：GPT-4o-mini作为专有基线模型；AIMNet2相对DFT的性能优势。</li><li>评估条件：开环评估用于实验室基准测试和催化剂发现（无闭环指标）；Sargent团队CO2电还原催化剂发现涉及闭环自动实验循环；量子计算相关为资源估算而非实际硬件运行，原文明确说明这些是对未来容错硬件的资源估算，并非在当前量子处理器上进行的计算。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.05783/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Closed-Loop Evaluation of Bird&#x27;s-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.05521/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Situation Awareness for Intelligent Data Distribution in Connected Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

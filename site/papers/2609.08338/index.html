@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Multi-Modal Perception Pipeline for Object Detection and Tracking in Autonomous Racing - 自动驾驶每日论文卡</title>
+    <meta name="description" content="研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。 应用场景：自动驾驶赛车（原型车为 Dallara EAV-24），在高速（可达 80 m/s）、强振动、小安全裕度的极限工况下对周围车辆进行实时感知。 研究问题：在有限能见度、传感器噪声和失效等不利条件下，如何有效利用全部车上传感器（相机、LiDAR、RADAR），实现鲁棒、低延迟的周围车辆状态估计，以支撑安全自适应规划（如超车与碰撞规避）。 论文通过引入多模态后融合感知流程和集成赛道动力学与赛道布局先验知识的多目标跟踪框架，解决单模态感知在高速赛车场景下的精度和鲁棒性问题。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.08338">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.08338.webp" alt="A Multi-Modal Perception Pipeline for Object Detection and Tracking in Autonomous Racing" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Multi-Modal Perception Pipeline for Object Detection and Tracking in Autonomous Racing</h1>
+            <div class="detail-meta">2026-09-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.08338" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.08338" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.08338</span></div>
+            <p class="detail-summary">研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。 应用场景：自动驾驶赛车（原型车为 Dallara EAV-24），在高速（可达 80 m/s）、强振动、小安全裕度的极限工况下对周围车辆进行实时感知。 研究问题：在有限能见度、传感器噪声和失效等不利条件下，如何有效利用全部车上传感器（相机、LiDAR、RADAR），实现鲁棒、低延迟的周围车辆状态估计，以支撑安全自适应规划（如超车与碰撞规避）。 论文通过引入多模态后融合感知流程和集成赛道动力学与赛道布局先验知识的多目标跟踪框架，解决单模态感知在高速赛车场景下的精度和鲁棒性问题。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Modena and Reggio Emilia, Modena, Italy · Davide Malvezzi、Mic…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.08338/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。</p>
+  <ul class="reading-intro-points"><li>研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。</li><li>应用场景：自动驾驶赛车（原型车为 Dallara EAV-24），在高速（可达 80 m/s）、强振动、小安全裕度的极限工况下对周围车辆进行实时感知。</li><li>研究问题：在有限能见度、传感器噪声和失效等不利条件下，如何有效利用全部车上传感器（相机、LiDAR、RADAR），实现鲁棒、低延迟的周围车辆状态估计，以支撑安全自适应规划（如超车与碰撞规避）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Modena and Reggio Emilia, Modena, Italy；作者：Davide Malvezzi, Michele Pestarino, Ayoub Raji, Marko Bertogna</li><li>机构：HiPeRT Srl, Modena, Italy；作者：Vittoria Cavicchioli, Valentina La Gamba, Silvia Severi, Fabio Bagni, Luca Bartoli, Massimiliano Bosi, Francesco Gatti, Micaela Verucchi, Marko Bertogna</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。</li><li>应用场景：自动驾驶赛车（原型车为 Dallara EAV-24），在高速（可达 80 m/s）、强振动、小安全裕度的极限工况下对周围车辆进行实时感知。</li><li>研究问题：在有限能见度、传感器噪声和失效等不利条件下，如何有效利用全部车上传感器（相机、LiDAR、RADAR），实现鲁棒、低延迟的周围车辆状态估计，以支撑安全自适应规划（如超车与碰撞规避）。</li><li>论文通过引入多模态后融合感知流程和集成赛道动力学与赛道布局先验知识的多目标跟踪框架，解决单模态感知在高速赛车场景下的精度和鲁棒性问题。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种多模态后融合感知流水线，深度融合相机、LiDAR 与 RADAR 三种传感器的异构检测结果，提高了各传感模态在故障情况下的鲁棒性和连续性。</li><li>在多目标跟踪器中显式加入检测延迟补偿机制，利用预计算赛车线（racing line）的轨迹知识及速度剖面，将模型驱动的车辆动力学先验嵌入扩展卡尔曼滤波（EKF）的预测阶段。</li><li>利用 Frenet 坐标系表达被跟踪对象状态，并动态选择最匹配的赛车线，有效提升了弯道处方向和速度预测的鲁棒性。</li><li>在真实世界的高动态多样性竞赛场景（高速差超车、多目标遮挡、并排超车）完成评估，通过消融实验验证了各传感器互补特性，证明了多模态流水线的有效性与必要性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶全栈中的感知与多目标跟踪模块。</li><li>输入传感器：相机（七路 Sony IMX728）、LiDAR（三路 Innovusion Falcon K）、RADAR（四路 ZF ProWave）、GNSS/IMU（Vectornav VN-310，用于自车位姿）。</li><li>场景表示：</li></ul>
+<p> - 相机与 LiDAR 检测融合：将 LiDAR 点云去除地面与高空点后投影至相机图像，与 2D 边界框匹配，通过距离直方图恢复物体距离并反投影至 3D 世界坐标。</p>
+<p> - 相机-RADAR 融合：类似地将 RADAR 点投影至图像并匹配 2D 边界框，以 RADAR 点云时间戳为准，融合了径向速度信息。</p>
+<p> - LiDAR-RADAR 融合：选取 3D 检测框内 RADAR 点，将其径向速度信息附加至 LiDAR 3D 边界框上。</p>
+<ul><li>模型结构：</li></ul>
+<p> - 相机：YOLOv4 神经网络，输入批量多路图像，输出 2D 边界框，使用 tkDNN 优化推理。</p>
+<p> - LiDAR：PointPillars 模型，输入融合的 3D LiDAR 点云，输出 3D 边界框（含位置、朝向、尺寸），使用 tkDNN 优化推理。</p>
+<p> - RADAR：基于滤波与聚类的传统方法，对点云进行 RCS 与 SNR 等阈值的筛选，并结合外部赛道边界剔除无效点。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 传感器后端时序通过 PTP 协议进行时间同步；空间对齐依赖离线内外参标定。</p>
+<p> - 多目标跟踪基于扩展卡尔曼滤波（EKF），状态向量为 Frenet 坐标下的 [s, d, vs, vd]。</p>
+<p> - 该 EKF 使用改进的常速模型，引入一阶动态使得速度状态平滑趋近于由所选赛车线速度轮廓推出的参考值。</p>
+<p> - 跟踪器内部实现完整的对象生命周期管理、基于时间戳的延迟补偿与基于历史状态的回卷修正，并利用 Munkres（匈牙利）算法进行关联，以及基于轨迹距离动态选择最优赛车线。</p>
+
+<p>原文未报告场景表示与模型结构中的传统雷达点云表示类型、模型结构细节。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>相机模型预训练数据集：BDD100K；针对赛车域微调：含在线公开视频和近 600 张人工标注的历史测试图像。</li><li>LiDAR 模型预训练数据集：KITTI（仅使用车辆类别）；微调数据集：约 25000 幅人工标注的历史赛道 LiDAR 点云；原文未报告其他来源或尺寸。</li><li>实验数据：原文未报告具体实验数据规模，仅描述在 2025 年 A2RL 赛事期间受控测试中采集的车载传感器数据。</li><li>模型规模：原文未明确报告 YOLOv4 或 PointPillars 的具体参数数量。</li><li>训练资源：原文未报告；推理平台为 NVIDIA RTX 6000 Ada 系列 GPU，并使用 tkDNN 与 TensorRT 技术优化。</li><li>实车平台：Dallara EAV-24（由 UNIMORE Racing 车队在比赛和测试中使用）。</li><li>仿真器：原文未报告使用任何仿真器。</li><li>开源数据集与资源：本文档涉及的公开数据集，包括 BDD100K、KITTI 及在赛道采集的数据集；原文未提及代码发布情况。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估条件：基于 2025 年 A2RL 赛事中真实世界的受控多车试验收集数据（实车闭环评估）；原文未将评估限定在开环或仿真的范畴，且明确指出测试基于赛道上的真实车辆高精度定位数据进行验证。</li><li>评估基准与指标：以赛事期间对其他车辆提供的高精度定位数据作为真值，采用 Frenet 坐标下的纵向位置 RMSE、横向位置 RMSE、纵向速度 RMSE，同时分析纵向最大误差、跟踪持续时间，以及方位角误差；追踪性能误差在分析中还与主车与被追踪目标之间的距离及相对车辆位置进行了相关性统计。原文未报告车道占用、碰撞或超车成功率等经典的闭环规划指标。</li><li>关键数值（消融实验，315 秒高速追逐序列）：</li></ul>
+<p> - LiDAR+RADAR：纵向 RMSE 1.17 m，横向 RMSE 0.41 m，速度 RMSE 0.95 m/s，最大误差 73.05 m，追踪时间 308.6 s。</p>
+<p> - Camera+RADAR：纵向 RMSE 1.72 m，横向 RMSE 0.53 m，速度 RMSE 1.13 m/s，最大误差 95.15 m，追踪时间 305.7 s。</p>
+<p> - Camera+LiDAR：纵向 RMSE 1.54 m，横向 RMSE 0.42 m，速度 RMSE 1.43 m/s，最大误差 76.91 m，追踪时间 306.4 s。</p>
+<p> - Camera+LiDAR+RADAR：纵向 RMSE 1.40 m，横向 RMSE 0.41 m，速度 RMSE 0.77 m/s，最大误差 96.0 m，追踪时间 313.1 s；该组合取得最低速度误差、最高横向精度及最长的跟踪范围和时间。</p>
+<ul><li>其他关键场景结果：</li></ul>
+<p> - “高速相对速度差超车”：缓慢/接近停下的车辆可在约 80 m 被检测，开始主动跟踪时距离约为 68.81 m，且可在约 150 ms 内进入主动跟踪状态，350 ms 后达到一秒的碰撞时间（TTC），估计速度收敛为接近 0 m/s，期间纵向、横向和方位误差极低（最大误差发生在初始化）。</p>
+<p> - “遮挡下的多目标跟踪”：被遮挡目标在超车时约 51.74 m 处被发现，速度约在两次迭代内收敛到 0 m/s；初始化时暴露最大横向误差（0.83 m），呈极低延迟新目标初始化能力。</p>
+<p> - “并排超车”：各误差随两车相对位置变化规律明显；最大纵向误差 0.84 m，最大横向误差 0.61 m，纵向速度峰值误差误差由超过 4 m/s 下调，方位角误差最高达 9 度，这些大误差主要出现在初始化阶段，并在后续逐渐消除。文中指出并排过程中的误差主要由相机-位置估计缺乏被跟踪车辆结构的语义导致。</p>
+<ul><li>对比方法：原文未在相同数据下直接对比既有的 Kaist、TUM 或 MIT-PITT 等系统在特定测试序列上的数字，仅在其相关工作综述中讨论了这些系统的特点与局限（如使用的数据模态、是否多传感器融合、检测范围的表现）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.08965/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.08281/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SAM3-O2D2: Zero-Shot Object Out-of-Distribution Detection by Object Class Prompting of the SAM3-Image Model</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

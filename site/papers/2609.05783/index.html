@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Closed-Loop Evaluation of Bird&#x27;s-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。 应用场景为 CARLA 模拟器中的城市道路导航。 研究问题为评估将基于 Cross-View Transformer (CVT) 预测的鸟瞰图（BEV）语义地图作为行为克隆策略直接输入时，感知误差（预测 BEV 与真实 BEV 的差异）对闭环驾驶性能的下游影响。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.05783">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.05783.webp" alt="Closed-Loop Evaluation of Bird&#x27;s-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Closed-Loop Evaluation of Bird&#x27;s-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies</h1>
+            <div class="detail-meta">2026-09-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.05783" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.05783" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.05783</span></div>
+            <p class="detail-summary">该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。 应用场景为 CARLA 模拟器中的城市道路导航。 研究问题为评估将基于 Cross-View Transformer (CVT) 预测的鸟瞰图（BEV）语义地图作为行为克隆策略直接输入时，感知误差（预测 BEV 与真实 BEV 的差异）对闭环驾驶性能的下游影响。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Federal University of Santa Catarina (UFSC), Florianópolis, Brazil · Felipe…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.05783/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。</p>
+  <ul class="reading-intro-points"><li>该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。</li><li>应用场景为 CARLA 模拟器中的城市道路导航。</li><li>研究问题为评估将基于 Cross-View Transformer (CVT) 预测的鸟瞰图（BEV）语义地图作为行为克隆策略直接输入时，感知误差（预测 BEV 与真实 BEV 的差异）对闭环驾驶性能的下游影响。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Federal University of Santa Catarina (UFSC), Florianópolis, Brazil；作者：Felipe Carlos dos Santos、Eric Aislan Antonelo、Gustavo Claudio Karl Couto（注：三位作者均标注为同一机构，机构对应关系原文已明确）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。</li><li>应用场景为 CARLA 模拟器中的城市道路导航。</li><li>研究问题为评估将基于 Cross-View Transformer (CVT) 预测的鸟瞰图（BEV）语义地图作为行为克隆策略直接输入时，感知误差（预测 BEV 与真实 BEV 的差异）对闭环驾驶性能的下游影响。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个六通道 CVT-BEV 生成模型（编码道路、规划路线、车道边界、车辆、行人、交通灯），与先前仅三通道的基线相比，在更大且带扰动增广的数据集上训练。</li><li>引入基于核密度估计（KDE）的重要性加权重方案，对转弯、交叉口等不常见的驾驶机动进行重加权，改善了几何关键位置的道路和路线通道质量。</li><li>在 CARLA 仿真器中进行闭环评估，将多个 BEV 生成模型替换为 BC 策略输入（保持策略权重固定），比较其下游驾驶性能。</li><li>发现 KDE 加权模型是唯一能够在不违规的情况下完成整集 episode 的预测 BEV agent，尽管它宏观的 IoU 指标并非最高。</li><li>揭示全局分割指标（如路线平均 IoU）并不足以反映驾驶性能优劣，路线通道的预测质量是瓶颈所在，突出预测在几何关键位置的作用。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知（BEV 语义分割）与驾驶控制（行为克隆策略）的结合。</li><li>输入传感器：摄像头图像与稀疏路线信息（front、right、left、rear 四个方向 RGB 摄像头，以及一个表示稀疏路线图、单通道的图像），另需输入相机标定参数（内参、外参）用于跨视角变换。行为克隆策略同时使用车辆纵向速度和最近控制命令等标量输入。</li><li>场景表示：车载摄像头视角下的语义 BEV 高清图（192×192 六通道二进制掩码）。</li><li>模型结构：“CVT”模型采用 EfficientNet-B4 作为主干网络，结合跨视图注意力融合多视角信息，迭代细化 BEV 表示。“BC 策略”采用卷积神经网络提取 BEV 特征，将状态向量通过 MLP 嵌入，再拼接特征输出 Beta 分布的参数以采样连续控制命令（加速度和转向）。</li><li>关键技术：将 KDE 用于对训练样本进行加权，调整 BEV 分割训练的损失（BCE），以强化对稀疏的驾驶操纵（如转弯和交叉口）的学习。采用带扰动（转向/油门）的专家演示来提升数据多样性，并包含异常轨迹。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：自采 CARLA Leaderboard (Town01) 数据，总计 1,186,499 张图像、201,980 个采样点，约 93.8 GB。训练/验证/测试划分见原文表（训练 930,040 张；验证 129,579 张；测试 126,880 张）。</li><li>仿真器：CARLA 模拟器。</li><li>模型规模：CVT 模型基于 EfficientNet-B4 后端（模型具体参数规模未报告）。特征维度大小未明确。BC 策略网络结构同论文 Antenelo 等人成果。</li><li>训练资源：原文未报告（未提及具体 GPU）。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：</li></ul>
+<p> - BEV 质量：IoU 度量，评估于 Town01（验证）和 town02（测试）。</p>
+<p> - 闭环驾驶：CARLA 中 5 个固定生成点/route（每个长约 1241 m）。</p>
+<p> - 对比：CVT 6ch. (无扰动), CVT 6ch. (扰动), CVT 6ch. KDE, CVT 3ch. (基线，来自文献)，及 UNet。评估中还设置“无动态障碍物”的环境以隔离感知与策略影响。</p>
+<ul><li>评估指标：人均道路可通行 distance、违规次数（episode 终止时）以行为克隆 driver 表现。BEV 质量：IoU 值。</li><li>关键数值：CVT 6ch. KDE 的 mean (channels 0-2) Town01 验证 IoU 最高（0.6413）；在 Town02 测试集同为最高（0.5667）。 BC agent 中，CVT 6ch. KDE 累计 Town01 完成 261 m 路线、违规 4/5 次，是最佳表现模型。</li><li>评估条件：仿真（CARLA）。闭环评估无动态障碍物；定性示例图和轨迹图证明其闭环特性。</li></ul>
+
+<ul><li>在 BEV 质量（IoU）上，KDE 模型在静态几何通道（道路、轨迹、车道）优于其他六通道模型，但在 Town02 中仍低于三通道基线（0.567 vs. 0.6703）；KDE 模型在车辆和交通灯上的 IoU 较低（行人 IoU 为 0）。</li><li>在闭环驾驶（无交通/障碍物场景）中，KDE 模型是唯一能够完成完整 episode 且不违规的模型（在 Town01 的 5 个 episode 中违规 4 次，性能远优于其他所有基于预测 BEV 的策略，也比 CVT 6ch. 有更大的路线 coverage 对比）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.06055/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DriveZero: End-to-End Driving Beyond Human Demonstrations</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.05643/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">The convergent laboratory: when AI reasoning, autonomous experiments, high performance and quantum computing reshape chemistry</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

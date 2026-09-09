@@ -1,5 +1,585 @@
 [
   {
+    "date": "2026-09-08",
+    "title": "PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.08965",
+    "arxiv_id": "2609.08965",
+    "detail_path": "papers/2609.08965/",
+    "cover_path": "covers/2609.08965/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.08965.webp",
+    "paper_image_full_path": "assets/paper-images/2609.08965.webp",
+    "preview_text": "本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。 该框架覆盖基于场景测试的全部生命周期，包括场景生成、检索、修改、测试执行和结果分析，并新增两个 LLM 增强阶段：ADS增强（规划器调参）和 ADS基准测试（跨规划器对比）。 旨在解决当前自动驾驶系统验证流程中各阶段工具割裂、依赖人工脚本、缺乏统一交互的问题。",
+    "research_unit": "Professorship of Autonomous Vehicle Systems, TUM School of Engineering and…",
+    "hook_text": "本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。",
+    "key_points": [
+      "本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。",
+      "该框架覆盖基于场景测试的全部生命周期，包括场景生成、检索、修改、测试执行和结果分析，并新增两个 LLM 增强阶段：ADS增强（规划器调参）和 ADS基准测试（跨规划器对比）。",
+      "旨在解决当前自动驾驶系统验证流程中各阶段工具割裂、依赖人工脚本、缺乏统一交互的问题。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "title": "A Multi-Modal Perception Pipeline for Object Detection and Tracking in Autonomous Racing",
+    "link": "https://arxiv.org/abs/2609.08338",
+    "arxiv_id": "2609.08338",
+    "detail_path": "papers/2609.08338/",
+    "cover_path": "covers/2609.08338/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.08338.webp",
+    "paper_image_full_path": "assets/paper-images/2609.08338.webp",
+    "preview_text": "研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。 应用场景：自动驾驶赛车（原型车为 Dallara EAV-24），在高速（可达 80 m/s）、强振动、小安全裕度的极限工况下对周围车辆进行实时感知。 研究问题：在有限能见度、传感器噪声和失效等不利条件下，如何有效利用全部车上传感器（相机、LiDAR、RADAR），实现鲁棒、低延迟的周围车辆状态估计，以支撑安全自适应规划（如超车与碰撞规避）。 论文通过引入多模态后融合感知流程和集成赛道动力学与赛道布局先验知识的多目标跟踪框架，解决单模态感知在高速赛车场景下的精度和鲁棒性问题。",
+    "research_unit": "University of Modena and Reggio Emilia, Modena, Italy · Davide Malvezzi、Mic…",
+    "hook_text": "研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。",
+    "key_points": [
+      "研究任务：面向自动驾驶赛车场景的多目标检测与跟踪任务。",
+      "应用场景：自动驾驶赛车（原型车为 Dallara EAV-24），在高速（可达 80 m/s）、强振动、小安全裕度的极限工况下对周围车辆进行实时感知。",
+      "研究问题：在有限能见度、传感器噪声和失效等不利条件下，如何有效利用全部车上传感器（相机、LiDAR、RADAR），实现鲁棒、低延迟的周围车辆状态估计，以支撑安全自适应规划（如超车与碰撞规避）。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "title": "SAM3-O2D2: Zero-Shot Object Out-of-Distribution Detection by Object Class Prompting of the SAM3-Image Model",
+    "link": "https://arxiv.org/abs/2609.08281",
+    "arxiv_id": "2609.08281",
+    "detail_path": "papers/2609.08281/",
+    "cover_path": "covers/2609.08281/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.08281.webp",
+    "paper_image_full_path": "assets/paper-images/2609.08281.webp",
+    "preview_text": "本文解决自动驾驶及通用场景中目标检测器可能对未见过（OOD）目标过度自信的安全问题，任务是目标级零样本（zero-shot）OOD 检测。 方法通过将目标检测器预测的类别标签用作文本提示，利用 SAM3-image 基础模型在预测层面验证检测一致性。",
+    "research_unit": "Technische Universität Braunschweig, Institute for Communications Technolog…",
+    "hook_text": "本文解决自动驾驶及通用场景中目标检测器可能对未见过（OOD）目标过度自信的安全问题，任务是目标级零样本（zero-shot）OOD 检测。",
+    "key_points": [
+      "本文解决自动驾驶及通用场景中目标检测器可能对未见过（OOD）目标过度自信的安全问题，任务是目标级零样本（zero-shot）OOD 检测。",
+      "方法通过将目标检测器预测的类别标签用作文本提示，利用 SAM3-image 基础模型在预测层面验证检测一致性。",
+      "提出零样本目标 OOD 检测方法 SAM3-O2D2，利用文本可提示的 SAM3-image 基础模型，并与目标检测器的预测进行比较。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "title": "Drive by Hindsight and Foresight: Tool-Grounded Synergistic Reasoning over Hierarchical Memory for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.08217",
+    "arxiv_id": "2609.08217",
+    "detail_path": "papers/2609.08217/",
+    "cover_path": "covers/2609.08217/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.08217.webp",
+    "paper_image_full_path": "assets/paper-images/2609.08217.webp",
+    "preview_text": "论文解决自动驾驶场景中视觉语言模型（VLM）的推理与决策问题，具体任务包括风险感知、规则遵守、场景理解、空间-时间关系推理和驾驶行为决策等。 应用场景为基于六视角环视图像的开放式自动驾驶问答与推理评估。 针对现有方法中模型缺乏主动感知能力、无法积累跨场景经验、对时空关系理解弱、易产生幻觉和泛化不足等研究问题，提出一个将层级记忆与工具调用紧密耦合的闭环推理框架，以模拟人类的“远见”（foresight）与“后见”（hindsight）推理模式。",
+    "research_unit": "Beihang University · Baojie Chen",
+    "hook_text": "论文解决自动驾驶场景中视觉语言模型（VLM）的推理与决策问题，具体任务包括风险感知、规则遵守、场景理解、空间-时间关系推理和驾驶行为决策等。",
+    "key_points": [
+      "论文解决自动驾驶场景中视觉语言模型（VLM）的推理与决策问题，具体任务包括风险感知、规则遵守、场景理解、空间-时间关系推理和驾驶行为决策等。",
+      "应用场景为基于六视角环视图像的开放式自动驾驶问答与推理评估。",
+      "针对现有方法中模型缺乏主动感知能力、无法积累跨场景经验、对时空关系理解弱、易产生幻觉和泛化不足等研究问题，提出一个将层级记忆与工具调用紧密耦合的闭环推理框架，以模拟人类的“远见”（foresight）与“后见”（hindsight）推理模式。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "title": "Re-engineering SORT-based algorithms for low-cost small object tracking from omnidirectional footage",
+    "link": "https://arxiv.org/abs/2609.07547",
+    "arxiv_id": "2609.07547",
+    "detail_path": "papers/2609.07547/",
+    "cover_path": "covers/2609.07547/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.07547.webp",
+    "paper_image_full_path": "assets/paper-images/2609.07547.webp",
+    "preview_text": "论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。 研究问题聚焦于三个相互交织的挑战：等距柱状投影（equirectangular projection）导致的左右接缝不连续、目标极小（典型小于 32×32 像素）且快速移动、以及远程电池供电设备对计算资源和功耗的严格限制。 论文指出，现有主流跟踪器依赖外观编码器（ReID/Transformer）且为标准视场相机设计，在这些场景下失效，因此重新设计基于 SORT（Simple Online and Realtime Tracking）的轻量级跟踪框架以适配该几何与尺度特性。",
+    "research_unit": "Sigmedia Group, Electronic and Electrical Engineering, Trinity College Dubl…",
+    "hook_text": "论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。",
+    "key_points": [
+      "论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。",
+      "研究问题聚焦于三个相互交织的挑战：等距柱状投影（equirectangular projection）导致的左右接缝不连续、目标极小（典型小于 32×32 像素）且快速移动、以及远程电池供电设备对计算资源和功耗的严格限制。",
+      "论文指出，现有主流跟踪器依赖外观编码器（ReID/Transformer）且为标准视场相机设计，在这些场景下失效，因此重新设计基于 SORT（Simple Online and Realtime Tracking）的轻量级跟踪框架以适配该几何与尺度特性。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "title": "Generation of Vectorized Maps Beyond Vehicle View",
+    "link": "https://arxiv.org/abs/2609.07511",
+    "arxiv_id": "2609.07511",
+    "detail_path": "papers/2609.07511/",
+    "cover_path": "covers/2609.07511/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.07511.webp",
+    "paper_image_full_path": "assets/paper-images/2609.07511.webp",
+    "preview_text": "本文研究自动驾驶中\"超视距矢量地图生成\"问题：给定车辆传感器可感知区域（约70米范围）内的矢量地图（in-view），预测其在行驶方向上100-150米的合理延续（beyond-view）。 应用场景为自动驾驶中的在线高清地图构建，旨在弥补在线重建方法视野有限与传统离线高清地图成本高、更新慢之间的差距，为安全规划提供更远距离的道路结构先验。 该问题为首次提出；论文提出原型模型BeyondFormer以验证该任务的技术可行性。",
+    "research_unit": "Centre for Automation and Robotics, CSIC-UPM, Spain · Clara Gomez、Antonio A…",
+    "hook_text": "本文研究自动驾驶中\"超视距矢量地图生成\"问题：给定车辆传感器可感知区域（约70米范围）内的矢量地图（in-view），预测其在行驶方向上100-150米的合理延续（beyond-view）。",
+    "key_points": [
+      "本文研究自动驾驶中\"超视距矢量地图生成\"问题：给定车辆传感器可感知区域（约70米范围）内的矢量地图（in-view），预测其在行驶方向上100-150米的合理延续（beyond-view）。",
+      "应用场景为自动驾驶中的在线高清地图构建，旨在弥补在线重建方法视野有限与传统离线高清地图成本高、更新慢之间的差距，为安全规划提供更远距离的道路结构先验。",
+      "该问题为首次提出；论文提出原型模型BeyondFormer以验证该任务的技术可行性。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "title": "A Two-Stage Framework for Ego-Centric Key Object Identification via Object State Prediction",
+    "link": "https://arxiv.org/abs/2609.07125",
+    "arxiv_id": "2609.07125",
+    "detail_path": "papers/2609.07125/",
+    "cover_path": "covers/2609.07125/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.07125.webp",
+    "paper_image_full_path": "assets/paper-images/2609.07125.webp",
+    "preview_text": "解决自动驾驶场景下的关键物体识别（Key Object Identification）任务。 应用场景为城市复杂交通环境下的自动驾驶感知与决策解释，旨在提升自动驾驶系统对于环境影响自身驾驶行为的关键物体的识别能力，增强决策透明度。 研究问题为现有方法仅独立检测物体或依赖视觉关系建模，未充分显式考虑以自车为中心的物体重要性判断。针对此提出两阶段框架：第一阶段推断周围物体相对于自车的动态状态，第二阶段利用物体状态与时空关系识别最关键物体。",
+    "research_unit": "School of Computing and Information, University of Pittsburgh · Shihong Lin…",
+    "hook_text": "解决自动驾驶场景下的关键物体识别（Key Object Identification）任务。",
+    "key_points": [
+      "解决自动驾驶场景下的关键物体识别（Key Object Identification）任务。",
+      "应用场景为城市复杂交通环境下的自动驾驶感知与决策解释，旨在提升自动驾驶系统对于环境影响自身驾驶行为的关键物体的识别能力，增强决策透明度。",
+      "研究问题为现有方法仅独立检测物体或依赖视觉关系建模，未充分显式考虑以自车为中心的物体重要性判断。针对此提出两阶段框架：第一阶段推断周围物体相对于自车的动态状态，第二阶段利用物体状态与时空关系识别最关键物体。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "title": "CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving",
+    "link": "https://arxiv.org/abs/2609.07094",
+    "arxiv_id": "2609.07094",
+    "detail_path": "papers/2609.07094/",
+    "cover_path": "covers/2609.07094/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.07094.webp",
+    "paper_image_full_path": "assets/paper-images/2609.07094.webp",
+    "preview_text": "本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。 研究问题：现有驾驶推理表示无法同时提供空间、时间与因果三重锚定，推理结果难以逐元素验证；且大规模推理标注多为模型生成、难以人工核验。 应用场景：自动驾驶物理 AI 模型在复杂真实驾驶场景中的推理基准评测及推理标签质量验证。",
+    "research_unit": "NVIDIA · Jenny Schmalfuss、Despoina Paschalidou、German Ros 等",
+    "hook_text": "本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。",
+    "key_points": [
+      "本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。",
+      "研究问题：现有驾驶推理表示无法同时提供空间、时间与因果三重锚定，推理结果难以逐元素验证；且大规模推理标注多为模型生成、难以人工核验。",
+      "应用场景：自动驾驶物理 AI 模型在复杂真实驾驶场景中的推理基准评测及推理标签质量验证。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "title": "Large Discrete Policy: Advancing Explicit Behavior Modeling with Stochastic Iterative Scoring",
+    "link": "https://arxiv.org/abs/2609.07049",
+    "arxiv_id": "2609.07049",
+    "detail_path": "papers/2609.07049/",
+    "cover_path": "covers/2609.07049/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.07049.webp",
+    "paper_image_full_path": "assets/paper-images/2609.07049.webp",
+    "preview_text": "解决自动驾驶中的端到端行为规划与闭环驾驶任务，以及机器人操作中的视觉行为建模与控制问题。 针对现有连续生成式行为策略（如扩散模型、流匹配）隐式决策过程难以解释、易产生不合理动作的问题，提出将行为建模视为在大规模物理可行动作词汇上进行离散挑选的显式决策框架。 研究核心问题是：如何在保持动作词汇固定且物理可行的前提下，通过更精细的评分机制提高离散策略的表达能力，以逼近甚至超越连续生成式策略的表现。",
+    "research_unit": "NVIDIA · Nadine Chang、Xinglong Sun、Jingde Chen 等",
+    "hook_text": "解决自动驾驶中的端到端行为规划与闭环驾驶任务，以及机器人操作中的视觉行为建模与控制问题。",
+    "key_points": [
+      "解决自动驾驶中的端到端行为规划与闭环驾驶任务，以及机器人操作中的视觉行为建模与控制问题。",
+      "针对现有连续生成式行为策略（如扩散模型、流匹配）隐式决策过程难以解释、易产生不合理动作的问题，提出将行为建模视为在大规模物理可行动作词汇上进行离散挑选的显式决策框架。",
+      "研究核心问题是：如何在保持动作词汇固定且物理可行的前提下，通过更精细的评分机制提高离散策略的表达能力，以逼近甚至超越连续生成式策略的表现。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-06",
+    "title": "Drones as Annotators: Amodal 3D Auto-Labeling for Ground LiDAR with Aerial Priors",
+    "link": "https://arxiv.org/abs/2609.06819",
+    "arxiv_id": "2609.06819",
+    "detail_path": "papers/2609.06819/",
+    "cover_path": "covers/2609.06819/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.06819.webp",
+    "paper_image_full_path": "assets/paper-images/2609.06819.webp",
+    "preview_text": "本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。 应用场景为城市场景下具有俯拍视角无人机（UAV）与地面 LiDAR（车载、路侧或融合）协同采集数据的路口环境，用于降低车辆检测标注的人力成本。 研究问题：单地面视角 LiDAR 存在遮挡与点云稀疏问题，难以恢复完整的目标几何形状，导致伪标签质量下降；本文利用无人机鸟瞰视角提供低遮挡的目标检测先验，解决地面 LiDAR 自动标注的困惑。",
+    "research_unit": "Lyles School of Civil and Construction Engineering, Purdue University, West…",
+    "hook_text": "本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。",
+    "key_points": [
+      "本文解决自动驾驶中 3D 边界框标注成本高昂、依赖人工且需要专业知识的问题，针对地面 LiDAR 数据的自动 3D 标注任务展开研究。",
+      "应用场景为城市场景下具有俯拍视角无人机（UAV）与地面 LiDAR（车载、路侧或融合）协同采集数据的路口环境，用于降低车辆检测标注的人力成本。",
+      "研究问题：单地面视角 LiDAR 存在遮挡与点云稀疏问题，难以恢复完整的目标几何形状，导致伪标签质量下降；本文利用无人机鸟瞰视角提供低遮挡的目标检测先验，解决地面 LiDAR 自动标注的困惑。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-06",
+    "title": "Geometric Distributional Control: Learning Progress with Partial Structural Knowledge",
+    "link": "https://arxiv.org/abs/2609.06331",
+    "arxiv_id": "2609.06331",
+    "detail_path": "papers/2609.06331/",
+    "cover_path": "covers/2609.06331/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.06331.webp",
+    "paper_image_full_path": "assets/paper-images/2609.06331.webp",
+    "preview_text": "该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。 论文提出的任务是：在已知部分几何、规则、约束、响应映射等显式结构的前提下，仅需短程已知可行的轨迹片段与弱符号进度证书，学习局部进度值梯度的方向性控制。 研究聚焦于如何以数据支持的可行进度几何替代不可用的解析解几何，并让学习到的进度得分在场架上引导可行动作方向而不需要全局贝尔曼递归或黑盒策略学习。",
+    "research_unit": "University of Central Florida · Tong Wu",
+    "hook_text": "该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。",
+    "key_points": [
+      "该论文解决的是部分物理已知、但完整方向性解几何未知的实时控制问题，属于自动驾驶、仓储机器人、城市交通网络控制、自主投递无人机等部署系统的中间控制机制。",
+      "论文提出的任务是：在已知部分几何、规则、约束、响应映射等显式结构的前提下，仅需短程已知可行的轨迹片段与弱符号进度证书，学习局部进度值梯度的方向性控制。",
+      "研究聚焦于如何以数据支持的可行进度几何替代不可用的解析解几何，并让学习到的进度得分在场架上引导可行动作方向而不需要全局贝尔曼递归或黑盒策略学习。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-05",
+    "title": "DriveZero: End-to-End Driving Beyond Human Demonstrations",
+    "link": "https://arxiv.org/abs/2609.06055",
+    "arxiv_id": "2609.06055",
+    "detail_path": "papers/2609.06055/",
+    "cover_path": "covers/2609.06055/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.06055.webp",
+    "paper_image_full_path": "assets/paper-images/2609.06055.webp",
+    "preview_text": "论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。 应用场景覆盖城区端到端驾驶、闭环规划、视觉感知预训练以及仿真与实车部署准备，通过解耦感知与动作两大模型，分别采用最适合各自的学习范式后进行统一蒸馏。 系统包含三个组成部分：DriveRL（闭环强化学习特权教师模型）、DriveVFM（多视觉基础模型蒸馏的驾驶骨干网络）、DriveZero（相机纯视觉端到端规划器）。",
+    "research_unit": "Xiaomi EV · AD & Robotics、L3 Team（作者与机构对应关系：原文仅以团队名义署名、未列出个人作者姓名与机构的逐一对应关系 等",
+    "hook_text": "论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。",
+    "key_points": [
+      "论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。",
+      "应用场景覆盖城区端到端驾驶、闭环规划、视觉感知预训练以及仿真与实车部署准备，通过解耦感知与动作两大模型，分别采用最适合各自的学习范式后进行统一蒸馏。",
+      "系统包含三个组成部分：DriveRL（闭环强化学习特权教师模型）、DriveVFM（多视觉基础模型蒸馏的驾驶骨干网络）、DriveZero（相机纯视觉端到端规划器）。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-05",
+    "title": "Closed-Loop Evaluation of Bird's-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies",
+    "link": "https://arxiv.org/abs/2609.05783",
+    "arxiv_id": "2609.05783",
+    "detail_path": "papers/2609.05783/",
+    "cover_path": "covers/2609.05783/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.05783.webp",
+    "paper_image_full_path": "assets/paper-images/2609.05783.webp",
+    "preview_text": "该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。 应用场景为 CARLA 模拟器中的城市道路导航。 研究问题为评估将基于 Cross-View Transformer (CVT) 预测的鸟瞰图（BEV）语义地图作为行为克隆策略直接输入时，感知误差（预测 BEV 与真实 BEV 的差异）对闭环驾驶性能的下游影响。",
+    "research_unit": "Federal University of Santa Catarina (UFSC), Florianópolis, Brazil · Felipe…",
+    "hook_text": "该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。",
+    "key_points": [
+      "该论文研究自动驾驶领域中的行为克隆（Behavior Cloning, BC）任务。",
+      "应用场景为 CARLA 模拟器中的城市道路导航。",
+      "研究问题为评估将基于 Cross-View Transformer (CVT) 预测的鸟瞰图（BEV）语义地图作为行为克隆策略直接输入时，感知误差（预测 BEV 与真实 BEV 的差异）对闭环驾驶性能的下游影响。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-04",
+    "title": "The convergent laboratory: when AI reasoning, autonomous experiments, high performance and quantum computing reshape chemistry",
+    "link": "https://arxiv.org/abs/2609.05643",
+    "arxiv_id": "2609.05643",
+    "detail_path": "papers/2609.05643/",
+    "cover_path": "covers/2609.05643/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.05643.webp",
+    "paper_image_full_path": "assets/paper-images/2609.05643.webp",
+    "preview_text": "该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。 论文讨论了人工智能（AI）、自主智能体、自驱动实验室、机器学习原子间势、高性能计算和容错量子计算在化学与材料科学中的融合。 研究问题聚焦于如何将这些技术集成到一个统一平台中，以加速化学与材料发现，实现从假设生成到实验验证的自动化闭环。 应用场景包括催化剂发现、分子设计、反应网络探索和材料合成。",
+    "research_unit": "Data Science and Learning Division, Argonne National Laboratory · Eliu Huer…",
+    "hook_text": "该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。",
+    "key_points": [
+      "该论文是一篇评论性文章（Comment），源自TPC26会议，关注材料科学发现领域。",
+      "论文讨论了人工智能（AI）、自主智能体、自驱动实验室、机器学习原子间势、高性能计算和容错量子计算在化学与材料科学中的融合。",
+      "研究问题聚焦于如何将这些技术集成到一个统一平台中，以加速化学与材料发现，实现从假设生成到实验验证的自动化闭环。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-01",
+    "title": "Situation Awareness for Intelligent Data Distribution in Connected Vehicles",
+    "link": "https://arxiv.org/abs/2609.05521",
+    "arxiv_id": "2609.05521",
+    "detail_path": "papers/2609.05521/",
+    "cover_path": "covers/2609.05521/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.05521.webp",
+    "paper_image_full_path": "assets/paper-images/2609.05521.webp",
+    "preview_text": "本论文面向智能网联汽车（Connected Vehicles）中的智能数据分发任务，提出了一种基于鸟瞰视角（Bird's-Eye-View, BEV）图像的车辆交通情境识别方法。 研究问题在于：当车辆自身传感器因遮挡产生盲区时，协同感知需通过V2X通信获取额外数据，但会产生大量冗余数据传输。论文提出通过识别当前交通情境，使车辆能够有针对性地获取和利用相关数据，从而优化传感器数据管理并降低V2X通信中的冗余。",
+    "research_unit": "斯图加特大学工业自动化与软件工程研究所（Institute of Industrial Automation and Software Enginee…",
+    "hook_text": "本论文面向智能网联汽车（Connected Vehicles）中的智能数据分发任务，提出了一种基于鸟瞰视角（Bird's-Eye-View, BEV）图像的车辆交通情境识别方法。",
+    "key_points": [
+      "本论文面向智能网联汽车（Connected Vehicles）中的智能数据分发任务，提出了一种基于鸟瞰视角（Bird's-Eye-View, BEV）图像的车辆交通情境识别方法。",
+      "研究问题在于：当车辆自身传感器因遮挡产生盲区时，协同感知需通过V2X通信获取额外数据，但会产生大量冗余数据传输。论文提出通过识别当前交通情境，使车辆能够有针对性地获取和利用相关数据，从而优化传感器数据管理并降低V2X通信中的冗余。",
+      "提出了一种新颖的轻量级交通情境识别概念，可直接利用车辆BEV图像识别当前交通情境，无需复杂的目标关联推理。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-31",
+    "title": "An Exploratory Study of Frequency-Aware Task Weighting for YOLOv8-Based Unified Driving Perception",
+    "link": "https://arxiv.org/abs/2609.05516",
+    "arxiv_id": "2609.05516",
+    "detail_path": "papers/2609.05516/",
+    "cover_path": "covers/2609.05516/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.05516.webp",
+    "paper_image_full_path": "assets/paper-images/2609.05516.webp",
+    "preview_text": "本文针对自动驾驶场景中的统一感知问题，研究如何在单一网络中同时完成目标检测、可行驶区域分割和车道线分割。 核心研究问题是：多任务联合优化中不同任务具有不同的收敛速度、损失尺度和优化稳定性，现有任务加权方法多依赖损失幅值、学习不确定性、短期损失变化或梯度统计，本文探索将近期损失历史窗口的频率结构作为互补信号。 论文实现并考察了Frequency-aware Task Weighting（FTW）动态任务平衡规则，在基于YOLOv8的统一感知框架下，对比固定加权和不确定性加权。 论文整体定位为探索性可行性研究，明确不声称FTW相对基线具有稳定性能优势。",
+    "research_unit": "NYU Shanghai（上海纽约大学） · Zhiyuan Nie、Zixi Zhou、Xianbin Gu",
+    "hook_text": "本文针对自动驾驶场景中的统一感知问题，研究如何在单一网络中同时完成目标检测、可行驶区域分割和车道线分割。",
+    "key_points": [
+      "本文针对自动驾驶场景中的统一感知问题，研究如何在单一网络中同时完成目标检测、可行驶区域分割和车道线分割。",
+      "核心研究问题是：多任务联合优化中不同任务具有不同的收敛速度、损失尺度和优化稳定性，现有任务加权方法多依赖损失幅值、学习不确定性、短期损失变化或梯度统计，本文探索将近期损失历史窗口的频率结构作为互补信号。",
+      "论文实现并考察了Frequency-aware Task Weighting（FTW）动态任务平衡规则，在基于YOLOv8的统一感知框架下，对比固定加权和不确定性加权。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2025-10-28",
+    "title": "Delay Tolerant Control for Autonomous Driving Using CDOB",
+    "link": "https://arxiv.org/abs/2510.24898",
+    "arxiv_id": "2510.24898",
+    "detail_path": "papers/2510.24898/",
+    "cover_path": "covers/2510.24898/",
+    "paper_image_path": "assets/paper-images/thumbs/2510.24898.webp",
+    "paper_image_full_path": "assets/paper-images/2510.24898.webp",
+    "preview_text": "该论文研究的是自动驾驶中的路径跟踪控制问题。 应用场景是网联自动驾驶车辆（CAV）在高层决策模块生成无碰撞路径后，由底层控制器精确跟踪该轨迹。 核心研究问题是：通信延迟和计算延迟会显著降低 PID、扰动观测器（DOB）等传统控制器在路径跟踪中的性能，论文旨在设计一种对时延具有鲁棒性的控制框架。",
+    "research_unit": "原文未报告机构信息 · Xincheng Cao、Haochong Chen、Levent Guvenc 等",
+    "hook_text": "该论文研究的是自动驾驶中的路径跟踪控制问题。",
+    "key_points": [
+      "该论文研究的是自动驾驶中的路径跟踪控制问题。",
+      "应用场景是网联自动驾驶车辆（CAV）在高层决策模块生成无碰撞路径后，由底层控制器精确跟踪该轨迹。",
+      "核心研究问题是：通信延迟和计算延迟会显著降低 PID、扰动观测器（DOB）等传统控制器在路径跟踪中的性能，论文旨在设计一种对时延具有鲁棒性的控制框架。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2025-10-27",
+    "title": "NeuroDOB: A Deep Neural Observer-Based Controller for Vehicle Lateral Dynamics",
+    "link": "https://arxiv.org/abs/2510.23067",
+    "arxiv_id": "2510.23067",
+    "detail_path": "papers/2510.23067/",
+    "cover_path": "covers/2510.23067/",
+    "paper_image_path": "assets/paper-images/thumbs/2510.23067.webp",
+    "paper_image_full_path": "assets/paper-images/2510.23067.webp",
+    "preview_text": "论文针对自动驾驶与高级驾驶辅助系统中的车辆横向控制任务，提出了一种基于深度神经网络观测器的控制器（NeuroDOB）。 该控制器以线性二次型调节器（LQR）为基线，并用深度神经网络（DNN）替代传统扰动观测器（DOB），旨在学习并补偿未建模的车辆动态和驾驶员个性化行为。 研究问题是如何在保持系统稳定性的同时，使横向控制能够适应不同驾驶员的驾驶习惯以及多变的路况，从而克服传统 LQR 与 DOB 方法在个性化与复杂动态补偿上的局限性。",
+    "research_unit": "原文未明确对应 · Sangmin Kim、Taehun Kim、Guntae Kim 等",
+    "hook_text": "论文针对自动驾驶与高级驾驶辅助系统中的车辆横向控制任务，提出了一种基于深度神经网络观测器的控制器（NeuroDOB）。",
+    "key_points": [
+      "论文针对自动驾驶与高级驾驶辅助系统中的车辆横向控制任务，提出了一种基于深度神经网络观测器的控制器（NeuroDOB）。",
+      "该控制器以线性二次型调节器（LQR）为基线，并用深度神经网络（DNN）替代传统扰动观测器（DOB），旨在学习并补偿未建模的车辆动态和驾驶员个性化行为。",
+      "研究问题是如何在保持系统稳定性的同时，使横向控制能够适应不同驾驶员的驾驶习惯以及多变的路况，从而克服传统 LQR 与 DOB 方法在个性化与复杂动态补偿上的局限性。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2025-10-26",
+    "title": "Uncertainty-Aware Autonomous Vehicles: Predicting the Road Ahead",
+    "link": "https://arxiv.org/abs/2510.22680",
+    "arxiv_id": "2510.22680",
+    "detail_path": "papers/2510.22680/",
+    "cover_path": "covers/2510.22680/",
+    "paper_image_path": "assets/paper-images/thumbs/2510.22680.webp",
+    "paper_image_full_path": "assets/paper-images/2510.22680.webp",
+    "preview_text": "本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。 应用场景为自动驾驶赛车，具体任务是通过前方摄像头图像分类识别前方道路布局，并将其不确定性集成到基于 ROS 的车辆控制管线中，动态调节车速以提升安全性。 研究核心是评估不确定性感知的图像分类器（随机集神经网络 RS-NN、传统 CNN、拉普拉斯桥贝叶斯神经网络 LB-BNN）在道路布局预测任务中的准确率与不确定性校准性能，并将最优模型（RS-NN）集成到真实自动驾驶赛车的软件栈中进行实证验证。",
+    "research_unit": "School of Engineering, Computing and Mathematics, Oxford Brookes University…",
+    "hook_text": "本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。",
+    "key_points": [
+      "本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。",
+      "应用场景为自动驾驶赛车，具体任务是通过前方摄像头图像分类识别前方道路布局，并将其不确定性集成到基于 ROS 的车辆控制管线中，动态调节车速以提升安全性。",
+      "研究核心是评估不确定性感知的图像分类器（随机集神经网络 RS-NN、传统 CNN、拉普拉斯桥贝叶斯神经网络 LB-BNN）在道路布局预测任务中的准确率与不确定性校准性能，并将最优模型（RS-NN）集成到真实自动驾驶赛车的软件栈中进行实证验证。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2025-10-15",
+    "title": "Safe Driving in Occluded Environments",
+    "link": "https://arxiv.org/abs/2510.13114",
+    "arxiv_id": "2510.13114",
+    "detail_path": "papers/2510.13114/",
+    "cover_path": "covers/2510.13114/",
+    "paper_image_path": "assets/paper-images/thumbs/2510.13114.webp",
+    "paper_image_full_path": "assets/paper-images/2510.13114.webp",
+    "preview_text": "该论文研究自动驾驶中由于视觉遮挡（如建筑、树木、停放车辆等导致的视野盲区）造成的潜在风险问题。 应用场景为视野遮挡的路口（如交叉路口），本车与行人交互，试图安全通过路口。 研究问题是如何在遮挡环境下，对不可见或潜在的交通参与者带来的“潜在风险”进行安全控制，同时避免过度保守导致性能损失。 提出一种概率安全证书，将潜在风险概率控制在容差范围内，并集成到模型预测控制或数据驱动策略中。",
+    "research_unit": "Department of Electrical and Computer Engineering, Carnegie Mellon Universi…",
+    "hook_text": "该论文研究自动驾驶中由于视觉遮挡（如建筑、树木、停放车辆等导致的视野盲区）造成的潜在风险问题。",
+    "key_points": [
+      "该论文研究自动驾驶中由于视觉遮挡（如建筑、树木、停放车辆等导致的视野盲区）造成的潜在风险问题。",
+      "应用场景为视野遮挡的路口（如交叉路口），本车与行人交互，试图安全通过路口。",
+      "研究问题是如何在遮挡环境下，对不可见或潜在的交通参与者带来的“潜在风险”进行安全控制，同时避免过度保守导致性能损失。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-03-11",
     "title": "A Survey of Reasoning in Autonomous Driving Systems: Open Challenges and Emerging Paradigms",
     "link": "https://arxiv.org/abs/2603.11093",

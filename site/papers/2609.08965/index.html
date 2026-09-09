@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。 该框架覆盖基于场景测试的全部生命周期，包括场景生成、检索、修改、测试执行和结果分析，并新增两个 LLM 增强阶段：ADS增强（规划器调参）和 ADS基准测试（跨规划器对比）。 旨在解决当前自动驾驶系统验证流程中各阶段工具割裂、依赖人工脚本、缺乏统一交互的问题。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.08965">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.08965.webp" alt="PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.08965" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.08965" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.08965</span></div>
+            <p class="detail-summary">本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。 该框架覆盖基于场景测试的全部生命周期，包括场景生成、检索、修改、测试执行和结果分析，并新增两个 LLM 增强阶段：ADS增强（规划器调参）和 ADS基准测试（跨规划器对比）。 旨在解决当前自动驾驶系统验证流程中各阶段工具割裂、依赖人工脚本、缺乏统一交互的问题。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Professorship of Autonomous Vehicle Systems, TUM School of Engineering and…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.08965/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。</p>
+  <ul class="reading-intro-points"><li>本文提出 PlannerForge，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。</li><li>该框架覆盖基于场景测试的全部生命周期，包括场景生成、检索、修改、测试执行和结果分析，并新增两个 LLM 增强阶段：ADS增强（规划器调参）和 ADS基准测试（跨规划器对比）。</li><li>旨在解决当前自动驾驶系统验证流程中各阶段工具割裂、依赖人工脚本、缺乏统一交互的问题。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Professorship of Autonomous Vehicle Systems, TUM School of Engineering and Design, Technical University of Munich; Munich Institute of Robotics and Machine Intelligence (MIRMI)；作者：Yuan Gao, Sebastian Müller, Mattia Piccinini, Marc Kaufeld, Yuchen Zhang, Finn Rasmus Schäfer, Johannes Betz</li><li>机构：University College London；作者：Qunying Song</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文提出 <strong>PlannerForge</strong>，一个用于自动驾驶运动规划器场景测试的统一 LLM-Agent 框架。</li><li>该框架覆盖基于场景测试的全部生命周期，包括场景生成、检索、修改、测试执行和结果分析，并新增两个 LLM 增强阶段：ADS增强（规划器调参）和 ADS基准测试（跨规划器对比）。</li><li>旨在解决当前自动驾驶系统验证流程中各阶段工具割裂、依赖人工脚本、缺乏统一交互的问题。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 PlannerForge，据作者所述是首个将全部场景测试阶段（Scenario Source、Generation、Database、Selection、Test Execution、ADS Assessment，以及 ADS Enhancement 和 ADS Benchmarking）统一到单一聊天机器人驱动流水线中的全生命周期 LLM 框架。</li><li>引入 Module Router，作为意图分类器，打破传统线性（生成→选择→修改→测试→分析）流程，支持灵活的任务分发。</li><li>对十个现成 LLM 后端（五个商业、五个开源）在五个核心任务和八种任务切片下的六种提示条件进行实证评估，验证无需领域微调即可驱动整个框架。</li><li>提供一个统一的多规划器接口，支持对生成和修改场景进行规划器对比评估，封装了 Frenetix 和 MP-RBFN 两个规划器。</li><li>该框架支持自然语言驱动的场景生成（基于真实 OSM 地图）与场景修改（通过 SUMO 往返转换），实现真实可执行的测试场景合成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li><strong>所属模块</strong>：本文方法属于自动驾驶测试领域的场景级测试与验证模块，针对运动规划器。</li><li><strong>输入传感器</strong>：原文未直接报告传感器输入；框架输入为自然语言用户查询、基于 OpenStreetMap 的真实路网拓扑、以及来自 CommonRoad 数据库的场景 XML 文件。</li><li><strong>场景表示</strong>：场景以 CommonRoad 格式的 XML 文件表示，并附加结构化元数据（含位置、路边构造、参与者、自车四个场景层）；生成和修改过程涉及 SUMO 的 .net.xml 与 .vehicles.rou.xml 中间表示，以及通过 CommonRoad-SUMO 接口的往返转换生成运动学可行的轨迹。</li><li><strong>模型结构</strong>：统一 LLM 智能体框架，包含六种 LLM 模块：模块路由器、场景生成模块、场景选择模块、场景修改模块、规划器测试与增强模块、结果分析模块，通过 LangChain 后端与 Gradio 前端构建聊天机器人接口。</li><li><strong>关键技术</strong>：</li></ul>
+<p> - 双阶段函数调用实现模块路由与参数提取；用于选择/搜索的 Chroma 向量数据库架构；采用结构化元数据的交错槽位提取流水线，用于多阶段数据库剪枝。</p>
+<p> - LLM 提示技术包括上下文提示、思维链和上下文学习，用于生成符合特定场景与配置规格的输出。</p>
+<p> - 修改模块支持四种编辑类型：轨迹变更、行为变更、行驶参与者增删以及规划目标变更，针对 T、B、P、G 类型分别使用专用提示模板。</p>
+<p> - 测试模块在单个或批次模式下调用统一规划器接口，结果分析模块根据轨迹、碰撞标志和成本日志生成定量检查摘要与定性分析。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：源自 CommonRoad 的开源驾驶场景，并以此为基础构建场景数据库。</li><li>地图数据：使用来自 OpenStreetMap 并可通过 Overpass API 查询的真实路网拓扑。</li><li>仿真器：SUMO（用于微观交通模拟与场景修改）、开源运动规划仿真器（用于场景生成）。</li><li>模型规模（LLM 后端）：评估了五个商业模型（Qwen3.6-plus、Deepseek-v3.2、Glm-5、Gemini-3-flash、Gpt-5.4-mini）和五个开源模型（Qwen3.6:35b、Gemma4:31b、Gpt-oss:20b 等，通过 Ollama 运行）。</li><li>规划器模型：采样方法，即 Frenetix 与学习型 MP-RBFN 的封装实现。</li><li>向量数据库：Chroma 用于场景检索。</li><li>运行硬件：原文描述了 API/27G 级硬件用于 LLM 推理；CPU 用于数据库与仿真流水线执行；未给出具体 GPU 型号。</li><li>代码与数据：论文脚注中提及已发布至 https://github.com/TUM-AVS/PlannerForge，实现框架的前端与后端文献中也提及 Gradio 和 LangChain。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li><strong>评估框架与指标</strong>：在生成、选择、修改、模块路由以及规划器测试/增强任务上，使用 N=200、查询量和 10 种模型变体在 6 种提示条件下进行了评估。报告指标包括生成意图解析分数；选择的“所有满足”分数；修改的子任务特定验收标准（例如“结束百分比”、预设百分比、“计数匹配百分比”、“GT 边缘百分比”）；此外还有意图分类和 YAML 编辑匹配的准确率分数，以及回归的端到端成功率和成本。</li><li><strong>生成</strong>：最佳，模型 Glm-5 + cp_cot 达到 0.957，高于基线时分数（0.783，使用 Baseline 提示）0.174。</li><li><strong>选择</strong>：最佳，Qwen3.6-plus 和 cp_cot 达到 0.880 的“所有满足”分数，高于基线时 0.180。</li><li><strong>修改</strong>：最佳性能、与 cp_icl_cot 搭配的 Qwen3.6-plus，在 T、B、P、G 子任务的核心检查上达到约 100%。行为修改无法进行零样本处理（0%），但使用进阶提示后达到 100%；结构性修改的零样本基线较高。</li><li><strong>模块路由</strong>：最佳性能模型为带 cp_icl_cot 的 Gemma4:31b，得分 0.997；对比指标：手工设定的正则表达式路由器仅取得 45.5%。</li><li><strong>规划器测试与增强</strong>：最佳性能、与 cp_icl 搭配的 Gpt-5.4-mini，取得 1.000 的完美分数；对比的受约束 YAML 编辑器基线为 72.5%。</li><li><strong>端到端评估</strong>：使用 N=200 个查询、结合 cp_icl_cot 将 qwen3.6-plus 与 qwen3.6:35b 串联（生成→数据库→选择→修改→测试→增强），商业模型与开源平均每个场景分别保留 83%/78% 的累积成功率，每次约 126 秒/99 秒延迟与 42.5k/32.6k token 使用；各阶段故障出现在选择（6%/11%）和修改（9%/8%）。</li><li><strong>对比方法</strong>：PlannerForge 在生成方面优于 Scenario Factory 2.0（193 vs. 144个可执行结果/200个输出、属性保留率 92–96% vs. 92–96%）、在排名第 1 的选择精度上优于 BM25（92.0% vs. 67.5%）、在物理上有效的修改上优于 Words-to-Collisions（≥94% vs. 31%）。</li><li><strong>调参/增强结果</strong>：通过 LLM 驱动的成本调参（批次规模 N=400），规划器成功率从 50.4% 提高到 70.2%，每批次碰撞从 19.0% 降到 8.4%。结果报告回归差分、稳定性以及正确 LLM 调参决定，其中使用非特定规划器或配对的规划器参数映射。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.08338/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A Multi-Modal Perception Pipeline for Object Detection and Tracking in Autonomous Racing</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Uncertainty-Aware Autonomous Vehicles: Predicting the Road Ahead - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。 应用场景为自动驾驶赛车，具体任务是通过前方摄像头图像分类识别前方道路布局，并将其不确定性集成到基于 ROS 的车辆控制管线中，动态调节车速以提升安全性。 研究核心是评估不确定性感知的图像分类器（随机集神经网络 RS-NN、传统 CNN、拉普拉斯桥贝叶斯神经网络 LB-BNN）在道路布局预测任务中的准确率与不确定性校准性能，并将最优模型（RS-NN）集成到真实自动驾驶赛车的软件栈中进行实证验证。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2510.22680">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2510.22680.webp" alt="Uncertainty-Aware Autonomous Vehicles: Predicting the Road Ahead" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Uncertainty-Aware Autonomous Vehicles: Predicting the Road Ahead</h1>
+            <div class="detail-meta">2025-10-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2510.22680" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2510.22680" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2510.22680</span></div>
+            <p class="detail-summary">本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。 应用场景为自动驾驶赛车，具体任务是通过前方摄像头图像分类识别前方道路布局，并将其不确定性集成到基于 ROS 的车辆控制管线中，动态调节车速以提升安全性。 研究核心是评估不确定性感知的图像分类器（随机集神经网络 RS-NN、传统 CNN、拉普拉斯桥贝叶斯神经网络 LB-BNN）在道路布局预测任务中的准确率与不确定性校准性能，并将最优模型（RS-NN）集成到真实自动驾驶赛车的软件栈中进行实证验证。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Engineering, Computing and Mathematics, Oxford Brookes University…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2510.22680/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。</p>
+  <ul class="reading-intro-points"><li>本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。</li><li>应用场景为自动驾驶赛车，具体任务是通过前方摄像头图像分类识别前方道路布局，并将其不确定性集成到基于 ROS 的车辆控制管线中，动态调节车速以提升安全性。</li><li>研究核心是评估不确定性感知的图像分类器（随机集神经网络 RS-NN、传统 CNN、拉普拉斯桥贝叶斯神经网络 LB-BNN）在道路布局预测任务中的准确率与不确定性校准性能，并将最优模型（RS-NN）集成到真实自动驾驶赛车的软件栈中进行实证验证。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Engineering, Computing and Mathematics, Oxford Brookes University, UK；作者：Shireen Kudukkil Manchingal、Maryam Sultana、Fabio Cuzzolin、Andrew Bradley</li><li>机构：Autonomous Driving and Intelligent Transport, Oxford Brookes University, UK；作者：Armand Amaritei、Mihir Gohad、Andrew Bradley</li><li>机构：Cognitive Robotics, TU Delft, Netherlands；作者：Julian F. P. Kooij</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本文解决的问题是自动驾驶感知系统在稀有事件或分布外样本场景下因“过度自信”预测而导致的感知错误，研究目标是让自动驾驶车辆具备“知道自己不确定”（know when it is uncertain）的能力。</li><li>应用场景为自动驾驶赛车，具体任务是通过前方摄像头图像分类识别前方道路布局，并将其不确定性集成到基于 ROS 的车辆控制管线中，动态调节车速以提升安全性。</li><li>研究核心是评估不确定性感知的图像分类器（随机集神经网络 RS-NN、传统 CNN、拉普拉斯桥贝叶斯神经网络 LB-BNN）在道路布局预测任务中的准确率与不确定性校准性能，并将最优模型（RS-NN）集成到真实自动驾驶赛车的软件栈中进行实证验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建了包含七类道路曲率方向（Straight, Left-Easy/Medium/Hard, Right-Easy/Medium/Hard）的 TrackDrive Direction 数据集，并额外包含三类仅供测试的不确定图像（随机锥桶摆放、倒地锥桶、易混淆弯道）。</li><li>首次将随机集神经网络（RS-NN）应用于自动驾驶道路布局预测，证明其相比传统 CNN 和贝叶斯方法（LB-BNN）在准确率和不确定性校准方面均表现更优。</li><li>将 RS-NN 作为 ROS 节点集成到自动驾驶赛车的实时控制管线中，利用预测熵值通过五档速度缩放策略动态调节车速，实现了“高置信时保持高速、不确定性高时主动减速”的安全驾驶行为。</li><li>在真实 IMechE Formula Student UK AI 自动驾驶赛车上进行了实车闭环验证，展示了不确定性估计从诊断指标到可直接控制车辆行为的有效转化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知（Perception）模块，作为 ROS 软件栈中的一个独立分类器节点，与锥桶检测、路径规划与车辆控制模块协同工作。</li><li>输入传感器：Zed 2i 双目立体相机采集的前视图像（224×224 像素）；另有 Livox HAP TX LiDAR 用于感知融合，但分类器输入仅来自相机。</li><li>场景表示：将前方道路布局离散化为七类方向与曲率标签（Straight &lt;15°，Easy 15°35°，Medium 35°60°，Hard &gt;60°），以车辆前进方向为基准测量轨道偏差角度。</li><li>模型结构：对比了三种分类器——基线 CNN、随机集神经网络（RS-NN）和拉普拉斯桥贝叶斯神经网络（LB-BNN）。RS-NN 的独特之处在于预测类别集合上的信度函数（belief functions）而非单一概率分布，可直接量化预测不确定性。</li><li>关键技术：五档熵值阈值速度缩放策略——熵值&lt;2.2 时全速行驶(100%)、2.2-2.3 减速至 90%、2.3-2.4 减速至 80%、2.4-2.6 减速至 60%、≥2.6 完全切断油门；该策略通过 ROS 实时发布分类与熵值并调节系统控制器传来的速度请求。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：TrackDrive Direction 数据集，共 1,187 张标注图像；其中 919 张为七类标准样本（735 训练含 147 验证，184 测试），268 张为不确定图像仅用于测试鲁棒性。</li><li>数据采集环境：英国 Silverstone Circuit 赛道及牛津布鲁克斯大学校内受控测试道。</li><li>训练资源：原文未报告使用的具体 GPU 型号与训练硬件。</li><li>实车平台：参赛 IMechE Formula Student UK AI 竞赛的自动驾驶赛车（配备 Zed 2i 立体相机与 Livox HAP TX LiDAR）。</li><li>软件框架：ROS（Robot Operating System）；检测前端采用 YOLOv11 Nano；可视化工具为 Foxglove Studio。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：自建 TrackDrive Direction 数据集，分别在七类（细粒度方向与曲率）和三类（仅方向：Straight/Left/Right）设定下评估。</li><li>评估指标：分类准确率（Accuracy）、不确定性熵（Entropy）分布对比，用于衡量模型准确性及其对不确定数据的区分能力。</li><li>关键数值（七类）：CNN 准确率 67.93±0.25%，RS-NN 75.54±0.19%，LB-BNN 56.52±0.17%；在三类设定下，RS-NN 87.50±0.19%、LB-BNN 82.60±0.23%、CNN 81.06±0.05%。在不确定性图上，RS-NN 对不确定数据的熵值分布能清晰地与常规数据区分开，而 CNN 熵值整体偏低、LB-BNN 熵值集中于中低区间。</li><li>对比方法：基线 CNN、拉普拉斯桥贝叶斯神经网络（LB-BNN），与所提出的 RS-NN 进行对比评估。</li><li>实验条件：包含标准测试集上的开环离线评估（分类任务与不确定性估计），和在真实自动驾驶赛车上针对常规赛道与不确定赛道（随机/倒地锥桶）的闭环实车验证，证实熵值控制策略在不熟悉布局下可显著且持续降低请求的车轮转速（RPM）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2510.23067/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">NeuroDOB: A Deep Neural Observer-Based Controller for Vehicle Lateral Dynamics</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2510.13114/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Safe Driving in Occluded Environments</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

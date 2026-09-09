@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DriveZero: End-to-End Driving Beyond Human Demonstrations - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。 应用场景覆盖城区端到端驾驶、闭环规划、视觉感知预训练以及仿真与实车部署准备，通过解耦感知与动作两大模型，分别采用最适合各自的学习范式后进行统一蒸馏。 系统包含三个组成部分：DriveRL（闭环强化学习特权教师模型）、DriveVFM（多视觉基础模型蒸馏的驾驶骨干网络）、DriveZero（相机纯视觉端到端规划器）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.06055">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.06055.webp" alt="DriveZero: End-to-End Driving Beyond Human Demonstrations" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DriveZero: End-to-End Driving Beyond Human Demonstrations</h1>
+            <div class="detail-meta">2026-09-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.06055" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.06055" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.06055</span></div>
+            <p class="detail-summary">论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。 应用场景覆盖城区端到端驾驶、闭环规划、视觉感知预训练以及仿真与实车部署准备，通过解耦感知与动作两大模型，分别采用最适合各自的学习范式后进行统一蒸馏。 系统包含三个组成部分：DriveRL（闭环强化学习特权教师模型）、DriveVFM（多视觉基础模型蒸馏的驾驶骨干网络）、DriveZero（相机纯视觉端到端规划器）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Xiaomi EV · AD &amp; Robotics、L3 Team（作者与机构对应关系：原文仅以团队名义署名、未列出个人作者姓名与机构的逐一对应关系 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.06055/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。</p>
+  <ul class="reading-intro-points"><li>论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。</li><li>应用场景覆盖城区端到端驾驶、闭环规划、视觉感知预训练以及仿真与实车部署准备，通过解耦感知与动作两大模型，分别采用最适合各自的学习范式后进行统一蒸馏。</li><li>系统包含三个组成部分：DriveRL（闭环强化学习特权教师模型）、DriveVFM（多视觉基础模型蒸馏的驾驶骨干网络）、DriveZero（相机纯视觉端到端规划器）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Xiaomi EV；作者：AD &amp; Robotics, L3 Team（作者与机构对应关系：原文仅以团队名义署名，未列出个人作者姓名与机构的逐一对应关系；若需更精确的对应信息，原文未明确给出个人作者名单）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决端到端自动驾驶中传统模仿学习受限于人类驾驶日志质量和行为覆盖度的问题，核心研究问题是如何让系统学习超越人类示范的驾驶行为。</li><li>应用场景覆盖城区端到端驾驶、闭环规划、视觉感知预训练以及仿真与实车部署准备，通过解耦感知与动作两大模型，分别采用最适合各自的学习范式后进行统一蒸馏。</li><li>系统包含三个组成部分：DriveRL（闭环强化学习特权教师模型）、DriveVFM（多视觉基础模型蒸馏的驾驶骨干网络）、DriveZero（相机纯视觉端到端规划器）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DriveZero 系统，将驾驶解耦为感知模型与动作模型，分别预训练后通过蒸馏统一为纯相机端到端规划器，实现无人类轨迹监督的驾驶行为学习。</li><li>提出 DriveRL，一种混合智能体闭环强化学习框架，将 nuPlan 真实驾驶日志转化为交互式世界，利用 PPO 训练特权教师策略，其行为可超越日志回放专家。</li><li>引入值引导的测试时动作搜索，利用策略与评论家网络在推理阶段对候选动作进行一步前向搜索与保守式选择，提高闭环驾驶分数。</li><li>提出 DriveVFM，通过聚合多个冻结视觉基础模型（DINOv3、SigLIP2、SAM、Depth Anything V2）的特征蒸馏，从原始图像中学习统一驾驶骨干，无需任何任务级标注。</li><li>利用目标条件化教师模型进行目标增强，生成多样且目标一致的监督信号，显著扩充了单一日志轨迹无法提供的训练数据。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶系统，涵盖闭环强化学习动作模型（DriveRL）、视觉表征预训练模型（DriveVFM）和纯相机蒸馏规划器（DriveZero）三部分。</li><li>输入传感器：DriveRL 使用特权化结构化场景状态（车辆、地图、交通灯等）；DriveVFM 预训练输入为原始图像；DriveZero 输入为多视角相机图像、自车运动学信息和导航指令。</li><li>场景表示：DriveRL 的教师以结构化向量场景状态为表示，包含自车与周围参与者（当前帧加前四帧，共 5 帧，最多 96 个参与者）、局部矢量地图（最多 256 个 token）和交通灯状态；DriveZero 则以 DriveVFM 图像特征为基础，叠加 3D 位置编码与可学习寄存器压缩为场景 token。</li><li>模型结构：DriveRL 教师策略包含三个编码器（agent、ego-kinematics、map，嵌入维度 256）与多层交叉注意力网络，策略头输出 Beta 分布的纵向 jerk 与方向盘转角速率，总参数量为 5.70M；DriveVFM 采用共享 Vision Transformer 并结合每模型专用投影适配头；DriveZero 以 DriveVFM（LoRA 微调）为编码器，采用轨迹解码器以 WTA 方式生成 M 条轨迹候选，另设独立评分解码器预测 PDM 六项得分。</li><li>关键技术：混合智能体仿真（日志回放 + IDM 规则行为 + 自博弈学习策略并存）、场景一致性演员插入约束、并行 PPO 训练、值引导测试时动作搜索（短视距闭合反馈、奖励一致评分、保守选择策略）、PHI-S 标准化的异构特征蒸馏、有界形状参数 Beta 动作分布。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练数据集：nuPlan trainval 分割共 922,703 个场景（10 Hz 导出，训练时降采样至 5 Hz）；DriveVFM 预训练使用 LAION-2B、ImageNet-21K、SA-1B 与 OpenDV、nuPlan、Waymo 驾驶图像混合。</li><li>评测基准：nuPlan（Val14、Test14-hard、Test14-random）、NAVSIMv1、NAVSIMv2、HUGSIM 闭环基准。</li><li>训练资源：DriveRL 在 96 块 GPU 上并行训练，每 rank 2,048 个世界，PPO 共 2,400 次更新，总耗时约 21 小时；DriveVFM 分两阶段，分别以 256×256 与 512×512 分辨率预训练，全局 batch size 为 2,048 张图像。</li><li>模型规模：DriveRL 教师策略约 5.70M 参数；DriveZero 学生规划器参数量原文未报告。</li><li>实车平台：原文仅提及自博弈配置用于真实世界部署（第 3.3 节），未报告具体实车平台型号细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuPlan 三个社区划分（Val14、Test14-hard、Test14-random）在非反应（NR）与反应（R）模式下评估；DriveZero 在 NAVSIMv1 navtest、NAVSIMv2 navhard 与 HUGSIM 闭环基准上评估。</li><li>评估指标：nuPlan 使用闭环分数（CLS，0–100）；NAVSIM 使用 PDMS / EPDMS；HUGSIM 使用 HD-Score。</li><li>关键数值：DriveRL 在 nuPlan 六项设置上的平均得分为 93.01，经值引导测试时搜索提升至 93.57（DriveRL-TTS），且在全部三项划分上均超过 Log-Replay 专家；DriveZero 在 NAVSIMv1 上达 95.3 PDMS（超过人类驾驶者 94.8），在 NAVSIMv2 上达 57.1 EPDMS，在 HUGSIM 上 zero-shot 达 46.6 HD-Score。</li><li>对比方法：Log-Replay、IDM、PDM-Closed、UrbanDriver、PlanTF、PLUTO、Diffusion Planner、Flow Planner、Pi-DiMT、Plan-R1、PlannerRFT，以及无需人类数据的 CaRL 和 GigaFlow。</li><li>实验条件：DriveRL 为闭环仿真评估；DriveZero 在 NAVSIM 为 pseudo closed-loop 基准，在 HUGSIM 为真实闭环基准；（3.3 节提及实车部署配置，具体实车评估结果原文未报告）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.06331/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Geometric Distributional Control: Learning Progress with Partial Structural Knowledge</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.05783/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Closed-Loop Evaluation of Bird&#x27;s-Eye-View Maps from Cross-View Transformers as Inputs to Behavior-Cloning Policies</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

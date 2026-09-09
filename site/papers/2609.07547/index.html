@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Re-engineering SORT-based algorithms for low-cost small object tracking from omnidirectional footage - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。 研究问题聚焦于三个相互交织的挑战：等距柱状投影（equirectangular projection）导致的左右接缝不连续、目标极小（典型小于 32×32 像素）且快速移动、以及远程电池供电设备对计算资源和功耗的严格限制。 论文指出，现有主流跟踪器依赖外观编码器（ReID/Transformer）且为标准视场相机设计，在这些场景下失效，因此重新设计基于 SORT（Simple Online and Realtime Tracking）的轻量级跟踪框架以适配该几何与尺度特性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.07547">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.07547.webp" alt="Re-engineering SORT-based algorithms for low-cost small object tracking from omnidirectional footage" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Re-engineering SORT-based algorithms for low-cost small object tracking from omnidirectional footage</h1>
+            <div class="detail-meta">2026-09-07 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.07547" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.07547" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.07547</span></div>
+            <p class="detail-summary">论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。 研究问题聚焦于三个相互交织的挑战：等距柱状投影（equirectangular projection）导致的左右接缝不连续、目标极小（典型小于 32×32 像素）且快速移动、以及远程电池供电设备对计算资源和功耗的严格限制。 论文指出，现有主流跟踪器依赖外观编码器（ReID/Transformer）且为标准视场相机设计，在这些场景下失效，因此重新设计基于 SORT（Simple Online and Realtime Tracking）的轻量级跟踪框架以适配该几何与尺度特性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Sigmedia Group, Electronic and Electrical Engineering, Trinity College Dubl…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.07547/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。</p>
+  <ul class="reading-intro-points"><li>论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。</li><li>研究问题聚焦于三个相互交织的挑战：等距柱状投影（equirectangular projection）导致的左右接缝不连续、目标极小（典型小于 32×32 像素）且快速移动、以及远程电池供电设备对计算资源和功耗的严格限制。</li><li>论文指出，现有主流跟踪器依赖外观编码器（ReID/Transformer）且为标准视场相机设计，在这些场景下失效，因此重新设计基于 SORT（Simple Online and Realtime Tracking）的轻量级跟踪框架以适配该几何与尺度特性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Sigmedia Group, Electronic and Electrical Engineering, Trinity College Dublin；作者：Xin Shu, Meegan Gower, Anil Kokaram</li><li>机构：School of Zoology, Trinity College Dublin；作者：Yvonne Buckley</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文解决面向低成本全景（omnidirectional）相机部署场景的多目标跟踪（MOT）任务，具体针对捕捉飞行动物（如鸟类、蜜蜂）的野外监控应用。</li><li>研究问题聚焦于三个相互交织的挑战：等距柱状投影（equirectangular projection）导致的左右接缝不连续、目标极小（典型小于 32×32 像素）且快速移动、以及远程电池供电设备对计算资源和功耗的严格限制。</li><li>论文指出，现有主流跟踪器依赖外观编码器（ReID/Transformer）且为标准视场相机设计，在这些场景下失效，因此重新设计基于 SORT（Simple Online and Realtime Tracking）的轻量级跟踪框架以适配该几何与尺度特性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Seam-Aware Motion Model（SAMM）：在卡尔曼滤波恒速模型中增加接缝感知校正，当水平速度跳变超过阈值时视为跨接缝事件，将更新后的水平速度缠绕到带符号主区间上，保持目标跨左右接缝时的运动连续性。</li><li>提出 OmniEuc（Omni-Euclidean）缝感知距离：对归一化后的框中心，取直接欧氏距离与水平平移一个图像宽度后的缠绕距离的最小值，作为跨接缝情况下稳健的关联代价。</li><li>提出复合关联代价 $E_{fuse}$：对缝感知 OmniEuc 距离和 GIoU 派生代价进行加权融合（$E_{fuse}=\lambda E_{OmniEuc}+(1-\lambda)E_{GIoU}$），兼顾无重叠与跨缝情形与框良好对齐情形下的互补匹配信号。</li><li>构建并公开 OmniSmall 基准：一个专门用于全景影像小目标跟踪的野生动物真实轨迹数据集，包含 9 段序列、2551 帧、199 条轨迹，其中 87.12% 的框属于小目标。</li><li>在不引入外观编码器、跟踪阶段保持仅 CPU 运行的前提下，在 OmniSmall 上相对基线大幅提升跟踪性能，并在 JRDB 上保持竞争力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：tracking-by-detection（TBD）范式下的数据关联与运动模型模块，对 SORT 和 OCSORT 框架进行重设计。检测器为单独训练的单类 YOLOX（作者称之为 OmniSORT/OmniOCSORT 的检测输入来源）。</li><li>输入传感器：全景相机采集的等距柱状投影（equirectangular）图像，水平 360°覆盖，存在左右环绕接缝；作者未报告将图像映射为球面表示的处理流程。</li><li>场景表示：直接在等距柱状投影的 2D 图像坐标系上进行跟踪，框以归一化 $[0,1]$ 坐标表示，框中心坐标 $u,v$、尺度 $s$（面积）、宽高比 $r$ 构成卡尔曼状态。</li><li>模型结构：卡尔曼滤波（SORT 恒速公式，扩展含宽高比导数 $\dot r$），状态向量 $k_i=[u,v,s,r,\dot u,\dot v,\dot s,\dot r]$；数据关联采用匈牙利算法，关联代价为 OmegaEuc 与 GIoU 的加权融合。</li><li>关键技术：缝感知速度校正（SAMM 中当 $\|\dot u_{f+1}-\dot u_f\|/\max(\|\dot u_f\|,\epsilon)&gt;\tau$ 时执行 $\dot u_{f+1}=((\dot u_{f+1}+\tfrac12)\bmod 1)-\tfrac12$，其中 $\tau=10.0,\epsilon=10^{-6}$）；缝感知距离取直接与缠绕距离最小值并乘以 $\frac{\sqrt2}{2}$ 归一化到 $[0,1]$；$E_{GIoU}=\frac12(1-\text{GIoU})$；融合权重 $\lambda$ 按数据集、跟踪器和检测来源在训练集上以 0.1 步长网格搜索优化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>OmniSmall：自建数据集，8 段自然飞行行为录制于 QooCam 8K Enterprise（7680×3840，30 FPS，1551 帧）和 Ricoh THETA X（5760×2880，10 FPS，900 帧），另含 1 段 BBC Earth 纪录片片段（5120×2560，100 帧）作为密集鸟群压力测试；共 2551 帧、9 序列、199 条轨迹、20771 个人工标注框。</li><li>JRDB：公开全景行人跟踪基准（多相机机器人平台拼接成圆柱全景），54 序列、55554 帧、3292 条轨迹、1256363 帧框。</li><li>检测器：分别在各数据集上训练的单类 YOLOX；OmniSmall 上以 2:8 时序帧级划分训练/测试，JRDB 采用公开划分。</li><li>训练资源：原文未报告具体 GPU 型号、批大小等训练资源细节；实时性测量仅在单颗 CPU 核（AMD Ryzen 9 3900 12-Core Processor）上进行跟踪阶段 FPS。</li><li>实车/实机平台：原文未涉及实车；数据采集设备为固定部署的全景相机，跟踪代码库地址为 https://github.com/Xin-Shu/OmniSORT.git。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：OmniSmall（自建，9 序列）和 JRDB-panorama；消融研究在 OmniSmall 上以 GT 检测进行。</li><li>评估条件：开环离线评估，区分 ground-truth（GT）检测与 YOLOX 检测两种输入条件；对比仅限非外观式 TBD 跟踪器。</li><li>评估指标：HOTA（主指标）、MOTA、IDF1、IDSw，另报告跟踪阶段 FPS；显著性采用配对逐序列精确符号翻转检验。</li><li>GT 检测关键结果——OmniSmall：OmniOCSORT（$\lambda=0.7$）相对 OCSORT 提升 +8.51 HOTA、+9.41 MOTA、+10.17 IDF1，IDSw 从 382 降至 62；OmniSORT 相对 SORT（66.98 HOTA）提升 +27.12 HOTA。JRDB：OmniSORT HOTA 从 62.43 升至 67.69，OmniOCSORT HOTA 从 66.24 升至 67.01，均优于对比的 ByteTrack 与 HybridSORT 中大部分指标。</li><li>YOLOX 检测结果——OmniSmall：OmniOCSORT 取得最佳 HOTA 41.76、MOTA 26.97、IDF1 50.72；OmniSORT HOTA 41.11，增益相对 SORT 收窄至约 +1.95 HOTA。JRDB：ByteTrack 最佳（HOTA 31.92），OmniOCSORT HOTA 27.70 优于 SORT（26.45）与 OCSORT（26.45）。</li><li>消融结果（OmniSmall GT 检测）：SAMM 单独使用显著损害性能（SORT 66.98→20.05 HOTA，OCSORT 85.61→23.67 HOTA）；$E_{fuse}$ 两单项端点互补（SORT 单独 OmniEuc 73.75 优于单独 GIoU 60.53；OCSORT 相反 52.23 vs 65.71）；两者均远低于融合权重 $\lambda=0.7$ 时的 94.10/94.12 HOTA；最优配置 $\bar p=0.0039$。</li><li>运行速度（跟踪阶段，单 CPU 核，YOLOX 检测）：OmniSORT 320/1122 FPS（JRDB/OmniSmall），OmniOCSORT 260/862 FPS；作者未报告完整检测管线端到端帧率或闭环仿真评测。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.08217/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Drive by Hindsight and Foresight: Tool-Grounded Synergistic Reasoning over Hierarchical Memory for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.07511/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Generation of Vectorized Maps Beyond Vehicle View</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

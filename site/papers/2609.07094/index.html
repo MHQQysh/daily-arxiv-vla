@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。 研究问题：现有驾驶推理表示无法同时提供空间、时间与因果三重锚定，推理结果难以逐元素验证；且大规模推理标注多为模型生成、难以人工核验。 应用场景：自动驾驶物理 AI 模型在复杂真实驾驶场景中的推理基准评测及推理标签质量验证。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.07094">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.07094.webp" alt="CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CASCADE: A Spatio-Temporal-Causal Reasoning Representation and Dataset for Driving</h1>
+            <div class="detail-meta">2026-09-07 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.07094" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.07094" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.07094</span></div>
+            <p class="detail-summary">本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。 研究问题：现有驾驶推理表示无法同时提供空间、时间与因果三重锚定，推理结果难以逐元素验证；且大规模推理标注多为模型生成、难以人工核验。 应用场景：自动驾驶物理 AI 模型在复杂真实驾驶场景中的推理基准评测及推理标签质量验证。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">NVIDIA · Jenny Schmalfuss、Despoina Paschalidou、German Ros 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.07094/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。</p>
+  <ul class="reading-intro-points"><li>本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。</li><li>研究问题：现有驾驶推理表示无法同时提供空间、时间与因果三重锚定，推理结果难以逐元素验证；且大规模推理标注多为模型生成、难以人工核验。</li><li>应用场景：自动驾驶物理 AI 模型在复杂真实驾驶场景中的推理基准评测及推理标签质量验证。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：NVIDIA；作者：Jenny Schmalfuss, Despoina Paschalidou, German Ros, Jose M. Alvarez</li><li>机构：ETH Zürich；作者：Simon Gerstenecker（工作是在 NVIDIA 实习期间完成的）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>本论文提出 CASCADE（Causal Spatio-Temporal Analysis of Driving Environments），服务于自动驾驶长尾场景下的推理能力评估与监督任务。</li><li>研究问题：现有驾驶推理表示无法同时提供空间、时间与因果三重锚定，推理结果难以逐元素验证；且大规模推理标注多为模型生成、难以人工核验。</li><li>应用场景：自动驾驶物理 AI 模型在复杂真实驾驶场景中的推理基准评测及推理标签质量验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种面向驾驶场景的逐帧推理场景图表示（Reasoning Scene Graph），对空间、时间与因果三个维度进行显式锚定，使推理预测无需 (M)LLM 评判即可逐元素进行机器验证。</li><li>构建一个完全由人类专家标注的数据集，覆盖 2,066 条 PhysicalAI 驾驶片段，包含超过 34K 个推理相关元素，并提供完整的因果上下文。</li><li>支持双向、任意深度的完整因果链记录，不仅包括自车动作的触发原因，还记录自车动作对其他智能体的下游影响，区别于仅记录一级原因或仅记录共现关系的已有数据。</li><li>对标注数据进行了详细统计分析，涵盖动作与属性分布、因果链深度以及时间完整性等维度。</li><li>该表示可统一现有多种推理表示形式：其场景图可派生为推理文本链与因果归因标签，首次将三者纳入同一框架。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：驾驶场景推理表征与数据集构建模块（非端到端驾驶模型或规划模块）。</li><li>输入传感器：原始论文未报告（CASCADE 标注来源于 PhysicalAI-AV 数据集中的第一视角驾驶视频片段）。</li><li>场景表示：分层式时空因果场景图。采用五种顶层实体——自车、智能体、交通灯、交通物体、环境。实体具稳定属性（类型、数量等）及可随时间变化的标注轨道；实体间通过因果边（because-of、influenced-by）与空间边（包含关系、自车相对位姿）相连。</li><li>模型结构：原文未报告（本工作不涉及驾驶模型结构设计）。</li><li>关键技术：</li></ul>
+<p> - 时间锚定：所有动作、属性、状态均以带起止时间戳的片段形式记录，覆盖实体可见的完整期间。</p>
+<p> - 空间锚定：通过环境实体、自车相对位姿及图像关键点实现。</p>
+<p> - 因果锚定：because-of 边连接动作与其直接原因，允许跨实体形成因果链；influenced-by 边记录影响决策但不直接引发特定动作的要素。</p>
+<p> - 动作及信号目标：在非因果关系的场景中标识动作所指向的具体对象。</p>
+<p> - 空间包含关系：可标注&quot;Illegal&quot;及&quot;Near&quot;、&quot;Left/Right edge&quot;等修饰符，用以描述车道、人行横道等复杂空间情景。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CASCADE 人类标注数据集，基于 PhysicalAI-AV 数据集的 2,066 条训练与验证片段构建。</li><li>数据规模：超过 110,000 个语义值（平均每片段 54 个）；包含 34K+ 推理相关元素；其中 8,711 个时间戳动作片段（5,324 个自车动作、3,387 个智能体动作）、3,749 条 because-of 因果链路、2,979 条 influenced-by 条目、2,082 条空间包含关系及 1,631 个信号灯状态。</li><li>数据集资源地址：https://huggingface.co/datasets/nvidia/cascade（当前仅发布 Stage 1 标注）。</li><li>仿真器：原文未报告相关仿真器。</li><li>模型规模：原文未报告具体模型与参数规模。</li><li>训练资源：原文未报告除 Human annotation 流程外的额外训练资源。</li><li>实车平台：原文未报告实车平台细节（数据源来自 PhysicalAI-AV 视频数据集）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：原文未报告具体评估基准；论文强调 CASCADE 提供的是可供推理模型及自动标注结果进行逐元素比对的标注真值基准。</li><li>评估指标：原文未报告定量指标。</li><li>关键数值与统计：2,066 条标注片段；约 118 种智能体类型覆盖 18 种类型，其中脆弱道路使用者（行人、骑行、摩托、滑板、婴儿车等）约占四分之一；交通灯状态片段包含 213 个黄色状态；大多数包含特定条件的标注为施工区、湿滑、积雪等非名义工况；动作类型覆盖超过 30 种；每个受标注影响条目平均引用 1.16 个影响源。</li><li>对比方法：论文在表 1 中对多类公开数据与表示方法进行对比，包括文本轨迹（Alpamayo-R1、nuReasoning、Reason2Drive、LingoQA、BDD-X）、因果归因（SocioDrive、BDD-OIA、CTA、DRAMA、HDD、Rank2Tell）与场景图（roadscene2vec、OpenLane-V2、nSKG、CRS、ROAD-Waymo、ROAD）。</li><li>评价条件：均为开环 / 离线视频数据集分析，未涉及闭环仿真或实车评测；原文未报告任何端到端推理模型在该数据集上的评测结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.07125/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">A Two-Stage Framework for Ego-Centric Key Object Identification via Object State Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.07049/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Large Discrete Policy: Advancing Explicit Behavior Modeling with Stochastic Iterative Scoring</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
