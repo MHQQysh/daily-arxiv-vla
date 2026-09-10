@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Safety-Oriented Dynamic Path Planning for Automated Vehicles - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。 应用场景包括道路行驶中道路几何动态变化、周围障碍物运动，以及其他交通参与者的突发行。 研究问题为：如何在实时性约束下，为自动驾驶车辆规划无碰撞且安全的自适应轨迹，并在主优化问题无法及时求解时提供安全后备轨迹。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2510.03640">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2510.03640.webp" alt="Safety-Oriented Dynamic Path Planning for Automated Vehicles" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Safety-Oriented Dynamic Path Planning for Automated Vehicles</h1>
+            <div class="detail-meta">2025-10-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2510.03640" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2510.03640" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2510.03640</span></div>
+            <p class="detail-summary">论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。 应用场景包括道路行驶中道路几何动态变化、周围障碍物运动，以及其他交通参与者的突发行。 研究问题为：如何在实时性约束下，为自动驾驶车辆规划无碰撞且安全的自适应轨迹，并在主优化问题无法及时求解时提供安全后备轨迹。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Department of Aerospace Engineering, University of the Bundeswehr Munich ·…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2510.03640/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。</li><li>应用场景包括道路行驶中道路几何动态变化、周围障碍物运动，以及其他交通参与者的突发行。</li><li>研究问题为：如何在实时性约束下，为自动驾驶车辆规划无碰撞且安全的自适应轨迹，并在主优化问题无法及时求解时提供安全后备轨迹。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Department of Aerospace Engineering, University of the Bundeswehr Munich；作者：Mostafa Emam、Matthias Gerdts</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。</li><li>应用场景包括道路行驶中道路几何动态变化、周围障碍物运动，以及其他交通参与者的突发行。</li><li>研究问题为：如何在实时性约束下，为自动驾驶车辆规划无碰撞且安全的自适应轨迹，并在主优化问题无法及时求解时提供安全后备轨迹。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个双层级（bi-level）控制框架，通过时间相关栅格投影整合障碍物运动，从而增强道路边界并实现精确、自适应的路径规划。</li><li>采用非线性模型预测控制（NMPC）作为主控制环进行实时路径优化，并引入基于同伦（homotopy）的约束松弛以提高最优控制问题（OCP）的可解性。</li><li>设计独立并行运行的后备环，当主环在关键时间范围内无法计算出最优轨迹时，提供安全后备轨迹，以提升安全性与实时性能。</li><li>定义连续可微的隧道宽度函数用于道路阻塞检测与速度控制。</li><li>重新定义具有局部预测时域的控制问题，以更好适配车辆传感器输入数据流。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：路径规划与控制，属于自动驾驶车辆安全导向的动态路径规划模块。</li><li>输入传感器：论文假设存在充足的 AV 硬件和软件组件，期望控制器调用时获得笛卡尔坐标下的参考路径与行驶区域边界等距数据点序列；障碍物状态（如位置和速度）也可供 MPC 使用。原文未报告具体传感器型号或类型。</li><li>场景表示：使用 Frenet 框架表示，以 2D 自然三次样条构造参考路径 γ_r(s):[0,L]→R²，并将车道边界数据点投影到参考路径上，形成左右边界的 1D 样条。采用线性化点质量运动学车辆模型，状态向量为 x=(s,d,χ,κ,v)^T，其中 s 为弧长，d 为横向偏移，χ 为航向差，κ 为曲率，v 为速度；输入 u=(u₁,u₂)^T 分别表示曲率导数和加速度。</li><li>模型结构：主控制环采用 NMPC，基于连续时间非线性模型和约束进行实时路径优化；目标函数最大化行驶距离 s(T)，同时最小化跟踪误差 d、χ 和控制量 u。约束包括 s≤L、d∈[d̲(s),d̄(s)]、0≤v≤v̄(s)、横向加速度限制以及控制量限制 u∈U。</li><li>关键技术：</li></ul>
+<p> - 障碍物避让：假设障碍物 2D footprint 由无序点集 O_xy 表示，关联运动模型 M(o)，如行人使用恒速（CV）模型、车辆使用恒定曲率和加速度（CCA）模型；通过 RK4 迭代预测 [0,T] 内障碍物位置，采样时间 δ，离散步数 N，T=δN；利用路径样条确定车道内时间相关障碍物突出 P_sd(k)，并裁剪到最近边界 η。算法包括 refineXY（Graham 扫描凸包和最小点距增密）、transformXYtoSD（投影到 Frenet 框架）、predictStates（预测状态）、localProjection 和 Sutherland-Hodgman 裁剪等步骤。</p>
+<p> - 车道边界增强：将基础样条与 P_sd(k) 结合，提取互补轮廓 C_sd(k)，使用障碍物安全裕度和 AV 尺寸 {w,l_f,l_b} 计算扩展轮廓，邻近障碍物扩展轮廓用 Graham 扫描合并，再与对应边界求交得到增强样条；总边界样条数为 2(N+1)。随后采用同伦策略，从仅使用基础样条的低复杂度问题开始，逐步引入增强样条，同伦索引 ζⁱ∈[0,1]，公式为 d̲(s,k,ζⁱ)=(1-ζⁱ)γ̲(s)+ζⁱγ̲̃(s,k)，d̄(s,k,ζⁱ)=(1-ζⁱ)γ̄(s)+ζⁱγ̃̄(s,k)；迭代次数 Z 为速度与收敛率之间的折中。</p>
+<p> - 道路阻塞检测：定义隧道宽度函数 ω(s,k):=d̄(s,k,ζ^Z)-d̲(s,k,ζ^Z)，当 ω(s,k)≤ω̲ 且 ω̲≈0 表示道路阻塞；通过式 (4) 迭代所有离散时间步并用牛顿法寻找满足条件的最早 s_{h,k} 和 k_h；采用 anticipatory stop s̃_h&lt;s_h 在参考路径上进行预停，计算制动距离 s_decl，并通过式 (5) 构造增强速度剖面 ṽ̄(s) 及带同伦松弛的 v̄(s,ζⁱ)，最终得到式 (6) 的离散同伦 OCP 约束。</p>
+<p> - 后备轨迹：定义系统状态与控制 z_k=(x(k),u(k))^T，MPC 解 z_{n,N}，约束 g(z_{n,N})，函数 isSafe(z_{n,N},g) 检查约束违反是否在容差 ε 内并评估路径连续性 s_{n+k}≤s_{n+k+1}。三种后备策略：1）使用大量同伦迭代 Z，若失败则用 isSafe 验证最后一次 z_{n,N}（ζⁱ&lt;1）并采纳若可行；2）利用 MPC 整个预测时域，通过 isSafe 和灵敏度更新计算近似解 ẑ_{n,N-N₀}，从上一 MPC 迭代的可行偏移段 z_{n-1,N-N₀} 提取，使用先前控制 u_{n-1,N} 和灵敏度矩阵 S_{n-1,N}，定义域为 [0,N-N₀]；引入 isValid(z_n,z_{n-1,N}) 判断当前状态与先前解的差异是否足够小；3）设置 ζ=1、α_s=0 并引入 α_v∈R⁺，最小化 α_v v² 鼓励停车，记为 OCP_stop，可独立运行于单独控制器并与 MPC 并行。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告。</li><li>仿真器：原文未报告具体仿真器名称；论文提到 Numerical Testing and Simulation，但未在提供内容中说明仿真平台细节。</li><li>模型规模：原文未报告神经网络或模型参数量；NMPC 使用采样时间 δ=0.15[s]、N=30 的设置。</li><li>训练资源：原文未报告训练资源。</li><li>实车平台：原文未报告具体实车平台；仅在相关工作部分提到 MuCAR-3 为他人工作，非本文实验平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：原文提到 Numerical Testing and Simulation、Static Obstacle Avoidance、Dynamic Obstacle Overtaking 三类评估场景。</li><li>评估指标：原文未在提供内容中明确列出评估指标；涉及实时性（计算耗时）和避障效果等描述。</li><li>关键数值：</li></ul>
+<p> - 处理 \|O_xy\|=8、δ=0.15[s]、N=30、\|P_sd(k)\|随时间步变化时，Algorithm 1 平均耗时 450[μs]。</p>
+<p> - 车道边界增强过程处理多障碍物（含合并操作）在不同条件下平均耗时 1850[μs]，最大 2500[μs]。</p>
+<ul><li>对比方法：原文未在提供内容中报告与具体方法的量化对比结果。</li><li>开环、闭环、仿真或实车条件：论文评估包含数值测试与仿真，未在提供内容中报告闭环或实车验证。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2510.21751/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Real-time Mixed-Integer Quadratic Programming for Driving Behavior-Inspired Speed Bump Optimal Trajectory Planning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.08965/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

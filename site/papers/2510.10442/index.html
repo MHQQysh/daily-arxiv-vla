@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Risk-Budgeted Control Framework for Balanced Performance and Safety in Autonomous Vehicles - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。 关注的安全滤波器以 20–50 Hz 高频实时优化运行，求解器可能返回次优可行解或报告不可行（非理想求解结果），此类非理想结果反复出现会逐步侵蚀安全裕度。 提出带风险预算监控器的混合控制框架，通过滑动窗口监控安全屏障残差，在性能导向的松弛 CBF（R-CBF）与更保守的条件风险价值 CBF（CVaR-CBF）之间切换。 目标是兼顾安全性与性能：既避免逐步强制执行风险感知优化的过度保守，又对累积风险造成的安全裕度衰减进行窗口级认证。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2510.10442">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2510.10442.webp" alt="Risk-Budgeted Control Framework for Balanced Performance and Safety in Autonomous Vehicles" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Risk-Budgeted Control Framework for Balanced Performance and Safety in Autonomous Vehicles</h1>
+            <div class="detail-meta">2025-10-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2510.10442" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2510.10442" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2510.10442</span></div>
+            <p class="detail-summary">论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。 关注的安全滤波器以 20–50 Hz 高频实时优化运行，求解器可能返回次优可行解或报告不可行（非理想求解结果），此类非理想结果反复出现会逐步侵蚀安全裕度。 提出带风险预算监控器的混合控制框架，通过滑动窗口监控安全屏障残差，在性能导向的松弛 CBF（R-CBF）与更保守的条件风险价值 CBF（CVaR-CBF）之间切换。 目标是兼顾安全性与性能：既避免逐步强制执行风险感知优化的过度保守，又对累积风险造成的安全裕度衰减进行窗口级认证。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The Ohio State University, Department of Mechanical and Aerospace Engineeri…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2510.10442/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。</li><li>关注的安全滤波器以 20–50 Hz 高频实时优化运行，求解器可能返回次优可行解或报告不可行（非理想求解结果），此类非理想结果反复出现会逐步侵蚀安全裕度。</li><li>提出带风险预算监控器的混合控制框架，通过滑动窗口监控安全屏障残差，在性能导向的松弛 CBF（R-CBF）与更保守的条件风险价值 CBF（CVaR-CBF）之间切换。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The Ohio State University, Department of Mechanical and Aerospace Engineering；作者：Pei Yu Chang, Qadeer Ahmed</li><li>机构：The Ohio State University, Department of Electrical and Computer Engineering；作者：Vishnu Renganathan</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。</li><li>关注的安全滤波器以 20–50 Hz 高频实时优化运行，求解器可能返回次优可行解或报告不可行（非理想求解结果），此类非理想结果反复出现会逐步侵蚀安全裕度。</li><li>提出带风险预算监控器的混合控制框架，通过滑动窗口监控安全屏障残差，在性能导向的松弛 CBF（R-CBF）与更保守的条件风险价值 CBF（CVaR-CBF）之间切换。</li><li>目标是兼顾安全性与性能：既避免逐步强制执行风险感知优化的过度保守，又对累积风险造成的安全裕度衰减进行窗口级认证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出有限时域风险预算公式，可在存在瞬态非最优解的情况下认证安全性。</li><li>提出监控器驱动的切换机制，在性能导向的 CBF-QP 与保守的 CVaR–CBF 滤波器之间切换。</li><li>设计滑动窗口风险预算监控器，给出坏步定义与窗口级安全证书（Theorem 1），建立允许坏步比例与安全裕度 δ、最大允许风险 ν̄ 之间的数学关系。</li><li>提出两类实时触发策略：可行性触发（FT-C-CBF，R-CBF 问题报告不可行且累计坏步达到预算时切换）与质量触发（QT-C-CBF，残差低于规定安全裕度且累计坏步达到预算时切换）。</li><li>通过理论分析与仿真展示在不确定性下安全与性能的平衡。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：安全滤波器/监督控制器模块，作为 MPC 名义控制器之上的安全层，通过监控器输出切换信号构成混合架构。</li><li>输入传感器：原文未报告具体传感器型号；仿真中参考轨迹来自实验 AV 记录的 GPS 路径，障碍物以感知系统报告的有界框估计建模，车辆定位带有高斯噪声。</li><li>场景表示：非线性控制–仿射系统，安全集由连续可微函数 h(x) 定义；障碍物与车辆状态以采样点表示，P 个障碍物样本与 Q 个车辆样本构成 S=PQ 个车辆–障碍物对，每对对应一个 CBF。</li><li>模型结构：名义控制为 MPC；安全滤波为 CBF-QP。R-CBF 在屏障约束中引入非负松弛 ν_k 并施加二次罚 ρ_ν；CVaR-CBF 使用 Rockafellar–Uryasev 表示的 CVaR 约束（置信水平 ϵ、损失阈值 γ），并引入松弛 ν_k 及上界 ν̄，形成凸二次规划。</li><li>关键技术：安全残差 r(x,u)=L_f h(x)+L_g h(x)u+κh(x)；一步比较不等式 h_{k+1} ≥ μh_k + cr_k，其中 μ=e^{−κT_s}，c=(1−μ)/κ；坏步指示 b_k=1{r_k&lt;δ}；滑动窗口长度 W，最多允许 M 个坏步；累计坏步更新 m_k=m_{k−1}+b_k−b_{k−W}；通过 Rearrangement Lemma 推导最坏情况残差排列（M 个坏步置于最大权重处），得到窗口级安全证书 μ^M(1−μ^{W−M})δ ≥ (1−μ^M)ν̄，并由此反推风险上限 ν̄ ≤ [μ^M(1−μ^{W−M})/(1−μ^M)]δ。</li><li>原文未报告：未报告具体求解器名称、求解精度设置、模型参数量或网络结构规模。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：未使用公开数据集；参考轨迹来自文献中实验 AV 记录的 GPS 路径，评估场景为多个 AV–行人交互场景。</li><li>仿真器：原文未报告具体仿真器名称。</li><li>模型规模：原文未报告。</li><li>训练资源：不涉及模型训练，原文未报告训练资源。</li><li>实车平台：参考轨迹来自实验 AV 的 GPS 记录，但本文评估为仿真实验；原文未报告本文是否进行实车部署。</li><li>关键仿真配置：最小安全距离 D_s=3 m，κ=1，窗口 W=5，M=1，δ=1 m，由公式推导风险上限 ν̄=3.8，CVaR 置信水平 ϵ=95%，损失阈值 γ=0，车辆定位噪声标准差 σ_v=0.1、每步采样 Q=10 个车辆状态样本，障碍物每步采样 P=10 个样本、采样半宽 σ_o∈{1,2,3,4,5} m。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：MPC 作为名义控制器，对比四种安全滤波器：R-CBF（基线，直接使用含噪行人测量）、CVaR–CBF 硬尾约束（C-CBF，ν_k≡0）、自适应 CVaR–CBF（AC-CBF，自适应置信水平 ϵ∈{0.01,0.05,0.10,0.15,0.20,0.25,0.30,0.40,0.50}）、松弛 CVaR–CBF（RC-CBF，全程允许 ν_k≥0 且无风险监控）；以及本文的 FT-C-CBF 和 QT-C-CBF。</li><li>评估指标：成功率（SR，最小车–行人距离全程超过 d_min=2.8 m）、行人最小距离（MDP，成功运行的平均最小距离，5.8 m 以上视为满足期望安全裕度）、不可行率（IR）、计算时间（CT）、横向跟踪误差（CTE）。</li><li>关键数值：在最困难的 5 m 行人检测不确定性情形下，本文方法在 300 次试验中达到 94–96% 的无碰撞成功率，同时保持最低的平均 CTE=3.2–3.6 m，表明避障后轨迹恢复更快，安全与性能平衡较好。</li><li>对比结果：R-CBF 基线用于量化忽略不确定性带来的鲁棒性差距；C-CBF 为无逐步松弛的严格尾风险约束；AC-CBF 采用类似风险自适应置信水平思路但无动态区域设计；RC-CBF 全程松弛且无风险监控。</li><li>评估条件：全部为仿真评估，共 1500 次 Monte Carlo 运行，涵盖多种 AV–行人交互场景与不同障碍物不确定性水平（σ_o 最高 5 m）；原文未报告开环评估、闭环实车测试结果，也未在给定文本中报告各基线方法的具体数值。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.09418/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Valerant: An Automatic Navigable Game Map Generator via Action-Conditioned World Model Exploration</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2510.21751/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Real-time Mixed-Integer Quadratic Programming for Driving Behavior-Inspired Speed Bump Optimal Trajectory Planning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

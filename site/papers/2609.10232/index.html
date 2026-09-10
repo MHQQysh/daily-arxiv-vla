@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mitigating Degradation Attacks in Cooperative Autonomous Driving via Intention Sharing: A Vehicle-in-the-Loop Study - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。 应用场景为纵向车辆跟随（car following），包括两车跟车与三车跟车配置，真实线控车辆作为跟随车。 研究问题：在 DoS 导致的通信延迟（最高约 2 秒）下，仅共享状态的基线控制器是否会出现性能退化与碰撞，以及基于意图共享（intention sharing）的通信策略能否作为控制器层面的缓解机制提升韧性。 研究定位为控制与通信架构视角，而非攻击检测、预防或安全保证；不涉及 PC5 干扰、洪泛或控制指令注入。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.10232">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.10232.webp" alt="Mitigating Degradation Attacks in Cooperative Autonomous Driving via Intention Sharing: A Vehicle-in-the-Loop Study" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Mitigating Degradation Attacks in Cooperative Autonomous Driving via Intention Sharing: A Vehicle-in-the-Loop Study</h1>
+            <div class="detail-meta">2026-09-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.10232" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.10232" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.10232</span></div>
+            <p class="detail-summary">论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。 应用场景为纵向车辆跟随（car following），包括两车跟车与三车跟车配置，真实线控车辆作为跟随车。 研究问题：在 DoS 导致的通信延迟（最高约 2 秒）下，仅共享状态的基线控制器是否会出现性能退化与碰撞，以及基于意图共享（intention sharing）的通信策略能否作为控制器层面的缓解机制提升韧性。 研究定位为控制与通信架构视角，而非攻击检测、预防或安全保证；不涉及 PC5 干扰、洪泛或控制指令注入。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Clemson University, Dept. of Automotive Engineering, Greenville, SC 29607…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.10232/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。</p>
+  <ul class="reading-intro-points"><li>论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。</li><li>应用场景为纵向车辆跟随（car following），包括两车跟车与三车跟车配置，真实线控车辆作为跟随车。</li><li>研究问题：在 DoS 导致的通信延迟（最高约 2 秒）下，仅共享状态的基线控制器是否会出现性能退化与碰撞，以及基于意图共享（intention sharing）的通信策略能否作为控制器层面的缓解机制提升韧性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Clemson University, Dept. of Automotive Engineering, Greenville, SC 29607, USA；作者：Prakhar Gupta、Rongyao Wang、Yunyi Jia</li><li>机构：Argonne National Laboratory, Vehicle and Mobility Systems Department, Lemont, IL 64039, USA；作者：Tyler Ard</li><li>机构：South Carolina State University, Computer Science &amp; Mathematics Department, Orangeburg, SC, USA；作者：Jagruti Sahoo</li><li>机构：South Carolina State University, Engineering Department, Orangeburg, SC, USA；作者：Judith Mwakalonge</li><li>机构：Clemson University, Dept. of Mechanical Engineering, Clemson, SC 29634, USA；作者：Ardalan Vahidi</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。</li><li>应用场景为纵向车辆跟随（car following），包括两车跟车与三车跟车配置，真实线控车辆作为跟随车。</li><li>研究问题：在 DoS 导致的通信延迟（最高约 2 秒）下，仅共享状态的基线控制器是否会出现性能退化与碰撞，以及基于意图共享（intention sharing）的通信策略能否作为控制器层面的缓解机制提升韧性。</li><li>研究定位为控制与通信架构视角，而非攻击检测、预防或安全保证；不涉及 PC5 干扰、洪泛或控制指令注入。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出并实验评估基于时间戳对齐的意图共享缓解机制（PCF-I 与 PCF-IDA），利用接收到的轨迹信息和车辆意图补偿对抗性延迟，改善控制回路的时间一致性。</li><li>据作者所述，这是首个在 VIL 闭环实验中直接对比意图共享与状态共享通信策略、并面向对抗性延迟的网联控制研究，且使用完整 V2X 协议栈进行实验性威胁仿真，将网络层行为与控制层安全结果关联。</li><li>在本文跟车试验中提供实证数据，表明在所考虑的对抗性网络延迟条件下，意图共享相比状态共享提升了韧性。</li><li>通过 13 个攻击场景（每个车辆配置）在两种跟车配置下评估三种控制器变体，报告速度跟踪误差、车间距与碰撞事件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：控制层通信策略与 MPC 控制器设计；整体框架为 Predictive Car-Following（PCF）及其意图共享变体 PCF-I、延迟感知意图共享变体 PCF-IDA。</li><li>输入传感器：真实线控电动车配备 RTK GPS、IMU 和 LiDAR，通过 ROS/ROS2 栈管理；通信使用 Cohda MK6 C-V2X/DSRC 栈（OBU 与 RSU）。原文未报告具体传感器型号与参数。</li><li>场景表示：纵向跟车；状态向量 x=[s, v, a]（位置、速度、加速度），连续动力学为 ẋ=[v, a, (u−a)/τ]，采用零阶保持离散化；前车未来动作建模为高斯分布 u_pv ~ N(μ_pv, σ_pv σ_pv^T)，并在概率约束下满足最小跟车间距（α_i ∈ [0.50, 1.0)，α_0 = 0.99，折扣因子 λ = 0.95）。</li><li>模型结构：MPC（式 1）含终端代价与无限时域 LQR 参考 R、控制量惩罚 ρ、松弛变量惩罚 w；求解器为 Gurobi；控制更新与意图广播均为 20 Hz（每 0.05 s 一条），每条消息含 N=32 个预测轨迹点，时间戳用于对齐，轨迹采样间隔 0.5 s，对应 16 s 前瞻。</li><li>关键技术：</li></ul>
+<p> - 基线 PCF：仅共享当前状态，前车参考轨迹由运动学外推生成（式 3）。</p>
+<p> - PCF-I：前车广播未来 N 步预测轨迹，直接作为跟随车 MPC 参考；名义情况下 p=i。</p>
+<p> - PCF-IDA：利用 V2X 包内时间戳检测延迟 γ，令 p = i+γ，将最近收到的意图序列向前滚动 γ 步；当 i+γ≥N 时以“停止假设”填充（s_i^pv ← s_{N−γ}^pv）。算法 1 给出该流程。</p>
+<ul><li>威胁模型：攻击者在 RSU 的 IP 接口注入恶意 UDP 流量（多连接、高速率）以耗尽处理与排队资源，造成端到端时延 D_k = D_0,k + D_q,k + D_j,k 中的排队时延 D_q,k 与抖动 D_j,k 增大；攻击者不能修改控制器、注入控制指令、篡改合法消息或时间戳。原文未报告 PC5 干扰与洪泛、控制指令注入。</li><li>原文未报告：端到端感知/规划模块细节、模型参数量、具体 MPC 求解超参配置的完整列表（仅报告求解时间约 25 ms 与消息大小 272 字节）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：US06 驾驶循环的缩放片段，用于前车虚拟 CAV 的速度轨迹；测试车道长度 230 m。</li><li>仿真器：SUMO 微观交通仿真器（路侧计算机托管数字孪生）。</li><li>模型规模：原文未报告（MPC 基于线性状态空间模型；N=32 预测步；控制/广播频率 20 Hz；消息 272 字节，43.52 kbit/s；求解时间约 25 ms）。</li><li>训练资源：原文未报告（未涉及学习型模型的训练）。</li><li>实车平台：线控电动车，配备 RTK GPS、IMU、LiDAR，运行 ROS/ROS2；通信为 Cohda MK6 C-V2X/DSRC（OBU/RSU）；仿真器、RSU、OBU 与车载处理设备时钟同步到 GPS 时钟。</li><li>攻击仿真：在 Cohda MK6 硬件上先表征混合攻击以产生往返时延（约 100 ms–2000 ms），再据此标定受控延迟注入试验；实时 RTT 测量确认攻击下通信延迟超过 2 s。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：无攻击名义基线与 13 个攻击场景（每个控制器、每个车辆配置）；场景记为 d/t_a（有效通信延迟/攻击起始时刻），攻击起始时刻包括 t=10、19、20、22 s。</li><li>评估指标：归一化 RMS 速度跟踪误差百分比变化、最低观测车间距百分比变化、RMS 控制努力变化、碰撞事件（判定条件为 d_front &lt; d_min^bumper 碰撞即视为碰撞，碰撞后车辆继续行驶以暴露全部风险事件）；评估条件为 VIL 闭环实验（仿真交通 + 真实车辆 + 物理 V2X）。</li><li>关键数值：</li></ul>
+<p> - RMS 速度跟踪误差变化：PCF 为 −9.3% 至 92.9%；PCF-I 为 0.01% 至 4.8%；PCF-IDA 为 −14.8% 至 1.3%。</p>
+<p> - RMS 车间距变化（未在图中展示）：PCF 为 −44.4% 至 −2.9%；PCF-I 为 −0.3% 至 2.7%；PCF-IDA 为 −21.9% 至 0.03%。</p>
+<p> - RMS 控制努力变化：PCF 为 12.6% 至 101.6%；PCF-I 为 2.5% 至 76.0%；PCF-IDA 为 9.0% 至 109.4%。</p>
+<p> - 延迟低于约 100 ms 时所有控制器表现符合预期；延迟超过约 1 s 时基线 PCF 频繁发生追尾碰撞，每种配置有 7 次试验发生碰撞；PCF-I 与 PCF-IDA 在测试场景中无碰撞，PCF-IDA 在最大测试延迟 2.0 s 下仍保持无碰撞。</p>
+<ul><li>对比方法：基线状态共享 PCF、意图共享 PCF-I、延迟感知意图共享 PCF-IDA；三种控制器在同一 maneuver 类型、通信路径和物理测试环境下对比。</li><li>开环/闭环与实车条件：为 VIL 闭环实验（含物理车辆与 V2X 硬件）；论文为三车配置时 RMS 速度跟踪误差变化对两段跟车交互取平均；论文指出结论受限于所测试的单前车跟车场景，不构成理论安全保证，通信丢失、超出前瞻范围的延迟、不准确意图、紧急机动或未建模扰动下的碰撞风险仍可能存在。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.10377/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Data-Driven Risk Fields for Safer End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.09881/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">CLFTv2: Efficient Camera-LiDAR Fusion for Semantic Segmentation via Hierarchical Feature Pyramids</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,5 +1,237 @@
 [
   {
+    "date": "2026-09-09",
+    "title": "Data-Driven Risk Fields for Safer End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.10377",
+    "arxiv_id": "2609.10377",
+    "detail_path": "papers/2609.10377/",
+    "cover_path": "covers/2609.10377/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.10377.webp",
+    "paper_image_full_path": "assets/paper-images/2609.10377.webp",
+    "preview_text": "任务：面向端到端自动驾驶，学习一种以自车为条件的 BEV 风险场（ego-conditioned BEV risk field），并与轨迹规划共享 BEV 特征。 应用场景：基于 CARLA 仿真器的闭环自动驾驶，覆盖多城镇、多天气、多交通流与多场景；输入包括前视相机图像、LiDAR 点云、自车状态、导航命令与导航点。 研究问题：现有端到端规划器隐式学习感知到规划的关系，缺乏显式风险监督；规则式风险模型虽有可解释安全先验，但依赖手工函数、系数与阈值；已有学习式风险表示多依赖占据派生标签或启发式代价，难以刻画“由周围智能体共同决定的自车规划风险”。",
+    "research_unit": "清华大学车辆与运载学院（School of Vehicle and Mobility, Tsinghua University） · Yuanxin…",
+    "hook_text": "任务：面向端到端自动驾驶，学习一种以自车为条件的 BEV 风险场（ego-conditioned BEV risk field），并与轨迹规划共享 BEV 特征。",
+    "key_points": [
+      "任务：面向端到端自动驾驶，学习一种以自车为条件的 BEV 风险场（ego-conditioned BEV risk field），并与轨迹规划共享 BEV 特征。",
+      "应用场景：基于 CARLA 仿真器的闭环自动驾驶，覆盖多城镇、多天气、多交通流与多场景；输入包括前视相机图像、LiDAR 点云、自车状态、导航命令与导航点。",
+      "研究问题：现有端到端规划器隐式学习感知到规划的关系，缺乏显式风险监督；规则式风险模型虽有可解释安全先验，但依赖手工函数、系数与阈值；已有学习式风险表示多依赖占据派生标签或启发式代价，难以刻画“由周围智能体共同决定的自车规划风险”。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "title": "Mitigating Degradation Attacks in Cooperative Autonomous Driving via Intention Sharing: A Vehicle-in-the-Loop Study",
+    "link": "https://arxiv.org/abs/2609.10232",
+    "arxiv_id": "2609.10232",
+    "detail_path": "papers/2609.10232/",
+    "cover_path": "covers/2609.10232/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.10232.webp",
+    "paper_image_full_path": "assets/paper-images/2609.10232.webp",
+    "preview_text": "论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。 应用场景为纵向车辆跟随（car following），包括两车跟车与三车跟车配置，真实线控车辆作为跟随车。 研究问题：在 DoS 导致的通信延迟（最高约 2 秒）下，仅共享状态的基线控制器是否会出现性能退化与碰撞，以及基于意图共享（intention sharing）的通信策略能否作为控制器层面的缓解机制提升韧性。 研究定位为控制与通信架构视角，而非攻击检测、预防或安全保证；不涉及 PC5 干扰、洪泛或控制指令注入。",
+    "research_unit": "Clemson University, Dept. of Automotive Engineering, Greenville, SC 29607…",
+    "hook_text": "论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。",
+    "key_points": [
+      "论文针对网联自动驾驶（CAV）在 V2X 通信遭受拒绝服务（DoS）攻击而导致通信延迟时的协同自适应巡航/协同跟车安全问题。",
+      "应用场景为纵向车辆跟随（car following），包括两车跟车与三车跟车配置，真实线控车辆作为跟随车。",
+      "研究问题：在 DoS 导致的通信延迟（最高约 2 秒）下，仅共享状态的基线控制器是否会出现性能退化与碰撞，以及基于意图共享（intention sharing）的通信策略能否作为控制器层面的缓解机制提升韧性。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "title": "CLFTv2: Efficient Camera-LiDAR Fusion for Semantic Segmentation via Hierarchical Feature Pyramids",
+    "link": "https://arxiv.org/abs/2609.09881",
+    "arxiv_id": "2609.09881",
+    "detail_path": "papers/2609.09881/",
+    "cover_path": "covers/2609.09881/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.09881.webp",
+    "paper_image_full_path": "assets/paper-images/2609.09881.webp",
+    "preview_text": "面向自动驾驶的语义分割任务，重点关注弱势道路使用者（VRU）在严重类别不平衡条件下的可靠识别。 应用场景为智能交通系统与车载实时感知，需在严格延迟约束下处理多模态传感器流。 研究问题：现有 ViT 编码器具备良好的跨模态上下文建模能力，但其二次复杂度与单一固定空间分辨率难以高效生成小目标检测所需的多尺度特征金字塔；同时查询匹配式解码器（如 MaskFormer/Mask2Former）在闭集语义分割中引入不必要的训练开销。 论文提出 CLFTv2，在 2D 透视投影域内以层次化 Swin 编码器替代全局 ViT 注意力，并配以轻量 FPN 风格残差解码器。",
+    "research_unit": "塔林理工大学机械与工业工程系（Department of Mechanical and Industrial Engineering, Tallinn…",
+    "hook_text": "面向自动驾驶的语义分割任务，重点关注弱势道路使用者（VRU）在严重类别不平衡条件下的可靠识别。",
+    "key_points": [
+      "面向自动驾驶的语义分割任务，重点关注弱势道路使用者（VRU）在严重类别不平衡条件下的可靠识别。",
+      "应用场景为智能交通系统与车载实时感知，需在严格延迟约束下处理多模态传感器流。",
+      "研究问题：现有 ViT 编码器具备良好的跨模态上下文建模能力，但其二次复杂度与单一固定空间分辨率难以高效生成小目标检测所需的多尺度特征金字塔；同时查询匹配式解码器（如 MaskFormer/Mask2Former）在闭集语义分割中引入不必要的训练开销。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "title": "A Risk-Sensitive and Uncertainty-Aware Decision-Making and Control Framework for Safe and Robust Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.09650",
+    "arxiv_id": "2609.09650",
+    "detail_path": "papers/2609.09650/",
+    "cover_path": "covers/2609.09650/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.09650.webp",
+    "paper_image_full_path": "assets/paper-images/2609.09650.webp",
+    "preview_text": "论文面向自动驾驶决策与控制任务，重点关注城市无信号交叉口这类高度交互、安全攸关的场景。 研究问题：强化学习（RL）策略缺乏内在安全保证，在分布外（OOD）和长尾事件中可靠性不足；传统安全滤波采用固定保守约束，易导致过度干预、过早制动和通行效率下降。 论文提出风险敏感且不确定性感知的决策与控制（RUDC）框架，目标是在安全、效率和鲁棒性之间取得更好平衡。 该工作是其前期工作（基础风险敏感分布式评论家 + HOCBF 安全滤波）的扩展。",
+    "research_unit": "同济大学汽车与能源工程学院（College of Automotive and Energy Engineering, Tongji Universi…",
+    "hook_text": "论文面向自动驾驶决策与控制任务，重点关注城市无信号交叉口这类高度交互、安全攸关的场景。",
+    "key_points": [
+      "论文面向自动驾驶决策与控制任务，重点关注城市无信号交叉口这类高度交互、安全攸关的场景。",
+      "研究问题：强化学习（RL）策略缺乏内在安全保证，在分布外（OOD）和长尾事件中可靠性不足；传统安全滤波采用固定保守约束，易导致过度干预、过早制动和通行效率下降。",
+      "论文提出风险敏感且不确定性感知的决策与控制（RUDC）框架，目标是在安全、效率和鲁棒性之间取得更好平衡。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "title": "Valerant: An Automatic Navigable Game Map Generator via Action-Conditioned World Model Exploration",
+    "link": "https://arxiv.org/abs/2609.09418",
+    "arxiv_id": "2609.09418",
+    "detail_path": "papers/2609.09418/",
+    "cover_path": "covers/2609.09418/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.09418.webp",
+    "paper_image_full_path": "assets/paper-images/2609.09418.webp",
+    "preview_text": "论文面向 3D 游戏地图自动生成任务，目标是仅从单张输入图像出发，自动探索并构建可导航的 3D 游戏地图。 应用场景为 3D 游戏（如第一人称射击游戏）中需要持久、可导航且具备显式几何的空间，用于支持相机运动、碰撞、可见性与物体交互的一致性解析。 研究问题在于：自动驾驶与机器人领域中物理环境本身独立存在，可作为持久 3D 世界的基底；而游戏没有这种外部基底，虚拟世界必须被生成。现有游戏导向方法多结合动作条件世界模型与外部策略/奖励函数，但主要在 2D 视觉观测空间中运行，不实例化持久 3D 几何，动作条件视频 rollout 只提供视觉观测而不提供空间表示。 论文提出 Valerant，将预训练的动作条件世界模型转化为 World Action Model（WAM），通过预测性视觉 rollout 与 SLAM 空间重建、探索驱动动作选择耦合，逐步把单张图像转化为持久 3D 游戏地图。",
+    "research_unit": "Case Western Reserve University · Yiran Qiao、Jing Ma",
+    "hook_text": "论文面向 3D 游戏地图自动生成任务，目标是仅从单张输入图像出发，自动探索并构建可导航的 3D 游戏地图。",
+    "key_points": [
+      "论文面向 3D 游戏地图自动生成任务，目标是仅从单张输入图像出发，自动探索并构建可导航的 3D 游戏地图。",
+      "应用场景为 3D 游戏（如第一人称射击游戏）中需要持久、可导航且具备显式几何的空间，用于支持相机运动、碰撞、可见性与物体交互的一致性解析。",
+      "研究问题在于：自动驾驶与机器人领域中物理环境本身独立存在，可作为持久 3D 世界的基底；而游戏没有这种外部基底，虚拟世界必须被生成。现有游戏导向方法多结合动作条件世界模型与外部策略/奖励函数，但主要在 2D 视觉观测空间中运行，不实例化持久 3D 几何，动作条件视频 rollout 只提供视觉观测而不提供空间表示。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2025-10-12",
+    "title": "Risk-Budgeted Control Framework for Balanced Performance and Safety in Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2510.10442",
+    "arxiv_id": "2510.10442",
+    "detail_path": "papers/2510.10442/",
+    "cover_path": "covers/2510.10442/",
+    "paper_image_path": "assets/paper-images/thumbs/2510.10442.webp",
+    "paper_image_full_path": "assets/paper-images/2510.10442.webp",
+    "preview_text": "论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。 关注的安全滤波器以 20–50 Hz 高频实时优化运行，求解器可能返回次优可行解或报告不可行（非理想求解结果），此类非理想结果反复出现会逐步侵蚀安全裕度。 提出带风险预算监控器的混合控制框架，通过滑动窗口监控安全屏障残差，在性能导向的松弛 CBF（R-CBF）与更保守的条件风险价值 CBF（CVaR-CBF）之间切换。 目标是兼顾安全性与性能：既避免逐步强制执行风险感知优化的过度保守，又对累积风险造成的安全裕度衰减进行窗口级认证。",
+    "research_unit": "The Ohio State University, Department of Mechanical and Aerospace Engineeri…",
+    "hook_text": "论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。",
+    "key_points": [
+      "论文面向自动驾驶车辆（AV）在与行人交互场景中的安全控制问题，研究在车辆定位噪声与障碍物位置不确定性下的实时安全滤波。",
+      "关注的安全滤波器以 20–50 Hz 高频实时优化运行，求解器可能返回次优可行解或报告不可行（非理想求解结果），此类非理想结果反复出现会逐步侵蚀安全裕度。",
+      "提出带风险预算监控器的混合控制框架，通过滑动窗口监控安全屏障残差，在性能导向的松弛 CBF（R-CBF）与更保守的条件风险价值 CBF（CVaR-CBF）之间切换。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2025-10-10",
+    "title": "Real-time Mixed-Integer Quadratic Programming for Driving Behavior-Inspired Speed Bump Optimal Trajectory Planning",
+    "link": "https://arxiv.org/abs/2510.21751",
+    "arxiv_id": "2510.21751",
+    "detail_path": "papers/2510.21751/",
+    "cover_path": "covers/2510.21751/",
+    "paper_image_path": "assets/paper-images/thumbs/2510.21751.webp",
+    "paper_image_full_path": "assets/paper-images/2510.21751.webp",
+    "preview_text": "论文针对自动驾驶车辆（AV）的运动规划任务，聚焦城市环境中减速带（speed bump）通过这一被较少关注的场景。 应用场景为城市道路中同时存在减速带、道路边界等静态特征与动态约束的轨迹规划，需兼顾减速带通过、乘客舒适性与安全性。 研究问题是：如何在统一的优化框架中同时处理减速带所引发的离散决策（何时/如何减速、转向避让）与连续动力学约束，并保持实时可计算性。 论文将问题建模为基于模型预测控制（MPC）的混合整数二次规划（MIQP）轨迹规划问题，并提出模仿人类驾驶行为的减速带处理约束。",
+    "research_unit": "School of Engineering and Technology, Vinh University, Vinh, Vietnam · Van…",
+    "hook_text": "论文针对自动驾驶车辆（AV）的运动规划任务，聚焦城市环境中减速带（speed bump）通过这一被较少关注的场景。",
+    "key_points": [
+      "论文针对自动驾驶车辆（AV）的运动规划任务，聚焦城市环境中减速带（speed bump）通过这一被较少关注的场景。",
+      "应用场景为城市道路中同时存在减速带、道路边界等静态特征与动态约束的轨迹规划，需兼顾减速带通过、乘客舒适性与安全性。",
+      "研究问题是：如何在统一的优化框架中同时处理减速带所引发的离散决策（何时/如何减速、转向避让）与连续动力学约束，并保持实时可计算性。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2025-10-04",
+    "title": "Safety-Oriented Dynamic Path Planning for Automated Vehicles",
+    "link": "https://arxiv.org/abs/2510.03640",
+    "arxiv_id": "2510.03640",
+    "detail_path": "papers/2510.03640/",
+    "cover_path": "covers/2510.03640/",
+    "paper_image_path": "assets/paper-images/thumbs/2510.03640.webp",
+    "paper_image_full_path": "assets/paper-images/2510.03640.webp",
+    "preview_text": "论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。 应用场景包括道路行驶中道路几何动态变化、周围障碍物运动，以及其他交通参与者的突发行。 研究问题为：如何在实时性约束下，为自动驾驶车辆规划无碰撞且安全的自适应轨迹，并在主优化问题无法及时求解时提供安全后备轨迹。",
+    "research_unit": "Department of Aerospace Engineering, University of the Bundeswehr Munich ·…",
+    "hook_text": "论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。",
+    "key_points": [
+      "论文面向自动驾驶车辆（Automated Vehicles）的路径规划任务，聚焦在动态环境中的实时避障问题。",
+      "应用场景包括道路行驶中道路几何动态变化、周围障碍物运动，以及其他交通参与者的突发行。",
+      "研究问题为：如何在实时性约束下，为自动驾驶车辆规划无碰撞且安全的自适应轨迹，并在主优化问题无法及时求解时提供安全后备轨迹。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-08",
     "title": "PlannerForge: LLM Agents for Scenario-Based Testing of Motion Planners in Autonomous Driving",
     "link": "https://arxiv.org/abs/2609.08965",

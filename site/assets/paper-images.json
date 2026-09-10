@@ -22928,5 +22928,505 @@
     "inside_figure": false,
     "width": 918,
     "height": 1188
+  },
+  "2609.09418": {
+    "title": "Valerant: An Automatic Navigable Game Map Generator via Action-Conditioned World Model Exploration",
+    "abs_url": "https://arxiv.org/abs/2609.09418",
+    "html_url": "https://arxiv.org/html/2609.09418v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.09418v1/Figure1_2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 383,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09418v1/Res1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 451,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09418v1/Ablation.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 333,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.09418.webp",
+    "image_url": "https://arxiv.org/html/2609.09418v1/Figure1_2.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 548,
+    "height": 383
+  },
+  "2609.10232": {
+    "title": "Mitigating Degradation Attacks in Cooperative Autonomous Driving via Intention Sharing: A Vehicle-in-the-Loop Study",
+    "abs_url": "https://arxiv.org/abs/2609.10232",
+    "html_url": "https://arxiv.org/html/2609.10232v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.10232v1/Fig4_performance_R1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 478,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10232v1/Fig1_vil_r1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 273,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10232v1/Fig2_sweeps.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 272,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10232v1/Fig3_r1_cycle_v2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 237,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.10232.webp",
+    "image_url": "https://arxiv.org/html/2609.10232v1/Fig4_performance_R1.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 478
+  },
+  "2609.09881": {
+    "title": "CLFTv2: Efficient Camera-LiDAR Fusion for Semantic Segmentation via Hierarchical Feature Pyramids",
+    "abs_url": "https://arxiv.org/abs/2609.09881",
+    "html_url": "https://arxiv.org/html/2609.09881v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.09881v1/images/zod/ablation_modalities/frame_003591_rgb.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09881v1/images/zod/ablation_modalities/frame_003591_lidar.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09881v1/images/zod/ablation_modalities/frame_003591_fusion.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09881v1/images/zod/ground_truth/frame_000404.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09881v1/images/zod/ablation/frame_000404_simple_average.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.09881.webp",
+    "image_url": "https://arxiv.org/html/2609.09881v1/images/zod/ablation_modalities/frame_003591_rgb.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 268
+  },
+  "2609.09650": {
+    "title": "A Risk-Sensitive and Uncertainty-Aware Decision-Making and Control Framework for Safe and Robust Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.09650",
+    "html_url": "https://arxiv.org/html/2609.09650v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.09650v1/network_architechture.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 187,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09650v1/ablution_case.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 467,
+        "height": 262,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09650v1/sensitivity.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 231,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09650v1/ood_case.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 131,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.09650v1/framework.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 229,
+        "height": 141,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 70
+      }
+    ],
+    "path": "assets/paper-images/2609.09650.webp",
+    "image_url": "https://arxiv.org/html/2609.09650v1/network_architechture.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 452,
+    "height": 187
+  },
+  "2609.10377": {
+    "title": "Data-Driven Risk Fields for Safer End-to-End Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.10377",
+    "html_url": "https://arxiv.org/html/2609.10377v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.10377v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 256,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10377v1/diagram.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 260,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10377v1/qualitative.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 462,
+        "height": 289,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10377v1/label_generation.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 132,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.10377.webp",
+    "image_url": "https://arxiv.org/html/2609.10377v1/teaser.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 256
+  },
+  "2510.10442": {
+    "title": "Risk-Budgeted Control Framework for Balanced Performance and Safety in Autonomous Vehicles",
+    "abs_url": "https://arxiv.org/abs/2510.10442",
+    "html_url": "https://arxiv.org/html/2510.10442v2",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2510.10442v2/figure1_alt.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 188,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2510.10442v2/trajectory.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 209,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2510.10442v2/SR_CTE.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 137,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2510.10442.webp",
+    "image_url": "https://arxiv.org/html/2510.10442v2/figure1_alt.jpg",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/jpeg",
+    "inside_figure": true,
+    "width": 476,
+    "height": 188
+  },
+  "2510.21751": {
+    "title": "Real-time Mixed-Integer Quadratic Programming for Driving Behavior-Inspired Speed Bump Optimal Trajectory Planning",
+    "abs_url": "https://arxiv.org/abs/2510.21751",
+    "html_url": "https://arxiv.org/html/2510.21751v1",
+    "candidates": [
+      {
+        "url": "https://ar5iv.labs.arxiv.org/assets/ar5iv_card.png",
+        "source": "og:image",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "",
+        "classes": "",
+        "score": 80
+      },
+      {
+        "url": "https://ar5iv.labs.arxiv.org/assets/ar5iv.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": 40,
+        "alt": "ar5iv homepage",
+        "classes": "",
+        "score": 20
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Mascot Sammy",
+        "classes": "",
+        "score": -80
+      }
+    ],
+    "path": "assets/paper-images/2510.21751.webp",
+    "image_url": "https://ar5iv.labs.arxiv.org/assets/ar5iv_card.png",
+    "source": "og:image",
+    "score": 80,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": null,
+    "height": null
+  },
+  "2510.03640": {
+    "title": "Safety-Oriented Dynamic Path Planning for Automated Vehicles",
+    "abs_url": "https://arxiv.org/abs/2510.03640",
+    "html_url": "https://arxiv.org/html/2510.03640v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2510.03640v1/tst_1_path.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 215,
+        "height": 124,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2510.03640v1/tst_1_velocity.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 215,
+        "height": 129,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2510.03640v1/tst_2_path.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 215,
+        "height": 124,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2510.03640v1/tst_2_t_41.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 215,
+        "height": 132,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2510.03640v1/tst_2_t_66.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 215,
+        "height": 132,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      }
+    ],
+    "path": "assets/paper-images/2510.03640.webp",
+    "image_url": "https://arxiv.org/html/2510.03640v1/tst_1_path.png",
+    "source": "img",
+    "score": 70,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 215,
+    "height": 124
   }
 }
