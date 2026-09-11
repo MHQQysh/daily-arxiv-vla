@@ -1,5 +1,121 @@
 [
   {
+    "date": "2026-09-10",
+    "title": "MC-DeTra: Motion-Consistent Joint Object Detection and Socially-Aware Trajectory Forecasting in Bird's-Eye-View Images",
+    "link": "https://arxiv.org/abs/2609.11717",
+    "arxiv_id": "2609.11717",
+    "detail_path": "papers/2609.11717/",
+    "cover_path": "covers/2609.11717/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.11717.webp",
+    "paper_image_full_path": "assets/paper-images/2609.11717.webp",
+    "preview_text": "论文面向自动驾驶中统一的目标检测与轨迹预测任务，目标是在共享鸟瞰图（BEV）表示上同时完成目标检测与多模态未来轨迹预测。 输入场景为由 LiDAR 与高精地图栅格化得到的 BEV 图像，应用于自动驾驶中对车辆等动态交通参与者的感知与预测。 研究问题：现有最强联合检测-预测模型 DeTra 无公开实现，且动态（移动）目标的轨迹预测仍显著难于检测；论文旨在在不增加推理延迟、不破坏检测精度的前提下提升动态目标预测性能，并诊断共享骨干网络中辅助损失的梯度竞争问题。",
+    "research_unit": "Moscow Institute of Physics and Technology, Moscow, Russia · Vladislav Diuz…",
+    "hook_text": "论文面向自动驾驶中统一的目标检测与轨迹预测任务，目标是在共享鸟瞰图（BEV）表示上同时完成目标检测与多模态未来轨迹预测。",
+    "key_points": [
+      "论文面向自动驾驶中统一的目标检测与轨迹预测任务，目标是在共享鸟瞰图（BEV）表示上同时完成目标检测与多模态未来轨迹预测。",
+      "输入场景为由 LiDAR 与高精地图栅格化得到的 BEV 图像，应用于自动驾驶中对车辆等动态交通参与者的感知与预测。",
+      "研究问题：现有最强联合检测-预测模型 DeTra 无公开实现，且动态（移动）目标的轨迹预测仍显著难于检测；论文旨在在不增加推理延迟、不破坏检测精度的前提下提升动态目标预测性能，并诊断共享骨干网络中辅助损失的梯度竞争问题。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-10",
+    "title": "Using Automated Vehicles Operational Data to Confirm Safety and Anticipate Threats",
+    "link": "https://arxiv.org/abs/2609.11549",
+    "arxiv_id": "2609.11549",
+    "detail_path": "papers/2609.11549/",
+    "cover_path": "covers/2609.11549/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.11549.webp",
+    "paper_image_full_path": "assets/paper-images/2609.11549.webp",
+    "preview_text": "论文面向自动驾驶系统（ADS）的安全评估与在役监测任务，讨论欧盟新近通过的允许无人物流/驾驶车辆在公共道路上运行的法规中提出的数据采集条款。 应用场景为公共道路上的无人驾驶车辆运行，以及随之产生的真实世界运行数据采集与安全监管。 研究问题：传统型式认证（homologation）验证方案可能仍存在大量未知风险，如何借助在役监测与报告（ISMR）机制，利用真实运行数据确认型式认证安全目标、提前识别安全威胁。",
+    "research_unit": "原文未报告 · Riccardo Donà、Espedito Rusciano、Germana Trentadue 等",
+    "hook_text": "论文面向自动驾驶系统（ADS）的安全评估与在役监测任务，讨论欧盟新近通过的允许无人物流/驾驶车辆在公共道路上运行的法规中提出的数据采集条款。",
+    "key_points": [
+      "论文面向自动驾驶系统（ADS）的安全评估与在役监测任务，讨论欧盟新近通过的允许无人物流/驾驶车辆在公共道路上运行的法规中提出的数据采集条款。",
+      "应用场景为公共道路上的无人驾驶车辆运行，以及随之产生的真实世界运行数据采集与安全监管。",
+      "研究问题：传统型式认证（homologation）验证方案可能仍存在大量未知风险，如何借助在役监测与报告（ISMR）机制，利用真实运行数据确认型式认证安全目标、提前识别安全威胁。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-10",
+    "title": "CARLAverse: A Highly Modular, Distributed, and Multimodal Framework for Human-in-the-Loop Simulation",
+    "link": "https://arxiv.org/abs/2609.11478",
+    "arxiv_id": "2609.11478",
+    "detail_path": "papers/2609.11478/",
+    "cover_path": "covers/2609.11478/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.11478.webp",
+    "paper_image_full_path": "assets/paper-images/2609.11478.webp",
+    "preview_text": "论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。 解决的工程问题是：现有多智能体仿真平台在需要高保真触觉反馈时，难以满足网络延迟与同步约束，且商用连接式模拟器昂贵、开源方案缺乏物理沉浸与硬件集成能力。 提出 CARLAverse，一个开源、多模态仿真生态，把驾驶（DrivoCARLA）、骑行（CycloCARLA）与行人（WalkoCARLA）仿真器集成到同一 CARLA 虚拟环境。 应用场景为跨机构、地理分布的多人类参与者 HITL 实验，用于研究混合交通中真人的社会性交互行为。 研究问题聚焦于分布式物理架构与模块化硬件抽象如何兼顾全局环境同步与本地低延迟触觉控制。",
+    "research_unit": "Institute of Energy Efficient Mobility · Patrick Rebling",
+    "hook_text": "论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。",
+    "key_points": [
+      "论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。",
+      "解决的工程问题是：现有多智能体仿真平台在需要高保真触觉反馈时，难以满足网络延迟与同步约束，且商用连接式模拟器昂贵、开源方案缺乏物理沉浸与硬件集成能力。",
+      "提出 CARLAverse，一个开源、多模态仿真生态，把驾驶（DrivoCARLA）、骑行（CycloCARLA）与行人（WalkoCARLA）仿真器集成到同一 CARLA 虚拟环境。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-10",
+    "title": "Testing Between the Test Cases: Proving End-to-End Steering in Conditions You Never Drove",
+    "link": "https://arxiv.org/abs/2609.10951",
+    "arxiv_id": "2609.10951",
+    "detail_path": "papers/2609.10951/",
+    "cover_path": "covers/2609.10951/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.10951.webp",
+    "paper_image_full_path": "assets/paper-images/2609.10951.webp",
+    "preview_text": "论文针对端到端（E2E）自动驾驶转向网络在低能见度扰动条件下的安全性验证问题。 应用场景为 CARLA 仿真中的两条道路：Town04 高速公路环线与 Town06 城市主干道（道路类型与几何不同，属于不同 ODD）。 研究问题：传统仿真测试只能覆盖有限测试用例，模型通过所有测试条件仍可能在真实世界失败；论文探索用形式化验证（bound propagation）对“测试用例之间”的连续扰动强度进行安全性判定，并检验其与闭环仿真结果是否一致。",
+    "research_unit": "Western Michigan University, Department of Computer Science · Menuka Ghalan…",
+    "hook_text": "论文针对端到端（E2E）自动驾驶转向网络在低能见度扰动条件下的安全性验证问题。",
+    "key_points": [
+      "论文针对端到端（E2E）自动驾驶转向网络在低能见度扰动条件下的安全性验证问题。",
+      "应用场景为 CARLA 仿真中的两条道路：Town04 高速公路环线与 Town06 城市主干道（道路类型与几何不同，属于不同 ODD）。",
+      "研究问题：传统仿真测试只能覆盖有限测试用例，模型通过所有测试条件仍可能在真实世界失败；论文探索用形式化验证（bound propagation）对“测试用例之间”的连续扰动强度进行安全性判定，并检验其与闭环仿真结果是否一致。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-09",
     "title": "Data-Driven Risk Fields for Safer End-to-End Autonomous Driving",
     "link": "https://arxiv.org/abs/2609.10377",

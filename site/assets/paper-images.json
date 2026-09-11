@@ -23428,5 +23428,213 @@
     "inside_figure": true,
     "width": 215,
     "height": 124
+  },
+  "2609.11478": {
+    "title": "CARLAverse: A Highly Modular, Distributed, and Multimodal Framework for Human-in-the-Loop Simulation",
+    "abs_url": "https://arxiv.org/abs/2609.11478",
+    "html_url": "https://arxiv.org/html/2609.11478v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.11478v1/figures/carlaverse_tools.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 443,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11478v1/distributed_physics.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 202,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11478v1/drivocarla_overview.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 183,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11478v1/cyclocarla.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 288,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11478v1/walkocarla.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 301,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.11478.webp",
+    "image_url": "https://arxiv.org/html/2609.11478v1/figures/carlaverse_tools.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 443
+  },
+  "2609.10951": {
+    "title": "Testing Between the Test Cases: Proving End-to-End Steering in Conditions You Never Drove",
+    "abs_url": "https://arxiv.org/abs/2609.10951",
+    "html_url": "https://arxiv.org/html/2609.10951v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.10951v1/routes.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 582,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10951v1/conditions.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 546,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.10951v1/disturbance_family.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 71,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.10951.webp",
+    "image_url": "https://arxiv.org/html/2609.10951v1/routes.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 582
+  },
+  "2609.11717": {
+    "title": "MC-DeTra: Motion-Consistent Joint Object Detection and Socially-Aware Trajectory Forecasting in Bird's-Eye-View Images",
+    "abs_url": "https://arxiv.org/abs/2609.11717",
+    "html_url": "https://arxiv.org/html/2609.11717v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.11717v1/MC-DeTra.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 242,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11717v1/fig_occupancy_aux.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 333,
+        "height": 274,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11717v1/fig_bev_detection.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 419,
+        "height": 223,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11717v1/fig_past_overlay.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 153,
+        "height": 145,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2609.11717v1/fig_yaw_arrows.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 153,
+        "height": 145,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      }
+    ],
+    "path": "assets/paper-images/2609.11717.webp",
+    "image_url": "https://arxiv.org/html/2609.11717v1/MC-DeTra.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 242
+  },
+  "2609.11549": {
+    "title": "Using Automated Vehicles Operational Data to Confirm Safety and Anticipate Threats",
+    "abs_url": "https://arxiv.org/abs/2609.11549",
+    "html_url": "https://arxiv.org/html/2609.11549v1",
+    "path": "assets/paper-images/2609.11549.webp",
+    "image_url": "https://arxiv.org/pdf/2609.11549",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 893,
+    "height": 1263
   }
 }

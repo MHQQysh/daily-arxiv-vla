@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CARLAverse: A Highly Modular, Distributed, and Multimodal Framework for Human-in-the-Loop Simulation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。 解决的工程问题是：现有多智能体仿真平台在需要高保真触觉反馈时，难以满足网络延迟与同步约束，且商用连接式模拟器昂贵、开源方案缺乏物理沉浸与硬件集成能力。 提出 CARLAverse，一个开源、多模态仿真生态，把驾驶（DrivoCARLA）、骑行（CycloCARLA）与行人（WalkoCARLA）仿真器集成到同一 CARLA 虚拟环境。 应用场景为跨机构、地理分布的多人类参与者 HITL 实验，用于研究混合交通中真人的社会性交互行为。 研究问题聚焦于分布式物理架构与模块化硬件抽象如何兼顾全局环境同步与本地低延迟触觉控制。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.11478">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.11478.webp" alt="CARLAverse: A Highly Modular, Distributed, and Multimodal Framework for Human-in-the-Loop Simulation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CARLAverse: A Highly Modular, Distributed, and Multimodal Framework for Human-in-the-Loop Simulation</h1>
+            <div class="detail-meta">2026-09-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.11478" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.11478" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.11478</span></div>
+            <p class="detail-summary">论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。 解决的工程问题是：现有多智能体仿真平台在需要高保真触觉反馈时，难以满足网络延迟与同步约束，且商用连接式模拟器昂贵、开源方案缺乏物理沉浸与硬件集成能力。 提出 CARLAverse，一个开源、多模态仿真生态，把驾驶（DrivoCARLA）、骑行（CycloCARLA）与行人（WalkoCARLA）仿真器集成到同一 CARLA 虚拟环境。 应用场景为跨机构、地理分布的多人类参与者 HITL 实验，用于研究混合交通中真人的社会性交互行为。 研究问题聚焦于分布式物理架构与模块化硬件抽象如何兼顾全局环境同步与本地低延迟触觉控制。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute of Energy Efficient Mobility · Patrick Rebling</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.11478/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。</li><li>解决的工程问题是：现有多智能体仿真平台在需要高保真触觉反馈时，难以满足网络延迟与同步约束，且商用连接式模拟器昂贵、开源方案缺乏物理沉浸与硬件集成能力。</li><li>提出 CARLAverse，一个开源、多模态仿真生态，把驾驶（DrivoCARLA）、骑行（CycloCARLA）与行人（WalkoCARLA）仿真器集成到同一 CARLA 虚拟环境。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute of Energy Efficient Mobility；作者：Patrick Rebling</li><li>机构：Karlsruhe University of Applied Sciences；作者：Philipp Nenninger、Reiner Kriesten</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶混合交通场景（人驾车辆与骑行者、行人等弱势道路使用者共存）中的人机在环（HITL）仿真研究。</li><li>解决的工程问题是：现有多智能体仿真平台在需要高保真触觉反馈时，难以满足网络延迟与同步约束，且商用连接式模拟器昂贵、开源方案缺乏物理沉浸与硬件集成能力。</li><li>提出 CARLAverse，一个开源、多模态仿真生态，把驾驶（DrivoCARLA）、骑行（CycloCARLA）与行人（WalkoCARLA）仿真器集成到同一 CARLA 虚拟环境。</li><li>应用场景为跨机构、地理分布的多人类参与者 HITL 实验，用于研究混合交通中真人的社会性交互行为。</li><li>研究问题聚焦于分布式物理架构与模块化硬件抽象如何兼顾全局环境同步与本地低延迟触觉控制。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 CARLAverse 的总体系统架构、软件框架与跨域集成方法，使异构 HITL 节点能在共享虚拟环境中交互。</li><li>提出分布式物理架构：延迟敏感的自身动力学与高频力反馈在客户端本地节点计算，中心 CARLA 服务器负责 NPC 物理与全局交通协调。</li><li>在既有模块化硬件抽象框架基础上扩展出三种人类交互域节点：DrivoCARLA（车辆）、CycloCARLA（自行车）、WalkoCARLA（行人）。</li><li>在通信上绕过 ROS/DDS 中间件用于主动控制，改用 CARLA 原生 API RPC（TCP/IP）进行可靠状态更新，并以专用无连接 UDP 传输高频率力反馈与运动提示数据，ROS 仅用于后台数据记录（rosbag）。</li><li>提供跨领域支撑组件，包括 CARLAverse 工具库、YAML 编排、基于 Web 的 HMI/遥测、空间音频（CARLAcoustics）、力反馈服务器与运动平台服务器等。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：CARLAverse 仿真生态系统，包含中心服务器（CARLA/Unreal Engine 环境）与多个异构客户端节点。</li><li>输入传感器：原文在节点描述中提及力反馈硬件、运动平台、OpenXR 跟踪、VR 头显、蓝牙（BLE）骑行台、视觉位姿估计、眼动跟踪数据记录等，但未给出统一的传感器配置清单；具体传感器规格原文未报告。</li><li>场景表示：基于 CARLA/Unreal Engine 的 3D 城市环境与 OpenDRIVE 地图，中心服务器维护全局世界状态、天气与全局碰撞矩阵。</li><li>模型结构（系统结构）：严格 server-client 拓扑，中心服务器通过直接 RPC 连接各本地节点；全局交通管理器、交通灯管理、NPC 行为与物理、天气同步、全局碰撞检测在中心；本地节点计算自身物理（轮胎-路面交互、回正力矩、运动提示）、VR 可视化与位姿估计。</li><li>关键技术：分布式物理域划分（全局域 vs 本地域）、客户端位置插值以平滑网络抖动、连接超时自动移除失联实例的失效保护、40 字节 1 字节对齐 C++ struct 的 UDP 力反馈命令流、DirectInput/evdev 硬件抽象、带硬件看门狗的安全停机机制。</li><li>原文未报告统一的神经网络模型或学习型算法结构；论文定位为系统架构与集成方法论文。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告使用任何公开数据集。</li><li>仿真器：CARLA（作为中心仿真核心）、Unreal Engine；并对比了 SUMO、LGSVL、AirSim、JOAN、CARMEn、GrokWalks、CDA-HDS、Sky-Drive、DMAVA 等平台。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告任何训练资源（无训练流程）。</li><li>实车平台：原文未报告实车平台；硬件侧报告了力反馈方向盘（直驱电机）、运动平台、自行车骑行台（智能骑行台/直流电机）、VR 头显、OpenXR 跟踪与触觉前叉电机等模拟器硬件。</li><li>代码与文档地址：https://git.ieem-ka.de/simulator-environments/carlaverse。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：论文未报告定量基准评测，主要通过表 I、表 II 对现有非 CARLA 与 CARLA 多智能体/协同仿真框架进行定性对比。</li><li>评估指标：论文报告了延迟相关的形式化分析，给出中心化触觉环路延迟 T_central = t_input + t_network,tx + t_physics + t_network,rx + t_actuation，以及本地化后的 T_local = t_input + t_physics,local + t_actuation；同时引用 ROS/DDS 相比原始 socket 通信在小负载下可增加最高 50% 延迟。</li><li>关键数值：原文报告力反馈 UDP 载荷为严格 40 字节、1 字节内存对齐；高频控制回路常需 &gt;100 Hz、稳定触觉可达 1000 Hz；未报告 CARLAverse 自身的实测延迟、帧率或用户研究结果。</li><li>对比方法：表 II 对比 DReyeVR、JOAN、GrokWalks、CDA-HDS、Sky-Drive、CARMEn、DMAVA 与 CARLAverse，对比维度为是否具备分布式物理、是否支持驾驶/自行车/行人 HITL 节点及关键局限。</li><li>评估条件：论文明确说明同步机制的细节和单个物理与感知子系统的定量验证放在配套论文与进行中的工作中，本文未报告开环、闭环、仿真或实车的定量评估结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.11549/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Using Automated Vehicles Operational Data to Confirm Safety and Anticipate Threats</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.10951/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Testing Between the Test Cases: Proving End-to-End Steering in Conditions You Never Drove</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
