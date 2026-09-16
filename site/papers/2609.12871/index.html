@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Multi-Vehicle Dataset with Camera, LiDAR, and Radar Sensors and Scanned 3D Models for Custom Auto-Annotation using RTK-GNSS - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。 应用场景为相机、LiDAR、雷达多传感器对多车辆的感知、标注与评估，涵盖单目标测量与多目标交通场景。 研究问题：现有数据集缺少被观测车辆的精确 3D 模型、缺少目标车辆的连续运动学参考、标注粒度固定，因而难以细致评估遮挡、反射、微多普勒等物理测量效应。 论文通过为所有车辆装备 RTK-GNSS/INS 单元并扫描全部车辆的 3D 模型，使任意时刻完整动态环境状态已知，从而支持用户自定义粒度的自动标注。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.12871">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.12871.webp" alt="A Multi-Vehicle Dataset with Camera, LiDAR, and Radar Sensors and Scanned 3D Models for Custom Auto-Annotation using RTK-GNSS" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Multi-Vehicle Dataset with Camera, LiDAR, and Radar Sensors and Scanned 3D Models for Custom Auto-Annotation using RTK-GNSS</h1>
+            <div class="detail-meta">2026-09-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.12871" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.12871" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.12871</span></div>
+            <p class="detail-summary">论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。 应用场景为相机、LiDAR、雷达多传感器对多车辆的感知、标注与评估，涵盖单目标测量与多目标交通场景。 研究问题：现有数据集缺少被观测车辆的精确 3D 模型、缺少目标车辆的连续运动学参考、标注粒度固定，因而难以细致评估遮挡、反射、微多普勒等物理测量效应。 论文通过为所有车辆装备 RTK-GNSS/INS 单元并扫描全部车辆的 3D 模型，使任意时刻完整动态环境状态已知，从而支持用户自定义粒度的自动标注。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">慕尼黑联邦国防军大学自动驾驶研究所（Institute for Autonomous Driving of the University of the…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.12871/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。</li><li>应用场景为相机、LiDAR、雷达多传感器对多车辆的感知、标注与评估，涵盖单目标测量与多目标交通场景。</li><li>研究问题：现有数据集缺少被观测车辆的精确 3D 模型、缺少目标车辆的连续运动学参考、标注粒度固定，因而难以细致评估遮挡、反射、微多普勒等物理测量效应。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：慕尼黑联邦国防军大学自动驾驶研究所（Institute for Autonomous Driving of the University of the Bundeswehr Munich, Neubiberg, Germany）；作者：Philipp Berthold、Bianca Forkel、Mirko Maehlisch（原文注明三位作者均隶属该研究所）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。</li><li>应用场景为相机、LiDAR、雷达多传感器对多车辆的感知、标注与评估，涵盖单目标测量与多目标交通场景。</li><li>研究问题：现有数据集缺少被观测车辆的精确 3D 模型、缺少目标车辆的连续运动学参考、标注粒度固定，因而难以细致评估遮挡、反射、微多普勒等物理测量效应。</li><li>论文通过为所有车辆装备 RTK-GNSS/INS 单元并扫描全部车辆的 3D 模型，使任意时刻完整动态环境状态已知，从而支持用户自定义粒度的自动标注。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出数据集（7V-Scanario），同时包含相机、LiDAR 和雷达原始测量数据，并为每辆车提供扫描的 3D 模型（含结构与纹理）。</li><li>所有涉及车辆（传感器车与 7 辆目标车）均装备 RTK-GNSS/INS 单元，提供连续的位置与运动学参考数据。</li><li>相比已有数据集（KITTI、nuScenes、Waymo、Argoverse 2、Oxford RobotCar、GOOSE、RadarScenes、[10]），本数据集在传感器组合、运动学参考范围（all vehicles）和 3D 模型（3D scans）上均有覆盖。</li><li>由于 3D 模型和车辆状态在任意时刻已知，可生成任意格式与粒度的自动标注（如区分车轮、窗户等），无需人工标注全部传感器数据。</li><li>支持数据增强（修改模型纹理、人工增加光源）以及将真实 3D 模型用于仿真，缓解 Sim-to-Real Gap。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知算法数据集构建与自动标注，涉及多传感器标定、定位参考与 3D 模型配准。</li><li>输入传感器：1× Velodyne VLS-128 LiDAR（360°、10 Hz）；4× Basler acA2440-20gc RGB 相机（间隔 90°、10 Hz）；5× Smartmicro UMRR-96 Type 153 79 GHz 中距雷达（四角与散热器格栅、约 18 Hz）；1× Smartmicro UMRR-32 Type 132 77 GHz 远距雷达（散热器格栅、约 18 Hz）；1× OxTS RT3000v3 RTK-GNSS/INS（100 Hz）；VW Touareg 量产车数据（轮速、转向角、陀螺，50 Hz）。</li><li>传感器车：MuCAR-3（改装 Volkswagen Touareg）；传感器采用 [16] 的概率联合多传感器优化算法进行外参标定，并通过硬件时间戳、硬件触发与软件总线延迟补偿统一时钟。</li><li>场景表示：以 RTK-GNSS/INS 提供的高频位姿为基准，通过插值得到任意传感器测量时刻的真值；3D 模型与其局部 INS 坐标系对齐。</li><li>模型结构与关键技术：使用 Artec Leo 3D 扫描仪扫描所有车辆，处理得到全局配准 3D 模型；通过选取 GNSS/INS 单元的特征（标记、螺丝）或原型车特征（车轴、徽标），建立变换 H_scan^INS，并用式(1) 的旋转平移模型与式(2) 的最小二乘残差优化求解对齐；完整投影变换链见式(3)（sensor→ego-INS→target-INS→scan）。</li><li>自动标注：论文不直接提供现成标注，建议使用 ray casting 类库（如 trimesh）按用户自定义格式与粒度自动生成标注；原文未报告具体标注生成实现细节。</li><li>原文未报告模型规模（未涉及神经网络模型）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集名称：7V-Scanario（本数据集），数据集与补充数据地址为 https://github.com/UniBwTAS/7V-Scanario。</li><li>目标车辆（7 辆）：Hyundai i10、BMW 1 Series、Audi A6 station wagon、VW Tiguan（MuCAR-4）、Audi Q8（MuCAR-5）、StreetScooter Work、VW e-Crafter。</li><li>场景类型：单目标场景（传感器车以 7 m 至 35 m 变化半径绕行目标车，目标车缓慢前进行驶，单次录制约 10–15 min）；多目标场景，分为高动态频繁遮挡机动（6 个场景，共 17 min）、路口交通（4 段，共 5 min）、公路与乡村道路交通（13 个场景，超过 28 min）。</li><li>单目标场景场地为 110 m × 70 m 的平整沥青空地。</li><li>数据格式：ROS bags，LiDAR、雷达、里程计、GNSS/INS 以原始 UDP/CAN 包存储，相机图像为标准 ROS 格式，标定数据以 TF 与 CameraInfo 消息提供；多目标测量活动的 GNSS/INS 原始数据转储及 3D 模型单独提供。</li><li>通信与存储：车辆间使用窄带长距 WiFi（传感器车为接入点），GNSS/INS 单元同时将原始数据与解算结果转储到内部存储。</li><li>仿真器：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：传感器车 MuCAR-3（VW Touareg）；目标车中 VW Tiguan 与 Audi Q8 为原型车，其余为加装铝制车顶架的乘用车或物流原型车。</li><li>模型规模：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：本文为数据集论文，未定义统一的算法评测基准；原文明确表示不提供现成标注，标注格式与粒度由用户决定。</li><li>评估指标：论文未给出统一指标，示例评估中使用了检测点累积可视化与归一化热图（按观测参数出现频率进行逆加权归一化，引文 [20]）。</li><li>精度相关数值：GNSS/INS 厂家标称定位精度约 1 cm、角度精度 0.03°（每单元理想条件，相对位姿需应用两次）；3D 扫描精度为 0.1 mm 加每米 0.3 mm，实际配准精度在厘米级（引文 [18]）；RTK 参考站距离小于 1 km，场景处于开阔天空条件。</li><li>示例评估结果：雷达检测点累积显示雷达传感器在俯仰（elevation）测量上存在较大不确定性；VW Tiguan 记录的雷达检测归一化热图显示热点沿车辆轮廓和车顶传感器结构分布，并可通过选择观测参数生成视角相关热图；LiDAR 示例显示激光穿过车窗，在对面 B 柱上产生测量点，可借助 3D 模型研究车窗对 LiDAR 的穿透性；另一示例展示 Hyundai i10 部分遮挡 VW e-Crafter 时的遮挡效应。</li><li>对比方法：论文在表 I 中与 (Semantic) KITTI、nuScenes/nuImages、Cityscapes (3D)、Waymo、Argoverse 2、Oxford (Radar) RobotCar、GOOSE、RadarScenes 及 [10] 从传感器、标注、运动学参考、3D 模型四方面进行对比，指出这些数据集仅提供传感器车运动学信息或不提供运动学参考，仅 KITTI 在深度图中使用简单 CAD 模型。</li><li>开环、闭环、仿真或实车条件：论文未报告开环或闭环评测；数据采集为实车在测试场与真实道路场景下进行，原文未报告仿真实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.13642/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">When Compliance Data Masquerades as Evaluation: Measurement Validity for Deployed AI Systems</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.12609/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Quantifying Spectral Differences in Vehicle Kinematics Between Production Autonomous and Human-Driven Vehicles Across Driving Scenarios</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

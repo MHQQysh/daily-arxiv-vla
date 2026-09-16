@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NeuroSymbEAD: A Large Scale Neuro-Symbolic Caption Dataset for Omni-Directional Embodied Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。 任务包括 3D 描述生成（captioning）与 3D 视觉定位（grounding），目标是把户外驾驶场景转化为结构化、自我中心（ego-centric）的自然语言表示。 应用场景基于 KITTI-360 的 LiDAR 记录的户外驾驶序列，聚焦交通相关的静态与动态对象。 研究问题在于：现有 3D 视觉语言数据集多集中在室内场景，而户外驾驶语言数据集通常面向密集对象描述、问答、排序或推理，缺少显式的、层次化的、自我中心神经符号描述与本体关系。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.16919">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.16919.webp" alt="NeuroSymbEAD: A Large Scale Neuro-Symbolic Caption Dataset for Omni-Directional Embodied Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">NeuroSymbEAD: A Large Scale Neuro-Symbolic Caption Dataset for Omni-Directional Embodied Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-15 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.16919" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.16919" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.16919</span></div>
+            <p class="detail-summary">论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。 任务包括 3D 描述生成（captioning）与 3D 视觉定位（grounding），目标是把户外驾驶场景转化为结构化、自我中心（ego-centric）的自然语言表示。 应用场景基于 KITTI-360 的 LiDAR 记录的户外驾驶序列，聚焦交通相关的静态与动态对象。 研究问题在于：现有 3D 视觉语言数据集多集中在室内场景，而户外驾驶语言数据集通常面向密集对象描述、问答、排序或推理，缺少显式的、层次化的、自我中心神经符号描述与本体关系。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">DFKI · Muhammad Ahmed Ullah Khan、Sheikh Talha Uddin、Didier Stricker 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.16919/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。</li><li>任务包括 3D 描述生成（captioning）与 3D 视觉定位（grounding），目标是把户外驾驶场景转化为结构化、自我中心（ego-centric）的自然语言表示。</li><li>应用场景基于 KITTI-360 的 LiDAR 记录的户外驾驶序列，聚焦交通相关的静态与动态对象。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：DFKI；作者：Muhammad Ahmed Ullah Khan、Sheikh Talha Uddin、Didier Stricker、Muhammad Zeshan Afzal。</li><li>机构：RPTU Kaiserslautern-Landau；作者：Muhammad Ahmed Ullah Khan。</li><li>机构：Independent Researcher；作者：Mohammed Elamine。</li><li>机构：BITS-Pilani, Hyderabad；作者：Sk Aziz Ali。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。</li><li>任务包括 3D 描述生成（captioning）与 3D 视觉定位（grounding），目标是把户外驾驶场景转化为结构化、自我中心（ego-centric）的自然语言表示。</li><li>应用场景基于 KITTI-360 的 LiDAR 记录的户外驾驶序列，聚焦交通相关的静态与动态对象。</li><li>研究问题在于：现有 3D 视觉语言数据集多集中在室内场景，而户外驾驶语言数据集通常面向密集对象描述、问答、排序或推理，缺少显式的、层次化的、自我中心神经符号描述与本体关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 NeuroSymbEAD，据原文称为首个面向户外 3D 自动驾驶场景的自我中心神经符号描述数据集。</li><li>构建自我中心知识图谱，对静态和动态对象标注类别、类别层级、朝向、方向以及相对自我车辆的距离等信息。</li><li>在 KITTI-360 上生成多层次文本描述，包含对象级描述和组级描述，形成轻量级自我中心场景地图表示。</li><li>提供数据标注流程与算法，可将 3D 驾驶场景转换为结构化自我中心语言，并支持对象级与组级注释生成。</li><li>使用预训练 grounding 和自回归 captioning 网络进行基准测试，为交通场景解释、3D 推理和可解释自动驾驶感知提供评测基准。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向 3D 视觉语言中的 captioning 与 grounding，构建神经符号描述数据集与基准。</li><li>输入传感器：原文说明基于 KITTI-360 的 LiDAR 记录驾驶序列；具体传感器配置原文未报告。</li><li>场景表示：以自我车辆为中心的局部坐标系，原点映射到 Velodyne 传感器，x 轴指向车辆前方，y 轴指向左侧，z 轴向上。</li><li>知识图谱生成：先提取对象 3D 真值边界框及语义类别、中心、尺寸等参数，再计算对象与自我车辆的距离、朝向和 heading，最后结合语义属性与本体符号生成对象级和组级描述。</li><li>对象级描述生成：描述包含对象标签、动态状态、距离、相对角度、速度、heading、heading class 与 residual 等信息。</li><li>组级描述生成：根据语义类别、动态状态以及粗略自我中心位置（前/后、左/右）对对象进行聚类，生成组级描述。</li><li>基准模型：采用 3DJCG 进行训练与评估；原文指出使用真值边界框而非 VoteNet 预测框。</li><li>关系模块修改：移除检测头，将真值边界框参数通过全连接层融入增强特征，并在 Relation Encoding Module 中计算对象与自我车辆的距离。</li><li>特征处理：增强特征在边界框中心处进行分组与聚合，类似 Set Abstraction 层，但兴趣点预定义为边界框中心；随后经过多头自注意力层输入 grounding 与 captioning 头。</li><li>原文未报告：具体传感器融合方式、完整端到端模型规模、推理实时性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：KITTI-360。</li><li>数据集规模：39,723 个自我中心描述场景，覆盖 9 个 KITTI-360 驾驶序列；共 692,081 条文本描述，其中 486,844 条对象级描述、205,237 条组级描述。</li><li>场景统计：平均每场景 12.26 个对象、17.42 条描述；包含 4,450 个唯一对象、10 个对象级语义类别、2 个组级类别（human 和 vehicle）。</li><li>静态/动态统计：对象级描述中 400,974 条为静态对象，85,870 条为动态对象；组级描述中 151,092 条为静态组，54,145 条为动态组。</li><li>类别统计：cars 占 375,250 条对象级描述；person 与 rider 共 47,114 条；其他车辆相关类别共 64,480 条；组级中 vehicle groups 为 172,859 条，human groups 为 32,378 条。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：原文未报告模型参数量或规模。</li><li>训练资源：单张 A100 GPU，16 个 worker，batch size 为 64。</li><li>实车平台：基于 KITTI-360 真实驾驶数据；具体实车平台信息原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NeuroSymbEAD 数据集上使用 3DJCG 进行 3D captioning 与 3D visual grounding 基准评估。</li><li>评估数据划分：训练使用序列 0、4、5、6、7；评估使用序列 9、10；序列 2 和 3 因 3DJCG 预处理与评估流程中的数据不一致被排除在 captioning 和 grounding 基准之外。</li><li>评估指标：captioning 使用 BLEU-4 与 ROUGE；grounding 使用 language accuracy 与 reference accuracy。</li><li>关键数值：3DJCG 在验证集上取得 BLEU-4 54.67、ROUGE 61.45、Language Accuracy 99.71%、Reference Accuracy 96.42%。</li><li>对比方法：原文主要报告 3DJCG 的基准结果；未报告与其他方法的完整对比数值。</li><li>评估条件：使用真值 3D 边界框，不使用 VoteNet 预测框，因此无需计算 IoU；论文报告的是验证集结果。</li><li>开环、闭环、仿真或实车条件：原文未报告开环、闭环或仿真评估；评估基于 KITTI-360 真实驾驶数据，属于真实数据上的离线基准评测。</li><li>限制：数据集当前聚焦交通相关 human 和 vehicle 类别，本体较稀疏；描述由结构化模板生成，语言多样性有限；基准仅使用真值框和一个 captioning/grounding 基线，未来将扩展到预测检测和现代驾驶 VLM。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.16697/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

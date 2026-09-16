@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DRS-VPT: Directly Relocalizing in a Scan with Vision Point Transformers - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。 应用场景包括自动驾驶中的相机–LiDAR 标定，以及室内相机到地图的重定位（camera-to-map relocalization）。 核心研究问题是：如何在不依赖初始位姿、不将图像特征烘焙进三维地图点的情况下，实现跨模态的图像–扫描对齐，并能跨数据集、跨传感器泛化。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.12557">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.12557.webp" alt="DRS-VPT: Directly Relocalizing in a Scan with Vision Point Transformers" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DRS-VPT: Directly Relocalizing in a Scan with Vision Point Transformers</h1>
+            <div class="detail-meta">2026-09-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.12557" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.12557" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.12557</span></div>
+            <p class="detail-summary">论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。 应用场景包括自动驾驶中的相机–LiDAR 标定，以及室内相机到地图的重定位（camera-to-map relocalization）。 核心研究问题是：如何在不依赖初始位姿、不将图像特征烘焙进三维地图点的情况下，实现跨模态的图像–扫描对齐，并能跨数据集、跨传感器泛化。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Oxford, Oxford OX2 6NN, United Kingdom · Lanke Frank Tarimo F…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.12557/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。</p>
+  <ul class="reading-intro-points"><li>论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。</li><li>应用场景包括自动驾驶中的相机–LiDAR 标定，以及室内相机到地图的重定位（camera-to-map relocalization）。</li><li>核心研究问题是：如何在不依赖初始位姿、不将图像特征烘焙进三维地图点的情况下，实现跨模态的图像–扫描对齐，并能跨数据集、跨传感器泛化。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Oxford, Oxford OX2 6NN, United Kingdom；作者：Lanke Frank Tarimo Fu、Maurice Fallon</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。</li><li>应用场景包括自动驾驶中的相机–LiDAR 标定，以及室内相机到地图的重定位（camera-to-map relocalization）。</li><li>核心研究问题是：如何在不依赖初始位姿、不将图像特征烘焙进三维地图点的情况下，实现跨模态的图像–扫描对齐，并能跨数据集、跨传感器泛化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DRS-VPT，一种前馈 transformer 架构，将前馈几何预测与可微的直接图像–扫描对齐统一起来，无需位姿初始化，也无需在参考地图中存储逐点图像特征。</li><li>通过跨多种传感器和环境的基础训练，单一 DRS-VPT 模型在相机–LiDAR 配准上取得 state-of-the-art 性能，并在对原始点云地图的重定位中具有竞争力，能泛化到现有单数据集方法严重失败的其他域。</li><li>消融显示，重投影特征度量对齐（reprojective feature-metric alignment）显著优于 ICP 和 Kabsch 等几何点对齐方案，在相机–LiDAR 配准上将平均平移误差降低约 5 倍。</li><li>模型还定性展示了学习到复杂扫描–图像投影特性，例如对背面点的遮挡处理。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：前馈视觉几何模型与跨模态配准，融合图像编码、点云编码、跨模态注意力、输出重建与直接对齐精化。</li><li>输入传感器：N 张 RGB 图像与一个参考三维点云（原始点云，论文强调不含颜色信息）；所有预测几何量表达在第一张图像 Î1 的坐标系下。</li><li>场景表示：每个图像视图预测射线方向 Ri、尺度不确定的射线深度 D̃i、相机旋转 Qi、尺度不确定的平移 t̃i 及置信权重 WiX；对参考扫描预测变换后的扫描点 X̃P、扫描旋转 QP、尺度不确定平移 t̃P 与逐点置信权重 WP；还预测全局度量尺度 s。</li><li>模型结构：图像使用与 MapAnything 相同的冻结 DINOv2 ViT-L 编码器，提取最后一层 patch 特征 FI∈R^{1024×H/14×W/14}；点云使用 PointTransformerV3 的 Sonata 变体，经自适应体素下采样后产生逐点特征 FP，潜在维度 1024。</li><li>跨模态注意力：采用 24 层交替注意力架构，类似 MapAnything，包含 12 个全局注意力和 12 个局部注意力块，潜在维度 768（输入从 1024 投影），12 个注意力头，MLP ratio 为 4；transformer 权重由对应 MapAnything 模型初始化并微调。</li><li>关键技术：点云 token 在进入 transformer 前按 Sonata 空间填充曲线顺序均匀下采样到 5,000 个 token；全局注意力中两模态 token 与可学习 scale token 联合参与，局部注意力中各模态独立自注意力；之后通过门控机制融合上下文特征与原始高分辨率点特征。</li><li>输出重建：图像分支使用与 MapAnything 相同的 DPT-based 深度头和卷积位姿头；扫描输出使用轻量线性解码器映射到第一相机坐标系中的变换坐标与逐点置信权重，全局位姿头预测扫描旋转与尺度不确定平移作为直接对齐的粗初始化；尺度通过 scale token 经两层 MLP 和指数输出预测。</li><li>对齐特征：从第一张图像和点云 token 解码三级由粗到细特征金字塔，图像特征每级维度 24，使用带跳跃连接的 DPT 头；点云特征使用带跳跃连接的轻量 MLP；两分支也输出逐元素置信权重。</li><li>直接对齐精化：使用预测全局尺度 s 缩放平移，得到扫描初始位姿，并按已知内参将扫描点投影到相机 1 图像；在金字塔各级计算点云特征与投影位置双线性采样图像特征之间的残差，构建带学习置信权重和鲁棒惩罚的能量；使用 SE(3) 李代数增量线性化残差，构建 Gauss–Newton 法方程并求解，更新通过 SE(3) 指数映射施加；每个金字塔级别展开固定次数（通常五次）Gauss–Newton 迭代，由粗到细进行。</li><li>训练损失：监督射线方向、旋转、平移、深度、局部点图、世界坐标系点图与置信图；旋转损失考虑单位四元数的二对一对称性；平移在尺度不变方式下优化；深度和点图在 log 空间监督；点图损失为置信加权并含 −α log Ci 项；尺度监督仅用于具有度量真值的数据集；最终总损失结合几何监督与可微对齐阶段的重投影损失。</li><li>原文未报告的模型规模总量、推理时延等细节未在提供文本中给出。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练数据集：MegaDepth、OxfordSpires、KITTI、ETH3D、Argoverse、nuScenes、PandaSet、7-Scenes、ScanNet++、WildRGBD、GrandTour。</li><li>数据集用途：MegaDepth 使用公开 SfM 重建作为尺度不确定点云监督；OxfordSpires 提供同步相机–LiDAR 数据，使用相机视锥内稀疏 LiDAR 回波；KITTI、Argoverse、nuScenes、PandaSet 提供自动驾驶平台完整 LiDAR 扫描；ETH3D、ScanNet++、7-Scenes、WildRGBD 提供密集室内重建，作为与对应相机视图关联的深度派生点云；GrandTour 提供机器人平台在森林和仓库等非结构化环境的相机–LiDAR 序列。</li><li>多视图采样：预计算帧间重叠，采用基于共视的采样策略，训练样本中所有选中图像视图与参考扫描至少共享 25% 几何重叠；训练时采样 N 张共视图像与参考点云，并对输入扫描施加随机旋转和平移位姿增强。</li><li>仿真器：原文未报告。</li><li>模型规模：图像编码器为 DINOv2 ViT-L；点云编码器为 PointTransformerV3 的 Sonata 变体；transformer 为 24 层、潜在维度 768、12 个注意力头、MLP ratio 4；点云 token 下采样到 5,000；整体参数量原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：论文提到自动驾驶平台与机器人搭载平台的数据集（如 KITTI、nuScenes、PandaSet、GrandTour），但未报告本文自行搭建或使用的具体实车平台配置。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：KITTI 和 nuScenes 上的宽基线相机–LiDAR 对齐；7Scenes 室内相机–地图重定位；12Scenes 零样本室内重定位；KITTI→nuScenes 跨数据集泛化；KITTI 上的精化策略与点密度消融。</li><li>评估指标：相机–LiDAR 对齐使用平移误差 t（米）和旋转误差 r（度），报告均值/中位数，以及 2 m 平移与 5° 旋转阈值内的准确率 Acc；室内重定位使用平移误差（cm）/旋转误差（deg）及召回率 Recall；零样本与跨数据集实验报告中位平移、旋转误差和召回率。</li><li>关键数值：KITTI 相机–LiDAR 对齐中 DRS-VPT 达到 t 0.09/0.05 m、r 0.34/0.25°、Acc 99.73%；nuScenes 中 t 0.33/0.13 m、r 0.67/0.33°、Acc 97.76%；对比方法包括 CorrI2P、VP2P、CoFiI2P、TrafficLoc。</li><li>7Scenes 结果：DRS-VPT 在 Chess 为 3/0.84、Fire 为 2/1.01、Heads 为 2/1.00、Office 为 3/0.88、Pumpkin 为 7/1.67、Kitchen 为 5/1.30、Stairs 为 27/3.26，整体 Recall 为 66.4%；对比方法包括 InLoc、DSAC*、PixLoc、ACE。</li><li>12Scenes 零样本结果：整体召回率 53.6%；分场景包括 apt1 平移 4 cm、旋转 1.92°、召回 56.8%，apt2 平移 5 cm、旋转 2.23°、召回 48.9%，office1 平移 4 cm、旋转 1.82°、召回 62.0%，office2 平移 7 cm、旋转 2.78°、召回 33.7%。</li><li>KITTI→nuScenes 泛化：仅用 KITTI 训练的 TrafficLoc 和 CoFiI2P 失败，TrafficLoc 为 t 16.55 m、</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.12609/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Quantifying Spectral Differences in Vehicle Kinematics Between Production Autonomous and Human-Driven Vehicles Across Driving Scenarios</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.12371/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">READ: Learning Risk-Informed Fields for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

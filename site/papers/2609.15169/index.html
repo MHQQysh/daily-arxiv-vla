@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GRAVA: Grounded Reasoning-to-Action Representation and Learning for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。 论文指出两类基本限制：一是语言推理与物理场景证据之间的“ grounding gap（G1）”；二是即使存在 grounding，其也常通过独立感知/问答任务引入，导致 grounding 与后续推理、决策、动作生成之间出现“reasoning-to-action fragmentation gap（G2）”。 论文提出以 Grounded Reasoning-to-Action（GRA）表示为中心的 GRAVA 框架，在单一自回归流中整合 grounding、推理与动作生成，用于自动驾驶运动规划与决策。 应用场景为自动驾驶闭环/伪闭环驾驶行为生成，强调在复杂和长尾场景中保留动作相关物理证据并贯穿到可执行动作。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.15169">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.15169.webp" alt="GRAVA: Grounded Reasoning-to-Action Representation and Learning for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">GRAVA: Grounded Reasoning-to-Action Representation and Learning for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-14 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.15169" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.15169" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.15169</span></div>
+            <p class="detail-summary">论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。 论文指出两类基本限制：一是语言推理与物理场景证据之间的“ grounding gap（G1）”；二是即使存在 grounding，其也常通过独立感知/问答任务引入，导致 grounding 与后续推理、决策、动作生成之间出现“reasoning-to-action fragmentation gap（G2）”。 论文提出以 Grounded Reasoning-to-Action（GRA）表示为中心的 GRAVA 框架，在单一自回归流中整合 grounding、推理与动作生成，用于自动驾驶运动规划与决策。 应用场景为自动驾驶闭环/伪闭环驾驶行为生成，强调在复杂和长尾场景中保留动作相关物理证据并贯穿到可执行动作。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">18 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">北京理工大学电动车辆国家工程研究中心 · Xiao Liu、Jianghao Leng、Chao Sun 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.15169/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。</li><li>论文指出两类基本限制：一是语言推理与物理场景证据之间的“ grounding gap（G1）”；二是即使存在 grounding，其也常通过独立感知/问答任务引入，导致 grounding 与后续推理、决策、动作生成之间出现“reasoning-to-action fragmentation gap（G2）”。</li><li>论文提出以 Grounded Reasoning-to-Action（GRA）表示为中心的 GRAVA 框架，在单一自回归流中整合 grounding、推理与动作生成，用于自动驾驶运动规划与决策。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：北京理工大学电动车辆国家工程研究中心；作者：Xiao Liu、Jianghao Leng、Chao Sun、Haoyu Li</li><li>机构：北京理工大学深圳汽车研究院；作者：Xiao Liu、Jianghao Leng、Chao Sun</li><li>机构：深圳极光智捷科技有限公司（Shenzhen Jiguangzhijie Technology Co., Ltd.）；作者：Xiao Liu、Jianghao Leng、Chao Sun</li><li>机构：南洋理工大学电气与电子工程学院；作者：Haoyu Li、Lin Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。</li><li>论文指出两类基本限制：一是语言推理与物理场景证据之间的“ grounding gap（G1）”；二是即使存在 grounding，其也常通过独立感知/问答任务引入，导致 grounding 与后续推理、决策、动作生成之间出现“reasoning-to-action fragmentation gap（G2）”。</li><li>论文提出以 Grounded Reasoning-to-Action（GRA）表示为中心的 GRAVA 框架，在单一自回归流中整合 grounding、推理与动作生成，用于自动驾驶运动规划与决策。</li><li>应用场景为自动驾驶闭环/伪闭环驾驶行为生成，强调在复杂和长尾场景中保留动作相关物理证据并贯穿到可执行动作。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Grounded Reasoning-to-Action（GRA）表示：将语言指代绑定到 2D 视觉区域和自车坐标系物理状态，并在轨迹锚定的类型图中组织对象特定交互与驾驶决策；其动作相关结构被序列化为 grounded reasoning，随后生成 Executable Planner 动作。</li><li>提出与 GRA 对齐的预训练与后训练策略：包括 grounded pre-training、planner warm-up、verified self-distillation 和 Active RL Loop，用于逐步学习并优化完整 reasoning-to-action 过程。</li><li>提出工具增强的多智能体 GRA 数据构建流程，结合前向场景 grounding 与后向轨迹锚定，从同一 GRA 图派生出认知型问答监督和规划型 reasoning-to-action 监督。</li><li>构建 GR-NavSim 数据集：基于 nuPlan 扩展，包含 2.2M grounded question-answer pairs 和 70K GRA reasoning traces；论文称其为目前最大的开放词汇、非模板化自动驾驶问答数据集。</li><li>实例化 GRAVA-8B 并在 NAVSIM 与内部长尾基准上验证：在仅使用约 60% 可用人类驾驶演示进行动作监督的情况下，GRAVA-8B 在完整 NAVSIM 基准上于纯自回归驾驶模型中达到 state-of-the-art。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于自动驾驶 VLA 与运动规划方法，核心模块包括 GRA 表示、Executable Planner、agentic GRA 数据构建流程，以及分阶段训练策略。</li><li>输入传感器：原文中模型输入为视觉观测 \(V_{\mathrm{env}}\)、自车状态 \(s_{\mathrm{ego}}\) 和导航指令 \(c\)；原文未报告具体传感器配置、相机数量、LiDAR/Radar 等细节。</li><li>场景表示：使用 trajectory-anchored typed directed acyclic graph \(G=(V,E,\nu,\eta)\)。节点集合分解为场景/路线上下文节点 \(V^{S}\)、grounded object nodes \(V^{O}\)、interaction nodes \(V^{\Psi}\)、object-level decision nodes \(V^{D}\)，以及 ego-level decision node \(v^{\delta}\) 和 terminal action anchor \(v^{a}\)。</li><li>对象表示：每个动作相关对象 \(i\) 表示为 \(o_i=(m_i,b_i,\sigma_i)\)，其中 \(m_i\) 为语言指代，\(b_i\in[0,1000)^4\) 为归一化 2D bounding box，\(\sigma_i\) 为自车坐标系物理状态，包含语义类别及相对位置、距离、速度、朝向等属性。</li><li>图结构约束：每个保留的 interaction 或 object-level decision 必须可追溯到至少一个 grounded object；每个 object-level decision 必须贡献到 ego-level decision；ego-level decision 必须最终到达 action anchor。</li><li>序列化与生成：从 action anchor 的严格祖先集合提取动作相关子图 \(G_a=G[\mathrm{Anc}_G(v^a)]\)，序列化为 grounded reasoning \(r=\mathrm{Ser}(G_a)\)；随后由同一自回归 VLM 生成 Executable Planner 动作 \(a=(p,g,\phi)\)，完整序列为 \(y=[r;a]\)，分解为 \(\pi_{\theta}(y\mid x)=\pi_{\theta}(r\mid x)\pi_{\theta}(a\mid x,r)\)。</li><li>Executable Planner：动作原语集合为 STOP、CRAWL、CURVE、CRUISE；档位 \(g\in\{D,R\}\)；参数 \(\phi\in\Phi_p\)。STOP 参数为 endpoint，形状 \(\mathbb{R}^{2}\)；CRAWL 参数为 8 个点，形状 \(\mathbb{R}^{8\times 2}\)；CURVE 参数为 \(p_1,p_2,p_3\)，形状 \(\mathbb{R}^{3\times 2}\)；CRUISE 参数为 progress_end、\(v_{\mathrm{end}}\)、lat_end，形状 \(\mathbb{R}^{3}\)。</li><li>轨迹解码：固定几何解码器 \(\hat{\tau}=D_p(g,\phi;s_{\mathrm{ego}})\) 将动作转换为 4 秒时域上的 8 个 waypoint 轨迹 \(\hat{\tau}\in\mathbb{R}^{8\times 2}\)；解码器无可学习参数，动作选择保留在 \(\pi_{\theta}(a\mid x,r)\) 中。</li><li>训练监督：认知预训练目标为 \(\mathcal{L}_{\mathrm{QA}}=-\mathbb{E}_{(x,q,u)}[\log\pi_{\theta}(u\mid x,q)]\)；规划目标为 \(\mathcal{L}_{\mathrm{plan}}=-\mathbb{E}_{(x,r^*,a^*)}[\log\pi_{\theta}([r^*;a^*]\mid x)]\)。</li><li>分阶段学习：GRA pre-training 学习场景理解、指代解析、物理状态推理、交互和决策语义；planner warm-up 学习将 grounded reasoning 延续为可执行动作；verified self-distillation 根据解码轨迹的闭环驾驶奖励选择模型生成的 reasoning-to-action 序列；Active RL 使用轨迹级驾驶奖励优化完整 \([r;a]\) 序列。</li><li>Active RL 场景选择：先选出 greedy 输出仍不足的场景 \(\mathcal{D}_g(\theta)=\{x:s_{\mathrm{greedy}}(x)&lt;\tau_g\}\)，再保留采样 rollout 中满足 \(\max_i s_i\geq\tau_{\mathrm{hi}}\)、\(\min_i s_i&lt;\tau_{\mathrm{lo}}\)、\(\mathrm{std}_i(s_i)\geq\tau_{\sigma}\) 的 recoverable scenarios。</li><li>Active RL 优化：使用 normalized group-relative advantage \(\hat{A}_i=(s_i-\bar{s})/(\sigma_s+\epsilon)\)，采用 DAPO-style asymmetric clipping，token-level 目标结合 \(\rho_{i,t}(\theta)\hat{A}_i\) 与 clip 项，整体为 sequence-level Active RL objective。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM；GR-NavSim 基于 nuPlan 构建，包含 2.2M grounded question-answer pairs 和 70K GRA reasoning traces。</li><li>仿真器：原文提到 NAVSIM 协议与闭环驾驶奖励；Active RL 基础设施中包含 simulator scoring API；具体仿真器版本、渲染配置原文未报告。</li><li>模型规模：GRAVA-8B 基于 Qwen3-VL-8B-Instruct 实例化。</li><li>训练资源：原文未报告 GPU 型号、数量、训练时长、显存、总计算量等训练资源细节。</li><li>实车平台：原文未报告实车平台或实车测试信息。</li><li>代码资源：论文提供代码仓库链接 https://github.com/AhernResearch/grava。</li><li>内部基准：论文使用 internal long-tail benchmark，包含 Closed-loop Driving Score 和 Key-Object Compliance；其具体数据规模、采集平台与构建细节原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：完整 NAVSIM 基准；内部长尾基准（Internal Long-Tail Benchmark）。</li><li>评估指标：NAVSIM 使用 PDMS；内部长尾基准使用 Key-Object Compliance 和 Closed-loop Driving Score；grounded question-answering 评估中包含 scene and interaction（LLM judge）、object perception（3D localization）、decision（label accuracy）等评分定义。</li><li>关键数值：GRAVA-8B 在完整 NAVSIM 协议下达到 90.48 PDMS，相较其 pre-RL checkpoint 提升 10.2%，并在论文比较的直接自回归驾驶 VLA 中取得最佳性能。</li><li>长尾结果：在内部长尾基准上，完整 GRA 相对 action-only prediction 将 key-object compliance 提升 19.3%，将 Closed-loop Driving Score 提升 20.5%。</li><li>监督效率：论文报告仅使用约 60% 可用人类驾驶演示进行动作监督。</li><li>对比方法：论文比较对象包括直接自回归驾驶 VLA；相关工作中提及 EMMA、DriveLM、DriveV</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.15227/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Closed-form Bayesian homography estimation from noisy point correspondences</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.16074/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">World-Action Models for Robot Learning and Control: A Survey</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pedestrian Crossing Intent Classification From Event-Based Vision Using Convolutional Spiking Neural Networks With Temporal Augmentation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。 应用场景：自动驾驶车辆对行人是否将横穿道路进行预判，属于安全关键任务，要求在有运动模糊、高动态范围、类别不平衡等挑战条件下进行实时推理。 研究问题：传统基于帧的深度网络以固定帧率处理冗余 RGB 数据，限制了时间分辨率与能效；论文探索使用稀疏时间表示（事件/DVS）以及脉冲神经网络来实现更高效的行人意图分类。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.13328">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.13328.webp" alt="Pedestrian Crossing Intent Classification From Event-Based Vision Using Convolutional Spiking Neural Networks With Temporal Augmentation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Pedestrian Crossing Intent Classification From Event-Based Vision Using Convolutional Spiking Neural Networks With Temporal Augmentation</h1>
+            <div class="detail-meta">2026-09-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.13328" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.13328" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.13328</span></div>
+            <p class="detail-summary">任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。 应用场景：自动驾驶车辆对行人是否将横穿道路进行预判，属于安全关键任务，要求在有运动模糊、高动态范围、类别不平衡等挑战条件下进行实时推理。 研究问题：传统基于帧的深度网络以固定帧率处理冗余 RGB 数据，限制了时间分辨率与能效；论文探索使用稀疏时间表示（事件/DVS）以及脉冲神经网络来实现更高效的行人意图分类。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确对应 · Henok Teklu、Mustafa Sakhai、Maciej Wielgosz 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.13328/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。</p>
+  <ul class="reading-intro-points"><li>任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。</li><li>应用场景：自动驾驶车辆对行人是否将横穿道路进行预判，属于安全关键任务，要求在有运动模糊、高动态范围、类别不平衡等挑战条件下进行实时推理。</li><li>研究问题：传统基于帧的深度网络以固定帧率处理冗余 RGB 数据，限制了时间分辨率与能效；论文探索使用稀疏时间表示（事件/DVS）以及脉冲神经网络来实现更高效的行人意图分类。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未明确对应；作者：Henok Teklu、Mustafa Sakhai、Maciej Wielgosz、Matej Mertik（原文页面仅列出作者姓名，未提供作者所属机构信息）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。</li><li>应用场景：自动驾驶车辆对行人是否将横穿道路进行预判，属于安全关键任务，要求在有运动模糊、高动态范围、类别不平衡等挑战条件下进行实时推理。</li><li>研究问题：传统基于帧的深度网络以固定帧率处理冗余 RGB 数据，限制了时间分辨率与能效；论文探索使用稀疏时间表示（事件/DVS）以及脉冲神经网络来实现更高效的行人意图分类。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出端到端流水线：将 JAAD 真实驾驶视频用 v2e 模拟器转换为合成的动态视觉传感器（DVS）事件流，并用 CARLA 仿真的 DVS-PedX 序列（正常与恶劣天气）进行训练增强。</li><li>提出新的卷积脉冲神经网络（Conv-SNN）配合 clip-consistent DVS 数据增强，用于二分类行人过街意图。</li><li>详细公开架构决策、LIF 神经元动力学与代理梯度学习、类别平衡损失、JAAD 6 倍过采样和 70/15/15 分层划分协议。</li><li>在 1.07M 参数规模、CPU 训练条件下取得 JAAD DVS 测试集 95.83% 准确率与 F1 = 0.9695 等结果，并在稀疏时间表示上原生运行的同时追平或超越已有基于帧的方法。</li><li>提供全部 15 个训练轮次的收敛行为分析、域迁移特性分析以及与代表性相关工作的定量比较。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶中的行人过街意图感知/预测模块，输出二分类意图。</li><li>输入传感器：动态视觉传感器（DVS）事件流；JAAD 真实视频经 v2e 模拟器转为合成 DVS 事件流，CARLA 仿真 DVS（DVS-PedX）用于训练增强。</li><li>场景表示：稀疏时间事件表示（DVS 事件流），按片段（clip）组织并采用 clip-consistent 增强。</li><li>模型结构：卷积脉冲神经网络（Conv-SNN），使用泄漏积分发放（leaky-integrate-and-fire, LIF）神经元动力学与代理梯度学习。</li><li>关键技术：clip-consistent DVS 数据增强、类别平衡损失（class-balanced loss）、JAAD 6 倍过采样、70/15/15 分层划分协议。</li><li>其他细节：原文未报告特征维度、时间步长设置、具体卷积层数等更细粒度架构参数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：JAAD（Joint Attention in Autonomous Driving，真实驾驶视频，含行人意图标注）；DVS-PedX（CARLA 仿真的 DVS 序列，含正常与恶劣天气条件）。</li><li>仿真器/转换工具：v2e（将 JAAD 视频转为合成 DVS 事件流）；CARLA（生成 DVS-PedX 序列）。</li><li>模型规模：1.07M 参数。</li><li>训练资源：CPU 训练；共 15 个训练轮次（epoch）。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与指标：JAAD DVS 测试集、正常天气 CARLA DVS、恶劣天气 CARLA DVS；指标为准确率（accuracy）与 F1 分数。</li><li>关键数值：JAAD DVS 测试集 95.83% 准确率、F1 = 0.9695；正常 CARLA DVS 97.79% 准确率、F1 = 0.9478；恶劣天气 CARLA DVS 94.78% 准确率、F1 = 0.8369。</li><li>对比方法：与 JAAD 上先前基于帧的方法进行比较，论文声称在稀疏时间表示上原生运行的同时追平或超越其报告的准确率；原文未在摘要中给出具体对比方法名称与逐项数值。</li><li>评估条件：以 DVS 事件流为输入的模型评估；仿真条件下包含 CARLA 正常与恶劣天气设置；开环与闭环评估、是否实车验证原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.12371/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">READ: Learning Risk-Informed Fields for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.13265/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Forward-Facing Near-Infrared Adds Little to Colour for Farm-Machinery Traversability: A Site-Disjoint Evaluation of Sensor-Dependent Spatial Leakage</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,5 +1,469 @@
 [
   {
+    "date": "2026-09-15",
+    "title": "NeuroSymbEAD: A Large Scale Neuro-Symbolic Caption Dataset for Omni-Directional Embodied Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.16919",
+    "arxiv_id": "2609.16919",
+    "detail_path": "papers/2609.16919/",
+    "cover_path": "covers/2609.16919/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.16919.webp",
+    "paper_image_full_path": "assets/paper-images/2609.16919.webp",
+    "preview_text": "论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。 任务包括 3D 描述生成（captioning）与 3D 视觉定位（grounding），目标是把户外驾驶场景转化为结构化、自我中心（ego-centric）的自然语言表示。 应用场景基于 KITTI-360 的 LiDAR 记录的户外驾驶序列，聚焦交通相关的静态与动态对象。 研究问题在于：现有 3D 视觉语言数据集多集中在室内场景，而户外驾驶语言数据集通常面向密集对象描述、问答、排序或推理，缺少显式的、层次化的、自我中心神经符号描述与本体关系。",
+    "research_unit": "DFKI · Muhammad Ahmed Ullah Khan、Sheikh Talha Uddin、Didier Stricker 等",
+    "hook_text": "论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。",
+    "key_points": [
+      "论文面向自动驾驶中的 3D 视觉语言任务，提出 NeuroSymbEAD 大规模神经符号描述数据集，用于全向具身自动驾驶场景理解。",
+      "任务包括 3D 描述生成（captioning）与 3D 视觉定位（grounding），目标是把户外驾驶场景转化为结构化、自我中心（ego-centric）的自然语言表示。",
+      "应用场景基于 KITTI-360 的 LiDAR 记录的户外驾驶序列，聚焦交通相关的静态与动态对象。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-15",
+    "title": "World Models for Embodied Intelligence: From Plausible to Controllable to Actionable",
+    "link": "https://arxiv.org/abs/2609.16697",
+    "arxiv_id": "2609.16697",
+    "detail_path": "papers/2609.16697/",
+    "cover_path": "covers/2609.16697/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.16697.webp",
+    "paper_image_full_path": "assets/paper-images/2609.16697.webp",
+    "preview_text": "论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。 解决的研究问题是：在具身智能中，世界模型连接感知与决策，其价值不在于视觉逼真度，而在于能否改进智能体的行为；现有综述多按架构、输出模态或应用领域组织，未显式回答“哪些预测能力能改进行为”这一问题。 应用场景覆盖机器人操作（manipulation）、导航（navigation）、运动控制（locomotion）、自动驾驶（autonomous driving）以及通用具身学习。 核心论点是：世界模型的评估应从视觉合理性转向预测是否捕捉任务相关状态、是否反映干预效应、是否改进具身智能体的闭环行为。",
+    "research_unit": "香港科技大学（广州）（HKUST(GZ)） · Nanjie Yao、Hao Wang、Chong Cheng",
+    "hook_text": "论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。",
+    "key_points": [
+      "论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。",
+      "解决的研究问题是：在具身智能中，世界模型连接感知与决策，其价值不在于视觉逼真度，而在于能否改进智能体的行为；现有综述多按架构、输出模态或应用领域组织，未显式回答“哪些预测能力能改进行为”这一问题。",
+      "应用场景覆盖机器人操作（manipulation）、导航（navigation）、运动控制（locomotion）、自动驾驶（autonomous driving）以及通用具身学习。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-15",
+    "title": "Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation",
+    "link": "https://arxiv.org/abs/2609.16535",
+    "arxiv_id": "2609.16535",
+    "detail_path": "papers/2609.16535/",
+    "cover_path": "covers/2609.16535/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.16535.webp",
+    "paper_image_full_path": "assets/paper-images/2609.16535.webp",
+    "preview_text": "任务：面向自动驾驶的安全关键感知任务——紧急车辆分类，区分救护车（Ambulance）、消防车（Fire Engine）、警车（Police Car）与道路背景（Road）四类。 应用场景：智能交通系统与自动驾驶中，当紧急车辆接近时附近车辆需要及时让行；要求在多样和不利真实条件下保持鲁棒。 研究问题：现有方法只依赖单一模态（音频或视频），导致该模态退化时出现系统性失败——麦克风系统在嘈杂城市环境中失效，相机系统在夜间或被遮挡时失效；论文探索用音视频多模态融合并在推理时优雅处理任一模态缺失。",
+    "research_unit": "Lawrence Technological University, Department of Mathematics and Computer S…",
+    "hook_text": "任务：面向自动驾驶的安全关键感知任务——紧急车辆分类，区分救护车（Ambulance）、消防车（Fire Engine）、警车（Police Car）与道路背景（Road）四类。",
+    "key_points": [
+      "任务：面向自动驾驶的安全关键感知任务——紧急车辆分类，区分救护车（Ambulance）、消防车（Fire Engine）、警车（Police Car）与道路背景（Road）四类。",
+      "应用场景：智能交通系统与自动驾驶中，当紧急车辆接近时附近车辆需要及时让行；要求在多样和不利真实条件下保持鲁棒。",
+      "研究问题：现有方法只依赖单一模态（音频或视频），导致该模态退化时出现系统性失败——麦克风系统在嘈杂城市环境中失效，相机系统在夜间或被遮挡时失效；论文探索用音视频多模态融合并在推理时优雅处理任一模态缺失。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 5,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-14",
+    "title": "Closed-form Bayesian homography estimation from noisy point correspondences",
+    "link": "https://arxiv.org/abs/2609.15227",
+    "arxiv_id": "2609.15227",
+    "detail_path": "papers/2609.15227/",
+    "cover_path": "covers/2609.15227/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.15227.webp",
+    "paper_image_full_path": "assets/paper-images/2609.15227.webp",
+    "preview_text": "论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。 应用场景包括图像配准与拼接、鸟瞰图变换、相机标定、视觉 SLAM 等一般计算机视觉任务，以及医学成像、无人机地理定位和自动驾驶等安全关键领域。 研究问题是传统方法（如 DLT）只给出确定性点估计，无法直接量化观测噪声带来的参数不确定性，也无法纳入先验知识；已有贝叶斯方法依赖昂贵的采样或需要视频序列的时序信息。 论文目标是提出一种快速、有闭式解的贝叶斯单应性估计方法，显式建模测量不确定性和先验知识，并给出单应性参数的后验分布。",
+    "research_unit": "Technische Hochschule Augsburg · Hanne Beuter、Sebastian Dorn",
+    "hook_text": "论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。",
+    "key_points": [
+      "论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。",
+      "应用场景包括图像配准与拼接、鸟瞰图变换、相机标定、视觉 SLAM 等一般计算机视觉任务，以及医学成像、无人机地理定位和自动驾驶等安全关键领域。",
+      "研究问题是传统方法（如 DLT）只给出确定性点估计，无法直接量化观测噪声带来的参数不确定性，也无法纳入先验知识；已有贝叶斯方法依赖昂贵的采样或需要视频序列的时序信息。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-14",
+    "title": "GRAVA: Grounded Reasoning-to-Action Representation and Learning for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.15169",
+    "arxiv_id": "2609.15169",
+    "detail_path": "papers/2609.15169/",
+    "cover_path": "covers/2609.15169/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.15169.webp",
+    "paper_image_full_path": "assets/paper-images/2609.15169.webp",
+    "preview_text": "论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。 论文指出两类基本限制：一是语言推理与物理场景证据之间的“ grounding gap（G1）”；二是即使存在 grounding，其也常通过独立感知/问答任务引入，导致 grounding 与后续推理、决策、动作生成之间出现“reasoning-to-action fragmentation gap（G2）”。 论文提出以 Grounded Reasoning-to-Action（GRA）表示为中心的 GRAVA 框架，在单一自回归流中整合 grounding、推理与动作生成，用于自动驾驶运动规划与决策。 应用场景为自动驾驶闭环/伪闭环驾驶行为生成，强调在复杂和长尾场景中保留动作相关物理证据并贯穿到可执行动作。",
+    "research_unit": "北京理工大学电动车辆国家工程研究中心 · Xiao Liu、Jianghao Leng、Chao Sun 等",
+    "hook_text": "论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。",
+    "key_points": [
+      "论文面向自动驾驶中的视觉-语言-动作（VLA）模型，解决现有驾驶 VLA 在动作预测前的中间推理与物理场景证据关联较弱、且与可执行行为连接不一致的问题。",
+      "论文指出两类基本限制：一是语言推理与物理场景证据之间的“ grounding gap（G1）”；二是即使存在 grounding，其也常通过独立感知/问答任务引入，导致 grounding 与后续推理、决策、动作生成之间出现“reasoning-to-action fragmentation gap（G2）”。",
+      "论文提出以 Grounded Reasoning-to-Action（GRA）表示为中心的 GRAVA 框架，在单一自回归流中整合 grounding、推理与动作生成，用于自动驾驶运动规划与决策。"
+    ],
+    "reading_minutes": 18,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-13",
+    "title": "World-Action Models for Robot Learning and Control: A Survey",
+    "link": "https://arxiv.org/abs/2609.16074",
+    "arxiv_id": "2609.16074",
+    "detail_path": "papers/2609.16074/",
+    "cover_path": "covers/2609.16074/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.16074.webp",
+    "paper_image_full_path": "assets/paper-images/2609.16074.webp",
+    "preview_text": "本文是一篇面向机器人学习与控制的 World-Action Models（WAMs）综述，关注开放环境中机器人在部分可观测、物理约束和动态任务上下文下行动的问题。 论文聚焦的任务问题是：机器人不仅需要将观测和语言指令映射为动作，还需要预测候选动作如何影响未来状态和任务相关结果。 应用场景覆盖机器人操作、导航和自动驾驶，并延伸到通用具身机器人。 研究问题在于：如何将未来世界预测与可执行动作生成耦合，区别于传统世界模型、基于模型的强化学习、动作条件视频生成和反应式 VLA 策略。 论文目标是建立统一分类体系，梳理表示、转移动态建模、动作接口、架构、训练流程、数据模态与扩展策略，并总结数据集、基准、指标、协议和开放挑战。",
+    "research_unit": "MBZUAI · Zuxing Lu、Hongjia Zhai、Huajian Zeng 等",
+    "hook_text": "本文是一篇面向机器人学习与控制的 World-Action Models（WAMs）综述，关注开放环境中机器人在部分可观测、物理约束和动态任务上下文下行动的问题。",
+    "key_points": [
+      "本文是一篇面向机器人学习与控制的 World-Action Models（WAMs）综述，关注开放环境中机器人在部分可观测、物理约束和动态任务上下文下行动的问题。",
+      "论文聚焦的任务问题是：机器人不仅需要将观测和语言指令映射为动作，还需要预测候选动作如何影响未来状态和任务相关结果。",
+      "应用场景覆盖机器人操作、导航和自动驾驶，并延伸到通用具身机器人。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-12",
+    "title": "Bi-Level Routing and Sparse Spatial Attention based Multi-View BEV 3D Object Detection for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.14185",
+    "arxiv_id": "2609.14185",
+    "detail_path": "papers/2609.14185/",
+    "cover_path": "covers/2609.14185/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.14185.webp",
+    "paper_image_full_path": "assets/paper-images/2609.14185.webp",
+    "preview_text": "任务：基于多视角相机的 Bird's Eye View（BEV）3D 目标检测。 应用场景：自动驾驶车载边缘设备上的实时多视角单帧环境感知。 研究问题：现有 Transformer 类 BEV 感知算法面临三个问题——全局注意力计算复杂度呈二次增长导致计算开销大；多尺度特征融合模块存在计算冗余且难以保留远处小尺度目标特征；主流 2D-to-BEV 视图投影采用稠密空间网格查询与交叉注意力，计算资源消耗巨大且在无意义背景区域进行无效交互，制约实时推理性能。 目标：提出高效 3D 目标检测框架 Sparse-BEVNet，在提升精度的同时提高推理速度。",
+    "research_unit": "University of Pennsylvania · Jing Zhang",
+    "hook_text": "任务：基于多视角相机的 Bird's Eye View（BEV）3D 目标检测。",
+    "key_points": [
+      "任务：基于多视角相机的 Bird's Eye View（BEV）3D 目标检测。",
+      "应用场景：自动驾驶车载边缘设备上的实时多视角单帧环境感知。",
+      "研究问题：现有 Transformer 类 BEV 感知算法面临三个问题——全局注意力计算复杂度呈二次增长导致计算开销大；多尺度特征融合模块存在计算冗余且难以保留远处小尺度目标特征；主流 2D-to-BEV 视图投影采用稠密空间网格查询与交叉注意力，计算资源消耗巨大且在无意义背景区域进行无效交互，制约实时推理性能。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-12",
+    "title": "FFVO: A Feedforward Pose Decoder for Long-Horizon Visual Odometry",
+    "link": "https://arxiv.org/abs/2609.13733",
+    "arxiv_id": "2609.13733",
+    "detail_path": "papers/2609.13733/",
+    "cover_path": "covers/2609.13733/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.13733.webp",
+    "paper_image_full_path": "assets/paper-images/2609.13733.webp",
+    "preview_text": "论文面向自动驾驶中的长时程视觉里程计（Visual Odometry）任务，目标是从单目视频序列中前馈预测每帧的相机到世界位姿。 应用场景包括自动驾驶中的建图、定位、运动预测、长时程场景理解，以及将未整理视频转化为轨迹-视频配对数据以训练驾驶世界模型。 研究问题在于：现有前馈联合重建模型（如 π³）虽然局部几何精度较高，但在长时程驾驶序列上相机位姿估计存在抖动、碎片化和漂移，导致跨帧点图不对齐；同时标准注意力机制在长序列上计算复杂度呈二次增长，且无约束全局注意力在重复场景结构、运动模糊和动态智能体下容易产生歧义。",
+    "research_unit": "Waymo LLC · Meng-Li Shih、Shih-Yang Su、Yuliang Zou 等",
+    "hook_text": "论文面向自动驾驶中的长时程视觉里程计（Visual Odometry）任务，目标是从单目视频序列中前馈预测每帧的相机到世界位姿。",
+    "key_points": [
+      "论文面向自动驾驶中的长时程视觉里程计（Visual Odometry）任务，目标是从单目视频序列中前馈预测每帧的相机到世界位姿。",
+      "应用场景包括自动驾驶中的建图、定位、运动预测、长时程场景理解，以及将未整理视频转化为轨迹-视频配对数据以训练驾驶世界模型。",
+      "研究问题在于：现有前馈联合重建模型（如 π³）虽然局部几何精度较高，但在长时程驾驶序列上相机位姿估计存在抖动、碎片化和漂移，导致跨帧点图不对齐；同时标准注意力机制在长序列上计算复杂度呈二次增长，且无约束全局注意力在重复场景结构、运动模糊和动态智能体下容易产生歧义。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-12",
+    "title": "When Compliance Data Masquerades as Evaluation: Measurement Validity for Deployed AI Systems",
+    "link": "https://arxiv.org/abs/2609.13642",
+    "arxiv_id": "2609.13642",
+    "detail_path": "papers/2609.13642/",
+    "cover_path": "covers/2609.13642/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.13642.webp",
+    "paper_image_full_path": "assets/paper-images/2609.13642.webp",
+    "preview_text": "论文讨论已部署人工智能系统（deployed AI systems）评估中的测量效度（measurement validity）问题，属于AI评估方法论与治理方向，而非新的感知或规划算法。 核心研究问题：为运行监控或监管合规而收集的数据，被当作比较性评估基准来解读时会产生系统性评估失效。 应用场景以自动驾驶安全评估为具体案例：美国加州DMV脱离（disengagement）报告、NHTSA Standing General Order（SGO）事故报告，以及基于暴露量（exposure）调整的回顾性安全研究。 论文主张监控用数据不等于有效评估基准，比较性结论需要测量设计与所声称结论之间显式对齐。",
+    "research_unit": "Texas A&M University–Corpus Christi，Dept. of Computing Sciences · Hung-Yu L…",
+    "hook_text": "论文讨论已部署人工智能系统（deployed AI systems）评估中的测量效度（measurement validity）问题，属于AI评估方法论与治理方向，而非新的感知或规划算法。",
+    "key_points": [
+      "论文讨论已部署人工智能系统（deployed AI systems）评估中的测量效度（measurement validity）问题，属于AI评估方法论与治理方向，而非新的感知或规划算法。",
+      "核心研究问题：为运行监控或监管合规而收集的数据，被当作比较性评估基准来解读时会产生系统性评估失效。",
+      "应用场景以自动驾驶安全评估为具体案例：美国加州DMV脱离（disengagement）报告、NHTSA Standing General Order（SGO）事故报告，以及基于暴露量（exposure）调整的回顾性安全研究。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "title": "A Multi-Vehicle Dataset with Camera, LiDAR, and Radar Sensors and Scanned 3D Models for Custom Auto-Annotation using RTK-GNSS",
+    "link": "https://arxiv.org/abs/2609.12871",
+    "arxiv_id": "2609.12871",
+    "detail_path": "papers/2609.12871/",
+    "cover_path": "covers/2609.12871/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.12871.webp",
+    "paper_image_full_path": "assets/paper-images/2609.12871.webp",
+    "preview_text": "论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。 应用场景为相机、LiDAR、雷达多传感器对多车辆的感知、标注与评估，涵盖单目标测量与多目标交通场景。 研究问题：现有数据集缺少被观测车辆的精确 3D 模型、缺少目标车辆的连续运动学参考、标注粒度固定，因而难以细致评估遮挡、反射、微多普勒等物理测量效应。 论文通过为所有车辆装备 RTK-GNSS/INS 单元并扫描全部车辆的 3D 模型，使任意时刻完整动态环境状态已知，从而支持用户自定义粒度的自动标注。",
+    "research_unit": "慕尼黑联邦国防军大学自动驾驶研究所（Institute for Autonomous Driving of the University of the…",
+    "hook_text": "论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。",
+    "key_points": [
+      "论文面向自动驾驶感知算法开发，提出一个多车辆数据集，用于评估测量原理（measurement principles）与目标车辆在传感器数据中的外观。",
+      "应用场景为相机、LiDAR、雷达多传感器对多车辆的感知、标注与评估，涵盖单目标测量与多目标交通场景。",
+      "研究问题：现有数据集缺少被观测车辆的精确 3D 模型、缺少目标车辆的连续运动学参考、标注粒度固定，因而难以细致评估遮挡、反射、微多普勒等物理测量效应。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "title": "Quantifying Spectral Differences in Vehicle Kinematics Between Production Autonomous and Human-Driven Vehicles Across Driving Scenarios",
+    "link": "https://arxiv.org/abs/2609.12609",
+    "arxiv_id": "2609.12609",
+    "detail_path": "papers/2609.12609/",
+    "cover_path": "covers/2609.12609/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.12609.webp",
+    "paper_image_full_path": "assets/paper-images/2609.12609.webp",
+    "preview_text": "论文研究的自动驾驶任务是量化量产自动驾驶车辆（Production Autonomous Vehicles, PAVs）与人类驾驶车辆（Human-Driven Vehicles, HVs）在不同驾驶场景下的车辆运动学频谱差异。 应用场景涵盖多种驾驶状态（自由流巡航、跟车、左转、右转）、光照条件（白天、夜间照明）、天气条件（晴朗、雨天）以及车辆密度（低、中、高）。 研究问题在于：现有研究多依赖仿真模型或低级ACC系统在有限条件下比较PAV与HV的时域指标，无法反映配备高级自动驾驶系统的PAV基于黑箱数据驱动模型产生的行为，也无法刻画与频率相关的交通动态。论文旨在通过真实世界PAV数据集，构建频域框架系统量化PAV-HV运动学差异。",
+    "research_unit": "The Hong Kong University of Science and Technology (Guangzhou), Guangzhou…",
+    "hook_text": "论文研究的自动驾驶任务是量化量产自动驾驶车辆（Production Autonomous Vehicles, PAVs）与人类驾驶车辆（Human-Driven Vehicles, HVs）在不同驾驶场景下的车辆运动学频谱差异。",
+    "key_points": [
+      "论文研究的自动驾驶任务是量化量产自动驾驶车辆（Production Autonomous Vehicles, PAVs）与人类驾驶车辆（Human-Driven Vehicles, HVs）在不同驾驶场景下的车辆运动学频谱差异。",
+      "应用场景涵盖多种驾驶状态（自由流巡航、跟车、左转、右转）、光照条件（白天、夜间照明）、天气条件（晴朗、雨天）以及车辆密度（低、中、高）。",
+      "研究问题在于：现有研究多依赖仿真模型或低级ACC系统在有限条件下比较PAV与HV的时域指标，无法反映配备高级自动驾驶系统的PAV基于黑箱数据驱动模型产生的行为，也无法刻画与频率相关的交通动态。论文旨在通过真实世界PAV数据集，构建频域框架系统量化PAV-HV运动学差异。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "title": "DRS-VPT: Directly Relocalizing in a Scan with Vision Point Transformers",
+    "link": "https://arxiv.org/abs/2609.12557",
+    "arxiv_id": "2609.12557",
+    "detail_path": "papers/2609.12557/",
+    "cover_path": "covers/2609.12557/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.12557.webp",
+    "paper_image_full_path": "assets/paper-images/2609.12557.webp",
+    "preview_text": "论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。 应用场景包括自动驾驶中的相机–LiDAR 标定，以及室内相机到地图的重定位（camera-to-map relocalization）。 核心研究问题是：如何在不依赖初始位姿、不将图像特征烘焙进三维地图点的情况下，实现跨模态的图像–扫描对齐，并能跨数据集、跨传感器泛化。",
+    "research_unit": "University of Oxford, Oxford OX2 6NN, United Kingdom · Lanke Frank Tarimo F…",
+    "hook_text": "论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。",
+    "key_points": [
+      "论文研究的是图像到点云扫描配准（image-to-scan registration）任务，即在参考三维点云未与任何相机对齐、且无初始位姿的情况下，将查询图像注册到该点云。",
+      "应用场景包括自动驾驶中的相机–LiDAR 标定，以及室内相机到地图的重定位（camera-to-map relocalization）。",
+      "核心研究问题是：如何在不依赖初始位姿、不将图像特征烘焙进三维地图点的情况下，实现跨模态的图像–扫描对齐，并能跨数据集、跨传感器泛化。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "title": "READ: Learning Risk-Informed Fields for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.12371",
+    "arxiv_id": "2609.12371",
+    "detail_path": "papers/2609.12371/",
+    "cover_path": "covers/2609.12371/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.12371.webp",
+    "paper_image_full_path": "assets/paper-images/2609.12371.webp",
+    "preview_text": "论文面向端到端自动驾驶规划任务，研究如何让规划器显式理解道路结构、周围智能体及其运动状态对未来机动的影响。 应用场景为城市自动驾驶规划，基于 NAVSIM 基准的多视角相机、自车状态、地图信息与高层导航指令进行轨迹预测。 研究问题：现有学习型规划器对场景因素与候选动作关系的表达隐含在潜在特征中，难以检查、诊断或细化；经典安全场虽显式但风险形状与权重需预先设定、无法逐场景自适应。READ 旨在学习一种显式、与规划对齐、可微且场景自适应的风险表示。",
+    "research_unit": "清华大学车辆与运载学院（School of Vehicle and Mobility, Tsinghua University） · Zehong K…",
+    "hook_text": "论文面向端到端自动驾驶规划任务，研究如何让规划器显式理解道路结构、周围智能体及其运动状态对未来机动的影响。",
+    "key_points": [
+      "论文面向端到端自动驾驶规划任务，研究如何让规划器显式理解道路结构、周围智能体及其运动状态对未来机动的影响。",
+      "应用场景为城市自动驾驶规划，基于 NAVSIM 基准的多视角相机、自车状态、地图信息与高层导航指令进行轨迹预测。",
+      "研究问题：现有学习型规划器对场景因素与候选动作关系的表达隐含在潜在特征中，难以检查、诊断或细化；经典安全场虽显式但风险形状与权重需预先设定、无法逐场景自适应。READ 旨在学习一种显式、与规划对齐、可微且场景自适应的风险表示。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "title": "Pedestrian Crossing Intent Classification From Event-Based Vision Using Convolutional Spiking Neural Networks With Temporal Augmentation",
+    "link": "https://arxiv.org/abs/2609.13328",
+    "arxiv_id": "2609.13328",
+    "detail_path": "papers/2609.13328/",
+    "cover_path": "covers/2609.13328/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.13328.webp",
+    "paper_image_full_path": "assets/paper-images/2609.13328.webp",
+    "preview_text": "任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。 应用场景：自动驾驶车辆对行人是否将横穿道路进行预判，属于安全关键任务，要求在有运动模糊、高动态范围、类别不平衡等挑战条件下进行实时推理。 研究问题：传统基于帧的深度网络以固定帧率处理冗余 RGB 数据，限制了时间分辨率与能效；论文探索使用稀疏时间表示（事件/DVS）以及脉冲神经网络来实现更高效的行人意图分类。",
+    "research_unit": "原文未明确对应 · Henok Teklu、Mustafa Sakhai、Maciej Wielgosz 等",
+    "hook_text": "任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。",
+    "key_points": [
+      "任务：行人过街意图分类（pedestrian crossing intent classification），将行人意图二分类为“过街（crossing）”与“不过街（non-crossing）”。",
+      "应用场景：自动驾驶车辆对行人是否将横穿道路进行预判，属于安全关键任务，要求在有运动模糊、高动态范围、类别不平衡等挑战条件下进行实时推理。",
+      "研究问题：传统基于帧的深度网络以固定帧率处理冗余 RGB 数据，限制了时间分辨率与能效；论文探索使用稀疏时间表示（事件/DVS）以及脉冲神经网络来实现更高效的行人意图分类。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "title": "Forward-Facing Near-Infrared Adds Little to Colour for Farm-Machinery Traversability: A Site-Disjoint Evaluation of Sensor-Dependent Spatial Leakage",
+    "link": "https://arxiv.org/abs/2609.13265",
+    "arxiv_id": "2609.13265",
+    "detail_path": "papers/2609.13265/",
+    "cover_path": "covers/2609.13265/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.13265.webp",
+    "paper_image_full_path": "assets/paper-images/2609.13265.webp",
+    "preview_text": "论文研究农业机械自动驾驶中的可通行性估计（traversability estimation）任务，即将前方场景分割为可通行与不可通行地面。 应用场景为韩国稻田和旱田环境下的日间农机自主行驶，比较前向彩色相机与近红外相机两种传感器配置的价值。 核心研究问题是：前向近红外波段是否提供了彩色图像尚未携带的可通行性地信息，以及既有基准在空间自相关影像上不按地点划分训练/评估集所导致的“空间泄漏”如何影响传感器评估结论。",
+    "research_unit": "韩国高丽大学电气与计算机工程系（Department of Electrical and Computer Engineering, Korea Un…",
+    "hook_text": "论文研究农业机械自动驾驶中的可通行性估计（traversability estimation）任务，即将前方场景分割为可通行与不可通行地面。",
+    "key_points": [
+      "论文研究农业机械自动驾驶中的可通行性估计（traversability estimation）任务，即将前方场景分割为可通行与不可通行地面。",
+      "应用场景为韩国稻田和旱田环境下的日间农机自主行驶，比较前向彩色相机与近红外相机两种传感器配置的价值。",
+      "核心研究问题是：前向近红外波段是否提供了彩色图像尚未携带的可通行性地信息，以及既有基准在空间自相关影像上不按地点划分训练/评估集所导致的“空间泄漏”如何影响传感器评估结论。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 4,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-31",
+    "title": "Seeing What the Vehicle Sees: Video-Augmented Virtual Reality for Physical Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2609.13224",
+    "arxiv_id": "2609.13224",
+    "detail_path": "papers/2609.13224/",
+    "cover_path": "covers/2609.13224/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.13224.webp",
+    "paper_image_full_path": "assets/paper-images/2609.13224.webp",
+    "preview_text": "论文面向自动驾驶车辆乘客对车辆感知与决策缺乏理解的问题，提出一种视频增强虚拟现实（VR）框架，用于在沉浸式环境中呈现物理自动驾驶车辆的行为。 应用场景为乘客视角：乘客在 VR 座舱中同时观察与物理机器人车辆同步运动的虚拟车辆、车辆第一人称实时摄像头画面，以及车辆导航决策信息的车载仪表盘界面。 研究问题在于：现有面向乘客的 VR 系统多依赖完全仿真车辆或预编排场景，其呈现的运动与感知并非来自真实运行的自动驾驶平台，因此本工作尝试将物理 ROS 2 自动驾驶机器人车辆与 VR 端进行实时耦合。",
+    "research_unit": "School of Engineering and Technology, Central Michigan University, Mount Pl…",
+    "hook_text": "论文面向自动驾驶车辆乘客对车辆感知与决策缺乏理解的问题，提出一种视频增强虚拟现实（VR）框架，用于在沉浸式环境中呈现物理自动驾驶车辆的行为。",
+    "key_points": [
+      "论文面向自动驾驶车辆乘客对车辆感知与决策缺乏理解的问题，提出一种视频增强虚拟现实（VR）框架，用于在沉浸式环境中呈现物理自动驾驶车辆的行为。",
+      "应用场景为乘客视角：乘客在 VR 座舱中同时观察与物理机器人车辆同步运动的虚拟车辆、车辆第一人称实时摄像头画面，以及车辆导航决策信息的车载仪表盘界面。",
+      "研究问题在于：现有面向乘客的 VR 系统多依赖完全仿真车辆或预编排场景，其呈现的运动与感知并非来自真实运行的自动驾驶平台，因此本工作尝试将物理 ROS 2 自动驾驶机器人车辆与 VR 端进行实时耦合。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-10",
     "title": "MC-DeTra: Motion-Consistent Joint Object Detection and Socially-Aware Trajectory Forecasting in Bird's-Eye-View Images",
     "link": "https://arxiv.org/abs/2609.11717",

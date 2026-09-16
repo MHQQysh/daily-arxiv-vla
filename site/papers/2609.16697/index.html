@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>World Models for Embodied Intelligence: From Plausible to Controllable to Actionable - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。 解决的研究问题是：在具身智能中，世界模型连接感知与决策，其价值不在于视觉逼真度，而在于能否改进智能体的行为；现有综述多按架构、输出模态或应用领域组织，未显式回答“哪些预测能力能改进行为”这一问题。 应用场景覆盖机器人操作（manipulation）、导航（navigation）、运动控制（locomotion）、自动驾驶（autonomous driving）以及通用具身学习。 核心论点是：世界模型的评估应从视觉合理性转向预测是否捕捉任务相关状态、是否反映干预效应、是否改进具身智能体的闭环行为。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.16697">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.16697.webp" alt="World Models for Embodied Intelligence: From Plausible to Controllable to Actionable" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">World Models for Embodied Intelligence: From Plausible to Controllable to Actionable</h1>
+            <div class="detail-meta">2026-09-15 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.16697" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.16697" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.16697</span></div>
+            <p class="detail-summary">论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。 解决的研究问题是：在具身智能中，世界模型连接感知与决策，其价值不在于视觉逼真度，而在于能否改进智能体的行为；现有综述多按架构、输出模态或应用领域组织，未显式回答“哪些预测能力能改进行为”这一问题。 应用场景覆盖机器人操作（manipulation）、导航（navigation）、运动控制（locomotion）、自动驾驶（autonomous driving）以及通用具身学习。 核心论点是：世界模型的评估应从视觉合理性转向预测是否捕捉任务相关状态、是否反映干预效应、是否改进具身智能体的闭环行为。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">香港科技大学（广州）（HKUST(GZ)） · Nanjie Yao、Hao Wang、Chong Cheng</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.16697/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。</p>
+  <ul class="reading-intro-points"><li>论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。</li><li>解决的研究问题是：在具身智能中，世界模型连接感知与决策，其价值不在于视觉逼真度，而在于能否改进智能体的行为；现有综述多按架构、输出模态或应用领域组织，未显式回答“哪些预测能力能改进行为”这一问题。</li><li>应用场景覆盖机器人操作（manipulation）、导航（navigation）、运动控制（locomotion）、自动驾驶（autonomous driving）以及通用具身学习。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：香港科技大学（广州）（HKUST(GZ)）；作者：Nanjie Yao、Hao Wang、Chong Cheng</li><li>机构：牛津大学（University of Oxford）；作者：Zhikang Chen</li><li>机构：普林斯顿大学（Princeton University）；作者：Wenzhe Li</li><li>机构：腾讯（Tencent）；作者：Jiafei Lyu</li><li>机构：中山大学（Sun Yat-sen University）；作者：Li Shen</li><li>机构：上海交通大学（Shanghai Jiao Tong University）；作者：Peilin Zhao</li><li>机构：北京大学（Peking University）；作者：Zongqing Lu</li><li>机构：清华大学（Tsinghua University）；作者：Gao Huang</li><li>机构：阿里巴巴集团（Alibaba Group）；作者：Steven Hoi（与新加坡管理大学共同署名）</li><li>机构：新加坡管理大学（Singapore Management University）；作者：Steven Hoi（与阿里巴巴集团共同署名）</li><li>机构：南洋理工大学（Nanyang Technological University）；作者：Dacheng Tao、Deheng Ye</li><li>注：原文以编号上标形式给出作者与机构的对应关系，其中 Hao Wang 与 Deheng Ye 标注为通讯作者。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文类型为面向具身智能的世界模型综述（survey），并非提出单一新方法的实验论文。</li><li>解决的研究问题是：在具身智能中，世界模型连接感知与决策，其价值不在于视觉逼真度，而在于能否改进智能体的行为；现有综述多按架构、输出模态或应用领域组织，未显式回答“哪些预测能力能改进行为”这一问题。</li><li>应用场景覆盖机器人操作（manipulation）、导航（navigation）、运动控制（locomotion）、自动驾驶（autonomous driving）以及通用具身学习。</li><li>核心论点是：世界模型的评估应从视觉合理性转向预测是否捕捉任务相关状态、是否反映干预效应、是否改进具身智能体的闭环行为。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出以决策为中心的能力阶梯：Plausible（保持任务相关的时间、几何或物理结构）→ Controllable（额外预测干预如何改变该结构）→ Actionable（将预测转化为可测量的规划、行动、学习、评估、验证、恢复或数据选择收益）。</li><li>提出 3 × 4 的“grounding–improvement”矩阵，将几何、物理、动作三种 grounding 与数据、奖励、策略、模型自身四种改进回路交叉，连接预测内容与闭环使用路径。</li><li>围绕三个能力层级组织代表性方法的技术演进脉络，并分析其在 grounding 维度、改进回路与具身体（embodiment）之间的交叉联系，覆盖操作、导航、运动与自动驾驶。</li><li>综述数据集与基准，提出与三个能力层级对齐的评估协议，并指出长时程一致性、不确定性校准、因果干预测试、延迟、验证与恢复、跨具身迁移等开放问题。</li><li>论文强调能力层级是累积性的，并区分“存在预测模型”与“预测能力强度”，指出视觉合理性本身不能证明模型捕捉了机器人动作效应或对下游决策有益。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：综述性框架与分类体系，涉及感知、预测与决策之间的世界模型模块；原文未报告具体单一系统的模型结构。</li><li>输入传感器：综述中提及的预测输入可包括相机、LiDAR、RGB-D、触觉信号、本体状态、语言指令、目标图像、动作序列等；具体到某一方法时原文按方法分别描述，未给出统一的传感器配置。</li><li>场景表示：原文将预测状态表示分为观察空间（像素或视觉 token）、潜空间（连续或离散特征）、结构化表示（物体、关系、地图、符号变量），语义内容可包括外观、几何（深度、位姿、点云、occupancy、scene flow、持久 3D/4D 结构）、物理（运动、接触、力、形变、材质响应）以及任务相关量（奖励、价值、终止、进度、风险）。</li><li>模型结构：原文按能力层级梳理了多类结构思路，包括潜动力学模型与价值等价模型、对比式结构世界模型（C-SWM）、SlotFormer、JEPA/V-JEPA、occupancy 与点云预测模型、基于扩散或自回归的视频世界模型、物理约束模型（如 PhyDNet、OP3）、对象中心与 3D 高斯表示、以及联合世界-动作模型（如 GR-1、GR-2、PAD、Unified World Models、WorldVLA 等）。</li><li>关键技术：包括潜空间想象与预测表征、无重建的对比式目标、占用栅格与点流预测、物理与几何约束、持久记忆与长时程稳定性机制、动作条件预测、潜动作与语言指定干预、几何/轨迹/接触等结构接地控制、策略驱动 rollout、以及联合视频-动作生成与逆动力学动作解码。</li><li>若原文未报告某项信息，明确写“原文未报告”：原文未报告统一的模型规模、训练超参数或具体网络层配置。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文在综述中提及多个数据集与基准，包括与物理推理相关的 IntPhys、PHYRE、CLEVRER、Physion，与驾驶和场景生成相关的工作，以及操作与导航相关数据；但原文未给出统一的完整数据集清单。</li><li>仿真器：原文提及物理仿真器与学习型仿真器（learned simulators）作为世界模型的一类使用形式，并提及 Cosmos 平台提供预训练世界基础模型、视频 tokenizer 与后训练配方；具体仿真器版本与配置原文未报告。</li><li>模型规模：原文提及 LDA-1B 等含规模标识的模型，但未报告综述层面统一的模型规模统计。</li><li>训练资源：原文未报告。</li><li>实车平台：原文在具身与域迁移部分讨论机器人操作、导航、运动控制与自动驾驶等具身体，并提及物理机器人上的潜想象（如 DayDreamer）等；但原文未报告统一的具体实车平台型号与配置。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：原文提出与三个能力层级对齐的评估协议，并讨论基准设计原则；涉及的基准示例包括 IntPhys、PHYRE、CLEVRER、Physion、ACT-Bench 等；原文未报告统一的完整基准列表。</li><li>评估指标：原文从三个层面给出评估维度——合理性与稳定性（随预测时域、场景迁移或不确定性变化的误差曲线与约束满足概率）、可控性与干预一致性（不同动作序列应产生不同的接地效应，预测对比需与留出环境转移一致）、可行动性与决策效用（在匹配控制器与计算预算下，下游效用应优于无世界模型的基线）；效用可包括任务回报、成功率、策略排序质量、安全性、恢复能力、真实数据效率或持续改进。</li><li>关键数值：原文未报告统一的定量结果数值；具体方法的数值需查阅被引用的各原始工作，本综述未汇总为统一数值表。</li><li>对比方法：原文以能力层级与 grounding–improvement 矩阵组织方法对比，而非在统一实验条件下进行数值对比；原文明确强调占用矩阵单元格本身并不证明可行动性，需要相对匹配基线的可测量下游改进。</li><li>开环、闭环、仿真或实车条件：原文区分开环或离线测试（Plausible 的最低设置）、干预条件下的对比测试（Controllable）、以及在匹配预算下的下游决策改进测试（Actionable）；并讨论策略驱动 rollout、学习型仿真器用于策略训练与评估、以及运行时验证、纠正与恢复等闭环使用条件；具体实验条件在各被引工作中分别报告，原文未给出统一的仿真或实车条件汇总。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.16919/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">NeuroSymbEAD: A Large Scale Neuro-Symbolic Caption Dataset for Omni-Directional Embodied Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.16535/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

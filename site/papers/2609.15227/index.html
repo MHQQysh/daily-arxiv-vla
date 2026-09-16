@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Closed-form Bayesian homography estimation from noisy point correspondences - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。 应用场景包括图像配准与拼接、鸟瞰图变换、相机标定、视觉 SLAM 等一般计算机视觉任务，以及医学成像、无人机地理定位和自动驾驶等安全关键领域。 研究问题是传统方法（如 DLT）只给出确定性点估计，无法直接量化观测噪声带来的参数不确定性，也无法纳入先验知识；已有贝叶斯方法依赖昂贵的采样或需要视频序列的时序信息。 论文目标是提出一种快速、有闭式解的贝叶斯单应性估计方法，显式建模测量不确定性和先验知识，并给出单应性参数的后验分布。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.15227">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.15227.webp" alt="Closed-form Bayesian homography estimation from noisy point correspondences" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Closed-form Bayesian homography estimation from noisy point correspondences</h1>
+            <div class="detail-meta">2026-09-14 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.15227" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.15227" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.15227</span></div>
+            <p class="detail-summary">论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。 应用场景包括图像配准与拼接、鸟瞰图变换、相机标定、视觉 SLAM 等一般计算机视觉任务，以及医学成像、无人机地理定位和自动驾驶等安全关键领域。 研究问题是传统方法（如 DLT）只给出确定性点估计，无法直接量化观测噪声带来的参数不确定性，也无法纳入先验知识；已有贝叶斯方法依赖昂贵的采样或需要视频序列的时序信息。 论文目标是提出一种快速、有闭式解的贝叶斯单应性估计方法，显式建模测量不确定性和先验知识，并给出单应性参数的后验分布。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Technische Hochschule Augsburg · Hanne Beuter、Sebastian Dorn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.15227/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。</p>
+  <ul class="reading-intro-points"><li>论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。</li><li>应用场景包括图像配准与拼接、鸟瞰图变换、相机标定、视觉 SLAM 等一般计算机视觉任务，以及医学成像、无人机地理定位和自动驾驶等安全关键领域。</li><li>研究问题是传统方法（如 DLT）只给出确定性点估计，无法直接量化观测噪声带来的参数不确定性，也无法纳入先验知识；已有贝叶斯方法依赖昂贵的采样或需要视频序列的时序信息。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Technische Hochschule Augsburg；作者：Hanne Beuter, Sebastian Dorn</li><li>机构：TTZ Landsberg am Lech；作者：Hanne Beuter, Sebastian Dorn</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的是从含噪点对应关系中进行单应性估计（homography estimation, HE）的问题。</li><li>应用场景包括图像配准与拼接、鸟瞰图变换、相机标定、视觉 SLAM 等一般计算机视觉任务，以及医学成像、无人机地理定位和自动驾驶等安全关键领域。</li><li>研究问题是传统方法（如 DLT）只给出确定性点估计，无法直接量化观测噪声带来的参数不确定性，也无法纳入先验知识；已有贝叶斯方法依赖昂贵的采样或需要视频序列的时序信息。</li><li>论文目标是提出一种快速、有闭式解的贝叶斯单应性估计方法，显式建模测量不确定性和先验知识，并给出单应性参数的后验分布。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>理论推导了从点对应关系确定单应性后验均值的贝叶斯推断方法，并给出闭式解。</li><li>通过后验分布实现对单应性矩阵参数的不确定性量化（UQ）。</li><li>在合成数据和图像拼接数据上进行了概念验证（PoC），并结合应用相关的噪声建模。</li><li>方法可处理含噪观测、少量数据点，计算开销低，且允许纳入先验知识。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于特征的静态图像单应性估计，不依赖视频时序信息。</li><li>输入传感器：原文未报告具体传感器；以图像中检测到的关键点（点对应关系）作为输入。</li><li>场景表示：在 k 维齐次坐标下推导，2D 图像对应 k=3；观测模型为 d_i = R s_i + n_i，噪声为加性高斯 n_i ~ G(0, N_i)。</li><li>模型结构：将单应性矩阵 R 视为随机变量，采用贝叶斯后验推断，先验选用矩阵正态分布（Gaussian），似然为高斯分布；通过最小化后验信息 H(R\|d,s) 求最大后验/后验均值。</li><li>关键技术：推导出闭式后验均值解，即式(24)，并指出其为闭式 Wiener 滤波器解；在简化观测模型下给出式(25)、式(27)、式(30)等形式。</li><li>迭代贝叶斯方法：为处理透视归一化引入的非线性，论文提出交替推断 R 和 1/w 的迭代方法，并给出式(43)、式(44)等；原文未报告该部分的完整截断公式。</li><li>不确定性量化：由后验信息二阶导数得到后验协方差 Σ，给出式(31)、式(32)、式(33)，并用式(35)定义 1σ 不确定区间。</li><li>噪声建模：区分像素噪声与透视噪声；像素噪声可通过 w² 缩放到齐次坐标噪声，见式(41)；原文报告了图像平面噪声与齐次表示之间的转换关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：合成数据（Synthetic Data）；图像拼接实验使用 AANAP/skyline、HPatches/v_graffiti、OBJ-GSP-03_river、Aerial/Restaurant、NISwGSP-06_PalazzoPubblico。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li><li>其他：论文提到方法适用于自动驾驶等安全关键领域，但提供的 HTML 原文未报告自动驾驶实车或仿真平台实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：合成数据实验用于投影变换；图像拼接实验用于真实图像对应关系。</li><li>评估指标：原文未在提供内容中明确列出完整指标名称；摘要提到“improved estimation accuracy over DLT under varying noise conditions”，即在不同噪声条件下相对 DLT 的估计精度改善。</li><li>对比方法：Direct Linear Transformation（DLT）。</li><li>关键数值：简单示例中，设定 Θ=π/6、σ_n²=10⁻²，mock 单应性矩阵为 [[0.87, -0.5], [0.5, 0.87]]，推断结果为 R_m = [[0.86, -0.48], [0.49, 0.89]] ± [[0.02, 0.02], [0.02, 0.02]]。</li><li>开环、闭环、仿真或实车条件：论文报告了合成数据实验和图像拼接实验，属于仿真/离线图像实验；原文未报告开环、闭环或实车条件。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.16535/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.15169/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">GRAVA: Grounded Reasoning-to-Action Representation and Learning for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
