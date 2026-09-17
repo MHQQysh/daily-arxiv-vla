@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。 应用场景为基于视觉 BEV 特征、风险场与结构化地图/行为体状态的城市自动驾驶规划。 核心研究问题在于：预测出的未来风险可能只是当前场景评估已捕获的风险的重复，因此需要将未来证据与当前状态参考进行对比，才能判断是否值得干预并替换轨迹。 论文提出 RiskWorld，将风险感知世界建模与选择性轨迹替换结合，在一次规划步内共享一次占用预测并用于评估多个候选轨迹。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.18442">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.18442.webp" alt="Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving</h1>
+            <div class="detail-meta">2026-09-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.18442" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.18442" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.18442</span></div>
+            <p class="detail-summary">论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。 应用场景为基于视觉 BEV 特征、风险场与结构化地图/行为体状态的城市自动驾驶规划。 核心研究问题在于：预测出的未来风险可能只是当前场景评估已捕获的风险的重复，因此需要将未来证据与当前状态参考进行对比，才能判断是否值得干预并替换轨迹。 论文提出 RiskWorld，将风险感知世界建模与选择性轨迹替换结合，在一次规划步内共享一次占用预测并用于评估多个候选轨迹。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">RWTH Aachen University · Rongxiang Zeng、Linsen Cai、Jiafu Zhang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.18442/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。</li><li>应用场景为基于视觉 BEV 特征、风险场与结构化地图/行为体状态的城市自动驾驶规划。</li><li>核心研究问题在于：预测出的未来风险可能只是当前场景评估已捕获的风险的重复，因此需要将未来证据与当前状态参考进行对比，才能判断是否值得干预并替换轨迹。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：RWTH Aachen University；作者：Rongxiang Zeng、Linsen Cai、Jiafu Zhang、Yijie Zhong、Alvaro García Hernandez、Yongqi Dong</li><li>机构：Monash University；作者：Yide Tao、Nan Zheng、Hai L. Vu</li><li>机构：Technical University of Munich (TUM)；作者：Shuai Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。</li><li>应用场景为基于视觉 BEV 特征、风险场与结构化地图/行为体状态的城市自动驾驶规划。</li><li>核心研究问题在于：预测出的未来风险可能只是当前场景评估已捕获的风险的重复，因此需要将未来证据与当前状态参考进行对比，才能判断是否值得干预并替换轨迹。</li><li>论文提出 RiskWorld，将风险感知世界建模与选择性轨迹替换结合，在一次规划步内共享一次占用预测并用于评估多个候选轨迹。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出风险感知世界表示，将视觉 BEV 特征与空间风险场、时序行为体上下文对齐融合，用于未来场景预测与轨迹级风险评估。</li><li>提出共享的流引导占用演化模型，同时传输占用、运动状态与场景特征，并通过有符号残差修正传输无法解释的占用变化。</li><li>提出持久性参考干预规则（Persistence-Referenced Intervention, PRI），将未来与当前证据的对比转化为非负碰撞分数修正，在固定候选集内进行选择性轨迹替换。</li><li>轨迹替换满足对预测风险和轨迹误差的分量约束，且候选轨迹几何保持不变；每次规划步只生成一次预测并在候选间复用。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向规划的预测与世界建模模块，包含风险感知表示、占用演化、候选评分与选择性轨迹替换。</li><li>输入传感器：视觉 BEV 特征来自相机；推理时还使用由标注导出的当前与历史行为体状态，以及数据集提供的地图上下文；结构化行为体与地图信息与视觉特征分开提供。</li><li>场景表示：在 BEV 域上定义非负标量风险势函数，将道路几何、行为体占用、运动相关风险和成对交互风险栅格化为多通道风险张量；静态地图风险、行为体占用、运动风险与交互风险分别编码。风险通道以对数压缩、5th–95th 百分位缩放并裁剪到 [0,1] 归一化。</li><li>模型结构：RiskExpert 编码风险场并结合地图与运动上下文，其风险特征与视觉 BEV 特征对齐融合形成当前世界表示 W0；基础候选评分器（BCS）预测碰撞分数和轨迹误差，当前状态重评分（CSR）用当前状态证据更新评估并选择锚点轨迹。</li><li>流引导占用演化：由 W0 初始化 rollout，流头从上一运动状态预测位移场 Ft，同一位移用于反向双线性采样 warp 占用、运动状态和场景特征；ConvGRU 更新运动状态并结合当前场景上下文与占用反馈；两个头预测源/汇事件，得到有符号占用修正 ΔOt=α[tanh(Bt)−tanh(Dt)]，再更新占用。重复得到共享未来序列 {(Ot,St)}。</li><li>持久性参考干预：每个候选查询未来 (Ot,St) 与在相同位置重复当前 (O0,S0) 的持久性参考；特征对比和占用对比经共享证据编码器和 incoming-risk bridge 得到非负碰撞 logit 修正，碰撞分数更新为 σ(c^C+b)，构造上保证未来碰撞概率不低于当前碰撞概率。</li><li>约束替换：候选风险在 1s、2s、3s 前缀和最后两步尾项上汇总；干预要求锚点有正修正且某分量满足超出边距或跨越阈值，替代候选需分量满足预测风险不高于锚点、至少一个分量显著更低、误差均值和前缀误差满足约束；在合格候选中最小化加权预测风险与误差的目标函数，否则保留锚点。</li><li>轨迹候选：使用从训练集真值自车轨迹学习、相对保持当前速度的直线参考的残差码本；推理时按自车速度和导航命令选择一组，将十个残差原型加到参考轨迹，并增加两个确定性低速运动学候选，共 K=12 个候选，跨度 3 s、6 步、0.5 s 间隔。</li><li>训练：先通过未来风险场重建预训练 RiskExpert，再进行风险-视觉融合与当前世界评分，随后训练占用演化，使用占用监督、掩码 smooth-L1 位移损失和源/汇平衡 BCE；最终校准冻结表示、演化模块、证据编码器和当前世界评分器，仅优化 incoming-risk bridge，目标包含 BCE、Brier、focal、hard-example、辅助项和碰撞 logit 二次惩罚。</li><li>原文未报告具体的网络层数、隐藏维度等模型结构细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes，用于开环规划评估；输入包括相机特征、标注导出的当前与历史行为体状态以及数据集提供的地图上下文。</li><li>仿真器：原文未报告。</li><li>模型规模：RiskWorld 参数量 90.81 M；对比中报告 VAD 58.36 M、SparseDrive-S 85.90 M、DiffusionDrive 92.04 M、UniAD 125.00 M、FusionAD 141.60 M、World4Drive 70.18 M、ResWorld 80.77 M、OccWorld-O 72.39 M。</li><li>训练资源：原文未报告训练硬件细节；推理吞吐在单张 NVIDIA RTX 4090 上测量。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 开环规划；输入设置中 RiskWorld 使用 C+M+GT-Tr（相机、地图、当前与历史真值行为体状态），辅助监督为 Risk/O+Coll.。</li><li>评估指标：L2 误差（1s、2s、3s 及平均，越小越好）和碰撞率 CR（1s、2s、3s 及平均，越小越好），另报告参数量和 FPS。</li><li>关键数值：RiskWorld 平均 L2 为 0.40 m，1s/2s/3s L2 分别为 0.18/0.37/0.65 m；平均碰撞率为 0.09%，1s/2s/3s 碰撞率分别为 0.06%/0.08%/0.14%；参数量 90.81 M，在单张 RTX 4090 上 11.5 FPS。</li><li>对比方法：包括 ST-P3、UniAD、VAD、GenAD、SparseDrive-S、DiffusionDrive、Drive-OccWorld、OccWorld-D、World4Drive、ResWorld、FusionAD、SpaRC-AD、OccWorld-O 等；RiskWorld 在 3 s 长时域取得最低碰撞率，平均 L2 为第二优；ResWorld 平均 L2 0.35 m、平均 CR 0.07%，World4Drive 3 s L2 0.81 m、平均 CR 0.16%。</li><li>消融与扰动：RiskExpert 特征扰动下，完整特征为 L2 Avg. 0.40 m、Collision Avg. 0.09%；置零特征为 0.63 m、0.28%；打乱特征为 0.49 m、0.27%。</li><li>PRI 与 Flow Transport 消融：CSR 基线 L2 Avg. 0.40 m、CR 平均 0.12%；No-Transport（有 PRI 无 FT）L2 Avg. 0.40 m、CR 平均 0.12%；Full（PRI+FT）L2 Avg. 0.40 m、1s/2s/3s CR 为 0.06%/0.08%/0.14%（原文表格在此处被截断，平均 CR 数值部分缺失）。</li><li>评估条件：论文报告的是开环规划评估；原文未报告闭环、仿真或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.18511/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Learning from Distributed Eyes: Leveraging Collaborative Perception for Automated Model Adaptation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.17766/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DRT&amp;R: Direct Radar Teach &amp; Repeat</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

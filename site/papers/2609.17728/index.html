@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RAF-VLA: Representation Alignment with the Future for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。 应用场景为自动驾驶中的轨迹规划：输入前视图像序列、导航指令与驾驶状态，输出未来自车轨迹航点。 研究问题：现有“世界建模型 VLA”通过显式预测未来驾驶场景作为密集监督来学习规划相关内部表示，但带来两个问题：额外的训练负担与推理延迟。 论文提出在表示层面而非生成层面利用未来场景监督，通过 Future-Aligned 监督微调直接对齐策略隐状态与未来帧表示，从而避免未来生成。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.17728">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.17728.webp" alt="RAF-VLA: Representation Alignment with the Future for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">RAF-VLA: Representation Alignment with the Future for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-15 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.17728" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.17728" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.17728</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。 应用场景为自动驾驶中的轨迹规划：输入前视图像序列、导航指令与驾驶状态，输出未来自车轨迹航点。 研究问题：现有“世界建模型 VLA”通过显式预测未来驾驶场景作为密集监督来学习规划相关内部表示，但带来两个问题：额外的训练负担与推理延迟。 论文提出在表示层面而非生成层面利用未来场景监督，通过 Future-Aligned 监督微调直接对齐策略隐状态与未来帧表示，从而避免未来生成。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">16 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Korea Advanced Institute of Science &amp; Technology (KAIST), Graduate School o…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.17728/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。</li><li>应用场景为自动驾驶中的轨迹规划：输入前视图像序列、导航指令与驾驶状态，输出未来自车轨迹航点。</li><li>研究问题：现有“世界建模型 VLA”通过显式预测未来驾驶场景作为密集监督来学习规划相关内部表示，但带来两个问题：额外的训练负担与推理延迟。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Korea Advanced Institute of Science &amp; Technology (KAIST), Graduate School of Mobility；作者：Dogun Kim、Yongjae Lee、Junhyeok Park、Dongsuk Kum</li><li>机构：Korea Advanced Institute of Science &amp; Technology (KAIST), Robotics Program；作者：Joonhee Lim、Yeina Lee、Moogeun Park</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。</li><li>应用场景为自动驾驶中的轨迹规划：输入前视图像序列、导航指令与驾驶状态，输出未来自车轨迹航点。</li><li>研究问题：现有“世界建模型 VLA”通过显式预测未来驾驶场景作为密集监督来学习规划相关内部表示，但带来两个问题：额外的训练负担与推理延迟。</li><li>论文提出在表示层面而非生成层面利用未来场景监督，通过 Future-Aligned 监督微调直接对齐策略隐状态与未来帧表示，从而避免未来生成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 RAF-VLA，一种在表示层面利用未来场景监督的 VLA 自动驾驶框架，使驾驶策略直接学习规划相关的内部表示。</li><li>提出 Future-Aligned Supervised Fine-Tuning，通过在动作学习上施加简单正则化，将策略隐状态与未来帧表示对齐，避免未来生成带来的训练负担与推理延迟。</li><li>在 NAVSIM 基准上进行实验，显示在显著更少训练样本的条件下取得与最新 VLA 规划器相当的规划性能，训练开销低、推理开销可忽略。</li><li>论文报告 Future-Aligned SFT 仅带来 3.8% 训练开销，推理开销为 1 ms。</li><li>论文给出定性结果与受控对比实验以支持方法有效性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶规划中的 VLA 策略学习，包含表示对齐与动作预测；训练分为 Future-Aligned SFT 与基于 GRPO 的 RFT 两阶段。</li><li>输入传感器：时间步 t 的前视图像序列 I_t = {I_{t-T}, ..., I_t}，当前导航指令 ℓ_t，驾驶状态 s_t（近期自车位姿与当前导航命令的 one-hot 编码）。</li><li>场景表示：输入 q_t = (I_t, ℓ_t, s_t)；输出为未来航点轨迹 τ̂_t = π_θ(q_t) = {p̂_{t+h}}_{h=1}^{H}，每个航点包含位置与朝向 (x̂, ŷ, θ̂)。</li><li>模型结构：采用 Mixture-of-Transformers（MoT）架构，包含 Vision-Language Expert 与轻量 Action Expert；两个专家在每层通过 joint attention 交互。</li><li>Vision-Language Expert：基于预训练 VLM 构建，输入图像序列与导航指令分别由视觉编码器和 tokenizer 编码；在图像和语言 token 之后附加可学习的 world queries 作为未来对齐的表示槽。</li><li>Action Expert：结构与 Vision-Language Expert 类似但隐藏维度更小；输入为可学习 action queries 与由驾驶状态经 MLP 投影得到的 status token。</li><li>Joint Attention：两个专家各自计算 Q、K、V，在 token 序列维度上拼接；Action Expert 内部（status token 与 action queries）使用全双向注意力，允许 Action Expert 注意 Vision-Language Expert，反向被 mask；注意力输出再拆分回对应专家。</li><li>动作解码：使用基于 query 的 action head 与多个轨迹锚点，将最终动作表示解码为自车轨迹；轨迹预测损失记为 L_act。</li><li>Future-Aligned SFT：为每个选定的未来规划步 h ∈ H_F 分配 K 个可学习 world queries；world queries 可注意图像与语言 token，采用块状因果注意力（同一 horizon 的 K 个 query 内部双向，屏蔽更晚 horizon）。</li><li>表示对齐：冻结的预训练 world encoder f 从未来帧 I_{t+h} 提取目标表示，仅作为训练对齐目标，不作为策略输入；可训练两层 MLP projector（GELU 激活）g_φ 将 world-query 隐状态映射到目标特征空间；通过最小化均方误差实现对齐。</li><li>训练目标：L_SFT = L_act + λ_align · L_align；world encoder 在 SFT 期间冻结。</li><li>训练后处理：Future-Aligned SFT 后移除 world encoder 与对齐 projector，但保留学习到的 world queries；Action Expert 通过 joint attention 直接关注其上下文化隐状态。</li><li>RFT：使用 GRPO 进行强化微调，旧策略采样一组 G 个候选输出，用组内归一化优势 A_i 优化当前策略，包含裁剪代理目标与对参考策略 π_ref 的 KL 惩罚；规划奖励 r_i 使用 NAVSIM PDMS；RFT 阶段不再使用未来帧监督。</li><li>原文未报告：具体传感器安装参数、相机内参/外参细节、world encoder 的具体网络结构细节等。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM v1 与 NAVSIM v2 基准；NAVSIM 基于 OpenScene，提供真实传感器观测与标注驾驶场景；训练使用 navtrain 划分，评估使用 navtest 划分。</li><li>仿真器/平台：NAVSIM 为基于真实数据的闭环评估基准；原文未报告实车平台信息。</li><li>模型规模：Vision-Language Expert 使用 Qwen2.5-VL-7B-Instruct；Action Expert 为 embedding dimension 1024 的轻量 transformer；对齐 projector 为两层 MLP，GELU 激活；world encoder 来自 Cosmos world model。</li><li>训练配置：Future-Aligned SFT 训练 4 epochs，AdamW，global batch size 144，学习率 1×10^{-5} 余弦衰减，冻结 VLM vision encoder 与 world encoder；默认对齐 1 s 与 4 s horizon，每个 horizon K=4 个 world queries，λ_align=1。</li><li>RFT 配置：GRPO 训练 1.5 epochs，global batch size 288，学习率 2×10^{-6}，group size G=8，KL 系数 β=0.04；移除 world encoder 与 alignment projector，冻结 VLM vision encoder、world queries 与 action head。</li><li>训练资源：4×H200 GPUs；SFT 约 11 小时，RFT 约 7 小时；vanilla SFT 为 10.56 h（42.2 H200 GPU-hours），Future-Aligned SFT 为 10.96 h（43.8 H200 GPU-hours）。</li><li>推理测量：单张 NVIDIA H200 GPU，batch size 1。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1 与 NAVSIM v2 闭环指标评估。</li><li>评估指标：NAVSIM v1 使用 PDMS = NC × DAC × (5EP + 5TTC + 2C)/12，其中包含 No At-Fault Collision（NC）、Drivable Area Compliance（DAC）、Ego Progress（EP）、Time-to-Collision（TTC）、Comfort（C）；NAVSIM v2 使用 EPDMS，额外包含 Driving Direction Compliance（DDC）、Traffic Light Compliance（TLC）、Lane Keeping（LK）、History Comfort（HC）、Extended Comfort（EC）。</li><li>NAVSIM v1 主要结果：仅使用单前视相机时 RAF-VLA 达到 PDMS 90.0；使用 best-of-N（N=6）策略时 PDMS 提升至 94.2，同时取得最佳 DAC 99.6 与 EP 89.8；对比方法包括 UniAD、TransFuser、LAW、Epona、Hydra-MDP、DiffusionDrive、WoTE、DriveLaW、AutoVLA、ReCogDrive、AdaThinkDrive、DrivingGPT、FSDrive、PWM、DriveVLA-W0、ExploreVLA、SGDrive 等。</li><li>NAVSIM v2 结果：Future-Aligned SFT 模型达到 EPDMS 86.2，与最佳已报告 SFT 结果相当；对比方法包括 TransFuser、VADv2、Hydra-MDP、Hydra-MDP++、ReCogDrive、DiffusionDrive、DriveVLA-W0、SGDrive。</li><li>对齐有效性：无对齐 SFT PDMS 为 87.92；Future-Aligned SFT 为 89.13（+1.21）；经过 RFT 后，由 Future-Aligned SFT 初始化的模型 PDMS 为 90.03，由无对齐 SFT 初始化的模型为 88.85（+1.18）。</li><li>训练开销：Future-Aligned SFT 相对 vanilla SFT 训练时间从 10.56 h（42.2 H200 GPU-hours）增至 10.96 h（43.8 H200 GPU-hours），增加 3.8%。</li><li>推理开销：对齐使预测 4 秒轨迹的延迟从 0.152 s 变为 0.153 s，Δ 为 +0.001 s（1 ms），推理开销可忽略。</li><li>定性结果：论文图 3 比较了无对齐 SFT、Future-Aligned SFT、以及 Future-Aligned SFT + GRPO RFT 在 NAVSIM navtest</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.17757/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Imitation Learning for Autonomous Driving in CARLA</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.16919/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">NeuroSymbEAD: A Large Scale Neuro-Symbolic Caption Dataset for Omni-Directional Embodied Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

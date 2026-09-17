@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Imitation Learning for Autonomous Driving in CARLA - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。 应用场景：CARLA 仿真环境下的端到端自动驾驶，包括沿车道行驶、路口转向、在训练路线与留出路线上的自回归闭环驾驶，以及零样本迁移到未见过的 CARLA 城镇。 研究问题：一个紧凑多模态策略能从离线专家演示中获得多少闭环驾驶能力，以及演示分布（专家状态分布的支持集）的覆盖情况如何影响自回归部署下涌现出的行为。 核心张力：训练在专家状态分布下最小化误差，部署时策略自身的动作决定其后续观测，误差可能复合（协变量偏移），因此低验证损失是必要条件而非充分条件。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.17757">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.17757.webp" alt="Imitation Learning for Autonomous Driving in CARLA" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Imitation Learning for Autonomous Driving in CARLA</h1>
+            <div class="detail-meta">2026-09-15 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.17757" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.17757" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.17757</span></div>
+            <p class="detail-summary">任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。 应用场景：CARLA 仿真环境下的端到端自动驾驶，包括沿车道行驶、路口转向、在训练路线与留出路线上的自回归闭环驾驶，以及零样本迁移到未见过的 CARLA 城镇。 研究问题：一个紧凑多模态策略能从离线专家演示中获得多少闭环驾驶能力，以及演示分布（专家状态分布的支持集）的覆盖情况如何影响自回归部署下涌现出的行为。 核心张力：训练在专家状态分布下最小化误差，部署时策略自身的动作决定其后续观测，误差可能复合（协变量偏移），因此低验证损失是必要条件而非充分条件。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未报告作者所属机构全称 · Jordy Kieto（原文仅给出其 GitHub 仓库地址作为 affiliation 形式的信息）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.17757/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。</p>
+  <ul class="reading-intro-points"><li>任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。</li><li>应用场景：CARLA 仿真环境下的端到端自动驾驶，包括沿车道行驶、路口转向、在训练路线与留出路线上的自回归闭环驾驶，以及零样本迁移到未见过的 CARLA 城镇。</li><li>研究问题：一个紧凑多模态策略能从离线专家演示中获得多少闭环驾驶能力，以及演示分布（专家状态分布的支持集）的覆盖情况如何影响自回归部署下涌现出的行为。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未报告作者所属机构全称；作者：Jordy Kieto（原文仅给出其 GitHub 仓库地址作为 affiliation 形式的信息）</li><li>作者：原文作者列表仅出现“Jordy Kieto”，其余作者位为占位符号（“⋅”）与视频链接，原文未报告其姓名与机构</li><li>机构：原文未明确对应；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。</li><li>应用场景：CARLA 仿真环境下的端到端自动驾驶，包括沿车道行驶、路口转向、在训练路线与留出路线上的自回归闭环驾驶，以及零样本迁移到未见过的 CARLA 城镇。</li><li>研究问题：一个紧凑多模态策略能从离线专家演示中获得多少闭环驾驶能力，以及演示分布（专家状态分布的支持集）的覆盖情况如何影响自回归部署下涌现出的行为。</li><li>核心张力：训练在专家状态分布下最小化误差，部署时策略自身的动作决定其后续观测，误差可能复合（协变量偏移），因此低验证损失是必要条件而非充分条件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出面向 CARLA 的系统化演示生成流程：枚举生成点、从道路图推导下一路口的可行机动、随机化起始位姿，并且只有在分类确认实际执行的机动后才接受自动驾驶 rollout，从而产生按机动均衡、短小、可复现且带标注的采集片段。</li><li>提供可复现的行为克隆流程与已发布策略（1.36 M 参数），涵盖传感器配置、数据契约、预处理、窗口索引与训练，并发布 Keras 与 ONNX 检查点，其来源与一次记录在案的训练运行绑定。</li><li>给出按证据等级划分的闭环行为叙述（训练路线与留出路线上数小时自主驾驶、零样本迁移到未见过城镇、从大幅偏离中恢复），将每条结论标注为已测量、已观察、推断或未验证。</li><li>明确区分“测得的离线指标”与“观察到的闭环现象”，并通过日志化产物重建已发布检查点的数据来源。</li><li>明确报告若干影响解读的实现细节（位置嵌入为固定随机常量、遥测分量重复、LiDAR BEV 归一化受近距自车回波主导）以及测试时使用的特权信息（HD 地图车道图与真值自车位姿给出的路点、绘制进 RGB 图像的调试路点）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端行为克隆策略，采用晚期融合的多模态时序策略；作者明确不主张架构新颖性，架构仅作为研究数据与闭环行为的“仪器”。</li><li>输入传感器：四类模态，均在同一自车坐标系下，取 K=5 帧历史（0.25 s，20 Hz）：前置 RGB 相机（FOV 90°，安装于 (0.4, 0, 1.6) m，采集 224²，双线性缩放至 96²，归一到 [0,1]，形状 96×96×3）；32 线射线投射 LiDAR（50 m 范围，50k 点/秒），构造鸟瞰图（BEV）直方图，形状 64×64×1；车辆遥测（5 维软饱和运动学量，实际等效 4 个不同信号）；车道中心路点（25 个、间隔 2 m，形状 25×3）。</li><li>场景表示：LiDAR BEV 直方图按 x∈(0,30) m、\|y\|&lt;10 m 范围内的点统计分箱并做最大值归一化；路点在自车坐标系下表示为 (x_k/d_k, y_k/d_k, min(d_k,50)/50)；遥测以 tanh 软饱和编码速度、加速度、前向与横向速度。不使用过去控制量作为输入。</li><li>模型结构：每个模态有独立编码器且权重跨时间共享；RGB 与 LiDAR 编码器为三个 stride 的 3×3 卷积（32、64、128 通道，ReLU）加全局平均池化；路点与遥测编码器为单层全连接（32 单元，ReLU）；四路特征拼接为 320 维，经投影得到 256 维并加位置嵌入；随后为两层 post-norm Transformer 编码器块（4 头，key 维 64，前馈 512）；从最新时间步解码动作（W_o ReLU(W_h h_t^(2))）。推理时油门与刹车裁剪到 [0,1]，转向裁剪到 [-1,1]。参数量 1,358,211。</li><li>关键技术：式(3)的离线目标对油门与刹车使用 Huber 损失 H_1、对转向使用平方误差；演示生成采用“先验证后接受”的机制，将随机性专家（CARLA Traffic Manager autopilot）转化为受控数据源；键盘专家标签经过指数低通滤波与速率限幅（油门 τ=0.5 s、r↑=1.0/s、r↓=1.5/s、0.03 死区；转向 τ=0.2 s、r=2.5/s，刹车记录原始值）；窗口仅在其多数方向标签覆盖至少 60% 帧时保留。</li><li>原文未报告：原文未报告除上述内容外的其他模型结构细节（如优化器之外的训练技巧、正则化、数据增强）与实车部署方法。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CARLA 仿真器中的专家演示数据；地图为 Town01 与 Town02；共 448 段录像（2026-05-09 采集 394 段，2026-05-10 采集 54 段）；中位录像长度 595 窗口 ≈ 600 帧 = 30 s；五帧窗口总数 236,882（≈3.3 h 的 20 Hz 驾驶）；按窗口的方向混合为直行 89.47%、左转 5.85%、右转 4.67%；刹车 &gt;0 的窗口占 2.0%；平均目标油门 0.235、平均 \|δ\|为 0.030。</li><li>数据集划分：按录像与方向分层划分，每条录像某一方向前 70% 窗口用于训练、后 30% 用于验证，得 165,777 训练窗口与 71,108 验证窗口，方向比例匹配；该划分为录像内的时间留出。</li><li>仿真器：CARLA，同步模式 Δt=0.05 s；相机与 LiDAR 消息仅在帧索引相差至多 1 且时间戳相差至多 1.5Δt 时配对，否则丢弃该帧。</li><li>专家：人类驾驶员（键盘）或 CARLA Traffic Manager 自动驾驶（基于特权仿真状态）。</li><li>训练资源：Adam 优化器，学习率 3×10⁻³，batch size 409；每 50 步在 50 个验证 batch 上评估；训练持续 53 个 epoch（21,750 步，8.88 M 窗口，1.64 h），每 10 个 epoch 写一次检查点；已发布策略为 epoch-10 检查点。原文未报告 GPU 型号、数量与显存等硬件资源。</li><li>实车平台：原文未报告（论文为纯仿真研究，并明确不对真实世界驾驶做任何声明）。</li><li>已发布资源：代码、数据样本、策略（Keras 与 ONNX 检查点）、训练曲线笔记本以及逐条声明的证据审计，仓库为 https://github.com/JordyKieto/carla-imitation-learning。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARLA 仿真中的离线验证（录像内时间留出）与闭环部署（无专家、无动作滤波、无安全控制器介入，策略动作独自决定后续观测）。</li><li>离线评估指标：验证损失、各控制量 MAE、转向检测（\|δ̂\|&gt;0.1 的 precision/recall/F1）、转向起始延迟（帧）、滞后误差（k∈{1,2,3}）、平滑度、按方向的验证 MSE。</li><li>离线关键数值：epoch-10（已发布）验证损失 1.53e-3，MAE 为油门 0.017、刹车 0.017、转向 0.013，转向 F1 0.78，按方向验证 MSE 为直行 0.84e-3、左转 0.98e-3、右转 1.57e-3；epoch 1 末验证损失 1.26e-2、转向 MAE 0.056、转向 F1 0.39；epoch 50–53 验证损失 0.70e-3、转向 MAE 0.006、转向 F1 0.82，按方向 MSE 为直行 0.36e-3、左转 0.93e-3、右转 0.83e-3。</li><li>离线观察：大部分离线拟合在早期完成（epoch 10 到 ≥50 验证损失再降约一半，但转向 F1 仅从 0.78 升到 0.82）；转向始终是困难情形（右转验证误差约为直行的 2</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.17766/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DRT&amp;R: Direct Radar Teach &amp; Repeat</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.17728/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RAF-VLA: Representation Alignment with the Future for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

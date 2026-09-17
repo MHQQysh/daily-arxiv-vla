@@ -1,5 +1,237 @@
 [
   {
+    "date": "2026-09-16",
+    "title": "GNN-Accelerated Mixed-Integer Dual MPC for Interactive Driving",
+    "link": "https://arxiv.org/abs/2609.18679",
+    "arxiv_id": "2609.18679",
+    "detail_path": "papers/2609.18679/",
+    "cover_path": "covers/2609.18679/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.18679.webp",
+    "paper_image_full_path": "assets/paper-images/2609.18679.webp",
+    "preview_text": "任务：面向自动驾驶的交互式驾驶规划与控制，在存在多个反应性对手车辆的多车道道路环境中生成主动交互行为并优化机动决策与连续运动。 应用场景：多车多车道高速公路交互、匝道汇入、环岛等结构化道路场景。 研究问题：现有 Dual MPC 应用仅限于单车道单对手场景，无法处理多车道多对手交互；将离散机动决策与连续轨迹联合优化的混合整数非线性规划求解代价随交互复杂度急剧增长，需要加速求解。",
+    "research_unit": "KTH Royal Institute of Technology（瑞典斯德哥尔摩，Division of Decision and Control…",
+    "hook_text": "任务：面向自动驾驶的交互式驾驶规划与控制，在存在多个反应性对手车辆的多车道道路环境中生成主动交互行为并优化机动决策与连续运动。",
+    "key_points": [
+      "任务：面向自动驾驶的交互式驾驶规划与控制，在存在多个反应性对手车辆的多车道道路环境中生成主动交互行为并优化机动决策与连续运动。",
+      "应用场景：多车多车道高速公路交互、匝道汇入、环岛等结构化道路场景。",
+      "研究问题：现有 Dual MPC 应用仅限于单车道单对手场景，无法处理多车道多对手交互；将离散机动决策与连续轨迹联合优化的混合整数非线性规划求解代价随交互复杂度急剧增长，需要加速求解。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-16",
+    "title": "FIVE-VLA: Fast and EffectIVE Autonomous Driving with Recurrent Action Memory",
+    "link": "https://arxiv.org/abs/2609.18623",
+    "arxiv_id": "2609.18623",
+    "detail_path": "papers/2609.18623/",
+    "cover_path": "covers/2609.18623/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.18623.webp",
+    "paper_image_full_path": "assets/paper-images/2609.18623.webp",
+    "preview_text": "论文面向自动驾驶（Autonomous Driving, AD）中的视觉-语言-动作模型（Vision-Language-Action, VLA）任务，目标是在车载边缘设备上高效、有效地完成驾驶轨迹预测。 应用场景包括闭环驾驶（如 Bench2Drive、Fail2Drive 基准）与开环非反应式仿真（如 NVIDIA Physical AI AV 真实世界数据集），涉及超车、让行、紧急制动等对时序上下文敏感的场景。 研究问题主要有三：现有 VLA 参数量过大（如 7B）、推理时生成文本（CoT 或冗余 token）导致多轮前向传播、缺乏时序记忆机制；且已有记忆机制多在视觉域操作，破坏 VLM 预训练知识迁移。 论文提出 FIVE-VLA（Fast and EffectIVE VLA）与循环动作记忆（Recurrent Action Memory, RAM），在单次前向传播中直接预测轨迹，并轻量地引入动作域时序上下文。",
+    "research_unit": "Robert Bosch GmbH, Germany · Kemal Oksuz、Alexandru Buburuzan、Yuhan Yao 等",
+    "hook_text": "论文面向自动驾驶（Autonomous Driving, AD）中的视觉-语言-动作模型（Vision-Language-Action, VLA）任务，目标是在车载边缘设备上高效、有效地完成驾驶轨迹预测。",
+    "key_points": [
+      "论文面向自动驾驶（Autonomous Driving, AD）中的视觉-语言-动作模型（Vision-Language-Action, VLA）任务，目标是在车载边缘设备上高效、有效地完成驾驶轨迹预测。",
+      "应用场景包括闭环驾驶（如 Bench2Drive、Fail2Drive 基准）与开环非反应式仿真（如 NVIDIA Physical AI AV 真实世界数据集），涉及超车、让行、紧急制动等对时序上下文敏感的场景。",
+      "研究问题主要有三：现有 VLA 参数量过大（如 7B）、推理时生成文本（CoT 或冗余 token）导致多轮前向传播、缺乏时序记忆机制；且已有记忆机制多在视觉域操作，破坏 VLM 预训练知识迁移。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-16",
+    "title": "Accuracy- and Real-Time-Aware 4D Radar Preprocessing for Autonomous Driving Perception Systems",
+    "link": "https://arxiv.org/abs/2609.18542",
+    "arxiv_id": "2609.18542",
+    "detail_path": "papers/2609.18542/",
+    "cover_path": "covers/2609.18542/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.18542.webp",
+    "paper_image_full_path": "assets/paper-images/2609.18542.webp",
+    "preview_text": "任务：面向自动驾驶感知的 4D 雷达预处理，服务 4D 雷达 3D 目标检测。 应用场景：车载嵌入式环境下的实时感知，尤其关注雨、雾、雪等恶劣天气下的鲁棒性。 研究问题：4D 雷达张量信息丰富但体量大、计算负担重，点云轻量但稀疏且噪声多，现有预处理难以在感知精度、实时性、计算复杂度之间取得平衡；同时缺少面向嵌入式部署的综合评价指标。 论文同时针对张量预处理和点云预处理提出方法，并提出嵌入式导向的评价指标以联合衡量精度与效率。",
+    "research_unit": "Korea Advanced Institute of Science and Technology (KAIST), Cho Chun Shik G…",
+    "hook_text": "任务：面向自动驾驶感知的 4D 雷达预处理，服务 4D 雷达 3D 目标检测。",
+    "key_points": [
+      "任务：面向自动驾驶感知的 4D 雷达预处理，服务 4D 雷达 3D 目标检测。",
+      "应用场景：车载嵌入式环境下的实时感知，尤其关注雨、雾、雪等恶劣天气下的鲁棒性。",
+      "研究问题：4D 雷达张量信息丰富但体量大、计算负担重，点云轻量但稀疏且噪声多，现有预处理难以在感知精度、实时性、计算复杂度之间取得平衡；同时缺少面向嵌入式部署的综合评价指标。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-16",
+    "title": "Learning from Distributed Eyes: Leveraging Collaborative Perception for Automated Model Adaptation",
+    "link": "https://arxiv.org/abs/2609.18511",
+    "arxiv_id": "2609.18511",
+    "detail_path": "papers/2609.18511/",
+    "cover_path": "covers/2609.18511/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.18511.webp",
+    "paper_image_full_path": "assets/paper-images/2609.18511.webp",
+    "preview_text": "任务：面向自动驾驶 3D 目标检测的感知模型无监督自适应（test-time adaptation / source-free 无监督域适应），无需人工标注即可将预训练模型适配到新的目标域。 应用场景：车联网（V2V/5G+）中，自我车（learner）在目标环境中与周围 N 辆联网自动驾驶车辆（CAV）协作，在带宽与时延受限的情况下利用协同感知（CP）结果监督本地模型适配。 研究问题：现有 TTA 方法仅依赖自我车视角数据，伪标签质量不可靠、对超参数敏感，难以处理遮挡与感知歧义；而直接套用现有 CP 方案进行适配又会遭遇三个问题——(1) 时间与带宽约束下的特征共享通信瓶颈；(2) CP 视角与学习者 FoV 之间的视角差异；(3) 即便 CP 生成的标签也存在不可靠性。",
+    "research_unit": "香港城市大学（City University of Hong Kong）香港赛马会智慧城市实验室（Hong Kong JC Lab of Smart…",
+    "hook_text": "任务：面向自动驾驶 3D 目标检测的感知模型无监督自适应（test-time adaptation / source-free 无监督域适应），无需人工标注即可将预训练模型适配到新的目标域。",
+    "key_points": [
+      "任务：面向自动驾驶 3D 目标检测的感知模型无监督自适应（test-time adaptation / source-free 无监督域适应），无需人工标注即可将预训练模型适配到新的目标域。",
+      "应用场景：车联网（V2V/5G+）中，自我车（learner）在目标环境中与周围 N 辆联网自动驾驶车辆（CAV）协作，在带宽与时延受限的情况下利用协同感知（CP）结果监督本地模型适配。",
+      "研究问题：现有 TTA 方法仅依赖自我车视角数据，伪标签质量不可靠、对超参数敏感，难以处理遮挡与感知歧义；而直接套用现有 CP 方案进行适配又会遭遇三个问题——(1) 时间与带宽约束下的特征共享通信瓶颈；(2) CP 视角与学习者 FoV 之间的视角差异；(3) 即便 CP 生成的标签也存在不可靠性。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-16",
+    "title": "Risk-Aware World Modeling with Flow-Guided Occupancy Evolution for Selective Trajectory Planning in Automated Driving",
+    "link": "https://arxiv.org/abs/2609.18442",
+    "arxiv_id": "2609.18442",
+    "detail_path": "papers/2609.18442/",
+    "cover_path": "covers/2609.18442/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.18442.webp",
+    "paper_image_full_path": "assets/paper-images/2609.18442.webp",
+    "preview_text": "论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。 应用场景为基于视觉 BEV 特征、风险场与结构化地图/行为体状态的城市自动驾驶规划。 核心研究问题在于：预测出的未来风险可能只是当前场景评估已捕获的风险的重复，因此需要将未来证据与当前状态参考进行对比，才能判断是否值得干预并替换轨迹。 论文提出 RiskWorld，将风险感知世界建模与选择性轨迹替换结合，在一次规划步内共享一次占用预测并用于评估多个候选轨迹。",
+    "research_unit": "RWTH Aachen University · Rongxiang Zeng、Linsen Cai、Jiafu Zhang 等",
+    "hook_text": "论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。",
+    "key_points": [
+      "论文面向自动驾驶的安全运动规划任务，研究如何在规划时预期交通风险的演化并决定何时修改当前已选轨迹。",
+      "应用场景为基于视觉 BEV 特征、风险场与结构化地图/行为体状态的城市自动驾驶规划。",
+      "核心研究问题在于：预测出的未来风险可能只是当前场景评估已捕获的风险的重复，因此需要将未来证据与当前状态参考进行对比，才能判断是否值得干预并替换轨迹。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-15",
+    "title": "DRT&R: Direct Radar Teach & Repeat",
+    "link": "https://arxiv.org/abs/2609.17766",
+    "arxiv_id": "2609.17766",
+    "detail_path": "papers/2609.17766/",
+    "cover_path": "covers/2609.17766/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.17766.webp",
+    "paper_image_full_path": "assets/paper-images/2609.17766.webp",
+    "preview_text": "面向自动驾驶/野外机器人导航中的雷达定位与路径跟踪任务，提出 Direct Radar Teach & Repeat（DRT&R）系统。 应用场景包括结构化 on-road 环境与结构较少的 off-road 环境，尤其是存在植被、缺乏人造强反射目标、几何退化等使稀疏点云雷达方法失效的场景。 研究问题：现有 direct 雷达方法虽在 on-road 全局定位上表现提升，但尚未部署到 off-road 或闭环系统；全局一致地图会平滑掉视角相关的雷达伪影，从而丢失可用于定位的信息。 核心思路：将 direct radar odometry（DRO）与 direct radar localization（DRL）结合进 teach-and-repeat 拓扑度量框架，并使用局部子图保留视角相关雷达特征。",
+    "research_unit": "University of Toronto, Robotics Institute, Canada · Alexander Krawciw、Danii…",
+    "hook_text": "面向自动驾驶/野外机器人导航中的雷达定位与路径跟踪任务，提出 Direct Radar Teach & Repeat（DRT&R）系统。",
+    "key_points": [
+      "面向自动驾驶/野外机器人导航中的雷达定位与路径跟踪任务，提出 Direct Radar Teach & Repeat（DRT&R）系统。",
+      "应用场景包括结构化 on-road 环境与结构较少的 off-road 环境，尤其是存在植被、缺乏人造强反射目标、几何退化等使稀疏点云雷达方法失效的场景。",
+      "研究问题：现有 direct 雷达方法虽在 on-road 全局定位上表现提升，但尚未部署到 off-road 或闭环系统；全局一致地图会平滑掉视角相关的雷达伪影，从而丢失可用于定位的信息。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-15",
+    "title": "Imitation Learning for Autonomous Driving in CARLA",
+    "link": "https://arxiv.org/abs/2609.17757",
+    "arxiv_id": "2609.17757",
+    "detail_path": "papers/2609.17757/",
+    "cover_path": "covers/2609.17757/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.17757.webp",
+    "paper_image_full_path": "assets/paper-images/2609.17757.webp",
+    "preview_text": "任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。 应用场景：CARLA 仿真环境下的端到端自动驾驶，包括沿车道行驶、路口转向、在训练路线与留出路线上的自回归闭环驾驶，以及零样本迁移到未见过的 CARLA 城镇。 研究问题：一个紧凑多模态策略能从离线专家演示中获得多少闭环驾驶能力，以及演示分布（专家状态分布的支持集）的覆盖情况如何影响自回归部署下涌现出的行为。 核心张力：训练在专家状态分布下最小化误差，部署时策略自身的动作决定其后续观测，误差可能复合（协变量偏移），因此低验证损失是必要条件而非充分条件。",
+    "research_unit": "原文未报告作者所属机构全称 · Jordy Kieto（原文仅给出其 GitHub 仓库地址作为 affiliation 形式的信息）",
+    "hook_text": "任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。",
+    "key_points": [
+      "任务：在 CARLA 仿真器中，用离线专家演示通过行为克隆（behavioral cloning）训练一个紧凑的多模态时序策略，输出连续的油门、刹车与转向控制（20 Hz）。",
+      "应用场景：CARLA 仿真环境下的端到端自动驾驶，包括沿车道行驶、路口转向、在训练路线与留出路线上的自回归闭环驾驶，以及零样本迁移到未见过的 CARLA 城镇。",
+      "研究问题：一个紧凑多模态策略能从离线专家演示中获得多少闭环驾驶能力，以及演示分布（专家状态分布的支持集）的覆盖情况如何影响自回归部署下涌现出的行为。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-15",
+    "title": "RAF-VLA: Representation Alignment with the Future for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.17728",
+    "arxiv_id": "2609.17728",
+    "detail_path": "papers/2609.17728/",
+    "cover_path": "covers/2609.17728/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.17728.webp",
+    "paper_image_full_path": "assets/paper-images/2609.17728.webp",
+    "preview_text": "论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。 应用场景为自动驾驶中的轨迹规划：输入前视图像序列、导航指令与驾驶状态，输出未来自车轨迹航点。 研究问题：现有“世界建模型 VLA”通过显式预测未来驾驶场景作为密集监督来学习规划相关内部表示，但带来两个问题：额外的训练负担与推理延迟。 论文提出在表示层面而非生成层面利用未来场景监督，通过 Future-Aligned 监督微调直接对齐策略隐状态与未来帧表示，从而避免未来生成。",
+    "research_unit": "Korea Advanced Institute of Science & Technology (KAIST), Graduate School o…",
+    "hook_text": "论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。",
+    "key_points": [
+      "论文面向端到端自动驾驶的规划任务，提出基于 VLA（Vision-Language-Action）框架 RAF-VLA。",
+      "应用场景为自动驾驶中的轨迹规划：输入前视图像序列、导航指令与驾驶状态，输出未来自车轨迹航点。",
+      "研究问题：现有“世界建模型 VLA”通过显式预测未来驾驶场景作为密集监督来学习规划相关内部表示，但带来两个问题：额外的训练负担与推理延迟。"
+    ],
+    "reading_minutes": 16,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-15",
     "title": "NeuroSymbEAD: A Large Scale Neuro-Symbolic Caption Dataset for Omni-Directional Embodied Autonomous Driving",
     "link": "https://arxiv.org/abs/2609.16919",
