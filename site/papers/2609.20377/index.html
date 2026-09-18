@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。 应用场景为城市驾驶中的交互式决策，例如无信号交叉口中自车与他车的相互影响。 研究问题在于现有 World–Action Models 中，级联式方法具备多模态覆盖但缺少双向耦合，联合式方法具备双向耦合但通常只生成单一场景–动作对，因此需要同时实现多模态覆盖与场景–动作双向共演化。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.20377">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.20377.webp" alt="MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.20377" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.20377" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.20377</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。 应用场景为城市驾驶中的交互式决策，例如无信号交叉口中自车与他车的相互影响。 研究问题在于现有 World–Action Models 中，级联式方法具备多模态覆盖但缺少双向耦合，联合式方法具备双向耦合但通常只生成单一场景–动作对，因此需要同时实现多模态覆盖与场景–动作双向共演化。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">NIO · 原文未明确对应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.20377/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。</li><li>应用场景为城市驾驶中的交互式决策，例如无信号交叉口中自车与他车的相互影响。</li><li>研究问题在于现有 World–Action Models 中，级联式方法具备多模态覆盖但缺少双向耦合，联合式方法具备双向耦合但通常只生成单一场景–动作对，因此需要同时实现多模态覆盖与场景–动作双向共演化。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：NIO；作者：原文未明确对应</li><li>机构：Artificial General Intelligence Institute, University of Science and Technology of China；作者：原文未明确对应</li><li>机构：School of Computer Science and Engineering, Sun Yat-sen University；作者：原文未明确对应</li><li>机构：Beihang University；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。</li><li>应用场景为城市驾驶中的交互式决策，例如无信号交叉口中自车与他车的相互影响。</li><li>研究问题在于现有 World–Action Models 中，级联式方法具备多模态覆盖但缺少双向耦合，联合式方法具备双向耦合但通常只生成单一场景–动作对，因此需要同时实现多模态覆盖与场景–动作双向共演化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 MM-Future，一种多模态联合世界–动作模型，通过 mixture conditional flow 从单一结果训练片段中学习多个配对的场景–动作假设。</li><li>提出 planning-oriented MM-Tokens，用紧凑的多视角场景表示支持高效的多模态未来 rollout。</li><li>提出 future-conditioned proposal scorer，根据观测历史与每个候选配对的预测未来对轨迹进行排序，实现未来感知的动作选择。</li><li>在 NAVSIM navtest 上取得 94.0 PDMS 与 91.5 EPDMS，并在 HUGSIM 零样本闭环评估中取得 32.3 HD-Score。</li><li>消融显示多模态联合世界–动作建模相较单模态和仅动作变体具有一致提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：整体为 world–action model，包含 MM-Encoder、modality-aware Transformer 生成器与 future-conditioned proposal scorer。</li><li>输入传感器：同步的多相机图像序列，以及历史自车状态向量和高层导航命令；原文未报告激光雷达或毫米波雷达等其他传感器。</li><li>场景表示：将多视角视频压缩为 planning-oriented MM-Tokens；每个时间 chunk 使用可学习 query 与各视角 register tokens 进行 self-attention 交互，得到 chunk-wise MM-Tokens，不再向下游传播 dense patch tokens，也不进行 RGB 或 BEV 重建监督。</li><li>模型结构：视觉 backbone 提取 register tokens，MM-Encoder 输出历史 MM-Tokens，EMA target encoder 在训练时提供未来目标；modality-aware Transformer 在 action tokens 与 future MM-Tokens 上进行联合条件流生成，并使用 modality-specific AdaLN 与 feed-forward 分支。</li><li>关键技术：结构化配对源，包括基于 K-means 聚类的 Gaussian-mixture noise 动作先验与独立未来 token 噪声；joint conditional flow，action 与 future 使用独立 flow time 和 asymmetric block mask，实现历史为干净前缀、动作与未来相互注意；Best-of-Many 监督，根据解码轨迹选择 winner mode，并对同一 mode 的动作与未来流进行监督；推理时用 Euler schedule 积分生成 M 个配对 rollout；future-conditioned proposal scorer 使用历史条件 decoder 与未来条件 decoder，未来注意力按 mode 块对角，输出 PDMS 分量 logits。</li><li>原文未报告：模型具体层数、隐藏维度、注意力头数、MM-Token 数量、chunk 数量、未来 chunk 数量、EMA 系数等超参数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM-v1 navtest、NAVSIM-v2 navtest、HUGSIM 闭环评估；训练使用 NAVSIM 的 train 或 trainval 子集。</li><li>仿真器：NAVSIM 官方训练时 pseudo-simulator 用于计算 scorer 目标；HUGSIM 用于零样本闭环评估。</li><li>模型规模：原文未报告参数规模。</li><li>训练资源：原文未报告 GPU 类型、数量、训练时长等资源信息。</li><li>实车平台：原文未报告实车平台或实车实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM-v2 navtest、NAVSIM-v1 navtest、HUGSIM 零样本闭环迁移。</li><li>评估指标：NAVSIM 使用 NC、DAC、DDC、TL、EP、TTC、LK、HC、EC、EPDMS、PDMS 等；HUGSIM 使用 HD-Score，并报告 Route Completion 等分量；消融还报告 latency。</li><li>开环结果：NAVSIM-v2 navtest 上 MM-Future 达到 94.0 PDMS 与 91.5 EPDMS；表中 NC 99.0、DAC 98.8、DDC 98.8、TL 99.4、EP 92.2、TTC 98.6、LK 95.4、HC 96.3、EC 89.2。</li><li>开环结果：NAVSIM-v1 navtest 上 MM-Future(trainval) 达到 94.0 PDMS；MM-Future(train) 达到 93.4 PDMS；表中 trainval 设置为 NC 98.7、DAC 99.0、TTC 95.8、Comf. 100、EP 91.6。</li><li>闭环结果：HUGSIM 零样本闭环评估中取得 32.3 HD-Score。</li><li>对比方法：包括 E2E 方法 DiffusionDriveV2、MeanFuser、UniTeD、DiffusionDrive、GaussianFusion、DriveSuprim、DrivoR；VLA 方法 DriveWorld-VLA、IRR-Drive-4B、DriveFine、AutoVLA、DriveVLA-W0、ReCogDrive；WAM 方法 Latent-WAM、GraphWorld、DriveFuture、Epona、WoTE 等。</li><li>消融结果：多模态生成方面，action-only 多模态从 16 到 32 个假设 PDMS 为 91.1 到 92.3，paired 多模态从 16 到 32 个假设 PDMS 为 91.7 到 92.9；模态感知场景–动作交互方面，Mixture-of-DiT bidirectional 达到 92.9 PDMS，优于 one-way 的 92.5；future-conditioned scoring 方面，仅历史为 92.9 PDMS，历史加配对未来为 93.3 PDMS。</li><li>效率方面：32 个配对多模态假设延迟为 132 ms；单模态动作模型延迟为 52 ms，16 个 action-only 多模态为 51 ms，32 个 action-only 多模态为 65 ms，16 个 paired 多模态为 79 ms。</li><li>评估条件：NAVSIM 为非反应式评测；HUGSIM 为零样本闭环评测；原文未报告实车评测结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.20480/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Worst-Case Hidden-Vehicle Trajectory Search in Spatiotemporal Occlusion Regions</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.20034/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Astronex-World 1.0: Real-Time Interactive World Model Foundation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

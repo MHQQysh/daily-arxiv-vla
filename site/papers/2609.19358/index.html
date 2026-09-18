@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open-vocabulary 3D object detection with promptable segmentation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。 应用场景是自动驾驶车辆的环境感知：需要输出带类别、位置、尺寸、朝向和速度的度量三维目标列表，用于下游规划与决策。 研究问题是在没有三维标注的前提下，可提示分割加原始传感器几何能产生多大用处的三维检测，以及这种免训练开放词汇系统与监督检测器之间的差距究竟来自哪里。 论文通过在 nuScenes 官方协议下设计三阶段受控比较来回答该问题：二维检测保持不变，只改变度量三维几何的来源（相机单目预测、LiDAR 免训练拟合、监督检测器框几何）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.19358">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.19358.webp" alt="Open-vocabulary 3D object detection with promptable segmentation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Open-vocabulary 3D object detection with promptable segmentation</h1>
+            <div class="detail-meta">2026-09-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.19358" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.19358" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.19358</span></div>
+            <p class="detail-summary">论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。 应用场景是自动驾驶车辆的环境感知：需要输出带类别、位置、尺寸、朝向和速度的度量三维目标列表，用于下游规划与决策。 研究问题是在没有三维标注的前提下，可提示分割加原始传感器几何能产生多大用处的三维检测，以及这种免训练开放词汇系统与监督检测器之间的差距究竟来自哪里。 论文通过在 nuScenes 官方协议下设计三阶段受控比较来回答该问题：二维检测保持不变，只改变度量三维几何的来源（相机单目预测、LiDAR 免训练拟合、监督检测器框几何）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute of Data Science and Artificial Intelligence, Boğaziçi University…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.19358/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。</p>
+  <ul class="reading-intro-points"><li>论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。</li><li>应用场景是自动驾驶车辆的环境感知：需要输出带类别、位置、尺寸、朝向和速度的度量三维目标列表，用于下游规划与决策。</li><li>研究问题是在没有三维标注的前提下，可提示分割加原始传感器几何能产生多大用处的三维检测，以及这种免训练开放词汇系统与监督检测器之间的差距究竟来自哪里。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute of Data Science and Artificial Intelligence, Boğaziçi University；作者：Mustafa Taha Koçyiğit（原文在其作者注释中给出该机构信息）。</li><li>机构：Boğaziçi University（由作者邮箱域名 bogazici.edu.tr 推断）；作者：Ömer Faruk Deniz；原文未明确将其与具体机构条目对应，仅通过邮箱域名可推断所属大学。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。</li><li>应用场景是自动驾驶车辆的环境感知：需要输出带类别、位置、尺寸、朝向和速度的度量三维目标列表，用于下游规划与决策。</li><li>研究问题是在没有三维标注的前提下，可提示分割加原始传感器几何能产生多大用处的三维检测，以及这种免训练开放词汇系统与监督检测器之间的差距究竟来自哪里。</li><li>论文通过在 nuScenes 官方协议下设计三阶段受控比较来回答该问题：二维检测保持不变，只改变度量三维几何的来源（相机单目预测、LiDAR 免训练拟合、监督检测器框几何）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个免训练、开放词汇的三维检测流程，把可提示分割掩码结合类别感知规则应用到 LiDAR 点上生成三维框，并在 nuScenes 官方协议下端到端评估，同时包含提示设计研究和单 GPU 全验证集推理方案。</li><li>给出同一流程的纯相机变体，用于分离“测距”与“开放词汇检测”各自的贡献。</li><li>提出在推理时把监督框几何关联到该流程自身检测上的方法，表明流程最大短板是测量精度而非二维检测，而类别混淆与置信度校准这两个限制不会因替换几何而消失。</li><li>提出免训练的相机见证规则，把同一开放词汇机制附加到监督 LiDAR 检测器上，以零标注成本恢复全监督相机融合约一半的增益。</li><li>提供开放词汇三维检测的覆盖分析，说明哪些目标被找到、哪些被错误命名、覆盖在哪里终止。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：整体是三维目标检测流程，核心是受控三阶段比较；二维检测组件在所有阶段固定为 SAM3 可提示概念分割，阶段之间只改变度量三维几何来源。</li><li>输入传感器：nuScenes 六路环视相机图像、单帧 LiDAR 点云（单次扫描）、以及数据集提供的传感器标定与位姿；相机变体使用 DVGT-2 从环视图像预测度量点图。</li><li>场景表示：图像空间使用 SAM3 实例掩码；三维空间使用度量点图（每像素一个三维坐标）、LiDAR 点云、鸟瞰图平面上的朝向矩形，以及全局坐标系下的三维框。</li><li>模型结构：SAM3 作为唯一二维检测组件，给定短名词短语返回该概念的所有实例掩码与置信度；相机变体用 DVGT-2 预测度量点图；LiDAR 变体把单帧点云投影到各相机并按掩码关联点；第三阶段在推理时关联 CenterPoint 的监督框几何；反向方向用三状态相机见证规则对 CenterPoint 检测框重新打分。</li><li>关键技术：类别提示集（10 个基础提示加 3 个变体提示，变体映射到父类）；深度门控（按类别长度设定容差，剔除遮挡物与背景泄漏点）；最小证据测试（类别相关最小掩码像素数与至少 3 个通过门控的点）；启发式框拟合（大型车辆用地面投影矩形拟合并搜索 yaw、小目标用点中值、障碍物沿主轴按 2.5 m 分段）；轻量时序后处理（按类别中心距离去重、贪心跟踪、速度估计与朝向三级规则）；桥接监督几何的两通道关联（地面平面 2 m 邻近与图像空间 0.25 IoU 关联）；相机见证规则（确认、矛盾、无见证三状态对应固定分数乘子 1.00、0.85、0.60）。</li><li>各阶段均未在 nuScenes 上训练或微调，唯一领域相关输入是类别名称以及数据集提供的传感器标定和位姿；类别先验取自 nuScenes 训练集各类平均框尺寸。</li><li>原文未报告模型参数量或具体网络结构细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes，在官方验证集 150 个场景、6,019 个关键帧上评估；过滤后包含 121,861 个真值目标，以汽车（53,043）和行人（23,500）为主。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告参数量或模型规模。</li><li>训练资源：推理使用单张 NVIDIA A100 GPU，bfloat16，六张相机图像同时处理；整个验证集约一小时完成；无训练过程。</li><li>实车平台：原文未报告实车部署平台；实验基于 nuScenes 公开数据与公开发布的检测器预测。</li><li>使用的模型与检查点：SAM3 官方检查点；DVGT-2 官方检查点与 DINOv3 图像骨干；监督参考为公开发布的 CenterPoint 和 MVP 验证预测，未重新训练。</li><li>图像处理细节：1600×900 相机图像缩放到 1008×1008 送入网络，掩码映射回原尺寸并以 0.5 二值化，模型自身检测阈值 0.05；点图定义在 512×288 网格。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 官方 DetectionEval 协议，mAP 在 0.5、1、2、4 m 四个中心距离阈值上平均，另有五项真阳性误差（ATE、ASE、AOE、AVE、AAE）和组合指标 NDS；类别专属距离范围（车辆 50 m、行人与两轮车 40 m、锥桶与护栏 30 m）。</li><li>对比方法：三阶段流程（SAM3 + DVGT-2、SAM3 + LiDAR、SAM3 + CenterPoint 几何）、CenterPoint + SAM3 见证，以及监督参考 CenterPoint（纯 LiDAR）和 MVP（LiDAR + 相机）。</li><li>关键数值：纯相机几何在官方协议下达到 0.183 mAP；同一掩码下用免训练规则拟合原始 LiDAR 点达到 0.298 mAP / 0.348 NDS，零标注成本；推理时借用监督框几何把同一检测提升到 0.413 mAP / 0.555 NDS。</li><li>反向验证：三状态相机见证规则把监督纯 LiDAR 检测器从 0.596 mAP 提升到 0.630 mAP，约为全监督相机融合增益的一半，且无需训练。</li><li>阈值影响：把发射阈值从 0.5 降到 0.2 使框数从 143,012 增至 277,291，增加 0.031 mAP 和 0.013 NDS，增益集中于小类别（行人 +0.067 AP、摩托车 +0.063、锥桶 +0.052、自行车 +0.037，汽车 +0.010、拖车 +0.001）。</li><li>覆盖分析：SAM3 找到范围内 84% 的目标并给出正确命名的掩码；在官方指标中失败的类别是被错误命名或几何上不宽容的类别，而不是未见类别。</li><li>评估条件：全部为 nuScenes 验证集上的开环评估，没有闭环仿真或实车实验；论文明确第三阶段是诊断性构造而非部署方案。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.19393/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">WZPlanner: Safe End-to-End Path Planning for Autonomous Driving in Work Zones</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.19216/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">4D Radar Perception Algorithms for Autonomous Driving: A Review</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

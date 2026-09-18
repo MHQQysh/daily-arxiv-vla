@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Worst-Case Hidden-Vehicle Trajectory Search in Spatiotemporal Occlusion Regions - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。 应用场景为城市道路中由其他交通参与者、路侧结构或道路几何造成的盲区，隐藏参与者可能在规划时域内进入自车路径。 研究问题包括两方面：一是如何利用多帧可见性记忆排除与历史不一致的隐藏状态假设；二是如何在考虑自车最优响应的条件下，找到仍能显著降低自车任务级驾驶评分的合法隐藏轨迹。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.20480">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.20480.webp" alt="Worst-Case Hidden-Vehicle Trajectory Search in Spatiotemporal Occlusion Regions" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Worst-Case Hidden-Vehicle Trajectory Search in Spatiotemporal Occlusion Regions</h1>
+            <div class="detail-meta">2026-09-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.20480" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.20480" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.20480</span></div>
+            <p class="detail-summary">论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。 应用场景为城市道路中由其他交通参与者、路侧结构或道路几何造成的盲区，隐藏参与者可能在规划时域内进入自车路径。 研究问题包括两方面：一是如何利用多帧可见性记忆排除与历史不一致的隐藏状态假设；二是如何在考虑自车最优响应的条件下，找到仍能显著降低自车任务级驾驶评分的合法隐藏轨迹。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">普渡大学 Lyles 土木与建筑工程学院（Lyles School of Civil and Construction Engineering, Pu…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.20480/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。</li><li>应用场景为城市道路中由其他交通参与者、路侧结构或道路几何造成的盲区，隐藏参与者可能在规划时域内进入自车路径。</li><li>研究问题包括两方面：一是如何利用多帧可见性记忆排除与历史不一致的隐藏状态假设；二是如何在考虑自车最优响应的条件下，找到仍能显著降低自车任务级驾驶评分的合法隐藏轨迹。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：普渡大学 Lyles 土木与建筑工程学院（Lyles School of Civil and Construction Engineering, Purdue University）；作者：Ruichen Tan、Zengxiang Lei、Satish Ukkusuri</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。</li><li>应用场景为城市道路中由其他交通参与者、路侧结构或道路几何造成的盲区，隐藏参与者可能在规划时域内进入自车路径。</li><li>研究问题包括两方面：一是如何利用多帧可见性记忆排除与历史不一致的隐藏状态假设；二是如何在考虑自车最优响应的条件下，找到仍能显著降低自车任务级驾驶评分的合法隐藏轨迹。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将多帧隐藏状态推断形式化为有限的历史认证问题，每个保留模式都需满足可见性、已观测占据、语义地图和类别相关运动学约束，并带有显式反向见证。</li><li>将隐藏轨迹发现形式化为 minimax 问题：内层自车响应 oracle 最大化任务级驾驶性能，外层搜索在合法且历史认证的隐藏轨迹中最小化该最优响应值。</li><li>提供推断与搜索之间的精确接口，反例生成从已认证当前模式出发，不重新采样状态，也不使用隐藏参与者未来标签。</li><li>在 WOMD 八个场景上量化了时间证据带来的隐藏种子集合收缩，以及 minimax 搜索暴露的可避免反例。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：遮挡感知安全评估与安全关键轨迹生成，包含历史条件隐藏模式推断与响应感知 minimax 轨迹搜索两个阶段。</li><li>输入传感器：原文报告使用向量化语义地图、自车状态和已观测道路使用者轨迹，未报告具体传感器型号或原始传感器数据。</li><li>场景表示：以 t0 时刻自车为中心的鸟瞰坐标系，+x 向前、+y 向左；区分视野内可见自由区域、已观测占据区域和未解析非可见区域。</li><li>模型结构：HC-MTS 分两阶段。Stage I 在当前盲区采样候选状态，结合类别特定速度与反向控制假设，通过反向传播和 K 帧一致性谓词保留有限隐藏状态模式；Stage II 从认证模式初始化合法前向隐藏轨迹，使用碰撞条件生成候选，并通过内层 ego-response oracle 与外层最小化搜索进行有限 minimax 迭代。</li><li>关键技术：几何视线射线可见性划分；类特定反向运动学更新；多帧可见性、占据、语义地图和运动学约束的乘积式证书；碰撞条件候选生成；有限 ego 响应集优化；基于交叉熵思想的高斯精英细化；跨轮下降与终止条件。</li><li>原文未报告：具体感知模型结构、端到端网络架构、传感器融合细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo Open Motion Dataset（WOMD）中的八个向量化场景。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li><li>场景选择：从几何可见性过程产生与自车规划时域相关的非空当前盲区的子集中随机采样八个场景，且在选择后不再根据 HC-MTS 输出调整；所有实验使用同一组八个场景。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：八个 WOMD 向量化场景；研究问题包括可见性历史长度对隐藏状态集合的影响（RQ1）和 HC-MTS 能否发现降低自车最优驾驶评分的合法历史一致隐藏轨迹（RQ2）。</li><li>评估指标：保留的历史一致隐藏种子数量（车辆、行人、总计）及其相对 K=1 的平均每场景减少百分比；自车优化后的驾驶评分，评分由碰撞优先级、目的地达成和乘坐舒适性构成。</li><li>关键数值：可见性记忆从 K=1 增加到 K=20 时，平均每场景车辆、行人、总保留隐藏种子数分别减少 18.12%、21.67%、18.45%；K=5 时分别减少 6.99%、9.19%、7.19%；K=10 时分别减少 11.78%、15.58%、12.13%。K=1 到 K=20 的减少幅度在八个场景中从 4.57% 到 35.44% 不等。</li><li>响应感知搜索结果：在场景 1–5 和 7 中，HC-MTS 找到与当前自车轨迹碰撞的合法历史一致攻击者，但有限 ego 响应 oracle 仍返回无碰撞响应，最终自车评分分别为 86.39、91.44、95.20、84.71、93.44 和 96.26，均值为 91.24；场景 6 和 8 在有限搜索预算内未找到合法碰撞产生攻击者，自车评分保持名义值 100；没有场景得分达到 -∞。</li><li>对比方法：原文未报告与其他方法的定量对比。</li><li>评估条件：全部为基于 WOMD 的离线/仿真评估，未报告开环、闭环或实车测试结果；结果被描述为预算依赖，不构成连续隐藏状态与控制空间上的形式化保证。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.20747/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MILER: Semantic Mid-Level Representation for Sim-to-Real Reinforcement Learning in Unstructured Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.20377/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

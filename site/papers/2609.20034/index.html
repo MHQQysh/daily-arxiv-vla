@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Astronex-World 1.0: Real-Time Interactive World Model Foundation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。 应用场景包括交互式视频生成、具身智能与自动驾驶；论文明确将 64 维动作输入和动作序列输出接口保留用于下游具身智能与自动驾驶后训练。 研究问题包括：双向视频扩散 Transformer 与因果交互生成之间的注意力形式冲突、文本与首帧无法完整指定可执行控制、以及自回归 rollout 中误差累积导致的运动衰减、几何漂移、颜色偏移与细节丢失。 论文提出 Astronex-World 1.0，包括双向模型与因果模型两个发布形式，共享同一控制接口，并支持在 rollout 指定位置插入文本事件。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.20034">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.20034.webp" alt="Astronex-World 1.0: Real-Time Interactive World Model Foundation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Astronex-World 1.0: Real-Time Interactive World Model Foundation</h1>
+            <div class="detail-meta">2026-09-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.20034" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.20034" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.20034</span></div>
+            <p class="detail-summary">论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。 应用场景包括交互式视频生成、具身智能与自动驾驶；论文明确将 64 维动作输入和动作序列输出接口保留用于下游具身智能与自动驾驶后训练。 研究问题包括：双向视频扩散 Transformer 与因果交互生成之间的注意力形式冲突、文本与首帧无法完整指定可执行控制、以及自回归 rollout 中误差累积导致的运动衰减、几何漂移、颜色偏移与细节丢失。 论文提出 Astronex-World 1.0，包括双向模型与因果模型两个发布形式，共享同一控制接口，并支持在 rollout 指定位置插入文本事件。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Astronex Robotics · Xin Zhou。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.20034/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。</li><li>应用场景包括交互式视频生成、具身智能与自动驾驶；论文明确将 64 维动作输入和动作序列输出接口保留用于下游具身智能与自动驾驶后训练。</li><li>研究问题包括：双向视频扩散 Transformer 与因果交互生成之间的注意力形式冲突、文本与首帧无法完整指定可执行控制、以及自回归 rollout 中误差累积导致的运动衰减、几何漂移、颜色偏移与细节丢失。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Astronex Robotics；作者：Xin Zhou。</li><li>机构：Nanjing University of Information Science and Technology；作者：Cong Miao。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。</li><li>应用场景包括交互式视频生成、具身智能与自动驾驶；论文明确将 64 维动作输入和动作序列输出接口保留用于下游具身智能与自动驾驶后训练。</li><li>研究问题包括：双向视频扩散 Transformer 与因果交互生成之间的注意力形式冲突、文本与首帧无法完整指定可执行控制、以及自回归 rollout 中误差累积导致的运动衰减、几何漂移、颜色偏移与细节丢失。</li><li>论文提出 Astronex-World 1.0，包括双向模型与因果模型两个发布形式，共享同一控制接口，并支持在 rollout 指定位置插入文本事件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出共享 5B 可控视频主干，包含双向与因果两种发布形式，同时支持文本到视频与图像到视频生成；前者面向高质量离线生成与监督，后者面向可缓存、持续、少步交互。</li><li>提出统一控制接口：通过 PRoPE 注入完整相机内参和外参，用 64 维连续动作流与具身 ID 调制每个视觉层；支持在 rollout 指定位置插入文本事件，并保留可后训练的动作序列输出接口。</li><li>提出五阶段训练流程：双向控制适配、block-causal teacher forcing、在线 UniPC 轨迹蒸馏、混合域因果 SFT、非对称 DMD/DMD2，并报告整个流程可在两张 NVIDIA L20 48 GB GPU 上运行。</li><li>在 WBench（Navi 158 与 Full 289）和部分 VBench 1.0 上评估，报告 5B 模型在两张 L20 GPU 上后训练后达到 13.6B 到 22B 模型的 WBench Full 分数范围。</li><li>发布网站、GitHub 与 Hugging Face 资源，并提供双向 checkpoint restore-2200 与因果 checkpoint DMD1545 等模型形式。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于视频世界模型基础模型，包含数据层、模型层、训练层、推理与评估层。</li><li>输入传感器：原文报告输入包括文本提示、初始观测图像、首帧、相机内参与外参、64 维连续动作和具身 ID；未报告真实传感器硬件细节。</li><li>场景表示：RGB 片段经 Wan2.2 VAE 编码为 48 通道视频 latent；latent 满足 N=4(F−1)+1，第一帧单独编码，后续每个 latent 帧覆盖 4 个 RGB 帧；patch embedding 为 1×2×2。</li><li>模型结构：基于 Wan2.2-TI2V-5B，30 层 DiT，隐藏宽度 3072，head 24，FFN 宽度 14336，latent 通道 48，权重 bfloat16，参数量 5,351,000,000。</li><li>关键技术：双向模型使用 full temporal attention；因果模型使用 block lower-triangular 时间注意力、跨 block KV 缓存、8 latent 帧一个推理 block、20 latent 帧局部窗口与 4 个持久 sink 帧。</li><li>相机控制：PRoPE 注入全部 30 层的相机内参与外参；WBench adapter 处理 c2w、w2c 与归一化内参约定，并反转 extrinsic。</li><li>动作控制：64 维连续动作经两层 MLP 变换，加入具身 embedding，并投影为每帧六组调制，即 attention 与 FFN 的 shift、scale、residual gate；最终动作投影零初始化。</li><li>文本与事件：文本由冻结的 UMT5 编码器编码并经 cross-attention 注入；事件在指定 latent 帧 s 处以 p⊕e 形式重新编码，前序帧保留在 KV cache 中，因此编辑局部发生。</li><li>输出接口：action_output 可将每 latent 帧空间视觉 token 池化后经 LayerNorm-MLP 解码为 [B,F,64] 动作序列；WBench 视频生成 checkpoint 使用 use_action=true、action_dim=64、num_embodiments=32。</li><li>采样：默认 UniPC，八步，CFG 3.0；蒸馏目标为四步，论文报告八步质量最佳。</li><li>原文未报告的模型结构细节：未报告文本编码器层数、VAE 具体网络结构、PRoPE 的完整公式展开、动作调制 MLP 隐层宽度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>相机控制数据：Control2V / minWM-data，用于 Stage I camera adaptation、camera recovery、causal Stage II 与 III；方向增强索引为 Control2V_backdown 与 Control2V_combined。</li><li>动作数据：DROID，用于 Stage I-b 学习 64 维动作条件与具身标识。</li><li>混合物理与动作数据：Control2V、CrossFPS、DrivingDojo、NVIDIA PhysicalAI，用于 Stage IV 与 Stage V。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：Astronex-World-5B，参数量 5,351,000,000，30 层 DiT，隐藏宽度 3072，head 24，FFN 宽度 14,336，latent 通道 48，bfloat16。</li><li>训练资源：所有五阶段均使用两张 NVIDIA L20 48 GB GPU，bfloat16 混合精度，FSDP，gradient checkpointing，1,000 个训练时间索引，内部 timestep shift 5.0；训练张量形状 [1,20,48,30,52]；因果训练 block 含 4 latent 帧；LoRA rank 64、alpha 128。</li><li>实车平台：原文未报告实车平台。</li><li>其他资源：使用 minWM 作为数据处理、分布式训练、蒸馏、checkpoint merging 与 streaming inference 工程框架；集成 Wan2.2-TI2V-5B、PRoPE、64 维动作调制、具身 ID、长窗口/sink 与 WBench/VBench adapters。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：WBench Navi 158、WBench Full 289，以及部分 VBench 1.0；WBench 评估因果模型，VBench 评估因果模型；推理不将一次生成拆分给双向 teacher 与因果 student。</li><li>评估指标：WBench 五维分数、WBench Navi、WBench Full、VBench 1.0 部分指标、事件与视角切换相关分数、RGB 差异、内部运动诊断、平均相邻帧 latent 变化。</li><li>关键数值：Astronex-World 1.0 在 WBench Navi 得分 73.5，在 WBench Full 得分 70.0；因果模型以 832×480、24 fps 生成，使用八步 UniPC、八 latent 帧 block、local history 与 persistent sink frames。</li><li>对比方法：WBench Full 上，5B 模型高于 13.6B LongCat-Video 与 14B Helios，与 22B LTX-2.3 相差约 1 分以内，并高于 YUME 1.5；YUME 1.5 基于同一 5B Wan2.2 prior 在 NVIDIA A100 GPU 上后训练。</li><li>事件局部性结果：与无事件 rollout 对比，switch 前帧 RGB 平均差异 1.8/255，switch 后帧平均差异 9.5/255。</li><li>结果条件：论文报告 WBench 与 VBench 评估因果模型，生成输出为 832×480 时用于 benchmark，模型也支持 1280×704、24 fps 输出。</li><li>开环/闭环/仿真/实车：原文报告 WBench、VBench、部分 VBench 1.0 与流式生成评估；未报告闭环控制评估、仿真器评估或实车评估。</li><li>分析限制：当前 adapter 仅暴露一个最早文本切换点，同一 case 的多个定时事件会被合并；论文指出该接口限制有助于解释 WBench Full 289 上事件与视角切换分数较低。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.20377/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.19903/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">REARL: A Closed-loop Autonomous Driving Simulation Enhancement Framework with Real Traffic Data and Large Language Models</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

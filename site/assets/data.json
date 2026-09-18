@@ -1,5 +1,324 @@
 [
   {
+    "date": "2026-09-17",
+    "title": "OPTED: On-Policy Fine-Tuning for End-to-End Driving using a Render-Free Teacher",
+    "link": "https://arxiv.org/abs/2609.20756",
+    "arxiv_id": "2609.20756",
+    "detail_path": "papers/2609.20756/",
+    "cover_path": "covers/2609.20756/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.20756.webp",
+    "paper_image_full_path": "assets/paper-images/2609.20756.webp",
+    "preview_text": "论文针对自动驾驶中的端到端驾驶策略，研究其闭环部署时的后训练（post-training）问题。 端到端策略通常以行为克隆（BC）在人类演示上开环预训练，但闭环执行时误差会累积，使车辆进入训练数据分布之外的状态，增加安全风险。 闭环后训练可缓解该问题，但对基于传感器的策略而言需要昂贵的仿真渲染；直接 RL 后训练样本效率极低。 OPTED 将强化学习与端到端策略后训练解耦：在无渲染的向量化仿真器中用 RL 训练特权教师，再由教师对学生在闭环仿真中的自身 rollout 进行监督。 目标是在最小化渲染交互的前提下恢复并提升闭环性能，同时保留学生预训练的人类数据先验。",
+    "research_unit": "KE:SAI · Damiano Da Col、Kashyap Chitta",
+    "hook_text": "论文针对自动驾驶中的端到端驾驶策略，研究其闭环部署时的后训练（post-training）问题。",
+    "key_points": [
+      "论文针对自动驾驶中的端到端驾驶策略，研究其闭环部署时的后训练（post-training）问题。",
+      "端到端策略通常以行为克隆（BC）在人类演示上开环预训练，但闭环执行时误差会累积，使车辆进入训练数据分布之外的状态，增加安全风险。",
+      "闭环后训练可缓解该问题，但对基于传感器的策略而言需要昂贵的仿真渲染；直接 RL 后训练样本效率极低。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "MILER: Semantic Mid-Level Representation for Sim-to-Real Reinforcement Learning in Unstructured Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.20747",
+    "arxiv_id": "2609.20747",
+    "detail_path": "papers/2609.20747/",
+    "cover_path": "covers/2609.20747/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.20747.webp",
+    "paper_image_full_path": "assets/paper-images/2609.20747.webp",
+    "preview_text": "论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。 应用场景为越野/非结构化道路，包括铺装路面、碎石、草地、高草、障碍物（树木、集装箱、灌木、杆、施工护栏）、发卡弯、走廊及越野路段。 核心研究问题：真实世界试错学习不可接受，RL 策略通常需在仿真中训练，但非结构化环境的仿真与真实域差异大，感知与执行两方面的 sim-to-real 迁移仍是开放难题。",
+    "research_unit": "University of the Bundeswehr Munich, Germany（Chair of Machine Perception fo…",
+    "hook_text": "论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。",
+    "key_points": [
+      "论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。",
+      "应用场景为越野/非结构化道路，包括铺装路面、碎石、草地、高草、障碍物（树木、集装箱、灌木、杆、施工护栏）、发卡弯、走廊及越野路段。",
+      "核心研究问题：真实世界试错学习不可接受，RL 策略通常需在仿真中训练，但非结构化环境的仿真与真实域差异大，感知与执行两方面的 sim-to-real 迁移仍是开放难题。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "Worst-Case Hidden-Vehicle Trajectory Search in Spatiotemporal Occlusion Regions",
+    "link": "https://arxiv.org/abs/2609.20480",
+    "arxiv_id": "2609.20480",
+    "detail_path": "papers/2609.20480/",
+    "cover_path": "covers/2609.20480/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.20480.webp",
+    "paper_image_full_path": "assets/paper-images/2609.20480.webp",
+    "preview_text": "论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。 应用场景为城市道路中由其他交通参与者、路侧结构或道路几何造成的盲区，隐藏参与者可能在规划时域内进入自车路径。 研究问题包括两方面：一是如何利用多帧可见性记忆排除与历史不一致的隐藏状态假设；二是如何在考虑自车最优响应的条件下，找到仍能显著降低自车任务级驾驶评分的合法隐藏轨迹。",
+    "research_unit": "普渡大学 Lyles 土木与建筑工程学院（Lyles School of Civil and Construction Engineering, Pu…",
+    "hook_text": "论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。",
+    "key_points": [
+      "论文针对自动驾驶中因遮挡（ occlusion）产生的隐藏交通参与者（车辆、行人）风险问题，研究如何在与观测历史一致的前提下，搜索最坏情况下的隐藏车辆轨迹。",
+      "应用场景为城市道路中由其他交通参与者、路侧结构或道路几何造成的盲区，隐藏参与者可能在规划时域内进入自车路径。",
+      "研究问题包括两方面：一是如何利用多帧可见性记忆排除与历史不一致的隐藏状态假设；二是如何在考虑自车最优响应的条件下，找到仍能显著降低自车任务级驾驶评分的合法隐藏轨迹。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "MM-Future: Multi-Mode Joint World-Action Modeling for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.20377",
+    "arxiv_id": "2609.20377",
+    "detail_path": "papers/2609.20377/",
+    "cover_path": "covers/2609.20377/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.20377.webp",
+    "paper_image_full_path": "assets/paper-images/2609.20377.webp",
+    "preview_text": "论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。 应用场景为城市驾驶中的交互式决策，例如无信号交叉口中自车与他车的相互影响。 研究问题在于现有 World–Action Models 中，级联式方法具备多模态覆盖但缺少双向耦合，联合式方法具备双向耦合但通常只生成单一场景–动作对，因此需要同时实现多模态覆盖与场景–动作双向共演化。",
+    "research_unit": "NIO · 原文未明确对应",
+    "hook_text": "论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的规划任务，研究在场景演化与自车决策相互耦合、且存在多模态不确定性的条件下，如何同时建模未来场景与驾驶动作。",
+      "应用场景为城市驾驶中的交互式决策，例如无信号交叉口中自车与他车的相互影响。",
+      "研究问题在于现有 World–Action Models 中，级联式方法具备多模态覆盖但缺少双向耦合，联合式方法具备双向耦合但通常只生成单一场景–动作对，因此需要同时实现多模态覆盖与场景–动作双向共演化。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "Astronex-World 1.0: Real-Time Interactive World Model Foundation",
+    "link": "https://arxiv.org/abs/2609.20034",
+    "arxiv_id": "2609.20034",
+    "detail_path": "papers/2609.20034/",
+    "cover_path": "covers/2609.20034/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.20034.webp",
+    "paper_image_full_path": "assets/paper-images/2609.20034.webp",
+    "preview_text": "论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。 应用场景包括交互式视频生成、具身智能与自动驾驶；论文明确将 64 维动作输入和动作序列输出接口保留用于下游具身智能与自动驾驶后训练。 研究问题包括：双向视频扩散 Transformer 与因果交互生成之间的注意力形式冲突、文本与首帧无法完整指定可执行控制、以及自回归 rollout 中误差累积导致的运动衰减、几何漂移、颜色偏移与细节丢失。 论文提出 Astronex-World 1.0，包括双向模型与因果模型两个发布形式，共享同一控制接口，并支持在 rollout 指定位置插入文本事件。",
+    "research_unit": "Astronex Robotics · Xin Zhou。",
+    "hook_text": "论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。",
+    "key_points": [
+      "论文面向视频世界模型（World Model）基础模型，解决从文本或初始图像出发、在相机轨迹、连续动作与具身标识控制下预测未来视觉状态的问题。",
+      "应用场景包括交互式视频生成、具身智能与自动驾驶；论文明确将 64 维动作输入和动作序列输出接口保留用于下游具身智能与自动驾驶后训练。",
+      "研究问题包括：双向视频扩散 Transformer 与因果交互生成之间的注意力形式冲突、文本与首帧无法完整指定可执行控制、以及自回归 rollout 中误差累积导致的运动衰减、几何漂移、颜色偏移与细节丢失。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "REARL: A Closed-loop Autonomous Driving Simulation Enhancement Framework with Real Traffic Data and Large Language Models",
+    "link": "https://arxiv.org/abs/2609.19903",
+    "arxiv_id": "2609.19903",
+    "detail_path": "papers/2609.19903/",
+    "cover_path": "covers/2609.19903/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.19903.webp",
+    "paper_image_full_path": "assets/paper-images/2609.19903.webp",
+    "preview_text": "论文面向自动驾驶仿真环境增强任务，目标是在仿真推演（rollout）过程中让仿真交通流持续逼近真实交通数据的统计特性。 应用场景为高速公路多车道、多背景车交互的交通流仿真，用于为自动驾驶系统测试与验证提供更真实、动态的虚拟环境。 研究问题：传统基于预定义规则或静态数据回放的方法难以刻画动态、非线性的交通交互；数据驱动方法存在数据偏差、过拟合与可解释性问题；已有 LLM 方法（如 CRITICAL）仅优化仿真初始配置，随仿真推进仿真分布会逐渐偏离真实数据。 论文提出 REARL，将真实交通数据与 LLM 结合，通过闭环的差异检测与在线行为调整缓解仿真过程中的分布偏差累积。",
+    "research_unit": "Minzu University of China（中央民族大学，Key Laboratory of Ethnic Language Intellig…",
+    "hook_text": "论文面向自动驾驶仿真环境增强任务，目标是在仿真推演（rollout）过程中让仿真交通流持续逼近真实交通数据的统计特性。",
+    "key_points": [
+      "论文面向自动驾驶仿真环境增强任务，目标是在仿真推演（rollout）过程中让仿真交通流持续逼近真实交通数据的统计特性。",
+      "应用场景为高速公路多车道、多背景车交互的交通流仿真，用于为自动驾驶系统测试与验证提供更真实、动态的虚拟环境。",
+      "研究问题：传统基于预定义规则或静态数据回放的方法难以刻画动态、非线性的交通交互；数据驱动方法存在数据偏差、过拟合与可解释性问题；已有 LLM 方法（如 CRITICAL）仅优化仿真初始配置，随仿真推进仿真分布会逐渐偏离真实数据。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "Vehicle Trajectory Prediction via Neural Fusion of Multiple EKF-Based Trajectory Candidates",
+    "link": "https://arxiv.org/abs/2609.19813",
+    "arxiv_id": "2609.19813",
+    "detail_path": "papers/2609.19813/",
+    "cover_path": "covers/2609.19813/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.19813.webp",
+    "paper_image_full_path": "assets/paper-images/2609.19813.webp",
+    "preview_text": "任务：自动驾驶中周围车辆的未来轨迹预测，用于碰撞风险评估与自车安全路径规划。 研究问题：基于神经网络的轨迹预测器（如 Trajectron++）虽能利用智能体历史、动态场景图和语义地图，但在加速、减速、转弯等特定运动模式下可能无法反映物理可行的轨迹。 思路：将神经网络预测器输出与基于扩展卡尔曼滤波（EKF）的多条轨迹候选在后期阶段融合，兼顾神经预测器的上下文表示能力与物理模型在特定运动模式下的可行性。",
+    "research_unit": "Korea Advanced Institute of Science and Technology (KAIST), CCS Graduate Sc…",
+    "hook_text": "任务：自动驾驶中周围车辆的未来轨迹预测，用于碰撞风险评估与自车安全路径规划。",
+    "key_points": [
+      "任务：自动驾驶中周围车辆的未来轨迹预测，用于碰撞风险评估与自车安全路径规划。",
+      "研究问题：基于神经网络的轨迹预测器（如 Trajectron++）虽能利用智能体历史、动态场景图和语义地图，但在加速、减速、转弯等特定运动模式下可能无法反映物理可行的轨迹。",
+      "思路：将神经网络预测器输出与基于扩展卡尔曼滤波（EKF）的多条轨迹候选在后期阶段融合，兼顾神经预测器的上下文表示能力与物理模型在特定运动模式下的可行性。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "VAST: V2X/Dynamic Map-Aware Autonomous Driving Systems Validation Toolchain",
+    "link": "https://arxiv.org/abs/2609.19681",
+    "arxiv_id": "2609.19681",
+    "detail_path": "papers/2609.19681/",
+    "cover_path": "covers/2609.19681/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.19681.webp",
+    "paper_image_full_path": "assets/paper-images/2609.19681.webp",
+    "preview_text": "论文面向 IoT-to-Edge-to-Cloud 连续体中的协同自动驾驶，提出 V2X/Dynamic Map 感知的验证工具链 VAST，用于系统级验证车辆、路侧基础设施传感器、边缘侧 Dynamic Map 服务与车载自动驾驶栈之间的完整信息路径。 应用场景为基于 Autoware/AWSIM 的仿真验证环境，重点包括遮挡交叉路口（盲区交叉口）下信号违规车辆逼近、行人/车辆冲突等边角场景。 研究问题为三个 RQ：RQ1——Lanelet2 兼容的生成流水线能否在 Autoware/AWSIM/Dynamic Map 验证环境中高效产生可复现的边角场景；RQ2——Dynamic Map 可用性如何影响 Autoware 的系统级行为；RQ3——集成验证流水线的吞吐瓶颈是什么。 论文明确不提出新的搜索算法，而是解决工具链互操作问题，包括 Lanelet2 到 Scenic 的映射、基于 ROS 2 的协同仿真、Dynamic Map 对象注入 Autoware 以及 TTC、PET、碰撞、超时与性能指标的采集。",
+    "research_unit": "Saitama University（Graduate School of Science and Engineering） · Shunsuke I…",
+    "hook_text": "论文面向 IoT-to-Edge-to-Cloud 连续体中的协同自动驾驶，提出 V2X/Dynamic Map 感知的验证工具链 VAST，用于系统级验证车辆、路侧基础设施传感器、边缘侧 Dynamic Map 服务与车载自动驾驶栈之间的完整信息路径。",
+    "key_points": [
+      "论文面向 IoT-to-Edge-to-Cloud 连续体中的协同自动驾驶，提出 V2X/Dynamic Map 感知的验证工具链 VAST，用于系统级验证车辆、路侧基础设施传感器、边缘侧 Dynamic Map 服务与车载自动驾驶栈之间的完整信息路径。",
+      "应用场景为基于 Autoware/AWSIM 的仿真验证环境，重点包括遮挡交叉路口（盲区交叉口）下信号违规车辆逼近、行人/车辆冲突等边角场景。",
+      "研究问题为三个 RQ：RQ1——Lanelet2 兼容的生成流水线能否在 Autoware/AWSIM/Dynamic Map 验证环境中高效产生可复现的边角场景；RQ2——Dynamic Map 可用性如何影响 Autoware 的系统级行为；RQ3——集成验证流水线的吞吐瓶颈是什么。"
+    ],
+    "reading_minutes": 15,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-16",
+    "title": "WZPlanner: Safe End-to-End Path Planning for Autonomous Driving in Work Zones",
+    "link": "https://arxiv.org/abs/2609.19393",
+    "arxiv_id": "2609.19393",
+    "detail_path": "papers/2609.19393/",
+    "cover_path": "covers/2609.19393/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.19393.webp",
+    "paper_image_full_path": "assets/paper-images/2609.19393.webp",
+    "preview_text": "面向自动驾驶车辆在道路施工区（work zone）中的安全通行问题，施工区车道几何常被临时交通控制设施改变，部分或全部封闭可能未反映在车载地图中。 解决的任务是从感知输入中联合预测车道边界、施工区边界以及可行驾驶轨迹选项。 应用场景包括车道变化、汇入、驶出、绕行、分叉等施工区拓扑，且覆盖恶劣天气与低能见度条件。 研究问题在于现有模块化自动驾驶栈和感知系统在施工区泛化不足，且公开的带结构化几何监督的数据有限。",
+    "research_unit": "Carnegie Mellon University, Pittsburgh, PA, USA · 原文未明确对应",
+    "hook_text": "面向自动驾驶车辆在道路施工区（work zone）中的安全通行问题，施工区车道几何常被临时交通控制设施改变，部分或全部封闭可能未反映在车载地图中。",
+    "key_points": [
+      "面向自动驾驶车辆在道路施工区（work zone）中的安全通行问题，施工区车道几何常被临时交通控制设施改变，部分或全部封闭可能未反映在车载地图中。",
+      "解决的任务是从感知输入中联合预测车道边界、施工区边界以及可行驾驶轨迹选项。",
+      "应用场景包括车道变化、汇入、驶出、绕行、分叉等施工区拓扑，且覆盖恶劣天气与低能见度条件。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-16",
+    "title": "Open-vocabulary 3D object detection with promptable segmentation",
+    "link": "https://arxiv.org/abs/2609.19358",
+    "arxiv_id": "2609.19358",
+    "detail_path": "papers/2609.19358/",
+    "cover_path": "covers/2609.19358/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.19358.webp",
+    "paper_image_full_path": "assets/paper-images/2609.19358.webp",
+    "preview_text": "论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。 应用场景是自动驾驶车辆的环境感知：需要输出带类别、位置、尺寸、朝向和速度的度量三维目标列表，用于下游规划与决策。 研究问题是在没有三维标注的前提下，可提示分割加原始传感器几何能产生多大用处的三维检测，以及这种免训练开放词汇系统与监督检测器之间的差距究竟来自哪里。 论文通过在 nuScenes 官方协议下设计三阶段受控比较来回答该问题：二维检测保持不变，只改变度量三维几何的来源（相机单目预测、LiDAR 免训练拟合、监督检测器框几何）。",
+    "research_unit": "Institute of Data Science and Artificial Intelligence, Boğaziçi University…",
+    "hook_text": "论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。",
+    "key_points": [
+      "论文研究的任务是面向自动驾驶的开放词汇、免训练三维目标检测，即在没有任何三维标注的情况下，利用文本提示驱动的可提示分割模型把六路环视相机中的概念掩码转化为度量三维框。",
+      "应用场景是自动驾驶车辆的环境感知：需要输出带类别、位置、尺寸、朝向和速度的度量三维目标列表，用于下游规划与决策。",
+      "研究问题是在没有三维标注的前提下，可提示分割加原始传感器几何能产生多大用处的三维检测，以及这种免训练开放词汇系统与监督检测器之间的差距究竟来自哪里。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-16",
+    "title": "4D Radar Perception Algorithms for Autonomous Driving: A Review",
+    "link": "https://arxiv.org/abs/2609.19216",
+    "arxiv_id": "2609.19216",
+    "detail_path": "papers/2609.19216/",
+    "cover_path": "covers/2609.19216/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.19216.webp",
+    "paper_image_full_path": "assets/paper-images/2609.19216.webp",
+    "preview_text": "本文是一篇面向自动驾驶的 4D 毫米波雷达感知算法综述，覆盖从信号处理、目标检测到语义分割、运动估计、占据预测与动态场景重建的研究进展。 论文按照感知任务与算法演进的顺序组织领域文献，首先介绍雷达基础、数据表示与质量增强方法，再依次回顾目标级感知、运动与定位、局部与稠密空间感知以及动态场景理解。 研究问题在于：现有综述主要关注雷达基础、数据表示、数据集、检测与跟踪，尚未在任务导向框架下系统梳理语义分割、占据预测、场景流与动态重建等新方向，也缺乏对高度、多普勒与雷达物理先验跨任务使用方式以及数据集经验支撑的系统总结。 论文旨在提供从稀疏目标感知到动态空间理解的任务导向视角，并讨论该领域的共性挑战与未来方向。",
+    "research_unit": "中国科学院计算技术研究所（Institute of Computing Technology, Chinese Academy of Sciences…",
+    "hook_text": "本文是一篇面向自动驾驶的 4D 毫米波雷达感知算法综述，覆盖从信号处理、目标检测到语义分割、运动估计、占据预测与动态场景重建的研究进展。",
+    "key_points": [
+      "本文是一篇面向自动驾驶的 4D 毫米波雷达感知算法综述，覆盖从信号处理、目标检测到语义分割、运动估计、占据预测与动态场景重建的研究进展。",
+      "论文按照感知任务与算法演进的顺序组织领域文献，首先介绍雷达基础、数据表示与质量增强方法，再依次回顾目标级感知、运动与定位、局部与稠密空间感知以及动态场景理解。",
+      "研究问题在于：现有综述主要关注雷达基础、数据表示、数据集、检测与跟踪，尚未在任务导向框架下系统梳理语义分割、占据预测、场景流与动态重建等新方向，也缺乏对高度、多普勒与雷达物理先验跨任务使用方式以及数据集经验支撑的系统总结。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-16",
     "title": "GNN-Accelerated Mixed-Integer Dual MPC for Interactive Driving",
     "link": "https://arxiv.org/abs/2609.18679",

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MILER: Semantic Mid-Level Representation for Sim-to-Real Reinforcement Learning in Unstructured Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。 应用场景为越野/非结构化道路，包括铺装路面、碎石、草地、高草、障碍物（树木、集装箱、灌木、杆、施工护栏）、发卡弯、走廊及越野路段。 核心研究问题：真实世界试错学习不可接受，RL 策略通常需在仿真中训练，但非结构化环境的仿真与真实域差异大，感知与执行两方面的 sim-to-real 迁移仍是开放难题。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.20747">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.20747.webp" alt="MILER: Semantic Mid-Level Representation for Sim-to-Real Reinforcement Learning in Unstructured Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">MILER: Semantic Mid-Level Representation for Sim-to-Real Reinforcement Learning in Unstructured Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.20747" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.20747" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.20747</span></div>
+            <p class="detail-summary">论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。 应用场景为越野/非结构化道路，包括铺装路面、碎石、草地、高草、障碍物（树木、集装箱、灌木、杆、施工护栏）、发卡弯、走廊及越野路段。 核心研究问题：真实世界试错学习不可接受，RL 策略通常需在仿真中训练，但非结构化环境的仿真与真实域差异大，感知与执行两方面的 sim-to-real 迁移仍是开放难题。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of the Bundeswehr Munich, Germany（Chair of Machine Perception fo…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.20747/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。</p>
+  <ul class="reading-intro-points"><li>论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。</li><li>应用场景为越野/非结构化道路，包括铺装路面、碎石、草地、高草、障碍物（树木、集装箱、灌木、杆、施工护栏）、发卡弯、走廊及越野路段。</li><li>核心研究问题：真实世界试错学习不可接受，RL 策略通常需在仿真中训练，但非结构化环境的仿真与真实域差异大，感知与执行两方面的 sim-to-real 迁移仍是开放难题。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of the Bundeswehr Munich, Germany（Chair of Machine Perception for Autonomous Driving）；作者：Thomas Steinecker、Denis Trescher、Alexander Bienemann、Thorsten Luettel、Mirko Maehlisch（原文仅在末尾作者块统一给出该机构信息，未逐一细分每位作者的具体二级单位，作者与机构的精确对应关系原文未明确对应）。</li><li>机构：dtec.bw – Digitalization and Technology Research Center of the Bundeswehr；作者：原文未明确对应（仅标注为资助方）。</li><li>机构：Federal Office of Bundeswehr Equipment, Information Technology and In-Service Support (BAAINBw)；作者：原文未明确对应（仅标注为资助方）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对非结构化环境下的自动驾驶任务，研究基于强化学习（RL）的端到端策略在真实车辆上的零样本 sim-to-real 迁移问题。</li><li>应用场景为越野/非结构化道路，包括铺装路面、碎石、草地、高草、障碍物（树木、集装箱、灌木、杆、施工护栏）、发卡弯、走廊及越野路段。</li><li>核心研究问题：真实世界试错学习不可接受，RL 策略通常需在仿真中训练，但非结构化环境的仿真与真实域差异大，感知与执行两方面的 sim-to-real 迁移仍是开放难题。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出面向非结构化环境的语义中层级表示（MLR）仿真器，通过 Perlin 噪声生成语义地图并直接生成 BEV，省去 3D 环境建模与渲染环节，显著降低建模工作量。</li><li>提出 MILER 零样本 sim-to-real 框架，使完全在高度抽象仿真（自行车模型 + MLR）中训练的 RL 策略可部署到两辆真实车辆，几乎无需车辆特定适配。</li><li>将轨迹对齐策略扩展到 MLR/BEV 形式的感知输入，实现感知与控制的联合零样本迁移，仿真中动作直接作用于自行车模型，部署时通过虚拟车辆与实际车辆对齐。</li><li>在两辆不同测试车辆上开展大量真实场景评估，在无人工干预下行驶 17.3 km，最高速度达 33.6 km/h，并声称这是首个在非结构化环境中、车辆尺寸的 RL 自动驾驶应用超过 30 km/h 的展示。</li><li>全部软件栈运行于 Jetson AGX Orin，推理平均耗时 1.9 ms。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端策略框架，覆盖仿真器、状态建模、RL 训练与真实车辆部署四个部分。</li><li>输入传感器：训练阶段无真实传感器输入，仅使用 MLR 仿真器生成的 BEV 与自行车模型车辆状态；部署阶段使用相机与 LiDAR，经 BEVFusion 生成语义 BEV。</li><li>场景表示：语义 BEV，含四类标签——Drivable（铺装道路与碎石）、Semi-drivable（草地与高草）、Non-drivable（障碍物与静止车辆）、None（未知，供部署策略使用）；BEV 以自车为中心，总长 60 m，单元分辨率 25 cm × 25 cm，使用 one-hot 编码，并将目标路点栅格化到额外通道；采用单帧 BEV 以避免时序不一致。</li><li>状态建模：包含 BEV、车辆状态（速度、加速度、转向角、转向角速率）、上一步动作、目标速度、自车坐标系下未来 80 个路点（间隔 1 m）、剩余路径长度。</li><li>动作空间：加加速度（jerk）与转向速率变化量，二者均为高阶导数，以减小 sim-to-real 差距并提升驾驶平顺性。</li><li>网络结构：CNN 编码器（1 个 5×5 卷积 + 4 个 3×3 卷积，步长均为 2，通道数为 32/64/128/128/256，各接层归一化与 ReLU），输出 256×8×8 特征图展平并投影为 512 维嵌入；其余 168 维状态经两层 MLP（128 单元）编码后与 BEV 嵌入拼接，融合为 640 维特征；actor 与 critic 分别为两层 256 单元 MLP 头。</li><li>训练关键技术：PPO、离散动作头（jerk 与转向速率变化各 5 个 bin，构成 5×5 分解式分类分布）、课程学习（前 2% 训练对奖励系数线性爬坡）、无折扣目标（γ=1）、状态归一化（基于 5 万条随机策略样本估计均值与方差，归一化内置于网络中）。</li><li>奖励设计：以沿目标路点的进度 Δs 为核心，进度被裁剪并经横向偏差高斯门控；附加目标速度项、朝向误差项；每步施加平顺性惩罚与安全速度惩罚（由向心加速度上限、障碍物距离限速、地形限速三者取最小值）；终止状态对碰撞/越界惩罚，未达目标停车无奖励，到达目标停车按剩余距离与终点朝向误差的高斯给出正奖励。</li><li>仿真器细节：GPU 加速自定义 MLR 仿真器，地图由多层 Perlin 噪声叠加生成，使用 3,800 张 500 m × 500 m、分辨率 0.4 m 的地图；每张地图生成连通图与目标路点，路点用 CCMA 平滑；回合初始化对位置、朝向、速度、加速度、转向角与转向速率加入高斯噪声；回合终止条件为静止、碰撞非可行驶单元或横向偏差超过 25 m 出界，仅在距最终路点 25 m 内静止视为完成。</li><li>部署细节：策略导出为 ONNX 并编译为 TensorRT 引擎；在真实车辆上初始化虚拟车辆 V 于真实车辆 R 位姿，BEVFusion 生成以 R 为中心的 BEV，经圆形裁剪（半径 1/2·W_BEV − d_max）与变换对齐到 V 坐标系，目标路点同样变换；策略输出作用于自行车模型得到下一虚拟状态，再由纵向与横向控制器（含 Stanley 控制器）控制实车跟随虚拟轨迹。</li><li>运动学约束：仿真车辆的运动学与动力学能力被保守限制为不超过真实车辆；原文未报告地图生成以外的其他具体实现细节（如地图生成随机种子等）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：未使用公开数据集，训练数据由自定义 MLR 仿真器在线生成。</li><li>仿真器：自定义 GPU 加速 MLR 仿真器；对比中提到 CARLA 与 MAVS 为高保真仿真器，但本文未使用。</li><li>地图规模：3,800 张 500 m × 500 m、分辨率 0.4 m 的合成地图。</li><li>模型规模：CNN 编码器通道 32/64/128/128/256，BEV 嵌入 512 维，状态 MLP 128 单元，actor/critic 各 256 单元，融合特征 640 维；总参数量原文未报告。</li><li>训练资源：单张 NVIDIA A100，训练约 68 小时，10^9 样本，约 2×10^6 个回合。</li><li>部署平台：Jetson AGX Orin；策略经 ONNX 导出并编译为 TensorRT 引擎，平均推理时间 1.9 ms。</li><li>实车平台：MuCAR-4（车辆 A，轴距 2.60 m，1.8 t）与 MuCAR-3（车辆 B，轴距 2.86 m，2.5 t），底层控制运行于各车 dSPACE 单元。</li><li>感知模型：适配版 BEVFusion，用于融合相机与 LiDAR 生成语义 BEV；具体适配细节原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：3.0 km 的真实测试赛道，含直线最高速路段、大型障碍物（树木、集装箱）、小型障碍物（灌木、杆、施工护栏）、多个发卡弯、含高草或碎石的小型越野路段与走廊；每辆车连续行驶三圈。</li><li>评估指标：平均速度、最大速度、平均横向偏差（CTD）、最大横向偏差、总行驶时间、最大向心加速度；消融中使用平均欧氏距离与平均速度差。</li><li>关键数值：车辆 A 平均速度 4.36 m/s，最大速度 9.33 m/s，平均 CTD 0.96 m，最大 CTD 5.16 m，总时间 33.4 min，最大向心加速度 2.19 m/s²；车辆 B 平均速度 4.19 m/s，最大速度 9.02 m/s，平均 CTD 1.06 m，最大 CTD 6.16 m，总时间 31.8 min，最大向心加速度 2.19 m/s²；两车合计行驶 17.3 km。</li><li>最高速度：33.6 km/h（最大速度直线段目标速度设为 40 km/h，其余路段目标速度为 30 km/h）。</li><li>对比方法：表 I 与 TADPO（报告真实世界平均速度 3.41 m/s，约 12.3 km/h）、WROOM、Sim2Seg 进行定性对比（车辆尺寸、最大速度、是否使用简单仿真器）；本文在最大速度与简单仿真器两项上均标注为满足。</li><li>消融结果：相同 BEV（OpenDR</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.20756/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">OPTED: On-Policy Fine-Tuning for End-to-End Driving using a Render-Free Teacher</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.20480/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Worst-Case Hidden-Vehicle Trajectory Search in Spatiotemporal Occlusion Regions</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
