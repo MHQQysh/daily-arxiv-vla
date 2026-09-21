@@ -25755,5 +25755,421 @@
     "inside_figure": true,
     "width": 476,
     "height": 403
+  },
+  "2609.22040": {
+    "title": "PRIME: Perception Feedback with Situational Memory Embeddings in VLA Models",
+    "abs_url": "https://arxiv.org/abs/2609.22040",
+    "html_url": "https://arxiv.org/html/2609.22040v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.22040v1/feedback_injection_point.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 221,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22040v1/filmxattn.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 344,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22040v1/attnpool.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 326,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22040v1/feedback_injection.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22040v1/l_prime.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 114,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 60
+      }
+    ],
+    "path": "assets/paper-images/2609.22040.webp",
+    "image_url": "https://arxiv.org/html/2609.22040v1/feedback_injection_point.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 221
+  },
+  "2609.22060": {
+    "title": "Traffic Sign Recognition for Autonomous Driving Using Branched YOLOv2 and Geometric Features",
+    "abs_url": "https://arxiv.org/abs/2609.22060",
+    "html_url": "https://arxiv.org/html/2609.22060v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.22060v1/result1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 324,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22060v1/result2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 358,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22060v1/result3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 308,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22060v1/result4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 368,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.22060v1/result5.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 326,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.22060.webp",
+    "image_url": "https://arxiv.org/html/2609.22060v1/result1.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 324
+  },
+  "2609.21470": {
+    "title": "Risk-Aware Occupancy for Safety-Oriented End-to-End Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.21470",
+    "html_url": "https://arxiv.org/html/2609.21470v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.21470v1/nips_teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 276,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21470v1/pipelines.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 216,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21470v1/roi_architecture.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 162,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21470v1/gain-exp.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 148,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.21470.webp",
+    "image_url": "https://arxiv.org/html/2609.21470v1/nips_teaser.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 691,
+    "height": 276
+  },
+  "2609.21000": {
+    "title": "Do Spinning Radar Doppler Velocity Measurements Improve Vehicle Detection and Tracking?",
+    "abs_url": "https://arxiv.org/abs/2609.21000",
+    "html_url": "https://arxiv.org/html/2609.21000v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.21000v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 307,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21000v1/doppler_tracking2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 182,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21000v1/tikz_images/labelling_figure/01_lidar.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 128,
+        "height": 128,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21000v1/tikz_images/labelling_figure/02_ensemble.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 128,
+        "height": 128,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21000v1/tikz_images/labelling_figure/03_tracking.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 128,
+        "height": 128,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      }
+    ],
+    "path": "assets/paper-images/2609.21000.webp",
+    "image_url": "https://arxiv.org/html/2609.21000v1/teaser.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 307
+  },
+  "2609.21712": {
+    "title": "ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation",
+    "abs_url": "https://arxiv.org/abs/2609.21712",
+    "html_url": "https://arxiv.org/html/2609.21712v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.21712v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 438,
+        "height": 265,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21712v1/pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 457,
+        "height": 198,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21712v1/data_clean.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 457,
+        "height": 203,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21712v1/memory_data.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 457,
+        "height": 210,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21712v1/architecture.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 243,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.21712.webp",
+    "image_url": "https://arxiv.org/html/2609.21712v1/teaser.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 438,
+    "height": 265
+  },
+  "2609.21486": {
+    "title": "Driving on Registers, Reasoning on Risk: Risk-Aware Occupancy for Register-Based End-to-End Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.21486",
+    "html_url": "https://arxiv.org/html/2609.21486v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.21486v1/Figures/RiskOcc-Conditioned_Candidate_Generation_Module.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 284,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21486v1/Figures/Risk-Aware_Candidate_Ranking_Module.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 188,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21486v1/firstimage.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 328,
+        "height": 170,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21486v1/comparison2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 335,
+        "height": 120,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2609.21486v1/Figures/Overall_Architecture.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 691,
+        "height": 106,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 60
+      }
+    ],
+    "path": "assets/paper-images/2609.21486.webp",
+    "image_url": "https://arxiv.org/html/2609.21486v1/Figures/RiskOcc-Conditioned_Candidate_Generation_Module.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 691,
+    "height": 284
+  },
+  "2609.21109": {
+    "title": "Talk to Me, Jarvis: An Open-Source Edge-Deployable Voice Assistant Framework for Autonomous Racecars",
+    "abs_url": "https://arxiv.org/abs/2609.21109",
+    "html_url": "https://arxiv.org/html/2609.21109v1",
+    "path": "assets/paper-images/2609.21109.webp",
+    "image_url": "https://arxiv.org/html/2609.21109v1",
+    "source": "playwright:figure",
+    "score": 60,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 800,
+    "height": 255
+  },
+  "2609.21404": {
+    "title": "Stabilizing Trajectory Outputs in End-to-End Autonomous Driving via SC-IMM Based Teacher Signals",
+    "abs_url": "https://arxiv.org/abs/2609.21404",
+    "html_url": "https://arxiv.org/html/2609.21404v1",
+    "path": "assets/paper-images/2609.21404.webp",
+    "image_url": "https://arxiv.org/pdf/2609.21404",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 893,
+    "height": 1191
   }
 }

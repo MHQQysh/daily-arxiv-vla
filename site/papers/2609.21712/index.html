@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。 任务：从视觉历史与计划的 ego-motion 合成多视角驾驶观测，并与策略在仿真回路中交替执行，实现可控、可重复的闭环仿真。 应用场景：生产级异构传感器配置（4 路 FoV&gt;180° 鱼眼 + 3 路针孔相机，原生约 720p、宽高比 5:1–5:4）下的实时闭环仿真。 研究问题：① 原生异构传感器的保真复现；② 因果逐时间步交互与长时程稳定性、低延迟的统一；③ 同一地点沿不同轨迹重访时场景身份（几何与布局）的保持。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.21712">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.21712.webp" alt="ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation</h1>
+            <div class="detail-meta">2026-09-18 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.21712" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.21712" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.21712</span></div>
+            <p class="detail-summary">论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。 任务：从视觉历史与计划的 ego-motion 合成多视角驾驶观测，并与策略在仿真回路中交替执行，实现可控、可重复的闭环仿真。 应用场景：生产级异构传感器配置（4 路 FoV&gt;180° 鱼眼 + 3 路针孔相机，原生约 720p、宽高比 5:1–5:4）下的实时闭环仿真。 研究问题：① 原生异构传感器的保真复现；② 因果逐时间步交互与长时程稳定性、低延迟的统一；③ 同一地点沿不同轨迹重访时场景身份（几何与布局）的保持。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">ZYT AI Team · 原文未明确对应（论文仅署名“ZYT AI Team”、未给出个体作者与机构对应关系）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.21712/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。</li><li>任务：从视觉历史与计划的 ego-motion 合成多视角驾驶观测，并与策略在仿真回路中交替执行，实现可控、可重复的闭环仿真。</li><li>应用场景：生产级异构传感器配置（4 路 FoV&gt;180° 鱼眼 + 3 路针孔相机，原生约 720p、宽高比 5:1–5:4）下的实时闭环仿真。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：ZYT AI Team；作者：原文未明确对应（论文仅署名“ZYT AI Team”，未给出个体作者与机构对应关系）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。</li><li>任务：从视觉历史与计划的 ego-motion 合成多视角驾驶观测，并与策略在仿真回路中交替执行，实现可控、可重复的闭环仿真。</li><li>应用场景：生产级异构传感器配置（4 路 FoV&gt;180° 鱼眼 + 3 路针孔相机，原生约 720p、宽高比 5:1–5:4）下的实时闭环仿真。</li><li>研究问题：① 原生异构传感器的保真复现；② 因果逐时间步交互与长时程稳定性、低延迟的统一；③ 同一地点沿不同轨迹重访时场景身份（几何与布局）的保持。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>原生异构传感器建模：双 Plücker 适配器（按投影类型分派）、ego-motion AdaLN、像素对齐布局条件，在不统一投影与分辨率的前提下联合建模 4 鱼眼 + 3 针孔视图，并配套异构混合训练。</li><li>因果单步后训练：TF（teacher forcing）、CD（causal consistency distillation）、DMD（self-rollout distribution matching distillation）与 RigCritic 将 40 步双向 teacher 转化为逐 latent 的流式生成器，有界历史循环支持分钟级推理。</li><li>插件式隐式记忆：基于真实场景 4DGS 渲染构建跨轨迹配对，零初始化残差路径恢复地点特定几何，并可经蒸馏传递到自回归学生模型。</li><li>轻量高感知保真解码：19M 参数的 TinyVAE 采用像素、感知与语义监督，据称实现 59.8× 更快解码、26.8× 更低模型显存，生成质量与 555M Wan 解码器相当。</li><li>训练–推理协同设计：多维并行与显存优化使七视角高清训练从 OOM 变为 4 GPU 可训；W8A8 量化与自研推理引擎降低单次前向与增量执行开销。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：单一 5B 参数视频 Diffusion Transformer（DiT）骨干，统一承载多视角生成、条件注入、记忆与自回归推理。</li><li>输入传感器：7 路同步环视相机（前广角、前窄角、后视针孔；前/左/右/后圆柱鱼眼），每样本为 81 帧、10 FPS 片段，保留原生分辨率与宽高比，不做裁剪或重采样。</li><li>场景表示：每相机独立编码与 patchify 为 T×h_v×w_v 的 token 网格；视角内用三轴 RoPE，跨视角注意力省略 RoPE，改用 token 级 Plücker 射线与视角语义槽编码几何与相机身份。</li><li>模型结构：</li></ul>
+<p> - 跨视角注意力：每两层插入一个模块，共 15 个，仅在同一 latent 时间步融合空间 token；用共视性 mask 保留 42 个有向视角对中的 24 个（约减少 43%），经 FlexAttention BlockMask 实现。</p>
+<p> - 统一稠密条件注入：相机几何与布局均在目标视角像素网格上渲染，按 VAE 因果 4× 打包折到 latent 时间轴，经轻量适配器映射到 token 网格后加到 patch embedding，并满足 d·s·k = r·p = 32；条件仅注入含噪流，干净历史不直接接收条件嵌入。</p>
+<p> - Plücker 射线场：采用六维 Plücker 线表示，按针孔或圆柱鱼眼模型做 unprojection，方向不做归一化以保留针孔 d̃_z≡1 与圆柱 ‖d̃‖=√(1+h²) 的统计差异；按投影族使用不同相机适配器。</p>
+<p> - Ego-motion：通过 AdaLN 全局调制，使用帧间增量 ΔT_i 的纵向平移、横向平移与偏航三个平面自由度（不含横滚、俯仰与垂直运动），经 scaled symlog 归一化、Fourier 特征与 MLP 生成 motion embedding，与扩散时间步嵌入相加产生逐层 AdaLN 系数。</p>
+<p> - 布局：将类别、3D 尺寸与朝向、交通灯颜色与方向栅格化为线框，按原生相机网格渲染，经共享适配器（PixelUnshuffle + 线性投影 + 零初始化 1×1 卷积）注入单点；适配器约 47.2M 参数/2.5 TMAC，对比视频 VAE 编码器的 149.6M/366 TMAC。</p>
+<p> - 记忆：在 15 个奇数骨干层前插入残差交叉注意力，目标 token 查询 4 个检索到的记忆 latent；检索用 20 m 与 45° 门限、按朝向-距离选 3 个至少间隔 1.5 m 的空间参考及最近时间参考；采用相对旋转/平移的 Fourier–MLP 与帧内 2D RoPE 的两级位置嵌入；记忆层只接在前广角与前窄角槽位，再经跨视角注意力传播到其余五路。</p>
+<ul><li>关键训练技术：AR 后训练分四阶段——因果化与 TF（双流拼接干净/含噪 token，独立逐 latent 噪声水平，固定长度剪枝 {c_{T-1}, n_0}，T=21 时 42→40 个 latent，约 0.91× 二次注意力开销）、Causal CD（48 级离散网格、EMA teacher，式(11)）、self-rollout DMD 单步生成、RigCritic 跨视角对抗精修（对完整七路 rig 联合判别）；像素域感知正则作为 DMD 与 RigCritic 中的生成器正则项。</li><li>推理技术：TinyVAE 解码器、少步 AR 推理、W8A8 量化与自研推理引擎；长时程推理使用有界 KV-cache，仅缓存去噪后的干净历史。</li><li>原文未报告项：DiT 的具体层数、隐藏维度、注意力头数、优化器与学习率等训练超参细节在提供的原文片段中未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据来源：生产驾驶栈的同一车载日志与采集管线，覆盖多个车辆平台；片段在合规流程下采集并去标识化，处理与训练在受控访问环境中进行。</li><li>数据规模：语料包含数百万条片段，分两个分辨率层级，用于分阶段课程训练；记忆模块使用近 100 万对同地点、不同轨迹的 4DGS 渲染配对。</li><li>数据清洗与再平衡：先剔除短于 81 帧的片段；联合分层天气、时段、自车速度与导航动作，保留稀有条件并下采样冗余常见场景；最终昼夜比约 2:1，干燥天气（晴/多云/阴）占 93.7%，雨雾雪合计约 6.3%，速度高于 86 km/h 的样本不足 1%，直行约占导航动作一半、左转约为右转两倍；清晰度过滤去除约 2% 因镜头污染或强降水严重退化的片段。</li><li>条件信号：ego-motion 帧间位姿增量、标定相机内外参、在线感知输出的场景布局（动态目标与静态道路要素，含 3D 框、朝向与交通灯颜色/方向标记）、仅作相机标识的文本（不含场景语义）。</li><li>跨轨迹配对构建：由端到端驾驶模型提出安全约束下的替代路径，使用 4DGS（时空体素网格 + MLP 预测规范 3D 高斯形变）重建并渲染该路径；渲染分支为记忆输入，原始轨迹观测为目标。</li><li>训练资源：七视角高清训练在 4 块 GPU 上由 OOM 变为可训练；实时吞吐为两 GPU 设置下完整七路 rig 4 FPS。</li><li>模型规模：骨干 5B 参数 DiT；TinyVAE 解码器 19M 参数；Wan 解码器为 555M 参数。</li><li>仿真器：原文未报告使用外部仿真器。</li><li>实车平台：原文报告数据来自生产车队多车辆平台的车载日志，但未报告具体车型或实车部署平台细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：内部多视角测试集（internal multi-view test set）；开环生成质量评估；30 秒长时程 rollout 与跨轨迹重访定性验证；未报告闭环策略评测或真实实车测试结果。</li><li>评估指标：PSNR、SSIM、FID、FVD、LPIPS；时延/加速比、FPS、模型参数与显存开销、MACs。</li><li>关键数值：</li></ul>
+<p> - 一步模型保留 teacher 超过 90% 的 PSNR 与 SSIM，FID、FVD、LPIPS 与 teacher 差距在 11% 以内。</p>
+<p> - 在仅计生成器的</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.22040/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PRIME: Perception Feedback with Situational Memory Embeddings in VLA Models</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.21486/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Driving on Registers, Reasoning on Risk: Risk-Aware Occupancy for Register-Based End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

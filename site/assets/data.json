@@ -1,5 +1,237 @@
 [
   {
+    "date": "2026-09-18",
+    "title": "Traffic Sign Recognition for Autonomous Driving Using Branched YOLOv2 and Geometric Features",
+    "link": "https://arxiv.org/abs/2609.22060",
+    "arxiv_id": "2609.22060",
+    "detail_path": "papers/2609.22060/",
+    "cover_path": "covers/2609.22060/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22060.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22060.webp",
+    "preview_text": "论文面向自动驾驶与高级驾驶辅助系统中的交通标志识别（TSR）任务，要求同时完成标志的定位（检测）与语义分类。 应用场景为车载视觉感知系统对连续视频帧的实时处理，需在时延约束下输出标志位置与类别，供下游决策使用。 研究问题包括两方面：一是推理速度，即减少简单样本上不必要的网络计算；二是分类精度，即区分颜色/形状相似、目标小、模糊或被部分遮挡的交通标志，避免“定位正确但类别错误”。 论文以 YOLOv2 作为统一检测与分类基线，研究两类互补改进：加入中间预测分支实现早退，以及引入显式几何特征（形状模板）辅助分类。 由于检测数据集（GTSDB）与细粒度分类数据集（GTSRB）在标注类型上不匹配，论文还构造了同时含定位与细粒度类别的合成数据集。",
+    "research_unit": "K. N. Toosi University of Technology（伊朗德黑兰） · Arefeh Rezaei（Department of C…",
+    "hook_text": "论文面向自动驾驶与高级驾驶辅助系统中的交通标志识别（TSR）任务，要求同时完成标志的定位（检测）与语义分类。",
+    "key_points": [
+      "论文面向自动驾驶与高级驾驶辅助系统中的交通标志识别（TSR）任务，要求同时完成标志的定位（检测）与语义分类。",
+      "应用场景为车载视觉感知系统对连续视频帧的实时处理，需在时延约束下输出标志位置与类别，供下游决策使用。",
+      "研究问题包括两方面：一是推理速度，即减少简单样本上不必要的网络计算；二是分类精度，即区分颜色/形状相似、目标小、模糊或被部分遮挡的交通标志，避免“定位正确但类别错误”。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-18",
+    "title": "PRIME: Perception Feedback with Situational Memory Embeddings in VLA Models",
+    "link": "https://arxiv.org/abs/2609.22040",
+    "arxiv_id": "2609.22040",
+    "detail_path": "papers/2609.22040/",
+    "cover_path": "covers/2609.22040/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22040.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22040.webp",
+    "preview_text": "论文针对自动驾驶中的 Vision-Language-Action（VLA）模型，研究其感知–推理–规划层级整体上仍以“前馈推理”为主的问题。 应用场景为端到端自动驾驶，尤其是在闭环驾驶中需要依赖累积情境进行判断的场景，如汇入、路口让行、被遮挡目标随后显现等。 研究问题：早期感知无法利用下游推理、导航目标与预测行为等高层内部状态，导致感知编码无法提前关注与任务相关的线索。 提出 PRIME，通过引入 Situational Memory 将过去多步的感知、推理、导航目标与预测行为潜表示反馈到感知前端，使感知查询具备意图驱动能力。",
+    "research_unit": "Department of Electrical Engineering and Information Technology, RWTH Aache…",
+    "hook_text": "论文针对自动驾驶中的 Vision-Language-Action（VLA）模型，研究其感知–推理–规划层级整体上仍以“前馈推理”为主的问题。",
+    "key_points": [
+      "论文针对自动驾驶中的 Vision-Language-Action（VLA）模型，研究其感知–推理–规划层级整体上仍以“前馈推理”为主的问题。",
+      "应用场景为端到端自动驾驶，尤其是在闭环驾驶中需要依赖累积情境进行判断的场景，如汇入、路口让行、被遮挡目标随后显现等。",
+      "研究问题：早期感知无法利用下游推理、导航目标与预测行为等高层内部状态，导致感知编码无法提前关注与任务相关的线索。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-18",
+    "title": "ZYT-World: A Real-Time Controllable World Model for Closed-Loop Autonomous-Driving Simulation",
+    "link": "https://arxiv.org/abs/2609.21712",
+    "arxiv_id": "2609.21712",
+    "detail_path": "papers/2609.21712/",
+    "cover_path": "covers/2609.21712/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.21712.webp",
+    "paper_image_full_path": "assets/paper-images/2609.21712.webp",
+    "preview_text": "论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。 任务：从视觉历史与计划的 ego-motion 合成多视角驾驶观测，并与策略在仿真回路中交替执行，实现可控、可重复的闭环仿真。 应用场景：生产级异构传感器配置（4 路 FoV>180° 鱼眼 + 3 路针孔相机，原生约 720p、宽高比 5:1–5:4）下的实时闭环仿真。 研究问题：① 原生异构传感器的保真复现；② 因果逐时间步交互与长时程稳定性、低延迟的统一；③ 同一地点沿不同轨迹重访时场景身份（几何与布局）的保持。",
+    "research_unit": "ZYT AI Team · 原文未明确对应（论文仅署名“ZYT AI Team”、未给出个体作者与机构对应关系）",
+    "hook_text": "论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。",
+    "key_points": [
+      "论文面向端到端与视觉–语言–动作（VLA）驾驶策略的闭环评估需求，提出生成式世界模型 ZYT-World，用于替代昂贵且长尾覆盖不足的道路测试。",
+      "任务：从视觉历史与计划的 ego-motion 合成多视角驾驶观测，并与策略在仿真回路中交替执行，实现可控、可重复的闭环仿真。",
+      "应用场景：生产级异构传感器配置（4 路 FoV>180° 鱼眼 + 3 路针孔相机，原生约 720p、宽高比 5:1–5:4）下的实时闭环仿真。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-18",
+    "title": "Driving on Registers, Reasoning on Risk: Risk-Aware Occupancy for Register-Based End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.21486",
+    "arxiv_id": "2609.21486",
+    "detail_path": "papers/2609.21486/",
+    "cover_path": "covers/2609.21486/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.21486.webp",
+    "paper_image_full_path": "assets/paper-images/2609.21486.webp",
+    "preview_text": "论文面向端到端自动驾驶的轨迹规划任务，关注基于 register 的多模态“候选生成—候选选择”范式。 应用场景为自动驾驶从不确定观测中输出单条可执行轨迹，需要兼顾多模态行为覆盖与最终轨迹选择可靠性。 研究问题在于：稀疏场景表示导致候选生成质量低、并且对几何相似的高质量轨迹排序不可靠。 论文提出 RRDrive，用风险感知占据作为稠密、时间对齐、可沿轨迹查询的表示，同时服务候选生成与候选排序。 论文还构建 RiskOcc-NAVSIM，并提供外部 RiskOcc 预测器以验证从传感器估计风险感知占据的可行性。",
+    "research_unit": "School of Vehicle and Mobility, Tsinghua University · 原文未明确对应",
+    "hook_text": "论文面向端到端自动驾驶的轨迹规划任务，关注基于 register 的多模态“候选生成—候选选择”范式。",
+    "key_points": [
+      "论文面向端到端自动驾驶的轨迹规划任务，关注基于 register 的多模态“候选生成—候选选择”范式。",
+      "应用场景为自动驾驶从不确定观测中输出单条可执行轨迹，需要兼顾多模态行为覆盖与最终轨迹选择可靠性。",
+      "研究问题在于：稀疏场景表示导致候选生成质量低、并且对几何相似的高质量轨迹排序不可靠。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-18",
+    "title": "Risk-Aware Occupancy for Safety-Oriented End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.21470",
+    "arxiv_id": "2609.21470",
+    "detail_path": "papers/2609.21470/",
+    "cover_path": "covers/2609.21470/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.21470.webp",
+    "paper_image_full_path": "assets/paper-images/2609.21470.webp",
+    "preview_text": "论文面向端到端（E2E）自动驾驶，解决稀疏表示（离散目标与地图元素）在拥挤、遮挡、非结构化障碍与复杂交互场景中难以完整、显式刻画规划相关风险的问题。 提出一种稠密表示——风险感知占据（risk-aware occupancy），将全局场景占据、地图衍生的交通约束与未来动态智能体占据统一编码为 BEV 风险场。 该统一 BEV 图在空间与时间维度上显式编码轨迹规划所需的风险证据，可作为感知监督目标与规划中间特征。 设计端到端网络 ROIDrive，通过独立分支预测风险感知占据并注入规划查询，实现安全导向的轨迹生成。 构建 RiskOcc4D-nuScenes 数据集以量化安全问题，并在 nuScenes 上验证碰撞率下降。",
+    "research_unit": "School of Vehicle and Mobility, Tsinghua University · 原文未明确对应",
+    "hook_text": "论文面向端到端（E2E）自动驾驶，解决稀疏表示（离散目标与地图元素）在拥挤、遮挡、非结构化障碍与复杂交互场景中难以完整、显式刻画规划相关风险的问题。",
+    "key_points": [
+      "论文面向端到端（E2E）自动驾驶，解决稀疏表示（离散目标与地图元素）在拥挤、遮挡、非结构化障碍与复杂交互场景中难以完整、显式刻画规划相关风险的问题。",
+      "提出一种稠密表示——风险感知占据（risk-aware occupancy），将全局场景占据、地图衍生的交通约束与未来动态智能体占据统一编码为 BEV 风险场。",
+      "该统一 BEV 图在空间与时间维度上显式编码轨迹规划所需的风险证据，可作为感知监督目标与规划中间特征。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-18",
+    "title": "Stabilizing Trajectory Outputs in End-to-End Autonomous Driving via SC-IMM Based Teacher Signals",
+    "link": "https://arxiv.org/abs/2609.21404",
+    "arxiv_id": "2609.21404",
+    "detail_path": "papers/2609.21404/",
+    "cover_path": "covers/2609.21404/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.21404.webp",
+    "paper_image_full_path": "assets/paper-images/2609.21404.webp",
+    "preview_text": "任务：端到端自动驾驶中的未来路点（waypoint）轨迹预测，并通过下游控制器将路点转换为车辆控制命令。 应用场景：基于传感器输入直接输出未来轨迹的端到端自动驾驶系统，重点面向闭环驾驶场景（摘要报告在 CARLA Town12 中进行闭环评估）。 研究问题：传统基于路点的模仿学习主要最小化坐标级误差，难以捕捉依赖场景的“路径—速度”变化，也难以抑制路点输出在时间上的不稳定性，从而导致闭环行为不稳定。",
+    "research_unit": "原文未明确对应 · Siewoo Kim、Seung-Hyun Kong",
+    "hook_text": "任务：端到端自动驾驶中的未来路点（waypoint）轨迹预测，并通过下游控制器将路点转换为车辆控制命令。",
+    "key_points": [
+      "任务：端到端自动驾驶中的未来路点（waypoint）轨迹预测，并通过下游控制器将路点转换为车辆控制命令。",
+      "应用场景：基于传感器输入直接输出未来轨迹的端到端自动驾驶系统，重点面向闭环驾驶场景（摘要报告在 CARLA Town12 中进行闭环评估）。",
+      "研究问题：传统基于路点的模仿学习主要最小化坐标级误差，难以捕捉依赖场景的“路径—速度”变化，也难以抑制路点输出在时间上的不稳定性，从而导致闭环行为不稳定。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "Talk to Me, Jarvis: An Open-Source Edge-Deployable Voice Assistant Framework for Autonomous Racecars",
+    "link": "https://arxiv.org/abs/2609.21109",
+    "arxiv_id": "2609.21109",
+    "detail_path": "papers/2609.21109/",
+    "cover_path": "covers/2609.21109/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.21109.webp",
+    "paper_image_full_path": "assets/paper-images/2609.21109.webp",
+    "preview_text": "面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。 目标是解决传统图形界面或命令行接口需要视觉注意力、增加反应时间的问题，允许操作员在不移开视线的情况下下达命令。 核心研究问题是在自然语言表达空间无限、而可执行命令集合有限的不匹配条件下，实现可靠、低延迟、网络无关的语音指令识别与映射。 关注在线托管模型带来的网络依赖与推理延迟波动问题，主张采用本地离线部署方案。",
+    "research_unit": "Technical University of Munich, TUM School of Engineering and Design, Profe…",
+    "hook_text": "面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。",
+    "key_points": [
+      "面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。",
+      "目标是解决传统图形界面或命令行接口需要视觉注意力、增加反应时间的问题，允许操作员在不移开视线的情况下下达命令。",
+      "核心研究问题是在自然语言表达空间无限、而可执行命令集合有限的不匹配条件下，实现可靠、低延迟、网络无关的语音指令识别与映射。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-17",
+    "title": "Do Spinning Radar Doppler Velocity Measurements Improve Vehicle Detection and Tracking?",
+    "link": "https://arxiv.org/abs/2609.21000",
+    "arxiv_id": "2609.21000",
+    "detail_path": "papers/2609.21000/",
+    "cover_path": "covers/2609.21000/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.21000.webp",
+    "paper_image_full_path": "assets/paper-images/2609.21000.webp",
+    "preview_text": "论文研究旋转式 FMCW 雷达的 Doppler 速度测量是否能够提升自动驾驶中的车辆检测与跟踪性能。 任务场景为使用具备 Doppler 能力的旋转雷达进行车辆目标检测和多目标跟踪，并补充由于缺乏真值动态目标标签而需要的自动标注流程。 关注的核心问题包括：旋转雷达检测的学习监督缺失、Doppler 距离畸变，以及低帧率旋转雷达下的帧间运动建模困难。 作者在 Boreas Road Trip 数据集上构建自动 lidar-to-radar 标注管线，并将标签转移到雷达，用于训练和评估检测器及跟踪器。",
+    "research_unit": "University of Toronto, Robotics Institute, Canada · Eric Xie、Daniil Lisus、T…",
+    "hook_text": "论文研究旋转式 FMCW 雷达的 Doppler 速度测量是否能够提升自动驾驶中的车辆检测与跟踪性能。",
+    "key_points": [
+      "论文研究旋转式 FMCW 雷达的 Doppler 速度测量是否能够提升自动驾驶中的车辆检测与跟踪性能。",
+      "任务场景为使用具备 Doppler 能力的旋转雷达进行车辆目标检测和多目标跟踪，并补充由于缺乏真值动态目标标签而需要的自动标注流程。",
+      "关注的核心问题包括：旋转雷达检测的学习监督缺失、Doppler 距离畸变，以及低帧率旋转雷达下的帧间运动建模困难。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
     "date": "2026-09-17",
     "title": "OPTED: On-Policy Fine-Tuning for End-to-End Driving using a Render-Free Teacher",
     "link": "https://arxiv.org/abs/2609.20756",

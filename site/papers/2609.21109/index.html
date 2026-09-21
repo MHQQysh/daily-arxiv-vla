@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Talk to Me, Jarvis: An Open-Source Edge-Deployable Voice Assistant Framework for Autonomous Racecars - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。 目标是解决传统图形界面或命令行接口需要视觉注意力、增加反应时间的问题，允许操作员在不移开视线的情况下下达命令。 核心研究问题是在自然语言表达空间无限、而可执行命令集合有限的不匹配条件下，实现可靠、低延迟、网络无关的语音指令识别与映射。 关注在线托管模型带来的网络依赖与推理延迟波动问题，主张采用本地离线部署方案。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.21109">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.21109.webp" alt="Talk to Me, Jarvis: An Open-Source Edge-Deployable Voice Assistant Framework for Autonomous Racecars" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Talk to Me, Jarvis: An Open-Source Edge-Deployable Voice Assistant Framework for Autonomous Racecars</h1>
+            <div class="detail-meta">2026-09-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.21109" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.21109" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.21109</span></div>
+            <p class="detail-summary">面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。 目标是解决传统图形界面或命令行接口需要视觉注意力、增加反应时间的问题，允许操作员在不移开视线的情况下下达命令。 核心研究问题是在自然语言表达空间无限、而可执行命令集合有限的不匹配条件下，实现可靠、低延迟、网络无关的语音指令识别与映射。 关注在线托管模型带来的网络依赖与推理延迟波动问题，主张采用本地离线部署方案。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Technical University of Munich, TUM School of Engineering and Design, Profe…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.21109/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。</p>
+  <ul class="reading-intro-points"><li>面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。</li><li>目标是解决传统图形界面或命令行接口需要视觉注意力、增加反应时间的问题，允许操作员在不移开视线的情况下下达命令。</li><li>核心研究问题是在自然语言表达空间无限、而可执行命令集合有限的不匹配条件下，实现可靠、低延迟、网络无关的语音指令识别与映射。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Technical University of Munich, TUM School of Engineering and Design, Professorship of Autonomous Vehicle Systems；作者：Daniel Henel、Alexander Langmann、Johannes Betz</li><li>机构：Technical University of Munich, TUM School of Engineering and Design, Institute of Automotive Technology；作者：Frederik Werner</li><li>机构：Munich Institute of Robotics and Machine Intelligence (MIRMI)；作者：D. Henel、F. Werner、A. Langmann、J. Betz（原文脚注将 MIRMI 与上述作者共同标注）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向自动驾驶赛车场景，研究人类操作员通过语音向自动驾驶赛车下发高层行为命令的问题。</li><li>目标是解决传统图形界面或命令行接口需要视觉注意力、增加反应时间的问题，允许操作员在不移开视线的情况下下达命令。</li><li>核心研究问题是在自然语言表达空间无限、而可执行命令集合有限的不匹配条件下，实现可靠、低延迟、网络无关的语音指令识别与映射。</li><li>关注在线托管模型带来的网络依赖与推理延迟波动问题，主张采用本地离线部署方案。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>对在线托管语言模型与本地部署语言模型进行语音命令分类对比，评估推理延迟与意图识别准确率。</li><li>提出一套针对轻量级本地模型的微调与部署流程，在意图识别准确率上优于在线替代方案，同时降低推理延迟。</li><li>提出开源、离线的语音助手架构，集成唤醒词检测、语音转写与命令分类，并在资源受限的移动硬件上演示（github.com/TUM-AVS/jarvis_voice_assistant）。</li><li>构建并扩展了面向赛车的命令数据集，包含 17 个命令类别、1,645 个样本，并加入 out-of-scope（OOS）类别以提升对无关输入的拒绝能力。</li><li>展示 QLoRA + 4-bit 量化微调可在资源受限硬件上把 7B 级模型的准确率从 27.06% 提升到 97.63%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：Jarvis 作为独立模块扩展基站（base station），基站是人与车端软件之间的接口，负责遥测与诊断信息，并通过 ROS2 与感知、规划、检测等模块通信。</li><li>输入传感器：麦克风音频流（唤醒词持续监听音频流）；原文未报告其他传感器输入。</li><li>场景表示：原文未报告以地图、栅格或向量等形式的环境场景表示；系统以预定义行为命令空间（速度目标、启动/停止、退出或返回维修区等）作为命令表示。</li><li>模型结构：</li></ul>
+<p> - 唤醒词检测：基于 openWakeWord 框架，触发短语为 “Hey Jarvis!”，采用 keyword spotting 技术；激活后以合成语音 “Hi!” 回应并进入命令监听状态。</p>
+<p> - 语音转文本：本地使用 OpenAI Whisper 的轻量英文 “base.en” 变体，实现低延迟、不依赖网络的转写。</p>
+<p> - 文本到命令分类器：核心组件为 LLM，将自然语言输入映射为预定义行为命令；最终方案为 Mistral 7B 的领域微调版本（Mistral-7B-v0.3-bnb-4bit）。</p>
+<p> - 语音合成反馈：基于 Coqui TTS 框架与 VITS 神经语音合成模型；高频使用的回复预录制以降低延迟。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 微调采用 Unsloth 框架实施 QLoRA，适配所有线性模块，具体为注意力投影层（q, k, v, o）与 MLP 层（gate, up, down）。</p>
+<p> - 超参数网格搜索范围：学习率 1×10⁻⁵ 与 5×10⁻⁵，epoch 2 与 3，梯度累积步数 4 与 8，LoRA rank 16 与 32（α 相应缩放）。</p>
+<p> - 微调分两阶段：第一阶段在 17 类中抽取 5 类子集上评估三个模型对微调的接受度；第二阶段在完整训练集上对 Mistral 7B 进行完整微调。</p>
+<p> - 最终配置：学习率 5×10⁻⁵，epoch 2，LoRA rank 32，LoRA alpha 32，梯度累积步数 4，优化器 AdamW 8-bit。</p>
+<ul><li>部署与安全流程：识别后的命令需人工操作员确认，只有确认的命令才经 ROS2 传输至基站，在基站进行额外安全检查与状态验证后再通过移动网络连接转发给赛车；每条语音命令都会在基站界面可视化以便操作员核验。</li><li>原文未报告：目标检测网络、轨迹预测模型、规划算法细节等。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：</li></ul>
+<p> - 初步评测数据集：专家整理的 85 个样本，覆盖预定义高层赛车命令，并配有描述所有命令、强制结构化输出格式的提示词。</p>
+<p> - 微调数据集：原始数据集过小，使用 GPT-4 进行数据增强（同义词替换、复述、词序重排、少量上下文添加），最终扩展为 17 个命令类、1,645 个样本。</p>
+<p> - 数据划分：80/20 训练-测试划分，训练集 1,308 个样本。</p>
+<p> - 额外类别：加入 out-of-scope（OOS）类以处理无关输入。</p>
+<ul><li>仿真器：原文未报告使用任何仿真器。</li><li>模型规模：Mistral 7B、LLaMA-3.1 8B、LLaMA-3.2 3B 被选入进一步微调；对比模型还包括 GPT-4o-2024-11-20、GPT-4o-2024-08-06、o3-mini-2025-01-31、GPT-4-turbo-2024-04-09、GPT-3.5-turbo-0125、Deepseek-R1-7B/14B/32B、Gemma2-9B/27B、Gemma3-12B、Mistral-small-22B/24B。</li><li>训练与推理资源：</li></ul>
+<p> - 初始基准测试与第一阶段微调：NVIDIA GeForce RTX 4090 GPU。</p>
+<p> - 第二阶段完整微调与评估：NVIDIA GeForce RTX 3060 Laptop GPU。</p>
+<p> - 在线模型通过 OpenAI API 访问（付费账户），使用默认设置，temperature 为 1.0。</p>
+<ul><li>实车平台：系统面向自动驾驶赛车，并集成到自动驾驶赛车软件栈（引用 Head-to-head autonomous racing 相关工作）；原文未报告具体赛车名称、底盘或车载计算平台型号。</li><li>开源地址：https://github.com/TUM-AVS/jarvis_voice_assistant</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：专家整理的赛车高层命令数据集（初步评测 85 样本）；微调后使用完整扩展数据集（1,645 样本，17 类，80/20 划分）的测试集。</li><li>评估指标：</li></ul>
+<p> - 意图分类准确率：正确分类命令数与测试样本总数之比。</p>
+<p> - 推理时间：从 tokenized 输入送入模型开始，到生成最终 end-of-sequence token 为止的端到端处理时间。</p>
+<ul><li>初始基准测试关键数值（无任务特定微调）：</li></ul>
+<p> - 在线模型：GPT-4o-2024-11-20 为 76.47% / 3.38 s；GPT-4o-2024-08-06 为 74.12% / 4.16 s；o3-mini-2025-01-31 为 85.88% / 21.08 s；GPT-4-turbo-2024-04-09 为 81.18% / 15.73 s；GPT-3.5-turbo-0125 为 57.65% / 5.12 s。</p>
+<p> - 本地模型：Llama3.1-8B 为 8.24% / 0.61 s；Llama3.2-3B 为 2.35% / 0.44 s；Deepseek-R1-7B 为 5.88% / 4.07 s；Deepseek-R1-14B 为 16.47% / 9.86 s；Deepseek-R1-32B 为 21.18% / 34.96 s；Gemma2-9B 为 8.24% / 0.82 s；Gemma2-27B 为 27.06% / 1.82 s；Gemma3-12B 为 18.82% / 1.14 s；Mistral-7B 为 27.06% / 0.64 s；Mistral-small-22B 为 16.47% / 1.31 s；Mistral-small-24B 为 24.71% / 1.15 s。</p>
+<p> - 作者结论：在线模型准确率较高但响应时间过长；本地模型准确率较低但延迟显著降低；因目标应用对快速响应要求高，优先考虑延迟，故选择 Mistral 7B、LLaMA-3.1 8B、LLaMA-3.2 3B 进入微调。</p>
+<ul><li>第一阶段微调（5 类子集，N</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.21404/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Stabilizing Trajectory Outputs in End-to-End Autonomous Driving via SC-IMM Based Teacher Signals</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.21000/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Do Spinning Radar Doppler Velocity Measurements Improve Vehicle Detection and Tracking?</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
