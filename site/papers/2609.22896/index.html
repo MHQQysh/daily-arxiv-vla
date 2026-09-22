@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Combining Foundation Model Confidence and Monocular Depth for Training-Free Out-of-Distribution Segmentation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。 应用场景为自动驾驶感知系统，要求对行驶路径上的未知物体产生稠密异常分数，并进一步在视频序列中实现 OOD 目标跟踪。 研究问题：现有 OOD 分割方法通常需要 OOD 训练样本、重训练分割骨干网络或专用辅助架构，限制实际部署；论文提出无需训练的方法，直接从基础分割模型的置信度预测中导出稠密 OOD 分数，并结合单目深度估计抑制误检。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.22896">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.22896.webp" alt="Combining Foundation Model Confidence and Monocular Depth for Training-Free Out-of-Distribution Segmentation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Combining Foundation Model Confidence and Monocular Depth for Training-Free Out-of-Distribution Segmentation</h1>
+            <div class="detail-meta">2026-09-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.22896" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.22896" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.22896</span></div>
+            <p class="detail-summary">论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。 应用场景为自动驾驶感知系统，要求对行驶路径上的未知物体产生稠密异常分数，并进一步在视频序列中实现 OOD 目标跟踪。 研究问题：现有 OOD 分割方法通常需要 OOD 训练样本、重训练分割骨干网络或专用辅助架构，限制实际部署；论文提出无需训练的方法，直接从基础分割模型的置信度预测中导出稠密 OOD 分数，并结合单目深度估计抑制误检。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Heinrich-Heine-University · Serin Varghese、Kira Maag</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.22896/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。</li><li>应用场景为自动驾驶感知系统，要求对行驶路径上的未知物体产生稠密异常分数，并进一步在视频序列中实现 OOD 目标跟踪。</li><li>研究问题：现有 OOD 分割方法通常需要 OOD 训练样本、重训练分割骨干网络或专用辅助架构，限制实际部署；论文提出无需训练的方法，直接从基础分割模型的置信度预测中导出稠密 OOD 分数，并结合单目深度估计抑制误检。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Heinrich-Heine-University；作者：Serin Varghese、Kira Maag</li><li>机构：CARIAD SE；作者：Serin Varghese、Fabian Hueger</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。</li><li>应用场景为自动驾驶感知系统，要求对行驶路径上的未知物体产生稠密异常分数，并进一步在视频序列中实现 OOD 目标跟踪。</li><li>研究问题：现有 OOD 分割方法通常需要 OOD 训练样本、重训练分割骨干网络或专用辅助架构，限制实际部署；论文提出无需训练的方法，直接从基础分割模型的置信度预测中导出稠密 OOD 分数，并结合单目深度估计抑制误检。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种无需训练的 OOD 检测流程，通过反转 SAM 2 道路分割 logits 获得稠密异常分数，仅需固定几何点提示，无需任务特定微调。</li><li>引入 depth-ring scoring 组件级融合机制，利用单目深度估计中的局部深度差异抑制误检，同时按构造保留检测召回。</li><li>在道路中心 OOD 基准上取得较强性能，且不使用任务特定训练数据、OOD 样本或任务特定辅助模型。</li><li>提出一个简单的时序关联组件作为 OOD 跟踪基线。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知中的 OOD 分割与 OOD 跟踪模块。</li><li>输入传感器：单目 RGB 图像/视频；原文未报告激光雷达、双目或多模态传感器输入。</li><li>场景表示：稠密逐像素 OOD 分数图，结合道路掩码、连通组件、单目深度图和跟踪实例。</li><li>模型结构：使用 SAM 2 large 配置进行可提示道路分割，使用 Depth Anything V2（ViT-L backbone）进行单目深度估计；两者均使用公开预训练权重，不进行微调或域适应。</li><li>关键技术：</li></ul>
+<p> - 道路分割：使用 3 个前景点、2 个背景点以及覆盖图像下方 70% 的边界框作为提示。</p>
+<p> - 候选选择：从 SAM 2 的 K 个候选掩码中选择质量分数最高且满足面积大于 10% 图像面积并触及图像底部的掩码。</p>
+<p> - 稠密 OOD 打分：对选中掩码的全分辨率 logit 图执行 sigmoid 反转，得到连续 OOD 分数。</p>
+<p> - 误检抑制：将像素转为连通组件，扩张道路掩码，过滤小噪声片段和触碰底边的大组件，并使用 depth-ring scoring 比较组件内部与周围道路环的中值深度差异。</p>
+<p> - 时序跟踪：基于 IoU 的在线二部匹配，使用匈牙利算法和生命周期状态管理；匹配阈值、初始化帧数和最大丢失帧数由参数控制。</p>
+<ul><li>原文未报告：网络训练细节、损失函数、模型参数量、推理时延、实车部署细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：</li></ul>
+<p> - SegmentMeIfYouCan 基准中的 LostAndFound、RoadObstacle、RoadAnomaly。</p>
+<p> - Street Obstacle Sequences（SOS）和 Wuppertal Obstacle Sequences（WOS）视频序列数据集，用于 OOD 跟踪评估。</p>
+<ul><li>仿真器：原文未报告。</li><li>模型规模：SAM 2 使用 large 配置；Depth Anything V2 使用 ViT-L backbone；原文未报告具体参数量。</li><li>训练资源：原文未报告训练资源，因为方法为 training-free，且基础模型均使用公开预训练权重。</li><li>实车平台：原文未报告实车平台；数据集包含真实道路视频序列。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：SegmentMeIfYouCan 的 LostAndFound、RoadObstacle、RoadAnomaly；OOD 跟踪使用 SOS 和 WOS。</li><li>评估指标：</li></ul>
+<p> - 像素级：AuPRC、FPR95。</p>
+<p> - 段级：平均 sIoU、PPV、F1-score，阈值 0.25 到 0.75，步长 0.05。</p>
+<p> - 跟踪：MOTA、MOTP。</p>
+<ul><li>对比方法：Maximum Softmax、MC Dropout、Ensemble、PGN、W-EDL、ODIN、Mahalanobis；跟踪对比包括 Baseline、PixOOD、JSR-Net、DaCUP、UNO-SAM2、RbA。</li><li>关键数值：</li></ul>
+<p> - LostAndFound：Ours AuPRC 71.5，FPR95 3.2，平均 sIoU 44.7，平均 PPV 52.6，平均 F1 49.6。</p>
+<p> - RoadObstacle：Ours AuPRC 51.3，FPR95 3.8，平均 sIoU 45.6，平均 PPV 45.7，平均 F1 43.2。</p>
+<p> - RoadAnomaly：Ours AuPRC 14.6，FPR95 69.7，平均 sIoU 10.3，平均 PPV 9.0，平均 F1 5.4。</p>
+<p> - SOS：Ours AuPRC 93.34，FPR95 0.22，平均 F1 33.65，MOTA -0.032，MOTP 85.77。</p>
+<p> - WOS：Ours AuPRC 74.27，FPR95 2.39，平均 F1 15.13，MOTA -0.029，MOTP 407.55。</p>
+<ul><li>消融结果：</li></ul>
+<p> - 提示策略：SAM 2 单点提示在 SOS 上 AuPRC 7.05、FPR95 100.00；3 正 2 负点在 SOS 上 AuPRC 18.89、FPR95 4.47；加入 70% 边界框后 SOS AuPRC 93.34、FPR95 0.22，LostAndFound AuPRC 71.13、FPR95 3.20。</p>
+<p> - 后处理累计效果：道路掩码扩张后 SOS 平均 F1 2.93、LostAndFound 48.87；加入自车抑制后分别为 2.91 和 49.14；加入小组件过滤后分别为 23.02 和 48.89；加入深度抑制后分别为 33.65 和 49.58。</p>
+<ul><li>条件：评估在开环、图像/视频序列和真实道路数据集上进行；原文未报告闭环仿真或实车闭环测试。跟踪结果被作者解释为初步因果基线，时序关联在大位移场景下表现有限。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.23049/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">VDGS: Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.22868/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Planning-Aligned Pretraining of BEV Representations with Sparse Action-Conditioned Targets for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZIL: Zero-shot Image-to-LiDAR Registration - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。 应用场景包括自动驾驶、机器人导航和混合现实等。 论文针对现有 SOTA 方法的两个问题：一是多数假设图像与点云同帧采集，难以处理远距离帧的非同步输入；二是依赖特定域训练，难以泛化到未见场景。 论文提出 ZIL，定位为首个面向零样本非同步图像到 LiDAR 配准的基础模型，目标是在不微调、不适配的情况下跨未见室外相机–LiDAR 系统完成配准。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.22716">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.22716.webp" alt="ZIL: Zero-shot Image-to-LiDAR Registration" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ZIL: Zero-shot Image-to-LiDAR Registration</h1>
+            <div class="detail-meta">2026-09-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.22716" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.22716" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.22716</span></div>
+            <p class="detail-summary">论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。 应用场景包括自动驾驶、机器人导航和混合现实等。 论文针对现有 SOTA 方法的两个问题：一是多数假设图像与点云同帧采集，难以处理远距离帧的非同步输入；二是依赖特定域训练，难以泛化到未见场景。 论文提出 ZIL，定位为首个面向零样本非同步图像到 LiDAR 配准的基础模型，目标是在不微调、不适配的情况下跨未见室外相机–LiDAR 系统完成配准。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Xiamen University · Zijun Li、Xiaotian Sun、Xuelun Shen 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.22716/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。</p>
+  <ul class="reading-intro-points"><li>论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。</li><li>应用场景包括自动驾驶、机器人导航和混合现实等。</li><li>论文针对现有 SOTA 方法的两个问题：一是多数假设图像与点云同帧采集，难以处理远距离帧的非同步输入；二是依赖特定域训练，难以泛化到未见场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Xiamen University；作者：Zijun Li、Xiaotian Sun、Xuelun Shen、Yao Dai、Sheng Ao、Cheng Wang</li><li>机构：Meta；作者：Yangyang Shi、Jakob Engel、Zhipeng Cai</li><li>机构：Xiamen University、Meta；作者：Cheng Wang（原文同时标注两个机构，且为通讯作者）、Zhipeng Cai（原文同时标注两个机构，且为通讯作者）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。</li><li>应用场景包括自动驾驶、机器人导航和混合现实等。</li><li>论文针对现有 SOTA 方法的两个问题：一是多数假设图像与点云同帧采集，难以处理远距离帧的非同步输入；二是依赖特定域训练，难以泛化到未见场景。</li><li>论文提出 ZIL，定位为首个面向零样本非同步图像到 LiDAR 配准的基础模型，目标是在不微调、不适配的情况下跨未见室外相机–LiDAR 系统完成配准。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 ZIL，首个面向图像到 LiDAR 配准的基础模型，具备强零样本泛化能力，可用于非同步图像–点云配准。</li><li>设计双编码器–双头 Transformer 架构：Vision Transformer 编码图像，Point Transformer V3 编码点云，除回归相机位姿外，还通过代理任务预测图像像素在 LiDAR 坐标系中的 3D 坐标，在不增加标注的情况下显著提升位姿精度。</li><li>发现朴素混合数据训练无法带来零样本泛化，提出相机内参归一化与 LiDAR 垂直轴原点归一化，以统一跨数据集的几何约定。</li><li>在 7 个公开数据集、140 万 LiDAR 帧上训练单一模型，在 5 个域内与零样本基准上持续显著超越此前 SOTA，最多降低平移误差 87%、旋转误差 76%。</li><li>首次在全部 5 个评估数据集上达到亚米级精度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：图像到 LiDAR 跨模态配准模块；输入为图像与 LiDAR 点云，输出相机到 LiDAR 的相对位姿。</li><li>输入传感器：相机图像与 LiDAR 点云；论文未报告具体实车传感器型号。</li><li>场景表示：图像经 Vision Transformer 编码为 patch token；点云经 Point Transformer V3 编码为稀疏 3D 点特征及其 3D 坐标；两类 token 拼接后由全局注意力块处理。</li><li>模型结构：编码器–解码器 Transformer，双编码器（Vision Transformer、Point Transformer V3）与双头（位姿头、逐像素 3D 坐标 DPT 头）。引入模态特定可学习 token（cam/lidar）与 register token；图像 token 使用 2D RoPE，点 token 使用归一化坐标构造的 3D RoPE 及稀疏卷积位置嵌入。位姿 token 由最终层 cam token 与 lidar token 相加构成，经 4 层额外自注意力与线性层回归 7 维位姿（3 维平移 + 4 维旋转四元数）。</li><li>关键技术：相机内参归一化（统一到 518×280 分辨率、水平视场角 45.5°、f_x=f_y=617.49 的规范针孔相机）；LiDAR Z 轴归一化（将最低点 z 坐标平移至零，并对真值平移与点图目标施加同样平移）。</li><li>代理任务：将点 token 全局平均后加到每个图像 patch token 上，由 DPT 头聚合多解码层特征预测 LiDAR 坐标系下的逐像素 3D 坐标；真值点图来自训练语料中查询时刻已有的 LiDAR 扫描，无需新数据采集或人工标注。</li><li>训练损失：总损失为位姿损失与点损失加权和（λ_pose=5，λ_point=1）；位姿损失为平移与旋转四元数的 ℓ1 损失之和；点损失为有效像素集合 Ω 上预测点图与真值点图的 L2 损失。</li><li>训练细节：冻结两个模态编码器；点编码器输出下采样至每场景 2048 个 token；梯度累积 5 个 micro-batch；共 128K 次迭代。</li><li>原文未报告：具体网络参数量、推理时延、实车部署平台信息未在原文中报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练数据集（7 个公开数据集，共 1.4M LiDAR 帧）：KITTI、nuScenes、Argoverse 2、Waymo、Boreas_RT、ZOD、Ford。</li><li>训练图像–点云对：约 3.1M 对图像–点云训练对，来自 1.4M 唯一 LiDAR 帧。</li><li>域内评估数据集：KITTI、nuScenes。</li><li>零样本评估数据集：KITTI-360、Lyft、PandaSet；这些数据集在任务特定配准训练中完全保留，不用于训练、微调、验证、checkpoint 选择或超参调优。</li><li>消融实验训练子集：KITTI、nuScenes、Argoverse 2、Waymo 四个数据集，约 1M 图像–点云对均匀采样。</li><li>仿真器：原文未报告。</li><li>模型规模：解码器包含 36 个 block，隐藏维度 1024；DPT 头使用第 12、20、28、36 层解码 block 进行多层级特征聚合；图像归一化分辨率 518×280，水平视场角 45.5°，f_x=f_y=617.49 像素。原文未报告总参数量。</li><li>训练资源：6 张 NVIDIA RTX 4090 GPU，AdamW 优化器，学习率 5×10⁻⁴，权重衰减 10⁻²，带 warmup，迭代 128K 次。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：域内评估为 KITTI 与 nuScenes；零样本评估为 KITTI-360、Lyft、PandaSet。</li><li>评估协议：按先前工作协议，在 ±10 m 范围内以固定种子随机采样非同步图像–点云对。</li><li>评估指标：平均相对平移误差（RTE）、平均相对旋转误差（RRE）、注册召回率（RR，RTE 与 RRE 同时小于 (2 m, 5°) 视为成功）。</li><li>零样本结果（KITTI-360 / Lyft / PandaSet）：ZIL 注册召回率分别为 96.9%、98.3%、98.6%；RTE 分别为 0.53±0.81 m、0.63±0.60 m、0.67±0.40 m；RRE 分别为 1.93°±8.76°、0.77°±0.38°、1.60°±0.36°。</li><li>零样本对比方法：DeepI2P、CorrI2P、VP2P、CoFiI2P、CoFiI2P-cross、I2PReg、I2PReg-cross；多数基线在零样本数据上严重退化，同帧训练方法注册召回率低于 20%，KITTI-360 上多个方法出现灾难性失败（零召回、平均 RTE 超 1000 m，表中以“–”表示）。</li><li>域内结果（KITTI / nuScenes）：ZIL RTE 为 0.39±0.46 m / 0.57±1.03 m，RRE 为 1.08°±2.95° / 0.88°±2.17°，RR 为 97.5% / 95.8%。相比此前最佳 GraphI2P（各数据集分别训练），ZIL 用单一模型将 KITTI 的 RTE 从 0.68 m 降至 0.39 m，将 nuScenes 的 RRE 从 2.21° 降至 0.88°。</li><li>域内对比方法：DeepI2P (2D)、CorrI2P、VP2P、2D-3D Matr、RetrI2P、FreeReg、CoFiI2P、GraphI2P、I2PReg-cross；除 ZIL 与 I2PReg-cross 由本文训练外，其余结果来自 Bie et al. (2025) 在非同步设置下的报告。</li><li>消融结果（KITTI-360 / Lyft / PandaSet）：单数据集训练 RR 为 82.0% / 22.5% / 9.2%；朴素混合数据训练 RR 为 14.7% / 24.6% / 18.5%；去掉 K-norm 的 RR 为 37.8% / 7.9% / 53.2%；去掉 Z-shift 的 RR 为 84.6% / 73.4% / 42.1</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.22857/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Image Frame Dynamic Object Segmentation and Ego Motion Estimation using Radar Image Fusion</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.22411/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">AutoRASOR: Autonomous Rapid Scanning Electron Microscope Operator</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

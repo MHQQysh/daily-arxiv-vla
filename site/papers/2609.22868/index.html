@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Planning-Aligned Pretraining of BEV Representations with Sparse Action-Conditioned Targets for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。 应用场景为相机端到端自动驾驶系统，包括检测、建图、运动预测与规划通过共享 BEV 表征耦合。 研究问题在于：现有驾驶预训练方法常依赖任务标注或稠密场景重建，监督的是通用空间支撑，而非对候选自车运动/规划最相关的 BEV 区域。 PAVER（Planning-Aligned BEV Encoder Pretraining）仅预训练 BEV 编码器，不改变下游架构，并保持仅相机推理流程。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.22868">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.22868.webp" alt="Planning-Aligned Pretraining of BEV Representations with Sparse Action-Conditioned Targets for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Planning-Aligned Pretraining of BEV Representations with Sparse Action-Conditioned Targets for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.22868" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.22868" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.22868</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。 应用场景为相机端到端自动驾驶系统，包括检测、建图、运动预测与规划通过共享 BEV 表征耦合。 研究问题在于：现有驾驶预训练方法常依赖任务标注或稠密场景重建，监督的是通用空间支撑，而非对候选自车运动/规划最相关的 BEV 区域。 PAVER（Planning-Aligned BEV Encoder Pretraining）仅预训练 BEV 编码器，不改变下游架构，并保持仅相机推理流程。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Hanyang University · Jaeha Song</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.22868/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。</li><li>应用场景为相机端到端自动驾驶系统，包括检测、建图、运动预测与规划通过共享 BEV 表征耦合。</li><li>研究问题在于：现有驾驶预训练方法常依赖任务标注或稠密场景重建，监督的是通用空间支撑，而非对候选自车运动/规划最相关的 BEV 区域。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Hanyang University；作者：Jaeha Song</li><li>机构：Hanyang University；作者：Soonmin Hwang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。</li><li>应用场景为相机端到端自动驾驶系统，包括检测、建图、运动预测与规划通过共享 BEV 表征耦合。</li><li>研究问题在于：现有驾驶预训练方法常依赖任务标注或稠密场景重建，监督的是通用空间支撑，而非对候选自车运动/规划最相关的 BEV 区域。</li><li>PAVER（Planning-Aligned BEV Encoder Pretraining）仅预训练 BEV 编码器，不改变下游架构，并保持仅相机推理流程。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出规划对齐的 BEV 编码器预训练，将监督放在候选自车运动轨迹经过的位置，而非稠密 BEV 栅格。</li><li>从单次 LiDAR 扫描构建稀疏风险（risk）与未知（unknown）动作目标，并沿规则化自车运动生成稀疏动作目标。</li><li>使用动作条件化的掩码 BEV 分支预测稀疏动作目标，不需要场景重建、未来预测或学习到的教师模型。</li><li>仅迁移 BEV 编码器，丢弃约 10K 参数的辅助头；在多种端到端架构上评估多任务迁移与规划性能。</li><li>在 nuScenes 与 Bench2Drive 上报告规划、检测、运动预测、建图及闭环驾驶结果。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：PAVER 作用于端到端驾驶模型中的 BEV 编码器，预训练后只迁移 BEV 编码器；检测、建图、运动预测和规划解码器在预训练时被禁用。</li><li>输入传感器：多视角图像输入 BEV 编码器；LiDAR 仅用于构造预训练目标；原文还报告了无 LiDAR 时使用冻结 UniK3D 深度反投影构造 Pseudo-LiDAR 目标的设置。</li><li>场景表示：相机 BEV 特征 \(F=f_{\mathrm{bev}}(I)\in\mathbb{R}^{B\times C\times H\times W}\)；LiDAR 被栅格化为 BEV 证据图，单元状态为 Unknown、Free、Occupied。</li><li>候选自车运动：由有限纵向加速度与偏航率组合成规则化控制族，从当前自车速度沿多个时间地平线展开，得到自车坐标系状态；再转换到 LiDAR/BEV 索引坐标系。</li><li>稀疏动作目标：在每个候选状态处横向查询 K 个位置，Risk 目标为落在 Occupied 单元的比例，Unknown 目标为落在 Unknown 单元的比例；这些比例描述当前证据，不是未来碰撞概率或校准不确定性。</li><li>动作走廊特征掩码：根据横向查询单元并集构造二值掩码，将选中 BEV 特征替换为共享可学习 mask token，未选中单元保留原始特征。</li><li>动作条件预测：使用逐点 \(1\times1\) 投影得到 \(Z\)，在转换后的动作中心双线性采样特征，与自车坐标系动作状态拼接，经 MLP 预测 risk/unknown 两个 logit。</li><li>预训练目标：logit-based 二元交叉熵损失 \( \mathcal{L}_{\mathrm{pre}}=\lambda_r\mathcal{L}_r+\lambda_u\mathcal{L}_u \)，在有效动作–地平线条目上平均。</li><li>关键技术包括规则化候选运动、稀疏 LiDAR 风险/未知目标、动作走廊掩码、动作条件预测；原文明示候选运动用于索引监督位置，不是专家轨迹或学习到的动作提议。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes，使用 28,130 个训练关键帧预训练，并在全部 6,019 个验证关键帧上评估。</li><li>闭环评估：Bench2Drive Town05 Long，使用 9 条路线，每条路线重复一次。</li><li>仿真器：Bench2Drive Town05 Long 闭环评估；原文未报告具体仿真器名称。</li><li>模型规模：PAVER 预训练辅助头约 10K 参数；表中报告 0.01M auxiliary parameters；对比重建式预训练辅助头为 6.41M 与 13.43M。</li><li>训练资源：预训练 20 个 epoch，使用 4 个 GPU，AdamW、余弦退火和降低的图像骨干学习率；下游训练遵循各模型原始配方。</li><li>实车平台：原文未报告实车平台，仅报告 nuScenes 开环评估与 Bench2Drive 闭环评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集上的规划、运动预测、检测和矢量地图指标；Bench2Drive Town05 Long 闭环驾驶评估。</li><li>评估指标：规划 L2、碰撞率 Col.、运动 ADE/FDE/MR、检测 mAP/NDS、地图 mAP；闭环使用 Driving Score、Route Completion、Infraction Score。</li><li>nuScenes 开环关键结果：VAD-Tiny 上 PAVER 将平均碰撞率从 0.51% 降至 0.19%，规划 L2 从 0.66 m 降至 0.60 m，运动 ADE 从 0.91 m 降至 0.80 m，地图 mAP 从 0.42 升至 0.44。</li><li>其他架构结果：GenAD 碰撞率从 0.37% 降至 0.21%，L2 降低 0.05 m；VAD-Base 的 L2 降低 0.18 m，但碰撞率从 0.31% 升至 0.40%。</li><li>分地平线结果：VAD-Tiny 与 GenAD 在 1、2、3 秒均改善 L2 与碰撞；VAD-Base 改善 L2 但增加碰撞。</li><li>Pseudo-LiDAR 结果：Pseudo-LiDAR 改善规划 L2、运动、检测和建图；其 L2 低于使用实测 LiDAR 的设置，但碰撞率高于基线和实测 LiDAR 变体。</li><li>闭环结果：在 Bench2Drive Town05 Long 上，UniAD-Tiny 的 Driving Score 从 48.45 提升至 58.79，Route Completion 从 60.96 提升至 79.06，Infraction Score 从 0.85 降至 0.79；PAVER 初始化将三个 UniAD-Tiny 超时转为完成。</li><li>对比方法：VAD-Tiny、VAD-Base、GenAD、UniAD-Tiny、UniPAD、MIM4D 等；原文报告 PAVER 与重建式预训练相比，在 VAD-Tiny 各时间地平线达到更低 L2，且辅助参数为 0.01M，而对比方法为 6.41M 和 13.43M。</li><li>其他定性/解释结果：Grad-CAM 高亮车辆和行人；原文报告 PAVER 改善行人、摩托车和自行车等类别的检测增益，检测类别结果见表 3。</li><li>评估条件：nuScenes 为开环评估；Bench2Drive Town05 Long 为闭环评估；原文未报告实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.22896/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Combining Foundation Model Confidence and Monocular Depth for Training-Free Out-of-Distribution Segmentation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.22857/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Image Frame Dynamic Object Segmentation and Ego Motion Estimation using Radar Image Fusion</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

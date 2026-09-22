@@ -1,5 +1,527 @@
 [
   {
+    "date": "2026-09-21",
+    "title": "Disparity Estimation of Planar Reflective Surfaces Using Specular Reflections From a Single Light Source",
+    "link": "https://arxiv.org/abs/2609.24756",
+    "arxiv_id": "2609.24756",
+    "detail_path": "papers/2609.24756/",
+    "cover_path": "covers/2609.24756/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.24756.webp",
+    "paper_image_full_path": "assets/paper-images/2609.24756.webp",
+    "preview_text": "论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。 应用场景包括自动驾驶中的障碍物检测、距离估计与导航，以及机器人控制、虚拟现实、多光谱/高光谱成像、工业分拣与视觉检测等。 研究问题是在平坦、无纹理表面且由单一固定光源照明、表面产生一个主导镜面反射的条件下，传统依赖纹理匹配的立体匹配方法和神经网络难以可靠估计视差，镜面反射区域常导致错误预测。 论文提出 SRDE（Specular Reflection Disparity Estimation）算法，利用镜面反射的几何属性，而非表面纹理，来恢复平坦无纹理物体的视差图。 论文还提出将 SRDE 选择性集成到现有神经视差估计流程中，在镜面反射区域替换网络预测，无需重新训练骨干网络。",
+    "research_unit": "Friedrich-Alexander University of Erlangen-Nürnberg (FAU), Department of El…",
+    "hook_text": "论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。",
+    "key_points": [
+      "论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。",
+      "应用场景包括自动驾驶中的障碍物检测、距离估计与导航，以及机器人控制、虚拟现实、多光谱/高光谱成像、工业分拣与视觉检测等。",
+      "研究问题是在平坦、无纹理表面且由单一固定光源照明、表面产生一个主导镜面反射的条件下，传统依赖纹理匹配的立体匹配方法和神经网络难以可靠估计视差，镜面反射区域常导致错误预测。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-21",
+    "title": "D-JEPA: A Decision-Aligned Latent World Model",
+    "link": "https://arxiv.org/abs/2609.24749",
+    "arxiv_id": "2609.24749",
+    "detail_path": "papers/2609.24749/",
+    "cover_path": "covers/2609.24749/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.24749.webp",
+    "paper_image_full_path": "assets/paper-images/2609.24749.webp",
+    "preview_text": "论文研究自动驾驶及更广泛具身控制中的潜在世界模型（latent world model）动作选择问题，关注候选未来轨迹在预测潜在空间中的目标距离与真实执行结果之间的不一致。 论文提出“决策局部预测差距”（decision-local prediction gap）：在少数竞争执行的候选未来中，预测上更接近目标的候选可能实际执行失败，而预测上更远的候选反而成功。 应用场景包括潜在控制、机器人操作、预训练动作生成模型、物理机器人以及自动驾驶轨迹选择。 研究问题是如何让预测世界模型的潜在几何结构与执行决策对齐，使潜在距离能够反映哪个候选真正会被成功执行。",
+    "research_unit": "The Hong Kong University of Science and Technology (Guangzhou) · Shuaijun L…",
+    "hook_text": "论文研究自动驾驶及更广泛具身控制中的潜在世界模型（latent world model）动作选择问题，关注候选未来轨迹在预测潜在空间中的目标距离与真实执行结果之间的不一致。",
+    "key_points": [
+      "论文研究自动驾驶及更广泛具身控制中的潜在世界模型（latent world model）动作选择问题，关注候选未来轨迹在预测潜在空间中的目标距离与真实执行结果之间的不一致。",
+      "论文提出“决策局部预测差距”（decision-local prediction gap）：在少数竞争执行的候选未来中，预测上更接近目标的候选可能实际执行失败，而预测上更远的候选反而成功。",
+      "应用场景包括潜在控制、机器人操作、预训练动作生成模型、物理机器人以及自动驾驶轨迹选择。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-21",
+    "title": "Relationally Grounded Latent World Models for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.24626",
+    "arxiv_id": "2609.24626",
+    "detail_path": "papers/2609.24626/",
+    "cover_path": "covers/2609.24626/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.24626.webp",
+    "paper_image_full_path": "assets/paper-images/2609.24626.webp",
+    "preview_text": "任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。 应用场景：基于 nuScenes 多视角图像输入的自动驾驶规划基准评估。 研究问题：潜在世界模型学到的预测性表示通常隐含地保留关系语义，论文探究交通场景图（traffic scene graph）能否作为“特权语义监督”（privileged semantic supervision）来对齐潜在世界表示，且推理时不需要场景图、3D 标注或额外计算。 核心思路：在训练阶段用场景图语义对齐视觉潜在表示，推理阶段完全移除监督分支。",
+    "research_unit": "Institute for Intelligent Systems, Esslingen University of Applied Sciences…",
+    "hook_text": "任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。",
+    "key_points": [
+      "任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。",
+      "应用场景：基于 nuScenes 多视角图像输入的自动驾驶规划基准评估。",
+      "研究问题：潜在世界模型学到的预测性表示通常隐含地保留关系语义，论文探究交通场景图（traffic scene graph）能否作为“特权语义监督”（privileged semantic supervision）来对齐潜在世界表示，且推理时不需要场景图、3D 标注或额外计算。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-21",
+    "title": "ME-VLM:A Unified VLM for Embodied Cognition and Agent Coordination",
+    "link": "https://arxiv.org/abs/2609.24526",
+    "arxiv_id": "2609.24526",
+    "detail_path": "papers/2609.24526/",
+    "cover_path": "covers/2609.24526/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.24526.webp",
+    "paper_image_full_path": "assets/paper-images/2609.24526.webp",
+    "preview_text": "论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。 应用场景涵盖数字环境与物理环境中的任务，包括具身场景理解、任务规划、技能/工具调用、动作执行、执行反馈验证与错误恢复。 研究问题在于：数字智能体缺乏对物理世界的空间结构感知、机器人动作语义理解与执行状态监控，而现有具身 VLM 又缺少多轮智能体推理、开放式指令下的技能调用、执行状态监控、错误诊断与长时程规划能力，因此需要将两类能力统一到一个模型中。",
+    "research_unit": "Li Auto Inc.（理想汽车） · Foundation Model、Li Auto Inc.（原文未给出具体个人作者姓名）",
+    "hook_text": "论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。",
+    "key_points": [
+      "论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。",
+      "应用场景涵盖数字环境与物理环境中的任务，包括具身场景理解、任务规划、技能/工具调用、动作执行、执行反馈验证与错误恢复。",
+      "研究问题在于：数字智能体缺乏对物理世界的空间结构感知、机器人动作语义理解与执行状态监控，而现有具身 VLM 又缺少多轮智能体推理、开放式指令下的技能调用、执行状态监控、错误诊断与长时程规划能力，因此需要将两类能力统一到一个模型中。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-21",
+    "title": "Lightweight Pedestrian Head-Orientation Recognition Network for Safe Pedestrian-Vehicle Interaction",
+    "link": "https://arxiv.org/abs/2609.24193",
+    "arxiv_id": "2609.24193",
+    "detail_path": "papers/2609.24193/",
+    "cover_path": "covers/2609.24193/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.24193.webp",
+    "paper_image_full_path": "assets/paper-images/2609.24193.webp",
+    "preview_text": "面向自动驾驶中的行人头部朝向识别任务，用于理解行人注意力并预判潜在过街行为。 应用场景为真实交通场景中的行人—车辆交互安全。 研究问题：真实交通场景中行人头部区域常以低分辨率被采集，导致可靠识别困难。",
+    "research_unit": "原文未报告 · Yuanzhe Li、Yidi Huang、Xiaotong Chang 等",
+    "hook_text": "面向自动驾驶中的行人头部朝向识别任务，用于理解行人注意力并预判潜在过街行为。",
+    "key_points": [
+      "面向自动驾驶中的行人头部朝向识别任务，用于理解行人注意力并预判潜在过街行为。",
+      "应用场景为真实交通场景中的行人—车辆交互安全。",
+      "研究问题：真实交通场景中行人头部区域常以低分辨率被采集，导致可靠识别困难。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-20",
+    "title": "Hardware-in-the-Loop Evaluation of Game-Theoretic Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.23904",
+    "arxiv_id": "2609.23904",
+    "detail_path": "papers/2609.23904/",
+    "cover_path": "covers/2609.23904/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.23904.webp",
+    "paper_image_full_path": "assets/paper-images/2609.23904.webp",
+    "preview_text": "论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。 采用博弈论方法，将每辆车建模为具有各自驾驶目标的玩家，对比 Nash（对称、同时决策）与 Stackelberg（领导者-跟随者层级）两种均衡控制器。 研究问题聚焦于：博弈论控制器从数值仿真、虚拟验证到物理硬件部署过程中，层级分配、障碍车行为以及感知与状态估计误差对控制器行为和安全性的影响。",
+    "research_unit": "Virginia Tech, Blacksburg, VA, USA（Department of Electrical and Computer En…",
+    "hook_text": "论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。",
+    "key_points": [
+      "论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。",
+      "采用博弈论方法，将每辆车建模为具有各自驾驶目标的玩家，对比 Nash（对称、同时决策）与 Stackelberg（领导者-跟随者层级）两种均衡控制器。",
+      "研究问题聚焦于：博弈论控制器从数值仿真、虚拟验证到物理硬件部署过程中，层级分配、障碍车行为以及感知与状态估计误差对控制器行为和安全性的影响。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-20",
+    "title": "Transferring Visual Explanations: How Cross-Architecture Knowledge Distillation Affects Model Interpretability",
+    "link": "https://arxiv.org/abs/2609.23561",
+    "arxiv_id": "2609.23561",
+    "detail_path": "papers/2609.23561/",
+    "cover_path": "covers/2609.23561/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.23561.webp",
+    "paper_image_full_path": "assets/paper-images/2609.23561.webp",
+    "preview_text": "论文面向资源受限场景下高效神经网络部署的需求，关注紧凑模型在安全关键领域（如自动驾驶、医学）中可解释性下降的问题。 研究任务是探究知识蒸馏（Knowledge Distillation, KD）能否将大型教师网络的空间特征归因（spatial feature attribution）传递给紧凑学生网络。 应用场景为安全关键领域中的模型可解释性评估，论文明确提及自动驾驶与医学。 研究问题包括：KD 方案（蒸馏温度与软标签损失权重）如何影响学生模型的可解释性；以及跨架构（卷积与 Transformer 类模型）组合下细粒度空间推理能否被继承。",
+    "research_unit": "原文未报告 · Aleks Czufarow、Ihor Babin",
+    "hook_text": "论文面向资源受限场景下高效神经网络部署的需求，关注紧凑模型在安全关键领域（如自动驾驶、医学）中可解释性下降的问题。",
+    "key_points": [
+      "论文面向资源受限场景下高效神经网络部署的需求，关注紧凑模型在安全关键领域（如自动驾驶、医学）中可解释性下降的问题。",
+      "研究任务是探究知识蒸馏（Knowledge Distillation, KD）能否将大型教师网络的空间特征归因（spatial feature attribution）传递给紧凑学生网络。",
+      "应用场景为安全关键领域中的模型可解释性评估，论文明确提及自动驾驶与医学。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-20",
+    "title": "Towards robust multimodal 3D object detection via visual foundation models",
+    "link": "https://arxiv.org/abs/2609.23541",
+    "arxiv_id": "2609.23541",
+    "detail_path": "papers/2609.23541/",
+    "cover_path": "covers/2609.23541/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.23541.webp",
+    "paper_image_full_path": "assets/paper-images/2609.23541.webp",
+    "preview_text": "论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。 应用场景为真实自动驾驶环境，重点关注由传感器噪声、恶劣天气和环境变化导致的分布外（OOD）损坏场景。 研究问题：现有方法通常在理想化干净数据上训练，面对 OOD 损坏时鲁棒性不足，难以泛化到夜间、极端天气或严重传感器噪声等未见过场景。 论文提出 RoboDistill 框架，将视觉基础模型（VFM，尤其是 SAM）引入多模态 3D 检测流程，以提升鲁棒性与泛化能力。",
+    "research_unit": "School of Computer Science and Technology, Beijing Jiaotong University, Bei…",
+    "hook_text": "论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。",
+    "key_points": [
+      "论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。",
+      "应用场景为真实自动驾驶环境，重点关注由传感器噪声、恶劣天气和环境变化导致的分布外（OOD）损坏场景。",
+      "研究问题：现有方法通常在理想化干净数据上训练，面对 OOD 损坏时鲁棒性不足，难以泛化到夜间、极端天气或严重传感器噪声等未见过场景。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-20",
+    "title": "Detecting Phone-Induced Pedestrian Distraction via a Multimodal Fusion Transformer",
+    "link": "https://arxiv.org/abs/2609.23507",
+    "arxiv_id": "2609.23507",
+    "detail_path": "papers/2609.23507/",
+    "cover_path": "covers/2609.23507/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.23507.webp",
+    "paper_image_full_path": "assets/paper-images/2609.23507.webp",
+    "preview_text": "论文针对自动驾驶场景中行人因使用手机（发短信、看视频、打电话）而分心的问题，提出自动检测手机导致的行人分心行为。 该任务服务于自动驾驶车辆：提升态势感知能力、支持及时风险评估，从而有助于安全运动规划与车辆控制。 研究问题为如何联合利用人体姿态关键点的骨骼动态信息与行人图像的视觉外观信息，实现可靠的行人分心检测。",
+    "research_unit": "原文未报告作者所属机构；作者：Yuanzhe Li、Hounian Liu、Xiaotong Chang、Yidi Huang；原文未明确对应",
+    "hook_text": "论文针对自动驾驶场景中行人因使用手机（发短信、看视频、打电话）而分心的问题，提出自动检测手机导致的行人分心行为。",
+    "key_points": [
+      "论文针对自动驾驶场景中行人因使用手机（发短信、看视频、打电话）而分心的问题，提出自动检测手机导致的行人分心行为。",
+      "该任务服务于自动驾驶车辆：提升态势感知能力、支持及时风险评估，从而有助于安全运动规划与车辆控制。",
+      "研究问题为如何联合利用人体姿态关键点的骨骼动态信息与行人图像的视觉外观信息，实现可靠的行人分心检测。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-20",
+    "title": "FeasibleFlow: One-Step Joint Transport of Configuration Feasibility and Trajectories for End-to-End Driving",
+    "link": "https://arxiv.org/abs/2609.23488",
+    "arxiv_id": "2609.23488",
+    "detail_path": "papers/2609.23488/",
+    "cover_path": "covers/2609.23488/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.23488.webp",
+    "paper_image_full_path": "assets/paper-images/2609.23488.webp",
+    "preview_text": "论文面向端到端自动驾驶任务：从当前多视角传感器观测直接预测未来自车轨迹，并要求轨迹在场景演化过程中持续保持安全可行。 应用场景为基于 NAVSIM 基准的端到端规划，输入为多视角相机图像与自车状态，输出为未来 4 秒、2 Hz 的 8 个未来位姿序列。 研究问题：未来状态建模通常只在辅助监督、静态条件或候选评估中影响轨迹生成，其表示包含与自车规划无关的信息，且未显式表达自车足迹与朝向所受到的几何约束。 论文提出将可行性显式建模在自车构型空间中，并与多模态轨迹联合单步传输，同时解决安全反馈稀疏导致候选选择偏向高进展候选的问题。",
+    "research_unit": "Bosch Cross-Domain Computing Solutions · Xiang Li、Bikun Wang、Qing Xu 等",
+    "hook_text": "论文面向端到端自动驾驶任务：从当前多视角传感器观测直接预测未来自车轨迹，并要求轨迹在场景演化过程中持续保持安全可行。",
+    "key_points": [
+      "论文面向端到端自动驾驶任务：从当前多视角传感器观测直接预测未来自车轨迹，并要求轨迹在场景演化过程中持续保持安全可行。",
+      "应用场景为基于 NAVSIM 基准的端到端规划，输入为多视角相机图像与自车状态，输出为未来 4 秒、2 Hz 的 8 个未来位姿序列。",
+      "研究问题：未来状态建模通常只在辅助监督、静态条件或候选评估中影响轨迹生成，其表示包含与自车规划无关的信息，且未显式表达自车足迹与朝向所受到的几何约束。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-20",
+    "title": "Scenario MPC with STL Specifications and Pareto-Based Feasibility Repair",
+    "link": "https://arxiv.org/abs/2609.23263",
+    "arxiv_id": "2609.23263",
+    "detail_path": "papers/2609.23263/",
+    "cover_path": "covers/2609.23263/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.23263.webp",
+    "paper_image_full_path": "assets/paper-images/2609.23263.webp",
+    "preview_text": "论文面向多智能体系统（如自动驾驶）中的控制合成任务，使用信号时序逻辑（STL）编码时空安全要求。 应用场景为存在随机、不可控智能体的真实多智能体环境，智能体动态与意图未知，需要基于采样轨迹评估 STL 满足性。 研究问题包括两点：其一是如何在有限采样满足的情况下量化未见实现下 STL 违反概率（严格可行性评估）；其二是在 STL 约束不可行时如何进行可行性修复，并兼顾所有智能体的性能而非仅以自车为中心（ego-centric）。",
+    "research_unit": "University of Southern California, Department of Computer Science · Tianhao…",
+    "hook_text": "论文面向多智能体系统（如自动驾驶）中的控制合成任务，使用信号时序逻辑（STL）编码时空安全要求。",
+    "key_points": [
+      "论文面向多智能体系统（如自动驾驶）中的控制合成任务，使用信号时序逻辑（STL）编码时空安全要求。",
+      "应用场景为存在随机、不可控智能体的真实多智能体环境，智能体动态与意图未知，需要基于采样轨迹评估 STL 满足性。",
+      "研究问题包括两点：其一是如何在有限采样满足的情况下量化未见实现下 STL 违反概率（严格可行性评估）；其二是在 STL 约束不可行时如何进行可行性修复，并兼顾所有智能体的性能而非仅以自车为中心（ego-centric）。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-19",
+    "title": "VDGS: Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction",
+    "link": "https://arxiv.org/abs/2609.23049",
+    "arxiv_id": "2609.23049",
+    "detail_path": "papers/2609.23049/",
+    "cover_path": "covers/2609.23049/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.23049.webp",
+    "paper_image_full_path": "assets/paper-images/2609.23049.webp",
+    "preview_text": "论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。 研究问题：大规模场景中 3D Gaussian Splatting（3DGS）面临显存消耗过大，以及无人机采集导致视角覆盖不均的问题。 核心挑战：现有分区方案多基于几何，忽略相机观测分布，导致监督不均衡；基于锚点的混合表示中，低可见度区域梯度弱、锚点致密化不足，重建质量下降。",
+    "research_unit": "北京理工大学 · Haolin Yu、Jiadong Tang、YiXian Wang 等",
+    "hook_text": "论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。",
+    "key_points": [
+      "论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。",
+      "研究问题：大规模场景中 3D Gaussian Splatting（3DGS）面临显存消耗过大，以及无人机采集导致视角覆盖不均的问题。",
+      "核心挑战：现有分区方案多基于几何，忽略相机观测分布，导致监督不均衡；基于锚点的混合表示中，低可见度区域梯度弱、锚点致密化不足，重建质量下降。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-19",
+    "title": "Combining Foundation Model Confidence and Monocular Depth for Training-Free Out-of-Distribution Segmentation",
+    "link": "https://arxiv.org/abs/2609.22896",
+    "arxiv_id": "2609.22896",
+    "detail_path": "papers/2609.22896/",
+    "cover_path": "covers/2609.22896/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22896.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22896.webp",
+    "preview_text": "论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。 应用场景为自动驾驶感知系统，要求对行驶路径上的未知物体产生稠密异常分数，并进一步在视频序列中实现 OOD 目标跟踪。 研究问题：现有 OOD 分割方法通常需要 OOD 训练样本、重训练分割骨干网络或专用辅助架构，限制实际部署；论文提出无需训练的方法，直接从基础分割模型的置信度预测中导出稠密 OOD 分数，并结合单目深度估计抑制误检。",
+    "research_unit": "Heinrich-Heine-University · Serin Varghese、Kira Maag",
+    "hook_text": "论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。",
+    "key_points": [
+      "论文面向自动驾驶开放世界场景中的分布外（OOD）目标分割任务，针对道路上出现的未知障碍物（如异形动物、掉落货物、倒伏植被等）进行可靠检测与分割。",
+      "应用场景为自动驾驶感知系统，要求对行驶路径上的未知物体产生稠密异常分数，并进一步在视频序列中实现 OOD 目标跟踪。",
+      "研究问题：现有 OOD 分割方法通常需要 OOD 训练样本、重训练分割骨干网络或专用辅助架构，限制实际部署；论文提出无需训练的方法，直接从基础分割模型的置信度预测中导出稠密 OOD 分数，并结合单目深度估计抑制误检。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-19",
+    "title": "Planning-Aligned Pretraining of BEV Representations with Sparse Action-Conditioned Targets for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.22868",
+    "arxiv_id": "2609.22868",
+    "detail_path": "papers/2609.22868/",
+    "cover_path": "covers/2609.22868/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22868.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22868.webp",
+    "preview_text": "论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。 应用场景为相机端到端自动驾驶系统，包括检测、建图、运动预测与规划通过共享 BEV 表征耦合。 研究问题在于：现有驾驶预训练方法常依赖任务标注或稠密场景重建，监督的是通用空间支撑，而非对候选自车运动/规划最相关的 BEV 区域。 PAVER（Planning-Aligned BEV Encoder Pretraining）仅预训练 BEV 编码器，不改变下游架构，并保持仅相机推理流程。",
+    "research_unit": "Hanyang University · Jaeha Song",
+    "hook_text": "论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的鸟瞰图（BEV）表征预训练问题，目标是获得对规划更相关的 BEV 特征。",
+      "应用场景为相机端到端自动驾驶系统，包括检测、建图、运动预测与规划通过共享 BEV 表征耦合。",
+      "研究问题在于：现有驾驶预训练方法常依赖任务标注或稠密场景重建，监督的是通用空间支撑，而非对候选自车运动/规划最相关的 BEV 区域。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-19",
+    "title": "Image Frame Dynamic Object Segmentation and Ego Motion Estimation using Radar Image Fusion",
+    "link": "https://arxiv.org/abs/2609.22857",
+    "arxiv_id": "2609.22857",
+    "detail_path": "papers/2609.22857/",
+    "cover_path": "covers/2609.22857/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22857.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22857.webp",
+    "preview_text": "论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。 核心研究问题在于两者的循环依赖：准确自车运动估计通常需要静态场景观测，而识别静态观测又需要已知自车运动。 论文提出 Radar-Dot，一个雷达–RGB 融合框架，利用雷达 Doppler 测量打破该循环依赖。 应用场景为车载多传感器（雷达 + RGB 相机）条件下的图像帧动态目标分割与自车速度/轨迹估计。 论文将该工作定位为初步结果（preliminary results）。",
+    "research_unit": "原文未提供作者所属机构的明确信息，作者列表为 Astik Srivastava、Suhani Grover、Avinash Sharma、Madhav…",
+    "hook_text": "论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。",
+    "key_points": [
+      "论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。",
+      "核心研究问题在于两者的循环依赖：准确自车运动估计通常需要静态场景观测，而识别静态观测又需要已知自车运动。",
+      "论文提出 Radar-Dot，一个雷达–RGB 融合框架，利用雷达 Doppler 测量打破该循环依赖。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-19",
+    "title": "ZIL: Zero-shot Image-to-LiDAR Registration",
+    "link": "https://arxiv.org/abs/2609.22716",
+    "arxiv_id": "2609.22716",
+    "detail_path": "papers/2609.22716/",
+    "cover_path": "covers/2609.22716/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22716.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22716.webp",
+    "preview_text": "论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。 应用场景包括自动驾驶、机器人导航和混合现实等。 论文针对现有 SOTA 方法的两个问题：一是多数假设图像与点云同帧采集，难以处理远距离帧的非同步输入；二是依赖特定域训练，难以泛化到未见场景。 论文提出 ZIL，定位为首个面向零样本非同步图像到 LiDAR 配准的基础模型，目标是在不微调、不适配的情况下跨未见室外相机–LiDAR 系统完成配准。",
+    "research_unit": "Xiamen University · Zijun Li、Xiaotian Sun、Xuelun Shen 等",
+    "hook_text": "论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。",
+    "key_points": [
+      "论文研究图像到 LiDAR 配准（Image-to-LiDAR registration）任务，即在给定查询图像和 LiDAR 点云的条件下估计相机在点云坐标系中的 6-DoF 位姿。",
+      "应用场景包括自动驾驶、机器人导航和混合现实等。",
+      "论文针对现有 SOTA 方法的两个问题：一是多数假设图像与点云同帧采集，难以处理远距离帧的非同步输入；二是依赖特定域训练，难以泛化到未见场景。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-18",
+    "title": "AutoRASOR: Autonomous Rapid Scanning Electron Microscope Operator",
+    "link": "https://arxiv.org/abs/2609.22411",
+    "arxiv_id": "2609.22411",
+    "detail_path": "papers/2609.22411/",
+    "cover_path": "covers/2609.22411/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22411.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22411.webp",
+    "preview_text": "论文针对材料微观结构表征中的高通量瓶颈问题，提出面向扫描电子显微镜（SEM）的自主成像流程。 应用场景为自驱动实验室（Self-Driving Labs, SDLs）中大批量合成样品的自动化、多尺度显微表征。 研究问题在于现有自动化电镜流程多为任务特定，依赖预定义特征、已知属性或先验材料知识，难以直接用于未知样品的通用形态调查。 论文将任务重新定义为任务无关的“形态调查”，即在无领域特定预训练、微调或人工提示条件下，捕捉未知样品的多尺度形态分布。",
+    "research_unit": "Department of Materials Science and Engineering, University of Toronto · Ke…",
+    "hook_text": "论文针对材料微观结构表征中的高通量瓶颈问题，提出面向扫描电子显微镜（SEM）的自主成像流程。",
+    "key_points": [
+      "论文针对材料微观结构表征中的高通量瓶颈问题，提出面向扫描电子显微镜（SEM）的自主成像流程。",
+      "应用场景为自驱动实验室（Self-Driving Labs, SDLs）中大批量合成样品的自动化、多尺度显微表征。",
+      "研究问题在于现有自动化电镜流程多为任务特定，依赖预定义特征、已知属性或先验材料知识，难以直接用于未知样品的通用形态调查。"
+    ],
+    "reading_minutes": 15,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-15",
+    "title": "EditWM: Event-Decomposed World Modeling with Incremental Correction for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.22317",
+    "arxiv_id": "2609.22317",
+    "detail_path": "papers/2609.22317/",
+    "cover_path": "covers/2609.22317/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.22317.webp",
+    "paper_image_full_path": "assets/paper-images/2609.22317.webp",
+    "preview_text": "论文面向端到端自动驾驶中的候选轨迹评估与选择任务，利用世界模型预测与候选轨迹相关的未来场景演化，为规划提供预期后果。 应用场景为城市驾驶等自动驾驶规划场景，包括跟车、会车、窄路转弯等 navtest 场景。 研究问题：驾驶动态的可预测性并不一致，常规演化（自车运动、持续几何、平滑智能体动态）与事件驱动的突发/交互变化存在不对称可预测性；现有世界模型通常将完整未来演化作为统一预测目标，缺乏在保留可靠预测的同时对未解释变化进行选择性修正的机制。 论文提出 EditWM，将未来预测分解为“正常演化”与“事件驱动增量修正”，并在紧凑视觉特征空间中把修正后的未来表征接入轨迹打分。",
+    "research_unit": "The Hong Kong University of Science and Technology · Junjie Yang、Ziyi Shi、H…",
+    "hook_text": "论文面向端到端自动驾驶中的候选轨迹评估与选择任务，利用世界模型预测与候选轨迹相关的未来场景演化，为规划提供预期后果。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的候选轨迹评估与选择任务，利用世界模型预测与候选轨迹相关的未来场景演化，为规划提供预期后果。",
+      "应用场景为城市驾驶等自动驾驶规划场景，包括跟车、会车、窄路转弯等 navtest 场景。",
+      "研究问题：驾驶动态的可预测性并不一致，常规演化（自车运动、持续几何、平滑智能体动态）与事件驱动的突发/交互变化存在不对称可预测性；现有世界模型通常将完整未来演化作为统一预测目标，缺乏在保留可靠预测的同时对未解释变化进行选择性修正的机制。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
     "date": "2026-09-18",
     "title": "Traffic Sign Recognition for Autonomous Driving Using Branched YOLOv2 and Geometric Features",
     "link": "https://arxiv.org/abs/2609.22060",

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Relationally Grounded Latent World Models for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。 应用场景：基于 nuScenes 多视角图像输入的自动驾驶规划基准评估。 研究问题：潜在世界模型学到的预测性表示通常隐含地保留关系语义，论文探究交通场景图（traffic scene graph）能否作为“特权语义监督”（privileged semantic supervision）来对齐潜在世界表示，且推理时不需要场景图、3D 标注或额外计算。 核心思路：在训练阶段用场景图语义对齐视觉潜在表示，推理阶段完全移除监督分支。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.24626">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.24626.webp" alt="Relationally Grounded Latent World Models for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Relationally Grounded Latent World Models for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.24626" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.24626" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.24626</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。 应用场景：基于 nuScenes 多视角图像输入的自动驾驶规划基准评估。 研究问题：潜在世界模型学到的预测性表示通常隐含地保留关系语义，论文探究交通场景图（traffic scene graph）能否作为“特权语义监督”（privileged semantic supervision）来对齐潜在世界表示，且推理时不需要场景图、3D 标注或额外计算。 核心思路：在训练阶段用场景图语义对齐视觉潜在表示，推理阶段完全移除监督分支。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute for Intelligent Systems, Esslingen University of Applied Sciences…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.24626/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。</li><li>应用场景：基于 nuScenes 多视角图像输入的自动驾驶规划基准评估。</li><li>研究问题：潜在世界模型学到的预测性表示通常隐含地保留关系语义，论文探究交通场景图（traffic scene graph）能否作为“特权语义监督”（privileged semantic supervision）来对齐潜在世界表示，且推理时不需要场景图、3D 标注或额外计算。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute for Intelligent Systems, Esslingen University of Applied Sciences, Germany；作者：Fabian Schmidt、Markus Enzweiler</li><li>机构：Department of Computer Science, University of Freiburg, Germany；作者：Fabian Schmidt、Abhinav Valada</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的端到端轨迹规划，具体是在潜在世界模型（latent world model）框架下预测自车未来轨迹。</li><li>应用场景：基于 nuScenes 多视角图像输入的自动驾驶规划基准评估。</li><li>研究问题：潜在世界模型学到的预测性表示通常隐含地保留关系语义，论文探究交通场景图（traffic scene graph）能否作为“特权语义监督”（privileged semantic supervision）来对齐潜在世界表示，且推理时不需要场景图、3D 标注或额外计算。</li><li>核心思路：在训练阶段用场景图语义对齐视觉潜在表示，推理阶段完全移除监督分支。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出仅在训练阶段使用的“关系基础化”（relational grounding）方法，将 LAW 的视觉潜在状态与交通场景图语义嵌入对齐，推理路径保持不变，不引入测试时计算。</li><li>构建以 actor 为中心的场景图（ego 车与车辆、骑行者、行人等为节点，边编码相对朝向与邻近关系），并序列化为 subject–relation–object 结构化文本，用冻结的文本嵌入模型编码。</li><li>引入可选的时间语义对齐扩展，将世界模型预测的未来潜在状态与 t+1 时刻场景图语义表示对齐。</li><li>在 nuScenes 上验证：相对重新训练的 LAW 基线，结构化场景图监督将平均 L2 误差从 0.661 降至 0.622（5.9%），碰撞率从 0.456 降至 0.217（52.4%）。</li><li>证明结构化关系监督优于无结构 caption 式语义目标：相对无结构文本基线，平均 L2 误差降低 7.2%，碰撞率降低 30.4%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：潜在世界模型的训练目标设计模块，论文基于 LAW 架构构建，不改变其原始架构与原本监督。</li><li>输入传感器：多视角图像（multi-view images）；训练时额外使用 nuScenes 3D 标注构建场景图，仅作特权监督，推理不使用。</li><li>场景表示：actor-only 交通场景图，节点为 ego 车与周围交通参与者（车辆、骑行者、行人），边编码基于相对朝向与邻近度的关系；序列化为 subject–relation–object 文本语句。</li><li>模型结构：LAW 使用视觉编码器 E_vis 提取视觉潜在集合 V_t，航点解码器 D_wp 预测自车轨迹 W_t；轨迹向量化后与每个视觉潜在拼接并经 MLP 得到 action-aware 特征 A_t；潜在世界模型 F_WM 预测未来视觉表示 V̂_{t+1}。新增可学习对齐头 P（先 MeanPool 再 MLP 投影），冻结的 Qwen3-Embedding 文本编码器。</li><li>关键技术：用余弦距离对齐视觉嵌入 z_t^vis 与场景图嵌入 z_t^SG（式 5）；可选时间对齐损失 L_temp 对齐预测未来潜在嵌入与 t+1 场景图嵌入（式 8）；总目标 L = L_LAW + λ_SG·L_SG + λ_temp·L_temp（式 9）。</li><li>推理：场景图、文本嵌入与对齐组件在训练后全部丢弃，LAW 原推理管线不变；原文未报告推理时的额外网络开销细节。</li><li>原文未报告：视觉编码器与航点解码器的具体网络类型、参数量等细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes，使用其规划基准（perception-free LAW 设置）；训练时使用 nuScenes 3D 标注构建场景图监督目标。</li><li>仿真器：原文未报告。</li><li>模型规模：文本嵌入模型为冻结的 Qwen3-Embedding-8B；新增对齐头为 MeanPool + MLP 轻量结构，具体参数量原文未报告。</li><li>训练资源：四块 NVIDIA H200 GPU，使用 LAW 官方超参数与训练计划从零训练。</li><li>实车平台：原文未报告，评估为 nuScenes 基准上的开环规划评估。</li><li>默认超参数：λ_SG = 0.1，λ_temp = 0，除非消融实验另作说明。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 规划基准（perception-free LAW 架构），采用与 LAW 一致的评估协议。</li><li>评估指标：预测自车轨迹的 L2 位移误差与碰撞率（collision rate），在 1s、2s、3s 预测时域及其平均值上报告；两者均为越低越好。</li><li>对比方法：重新训练的 LAW 基线（受控对比，不对比已发表结果或公开 checkpoint）；无结构 caption 式文本监督变体（相同冻结嵌入模型与对齐目标）。</li><li>结构化关系监督结果（表 I）：LAW 基线 L2 为 0.327/0.628/1.029，平均 0.661；碰撞率为 0.156/0.278/0.934，平均 0.456。无结构文本 L2 为 0.310/0.632/1.067，平均 0.670；碰撞率为 0.166/0.229/0.540，平均 0.312。场景图方法 L2 为 0.287/0.585/0.994，平均 0.622；碰撞率为 0.098/0.137/0.417，平均 0.217。</li><li>相对基线提升：平均 L2 降低 5.9%，平均碰撞率降低 52.4%；相对无结构文本，平均 L2 降低 7.2%，平均碰撞率降低 30.4%。</li><li>当前状态对齐强度消融（表 II 上半）：λ_SG=0.05 时平均 L2 0.660、碰撞率 0.283；λ_SG=0.10 时平均 L2 0.622、碰撞率 0.217（最佳权衡）；λ_SG=0.25 时 0.696/0.342；λ_SG=0.50 时 0.642/0.258；λ_SG=1.00 时 0.642/0.312。效果随权重非单调，权重过大无一致增益。</li><li>时间对齐消融（表 II 下半）：仅时间对齐 λ_temp=0.10 时平均 L2 0.628、碰撞率 0.476；λ_temp=0.50 时 0.651/0.659（L2 增益基本消失且碰撞显著变差）。联合监督 λ_SG=λ_temp=0.05 为 0.632/0.257；0.10 为 0.624/0.291；0.25 为 0.606/0.436；0.50 为 0.594/0.387（最低平均 L2，较基线降低 10.1%，但碰撞率仍高于仅当前状态对齐的 0.217）。</li><li>结论性观察：关系基础化对碰撞率降低最有效的形式是作用于当前视觉状态；时间基础化可进一步提升轨迹精度，但对碰撞性能存在不同权衡，需要谨慎加权。</li><li>评估条件：开环评估（基于 nuScenes 基准的开环规划指标）；原文未报告闭环仿真或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.24749/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">D-JEPA: A Decision-Aligned Latent World Model</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.24526/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">ME-VLM:A Unified VLM for Embodied Cognition and Agent Coordination</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

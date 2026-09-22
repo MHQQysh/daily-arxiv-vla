@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VDGS: Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。 研究问题：大规模场景中 3D Gaussian Splatting（3DGS）面临显存消耗过大，以及无人机采集导致视角覆盖不均的问题。 核心挑战：现有分区方案多基于几何，忽略相机观测分布，导致监督不均衡；基于锚点的混合表示中，低可见度区域梯度弱、锚点致密化不足，重建质量下降。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.23049">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.23049.webp" alt="VDGS: Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">VDGS: Visibility-Driven Large-Scale 3D Gaussian Splatting for Aerial Scene Reconstruction</h1>
+            <div class="detail-meta">2026-09-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.23049" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.23049" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.23049</span></div>
+            <p class="detail-summary">论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。 研究问题：大规模场景中 3D Gaussian Splatting（3DGS）面临显存消耗过大，以及无人机采集导致视角覆盖不均的问题。 核心挑战：现有分区方案多基于几何，忽略相机观测分布，导致监督不均衡；基于锚点的混合表示中，低可见度区域梯度弱、锚点致密化不足，重建质量下降。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">北京理工大学 · Haolin Yu、Jiadong Tang、YiXian Wang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.23049/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。</p>
+  <ul class="reading-intro-points"><li>论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。</li><li>研究问题：大规模场景中 3D Gaussian Splatting（3DGS）面临显存消耗过大，以及无人机采集导致视角覆盖不均的问题。</li><li>核心挑战：现有分区方案多基于几何，忽略相机观测分布，导致监督不均衡；基于锚点的混合表示中，低可见度区域梯度弱、锚点致密化不足，重建质量下降。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：北京理工大学；作者：Haolin Yu、Jiadong Tang、YiXian Wang、Yu Gao、Shi He、Yi Yang、Mengyin Fu</li><li>机构：广州赛特智能科技有限公司（Guangzhou Saite Intelligent Technology Co., Ltd.）；作者：Zhilin Lai</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向大规模航拍场景重建任务，属于机器人自主系统中的三维建图与自动驾驶等应用的基础技术。</li><li>研究问题：大规模场景中 3D Gaussian Splatting（3DGS）面临显存消耗过大，以及无人机采集导致视角覆盖不均的问题。</li><li>核心挑战：现有分区方案多基于几何，忽略相机观测分布，导致监督不均衡；基于锚点的混合表示中，低可见度区域梯度弱、锚点致密化不足，重建质量下降。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Visibility-Driven Data Partitioning（可见度驱动数据分区）策略，显式建模相机分布与场景结构的关系，实现更合理的数据分区和更均衡的训练。</li><li>设计面向低可见度锚点的梯度补偿与致密化机制，缓解弱约束区域的欠拟合，提升复杂场景重建鲁棒性。</li><li>在多个大规模航拍数据集上验证：在视角分布不均条件下显著优于现有方法，在视角较均匀场景中保持竞争力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于锚点（anchor-based）的 3DGS 框架，包含可见度驱动数据分区与可见度引导锚点生成两大模块。</li><li>输入传感器：原文未报告具体传感器类型；实验使用 COLMAP 估计的相机位姿与稀疏点云作为输入。</li><li>场景表示：在 Scaffold-GS 式锚点结构上，每个锚点持有可学习特征，经 MLP 解码出 k 个神经高斯（位置偏移、不透明度、尺度、旋转、颜色等），用标准 3DGS 光栅化渲染。</li><li>关键技术一：可见度驱动分块。先在全场景训练固定迭代得到粗模型；将归一化平面锚点坐标 (x, y) 与归一化可见度 V̂ 加权组合成聚类特征，在联合空间聚类；保留每簇最大连通分量，用 α-shape 构建 2D 边界并扩张。</li><li>关键技术二：基于重渲染误差的相机分配。渲染全场景图与块级图，计算像素差图与归一化覆盖比，超过阈值则将相机分配给该块。</li><li>关键技术三：可见度引导锚点生成。按周期统计每个高斯被当前周期相机视锥观测的比例，低于阈值 T_low 的归为低可见度集合；用全局缓存 g_k 累积历史梯度并按指数补偿更新，densification 时叠加到原始梯度统计上。</li><li>训练与块合并：子块多 GPU 并行训练，训练时抑制块边界梯度更新并冻结 MLP 解码器参数；训练完成后按可见度覆盖合并核心锚点。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：UrbanScene3D 的 Residence、Sci-Art 场景；Mill19 的 Building、Rubble 场景；MatrixCity 的 Block-All 场景。</li><li>图像处理：除 MatrixCity 宽度调整为 1600 像素外，其余数据集图像下采样 4 倍，采用与先前方法相同的训练/测试划分。</li><li>仿真器：原文未报告。</li><li>模型规模：合并后模型大小 847 MB（Residence 场景 8 块划分）。</li><li>训练资源：NVIDIA A100 GPU（40 GB 显存）；8 GPU 并行；粗模型训练 100,000 次迭代约 5 小时，每子块 50,000 次迭代；Residence 块训练阶段 1.48 小时墙钟时间（11.85 GPU-hours），单块峰值显存约 5.4 GB。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：五个大规模航拍场景（Residence、Sci-Art、Rubble、Building、Block-All）。</li><li>评估指标：PSNR（↑）、SSIM（↑）、LPIPS（↓），测试视图上评估，并采用与先前工作相同的颜色校正策略。</li><li>对比方法：Switch-NeRF、3DGS、Scaffold-GS、DOGS、Octree-GS、HUG、Momentum-GS、MixGS。</li><li>关键数值（Residence / Sci-Art / Rubble / Building / Block-All PSNR）：VDGS 为 24.03 / 26.94 / 26.67 / 23.73 / 28.74；其中 Sci-Art PSNR 明显高于现有 3DGS 类方法，Block-All PSNR 为次优。</li><li>对比结果：在视角分布不均的 Residence 与 Sci-Art 场景优势显著；在较均匀的 MatrixCity、Building、Rubble 场景保持竞争力。</li><li>消融结果（Residence）：完整模型 PSNR 24.01、SSIM 0.845、LPIPS 0.188；去掉 Blocking 降 0.62 dB；去掉锚点生成同样导致性能下降；分块数增加到 8/16 后指标趋于饱和；超参数在测试范围内稳定，λ_vis=0（纯空间分区）性能下降。</li><li>效率结果：8 块 Residence 场景渲染速度 42.96 FPS。</li><li>评估条件：均为开环新视角合成评估（基于图像指标），原文未报告闭环或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.23263/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Scenario MPC with STL Specifications and Pareto-Based Feasibility Repair</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.22896/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Combining Foundation Model Confidence and Monocular Depth for Training-Free Out-of-Distribution Segmentation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

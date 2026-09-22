@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ME-VLM:A Unified VLM for Embodied Cognition and Agent Coordination - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。 应用场景涵盖数字环境与物理环境中的任务，包括具身场景理解、任务规划、技能/工具调用、动作执行、执行反馈验证与错误恢复。 研究问题在于：数字智能体缺乏对物理世界的空间结构感知、机器人动作语义理解与执行状态监控，而现有具身 VLM 又缺少多轮智能体推理、开放式指令下的技能调用、执行状态监控、错误诊断与长时程规划能力，因此需要将两类能力统一到一个模型中。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.24526">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.24526.webp" alt="ME-VLM:A Unified VLM for Embodied Cognition and Agent Coordination" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ME-VLM:A Unified VLM for Embodied Cognition and Agent Coordination</h1>
+            <div class="detail-meta">2026-09-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.24526" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.24526" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.24526</span></div>
+            <p class="detail-summary">论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。 应用场景涵盖数字环境与物理环境中的任务，包括具身场景理解、任务规划、技能/工具调用、动作执行、执行反馈验证与错误恢复。 研究问题在于：数字智能体缺乏对物理世界的空间结构感知、机器人动作语义理解与执行状态监控，而现有具身 VLM 又缺少多轮智能体推理、开放式指令下的技能调用、执行状态监控、错误诊断与长时程规划能力，因此需要将两类能力统一到一个模型中。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Li Auto Inc.（理想汽车） · Foundation Model、Li Auto Inc.（原文未给出具体个人作者姓名）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.24526/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。</p>
+  <ul class="reading-intro-points"><li>论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。</li><li>应用场景涵盖数字环境与物理环境中的任务，包括具身场景理解、任务规划、技能/工具调用、动作执行、执行反馈验证与错误恢复。</li><li>研究问题在于：数字智能体缺乏对物理世界的空间结构感知、机器人动作语义理解与执行状态监控，而现有具身 VLM 又缺少多轮智能体推理、开放式指令下的技能调用、执行状态监控、错误诊断与长时程规划能力，因此需要将两类能力统一到一个模型中。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Li Auto Inc.（理想汽车）；作者：Foundation Model, Li Auto Inc.（原文未给出具体个人作者姓名）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文提出 MachEmbodied-VLM（ME-VLM），一个统一视觉语言模型，面向物理 AI 场景，同时具备具身认知（embodied cognition）与多模态智能体（multimodal agent）能力。</li><li>应用场景涵盖数字环境与物理环境中的任务，包括具身场景理解、任务规划、技能/工具调用、动作执行、执行反馈验证与错误恢复。</li><li>研究问题在于：数字智能体缺乏对物理世界的空间结构感知、机器人动作语义理解与执行状态监控，而现有具身 VLM 又缺少多轮智能体推理、开放式指令下的技能调用、执行状态监控、错误诊断与长时程规划能力，因此需要将两类能力统一到一个模型中。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出具备增强物理认知能力的具身 VLM，实现从用户意图理解、环境感知、任务规划，到技能调用、动作执行、结果验证与纠正的完整闭环。</li><li>构建覆盖物理理解、任务规划、技能调用、执行过程理解与失败纠正的统一训练数据，并设计统一联合训练流程，使模型在单一框架内学习感知、规划决策与执行验证能力。</li><li>验证跨任务泛化能力，将 ME-VLM 迁移到自动驾驶与具身导航任务，并报告了竞争性结果。</li><li>面向边缘芯片进行令牌压缩、量化与软硬件协同优化，降低推理延迟与计算成本，提升在真实具身系统中部署的可行性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文为面向物理 AI 的基础模型，统一具身认知与智能体能力，围绕“感知–推理–动作–验证–重规划”的五阶段闭环构建。</li><li>输入传感器：原文报告输入主要为视觉观测，视觉编码器与 projector 处理单帧、多视图图像或视频，并产生视觉 token；未报告具体传感器型号或配置。</li><li>场景表示：模型通过视觉 token 与文本 token 在语言模型嵌入空间中联合建模，强调空间位置、几何结构、相对关系与动态变化趋势等物理场景状态；具体三维场景表示形式原文未报告。</li><li>模型结构：基于 Qwen3.5 系列原生多模态智能体模型构建，提供 4B 与 35B-A3B 两个变体；训练包含具身能力注入、专家强化学习与多教师 on-policy 蒸馏。</li><li>关键技术：</li></ul>
+<p> - 具身能力注入：两阶段 SFT，包括 Embodied Foundation SFT 与 Embodied Reasoning SFT，将语义表示对齐到动作相关物理概念与状态变化。</p>
+<p> - 专家强化学习：多模态智能体专家从原始基础策略初始化，具身认知专家从具身 SFT checkpoint 初始化，分别进行 Capability-Unit RL 与 Environment-Loop RL。</p>
+<p> - Capability-Unit RL：使用 GRPO 的组相对奖励归一化与 GSPO 的序列级重要性比与裁剪。</p>
+<p> - Environment-Loop RL：在任务特定沙盒或模拟器中进行多轮可执行交互，保留失败轨迹以学习验证、纠正与恢复。</p>
+<p> - 多教师 on-policy 蒸馏：学生从具身专家初始化，在自身 rollout 分布上由智能体教师与具身教师按决策类型加权提供分布监督，不使用推理时专家路由。</p>
+<p> - 边缘部署：视觉 token 压缩、W4A8 量化、M100 软硬件协同优化与编译运行时流水线。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：</li></ul>
+<p> - 具身数据：开源与自产数据，包含具身场景理解、具身任务规划、错误诊断与恢复；恢复数据基于虚拟具身环境，通过注入 offset 扰动并保存异常状态构建。</p>
+<p> - 自动驾驶数据：来自开源数据集，包含全景场景理解、长尾交通场景感知、风险物体识别、感知-预测-规划闭环决策。</p>
+<p> - 具身导航数据：基于 R2R 与 RxR 场景，由内部数据管线构建，包含第一人称观测与原子动作，并重组为多轮对话格式。</p>
+<p> - 智能体数据：开源部分主要为工具调用数据；自产部分为多模态工作流轨迹，保留模型利用视觉信息、分解目标、组织工具调用与整合中间结果的过程。</p>
+<ul><li>仿真器：Environment-Loop RL 使用任务特定 sandbox 或 simulator 实例；导航数据由 simulator 采集；原文未报告具体仿真器名称。</li><li>模型规模：4B 与 35B-A3B 两个变体；基线包括 Hy-Embodied 30B-A3B、RynnBrain 1.1 9B、PhysBrain 1.5 8B、MiMo-Embodied 7B。</li><li>训练资源：原文未报告 GPU 数量、训练时长或具体训练资源。</li><li>实车平台：边缘部署使用 Li Auto 的 M100 SoC，包含 M100 NPU、24 核 Arm CPU 子系统、LPDDR5X 内存子系统，最高 64 GB 内存与 273 GB/s 峰值带宽；原文未报告实车道路测试平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：</li></ul>
+<p> - 具身基准：物理理解包括 CV-Bench、VABench、RefCOCO、ERQA、MindCube、SPARBench、SPBench、MMSI-Bench、ViewSpatial-Bench、EmbSpatial-Bench、RefSpatial-Bench、RoboSpatial-Home；任务规划包括 Cosmos、EgoPlan2、RoboBench；动作执行包括 VSIBench、SITE-Bench、RoboBench；错误纠正包括 RoboFail、RoboFAC。</p>
+<p> - 智能体基准：多模态理解包括 BLINK、MMStar、MVBench、VideoMME、RealWorldQA；工具与技能调用包括 BFCL-V4、TAU2-Bench；长时程规划包括 ClawEval；推理包括 GPQA、AIME25、MMLU-Pro、MMMU-Pro、MathVision；指令遵循包括 IFEval、IFBench。</p>
+<p> - 任务迁移基准：自动驾驶包括 MAPLM、CODA-LM、DriveAction、nuScenes-QA、MME-RealWorld；具身导航包括 R2R、RxR。</p>
+<ul><li>评估指标：具身基准平均分 63.4（4B）与 70.9（35B-A3B），对比 Hy-Embodied 60.2、RynnBrain 1.1 62.1、PhysBrain 1.5 62.7、MiMo-Embodied 54.3；智能体基准平均分 63.1（4B）与 72.5（35B-A3B），对比 Hy-Embodied 61.2、RynnBrain 1.1 62.9、PhysBrain 1.5 46.6、MiMo-Embodied 54.1。</li><li>关键数值：</li></ul>
+<p> - 具身基准示例：CV-Bench 89.5/91.7，VABench-Point 67.0/75.4，VABench-Visual 81.6/82.6，RefCOCO-testA 85.9/87.8，RefCOCO-testB 76.6/80.3，ERQA 45.8/54.3，MindCube -/91.1，SPARBench 57.3/67.6，SPBench-MV 69.9/83.5，SPBench-SI 70.6/71.7，MMSI-Bench 33.3/46.4，ViewSpatial-Bench 57.8/62.7，EmbSpatial-Bench 81.0/83.1，RefSpatial-Bench 46.9/63.4，RoboSpatial-Home 67.7/74.0。</p>
+<p> - 任务规划示例：Cosmos 65.7/76.9，EgoPlan2 55.3/64.5，RoboBench-Planning 40.1/53.7。</p>
+<p> - 动作执行示例：VSIBench 63.2/71.2，SITE-Bench-Video 65.6/72.9，RoboBench-Perception 41.8/52.2，RoboBench-Affordance 47.0/60.7。</p>
+<p> - 错误纠正示例：RoboFail-Execution 79.7/86.3，RoboFail-Planning 56.7/63.3，RoboFAC 74.7/75.7，RoboBench-Error -/52.7。</p>
+<p> - 智能体基准示例：BLINK 58.9/67.7，MMStar 72.5/77.3，MVBench 64.1/71.9，VideoMME 55.6/60.3，RealWorldQA 79.0/79.7，BFCL-V4 40.5/63.2，TAU2-Bench 50.1/63.9。</p>
+<p> - 边缘部署：视觉 token 压缩将 prefill token 从 4,096 降至 3,328；W4A8 量化后具身任务基准性能下降小于 1%；prefill 延迟从 400 ms 降至 188 ms，约</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.24626/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Relationally Grounded Latent World Models for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.24193/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Lightweight Pedestrian Head-Orientation Recognition Network for Safe Pedestrian-Vehicle Interaction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

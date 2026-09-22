@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Towards robust multimodal 3D object detection via visual foundation models - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。 应用场景为真实自动驾驶环境，重点关注由传感器噪声、恶劣天气和环境变化导致的分布外（OOD）损坏场景。 研究问题：现有方法通常在理想化干净数据上训练，面对 OOD 损坏时鲁棒性不足，难以泛化到夜间、极端天气或严重传感器噪声等未见过场景。 论文提出 RoboDistill 框架，将视觉基础模型（VFM，尤其是 SAM）引入多模态 3D 检测流程，以提升鲁棒性与泛化能力。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.23541">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.23541.webp" alt="Towards robust multimodal 3D object detection via visual foundation models" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Towards robust multimodal 3D object detection via visual foundation models</h1>
+            <div class="detail-meta">2026-09-20 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.23541" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.23541" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.23541</span></div>
+            <p class="detail-summary">论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。 应用场景为真实自动驾驶环境，重点关注由传感器噪声、恶劣天气和环境变化导致的分布外（OOD）损坏场景。 研究问题：现有方法通常在理想化干净数据上训练，面对 OOD 损坏时鲁棒性不足，难以泛化到夜间、极端天气或严重传感器噪声等未见过场景。 论文提出 RoboDistill 框架，将视觉基础模型（VFM，尤其是 SAM）引入多模态 3D 检测流程，以提升鲁棒性与泛化能力。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Computer Science and Technology, Beijing Jiaotong University, Bei…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.23541/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。</li><li>应用场景为真实自动驾驶环境，重点关注由传感器噪声、恶劣天气和环境变化导致的分布外（OOD）损坏场景。</li><li>研究问题：现有方法通常在理想化干净数据上训练，面对 OOD 损坏时鲁棒性不足，难以泛化到夜间、极端天气或严重传感器噪声等未见过场景。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Computer Science and Technology, Beijing Jiaotong University, Beijing 100044, China；作者：Ziying Song、Lin Liu、Mingzhe Guo、Caiyan Jia</li><li>机构：Horizon Robotics, Beijing 100000, China；作者：Hongyu Pan</li><li>机构：University of Macau, Macao 999078, China；作者：Shaoqing Xu</li><li>机构：Nanyang Technological University, Singapore 349562, Singapore；作者：Lei Yang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶感知中的多模态 3D 目标检测任务，融合 LiDAR 点云与相机图像信息。</li><li>应用场景为真实自动驾驶环境，重点关注由传感器噪声、恶劣天气和环境变化导致的分布外（OOD）损坏场景。</li><li>研究问题：现有方法通常在理想化干净数据上训练，面对 OOD 损坏时鲁棒性不足，难以泛化到夜间、极端天气或严重传感器噪声等未见过场景。</li><li>论文提出 RoboDistill 框架，将视觉基础模型（VFM，尤其是 SAM）引入多模态 3D 检测流程，以提升鲁棒性与泛化能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 RoboDistill 框架，将视觉基础模型引入多模态 3D 目标检测，用于显式应对 OOD 损坏下的鲁棒性问题。</li><li>提出 SAM-AD，通过在自动驾驶图像上进行域自适应预训练，使 SAM 获得适配自动驾驶任务的语义特征表示。</li><li>设计 AD-FPN，对 SAM 特征进行多尺度细化与上采样，使其与 LiDAR 特征无缝融合。</li><li>提出深度引导小波注意力模块（DGWA），在频域中抑制高频传感器噪声并保留关键上下文信息。</li><li>提出多模态知识蒸馏融合模块（KD Fusion），以 SAM-AD 为教师、轻量点云网络为学生，传递高质量视觉知识并提升噪声条件下的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：多模态 3D 目标检测框架，检测头沿用 Voxel R-CNN。</li><li>输入传感器：LiDAR 点云与相机图像；原文未报告其他传感器类型。</li><li>场景表示：融合图像语义特征与 LiDAR 深度/点云特征，DeepInteraction 与 TransFusion 等对比方法使用 BEV 类融合范式；RoboDistill 使用 Transformer 融合图像与点云特征。</li><li>模型结构：包含 SAM-AD、AD-FPN、DGWA、KD Fusion 四部分。</li><li>SAM-AD：从 KITTI、nuScenes 等数据集收集自动驾驶图像，遵循 DMAE 框架，使用掩码图像建模以自监督方式预训练 SAM 与 MobileSAM；FastSAM 的分割头在 AD 数据集上用 YOLOv8 预训练；采用统一混合损坏预训练，覆盖 Robustness3D 定义的损坏类型；随机缩放和裁剪，掩码比例为 0.75。</li><li>AD-FPN：基于 FPN 原理，以 SAM 的 ViT 图像编码器输出为输入，构建步长为 {32,16,8,4} 的多尺度特征，自底向上逐步细化，以增强多尺度表达能力。</li><li>DGWA：将点云投影到图像坐标系得到稀疏 LiDAR 深度图，用深度编码器处理后与图像特征拼接并经卷积融合得到深度引导特征；使用 Haar 小波将特征分解为低频子带和高频子带，通过小波注意力选择性抑制噪声；经逆离散小波变换重建并与注意力输出融合，输出鲁棒表示。</li><li>KD Fusion：图像分支为教师、点云分支为学生；蒸馏损失为 KL 散度与交叉熵损失的加权组合，采用任务对齐的 logit/概率空间蒸馏而非中间特征对齐；固定 α=0.5、τ=4；引入教师置信度权重 w(T)，用归一化熵门控在高熵/低置信时削弱或关闭蒸馏。</li><li>Transformer 融合：包含任务特定自注意力细化、跨模态交叉注意力对齐以及残差前馈网络细化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：KITTI、nuScenes、KITTI-C、nuScenes-C、SA-1B（SAM 预训练）、Robustness3D（损坏定义）。</li><li>仿真器：原文未报告。</li><li>模型规模：RoboDistill(L) 100.31M、RoboDistill(B) 84.42M、RoboDistill(T) 15.23M；对比方法中 DeepInteraction 57.82M、TransFusion 36.96M。</li><li>训练资源：SAM-AD 与 MobileSAM 等预训练使用 8 张 NVIDIA A100 GPU，训练 400 个 epoch；nuScenes 评估在 NVIDIA A100 GPU 上进行，输入分辨率 448×800，使用 FP16。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：KITTI validation/test、nuScenes validation/test、KITTI-C、nuScenes-C。</li><li>评估指标：KITTI 使用 car 类 AP₃D（R40）与 mAP；nuScenes 使用 NDS 与 mAP；鲁棒性评估使用 KITTI-C car 类 moderate 难度 R40 AP 和 nuScenes-C mAP。</li><li>关键数值：</li></ul>
+<p> - KITTI validation：RoboDistill(L) mAP 89.03、Easy 93.55、Mod. 88.11、Hard 85.44；RoboDistill(B) mAP 88.60；RoboDistill(T) mAP 88.42。</p>
+<p> - KITTI test：RoboDistill(L) mAP 86.13、Easy 92.52、Mod. 84.65、Hard 81.21。</p>
+<p> - nuScenes validation：RoboDistill(L) NDS 72.7、mAP 70.5；RoboDistill(B) NDS 72.5、mAP 70.2；RoboDistill(T) NDS 72.3、mAP 70.1。</p>
+<p> - nuScenes test：RoboDistill(L) NDS 73.4、mAP 71.3；RoboDistill(B) NDS 72.8、mAP 71.1；RoboDistill(T) NDS 72.5、mAP 70.8。</p>
+<p> - 雾雪损坏示例：RoboDistill 在 moderate car AP 达 86.71%，LoGoNet 为 62.58%，提升 24.13 个百分点。</p>
+<p> - 27 种 OOD 损坏下的平均结果：多数损坏类型上 RoboDistill 优于 RoboFusion、BEVFormer、CenterPoint 等；例如 KITTI-C Snow 上 RoboDistill(B) 85.50，RoboFusion 85.29；nuScenes-C Snow 上 RoboDistill(L) 69.00，RoboFusion 67.12。</p>
+<ul><li>对比方法：Voxel R-CNN、VFF、CAT-Det、LoGoNet、Focals Conv-F、SV-RCNN、SID、CLEAN、Fade3D、RAE3D、FUTR3D、AutoAlignV2、BEVFusion-mit、DeepInteraction、CMT、SparseFusion、TransFusion、TiGDistill-BEV、PARTNER、RoboFusion、BEVFormer、CenterPoint。</li><li>评估条件：主要为数据集上的开环评估，包含 clean 与 OOD 损坏仿真评估；闭环评估、实车评估原文未报告。</li><li>速度：RoboDistill(L) 3.0 FPS、RoboDistill(B) 3.4 FPS、RoboDistill(T) 5.8 FPS。</li><li>消融与可视化：原文包含消融研究与可视化章节，但当前提供的 HTML 内容在消融、可视化及结论部分被截断，未报告具体消融数值。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.23561/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Transferring Visual Explanations: How Cross-Architecture Knowledge Distillation Affects Model Interpretability</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.23507/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Detecting Phone-Induced Pedestrian Distraction via a Multimodal Fusion Transformer</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

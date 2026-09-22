@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hardware-in-the-Loop Evaluation of Game-Theoretic Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。 采用博弈论方法，将每辆车建模为具有各自驾驶目标的玩家，对比 Nash（对称、同时决策）与 Stackelberg（领导者-跟随者层级）两种均衡控制器。 研究问题聚焦于：博弈论控制器从数值仿真、虚拟验证到物理硬件部署过程中，层级分配、障碍车行为以及感知与状态估计误差对控制器行为和安全性的影响。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.23904">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.23904.webp" alt="Hardware-in-the-Loop Evaluation of Game-Theoretic Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Hardware-in-the-Loop Evaluation of Game-Theoretic Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-20 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.23904" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.23904" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.23904</span></div>
+            <p class="detail-summary">论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。 采用博弈论方法，将每辆车建模为具有各自驾驶目标的玩家，对比 Nash（对称、同时决策）与 Stackelberg（领导者-跟随者层级）两种均衡控制器。 研究问题聚焦于：博弈论控制器从数值仿真、虚拟验证到物理硬件部署过程中，层级分配、障碍车行为以及感知与状态估计误差对控制器行为和安全性的影响。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Virginia Tech, Blacksburg, VA, USA（Department of Electrical and Computer En…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.23904/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。</li><li>采用博弈论方法，将每辆车建模为具有各自驾驶目标的玩家，对比 Nash（对称、同时决策）与 Stackelberg（领导者-跟随者层级）两种均衡控制器。</li><li>研究问题聚焦于：博弈论控制器从数值仿真、虚拟验证到物理硬件部署过程中，层级分配、障碍车行为以及感知与状态估计误差对控制器行为和安全性的影响。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Virginia Tech, Blacksburg, VA, USA（Department of Electrical and Computer Engineering）；作者：Aakanksha Kataria</li><li>机构：Virginia Tech, Blacksburg, VA, USA（Department of Mechanical Engineering）；作者：Huiwen Yan、Mushuang Liu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶车辆在无信号交叉口的通行决策任务，研究车辆路径冲突且意图信息不完整场景下的安全高效交互。</li><li>采用博弈论方法，将每辆车建模为具有各自驾驶目标的玩家，对比 Nash（对称、同时决策）与 Stackelberg（领导者-跟随者层级）两种均衡控制器。</li><li>研究问题聚焦于：博弈论控制器从数值仿真、虚拟验证到物理硬件部署过程中，层级分配、障碍车行为以及感知与状态估计误差对控制器行为和安全性的影响。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>在 MATLAB/Simulink 中实现交叉口场景的 Nash 与 Stackelberg 控制器，并通过 QUARC 部署到搭载 NVIDIA Jetson AGX Orin 的 Quanser QCar 2 平台。</li><li>提出并采用三阶段评估流程（MATLAB 数值仿真、QLabs 虚拟验证、QCar 2 硬件实验），评估控制器从数值仿真到物理车辆运行的行为。</li><li>使用 QLabs 在物理部署前验证控制器与车辆的集成，包括控制接口、坐标约定、指令缩放及与车辆动力学的兼容性。</li><li>报告了对称交互、一致与冲突的 Stackelberg 角色分配，以及非合作障碍车行为的影响。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：交叉口通行决策模块，采用滚动时域（receding-horizon）决策，在每个决策步预测有限候选动作下的轨迹并选择动作。</li><li>输入传感器：QCar 2 平台配备 Intel RealSense D435 RGB-D 相机、二维 LiDAR、轮速编码器和 IMU。原文未报告 MATLAB 仿真与 QLabs 阶段的传感器输入细节。</li><li>场景表示：交叉口场景中车辆沿固定直线路径驶向交叉口中心 (0,0)；车辆 i 的状态为 x_i(t)=[d_i(t), v_i(t)]^T，其中 d_i 为到交叉口中心的剩余距离，v_i 为纵向速度，u_i 为纵向加速度输入。</li><li>模型结构：采用离散时间纵向运动学模型，采样周期 Δt=0.1 s，v_i(t+1)=max(v_i(t)+u_i(t)Δt, 0)，d_i(t+1)=d_i(t)−v_i(t+1)Δt。每个候选加速度在预测时域 T=15 步（1.5 s）内保持不变。</li><li>成本函数：J_i^t(u(t)) = θ1 J_speed,i + θ2 J_effort,i + θ3 J_collision,i，包含速度跟踪项（相对期望速度的归一化平方误差）、控制努力项（加速度平方和）与碰撞规避项（基于 tanh 的安全距离惩罚，其中 d_safe 为安全距离、β 控制惩罚函数过渡、\|Δx\|为两车质心预测欧氏距离）。</li><li>关键技术：Nash 控制器将交互建模为有限势博弈，依据势函数 F^t 的全局最小化求解纯策略 Nash 均衡（Algorithm 1）；Stackelberg 控制器由二值输入 ego_is_leader 指定角色，领导者预测跟随者最优响应（BR(u_L)=argmin J_F^t(u_L,u_F)）并据此最小化自身成本，采用强 Stackelberg 均衡（Algorithm 2）。</li><li>原文未报告网络结构、学习式模型或额外感知算法的细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告使用任何公开或自建数据集，评估基于自设的交叉口测试场景。</li><li>仿真器：MATLAB（运动学车辆模型）、Quanser Interactive Labs（QLabs）虚拟验证环境。</li><li>模型规模：原文未报告。</li><li>训练资源：原文报告 MATLAB 运行时间在一台配备 AMD Ryzen 5 220 处理器（3.20 GHz）和 16 GB RAM 的笔记本电脑上采集；未报告模型训练资源。</li><li>实车平台：Quanser QCar 2（1/10 比例自动驾驶车），搭载 NVIDIA Jetson AGX Orin 板载计算机，传感器包括 Intel RealSense D435 RGB-D 相机、二维 LiDAR、轮速编码器和 IMU；控制器通过 QUARC 部署，控制回路运行于 100 Hz。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与场景：自设交叉口场景，包含 Nash 交互（1A 对称到达、1B 非对称到达）、Stackelberg 领导者-跟随者交互（2A 对称、2B 非对称）、Stackelberg 层级冲突（3 领导者-领导者冲突），以及鲁棒性场景（4A/4B 恒速障碍车、4C/4D 突减速障碍车）。</li><li>评估指标：MATLAB 表 I 报告最小距离（两车质心最小欧氏距离，单位 m）、平均速度（自车纵向平均速度，单位 m/s）、95 百分位延迟（μs）；硬件表 II 报告 WCET（ms）、平均延迟（ms）及观测行为。此外以定性行为描述作为结果。</li><li>关键数值（MATLAB 表 I）：Nash 1A 最小距离 2.804 m、平均速度 0.151 m/s、95 百分位延迟 2.200 μs（两车均让行停滞）；1B 为 2.287 m、0.400 m/s、1.500 μs；Stackelberg 2A 为 1.262 m、0.375 m/s、6.600 μs（领导者通行、跟随者让行）；2B 为 1.262 m、0.199 m/s、1.800 μs；3（领导者-领导者冲突）为 0.023 m、0.375 m/s、1.300 μs（MATLAB 中障碍车让行）；鲁棒性 4A 为 2.287 m、0.132 m/s、1.900 μs，4B 为 1.262 m、0.199 m/s、1.500 μs，4C 为 2.386 m、0.124 m/s、1.300 μs，4D 为 1.268 m、0.199 m/s、2.300 μs。MATLAB 决策时间 95 百分位低于 6.6 μs。</li><li>关键数值（硬件表 II）：Nash 1A WCET 0.1118 ms、平均 0.0366 ms（两车让行停止）；1B 0.1273 ms、0.0465 ms；Stackelberg 2A 0.7619 ms、0.2770 ms（领导者通行、跟随者让行）；2B 0.5232 ms、0.2864 ms；3A 领导者-领导者冲突 0.6996 ms、0.2781 ms（发生碰撞）；3B 跟随者-跟随者冲突 0.6965 ms、0.2781 ms（双方让行避免碰撞）；鲁棒性 4A 0.2099 ms、0.0391 ms，4B 0.5840 ms、0.2848 ms，4C 0.0925 ms、0.0413 ms，4D 0.7086 ms、0.2752 ms，4E 0.6540 ms、0.2668 ms。最大 WCET 为 0.7619 ms，低于 100 Hz 控制回路的 10 ms 周期；硬件指标在剔除前 2 s 初始化瞬态后计算。</li><li>对比方法：对比 Nash 与 Stackelberg 控制器在不同角色分配与障碍车行为下的表现，未与其他基线算法进行数值对比。</li><li>评估条件：定量结果来自 MATLAB 数值仿真与 QCar 2 硬件实验；QLabs 阶段提供定性验证。仿真与硬件在一致性上存在差异：层级冲突（领导者-领导者）在 MATLAB 中安全解决，但在硬件上导致碰撞，论文将其归因于板载感知与状态估计的噪声及离散化误差。</li><li>开放/闭环情况：原文报告 MATLAB 仿真使用运动学模型、不含感知误差或不确定性；硬件实验为含板载感知、状态估计、指令生成、驱动执行与物理运动的闭环运行。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.24193/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Lightweight Pedestrian Head-Orientation Recognition Network for Safe Pedestrian-Vehicle Interaction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.23561/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Transferring Visual Explanations: How Cross-Architecture Knowledge Distillation Affects Model Interpretability</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

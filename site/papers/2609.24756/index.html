@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Disparity Estimation of Planar Reflective Surfaces Using Specular Reflections From a Single Light Source - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。 应用场景包括自动驾驶中的障碍物检测、距离估计与导航，以及机器人控制、虚拟现实、多光谱/高光谱成像、工业分拣与视觉检测等。 研究问题是在平坦、无纹理表面且由单一固定光源照明、表面产生一个主导镜面反射的条件下，传统依赖纹理匹配的立体匹配方法和神经网络难以可靠估计视差，镜面反射区域常导致错误预测。 论文提出 SRDE（Specular Reflection Disparity Estimation）算法，利用镜面反射的几何属性，而非表面纹理，来恢复平坦无纹理物体的视差图。 论文还提出将 SRDE 选择性集成到现有神经视差估计流程中，在镜面反射区域替换网络预测，无需重新训练骨干网络。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.24756">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.24756.webp" alt="Disparity Estimation of Planar Reflective Surfaces Using Specular Reflections From a Single Light Source" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Disparity Estimation of Planar Reflective Surfaces Using Specular Reflections From a Single Light Source</h1>
+            <div class="detail-meta">2026-09-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.24756" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.24756" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.24756</span></div>
+            <p class="detail-summary">论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。 应用场景包括自动驾驶中的障碍物检测、距离估计与导航，以及机器人控制、虚拟现实、多光谱/高光谱成像、工业分拣与视觉检测等。 研究问题是在平坦、无纹理表面且由单一固定光源照明、表面产生一个主导镜面反射的条件下，传统依赖纹理匹配的立体匹配方法和神经网络难以可靠估计视差，镜面反射区域常导致错误预测。 论文提出 SRDE（Specular Reflection Disparity Estimation）算法，利用镜面反射的几何属性，而非表面纹理，来恢复平坦无纹理物体的视差图。 论文还提出将 SRDE 选择性集成到现有神经视差估计流程中，在镜面反射区域替换网络预测，无需重新训练骨干网络。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Friedrich-Alexander University of Erlangen-Nürnberg (FAU), Department of El…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.24756/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。</p>
+  <ul class="reading-intro-points"><li>论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。</li><li>应用场景包括自动驾驶中的障碍物检测、距离估计与导航，以及机器人控制、虚拟现实、多光谱/高光谱成像、工业分拣与视觉检测等。</li><li>研究问题是在平坦、无纹理表面且由单一固定光源照明、表面产生一个主导镜面反射的条件下，传统依赖纹理匹配的立体匹配方法和神经网络难以可靠估计视差，镜面反射区域常导致错误预测。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Friedrich-Alexander University of Erlangen-Nürnberg (FAU), Department of Electrical Engineering, Electronics and Information Technology, Chair of Multimedia Communications and Signal Processing, 91058 Erlangen, Germany；作者：Katja Kossira、Frank Sippel、Jürgen Seiler、André Kaup</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文关注的自动驾驶相关任务是多相机/相机阵列系统中的视差（disparity）估计，用于从多视角 2D 图像获取 3D 信息。</li><li>应用场景包括自动驾驶中的障碍物检测、距离估计与导航，以及机器人控制、虚拟现实、多光谱/高光谱成像、工业分拣与视觉检测等。</li><li>研究问题是在平坦、无纹理表面且由单一固定光源照明、表面产生一个主导镜面反射的条件下，传统依赖纹理匹配的立体匹配方法和神经网络难以可靠估计视差，镜面反射区域常导致错误预测。</li><li>论文提出 SRDE（Specular Reflection Disparity Estimation）算法，利用镜面反射的几何属性，而非表面纹理，来恢复平坦无纹理物体的视差图。</li><li>论文还提出将 SRDE 选择性集成到现有神经视差估计流程中，在镜面反射区域替换网络预测，无需重新训练骨干网络。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>利用镜面反射的几何属性，对镜面反射在相机视图间的位移进行建模，并结合已知相机配置与光源位置，提取平坦、无纹理物体的准确视差图。</li><li>提出一种鲁棒的光源位置估计方法，面向工业分拣和视觉检测等真实应用，通过对反射光线系统进行最小二乘优化来缓解测量误差。</li><li>证明 SRDE 可无缝集成到现有神经视差估计框架中，在不重新训练骨干模型的情况下，在镜面反射区域实现可靠视差估计。</li><li>构建了针对该受限场景的合成数据集，并采集了真实世界数据用于验证。</li><li>摘要报告 SRDE 在合成图像上相较现有方法在 End Point Error 上取得超过 52% 的提升，并在真实数据上展示更优表现。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文将 SRDE 分为镜面反射检测和视差估计两个主要部分。</li><li>输入传感器：使用相机阵列图像，实验中使用 3×3 共 9 个相机的阵列；合成与真实世界数据均匹配该几何配置。原文报告合成相机阵列水平、垂直基线为 85 mm，对角方向为 85√2 mm。</li><li>物理假设：假设单一光源并在物体表面形成一个镜面反射；物体表面可建模为欧氏平面，单一表面法向量表示整个物体平面；假设相机内参已知。光源位置需已知或可估计。</li><li>镜面反射检测：先使用校准反射标准（Zenith-Polymer）归一化图像；再结合自适应阈值与梯度阈值检测镜面反射。使用 3×3 Sobel 算子计算梯度幅值，颜色图像在亮度通道计算梯度。自适应阈值由局部 15×15 窗口内梯度均值、标准差和参数 k 构成；原文报告 k=1.5 在抑制纹理噪声和保留反射边界之间取得最佳平衡，且稳定区间为 k∈[1.2,…,1.8]。生成二值掩膜后使用 8 邻域连通域分析，仅保留最小空间范围 10×10 像素的连接分量，并只保留最大连通分量。</li><li>反射中心与位移：对检测到的镜面反射区域计算质心 (c_x,c_y)，并计算相邻相机 i 与 j 之间镜面反射的位置位移 Δ_x,i,j 和 Δ_y,i,j。</li><li>视差估计：将镜面反射建模为虚拟反射光源 V 的图像；对每个相邻相机对独立计算。先通过标准立体三角化得到虚拟相对深度 z_rel=B·f/(d·p)，其中 B 为基线，f 为焦距，p 为传感器像素尺寸，d 为相邻相机反射中心沿基线的像素位移。再用 o_x=(c_u−c_x)·p、o_y=(c_v−c_y)·p 将像素位移转换为传感器物理位移，并通过 x_rel=o_x·z_rel/f 及对应 y 方向得到虚拟光源 3D 位置。</li><li>全局坐标系与物体平面：取法向量 n=V−L=[n_x,n_y,n_z]^T，计算 pitch 与 roll 角 θ_pitch=−arctan(n_x/n_z)、θ_roll=−arctan(n_y/n_z)。由于虚拟光源与真实光源关于平面镜等距，物体表面位于二者中点 s=(V+L)/2，法向量 n 定义朝向，s 固定空间位置，从而确定 3D 物体平面。</li><li>深度与视差生成：每个像素 [x,y] 对应从相机光心出发的射线 k[x,y]=((x−c_u)/(f·p),(y−c_v)/(f·p),1)。使用射线-平面相交公式 z[x,y]=⟨n,s⟩/(k[x,y]·n) 得到绝对深度，交点 H[x,y]=z[x,y]×k[x,y]。最后用 d[x,y]=B·f/z[x,y] 将深度转回像素视差。所有相机对的独立视差估计通过逐像素中位数聚合生成全局视差图。</li><li>集成策略：SRDE 不能处理复杂背景，因此可集成到神经网络中；网络处理复杂和纹理区域，SRDE 选择性应用于平坦镜面物体区域。该混合策略无需网络重训练。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>合成数据集：论文指出已有数据集未完全覆盖该特定场景，因此使用 Blender 生成新的合成数据集。场景使用 9 个虚拟相机排列为 3×3 阵列，基线配置为水平、垂直 85 mm，对角 85√2 mm。放置一个随机强度、大小和颜色的光源，但相机从不直接捕获光源，只看到其在物体表面的反射。物体位于相机阵列前不同位置，均无纹理并反射光源，颜色、形状、尺度和朝向不同。</li><li>真实世界数据：使用 3×3 相机阵列采集，匹配虚拟设置的几何配置。由于论文聚焦镜面反射区域，背景被建模为无穷远，该区域没有显著视差。</li><li>仿真器/渲染工具：Blender。</li><li>预训练模型与数据集：评估网络包括 NMRF、CREStereo、IGEV。NMRF 使用 KITTI 和 Sceneflow 预训练权重，最终选用 Sceneflow；CREStereo 使用 ETH3D 预训练权重；IGEV 使用 ETH3D、KITTI、Middlebury、Sceneflow 预训练权重，最终选用 Sceneflow。</li><li>分割工具：使用 RePoSeg（Reflection-aware Postprocessed Segmentation）生成物体掩膜，用于在镜面反射物体区域内进行定量和定性比较。</li><li>训练资源/实车平台：原文报告算法在 NVIDIA RTX A4000 GPU 上执行，运行时间取三次最佳值；原文未报告模型规模、训练时长、内存占用以及实车平台信息。原文未报告标准模型训练资源，因为评估使用预训练权重。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在合成数据和真实世界数据上评估；定量比较关注镜面反射物体区域，使用 RePoSeg 掩膜排除背景；完整场景集成实验见 IV-E。</li><li>评估指标：End Point Error (EPE)、Root Mean Squared Error (RMSE)、Bad Matching Pixels，阈值分别为 0.1、0.01、0.001 像素（bmp0.1、bmp0.01、bmp0.001）。合成图像以 ground truth disparity 为参考；真实数据采用主观视觉比较。</li><li>对比方法：NMRF、CREStereo、IGEV。使用其预训练权重，选择表现最佳的模型进行对比：NMRF 与 IGEV 使用 Sceneflow，CREStereo 使用 ETH3D。</li><li>合成数据结果：摘要报告 SRDE 在合成图像上相较现有方法在 End Point Error 上取得超过 52% 的提升。原文正文截断部分未给出完整表格数值。</li><li>真实数据结果：论文报告在真实世界数据上进一步测试展示更优性能；真实数据部分包含光源位置估计和定性比较，原文截断处未给出完整数值。</li><li>集成结果：论文报告将 SRDE 集成到现有神经视差估计流程中，通过选择性替换镜面反射区域预测，在不修改骨干模型、不重新训练的情况下获得额外性能增益。</li><li>消融/参数分析：原文报告参数 k 在 [1.0,2.0] 范围内以 0.1 步长进行敏感性测试，稳定区间为 k∈[1.2,…,1.8]，最终固定 k=1.5。</li><li>开环、闭环、仿真或实车条件：论文评估为视差估计精度评估，包含合成数据和真实世界数据；原文未报告开环/闭环自动驾驶控制评估，也未报告实车闭环测试。</li><li>模型限制：论文列出检测边界、几何边界和照明边界等限制；SRDE 仅适用于可近似为平面的平坦表面、单一主导光源且光源位置已知或可估计的场景，不能处理复杂背景。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.24749/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">D-JEPA: A Decision-Aligned Latent World Model</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

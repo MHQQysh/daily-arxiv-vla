@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Frame Dynamic Object Segmentation and Ego Motion Estimation using Radar Image Fusion - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。 核心研究问题在于两者的循环依赖：准确自车运动估计通常需要静态场景观测，而识别静态观测又需要已知自车运动。 论文提出 Radar-Dot，一个雷达–RGB 融合框架，利用雷达 Doppler 测量打破该循环依赖。 应用场景为车载多传感器（雷达 + RGB 相机）条件下的图像帧动态目标分割与自车速度/轨迹估计。 论文将该工作定位为初步结果（preliminary results）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.22857">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.22857.webp" alt="Image Frame Dynamic Object Segmentation and Ego Motion Estimation using Radar Image Fusion" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Image Frame Dynamic Object Segmentation and Ego Motion Estimation using Radar Image Fusion</h1>
+            <div class="detail-meta">2026-09-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.22857" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.22857" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.22857</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。 核心研究问题在于两者的循环依赖：准确自车运动估计通常需要静态场景观测，而识别静态观测又需要已知自车运动。 论文提出 Radar-Dot，一个雷达–RGB 融合框架，利用雷达 Doppler 测量打破该循环依赖。 应用场景为车载多传感器（雷达 + RGB 相机）条件下的图像帧动态目标分割与自车速度/轨迹估计。 论文将该工作定位为初步结果（preliminary results）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未提供作者所属机构的明确信息，作者列表为 Astik Srivastava、Suhani Grover、Avinash Sharma、Madhav…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.22857/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。</li><li>核心研究问题在于两者的循环依赖：准确自车运动估计通常需要静态场景观测，而识别静态观测又需要已知自车运动。</li><li>论文提出 Radar-Dot，一个雷达–RGB 融合框架，利用雷达 Doppler 测量打破该循环依赖。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>原文未提供作者所属机构的明确信息，作者列表为 Astik Srivastava、Suhani Grover、Avinash Sharma、Madhava Krishna，机构：原文未明确；作者：原文未明确对应。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景中的动态目标分割与自车运动估计问题。</li><li>核心研究问题在于两者的循环依赖：准确自车运动估计通常需要静态场景观测，而识别静态观测又需要已知自车运动。</li><li>论文提出 Radar-Dot，一个雷达–RGB 融合框架，利用雷达 Doppler 测量打破该循环依赖。</li><li>应用场景为车载多传感器（雷达 + RGB 相机）条件下的图像帧动态目标分割与自车速度/轨迹估计。</li><li>论文将该工作定位为初步结果（preliminary results）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>利用雷达 Doppler 测量估计自车速度，同时显式分离静态与动态雷达回波点。</li><li>使用雷达导出的自车速度预测刚性背景光流，结合光流一致性与深度一致性识别独立运动的图像区域。</li><li>形成闭环流程：雷达自车运动估计用于图像动态分割，静态点过滤又反过来提升自车速度估计。</li><li>在 nuScenes 的 10 个场景（nuScenes-mini 的一部分）、394 个连续帧对上评估了完整闭环流程。</li><li>分析了雷达自车运动与光流/深度一致性公式各自的贡献，并使用基于 nuInsSeg 的动态目标掩码作为真值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：雷达里程计估计（II-A）与动态目标分割（II-B），后者包含 RGB 掩码生成子模块（II-B1）。</li><li>输入传感器：雷达点云（含距离 r、方位角 θ、视线方向 Doppler 速度 d）与 RGB 图像；深度估计网络使用 RGB 和雷达点云。</li><li>雷达自车运动估计：对 N 个雷达回波构建线性 Doppler 约束 d_i = −v_ego·P_i/‖P_i‖，堆叠为线性系统 H v_ego = −d_i，用最小二乘求解；采用 RANSAC 等鲁棒估计降低动态目标影响。该公式仅估计平移速度，不估计朝向，因此使用真值旋转 R_t 将自车坐标系速度变换到世界坐标系，并从真值初始位置 p_0 递推积分得到轨迹。</li><li>静态/动态雷达点分割：用估计速度预测 Doppler 速度 d̂_i = −u_i^T v̂_ego，定义残差 e_i = \|d_i + u_i^T v̂_ego\|，以阈值 τ 划分为静态集合 S 与动态集合 D；迭代流程为先用全部点估计初速度，再仅用静态点重新估计 v̂_ego^static。</li><li>RGB 动态掩码生成：使用 JustDepth 的雷达–RGB 深度网络获得两帧度量深度 D_{t−1}、D_t；用雷达速度构造平移 t_{t−1→t} = v_ego,t−1 Δt，旋转使用真值朝向，组成相对相机变换 T；将像素反投影到 3D，按刚性假设预测其在新帧位置并投影得到期望像素位置与期望刚性光流 f_est。</li><li>一致性判据：用预训练光流网络得到观测光流 f_obs，定义光流残差 e_flow = ‖f_obs − f_est‖_2；再定义深度残差 e_depth = \|D_t(u′,v′) − Z_est\|，其中 Z_est 为 X_t 的第三分量。</li><li>动态得分与阈值：S(u,v) = e_flow/σ_flow + λ·e_depth/σ_depth；σ_flow 含场景中值深度与 FOE 距离相关的容差项，σ_depth = max(D_{t−1}(u,v), Z_min)；阈值 τ = median(S) + k·MAD(S)，掩码 M(u,v) = 1[S(u,v) &gt; τ]；剔除不可靠光流对应（遮挡、越界），并做形态学开闭运算。</li><li>原文未报告网络训练细节、模型规模与具体超参数取值（如 τ、λ、k、Z_min、σ_FOE 等数值）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes 数据集，使用其中 10 个场景（论文说明属于 nuscenes-mini），共 394 个连续帧对。</li><li>真值标注：nuInsSeg 提供的图像空间实例分割掩码，选取带 nuScenes moving 属性的实例并合并 2D 掩码得到二值动态目标掩码；评估针对图像空间动态掩码，而非 3D 框投影。</li><li>深度模型：使用 JustDepth（雷达–相机度量深度估计网络，参考文献 [5]）获得两帧度量深度图。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告（论文未报告训练使用的 GPU、时长等）。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 数据集 10 个场景、394 个连续帧对；真值为 nuInsSeg 图像空间动态掩码；该实验不含任何学习式动态分割组件，作为纯几何基线。</li><li>评估指标：像素级 precision、recall、F1-score、dynamic IoU，跨所有评估帧聚合。</li><li>动态分割总体结果：precision 31.24%、recall 36.51%、F1 33.67%、dynamic IoU 20.24%。</li><li>场景差异：最佳为 scene-0061（IoU 36.02%、F1 52.96%），其次 scene-0757（IoU 35.28%、F1 52.16%）；scene-0655、scene-0916、scene-1077 的 IoU 低于 2.1%。</li><li>对比方法/条件：雷达速度估计方面对比使用全部雷达回波与使用分割出的静态点，并比较 LSQ 与 LSQ+RANSAC（图 2 中 A1/A2 为分割静态点、B1/B2 为全部点）的 MAE。</li><li>雷达速度估计结论：基于静态点分割的雷达自车速度估计相比使用全部雷达回波提高了自车速度估计精度。</li><li>评估条件：论文报告的是基于 nuScenes 数据的闭环流程评估（含几何分割与雷达速度估计），原文未报告实车实验与仿真器实验的条件与结果。</li><li>论文指出性能随场景变化显著，取决于动态内容数量与分布、雷达覆盖、深度质量以及自车运动估计精度。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.22868/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Planning-Aligned Pretraining of BEV Representations with Sparse Action-Conditioned Targets for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.22716/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">ZIL: Zero-shot Image-to-LiDAR Registration</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
