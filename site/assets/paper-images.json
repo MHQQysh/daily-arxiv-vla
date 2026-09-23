@@ -27185,5 +27185,291 @@
     "inside_figure": false,
     "width": 918,
     "height": 1188
+  },
+  "2609.26325": {
+    "title": "Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping",
+    "abs_url": "https://arxiv.org/abs/2609.26325",
+    "html_url": "https://arxiv.org/html/2609.26325v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.26325v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 265,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26325v1/overview.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 357,
+        "height": 126,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.26325.webp",
+    "image_url": "https://arxiv.org/html/2609.26325v1/teaser.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 429,
+    "height": 265
+  },
+  "2609.25831": {
+    "title": "Sometimes You Gotta Run Before You Can Walk: Run-then-Walk Scheduling Strategy for VLM Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.25831",
+    "html_url": "https://arxiv.org/html/2609.25831v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.25831v1/head_pic.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 234,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.25831v1/pipline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 223,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.25831v1/3d34ef81b357566e.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 494,
+        "height": 283,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.25831v1/1da6196444e35b0f.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 494,
+        "height": 283,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.25831v1/stage3_ee545028f8a85e6f.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 275,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.25831.webp",
+    "image_url": "https://arxiv.org/html/2609.25831v1/head_pic.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 548,
+    "height": 234
+  },
+  "2609.26299": {
+    "title": "ForeDrive: Foresight-Guided End-to-End Autonomous Driving with a Planning-Relevant Latent World Model",
+    "abs_url": "https://arxiv.org/abs/2609.26299",
+    "html_url": "https://arxiv.org/html/2609.26299v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.26299v1/Fig1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 379,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26299v1/Fig3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 349,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26299v1/Fig4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 371,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26299v1/SupFig1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 371,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26299v1/SupFig2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 698,
+        "height": 598,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      }
+    ],
+    "path": "assets/paper-images/2609.26299.webp",
+    "image_url": "https://arxiv.org/html/2609.26299v1/Fig1.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 698,
+    "height": 379
+  },
+  "2609.26792": {
+    "title": "DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving",
+    "abs_url": "https://arxiv.org/abs/2609.26792",
+    "html_url": "https://arxiv.org/html/2609.26792v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.26792v1/qual_comparison.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 471,
+        "height": 228,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26792v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 153,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26792v1/pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 462,
+        "height": 145,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26792v1/cl_rollout.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 121,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26792v1/cl_rollout_more.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 119,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 60
+      }
+    ],
+    "path": "assets/paper-images/2609.26792.webp",
+    "image_url": "https://arxiv.org/html/2609.26792v1/qual_comparison.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 471,
+    "height": 228
+  },
+  "2609.25860": {
+    "title": "MatchFusion: Explicit-Implicit Instance Matching for Spatio-Temporal Multimodal Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.25860",
+    "html_url": "https://arxiv.org/html/2609.25860v1",
+    "path": "assets/paper-images/2609.25860.webp",
+    "image_url": "https://arxiv.org/html/2609.25860v1",
+    "source": "playwright:figure",
+    "score": 60,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 800,
+    "height": 252
+  },
+  "2609.25515": {
+    "title": "Real-World Perception for Autonomous Driving in Adverse Weather: Enhancing Standard Detectors via Foundation-Guided Auto-Annotation",
+    "abs_url": "https://arxiv.org/abs/2609.25515",
+    "html_url": "https://arxiv.org/html/2609.25515v1",
+    "path": "assets/paper-images/2609.25515.webp",
+    "image_url": "https://arxiv.org/html/2609.25515v1",
+    "source": "playwright:figure",
+    "score": 60,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 800,
+    "height": 530
   }
 }

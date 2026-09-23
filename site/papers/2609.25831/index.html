@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sometimes You Gotta Run Before You Can Walk: Run-then-Walk Scheduling Strategy for VLM Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。 应用场景：闭环驾驶规划，评估于 NAVSIMv1、NAVSIMv2、Navhard 与 nuScenes 等驾驶基准。 研究问题：现有 GRPO 方案要么偏向进度（progress）导致不安全行为，要么过早施加安全约束导致过度保守，且两者都需要冗长训练；论文试图在单个训练流程中分离“进度探索”与“安全修复”，同时提升性能并加速收敛。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.25831">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.25831.webp" alt="Sometimes You Gotta Run Before You Can Walk: Run-then-Walk Scheduling Strategy for VLM Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Sometimes You Gotta Run Before You Can Walk: Run-then-Walk Scheduling Strategy for VLM Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.25831" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.25831" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.25831</span></div>
+            <p class="detail-summary">任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。 应用场景：闭环驾驶规划，评估于 NAVSIMv1、NAVSIMv2、Navhard 与 nuScenes 等驾驶基准。 研究问题：现有 GRPO 方案要么偏向进度（progress）导致不安全行为，要么过早施加安全约束导致过度保守，且两者都需要冗长训练；论文试图在单个训练流程中分离“进度探索”与“安全修复”，同时提升性能并加速收敛。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Peking University · Yuqi Ye、Shangkun Sun、Junhong Lin 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.25831/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。</p>
+  <ul class="reading-intro-points"><li>任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。</li><li>应用场景：闭环驾驶规划，评估于 NAVSIMv1、NAVSIMv2、Navhard 与 nuScenes 等驾驶基准。</li><li>研究问题：现有 GRPO 方案要么偏向进度（progress）导致不安全行为，要么过早施加安全约束导致过度保守，且两者都需要冗长训练；论文试图在单个训练流程中分离“进度探索”与“安全修复”，同时提升性能并加速收敛。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Peking University；作者：Yuqi Ye、Shangkun Sun、Junhong Lin、Jiayi Zhao、Changhao Peng、Wei Gao</li><li>机构：Minieye Technology Co., Ltd；作者：Wei Zheng、Guoqing Liu</li><li>机构：Fuzhou University；作者：Tiesong Zhao</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。</li><li>应用场景：闭环驾驶规划，评估于 NAVSIMv1、NAVSIMv2、Navhard 与 nuScenes 等驾驶基准。</li><li>研究问题：现有 GRPO 方案要么偏向进度（progress）导致不安全行为，要么过早施加安全约束导致过度保守，且两者都需要冗长训练；论文试图在单个训练流程中分离“进度探索”与“安全修复”，同时提升性能并加速收敛。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>揭示 VLM 驾驶 RL 中的两种不同优化机制：进度机制（Run-GRPO）积极探索高进度但牺牲安全，安全机制（Walk-GRPO）保持安全但进度提升缓慢。</li><li>提出 Run-then-Walk 两阶段 RL 训练策略：先在放宽约束下扩展进度分布，再通过端点（endpoint）与安全相关目标修复不安全行为，区别于单阶段混合目标 RL 与通用“易到难”课程学习。</li><li>给出一套与规划器无关的奖励接口与理论性方向解释（理想化分析），指出 Run 需产生高进度质量、Walk 需降低安全失败、以及参考策略需保留该质量。</li><li>在自回归规划器 AutoDrive-P³ 与扩散规划器 ReCogDrive 上验证同一算法的通用性。</li><li>在 NAVSIMv1、NAVSIMv2、Navhard、nuScenes 上报告更好的驾驶性能，并相比基线减少 40–50% 的 RL 训练轮数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：VLM 驾驶策略的 RL 微调/训练调度模块，不改变规划器原有架构与原生辅助目标，只改变时间调度与基于解码轨迹分布的规划奖励。</li><li>输入传感器：原文未报告具体传感器配置；表格中仅标明各方法是否使用 Image / Lidar，本方法在表格中标记为使用 Image、不使用 Lidar。</li><li>场景表示：以“驾驶查询 q”为单位，策略采样完整输出 x_i（自回归响应或扩散轨迹头的连续样本），再经解码器映射为轨迹 τ_i。</li><li>模型结构：在两类 VLM 规划器上实现——自回归 AutoDrive-P³（fast-mode）与扩散式 ReCogDrive；方法保持其原生辅助监督与架构。</li><li>关键技术：</li></ul>
+<p> - Run 阶段：使用进取型规划奖励 R_plan^run(τ_i)=PDMS(τ_i)，有意放宽安全修复，鼓励跳出 SFT 的保守解、发现更高进度模式。</p>
+<p> - Walk 阶段：用端点奖励与安全项替换进取型规划奖励，R_plan^walk(τ_i,τ_i*)=I_safe(τ_i)(R_safe(τ_i)+R_end(d_E))；不安全 rollout 的规划奖励置零。</p>
+<p> - 端点距离：d_E=‖p_T−g_T‖_1；端点奖励为分段衰减形式 R_end(d_E)=1−ηk(d_E)，k(d_E)=min(K, max(0,⌊(d_E−2Δ)/Δ⌋+1))，K=⌊1/η⌋。</p>
+<p> - 实现中 R_safe(τ_i)=NC(τ_i)+DAC(τ_i)；I_safe(τ_i)=1 仅当 NC(τ_i)&gt;0 且 DAC(τ_i)&gt;0。</p>
+<p> - 奖励组合：R_i^(s)=R_aux(x_i)+λ_plan R_plan^(s)(τ_i)，s∈{run, walk}；组相对优势 A_i^(s) 由组内奖励归一化得到。</p>
+<p> - 优化目标：GRPO 目标（含 clip 与 KL 项），Run 阶段以 π_sft 为参考策略，Walk 阶段以选定的 Run checkpoint π_run 为新参考策略。</p>
+<p> - 规划器无关性：奖励仅依赖解码轨迹与闭环反馈；自回归规划器奖励赋给包含轨迹的采样 token 序列，扩散规划器奖励赋给采样到的连续轨迹。</p>
+<ul><li>原文未报告：具体网络层数、参数量、传感器融合细节、推理频率等实现细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集/基准：NAVSIMv1、NAVSIMv2、Navhard、nuScenes。</li><li>仿真器：原文未报告具体仿真器名称（仅提及 NAVSIM 系列基准与闭环反馈）。</li><li>模型规模：原文未报告模型参数量；nuScenes 表格中列出的 VLM 型号包括 Qwen2.5-VL-3B、Qwen2-VL-7B、LLaVA-7B、GPT-3.5 等，但未给出本方法的模型规模统一说明。</li><li>训练资源：原文未报告 GPU 型号、数量、训练时长等资源信息。</li><li>实车平台：原文未报告实车平台；实验为基准评测（NAVSIM/nuScenes 等），未报告实车验证。</li><li>训练轮数设置：AutoDrive-P³ 使用 3 个 Run epoch + 2 个 Walk epoch，共 5 个 RL epoch；ReCogDrive 使用 5 个 Run epoch + 1 个 Walk epoch，共 6 个 RL epoch。基线为 10 个 RL epoch。</li><li>超参数：Δ=10、η=0.2；R_agg 设为 PDMS；其余训练超参数在附录 C（原文该部分内容未在提供文本中展开）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIMv1（PDMS）、NAVSIMv2/Navtest（EPDMS）、Navhard（两阶段协议 EPDMS）、nuScenes（L2 轨迹误差与 Collision 碰撞率）。</li><li>评估指标：PDMS、EPDMS、NC、DAC、DDC、TLC、EP、TTC、Comf、LK、HC、EC；nuScenes 使用 L2 (m) 与 Collision (%)，并按 1s/2s/3s 与均值报告。</li><li>对比方法：Human、Constant Velocity、Ego Status MLP、VADv2、UniAD、TransFuser、PARA-Drive、Hydra-MDP、DiffusionDrive、WoTE、DriveVLA-W0、DriveFuture、DriveWorld-VLA、ReCogDrive、AutoDrive-P³、LTF、GoalFlow、ST-P3、VAD、Ego-MLP、InsightDrive、GPT-Driver、DriveVLM、OpenEMMA、RDA-Driver、OmniDrive、OpenDriveVLA、AutoVLA、AutoDrive-R²、Latent-WAM 等。</li><li>关键数值（由原文报告）：</li></ul>
+<p> - 整体：相比基线减少 40–50% 的 RL 训练 epoch；AutoDrive-P³ 仅 5 个 RL epoch 达到 PDMS 91.8，基线 10 epoch 为 90.2（图 1）。</p>
+<p> - NAVSIMv1：ReCogDrive（Run-then-Walk）PDMS 从 90.6 提升至 91.0；AutoDrive-P³（Run-then-Walk）PDMS 从 90.2 提升至 91.8（EP 88.9、TTC 95.5、Comf 100.0）。</p>
+<p> - NAVSIMv2：ReCogDrive EPDMS 从 82.7 提升至 83.7；AutoDrive-P³ EPDMS 从 88.7 提升至 89.6，其中 EP 为 92.8。</p>
+<p> - Navhard：ReCogDrive 聚合指标从 26.5 提升至 28.2；AutoDrive-P³ 从 29.3 提升至 31.3。</p>
+<p> - nuScenes：AutoDrive-P³（Run-then-Walk）平均 L2 从 0.34 降至 0.33，平均 Collision 从 0.08% 降至 0.06%（原文表格中基线 1s 碰撞为 0.00%、本方法为 0.01%，平均值下降）。</p>
+<ul><li>对比结论：ReCogDrive 对比中所有安全相关指标提升，仅 EP 有小幅下降；AutoDrive-P³ 对比中进度提高同时保持较强安全。</li><li>开环/闭环/仿真/实车条件：论文在 NAVSIM 系列基准上进行闭环驾驶质量评估（PDMS/EPDMS 等闭环复合指标），nuScenes 报告轨迹误差与碰撞；原文未报告实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.25860/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MatchFusion: Explicit-Implicit Instance Matching for Spatio-Temporal Multimodal Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.25515/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Real-World Perception for Autonomous Driving in Adverse Weather: Enhancing Standard Detectors via Foundation-Guided Auto-Annotation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

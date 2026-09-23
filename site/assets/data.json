@@ -1,5 +1,179 @@
 [
   {
+    "date": "2026-09-22",
+    "title": "DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving",
+    "link": "https://arxiv.org/abs/2609.26792",
+    "arxiv_id": "2609.26792",
+    "detail_path": "papers/2609.26792/",
+    "cover_path": "covers/2609.26792/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.26792.webp",
+    "paper_image_full_path": "assets/paper-images/2609.26792.webp",
+    "preview_text": "论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。 应用场景为闭环仿真中评估 E2E 驾驶策略：仿真器需同时提供可控交通场景（物理布局与智能体行为）以及能够保留策略决策所需场景特征的观测图像。 研究问题：现有物理仿真器可控但视觉差距大，生成式/重建式仿真器视觉真实但可控性差、视觉域狭窄，无法忠实评估策略的闭环决策能力。",
+    "research_unit": "University of California, Los Angeles · Ziyang Leng、Sicheng Mo、Seth Z. Zhao…",
+    "hook_text": "论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。",
+    "key_points": [
+      "论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。",
+      "应用场景为闭环仿真中评估 E2E 驾驶策略：仿真器需同时提供可控交通场景（物理布局与智能体行为）以及能够保留策略决策所需场景特征的观测图像。",
+      "研究问题：现有物理仿真器可控但视觉差距大，生成式/重建式仿真器视觉真实但可控性差、视觉域狭窄，无法忠实评估策略的闭环决策能力。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-22",
+    "title": "Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping",
+    "link": "https://arxiv.org/abs/2609.26325",
+    "arxiv_id": "2609.26325",
+    "detail_path": "papers/2609.26325/",
+    "cover_path": "covers/2609.26325/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.26325.webp",
+    "paper_image_full_path": "assets/paper-images/2609.26325.webp",
+    "preview_text": "论文面向自动驾驶中的相机 3D 目标检测与在线矢量化高精地图构建两个任务，二者均为下游预测和规划提供对象级与地图级场景表示。 研究问题：相机方法受深度歧义限制，尤其矢量化建图需在遮挡情况下推断静态地图结构；已有显式点云先验方法依赖 LiDAR 构建先验地图，需要昂贵的三维测距传感器。 论文探索能否在不使用 LiDAR 构建地图和在线推理的前提下，从历史相机轨迹构建显式点云先验，并同时受益于 3D 目标检测与矢量化建图。",
+    "research_unit": "德国弗赖堡大学计算机科学系（Department of Computer Science, University of Freiburg, Germa…",
+    "hook_text": "论文面向自动驾驶中的相机 3D 目标检测与在线矢量化高精地图构建两个任务，二者均为下游预测和规划提供对象级与地图级场景表示。",
+    "key_points": [
+      "论文面向自动驾驶中的相机 3D 目标检测与在线矢量化高精地图构建两个任务，二者均为下游预测和规划提供对象级与地图级场景表示。",
+      "研究问题：相机方法受深度歧义限制，尤其矢量化建图需在遮挡情况下推断静态地图结构；已有显式点云先验方法依赖 LiDAR 构建先验地图，需要昂贵的三维测距传感器。",
+      "论文探索能否在不使用 LiDAR 构建地图和在线推理的前提下，从历史相机轨迹构建显式点云先验，并同时受益于 3D 目标检测与矢量化建图。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-22",
+    "title": "ForeDrive: Foresight-Guided End-to-End Autonomous Driving with a Planning-Relevant Latent World Model",
+    "link": "https://arxiv.org/abs/2609.26299",
+    "arxiv_id": "2609.26299",
+    "detail_path": "papers/2609.26299/",
+    "cover_path": "covers/2609.26299/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.26299.webp",
+    "paper_image_full_path": "assets/paper-images/2609.26299.webp",
+    "preview_text": "论文面向端到端自动驾驶的轨迹规划任务，解决现有潜在世界模型（latent world model）虽优化未来预测能力、但其表示不一定对规划有用的问题。 应用场景为相机单目（仅用当前前视图图像作为视觉输入）的端到端驾驶规划，采用纯模仿学习（pure imitation learning）协议，不使用强化学习或外部轨迹评分器。 研究问题在于：如何学习“与规划相关的潜在表示”（planning-relevant latent），并将其作为直接条件信号耦合到生成式规划器（DiT）中，同时缓解预测目标与规划目标之间的梯度干扰。",
+    "research_unit": "Huazhong University of Science and Technology · Sinuo Wang、Zichong Gu、Yuhan…",
+    "hook_text": "论文面向端到端自动驾驶的轨迹规划任务，解决现有潜在世界模型（latent world model）虽优化未来预测能力、但其表示不一定对规划有用的问题。",
+    "key_points": [
+      "论文面向端到端自动驾驶的轨迹规划任务，解决现有潜在世界模型（latent world model）虽优化未来预测能力、但其表示不一定对规划有用的问题。",
+      "应用场景为相机单目（仅用当前前视图图像作为视觉输入）的端到端驾驶规划，采用纯模仿学习（pure imitation learning）协议，不使用强化学习或外部轨迹评分器。",
+      "研究问题在于：如何学习“与规划相关的潜在表示”（planning-relevant latent），并将其作为直接条件信号耦合到生成式规划器（DiT）中，同时缓解预测目标与规划目标之间的梯度干扰。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-22",
+    "title": "MatchFusion: Explicit-Implicit Instance Matching for Spatio-Temporal Multimodal Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.25860",
+    "arxiv_id": "2609.25860",
+    "detail_path": "papers/2609.25860/",
+    "cover_path": "covers/2609.25860/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.25860.webp",
+    "paper_image_full_path": "assets/paper-images/2609.25860.webp",
+    "preview_text": "论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。 任务涉及空间维度的 LiDAR–相机交互，以及时间维度的历史帧–当前帧交互，用于目标检测、跟踪与规划。 核心研究问题是如何在几何差异和异构语义表示下，建立可靠的实例对应关系，并高效聚合互补信息。 论文指出，基于注意力的方法依赖上下文语义但需专门表示对齐、计算开销大；基于结构化目标状态的关联方法高效可解释但缺乏上下文证据解决歧义匹配。",
+    "research_unit": "哈尔滨工业大学 · Xiaoyu Li、Jiajia Fu、Long Shi 等",
+    "hook_text": "论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。",
+    "key_points": [
+      "论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。",
+      "任务涉及空间维度的 LiDAR–相机交互，以及时间维度的历史帧–当前帧交互，用于目标检测、跟踪与规划。",
+      "核心研究问题是如何在几何差异和异构语义表示下，建立可靠的实例对应关系，并高效聚合互补信息。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-22",
+    "title": "Sometimes You Gotta Run Before You Can Walk: Run-then-Walk Scheduling Strategy for VLM Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.25831",
+    "arxiv_id": "2609.25831",
+    "detail_path": "papers/2609.25831/",
+    "cover_path": "covers/2609.25831/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.25831.webp",
+    "paper_image_full_path": "assets/paper-images/2609.25831.webp",
+    "preview_text": "任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。 应用场景：闭环驾驶规划，评估于 NAVSIMv1、NAVSIMv2、Navhard 与 nuScenes 等驾驶基准。 研究问题：现有 GRPO 方案要么偏向进度（progress）导致不安全行为，要么过早施加安全约束导致过度保守，且两者都需要冗长训练；论文试图在单个训练流程中分离“进度探索”与“安全修复”，同时提升性能并加速收敛。",
+    "research_unit": "Peking University · Yuqi Ye、Shangkun Sun、Junhong Lin 等",
+    "hook_text": "任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。",
+    "key_points": [
+      "任务：面向基于视觉语言模型（VLM）的端到端自动驾驶规划器，研究其 GRPO 风格强化学习（RL）的训练调度问题。",
+      "应用场景：闭环驾驶规划，评估于 NAVSIMv1、NAVSIMv2、Navhard 与 nuScenes 等驾驶基准。",
+      "研究问题：现有 GRPO 方案要么偏向进度（progress）导致不安全行为，要么过早施加安全约束导致过度保守，且两者都需要冗长训练；论文试图在单个训练流程中分离“进度探索”与“安全修复”，同时提升性能并加速收敛。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-22",
+    "title": "Real-World Perception for Autonomous Driving in Adverse Weather: Enhancing Standard Detectors via Foundation-Guided Auto-Annotation",
+    "link": "https://arxiv.org/abs/2609.25515",
+    "arxiv_id": "2609.25515",
+    "detail_path": "papers/2609.25515/",
+    "cover_path": "covers/2609.25515/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.25515.webp",
+    "paper_image_full_path": "assets/paper-images/2609.25515.webp",
+    "preview_text": "任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。 应用场景：真实道路驾驶环境，涵盖 Campus、Highway、Residential、Rural 四类路线拓扑与多种天气/光照组合。 研究问题：标准可部署检测器在恶劣天气与光照下性能退化，而大规模视觉基础模型虽具零样本鲁棒性但计算代价高、难以实时部署；同时真实恶劣天气数据的人工标注成本极高。论文希望通过基础模型引导的自动标注与伪标签微调，在不改动架构的前提下增强标准检测器。",
+    "research_unit": "Virginia Commonwealth University (VCU), College of Engineering, Autonomous…",
+    "hook_text": "任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。",
+    "key_points": [
+      "任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。",
+      "应用场景：真实道路驾驶环境，涵盖 Campus、Highway、Residential、Rural 四类路线拓扑与多种天气/光照组合。",
+      "研究问题：标准可部署检测器在恶劣天气与光照下性能退化，而大规模视觉基础模型虽具零样本鲁棒性但计算代价高、难以实时部署；同时真实恶劣天气数据的人工标注成本极高。论文希望通过基础模型引导的自动标注与伪标签微调，在不改动架构的前提下增强标准检测器。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-21",
     "title": "Disparity Estimation of Planar Reflective Surfaces Using Specular Reflections From a Single Light Source",
     "link": "https://arxiv.org/abs/2609.24756",

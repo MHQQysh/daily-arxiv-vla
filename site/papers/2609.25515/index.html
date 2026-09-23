@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Real-World Perception for Autonomous Driving in Adverse Weather: Enhancing Standard Detectors via Foundation-Guided Auto-Annotation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。 应用场景：真实道路驾驶环境，涵盖 Campus、Highway、Residential、Rural 四类路线拓扑与多种天气/光照组合。 研究问题：标准可部署检测器在恶劣天气与光照下性能退化，而大规模视觉基础模型虽具零样本鲁棒性但计算代价高、难以实时部署；同时真实恶劣天气数据的人工标注成本极高。论文希望通过基础模型引导的自动标注与伪标签微调，在不改动架构的前提下增强标准检测器。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.25515">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.25515.webp" alt="Real-World Perception for Autonomous Driving in Adverse Weather: Enhancing Standard Detectors via Foundation-Guided Auto-Annotation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Real-World Perception for Autonomous Driving in Adverse Weather: Enhancing Standard Detectors via Foundation-Guided Auto-Annotation</h1>
+            <div class="detail-meta">2026-09-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.25515" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.25515" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.25515</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。 应用场景：真实道路驾驶环境，涵盖 Campus、Highway、Residential、Rural 四类路线拓扑与多种天气/光照组合。 研究问题：标准可部署检测器在恶劣天气与光照下性能退化，而大规模视觉基础模型虽具零样本鲁棒性但计算代价高、难以实时部署；同时真实恶劣天气数据的人工标注成本极高。论文希望通过基础模型引导的自动标注与伪标签微调，在不改动架构的前提下增强标准检测器。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Virginia Commonwealth University (VCU), College of Engineering, Autonomous…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.25515/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。</li><li>应用场景：真实道路驾驶环境，涵盖 Campus、Highway、Residential、Rural 四类路线拓扑与多种天气/光照组合。</li><li>研究问题：标准可部署检测器在恶劣天气与光照下性能退化，而大规模视觉基础模型虽具零样本鲁棒性但计算代价高、难以实时部署；同时真实恶劣天气数据的人工标注成本极高。论文希望通过基础模型引导的自动标注与伪标签微调，在不改动架构的前提下增强标准检测器。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Virginia Commonwealth University (VCU), College of Engineering, Autonomous Robots and Vehicles Laboratory (ARVL), Richmond, Virginia, United States；作者：Sepideh Gohari、Goodarz Mehr、Azim Eskandarian</li><li>机构：Virginia Polytechnic Institute and State University, Blacksburg, VA（数据集来源硕士论文所属单位）；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的 2D 视觉目标检测，在雨、雾、雪等恶劣天气与强光、弱光、无光等光照条件下提升标准检测器的感知性能。</li><li>应用场景：真实道路驾驶环境，涵盖 Campus、Highway、Residential、Rural 四类路线拓扑与多种天气/光照组合。</li><li>研究问题：标准可部署检测器在恶劣天气与光照下性能退化，而大规模视觉基础模型虽具零样本鲁棒性但计算代价高、难以实时部署；同时真实恶劣天气数据的人工标注成本极高。论文希望通过基础模型引导的自动标注与伪标签微调，在不改动架构的前提下增强标准检测器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>在自建真实驾驶数据集上对比三种架构不同的检测器（YOLOv8、Co-DETR、SAM3），覆盖 25 种路线、天气、光照组合场景。</li><li>提出基础模型引导的自动标注流水线，使用 SAM3 为未标注的恶劣天气驾驶数据离线生成伪标签，避免昂贵的人工标注。</li><li>证明在这些伪标签上微调基线 YOLOv8 可在不修改原始架构的情况下，将恶劣条件下总体 mAP 从 34.19% 提升至 50.23%（提高 16.04%），并在 Residential Direct Sunlight 提升 32.73%、Highway Fog 提升 28.65%。</li><li>展示微调后 YOLOv8 继承了 SAM3 的跨环境稳定性，标准差由 10.68 降至 9.96。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：视觉感知中的 2D 目标检测与数据标注/伪标签生成模块（完整端到端流水线见图 1）。</li><li>输入传感器：X-CAR 研究平台搭载的五路环视相机，分辨率 2880 × 1860；每个记录时间戳由五张高清环视图像组成。</li><li>场景表示：图像帧（keyframe）级别，多视角环视图像；未报告 BEV、点云或其他三维场景表示。</li><li>模型结构：</li></ul>
+<p> - YOLOv8：CNN 单阶段实时检测器，选用 YOLOv8-Large（YOLOv8l）变体。</p>
+<p> - Co-DETR：协同混合分配训练的检测 Transformer，采用 ViT-L 骨干的 COCO 预训练配置。</p>
+<p> - SAM3：开放词汇基础模型，面向 Promptable Concept Segmentation (PCS)，基于文本条件的 DETR 式检测器。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 数据集剪枝与关键帧提取：剔除每次采集序列首尾的离路行驶时段，将原始 1,218,990 帧（243,798 个时间戳、五相机）缩减为 849,795 帧域内驾驶帧；再以 2 Hz 时间下采样（原始 10 Hz）提取关键帧，最终得到 31,269 个时间戳、156,345 张多视角关键帧（Campus 58,075、Residential 48,830、Rural 34,285、Highway 15,155）。</p>
+<p> - 分层采样与真值构建：针对 25 个场景各选 30 个样本，每场景从五路环视相机各取 6 帧以保证 360° 空间覆盖，构成 750 个关键帧的平衡多视角评估集；在短序列或稀疏环境中放宽时间距离与目标存在约束，保留部分纯背景样本以测试误检。</p>
+<p> - 人工标注协议与分类体系：使用 CVAT 标注；为与闭集模型一致，真值类别受限于 COCO 80 类中的 8 类驾驶相关类别（car、truck、bus、bicycle、motorcycle、person、traffic light、stop sign），实际用 20 个细粒度类标注后经映射层合并为 8 类；仅标注边界框尺寸大于 20×20 像素的可辨识目标（无论严重遮挡或边缘截断），小于阈值的可见实例归入对应的 ignore 类，评估前移除 ignore 类与非目标类。最终得到 3,169 个标注框，平均每帧 4.23 个实例，其中 59.9% 为 car、17.7% 为 person。</p>
+<p> - 自动标注与微调：选择精度与稳定性最优的模型（SAM3）作为离线自动标注器，对全部未标注关键帧生成伪标签；人工标注子集与自动标注流水线严格分离作为最终评估真值；在此伪标签池上微调 YOLOv8l。</p>
+<p> - SAM3 评估设置：仅使用文本提示，不使用人工点提示或图像示例，直接从其框预测头提取边界框；用 14 个细粒度类名提示，后处理时映射合并回 8 个 COCO 驾驶类别，并应用 NMS 消除合并子类（如 rider 与 pedestrian 合并为 person）导致的重叠框冗余。</p>
+<ul><li>原文未报告：推理部署平台的具体计算开销、模型参数量、伪标签的具体数量与生成置信度设置、微调的超参数与训练轮次等细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：研究团队自建的真实世界驾驶数据集（源自 Xuelai Du 2024 年硕士论文），覆盖 4 种路线（Campus、Highway、Residential、Rural）、3 种天气域（Fog、Rain、Snow）与 3 种光照域（Direct Sunlight、Low Light、No Light），另加 Campus 的 Sufficient Light，共 25 个独特运行场景。原始 1,218,990 帧（243,798 时间戳×5 相机）；剪枝后 849,795 帧域内驾驶帧（169,959 时间戳/相机）；2 Hz 下采样后 31,269 个时间戳、156,345 张关键帧。</li><li>评估基准：750 个分层采样关键帧构成的人工标注真值集，共 3,169 个边界框实例。</li><li>仿真器：原文未报告（使用真实世界数据集，未使用仿真器）。</li><li>模型规模：YOLOv8l（原文对比提到 YOLOv8x 相比其在 COCO 上仅高 1.0% mAP，但延迟增加 58.6%，运行时间从 9.06 ms 增至 14.37 ms）；Co-DETR 采用 ViT-L 骨干，COCO 检测精度 65.9% AP；SAM3 在 COCO 上零样本达到 56.4% mAP。模型参数量原文未报告。</li><li>训练资源：NVIDIA GeForce RTX 3090 GPU；为每个候选模型使用独立 Docker 环境以避免依赖冲突。推理统一置信度阈值 τ = 0.5。</li><li>实车平台：X-CAR 研究平台，搭载五路环视相机（2880 × 1860 分辨率）。</li><li>标注工具：Computer Vision Annotation Tool (CVAT)。</li><li>原文未报告：微调阶段的训练时长、批大小、优化器等具体训练配置，以及实车在线推理测试。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：自建真实驾驶数据集的 750 帧人工标注真值集，覆盖 25 个场景；每个场景 30 个样本（每相机 6 帧）。</li><li>评估指标：采用标准 COCO 协议的 mAP50:95 作为主要指标，即在 0.50 至 0.95 的 IoU 阈值上对各类 AP 取平均；同时报告跨条件的均值 μ 与标准差 σ。统一置信度阈值 τ = 0.5。Campus 的 Sufficient Light 仅作基线参考，不计入总体指标以保证跨环境对称性。</li><li>候选检测器对比结果（表 I）：</li></ul>
+<p> - YOLOv8 在所有条件下均劣于 Transformer 架构，总体均值 μ = 34.19% mAP；Co-DETR μ = 53.21%；SAM3 μ = 56.14%。</p>
+<p> - YOLOv8 平均落后约 20% mAP，最大差距出现在 Highway Fog（16.83% vs. SAM3 的 55.71%，差 38.88%）。</p>
+<p> - 标准差：YOLOv8 σ = 10.68，Co-DETR σ = 14.31，SAM3 σ = 10.98。</p>
+<p> - 无光条件差异明显：Rural No Light 下 SAM3 53.70% 显著优于 Co-DETR 29.04%；Highway No Light 为全数据集最低分（YOLO 12.88%、Co-DETR 25.62%、SAM3 26.82%）。</p>
+<p> - 结论：SAM3 兼具最高总体精度与较高跨环境稳定性，被选为离线自动标注器。</p>
+<ul><li>基础模型引导微调效果（表 II）：</li></ul>
+<p> - 微调后 YOLOv8 平均 mAP 从 34.19</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.25831/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Sometimes You Gotta Run Before You Can Walk: Run-then-Walk Scheduling Strategy for VLM Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.24756/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Disparity Estimation of Planar Reflective Surfaces Using Specular Reflections From a Single Light Source</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

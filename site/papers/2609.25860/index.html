@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MatchFusion: Explicit-Implicit Instance Matching for Spatio-Temporal Multimodal Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。 任务涉及空间维度的 LiDAR–相机交互，以及时间维度的历史帧–当前帧交互，用于目标检测、跟踪与规划。 核心研究问题是如何在几何差异和异构语义表示下，建立可靠的实例对应关系，并高效聚合互补信息。 论文指出，基于注意力的方法依赖上下文语义但需专门表示对齐、计算开销大；基于结构化目标状态的关联方法高效可解释但缺乏上下文证据解决歧义匹配。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.25860">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.25860.webp" alt="MatchFusion: Explicit-Implicit Instance Matching for Spatio-Temporal Multimodal Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">MatchFusion: Explicit-Implicit Instance Matching for Spatio-Temporal Multimodal Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.25860" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.25860" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.25860</span></div>
+            <p class="detail-summary">论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。 任务涉及空间维度的 LiDAR–相机交互，以及时间维度的历史帧–当前帧交互，用于目标检测、跟踪与规划。 核心研究问题是如何在几何差异和异构语义表示下，建立可靠的实例对应关系，并高效聚合互补信息。 论文指出，基于注意力的方法依赖上下文语义但需专门表示对齐、计算开销大；基于结构化目标状态的关联方法高效可解释但缺乏上下文证据解决歧义匹配。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">哈尔滨工业大学 · Xiaoyu Li、Jiajia Fu、Long Shi 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.25860/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。</p>
+  <ul class="reading-intro-points"><li>论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。</li><li>任务涉及空间维度的 LiDAR–相机交互，以及时间维度的历史帧–当前帧交互，用于目标检测、跟踪与规划。</li><li>核心研究问题是如何在几何差异和异构语义表示下，建立可靠的实例对应关系，并高效聚合互补信息。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：哈尔滨工业大学；作者：Xiaoyu Li、Jiajia Fu、Long Shi、Tianyu Du、Xian Wu、Lijun Zhao、Yingtao Zhang、Lining Sun、Ruifeng Li</li><li>机构：浙江大学；作者：Ruihang Li</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向多模态自动驾驶感知与端到端自动驾驶（E2EAD）中的稀疏实例表示交互问题。</li><li>任务涉及空间维度的 LiDAR–相机交互，以及时间维度的历史帧–当前帧交互，用于目标检测、跟踪与规划。</li><li>核心研究问题是如何在几何差异和异构语义表示下，建立可靠的实例对应关系，并高效聚合互补信息。</li><li>论文指出，基于注意力的方法依赖上下文语义但需专门表示对齐、计算开销大；基于结构化目标状态的关联方法高效可解释但缺乏上下文证据解决歧义匹配。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出显式–隐式实例匹配机制，结合结构亲和度初始化与选择性语义精炼，建立高效且自适应的软对应关系。</li><li>提出统一的匹配–融合形式化框架，支持空间 LiDAR–相机交互和时间 past–current 交互，结合场景特定几何先验与共享语义精炼及单一残差聚合算子。</li><li>在多种前端配置上展示一致的感知增益，并提升计算与内存效率。</li><li>证明其与 E2EAD 框架兼容，例如将时间 MatchFusion 集成到 SparseDrive，在不增加额外监督的情况下改进感知。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：MatchFusion 是实例级匹配与融合模块，运行在上游基于 query 的感知模型输出的稀疏实例表示上，与前端特征提取解耦。</li><li>输入传感器：涉及 LiDAR 与相机；也涉及时间维度的历史帧与当前帧实例。</li><li>场景表示：实例由结构化目标状态和 query embedding 组成；目标状态包含 3D 中心、尺寸、yaw 角和预测类别。</li><li>模型结构：包括显式结构初始化、隐式语义精炼、matchmap 引导的残差融合。</li><li>关键技术：使用几何相似度与类别一致性初始化亲和度矩阵；类别一致时保留几何亲和度，不一致时设为负无穷；对结构上合理的关联使用实例 embedding 进行语义修正；通过 Sigmoid 得到软 matchmap；软 matchmap 引导多对多残差特征聚合。</li><li>空间 LiDAR–相机交互：将两种模态的 3D box 投影到图像平面，使用归一化位置偏移和对数尺寸比构成相对几何描述子；通过正弦位置编码与 MLP 得到视角特定几何亲和度，并在共同可见视角上做可见性感知平均。</li><li>时间 past–current 交互：通过目标运动补偿和自车运动变换对齐历史实例；在 BEV 空间构造几何亲和度；使用单向残差聚合将历史证据融入当前 query。</li><li>原文未报告：具体感知前端网络细节、完整训练损失形式、完整超参数设置中未明确列出的部分。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes，用于感知和规划评估。</li><li>仿真器：原文未报告。</li><li>模型规模：4-D 相对几何描述子每个分量使用 256-D 正弦嵌入，展平为 1024-D 特征；语义精炼使用单层 MLP；残差融合和模态投影 MLP 各包含两层；所有隐藏表示均为 256-D。</li><li>训练资源：使用 4 张 NVIDIA RTX 3090 GPU，训练 16 个 epoch，batch size 为 32，约需 12 小时；优化器为 AdamW，初始学习率 1.0×10^-3，并使用 cosine annealing。</li><li>实车平台：原文未报告。</li><li>其他资源：感知实验中冻结预训练前端；nuScenes 验证集结果不采用 test-time augmentation 或 model ensembling；E2EAD 中将 MatchFusion-T 集成到 SparseDrive 并按基线训练协议从零联合训练。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集，用于检测、跟踪、规划与效率评估。</li><li>评估指标：检测使用 NDS 和 mAP；跟踪使用 AMOTA 和 MOTA；规划使用轨迹 L2 误差和碰撞率 CR；效率使用 FLOPs、GPU 内存和推理延迟。</li><li>感知结果：MatchFusion-ST 在多个前端配置上相比更强单模态前端取得一致提升，NDS 提升 1.9–3.1%，mAP 提升 4.3–5.5%。</li><li>弱相机检测器结果：使用 DETR3D 时，融合将 NDS 从 70.1 提升到 72.0，mAP 从 65.1 提升到 69.4。</li><li>Sparse4Dv3 配置：MatchFusion-ST 将 NDS 提升到 73.0，mAP 提升到 70.4，并改善 AMOTA 和 MOTA。</li><li>效率结果：MatchFusion-ST 系统达到 73.0 NDS、62.3 AMOTA、254.2 GFLOPs、3.7 GB 内存；相比 SparseFusion，FLOPs 降低 55.3%，GPU 内存降低 39.3%。</li><li>延迟结果：相机前端、LiDAR 前端和 MatchFusion-ST 分别需要 47.3 ms、283.3 ms 和 12.9 ms；包含跟踪操作时，MatchFusion-ST 仅占总延迟的 3.7%。</li><li>E2EAD 结果：将 MatchFusion-T 集成到 SparseDrive 后，NDS 提升 0.8，mAP 提升 0.5，AMOTA 提升 2.7，MOTA 提升 1.7；CR 从 0.123% 降至 0.119%，L2 误差从 0.63 m 略微增加到 0.64 m。</li><li>消融结果：仅结构匹配达到 72.2 NDS、69.1 mAP；结构加语义提升到 72.4 NDS、69.2 mAP；使用多视图图像平面几何的结构加语义达到 72.5 NDS、69.6 mAP。</li><li>融合策略消融：直接 concat 为 69.4 NDS、64.8 mAP；self-attention 为 71.3 NDS、67.3 mAP；cross-attention 为 71.8 NDS、67.9 mAP；MatchFusion-S 为 72.5 NDS、69.6 mAP。</li><li>类别一致性消融：不启用类别一致性为 72.1 NDS、69.0 mAP；启用后为 73.0 NDS、70.4 mAP。</li><li>鲁棒性：空间旋转扰动 1°、2°、4° 时，NDS 分别降至 71.9、71.8、71.7；即使 4° 扰动仍比 LiDAR-only 基线高 1.6 NDS 和 2.9 mAP；时间扰动下 MatchFusion-ST 至少保持 72.3 NDS、69.2 mAP、61.2 AMOTA、60.1 MOTA。</li><li>对比方法：包括 TransFusion、DeepInteraction、SparseFusion、DeepInteraction++、StreamCMT、SparseDrive、DETR3D、StreamPETR、Sparse4Dv3、SimPB 等。</li><li>评估条件：主要为 nuScenes 数据集上的开环感知、跟踪与规划评估；原文未报告闭环仿真或实车测试结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.26299/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">ForeDrive: Foresight-Guided End-to-End Autonomous Driving with a Planning-Relevant Latent World Model</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.25831/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Sometimes You Gotta Run Before You Can Walk: Run-then-Walk Scheduling Strategy for VLM Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

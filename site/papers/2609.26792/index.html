@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。 应用场景为闭环仿真中评估 E2E 驾驶策略：仿真器需同时提供可控交通场景（物理布局与智能体行为）以及能够保留策略决策所需场景特征的观测图像。 研究问题：现有物理仿真器可控但视觉差距大，生成式/重建式仿真器视觉真实但可控性差、视觉域狭窄，无法忠实评估策略的闭环决策能力。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.26792">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.26792.webp" alt="DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving</h1>
+            <div class="detail-meta">2026-09-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.26792" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.26792" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.26792</span></div>
+            <p class="detail-summary">论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。 应用场景为闭环仿真中评估 E2E 驾驶策略：仿真器需同时提供可控交通场景（物理布局与智能体行为）以及能够保留策略决策所需场景特征的观测图像。 研究问题：现有物理仿真器可控但视觉差距大，生成式/重建式仿真器视觉真实但可控性差、视觉域狭窄，无法忠实评估策略的闭环决策能力。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of California, Los Angeles · Ziyang Leng、Sicheng Mo、Seth Z. Zhao…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.26792/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。</li><li>应用场景为闭环仿真中评估 E2E 驾驶策略：仿真器需同时提供可控交通场景（物理布局与智能体行为）以及能够保留策略决策所需场景特征的观测图像。</li><li>研究问题：现有物理仿真器可控但视觉差距大，生成式/重建式仿真器视觉真实但可控性差、视觉域狭窄，无法忠实评估策略的闭环决策能力。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of California, Los Angeles；作者：Ziyang Leng, Sicheng Mo, Seth Z. Zhao, Haoyuan Cai, Bolei Zhou</li><li>机构：Toyota Research Institute；作者：Yu Zeng, Rowan McAllister</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端（E2E）自动驾驶策略的闭环仿真评估任务，解决现有仿真平台存在的“sim-to-real 视觉差距”问题。</li><li>应用场景为闭环仿真中评估 E2E 驾驶策略：仿真器需同时提供可控交通场景（物理布局与智能体行为）以及能够保留策略决策所需场景特征的观测图像。</li><li>研究问题：现有物理仿真器可控但视觉差距大，生成式/重建式仿真器视觉真实但可控性差、视觉域狭窄，无法忠实评估策略的闭环决策能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DreamStream，一种生成式闭环仿真器，将物理仿真器与自回归视频模型耦合：物理仿真器构建并 rollout 交互场景，视频模型将符号化状态翻译为逼真视觉观测。</li><li>提出面向策略的视觉对齐指标 FDπ，基于公开 E2E 策略的场景上下文特征，计算真实与仿真配对场景特征分布之间的 Fréchet 距离，并跨多个策略聚合。</li><li>在 FDπ 指标下，DreamStream 在 nuScenes 上比最强先前闭环仿真器提升 1.6 倍，在 NAVSIM 上提升 4.7 倍，并诱导最小的策略感知扰动。</li><li>构建 Navhard-CL 闭环基准，将非反应的 NAVSIM 转化为交互式测试环境，包含对抗驾驶行为与天气变化，暴露 scorer bias、proposal coverage 失败、视觉鲁棒性不足等失败模式。</li><li>提出交通布局引导与多样化场景蒸馏方法，在蒸馏过程中保持场景布局对齐与视觉多样性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：生成式闭环仿真器，包含物理仿真器 S、自回归视频模型 G_φ 和待评估 E2E 策略 π 的闭环交互。</li><li>输入传感器：相机帧（E2E 策略直接消费的观测）；仿真器维护 ego 位姿、周围智能体、HD 地图等底层场景状态。</li><li>场景表示：交通布局条件 c 包含 HD 地图的透视投影（车道几何与交通元素）及交通智能体的 3D 边界框；闭环迭代中策略输出轨迹，仿真器执行前 Δr 步并渲染布局条件，视频模型自回归生成后续相机帧。</li><li>模型结构：基于大规模预训练视频模型的少步自回归视频扩散模型，采用三阶段蒸馏 —— Stage-1 构建可控条件视频生成器，Stage-2 转为少步自回归模型，Stage-3 用 self-forcing 提升长时域稳定性。</li><li>关键技术：以早期时间步隐状态作为 KV cache 维持长时域一致性；在 Stage-1 训练中按 p=0.1 替换布局条件以实现 classifier-free guidance 的交通布局引导；多样化场景蒸馏构建合成片段以保留预训练 backbone 的视觉多样性先验。</li><li>原文未报告视频模型的具体参数量或网络层数等细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（val 集）、NAVSIM（navtest）、NAVSIM navhard（含 navtest 中 540 个挑战场景子集）；Navhard-CL 基于 NAVSIM navhard 构建。</li><li>仿真器/基准：物理仿真器（论文以 BridgeSim 作为 Sim RGB 对照）、DriveArena 作为对比仿真器；Navhard-CL 包含 Navhard-Base、Navhard-AdvBehavior、Navhard-AdvWeather 三个场景桶。</li><li>模型规模：采用 Wan 2.1 作为 backbone；原文未报告具体模型参数量。</li><li>训练资源：原文未报告（截断内容中未见 GPU 型号、数量或训练时长）。</li><li>实车平台：原文未报告实车平台，评估均在仿真/闭环条件下进行。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes val 与 NAVSIM navtest 上的 FDπ 指标对比；Navhard-CL（Navhard-Base、Navhard-AdvBehavior、Navhard-AdvWeather）上的闭环评估。</li><li>评估指标：FDπ（及按策略分解的 FDπ_k）、FID、FVD、Driving Score (DS)、EPDMS、Route Completion (RC)、CLIP 相似度、PDMS（开环）。</li><li>关键数值：nuScenes val 上 FDπ 为 7.27（比最强 baseline 低 1.6 倍），NAVSIM navtest 上 FDπ 为 5.47（比 DriveArena 的 25.45 低约 4.7 倍）；FDπ 与 PDMS 的 held-out 相关性 r=-0.65，而 FID 为 r=+0.11、FVD 为 r=+0.08；对局部腐蚀的敏感性比 FID 高 2.3 倍；交通引导蒸馏使 FDπ 从 12.18 降至 9.50；多样化场景蒸馏在各天气/光照条件下均提升 CLIP 相似度。</li><li>对比方法：MagicDrive、Panacea、Dreamland、DriveArena、DreamForge、HUGSIM（nuScenes）；BridgeSim、DriveArena（NAVSIM）；策略面板包括 DrivoR、DiffusionDrive/DiffusionDriveV2、LTF、RAP、SparseDriveV2。</li><li>评估条件：开环（FDπ、FID、FVD、PDMS 相关性）与闭环（Navhard-CL 上的 DS、EPDMS、RC）；Bell 结果为仿真条件，原文未报告实车结果。</li><li>闭环结果：Navhard-Base 上，DreamStream 渲染下策略得分普遍高于 Sim RGB 与 DriveArena；Navhard-AdvBehavior 上揭示了 scorer bias（如 DrivoR 为 +14.17，DiffusionDrive 为 +3.64）和 proposal coverage 失败（DrivoR 为 -16.66，DiffusionDrive 为 -12.98，LTF 为 -14.61）；Navhard-AdvWeather 高得分子集上，DrivoR 在雨/雪条件下比夜间性能下降更多，主要体现在路面相关性能。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.26325/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Leveraging Vision-Based Point Cloud Map Priors for Camera-Based 3D Object Detection and Online Vectorized HD Mapping</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
