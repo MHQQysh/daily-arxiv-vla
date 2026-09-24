@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ODPure: Backdoor Purification for Object Detection via Ensemble Corruption Consensus - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。 解决的问题是：现有目标检测后门防御（输出扫描如 DetectorCleanse、模型检查如 ODSCAN）主要是“检测并丢弃”恶意输入或模型，无法对受污染样本进行净化，从而难以维持连续、准确的感知流。 论文关注的后门行为包括目标误分类（OMA）、目标消失（ODA）和目标生成（OGA），这些行为都由输入中嵌入的触发器等单一根因驱动。 论文提出首个针对目标检测的输入阶段净化防御，即 Corruption-Reconstruction-Selection（CRS）范式，并在 ODPure 中实现，目标是在不牺牲多目标检测精度的同时中和触发器。 关键观察是鲁棒性不对称：良性目标特征在不同损坏下表现出一致脆弱性，而后门触发器作为人工捷径对特定扰动类型高度敏感、表现可变脆弱性，从而可通过一致性共识过滤触发器。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.28239">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.28239.webp" alt="ODPure: Backdoor Purification for Object Detection via Ensemble Corruption Consensus" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ODPure: Backdoor Purification for Object Detection via Ensemble Corruption Consensus</h1>
+            <div class="detail-meta">2026-09-23 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.28239" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.28239" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.28239</span></div>
+            <p class="detail-summary">论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。 解决的问题是：现有目标检测后门防御（输出扫描如 DetectorCleanse、模型检查如 ODSCAN）主要是“检测并丢弃”恶意输入或模型，无法对受污染样本进行净化，从而难以维持连续、准确的感知流。 论文关注的后门行为包括目标误分类（OMA）、目标消失（ODA）和目标生成（OGA），这些行为都由输入中嵌入的触发器等单一根因驱动。 论文提出首个针对目标检测的输入阶段净化防御，即 Corruption-Reconstruction-Selection（CRS）范式，并在 ODPure 中实现，目标是在不牺牲多目标检测精度的同时中和触发器。 关键观察是鲁棒性不对称：良性目标特征在不同损坏下表现出一致脆弱性，而后门触发器作为人工捷径对特定扰动类型高度敏感、表现可变脆弱性，从而可通过一致性共识过滤触发器。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Changsha University of Science &amp; Technology（长沙理工大学） · L. Zeng（李增、原文署名 Li Ze…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.28239/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。</li><li>解决的问题是：现有目标检测后门防御（输出扫描如 DetectorCleanse、模型检查如 ODSCAN）主要是“检测并丢弃”恶意输入或模型，无法对受污染样本进行净化，从而难以维持连续、准确的感知流。</li><li>论文关注的后门行为包括目标误分类（OMA）、目标消失（ODA）和目标生成（OGA），这些行为都由输入中嵌入的触发器等单一根因驱动。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Changsha University of Science &amp; Technology（长沙理工大学）；作者：L. Zeng（李增，原文署名 Li Zeng）</li><li>机构：Xiangtan University（湘潭大学）；作者：M. Duan、Y. Li、X. Wen（原文署名 Mingcheng Duan、Yanchun Li、Xia Wen）</li><li>机构：Yunnan University（云南大学）；作者：L. Fan（原文署名 Longfei Fan）</li><li>机构：Huazhong University of Science and Technology（华中科技大学）；作者：H. Zhang（原文署名 Hangtao Zhang）</li><li>机构：City University of Hong Kong（香港城市大学）；作者：X. Wang（原文署名 Xianlong Wang）</li><li>机构：Griffith University（格里菲斯大学）；作者：L. Y. Zhang（原文署名 Leo Yu Zhang）</li><li>说明：原文未明确说明“Member”与“IEEE”等署名片段对应的机构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。</li><li>解决的问题是：现有目标检测后门防御（输出扫描如 DetectorCleanse、模型检查如 ODSCAN）主要是“检测并丢弃”恶意输入或模型，无法对受污染样本进行净化，从而难以维持连续、准确的感知流。</li><li>论文关注的后门行为包括目标误分类（OMA）、目标消失（ODA）和目标生成（OGA），这些行为都由输入中嵌入的触发器等单一根因驱动。</li><li>论文提出首个针对目标检测的输入阶段净化防御，即 Corruption-Reconstruction-Selection（CRS）范式，并在 ODPure 中实现，目标是在不牺牲多目标检测精度的同时中和触发器。</li><li>关键观察是鲁棒性不对称：良性目标特征在不同损坏下表现出一致脆弱性，而后门触发器作为人工捷径对特定扰动类型高度敏感、表现可变脆弱性，从而可通过一致性共识过滤触发器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 CRS 范式，这是首个面向目标检测的输入阶段净化框架，用于解决攻击破坏与多目标保持之间的固有权衡，支持连续且准确的感知流。</li><li>提出 ODPure，一个黑盒、模型无关的防御方法，通过组合多样化损坏、生成式恢复和基于共识的选择实现 CRS 框架，适用于 MLaaS 等无法访问模型内部信息的场景。</li><li>通过大量实验表明 ODPure 打破了分类净化方法所受的权衡限制，将触发器中和与多目标保持解耦，在不损害检测效用的情况下取得先进性能。</li><li>论文报告在 COCO 上 OMA 攻击使模型效用崩溃至 0.4% mAP 时，ODPure 将 mAP 恢复到 52.0%，并将 ASR 抑制到 1.5%，显著优于 ZIP 等分类净化基线。</li><li>论文提供了代码开源链接：https://github.com/Alex66366/ODPure。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：输入阶段、黑盒、模型无关的净化防御，位于检测器推理之前，不修改检测器内部结构。</li><li>输入传感器：原文未报告具体传感器类型；方法处理的是输入图像 I，未限定可见光、激光雷达等具体传感器。</li><li>场景表示：输入为二维图像，检测输出为边界框、类别标签和置信度集合，即 M(I)={r̂_j}={(b̂_j, l̂_j, ŝ_j)}。</li><li>威胁模型：假设后门通过数据投毒植入；防御者攻击无关、严格黑盒（仅查询模型并获得边界框与类别分数）、数据无关（无法访问训练集、干净集或孤立触发器样本），必须在推理时仅基于当前输入进行防御。</li><li>关键技术一（Corruption）：对输入应用多样化损坏函数集合 F={f_{i,j}}，包含 n=15 种损坏类型、m=3 个严重程度，将单张输入转换为损坏变体集合 I_corr={f_{i,j}(I)}，以利用触发器的可变脆弱性破坏其结构完整性。</li><li>关键技术二（Reconstruction）：使用基于 DiffBIR 的预训练图像恢复模型作为通用去噪器，分两阶段进行：先由 Restoration Module（RM）去除内容无关退化，再由 Generation Module（GM）利用冻结的 Stable Diffusion 生成先验重建高频边缘与纹理，避免过度平滑，同时将触发器视为分布外噪声选择性消除。</li><li>关键技术三（Selection）：聚合所有净化变体的检测结果，按类别分组，使用复合距离度量 D=d1+d2（d1=1-IoU，d2 为归一化中心欧氏距离）进行 DBSCAN 聚类，以 MinPts 作为共识阈值过滤不稳定的触发器异常，再在每个有效聚类内按置信度投票选出最终检测框。</li><li>原文未报告：具体检测器内部结构细节、传感器融合方式、实时性指标、模型参数量与推理延迟。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：COCO 2017 和 PASCAL VOC 2007+2012 联合集；攻击注入时选择目标类别 person，毒化 10–30% 的训练集；默认触发器为 29×29 或 15×15 像素的棋盘格，另有纯白和 Poké Ball 触发器示例。</li><li>模型：评估的检测器为单阶段 YOLOv5 和两阶段 Faster R-CNN；重建模型采用修改自 DiffBIR 的两阶段架构，配置与 DiffBIR 原文一致，其中生成模块使用 Stable Diffusion 的冻结生成先验，恢复模块在 ImageNet 等大规模外部数据集上预训练。</li><li>训练资源：原文未报告 GPU 型号、数量、训练时长或显存等训练资源。</li><li>仿真器：原文未报告使用任何仿真器。</li><li>实车平台：原文未报告实车平台或真实车辆部署实验。</li><li>ODPure 配置：损坏类型 n=15、严重程度 m=3；DBSCAN 距离阈值 ε=0.5，MinPts=10；完整损坏类型列表见补充材料 S-I。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：COCO 和 VOC 数据集上的后门攻击与防御，涉及 YOLOv5 与 Faster R-CNN；攻击类型包括 OMA、ODA、OGA。</li><li>评估指标：mAP@0.5 用于检测精度，ASR 用于攻击成功率；同时报告干净样本 mAP、防御前 mAP/ASR、防御后 mAP/ASR。</li><li>开环/闭环/仿真/实车条件：论文为图像目标检测基准上的开环评估，未报告闭环控制、仿真器或实车实验。</li><li>关键数值（来自论文正文与 TABLE I 可用部分）：</li></ul>
+<p> - COCO OMA（YOLO）：干净 mAP 52.8%，防御前 mAP 0.4%、ASR 94.6%，防御后 mAP 52.0%、ASR 1.5%。</p>
+<p> - VOC OMA（YOLO）：干净 mAP 76.4%，防御前 mAP 8.2%、ASR 87.7%，防御后 mAP 80.5%、ASR 2.0%。</p>
+<p> - VOC OMA（F-RCNN）：干净 mAP 79.3%，防御前 mAP 44.9%、ASR 94.6%，防御后 mAP 78.1%、ASR 17.4%。</p>
+<p> - COCO OMA（F-RCNN）：干净 mAP 49.7%，防御前 mAP 6.3%、ASR 91.9%，防御后 mAP 47.0%、ASR 16.3%。</p>
+<p> - VOC ODA（YOLO）：干净 mAP 72.0%，防御前 mAP 71.6%，ASR 数据在提供的 HTML 中被截断，防御后结果原文未在可见部分报告。</p>
+<p> - 动机实验：在 ODA 攻击的 YOLO 模型上，仅 Corruption 使 mAP 从 78.3% 降至 42.8%，后续 Reconstruction 将 mAP 恢复至 51.5%，同时 ASR 从 34.5% 降至 30.0%。</p>
+<ul><li>对比方法：</li></ul>
+<p> - 定性对比检测器专属防御：DetectorCleanse（输出扫描）和 ODSCAN（模型检查）。</p>
+<p> - 定量基线：将最先进的分类净化方法 ZIP 适配到目标检测，ODPure 性能显著优于 ZIP。</p>
+<ul><li>其他评估：论文还报告了自适应攻击结果（补充材料 S-II-A 固体颜色触发器、S-II-B 物理世界触发器）和消融研究（S6.SS5），但提供的 HTML 中这些部分的数值被截断，原文未在可见内容中报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.28366/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.27747/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Less Language, More Latents: Annotation-Efficient VLAs for Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

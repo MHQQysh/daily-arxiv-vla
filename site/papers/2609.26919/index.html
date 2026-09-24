@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bend the Clock: Predicting Ahead to Beat Latency in Event-Based Object Detection - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。 研究问题源于“观测—可用性不匹配”（observation–availability mismatch）：检测器在时间 t 观测，但预测要到 t+Δ 才可用，传统评估在观测时刻比较预测与标注，忽略了机器人真正收到预测时场景已经变化的问题。 论文指出，尽管事件相机具有低延迟优势，现代事件检测器端到端仍需数十毫秒计算，导致输出时检测框可能已经过时，尤其在高速运动场景中更严重。 核心目标是让事件检测器预测“输出可用时”的目标状态，而非“输入被观测时”的目标状态。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.26919">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.26919.webp" alt="Bend the Clock: Predicting Ahead to Beat Latency in Event-Based Object Detection" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Bend the Clock: Predicting Ahead to Beat Latency in Event-Based Object Detection</h1>
+            <div class="detail-meta">2026-09-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.26919" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.26919" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.26919</span></div>
+            <p class="detail-summary">论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。 研究问题源于“观测—可用性不匹配”（observation–availability mismatch）：检测器在时间 t 观测，但预测要到 t+Δ 才可用，传统评估在观测时刻比较预测与标注，忽略了机器人真正收到预测时场景已经变化的问题。 论文指出，尽管事件相机具有低延迟优势，现代事件检测器端到端仍需数十毫秒计算，导致输出时检测框可能已经过时，尤其在高速运动场景中更严重。 核心目标是让事件检测器预测“输出可用时”的目标状态，而非“输入被观测时”的目标状态。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">National University of Singapore, Singapore · Biswadeep Sen、Terence Sim</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.26919/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。</p>
+  <ul class="reading-intro-points"><li>论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。</li><li>研究问题源于“观测—可用性不匹配”（observation–availability mismatch）：检测器在时间 t 观测，但预测要到 t+Δ 才可用，传统评估在观测时刻比较预测与标注，忽略了机器人真正收到预测时场景已经变化的问题。</li><li>论文指出，尽管事件相机具有低延迟优势，现代事件检测器端到端仍需数十毫秒计算，导致输出时检测框可能已经过时，尤其在高速运动场景中更严重。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：National University of Singapore, Singapore；作者：Biswadeep Sen、Terence Sim</li><li>机构：IPAL CNRS IRL 2955, Singapore；作者：Biswadeep Sen、Benoit R. Cottereau、Nicolas Cuperlier、Terence Sim</li><li>机构：CerCo, CNRS UMR 5549, Université de Toulouse, France；作者：Benoit R. Cottereau</li><li>机构：ETIS UMR8051, CY Cergy Paris Université, ENSEA, CNRS, Cergy, France；作者：Nicolas Cuperlier</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。</li><li>研究问题源于“观测—可用性不匹配”（observation–availability mismatch）：检测器在时间 t 观测，但预测要到 t+Δ 才可用，传统评估在观测时刻比较预测与标注，忽略了机器人真正收到预测时场景已经变化的问题。</li><li>论文指出，尽管事件相机具有低延迟优势，现代事件检测器端到端仍需数十毫秒计算，导致输出时检测框可能已经过时，尤其在高速运动场景中更严重。</li><li>核心目标是让事件检测器预测“输出可用时”的目标状态，而非“输入被观测时”的目标状态。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>量化了事件基目标检测中的观测—可用性不匹配，说明观测时刻评估会高估机器人实际获得的检测精度。</li><li>提出 ChronoFuse，一种因果的可用性时刻检测器，结合未来目标监督和因果跨时间融合，使检测结果对齐预测可用时刻。</li><li>ChronoFuse 的融合路径轻量，仅增加 0.17M 参数和 0.84 ms 平均端到端延迟。</li><li>在 1Mpx 驾驶数据、FRED 无人机数据和 EV-Flying 鸟类/昆虫数据上验证方法，可恢复因延迟损失的大部分精度。</li><li>在 FRED 上恢复 90.8% 的延迟导致精度损失；在 EV-Flying 上达到 20.95 sAP，为最强标准事件检测器 2.25 sAP 的 9.3 倍。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于事件基多目标检测模块，关注检测器输出时间对齐和流式感知评估。</li><li>输入传感器：单目事件相机输入，事件表示为 e_i=(x_i,y_i,τ_i,p_i)，其中 (x_i,y_i) 为像素位置，τ_i 为时间戳，p_i∈{-1,+1} 为极性；原文未报告 RGB 与事件融合作为 ChronoFuse 主输入。</li><li>场景表示：在每个处理截止 t_k，仅使用积分窗口内事件构造因果输入 X_k=R({e_i \|t_k−T_win&lt;τ_i≤t_k})，不包含 t_k 之后的事件。</li><li>模型结构：使用 RVT 编码器和特征金字塔作为特征提取骨干 G_φ，生成多尺度特征金字塔 F_k={F_k^(ℓ)}；使用 YOLOX 风格检测头 D_ψ 输出原始框回归、objectness 和分类预测 Z_k，Post 操作完成解码、分数过滤和 NMS。</li><li>未来目标监督：训练目标从观测时刻标注 Y_q(t_k) 改为预测一个预测时域后的标注 Y_k^+=Y_q(t_k+Δ)，其中 Y_k^+ 为同一序列中时间上最接近 t_k+Δ 的有效标注。</li><li>跨时间融合模块：在每个金字塔层级，将缓存的前一时刻特征 H_k^(ℓ) 与当前特征 F_k^(ℓ) 分别通过共享的 1×1 卷积、BN 和 SiLU 投影，分支通道数为 C_ℓ/2；按固定“过去—现在”顺序拼接得到 R_k^(ℓ)，再与当前特征残差相加得到融合特征 F̃_k^(ℓ)=F_k^(ℓ)+R_k^(ℓ)。</li><li>因果性设计：H_k^(ℓ) 在序列内取 F_{k−1}^(ℓ)，在序列第一步取 F_k^(ℓ)，避免跨序列泄漏；推理后仅缓存未融合的当前金字塔 F_k^(ℓ)，不递归累加时间残差。</li><li>初始化与优化：BN 仿射参数 γ_ℓ=β_ℓ=0 零初始化，使初始融合路径输出为 0，保留预训练检测函数；训练最小化检测损失 L_det(Z_k,Y_k^+)，YOLOX 头使用未来框重新计算 SimOTA 分配。</li><li>原文未报告：论文未报告融合模块的具体网络深度、每层特征维度 C_ℓ 的详细数值、训练迭代数、优化器类型和学习率等训练细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：1Mpx、FRED、EV-Flying。</li><li>1Mpx：自动驾驶场景，包含汽车、行人、骑行者、摩托车等；使用 50 ms 事件积分窗口和处理步长。</li><li>FRED：空中机器人场景，目标为小型高速运动无人机；使用 33.33 ms 事件积分窗口和处理步长。</li><li>EV-Flying：快速运动的鸟类和昆虫场景，目标小、轨迹突变、位移大；使用 33.33 ms 事件积分窗口和处理步长。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：ChronoFuse 在 RVT-B 基础上增加 0.17M 参数，约增加 0.93%；每个流缓存 1.64 MiB 特征；不需要额外编码器前向。</li><li>训练资源：时序测量在单张 NVIDIA RTX 3090 上完成；论文提到计算工作部分由 NUS IT 的 Research Computing group 在 grant NUSREC-HPC-00001 下支持，但原文未报告完整训练硬件配置、训练时长和显存消耗。</li><li>实车平台：原文未报告实车平台，实验均为数据集评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：1Mpx、FRED、EV-Flying，使用流式平均精度 sAP、sAP50、sAP75；固定流式时域 Δ=33.33 ms，即 30 Hz 的一个时间步。</li><li>延迟感知评估：预测由 t 时刻前事件计算，但与 t+Δ 时刻真值比较；评估在 NVIDIA RTX 3090 上完成，时间包含表示构造、推理、预测传输、解码和 NMS。</li><li>对比方法：RVT、SAST、S5-ViT、SMamba；以及 RVT+Constant Velocity、RVT+Kalman 外推基线；还比较了 RGB 流式检测器 StreamYOLO 在同步 FRED 序列上的结果。</li><li>延迟测量：RVT 平均 29.89 ms、中位 28.81 ms、P90 37.27 ms、P95 41.65 ms；SAST 平均 47.86 ms；S5-ViT 平均 38.38 ms；SMamba 平均 45.17 ms。</li><li>1Mpx 结果：33.33 ms 延迟使 RVT 从 47.39 sAP 降至 43.17 sAP；ChronoFuse 达到 46.20 sAP，比 RVT+Constant Velocity 高 1.48，比 RVT+Kalman 高 0.65，恢复 71.8% 延迟损失，距离零延迟参考仅 1.19 点；sAP50 从 73.70 提升到 74.93，sAP75 从 42.84 提升到 47.60。</li><li>1Mpx 运动分组：RVT 延迟损失从低运动的 0.53 sAP 增至中运动的 2.23 和高运动的 10.06；高运动 sAP75 损失达 15.44 点；ChronoFuse 在中运动恢复 1.83 sAP，在高运动恢复 7.76 sAP，恢复高运动损失的 77%。</li><li>FRED 结果：RVT 观测时刻 46.82 sAP，33.33 ms 可用时降至 26.88 sAP，损失 19.94 点；Constant Velocity 和 Kalman 恢复至 39.75 和 39.98 sAP，分别恢复 64.5% 和 65.7%；ChronoFuse 达到 44.99 sAP，比可用时刻 RVT 高 18.11 点，恢复 90.8% 损失，距离观测时刻参考 1.83 点；sAP50 提升 11.39 点，sAP75 从 12.25 提升到 40.93，提升 28.68 点。</li><li>EV-Flying 结果：同时间 RVT 参考为 38.41 sAP，现有事件检测器在可用时刻最多 2.25 sAP；ChronoFuse 达到 20.95 sAP，为最强标准检测器的 9.3 倍。</li><li>与 RGB 流式检测比较：在同步 FRED 序列上，StreamYOLO 为 22.76 sAP、59.6 sAP50、11.6 sAP75；ChronoFuse</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.27317/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Breaking Weather-Content Coupling: Type-Severity Guided Progressive Disentanglement for All-in-One Infrared Restoration</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.26792/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

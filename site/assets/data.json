@@ -1,5 +1,179 @@
 [
   {
+    "date": "2026-09-23",
+    "title": "AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios",
+    "link": "https://arxiv.org/abs/2609.28366",
+    "arxiv_id": "2609.28366",
+    "detail_path": "papers/2609.28366/",
+    "cover_path": "covers/2609.28366/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.28366.webp",
+    "paper_image_full_path": "assets/paper-images/2609.28366.webp",
+    "preview_text": "论文构建了名为 AnchorReasoning 的视觉 grounding 与因果推理数据集，面向长尾自动驾驶场景。 任务面向 Vision-Language Models（VLMs），为其提供连接决策关键视觉证据与推理、规划过程的监督。 应用场景为长尾自动驾驶，即罕见且复杂、需要深入理解驾驶上下文并进行审慎推理的情形。 研究问题在于：现有驾驶数据集在将决策关键视觉证据与推理及规划相连接方面监督有限，缺乏细粒度、以决策为中心且带视觉 grounding 的推理标注。",
+    "research_unit": "University of Georgia, School of Environmental, Civil, Agricultural and Mec…",
+    "hook_text": "论文构建了名为 AnchorReasoning 的视觉 grounding 与因果推理数据集，面向长尾自动驾驶场景。",
+    "key_points": [
+      "论文构建了名为 AnchorReasoning 的视觉 grounding 与因果推理数据集，面向长尾自动驾驶场景。",
+      "任务面向 Vision-Language Models（VLMs），为其提供连接决策关键视觉证据与推理、规划过程的监督。",
+      "应用场景为长尾自动驾驶，即罕见且复杂、需要深入理解驾驶上下文并进行审慎推理的情形。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-23",
+    "title": "ODPure: Backdoor Purification for Object Detection via Ensemble Corruption Consensus",
+    "link": "https://arxiv.org/abs/2609.28239",
+    "arxiv_id": "2609.28239",
+    "detail_path": "papers/2609.28239/",
+    "cover_path": "covers/2609.28239/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.28239.webp",
+    "paper_image_full_path": "assets/paper-images/2609.28239.webp",
+    "preview_text": "论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。 解决的问题是：现有目标检测后门防御（输出扫描如 DetectorCleanse、模型检查如 ODSCAN）主要是“检测并丢弃”恶意输入或模型，无法对受污染样本进行净化，从而难以维持连续、准确的感知流。 论文关注的后门行为包括目标误分类（OMA）、目标消失（ODA）和目标生成（OGA），这些行为都由输入中嵌入的触发器等单一根因驱动。 论文提出首个针对目标检测的输入阶段净化防御，即 Corruption-Reconstruction-Selection（CRS）范式，并在 ODPure 中实现，目标是在不牺牲多目标检测精度的同时中和触发器。 关键观察是鲁棒性不对称：良性目标特征在不同损坏下表现出一致脆弱性，而后门触发器作为人工捷径对特定扰动类型高度敏感、表现可变脆弱性，从而可通过一致性共识过滤触发器。",
+    "research_unit": "Changsha University of Science & Technology（长沙理工大学） · L. Zeng（李增、原文署名 Li Ze…",
+    "hook_text": "论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。",
+    "key_points": [
+      "论文面向自动驾驶等安全关键感知场景中的目标检测模型，研究其后门攻击防御问题。",
+      "解决的问题是：现有目标检测后门防御（输出扫描如 DetectorCleanse、模型检查如 ODSCAN）主要是“检测并丢弃”恶意输入或模型，无法对受污染样本进行净化，从而难以维持连续、准确的感知流。",
+      "论文关注的后门行为包括目标误分类（OMA）、目标消失（ODA）和目标生成（OGA），这些行为都由输入中嵌入的触发器等单一根因驱动。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-23",
+    "title": "Less Language, More Latents: Annotation-Efficient VLAs for Driving",
+    "link": "https://arxiv.org/abs/2609.27747",
+    "arxiv_id": "2609.27747",
+    "detail_path": "papers/2609.27747/",
+    "cover_path": "covers/2609.27747/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.27747.webp",
+    "paper_image_full_path": "assets/paper-images/2609.27747.webp",
+    "preview_text": "论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。 研究目标是利用大量未标注的“观测–轨迹”对，在极少语言标注条件下训练可语言条件控制的驾驶 VLA。 应用场景为闭环自动驾驶，具体在 CARLA/Bench2Drive 闭环基准上评估。",
+    "research_unit": "Robert Bosch GmbH, Germany · Alexey Zakharov、Kemal Oksuz、Puneet K. Dokania",
+    "hook_text": "论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。",
+    "key_points": [
+      "论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。",
+      "研究目标是利用大量未标注的“观测–轨迹”对，在极少语言标注条件下训练可语言条件控制的驾驶 VLA。",
+      "应用场景为闭环自动驾驶，具体在 CARLA/Bench2Drive 闭环基准上评估。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-23",
+    "title": "Reflection-Aware Reasoning for Non-Line-of-Sight Pedestrian Localization",
+    "link": "https://arxiv.org/abs/2609.27346",
+    "arxiv_id": "2609.27346",
+    "detail_path": "papers/2609.27346/",
+    "cover_path": "covers/2609.27346/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.27346.webp",
+    "paper_image_full_path": "assets/paper-images/2609.27346.webp",
+    "preview_text": "论文针对自动驾驶中的非视距（NLOS）行人定位任务，即定位被遮挡、无法被自车直接观测到的行人。 应用场景为城市自动驾驶安全，强调在自车运动（ego-dynamic）的户外测试场环境中，雷达多径传播变得复杂且噪声大，使该任务极具挑战。 研究问题为：在自车运动的户外测试场场景下，如何从多径雷达观测中推断反射关系并重建反射路径，从而定位被遮挡的行人。",
+    "research_unit": "原文未报告 · Byeonggyu Park",
+    "hook_text": "论文针对自动驾驶中的非视距（NLOS）行人定位任务，即定位被遮挡、无法被自车直接观测到的行人。",
+    "key_points": [
+      "论文针对自动驾驶中的非视距（NLOS）行人定位任务，即定位被遮挡、无法被自车直接观测到的行人。",
+      "应用场景为城市自动驾驶安全，强调在自车运动（ego-dynamic）的户外测试场环境中，雷达多径传播变得复杂且噪声大，使该任务极具挑战。",
+      "研究问题为：在自车运动的户外测试场场景下，如何从多径雷达观测中推断反射关系并重建反射路径，从而定位被遮挡的行人。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-23",
+    "title": "Breaking Weather-Content Coupling: Type-Severity Guided Progressive Disentanglement for All-in-One Infrared Restoration",
+    "link": "https://arxiv.org/abs/2609.27317",
+    "arxiv_id": "2609.27317",
+    "detail_path": "papers/2609.27317/",
+    "cover_path": "covers/2609.27317/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.27317.webp",
+    "paper_image_full_path": "assets/paper-images/2609.27317.webp",
+    "preview_text": "论文面向自动驾驶、遥感等感知任务中的红外图像恢复问题，处理雾、雨、雪、云遮挡等多种恶劣天气导致的退化。 核心研究问题是红外图像中天气伪影与真实热结构强耦合，现有方法难以区分二者，且难以适应同一图像内空间变化的退化严重程度。 目标是在统一框架下实现 all-in-one 多天气红外恢复，同时减少残留伪影与对弱热响应的过度抑制。",
+    "research_unit": "Xi’an Jiaotong University, Shaanxi Key Laboratory of Deep Space Exploration…",
+    "hook_text": "论文面向自动驾驶、遥感等感知任务中的红外图像恢复问题，处理雾、雨、雪、云遮挡等多种恶劣天气导致的退化。",
+    "key_points": [
+      "论文面向自动驾驶、遥感等感知任务中的红外图像恢复问题，处理雾、雨、雪、云遮挡等多种恶劣天气导致的退化。",
+      "核心研究问题是红外图像中天气伪影与真实热结构强耦合，现有方法难以区分二者，且难以适应同一图像内空间变化的退化严重程度。",
+      "目标是在统一框架下实现 all-in-one 多天气红外恢复，同时减少残留伪影与对弱热响应的过度抑制。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-22",
+    "title": "Bend the Clock: Predicting Ahead to Beat Latency in Event-Based Object Detection",
+    "link": "https://arxiv.org/abs/2609.26919",
+    "arxiv_id": "2609.26919",
+    "detail_path": "papers/2609.26919/",
+    "cover_path": "covers/2609.26919/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.26919.webp",
+    "paper_image_full_path": "assets/paper-images/2609.26919.webp",
+    "preview_text": "论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。 研究问题源于“观测—可用性不匹配”（observation–availability mismatch）：检测器在时间 t 观测，但预测要到 t+Δ 才可用，传统评估在观测时刻比较预测与标注，忽略了机器人真正收到预测时场景已经变化的问题。 论文指出，尽管事件相机具有低延迟优势，现代事件检测器端到端仍需数十毫秒计算，导致输出时检测框可能已经过时，尤其在高速运动场景中更严重。 核心目标是让事件检测器预测“输出可用时”的目标状态，而非“输入被观测时”的目标状态。",
+    "research_unit": "National University of Singapore, Singapore · Biswadeep Sen、Terence Sim",
+    "hook_text": "论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。",
+    "key_points": [
+      "论文面向事件相机的多目标检测任务，应用场景包括自动驾驶、敏捷飞行和机器人拦截等高速机器人感知场景。",
+      "研究问题源于“观测—可用性不匹配”（observation–availability mismatch）：检测器在时间 t 观测，但预测要到 t+Δ 才可用，传统评估在观测时刻比较预测与标注，忽略了机器人真正收到预测时场景已经变化的问题。",
+      "论文指出，尽管事件相机具有低延迟优势，现代事件检测器端到端仍需数十毫秒计算，导致输出时检测框可能已经过时，尤其在高速运动场景中更严重。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
     "date": "2026-09-22",
     "title": "DreamStream: Towards Policy-Oriented Generative Simulation for End-to-End Driving",
     "link": "https://arxiv.org/abs/2609.26792",

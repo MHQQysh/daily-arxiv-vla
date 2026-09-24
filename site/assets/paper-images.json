@@ -27471,5 +27471,343 @@
     "inside_figure": true,
     "width": 800,
     "height": 530
+  },
+  "2609.28239": {
+    "title": "ODPure: Backdoor Purification for Object Detection via Ensemble Corruption Consensus",
+    "abs_url": "https://arxiv.org/abs/2609.28239",
+    "html_url": "https://arxiv.org/html/2609.28239v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.28239v1/chessboard.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 476,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28239v1/solid_white.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 448,
+        "height": 448,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28239v1/pokeball.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 476,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28239v1/final_corruption_all.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 323,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28239v1/pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 371,
+        "height": 248,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.28239.webp",
+    "image_url": "https://arxiv.org/html/2609.28239v1/chessboard.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 476
+  },
+  "2609.27747": {
+    "title": "Less Language, More Latents: Annotation-Efficient VLAs for Driving",
+    "abs_url": "https://arxiv.org/abs/2609.27747",
+    "html_url": "https://arxiv.org/html/2609.27747v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.27747v1/SETUP.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 218,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27747v1/MODEL.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 130,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27747v1/Counterfactuals-combined.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 169,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27747v1/ACTION_SAMPLES_F.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 138,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27747v1/diagrams/COMMAND-ACTION.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 153,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2609.27747.webp",
+    "image_url": "https://arxiv.org/html/2609.27747v1/SETUP.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 218
+  },
+  "2609.28366": {
+    "title": "AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios",
+    "abs_url": "https://arxiv.org/abs/2609.28366",
+    "html_url": "https://arxiv.org/html/2609.28366v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.28366v1/figures/action.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 382,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28366v1/figures/text-sample.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 575,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28366v1/figures/text-sample2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 468,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28366v1/figures/text-sample3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 472,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28366v1/figures/scene_context_full_prompt.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 439,
+        "height": 526,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      }
+    ],
+    "path": "assets/paper-images/2609.28366.webp",
+    "image_url": "https://arxiv.org/html/2609.28366v1/figures/action.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 548,
+    "height": 382
+  },
+  "2609.26919": {
+    "title": "Bend the Clock: Predicting Ahead to Beat Latency in Event-Based Object Detection",
+    "abs_url": "https://arxiv.org/abs/2609.26919",
+    "html_url": "https://arxiv.org/html/2609.26919v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.26919v1/latency_motivation2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26919v1/figures/final_qual.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 286,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26919v1/ChronoFuse.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 128,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26919v1/figures/recovery_across_datasets.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 165,
+        "height": 97,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2609.26919v1/figures/fred_localization_gain.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 165,
+        "height": 100,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2609.26919.webp",
+    "image_url": "https://arxiv.org/html/2609.26919v1/latency_motivation2.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 268
+  },
+  "2609.27317": {
+    "title": "Breaking Weather-Content Coupling: Type-Severity Guided Progressive Disentanglement for All-in-One Infrared Restoration",
+    "abs_url": "https://arxiv.org/abs/2609.27317",
+    "html_url": "https://arxiv.org/html/2609.27317v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.27317v1/dingxing.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 490,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27317v1/fig2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 385,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27317v1/fig4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 290,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27317v1/fig1_cropped.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 174,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.27317v1/fig3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 170,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2609.27317.webp",
+    "image_url": "https://arxiv.org/html/2609.27317v1/dingxing.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 490
+  },
+  "2609.27346": {
+    "title": "Reflection-Aware Reasoning for Non-Line-of-Sight Pedestrian Localization",
+    "abs_url": "https://arxiv.org/abs/2609.27346",
+    "html_url": "https://arxiv.org/html/2609.27346v1",
+    "path": "assets/paper-images/2609.27346.webp",
+    "image_url": "https://arxiv.org/pdf/2609.27346",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 918,
+    "height": 1188
   }
 }

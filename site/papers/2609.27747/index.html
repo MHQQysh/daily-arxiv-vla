@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Less Language, More Latents: Annotation-Efficient VLAs for Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。 研究目标是利用大量未标注的“观测–轨迹”对，在极少语言标注条件下训练可语言条件控制的驾驶 VLA。 应用场景为闭环自动驾驶，具体在 CARLA/Bench2Drive 闭环基准上评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.27747">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.27747.webp" alt="Less Language, More Latents: Annotation-Efficient VLAs for Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Less Language, More Latents: Annotation-Efficient VLAs for Driving</h1>
+            <div class="detail-meta">2026-09-23 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.27747" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.27747" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.27747</span></div>
+            <p class="detail-summary">论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。 研究目标是利用大量未标注的“观测–轨迹”对，在极少语言标注条件下训练可语言条件控制的驾驶 VLA。 应用场景为闭环自动驾驶，具体在 CARLA/Bench2Drive 闭环基准上评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Robert Bosch GmbH, Germany · Alexey Zakharov、Kemal Oksuz、Puneet K. Dokania</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.27747/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。</li><li>研究目标是利用大量未标注的“观测–轨迹”对，在极少语言标注条件下训练可语言条件控制的驾驶 VLA。</li><li>应用场景为闭环自动驾驶，具体在 CARLA/Bench2Drive 闭环基准上评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Robert Bosch GmbH, Germany；作者：Alexey Zakharov、Kemal Oksuz、Puneet K. Dokania</li><li>机构：Five AI Ltd., United Kingdom；作者：Alexey Zakharov、Kemal Oksuz、Puneet K. Dokania</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶中的视觉-语言-动作模型（VLA）训练问题：相机流与专家轨迹可大规模采集，但自然语言指令（如高层命令、反事实指令、VQA、思维链）标注稀缺且昂贵。</li><li>研究目标是利用大量未标注的“观测–轨迹”对，在极少语言标注条件下训练可语言条件控制的驾驶 VLA。</li><li>应用场景为闭环自动驾驶，具体在 CARLA/Bench2Drive 闭环基准上评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 LADA（Latent Action Driving Annotations）三阶段框架，从大量未标注观测–轨迹对中蒸馏出紧凑的车辆意图码本，缓解 VLA 的语言标注瓶颈。</li><li>第一阶段用带向量量化瓶颈的潜在动作模型学习高层车辆意图码本；第二阶段用少量语言标注训练视觉-语言翻译器，将观测与语言指令映射到该码本；第三阶段在完整未标注语料上以观测–潜在动作对训练驾驶 VLA。</li><li>将 LADA 集成到当前 SOTA 驾驶 VLA SimLingo 中，仅使用约 5% 的 HLC 和 CF 标注、不使用 VQA 或 CoT 监督，在闭环 Bench2Drive 上超过全监督 SimLingo：Driving Score 提升 +1.90，Success Rate 提升 +4.68。</li><li>相比使用 100% HLC 标注的 SimLingo 变体，LADA 完成的无违规路线多约 9%。</li><li>通过消融与定性分析表明潜动作预训练不可被简单的 HLC 伪标注替代，潜码能捕捉上下文敏感的驾驶意图。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：三阶段驾驶 VLA 训练框架，包括潜在动作模型（LAM）、翻译器（Translator）与驾驶模型（Driving Model）。</li><li>输入传感器：前向 RGB 相机图像、车辆速度；驾驶模型输入图像被切分为 N_I=2 个 448×448 图块，经视觉编码器与像素反混洗得到每帧 512 个视觉 token。原文未报告激光雷达或其它传感器。</li><li>场景表示：轨迹 τ_t 表示为路径点与速度剖面，Stage I 中具体表示为 20 点 ego 坐标系路线折线 R_t∈R^{20×2}，约 1 m 间距，按点增量编码解码。</li><li>模型结构：Stage I 为编码器–量化器–解码器结构，编码器 ψ: O×R^{20×2}→R^{L×d}，量化器 q 将投影后的嵌入映射到码本 {e_k}_{k=1}^C，解码器 θ: O×Z^L→R^{20×2} 重建路线；使用 NSVQ 可微量化与线性探针 φ 进行 HLC 对齐。Stage II 翻译器为 VLM_translator: O×L→Z，在码本上做 C 类分类，联合条件/无条件训练，并用 action dreaming 引入反事实监督。Stage III 驾驶模型 VLM_driving: O×Z→T，基于 SimLingo 架构，InternVL2-1B（Qwen2-0.5B-Instruct LLM 与 InternViT-300M-448px 视觉编码器），移除 VQA 与 commentary 任务提示，仅保留轨迹预测路径，通过可学习 query token 非自回归输出速度点与几何路径点。</li><li>关键技术：向量量化潜动作瓶颈、HLC 对齐线性探针、联合条件/无条件翻译器训练、反事实 action dreaming、潜在动作作为语言与轨迹之间的中间接口。</li><li>原文未报告：激光雷达等额外传感器、真实道路实车部署细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：SimLingo 语料，约 140 小时 CARLA 专家演示，约 2M 帧，4 fps，每帧具备 HLC、CoT、VQA、CF 四类标注；论文指出这是唯一同时满足四类标注齐全、规模足够、支持闭环评估的公开数据集。</li><li>仿真器：CARLA；闭环评估基准为 Bench2Drive。</li><li>模型规模：驾驶模型基于 InternVL2-1B，LLM 为 Qwen2-0.5B-Instruct，视觉编码器为 InternViT-300M-448px；Stage I 码本主实验设置为 (C,L)=(25,1)。</li><li>训练资源：8 张 NVIDIA A100 GPU，bf16 混合精度，训练 14 个 epoch，有效 batch size 为 96；各阶段超参数、优化器设置与采样方案见附录 B 与 C。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Bench2Drive 闭环基准，包含 220 条路线。</li><li>评估指标：Driving Score（DS，基于路线完成百分比与违规惩罚的平均分）、Success Rate（SR，在时间限制内且无交通违规完成路线的比例），以及 Bench2Drive 的多项能力指标（Merging、Overtaking、Emergency Brake、Give Way、Traffic Sign、Mean）。</li><li>关键数值：LADA 仅使用 5% HLC 与 5% CF、无 CoT 与 VQA，取得 DS 87.98±1.01、SR 70.46%±2.08；相较 Full-language SimLingo（DS 86.08、SR 65.78%）分别提升 +1.90 DS 与 +4.68 SR；相较 Full-HLC（DS 82.85、SR 61.36%）提升约 5 DS 与约 9 SR；能力均值 68.87±0.96，其中 Merging 55.03±3.41、Emergency Brake 71.11±3.17、Give Way 86.67±2.40、Traffic Sign 50.13±4.75、Mean 81.58±2.3。</li><li>对比方法：Heuristic（无标注规则伪标签，DS 71.04、SR 37.73）、IDM（5% 标注 HLC 分类器伪标注，DS 77.74、SR 51.36）、Anchor（k-means 几何锚点替代学习码本，DS 79.97、SR 54.01）、5-HLC（5% HLC，DS 78.37、SR 53.40）、Full-HLC（100% HLC，DS 82.85、SR 61.36）、Full-language SimLingo（100% HLC/CF/CoT/VQA，DS 86.08、SR 65.78）。</li><li>评估条件：闭环仿真评估；LADA 结果报告了 3 个随机种子的标准差。原文未报告开环评估与实车评估结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.28239/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">ODPure: Backdoor Purification for Object Detection via Ensemble Corruption Consensus</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.27346/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Reflection-Aware Reasoning for Non-Line-of-Sight Pedestrian Localization</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
