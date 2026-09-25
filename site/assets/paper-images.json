@@ -27809,5 +27809,421 @@
     "inside_figure": false,
     "width": 918,
     "height": 1188
+  },
+  "2609.29738": {
+    "title": "Combining Evasive and Braking Reactions for Safety Reference Models in Automated Vehicles",
+    "abs_url": "https://arxiv.org/abs/2609.29738",
+    "html_url": "https://arxiv.org/html/2609.29738v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.29738v1/figures/SRM_structure.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 206,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29738v1/figures/FSM_structure.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 203,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29738v1/figures/hard_FSM_vs_FSM_LC_H_acc_2_col.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 272,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29738v1/figures/dv_dx_cut_in_high.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 318,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29738v1/figures/PDF_FSM_H_crash_speed_2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 272,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.29738.webp",
+    "image_url": "https://arxiv.org/html/2609.29738v1/figures/SRM_structure.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 206
+  },
+  "2609.29235": {
+    "title": "SARFusion: Scene-Aware Routing Fusion for Robust Camera-LiDAR 3D Object Detection",
+    "abs_url": "https://arxiv.org/abs/2609.29235",
+    "html_url": "https://arxiv.org/html/2609.29235v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.29235v1/SARFusion.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 263,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29235v1/DER.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 183,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29235v1/SnowFogRain.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 327,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29235v1/SRP.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 172,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29235v1/CameraLidarCMP.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 132,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2609.29235.webp",
+    "image_url": "https://arxiv.org/html/2609.29235v1/SARFusion.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 263
+  },
+  "2609.28969": {
+    "title": "Sim-to-Real Aware End-to-End Learning Environment for Micromobility",
+    "abs_url": "https://arxiv.org/abs/2609.28969",
+    "html_url": "https://arxiv.org/html/2609.28969v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.28969v1/AWSIM.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 540,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28969v1/real.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 539,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28969v1/System_Model.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 337,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28969v1/system_design_IROS.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 299,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.28969v1/scenario.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 296,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2609.28969.webp",
+    "image_url": "https://arxiv.org/html/2609.28969v1/AWSIM.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 540
+  },
+  "2609.29835": {
+    "title": "Retrieve-to-Localize: Bridging Large Language Models and LiDAR Geometry for Spatial Grounding",
+    "abs_url": "https://arxiv.org/abs/2609.29835",
+    "html_url": "https://arxiv.org/html/2609.29835v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.29835v1/LiDAR-LLM_Teaser_v4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 216,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29835v1/Task_Final_Final_Final_Final_Final_Final_Final_Final.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 237,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29835v1/Qualitative_withqa_v5.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 307,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29835v1/LiDAR-LLM_Main_Figure_Final_Final.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 144,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.29835.webp",
+    "image_url": "https://arxiv.org/html/2609.29835v1/LiDAR-LLM_Teaser_v4.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 216
+  },
+  "2609.29813": {
+    "title": "S2Planner: Multi-Scale Semantic Planner for End-to-End Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.29813",
+    "html_url": "https://arxiv.org/html/2609.29813v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.29813v1/s2_planner.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 248,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29813v1/sca_vis.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 293,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29813v1/visualizations.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 286,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29813v1/dinov3_vis.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 168,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29813v1/deimv2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 168,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2609.29813.webp",
+    "image_url": "https://arxiv.org/html/2609.29813v1/s2_planner.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 248
+  },
+  "2609.29600": {
+    "title": "Active Client Selection in Federated Trajectory Prediction with Uncertainty-Awareness and Heterogeneous Complexity",
+    "abs_url": "https://arxiv.org/abs/2609.29600",
+    "html_url": "https://arxiv.org/html/2609.29600v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.29600v1/uncertainty_heter.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 286,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.29600v1/gradient_error.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 240,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.29600.webp",
+    "image_url": "https://arxiv.org/html/2609.29600v1/uncertainty_heter.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 429,
+    "height": 286
+  },
+  "2609.29198": {
+    "title": "Assessing the Impact of Fleet Size on Crowdsourced Mapping Using a Dissimilarity Measure",
+    "abs_url": "https://arxiv.org/abs/2609.29198",
+    "html_url": "https://arxiv.org/html/2609.29198v1",
+    "path": "assets/paper-images/2609.29198.webp",
+    "image_url": "https://arxiv.org/pdf/2609.29198",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 893,
+    "height": 1263
+  },
+  "2609.29687": {
+    "title": "Not All Synthetic Data Are Equal: Expert-Committee Audit Screening for Imbalanced Crash-Injury-Severity Prediction in Automated Driving Systems",
+    "abs_url": "https://arxiv.org/abs/2609.29687",
+    "html_url": "https://arxiv.org/html/2609.29687v1",
+    "path": "assets/paper-images/2609.29687.webp",
+    "image_url": "https://arxiv.org/pdf/2609.29687",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 893,
+    "height": 1263
   }
 }

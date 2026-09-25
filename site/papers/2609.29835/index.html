@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Retrieve-to-Localize: Bridging Large Language Models and LiDAR Geometry for Spatial Grounding - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。 研究问题在于：仅识别和定位单个物体不足以回答需要组合空间关系并定位意图目标的问题；现有关系型问答数据集多以粗粒度方向扇区或类别答案为主，难以验证目标是否被精确定位。 为此论文提出 SpatialLiDAR-QA 数据集和 SpatialLiDAR-LM 模型，将大语言模型的语言先验与 LiDAR 点云几何相连接，直接从局部 LiDAR 几何推导目标坐标，而非通过文本解码坐标。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.29835">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.29835.webp" alt="Retrieve-to-Localize: Bridging Large Language Models and LiDAR Geometry for Spatial Grounding" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Retrieve-to-Localize: Bridging Large Language Models and LiDAR Geometry for Spatial Grounding</h1>
+            <div class="detail-meta">2026-09-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.29835" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.29835" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.29835</span></div>
+            <p class="detail-summary">论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。 研究问题在于：仅识别和定位单个物体不足以回答需要组合空间关系并定位意图目标的问题；现有关系型问答数据集多以粗粒度方向扇区或类别答案为主，难以验证目标是否被精确定位。 为此论文提出 SpatialLiDAR-QA 数据集和 SpatialLiDAR-LM 模型，将大语言模型的语言先验与 LiDAR 点云几何相连接，直接从局部 LiDAR 几何推导目标坐标，而非通过文本解码坐标。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">韩国首尔汉阳大学汽车工程系（汽车-计算机融合方向）（Department of Automotive Engineering (Automotive-…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.29835/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。</p>
+  <ul class="reading-intro-points"><li>论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。</li><li>研究问题在于：仅识别和定位单个物体不足以回答需要组合空间关系并定位意图目标的问题；现有关系型问答数据集多以粗粒度方向扇区或类别答案为主，难以验证目标是否被精确定位。</li><li>为此论文提出 SpatialLiDAR-QA 数据集和 SpatialLiDAR-LM 模型，将大语言模型的语言先验与 LiDAR 点云几何相连接，直接从局部 LiDAR 几何推导目标坐标，而非通过文本解码坐标。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：韩国首尔汉阳大学汽车工程系（汽车-计算机融合方向）（Department of Automotive Engineering (Automotive-Computer Convergence), Hanyang University, Seoul, South Korea）；作者：Byounggun Park、Jusung Kim。</li><li>机构：韩国首尔汉阳大学汽车工程系（Department of Automotive Engineering, Hanyang University, Seoul, South Korea）；作者：Giyong Moon、Soonmin Hwang（通讯作者）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。</li><li>研究问题在于：仅识别和定位单个物体不足以回答需要组合空间关系并定位意图目标的问题；现有关系型问答数据集多以粗粒度方向扇区或类别答案为主，难以验证目标是否被精确定位。</li><li>为此论文提出 SpatialLiDAR-QA 数据集和 SpatialLiDAR-LM 模型，将大语言模型的语言先验与 LiDAR 点云几何相连接，直接从局部 LiDAR 几何推导目标坐标，而非通过文本解码坐标。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SpatialLiDAR-QA，将明确定义的空间关系与单步及多步关系定位任务结合，并包含互补的空间理解任务，支持 LiDAR-语言空间定位的训练与评估。</li><li>提出 SpatialLiDAR-LM，将上下文语言表示与语言条件、位置感知的候选检索及局部点细化相连接，从与问题相关的 LiDAR 几何中推导目标坐标。</li><li>在 SpatialLiDAR-QA 上评估 SpatialLiDAR-LM，在精确坐标预测任务上相较代表性 LiDAR-语言模型和多相机 VLM 取得显著提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：SpatialLiDAR-LM 为端到端架构，将 LLM 与通用 3D 点云骨干对齐，保留点云表示并将语言 grounding 到其空间结构中。</li><li>输入传感器：使用 LiDAR 点云输入；基线比较中包含多相机图像输入，但本模型主体为 LiDAR 模态。</li><li>场景表示：LiDAR 点级特征，坐标以 LiDAR 传感器为中心的 BEV 坐标系表示，+x 向右、+y 向前；坐标预测在 ±54 m 范围内以 0.25 m 分辨率离散为学习到的 bin token。</li><li>模型结构：LiDAR 编码器采用 PointTransformerV3（PTv3），初始化自在 nuScenes 上训练用于 LiDAR 语义分割的 checkpoint；点特征经轻量两层 MLP 投影至 LLM 嵌入空间；LLM 使用 LoRA 微调，基础 LLM 包括 Qwen3.5-0.8B 和 SmolVLM-500M-Instruct（移除视觉编码器）。</li><li>关键技术一：Point-Retrieved Localization（PRL），先为每个点 token 分配与查询无关的候选分数并进行 xy 平面 NMS 选出至多 M 个空间上分离的候选，再将 LLM 在 <code>&lt;loc&gt;</code> token 位置的上下文隐状态投影为检索查询，与候选 key 做缩放点积注意力检索相关候选，并在所选候选局部点邻域内做注意力加权细化得到最终坐标；当所选候选点支撑不足时保留粗估计。</li><li>关键技术二：Proposal-Key Positional Encoding（Key PE），将候选 LiDAR 坐标系中心通过傅里叶特征编码后加入候选 key，以在检索中区分语义相似但位置不同的实例；位置投影矩阵初始化为零。</li><li>训练目标：联合语言建模损失与坐标预测的 Smooth L1 损失，并加入基于候选检索分数的实例感知对比损失；推理时 PRL 直接从编码点 token 构建空间候选，不需要目标标注或外部检测器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：SpatialLiDAR-QA，基于 nuScenes 关键帧构建，共 108,811 个 QA 对，其中训练 89,548、验证 19,263；涵盖八类物体（car、truck、bus、trailer、construction_vehicle、pedestrian、bicycle、motorcycle）。</li><li>任务类型与数量：Localization 29,859、Object Identification 7,301、Single-step Relational 32,876、Multi-step Relational 10,552、Maneuver Feasibility 28,223。</li><li>数据构建：使用几何验证规则，过滤方向模糊样本；参照 Waymo Open Dataset 难度准则，少于 5 个 LiDAR 点的物体被过滤；对 QA 对进行人工验证。</li><li>模型规模：基础 LLM 为 Qwen3.5-0.8B 与 SmolVLM-500M-Instruct；PTv3 为点云编码器；原文未报告模型总参数量。</li><li>训练资源：使用 NVIDIA RTX A6000 GPU（每张 48 GB VRAM），四卡训练 2 个 epoch，每设备 batch size 为 4，有效 batch size 为 16；优化器为 AdamW，LoRA 参数 r=64、α=128、dropout 0.05。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：SpatialLiDAR-QA 验证集；另在 AV2 与 NAVSIM 上做 zero-shot 跨数据集评估，模型均在基于 nuScenes 的 SpatialLiDAR-QA 上微调。</li><li>评估指标：坐标预测任务报告在 0.5 m、1.0 m、2.0 m 阈值内的准确率；类别预测与 Maneuver Feasibility 报告 exact-match 准确率。</li><li>对比方法：LiDAR-LLM、BEV-LLM（多相机与 LiDAR 输入）、多相机 VLM 基线；所有基线使用相同基础 LLM、相同提示模板和 LoRA 调度在 SpatialLiDAR-QA 上重新实现。</li><li>坐标预测关键结果（Qwen3.5）：Localization @0.5 m 为 57.6%，@1.0 m 为 78.2%，@2.0 m 为 85.4%；Single-Step @0.5 m 为 34.7%，@1.0 m 为 56.2%，@2.0 m 为 71.4%；Multi-Step @0.5 m 为 44.1%，@1.0 m 为 62.9%，@2.0 m 为 74.0%；均优于对比方法。</li><li>坐标预测关键结果（SmolVLM）：Localization @0.5 m 为 57.2%，@1.0 m 为 77.0%，@2.0 m 为 85.0%；Single-Step @0.5 m 为 28.4%，@1.0 m 为 46.3%，@2.0 m 为 59.9%；Multi-Step @0.5 m 为 36.4%，@1.0 m 为 53.3%，@2.0 m 为 63.0%。</li><li>消融结果：以 Qwen3.5 的 Localization @0.5 m 为例，Language CE 为 10.3%，Smooth L1 为 3.2%，PRL 为 53.4%，PRL+Key PE 为 57.6%；Key PE 在关系定位任务上增益大于 Localization 任务，例如 SmolVLM 下单步提升 13.9 个百分点、多步提升 18.5 个百分点。</li><li>类别任务结果：多相机 VLM 在类别与 Maneuver Feasibility 上总体更高，例如 Qwen3.5 下 Maneuver Feasibility 为 92.2%，SpatialLiDAR-LM 为 85.5%；SpatialLiDAR-LM 在多数任务上优于其他 LiDAR 基线，如 SmolVLM 下 Maneuver Feasibility 达 87.2%。</li><li>跨数据集 zero-shot 结果：AV2 上 Localization @0.5 m 为 47.1%、@1.0 m 为 67.8%、@2.0 m 为 76.2%，Multi-Step @0.5 m 为 31.6%、@1.0 m 为 50.4%、@2.0 m 为 57.9%；NAVSIM 上 Localization @0.5 m 为 67.8%、@1.0 m 为 77.3%、@2.0 m 为 79.9%，Multi-Step @0.5 m 为 41.4%、@1.0 m 为 54.4%、@2.0 m 为 59.5%；均高于对应 VLM 基线。</li><li>评估条件：论文结果均为仿真数据集上的开环评估；原文未报告闭环评估或实车评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.29813/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">S2Planner: Multi-Scale Semantic Planner for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

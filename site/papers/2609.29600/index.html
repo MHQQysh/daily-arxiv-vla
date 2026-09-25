@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Active Client Selection in Federated Trajectory Prediction with Uncertainty-Awareness and Heterogeneous Complexity - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。 应用场景为真实世界中车辆轨迹数据分散在不同区域和车辆之间、难以构建高质量集中式数据集的场景，通过 FL 让车辆在不交换原始数据的前提下协同训练全局模型。 研究问题包括两点：一是单个交通场景中的高场景不确定性（轨迹或地图歧义），二是跨场景复杂度异构性（地图拓扑、交通密度、智能体组成和驾驶行为差异）。 论文提出主动客户端选择方法，引导 FL 优先选择信息量更大的客户端，以应对不确定性和复杂度异构性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.29600">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.29600.webp" alt="Active Client Selection in Federated Trajectory Prediction with Uncertainty-Awareness and Heterogeneous Complexity" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Active Client Selection in Federated Trajectory Prediction with Uncertainty-Awareness and Heterogeneous Complexity</h1>
+            <div class="detail-meta">2026-08-27 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.29600" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.29600" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.29600</span></div>
+            <p class="detail-summary">论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。 应用场景为真实世界中车辆轨迹数据分散在不同区域和车辆之间、难以构建高质量集中式数据集的场景，通过 FL 让车辆在不交换原始数据的前提下协同训练全局模型。 研究问题包括两点：一是单个交通场景中的高场景不确定性（轨迹或地图歧义），二是跨场景复杂度异构性（地图拓扑、交通密度、智能体组成和驾驶行为差异）。 论文提出主动客户端选择方法，引导 FL 优先选择信息量更大的客户端，以应对不确定性和复杂度异构性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Northeastern University · Yiming Xie、Muzi Peng、Ningfang Mi 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.29600/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。</li><li>应用场景为真实世界中车辆轨迹数据分散在不同区域和车辆之间、难以构建高质量集中式数据集的场景，通过 FL 让车辆在不交换原始数据的前提下协同训练全局模型。</li><li>研究问题包括两点：一是单个交通场景中的高场景不确定性（轨迹或地图歧义），二是跨场景复杂度异构性（地图拓扑、交通密度、智能体组成和驾驶行为差异）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Northeastern University；作者：Yiming Xie、Muzi Peng、Ningfang Mi、Lili Su</li><li>机构：University of Connecticut；作者：Fei Miao</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。</li><li>应用场景为真实世界中车辆轨迹数据分散在不同区域和车辆之间、难以构建高质量集中式数据集的场景，通过 FL 让车辆在不交换原始数据的前提下协同训练全局模型。</li><li>研究问题包括两点：一是单个交通场景中的高场景不确定性（轨迹或地图歧义），二是跨场景复杂度异构性（地图拓扑、交通密度、智能体组成和驾驶行为差异）。</li><li>论文提出主动客户端选择方法，引导 FL 优先选择信息量更大的客户端，以应对不确定性和复杂度异构性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 FLTP：一种基于不确定性感知目标的联邦轨迹预测框架，以分散方式训练轨迹预测器且不共享原始数据，采用负对数似然（NLL）目标（如 Laplace-mixture head）建模多模态并量化偶然不确定性（AU）。</li><li>提出一组主动客户端选择方法：FLTP-AU 优先选择具有中等偶然不确定性的客户端；FLTP-NLL 选择在 Laplace-mixture 目标下每客户端 NLL 较大的客户端。</li><li>提出 FLTP-DR，将可解释特征构建的复杂度排序（转弯频率、路口邻近度、车道汇入、速度方差、交互密度）与本地训练损失结合，兼顾不确定性与异构复杂度。</li><li>引入可解释的轨迹复杂度评分，用于将交通场景排序为 Easy/Moderate/Hard，并使用 Dirichlet 分区器构建现实的 non-IID 客户端划分，覆盖从高度不均衡到接近均匀部署的谱系。</li><li>验证了复杂度层级间的知识迁移：增加 Hard 数据比例可扩展机动/拓扑覆盖并迁移到中等或简单场景，在固定验证分布上改善 minADE、minFDE 并降低 MR。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：联邦学习框架下的轨迹预测客户端选择与训练模块，包括服务器与多个自动驾驶车辆客户端。</li><li>输入传感器：原文报告客户端可使用 Lidar 传感器和相机采集驾驶场景数据，记录所有邻近车辆轨迹；具体传感器配置与数据预处理细节原文未报告。</li><li>场景表示：驾驶场景样本表示为三元组 \(S=(X,Y,\mathcal{M})\)，其中 \(X\)、\(Y\) 分别为智能体（车辆或行人）的观测轨迹和未来轨迹集合，\(\mathcal{M}\) 为地图；每个场景指定一个目标智能体 \(i^*\) 用于评估轨迹预测模型。</li><li>模型结构：使用 vectorization 输入表示，并采用两个代表性 transformer backbone——HiVT 和 HPNet；HiVT 为轻量级 transformer 预测器，分离局部上下文提取与全局交互建模；HPNet 具备层次化解码器、多尺度时间融合和交互感知融合，用于长时域结构化运动建模。</li><li>关键技术：</li></ul>
+<p> - FLTP 遵循 FedAvg 的服务器-客户端交互，但本地优化器使用 AdamW，以改善小本地批次和非 IID 漂移下的稳定性。</p>
+<p> - 客户端在模型更新迭代前计算并上报本地数据集复杂度评分 \(\bar{\kappa}_c\)。</p>
+<p> - 服务器先形成候选池 \(\mathcal{C}_r\)，再将全局模型发送给候选客户端本地更新，并通过选择函数输出子集 \(\mathcal{L}_r\) 进行聚合。</p>
+<p> - 不确定性感知选择指标包括 NLL 和 AU；NLL 选择全局模型拟合较差、数据更困难的客户端，AU 选择偶然不确定性接近中位数的客户端，以兼顾代表性与低噪声。</p>
+<p> - FLTP-DR 在选择时同时考虑复杂度排序与本地训练损失，可自适应平衡高 rank 客户端与高 loss 客户端选择。</p>
+<p> - 选择模式包括 uniform、NLL、AU、DR。</p>
+<ul><li>理论分析：论文报告了收敛性分析和重要性采样解释；具体定理与完整证明细节原文未在提供的 HTML 内容中给出。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Argoverse。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：论文面向 connected autonomous vehicles（CAVs）场景，并描述客户端可使用 Lidar 和相机采集数据；是否进行实车部署、实车平台型号与配置原文未报告。</li><li>其他资源：使用 Dirichlet partitioner 构造 non-IID 客户端划分，涉及浓度参数 \(\alpha\) 和 mix 参数 \(\nu\)；具体实验取值原文未在提供的 HTML 内容中完整报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Argoverse 数据集上的联邦轨迹预测实验。</li><li>评估指标：minADE、minFDE、MR，以及收敛速度与泛化性能。</li><li>关键数值：</li></ul>
+<p> - 论文摘要报告，即使在 vanilla federated trajectory prediction 下，模型也超过本地训练模型。</p>
+<p> - 不确定性感知选择可加速收敛并改善 minADE、minFDE、MR 等核心指标。</p>
+<p> - 当客户端本地数据集在场景复杂度上存在显著异构性时，FLTP-DR 取得最佳泛化，并进一步加速收敛。</p>
+<p> - 增加 Hard 数据比例 \(\nu\) 可改善 minADE 和 minFDE，同时降低 MR。</p>
+<p> - 其他具体数值结果、表格与消融细节原文未在提供的 HTML 内容中完整报告。</p>
+<ul><li>对比方法：FLTP 与本地数据训练进行比较；不确定性感知选择器 FLTP-AU 与 FLTP-NLL 进行比较；在 HPNet 下进行整体性能比较；FLTP-DR 进行敏感性分析，包括选择比例 \(f_1\) 和混合参数 \(\nu\)。</li><li>评估条件：论文报告为基于 Argoverse 的实验评估，属于离线/数据集基准评估；开环、闭环、仿真或实车条件在提供的 HTML 内容中未明确报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.29687/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Not All Synthetic Data Are Equal: Expert-Committee Audit Screening for Imbalanced Crash-Injury-Severity Prediction in Automated Driving Systems</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.28366/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sim-to-Real Aware End-to-End Learning Environment for Micromobility - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。 应用场景包括配送机器人、电动轮椅等在城市人行道、走廊等复杂环境中的自主导航、避障和最后一公里物流。 研究问题聚焦于现有自动驾驶仿真器主要面向汽车，难以刻画微型出行车辆特有的差速驱动、全向轮等运动学特性，从而产生 sim-to-real gap，阻碍端到端驾驶策略部署。 论文提出面向 WHILL Model CR 的 sim-to-real aware 端到端学习环境，基于 AWSIM 与 ROS 2 构建，并通过系统辨识与同步架构支持世界模型类智能体训练与直接实车迁移。 核心研究问题包括：基于真实驾驶数据优化物理参数能否缩小轨迹与偏航角 sim-to-real gap；仅用 RGB 图像训练的世界模型端到端策略能否稳定避障；该策略能否无需微调直接迁移到实车并实现无碰撞避障。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.28969">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.28969.webp" alt="Sim-to-Real Aware End-to-End Learning Environment for Micromobility" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Sim-to-Real Aware End-to-End Learning Environment for Micromobility</h1>
+            <div class="detail-meta">2026-09-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.28969" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.28969" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.28969</span></div>
+            <p class="detail-summary">论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。 应用场景包括配送机器人、电动轮椅等在城市人行道、走廊等复杂环境中的自主导航、避障和最后一公里物流。 研究问题聚焦于现有自动驾驶仿真器主要面向汽车，难以刻画微型出行车辆特有的差速驱动、全向轮等运动学特性，从而产生 sim-to-real gap，阻碍端到端驾驶策略部署。 论文提出面向 WHILL Model CR 的 sim-to-real aware 端到端学习环境，基于 AWSIM 与 ROS 2 构建，并通过系统辨识与同步架构支持世界模型类智能体训练与直接实车迁移。 核心研究问题包括：基于真实驾驶数据优化物理参数能否缩小轨迹与偏航角 sim-to-real gap；仅用 RGB 图像训练的世界模型端到端策略能否稳定避障；该策略能否无需微调直接迁移到实车并实现无碰撞避障。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Saitama University · Shouma Amano、Takuya Azumi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.28969/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。</p>
+  <ul class="reading-intro-points"><li>论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。</li><li>应用场景包括配送机器人、电动轮椅等在城市人行道、走廊等复杂环境中的自主导航、避障和最后一公里物流。</li><li>研究问题聚焦于现有自动驾驶仿真器主要面向汽车，难以刻画微型出行车辆特有的差速驱动、全向轮等运动学特性，从而产生 sim-to-real gap，阻碍端到端驾驶策略部署。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Saitama University；作者：Shouma Amano、Takuya Azumi</li><li>机构：Academic Association (Graduate School of Science and Engineering) Saitama University；作者：Takuya Azumi</li><li>说明：原文仅分别标注了 Shouma Amano 与 Takuya Azumi 的隶属机构，未进一步区分两机构内部的独立贡献，且 Takuya Azumi 同时出现于两个机构标注中，因此按原文报告列出。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。</li><li>应用场景包括配送机器人、电动轮椅等在城市人行道、走廊等复杂环境中的自主导航、避障和最后一公里物流。</li><li>研究问题聚焦于现有自动驾驶仿真器主要面向汽车，难以刻画微型出行车辆特有的差速驱动、全向轮等运动学特性，从而产生 sim-to-real gap，阻碍端到端驾驶策略部署。</li><li>论文提出面向 WHILL Model CR 的 sim-to-real aware 端到端学习环境，基于 AWSIM 与 ROS 2 构建，并通过系统辨识与同步架构支持世界模型类智能体训练与直接实车迁移。</li><li>核心研究问题包括：基于真实驾驶数据优化物理参数能否缩小轨迹与偏航角 sim-to-real gap；仅用 RGB 图像训练的世界模型端到端策略能否稳定避障；该策略能否无需微调直接迁移到实车并实现无碰撞避障。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>通过基于真实驾驶数据优化物理参数，降低轨迹与偏航角响应中的 sim-to-real gap。</li><li>建立面向微型出行车辆的端到端学习基础设施，使用 ROS 2 与 AWSIM，并验证其可支持端到端驾驶策略训练。</li><li>在报告中的走廊场景下展示端到端驾驶策略的直接 sim-to-real 迁移，在无需更新网络权重的情况下实现无碰撞避障。</li><li>提出面向世界模型智能体稳定训练的分层架构与混合同步协议，以衔接异步 ROS 2 数据流与 episodic 强化学习需求。</li><li>使用贝叶斯优化进行系统辨识，优化摩擦、控制增益、阻力与质心偏移等参数，并在未见 Figure-eight 场景中验证泛化性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文方法覆盖仿真环境、车辆建模、系统辨识、端到端策略学习与部署架构，整体由 AWSIM 仿真器、WHILL Model CR 车辆、ROS 2 中间件和 DreamerV3 驾驶策略组成。</li><li>输入传感器：论文报告 AWSIM 中可采集 camera 与 LiDAR 多模态传感器数据；端到端策略训练与部署使用 64×64 RGB 图像输入，其他传感器值如里程计和碰撞标志从最新缓存的 ROS 2 消息中采样。</li><li>场景表示：AWSIM 使用东京西新宿详细地图，并加入 NPC；用于 sim-to-real 的走廊场景则基于真实实验室走廊 LiDAR 点云和 KISS-ICP SLAM 结果，使用 Unity cube 资产手工建模为轻量块状环境。端到端策略本身不显式使用地图，而是从 RGB 图像历史中学习。</li><li>模型结构：驾驶策略采用 DreamerV3，一种基于世界模型的强化学习算法。原文未报告 DreamerV3 的具体网络层数、隐藏维度、参数量等结构细节。</li><li>关键技术：</li></ul>
+<p> - 车辆坐标系统与参考点定义：采用 ROS 标准右手坐标系，模型原点为基准，控制输入为线速度 v 与角速度 ω，参考点为后轴中心，评估使用里程计坐标系跟踪后轴中心二维位姿。</p>
+<p> - 控制接口：通过 ROS 2 <code>geometry_msgs/Twist</code> 消息发布至 <code>cmd_vel</code> 主题控制车辆。</p>
+<p> - 力控制算法：目标线速度和角速度经标准逆运动学分解为左右轮速度，独立 PID 控制器计算各轮所需加速度，再映射为左右牵引力。</p>
+<p> - 系统辨识：构建优化问题最小化仿真与真实车辆在开环执行下的轨迹跟踪误差，目标函数为多个驾驶场景的 RMSE 之和，参数集包括摩擦系数和控制增益。使用 Optuna 的 TPE 进行 500 次贝叶斯优化。</p>
+<p> - 训练场景包括 Straight、Turn、Circle、S-curve、Figure-eight 五种预设机动；优化值使用 Straight、Turn、Circle、S-curve 四个场景的训练数据。</p>
+<p> - 端到端学习包装器：将原始传感器流转为模型可用张量，例如 64×64 图像；将 DreamerV3 输出的归一化连续动作 <code>a_t=[a_v,a_ω]∈[-1,1]^2</code> 映射为标准 <code>geometry_msgs/Twist</code> 命令，并线性缩放至预设速度限制。</p>
+<p> - 混合通信协议：高带宽传感器数据经 ROS 2 连续流式传输，状态管理信号如 episode reset 经同步 TCP 连接传输。高带宽传感器订阅队列深度为 1，采用 drop-oldest 策略。</p>
+<p> - 决策步定义：以新相机帧到达定义 MDP 决策步，目标间隔约 100 ms，即 10 Hz。仿真训练时采用基于时间戳的阻塞同步等待图像时间戳更新；实车部署时采用固定 10 Hz 定时器回调异步运行。</p>
+<p> - ROS 2 主题与同步设置：相机图像 10 Hz、Best Effort、带时间戳、队列 1；LiDAR 点云 10 Hz、Best Effort、无时间戳、队列 1；ground truth 里程计 20 Hz、Best Effort、无时间戳、队列 1；碰撞传感器事件驱动、Reliable、无时间戳、队列 10；<code>/whill/controller/cmd_vel</code> 为 10 Hz、Reliable、无时间戳、队列 1。</p>
+<ul><li>若原文未报告：DreamerV3 具体网络规模、训练超参数、优化器细节、策略输入是否包含除 RGB 和缓存传感器以外的信息等，原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：论文未使用公开命名数据集。仿真环境使用 AWSIM 中的东京西新宿地图，并加入 NPC；走廊迁移场景使用真实实验室走廊 LiDAR 点云经 KISS-ICP SLAM 建立空间参考，并手工建模 Unity cube 资产。真实车辆数据通过开环执行五种机动采集，用于系统辨识。</li><li>仿真器：AWSIM，版本 v2.0.0；同时使用 Unity cube assets 构建走廊场景。</li><li>中间件与软件：ROS 2 Humble、Ubuntu 22.04.5 LTS、Python 3.10、JAX、Optuna。实车 onboard computer 使用相同 Ubuntu 与 ROS 2 Humble 环境。</li><li>模型规模：使用 DreamerV3，但原文未报告模型参数量、网络层数、隐藏维度等规模信息。</li><li>训练资源：仿真与训练使用 AMD Ryzen Threadripper 7960X，24 核，256 GB RAM，NVIDIA RTX 6000 Ada GPU。</li><li>实车平台：WHILL Model CR，差速驱动推进，前部配备专用全向轮；onboard computer 运行 Ubuntu 与 ROS 2 Humble。原文未报告 onboard computer 的 CPU、GPU、内存等具体硬件规格。</li><li>传感平台：仿真中可采集 camera 与 LiDAR；真实走廊建模使用 LiDAR 与 KISS-ICP SLAM。端到端策略部署使用 64×64 RGB 图像输入。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：围绕三个研究问题评估，分别为轨迹与偏航角 sim-to-real gap、世界模型端到端策略训练效果、无需微调的直接 sim-to-real 迁移。</li><li>评估指标：轨迹 RMSE、速度 RMSE、角速度 RMSE、偏航角 RMSE；训练评估使用 reward curve、是否到达目标、到达时间、碰撞与超时；迁移评估比较 AWSIM 与真实世界轨迹并观察是否无碰撞到达目标区域。</li><li>开环、闭环、仿真或实车条件：</li></ul>
+<p> - RQ1 系统辨识评估：在真实世界采集五种场景的里程计与控制输入，在 AWSIM 中回放真实控制输入进行开环轨迹对比；每个指标为 10 次独立试验的均值 ± 标准差，p 值相对初始参数。</p>
+<p> - RQ2 训练评估：在仿真中设计避障场景，智能体仅使用 64×64 RGB 相机图像导航至目标，评估 reward curve。</p>
+<p> - RQ3 迁移评估：在实验室走廊复制环境中进行实车部署，策略不进行网络权重微调。</p>
+<ul><li>关键数值：</li></ul>
+<p> - Figure-eight 未见测试场景中，轨迹 RMSE 从 <code>0.853±0.002</code> m 降至 <code>0.111±0.002</code> m。</p>
+<p> - Turn 场景中，偏航角 RMSE 从 <code>0.615±0.008</code> rad 降至 <code>0.064±0.022</code> rad。</p>
+<p> - Straight 场景中，轨迹 RMSE 从 <code>0.166±0.060</code> m 降至 <code>0.058±0.004</code> m，p&lt;.001；速度 RMSE 从 <code>0.060±0.004</code> m/s</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.29198/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Assessing the Impact of Fleet Size on Crowdsourced Mapping Using a Dissimilarity Measure</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.29687/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Not All Synthetic Data Are Equal: Expert-Committee Audit Screening for Imbalanced Crash-Injury-Severity Prediction in Automated Driving Systems</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

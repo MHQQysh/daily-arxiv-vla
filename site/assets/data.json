@@ -1,5 +1,237 @@
 [
   {
+    "date": "2026-09-24",
+    "title": "Retrieve-to-Localize: Bridging Large Language Models and LiDAR Geometry for Spatial Grounding",
+    "link": "https://arxiv.org/abs/2609.29835",
+    "arxiv_id": "2609.29835",
+    "detail_path": "papers/2609.29835/",
+    "cover_path": "covers/2609.29835/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.29835.webp",
+    "paper_image_full_path": "assets/paper-images/2609.29835.webp",
+    "preview_text": "论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。 研究问题在于：仅识别和定位单个物体不足以回答需要组合空间关系并定位意图目标的问题；现有关系型问答数据集多以粗粒度方向扇区或类别答案为主，难以验证目标是否被精确定位。 为此论文提出 SpatialLiDAR-QA 数据集和 SpatialLiDAR-LM 模型，将大语言模型的语言先验与 LiDAR 点云几何相连接，直接从局部 LiDAR 几何推导目标坐标，而非通过文本解码坐标。",
+    "research_unit": "韩国首尔汉阳大学汽车工程系（汽车-计算机融合方向）（Department of Automotive Engineering (Automotive-…",
+    "hook_text": "论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。",
+    "key_points": [
+      "论文聚焦自动驾驶与户外机器人场景中的 LiDAR 空间定位任务，即根据自然语言空间问题在 LiDAR 几何中定位被指代目标。",
+      "研究问题在于：仅识别和定位单个物体不足以回答需要组合空间关系并定位意图目标的问题；现有关系型问答数据集多以粗粒度方向扇区或类别答案为主，难以验证目标是否被精确定位。",
+      "为此论文提出 SpatialLiDAR-QA 数据集和 SpatialLiDAR-LM 模型，将大语言模型的语言先验与 LiDAR 点云几何相连接，直接从局部 LiDAR 几何推导目标坐标，而非通过文本解码坐标。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-24",
+    "title": "S2Planner: Multi-Scale Semantic Planner for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.29813",
+    "arxiv_id": "2609.29813",
+    "detail_path": "papers/2609.29813/",
+    "cover_path": "covers/2609.29813/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.29813.webp",
+    "paper_image_full_path": "assets/paper-images/2609.29813.webp",
+    "preview_text": "论文面向端到端自动驾驶中的运动规划任务，目标是利用场景观测、自车近期运动和历史导航指令，直接选择可行的未来轨迹。 应用场景为基于三路前视相机、自车运动历史和当前驾驶命令的相机与自车状态联合规划。 研究问题在于：能否不依赖显式 BEV 预测头或固定轨迹词库，而是直接在候选轨迹点附近的标定投影位置采样多尺度图像特征，并迭代精化轨迹。 论文明确将其评估限定在 NAVSIM v1 非反应式四秒仿真设置中，并指出该设置不能代表交互式交通中的闭环或实车部署性能。",
+    "research_unit": "Technical University of Munich, Chair of Robotics, Artificial Intelligence…",
+    "hook_text": "论文面向端到端自动驾驶中的运动规划任务，目标是利用场景观测、自车近期运动和历史导航指令，直接选择可行的未来轨迹。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的运动规划任务，目标是利用场景观测、自车近期运动和历史导航指令，直接选择可行的未来轨迹。",
+      "应用场景为基于三路前视相机、自车运动历史和当前驾驶命令的相机与自车状态联合规划。",
+      "研究问题在于：能否不依赖显式 BEV 预测头或固定轨迹词库，而是直接在候选轨迹点附近的标定投影位置采样多尺度图像特征，并迭代精化轨迹。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-24",
+    "title": "Combining Evasive and Braking Reactions for Safety Reference Models in Automated Vehicles",
+    "link": "https://arxiv.org/abs/2609.29738",
+    "arxiv_id": "2609.29738",
+    "detail_path": "papers/2609.29738/",
+    "cover_path": "covers/2609.29738/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.29738.webp",
+    "paper_image_full_path": "assets/paper-images/2609.29738.webp",
+    "preview_text": "自动驾驶任务：面向自动驾驶系统（ADS）基于场景的安全性评估，构建用于性能基准的“谨慎且有能力”（Careful and Competent, C&C）人类驾驶员安全参考模型（Safety Reference Model, SRM）。 应用场景：高速公路高临界度切入（cut-in）场景，即目标车以较低车速切入自车前方引发的追尾/侧向冲突风险。 研究问题：现有安全参考模型多只关注纵向制动，忽略人类避撞中的转向避让作用；论文研究如何将纵向减速缓解与侧向转向避让整合到统一的行为框架中，在保持行为合理性和计算可解释性的同时扩展可预防性边界。",
+    "research_unit": "Joint Research Centre for the European Commission, Ispra, IT（欧盟委员会联合研究中心，意大…",
+    "hook_text": "自动驾驶任务：面向自动驾驶系统（ADS）基于场景的安全性评估，构建用于性能基准的“谨慎且有能力”（Careful and Competent, C&C）人类驾驶员安全参考模型（Safety Reference Model, SRM）。",
+    "key_points": [
+      "自动驾驶任务：面向自动驾驶系统（ADS）基于场景的安全性评估，构建用于性能基准的“谨慎且有能力”（Careful and Competent, C&C）人类驾驶员安全参考模型（Safety Reference Model, SRM）。",
+      "应用场景：高速公路高临界度切入（cut-in）场景，即目标车以较低车速切入自车前方引发的追尾/侧向冲突风险。",
+      "研究问题：现有安全参考模型多只关注纵向制动，忽略人类避撞中的转向避让作用；论文研究如何将纵向减速缓解与侧向转向避让整合到统一的行为框架中，在保持行为合理性和计算可解释性的同时扩展可预防性边界。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-24",
+    "title": "SARFusion: Scene-Aware Routing Fusion for Robust Camera-LiDAR 3D Object Detection",
+    "link": "https://arxiv.org/abs/2609.29235",
+    "arxiv_id": "2609.29235",
+    "detail_path": "papers/2609.29235/",
+    "cover_path": "covers/2609.29235/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.29235.webp",
+    "paper_image_full_path": "assets/paper-images/2609.29235.webp",
+    "preview_text": "论文针对自动驾驶中的相机-LiDAR 3D 目标检测任务，研究在传感器退化、恶劣天气和光照变化等不可靠感知条件下的鲁棒融合问题。 应用场景包括雪、雨、雾、强阳光等退化驾驶场景，以及相机或 LiDAR 失效等传感器故障条件。 核心研究问题是：现有融合检测器通常从紧耦合多模态表示中解码目标查询，形成较强跨模态依赖，在某一模态不可靠时会产生负迁移。 论文指出模态可靠性既依赖全局驾驶场景，也依赖单个目标查询，因此需要比固定融合路径或单一场景级决策更细粒度的自适应融合。 论文将鲁棒相机-LiDAR 融合重新表述为场景感知分支路由问题，并提出 SARFusion。",
+    "research_unit": "Institute of Automation, Chinese Academy of Sciences, Beijing, China · Yuti…",
+    "hook_text": "论文针对自动驾驶中的相机-LiDAR 3D 目标检测任务，研究在传感器退化、恶劣天气和光照变化等不可靠感知条件下的鲁棒融合问题。",
+    "key_points": [
+      "论文针对自动驾驶中的相机-LiDAR 3D 目标检测任务，研究在传感器退化、恶劣天气和光照变化等不可靠感知条件下的鲁棒融合问题。",
+      "应用场景包括雪、雨、雾、强阳光等退化驾驶场景，以及相机或 LiDAR 失效等传感器故障条件。",
+      "核心研究问题是：现有融合检测器通常从紧耦合多模态表示中解码目标查询，形成较强跨模态依赖，在某一模态不可靠时会产生负迁移。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-24",
+    "title": "Assessing the Impact of Fleet Size on Crowdsourced Mapping Using a Dissimilarity Measure",
+    "link": "https://arxiv.org/abs/2609.29198",
+    "arxiv_id": "2609.29198",
+    "detail_path": "papers/2609.29198/",
+    "cover_path": "covers/2609.29198/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.29198.webp",
+    "paper_image_full_path": "assets/paper-images/2609.29198.webp",
+    "preview_text": "面向 ADAS 与自动驾驶（AD）所需高精地图的维护任务，重点关注交通标志与限速等地图图层，这些信息是智能限速辅助（ISA）等安全功能的基础。 应用场景为基于车队的众包地图构建与持续更新，用以替代成本高、难以规模化的传统测绘方法。 研究问题：贡献数据的车辆数量（车队规模）与最终众包地图质量之间的关系尚不清晰，需要可量化的评估手段。",
+    "research_unit": "Heudiasyc · Marie-Ngoïe Badibanga Kalenda、Philippe Bonnifait",
+    "hook_text": "面向 ADAS 与自动驾驶（AD）所需高精地图的维护任务，重点关注交通标志与限速等地图图层，这些信息是智能限速辅助（ISA）等安全功能的基础。",
+    "key_points": [
+      "面向 ADAS 与自动驾驶（AD）所需高精地图的维护任务，重点关注交通标志与限速等地图图层，这些信息是智能限速辅助（ISA）等安全功能的基础。",
+      "应用场景为基于车队的众包地图构建与持续更新，用以替代成本高、难以规模化的传统测绘方法。",
+      "研究问题：贡献数据的车辆数量（车队规模）与最终众包地图质量之间的关系尚不清晰，需要可量化的评估手段。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-24",
+    "title": "Sim-to-Real Aware End-to-End Learning Environment for Micromobility",
+    "link": "https://arxiv.org/abs/2609.28969",
+    "arxiv_id": "2609.28969",
+    "detail_path": "papers/2609.28969/",
+    "cover_path": "covers/2609.28969/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.28969.webp",
+    "paper_image_full_path": "assets/paper-images/2609.28969.webp",
+    "preview_text": "论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。 应用场景包括配送机器人、电动轮椅等在城市人行道、走廊等复杂环境中的自主导航、避障和最后一公里物流。 研究问题聚焦于现有自动驾驶仿真器主要面向汽车，难以刻画微型出行车辆特有的差速驱动、全向轮等运动学特性，从而产生 sim-to-real gap，阻碍端到端驾驶策略部署。 论文提出面向 WHILL Model CR 的 sim-to-real aware 端到端学习环境，基于 AWSIM 与 ROS 2 构建，并通过系统辨识与同步架构支持世界模型类智能体训练与直接实车迁移。 核心研究问题包括：基于真实驾驶数据优化物理参数能否缩小轨迹与偏航角 sim-to-real gap；仅用 RGB 图像训练的世界模型端到端策略能否稳定避障；该策略能否无需微调直接迁移到实车并实现无碰撞避障。",
+    "research_unit": "Saitama University · Shouma Amano、Takuya Azumi",
+    "hook_text": "论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。",
+    "key_points": [
+      "论文面向微型出行车辆（micromobility）的端到端自动驾驶任务，目标车辆为 WHILL Model CR 电动轮椅。",
+      "应用场景包括配送机器人、电动轮椅等在城市人行道、走廊等复杂环境中的自主导航、避障和最后一公里物流。",
+      "研究问题聚焦于现有自动驾驶仿真器主要面向汽车，难以刻画微型出行车辆特有的差速驱动、全向轮等运动学特性，从而产生 sim-to-real gap，阻碍端到端驾驶策略部署。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-30",
+    "title": "Not All Synthetic Data Are Equal: Expert-Committee Audit Screening for Imbalanced Crash-Injury-Severity Prediction in Automated Driving Systems",
+    "link": "https://arxiv.org/abs/2609.29687",
+    "arxiv_id": "2609.29687",
+    "detail_path": "papers/2609.29687/",
+    "cover_path": "covers/2609.29687/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.29687.webp",
+    "paper_image_full_path": "assets/paper-images/2609.29687.webp",
+    "preview_text": "任务：面向自动驾驶系统（ADS）的碰撞伤害严重程度预测（crash injury severity prediction），属于严重类别不平衡下的分类任务。 应用场景：ADS 已在公共道路上运行，需要对其事故记录进行安全风险预测与治理，为安全关键场景提供可靠预测依据。 研究问题：碰撞报告数量有限、严重结局罕见、伤害类别高度不平衡；现有数据增强方法主要增加少数类样本数量，却很少评估生成样本对安全关键预测是否可信。",
+    "research_unit": "原文未报告作者所属机构信息，作者与机构对应关系：原文未明确对应；作者名单：Zewei Li、Qiaoqiao Ren、Hang Yang、S.C. W…",
+    "hook_text": "任务：面向自动驾驶系统（ADS）的碰撞伤害严重程度预测（crash injury severity prediction），属于严重类别不平衡下的分类任务。",
+    "key_points": [
+      "任务：面向自动驾驶系统（ADS）的碰撞伤害严重程度预测（crash injury severity prediction），属于严重类别不平衡下的分类任务。",
+      "应用场景：ADS 已在公共道路上运行，需要对其事故记录进行安全风险预测与治理，为安全关键场景提供可靠预测依据。",
+      "研究问题：碰撞报告数量有限、严重结局罕见、伤害类别高度不平衡；现有数据增强方法主要增加少数类样本数量，却很少评估生成样本对安全关键预测是否可信。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-08-27",
+    "title": "Active Client Selection in Federated Trajectory Prediction with Uncertainty-Awareness and Heterogeneous Complexity",
+    "link": "https://arxiv.org/abs/2609.29600",
+    "arxiv_id": "2609.29600",
+    "detail_path": "papers/2609.29600/",
+    "cover_path": "covers/2609.29600/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.29600.webp",
+    "paper_image_full_path": "assets/paper-images/2609.29600.webp",
+    "preview_text": "论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。 应用场景为真实世界中车辆轨迹数据分散在不同区域和车辆之间、难以构建高质量集中式数据集的场景，通过 FL 让车辆在不交换原始数据的前提下协同训练全局模型。 研究问题包括两点：一是单个交通场景中的高场景不确定性（轨迹或地图歧义），二是跨场景复杂度异构性（地图拓扑、交通密度、智能体组成和驾驶行为差异）。 论文提出主动客户端选择方法，引导 FL 优先选择信息量更大的客户端，以应对不确定性和复杂度异构性。",
+    "research_unit": "Northeastern University · Yiming Xie、Muzi Peng、Ningfang Mi 等",
+    "hook_text": "论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。",
+    "key_points": [
+      "论文面向自动驾驶中联网自动驾驶车辆（CAVs）的轨迹预测任务，研究在联邦学习（FL）框架下协同训练轨迹预测模型的问题。",
+      "应用场景为真实世界中车辆轨迹数据分散在不同区域和车辆之间、难以构建高质量集中式数据集的场景，通过 FL 让车辆在不交换原始数据的前提下协同训练全局模型。",
+      "研究问题包括两点：一是单个交通场景中的高场景不确定性（轨迹或地图歧义），二是跨场景复杂度异构性（地图拓扑、交通密度、智能体组成和驾驶行为差异）。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-23",
     "title": "AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios",
     "link": "https://arxiv.org/abs/2609.28366",
