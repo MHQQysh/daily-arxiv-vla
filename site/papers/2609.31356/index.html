@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open Vocabulary Domain Unlearning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。 现有近似领域遗忘（ADU）方法采用闭词表假设，仅在遗忘微调阶段见过的类别上评估遗忘效果，导致其仅过拟合到已见的类-域组合，对未见类别无法实现真正的领域抹除。 论文形式化提出开放词表领域遗忘（Open-Vocabulary Domain Unlearning, OVDU）协议，要求领域遗忘能泛化到留出的未见类别，即在全局类别空间上实现与类别无关的领域擦除。 论文提出一种手术式参数编辑框架，结合 Fisher 信息掩码与 Targeted Manifold Scattering（TMS）目标，以在保护基础零样本泛化能力的同时主动打散遗忘域的流形几何结构。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.31356">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.31356.webp" alt="Open Vocabulary Domain Unlearning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Open Vocabulary Domain Unlearning</h1>
+            <div class="detail-meta">2026-09-25 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.31356" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.31356" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.31356</span></div>
+            <p class="detail-summary">论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。 现有近似领域遗忘（ADU）方法采用闭词表假设，仅在遗忘微调阶段见过的类别上评估遗忘效果，导致其仅过拟合到已见的类-域组合，对未见类别无法实现真正的领域抹除。 论文形式化提出开放词表领域遗忘（Open-Vocabulary Domain Unlearning, OVDU）协议，要求领域遗忘能泛化到留出的未见类别，即在全局类别空间上实现与类别无关的领域擦除。 论文提出一种手术式参数编辑框架，结合 Fisher 信息掩码与 Targeted Manifold Scattering（TMS）目标，以在保护基础零样本泛化能力的同时主动打散遗忘域的流形几何结构。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The University of Queensland · Sumanth Udupa、Yadan Luo、Mahsa Baktashmotlagh</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.31356/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。</p>
+  <ul class="reading-intro-points"><li>论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。</li><li>现有近似领域遗忘（ADU）方法采用闭词表假设，仅在遗忘微调阶段见过的类别上评估遗忘效果，导致其仅过拟合到已见的类-域组合，对未见类别无法实现真正的领域抹除。</li><li>论文形式化提出开放词表领域遗忘（Open-Vocabulary Domain Unlearning, OVDU）协议，要求领域遗忘能泛化到留出的未见类别，即在全局类别空间上实现与类别无关的领域擦除。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The University of Queensland；作者：Sumanth Udupa、Yadan Luo、Mahsa Baktashmotlagh</li><li>机构：Monash University；作者：Mehrtash Harandi</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。</li><li>现有近似领域遗忘（ADU）方法采用闭词表假设，仅在遗忘微调阶段见过的类别上评估遗忘效果，导致其仅过拟合到已见的类-域组合，对未见类别无法实现真正的领域抹除。</li><li>论文形式化提出开放词表领域遗忘（Open-Vocabulary Domain Unlearning, OVDU）协议，要求领域遗忘能泛化到留出的未见类别，即在全局类别空间上实现与类别无关的领域擦除。</li><li>论文提出一种手术式参数编辑框架，结合 Fisher 信息掩码与 Targeted Manifold Scattering（TMS）目标，以在保护基础零样本泛化能力的同时主动打散遗忘域的流形几何结构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>指出现有领域遗忘文献中的数据泄漏问题，并提出 OVDU 协议，将遗忘微调阶段使用的类别与测试类别分离，以严格评估零样本泛化下的领域遗忘。</li><li>提出 Targeted Manifold Scattering（TMS）连续几何目标，通过解耦的保留分量与目标混淆分量，主动散射遗忘域的风格几何，而非仅进行流形平移或全局仿射偏移。</li><li>引入 Fisher 信息掩码进行参数隔离，将遗忘梯度限制在域敏感权重上，从数学上保护未见类别的语义子空间，避免零样本泛化崩溃。</li><li>在 PACS、OfficeHome、DomainNet 三个领域泛化基准上验证方法在严格 OVDU 协议下优于现有基线。</li><li>展示出优异的样本效率：仅用 4-shot 即超越基线 8-shot 的峰值结果。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向预训练 VLM 的领域遗忘/参数编辑框架，主要更新视觉编码器权重，文本编码器保持冻结。</li><li>输入传感器：原文未报告自动驾驶相关的具体传感器输入；实验输入为图像分类基准中的图像数据。</li><li>场景表示：使用 L2 归一化的视觉嵌入表示，TMS 损失应用于投影前的 CLS-token 空间，以保证基础结构更新。</li><li>模型结构：采用 OpenCLIP（ViT-B/16），冻结文本编码器；仅在 Fisher 敏感掩码约束下更新视觉权重。</li><li>问题形式化：数据集为 𝒟={(x_i,y_i,d_i)}，包含类别标签与域标签（遗忘域 𝒟_f、保留域 𝒟_r）；OVDU 将类别划分为仅用于训练的已见类 𝒞_seen 与留出的未见类 𝒞_unseen，并在全局测试空间 𝒞_test=𝒞_seen∪𝒞_unseen 上评估。</li><li>关键技术一：Fisher 引导参数隔离。基于逐样本损失的平方梯度计算对角经验 Fisher 信息矩阵，使用批内平均而非最大值以获得稳定的域级重要性；通过敏感度比值 ρ_i 和阈值 τ 构建二值掩码 m_i，将 NegGrad 更新严格路由到域敏感权重。</li><li>关键技术二：Targeted Manifold Scattering。包含保留分量 L_retain（让同类别保留嵌入优于遗忘嵌入，保护保留簇）与目标混淆分量 L_confuse（通过 hard mining 让遗忘嵌入主动模仿最相似的非同类保留嵌入），最终 L_TMS 为二者加权和，并与基础 NegGrad 交叉熵项按权重组合为总损失。</li><li>原文未报告：原文未报告自动驾驶实车部署所需的传感器融合、时序建模、控制接口等模块信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Office-Home（65 类；Art、Clipart、Product、Real-World）、Mini-DomainNet（126 类；Clipart、Painting、Real、Sketch）、PACS（7 类；Photo、Art Painting、Cartoon、Sketch）。</li><li>额外评估：ImageNet-1K（ImageNet-val）与 CIFAR-100，用于评估遗忘后的零样本泛化鲁棒性。</li><li>仿真器：原文未报告。</li><li>模型规模：OpenCLIP ViT-B/16；文本编码器冻结。</li><li>训练资源：原文未报告 GPU 型号、数量或训练时长；仅报告使用 AdamW 优化器、学习率 1e-5、训练 10 个 epoch。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：PACS、OfficeHome、DomainNet（Mini-DomainNet），并在 ImageNet-val 与 CIFAR-100 上评估零样本泛化；采用严格 few-shot（K=8）遗忘协议，类别比例 γ∈{0.25,0.50,0.75,1.0}，在 𝒞_seen∪𝒞_unseen 全类别上评估。</li><li>评估指标：保留域准确率 A_r（越高越好）、遗忘域准确率 A_f（越低越好）、擦除率 ℰ=100−A_f，以及 A_r 与 ℰ 的调和平均 HM。</li><li>对比方法：ADU（近期 SOTA 全局 prompt-tuning 领域遗忘方法）、NegGrad+Fisher（论文形式化的参数隔离基线）；附录中还考虑 SEMU、基于 SAM 的遗忘等额外基线。</li><li>单域遗忘关键数值（Table 1）：在 DomainNet 上 γ=1.0 时，Ours 的 F=14.44%、R=76.84%、HM=80.97%，优于 ADU（F=27.86%、R=81.48%、HM=76.53%）与 Baseline（F=18.02%、R=77.77%、HM=79.82%）。在 OfficeHome 上 γ=1.0 时，Ours 的 F=24.61%、R=75.45%、HM=75.42%，优于 ADU（HM=71.02%）。在 PACS 上 γ=1.0 时，Ours 的 F=38.35%、R=95.64%、HM=74.97%，优于 ADU（HM=42.49%）与 Baseline（HM=72.96%）。</li><li>稳定性-可塑性权衡：ADU 在低 γ 下遗忘强但保留崩塌，例如 DomainNet γ=0.25 时保留准确率仅 24.45%，而 Ours 保持 74.97%。</li><li>多域遗忘（Table 3，\|D_f\|=3）：在 DomainNet 上 γ=0.25 时，Ours 的 F=7.11%、R=60.19%、HM=73.05%，优于 Baseline（F=8.92%、R=59.87%、HM=72.25%）与 ADU（HM=38.99%）。</li><li>消融研究（Table 2，DomainNet）：confuse-only、retain-only 与二者结合（Ours）对比；二者结合在 γ=1.0 时取得最低遗忘准确率 F=14.44% 与最高平均 HM=80.97%，retain-only 取得最高平均保留准确率 77.59%。</li><li>样本效率（Figure 3）：在 n∈{1,4,8} shots 下，Ours 用 4 shots 即超越 baseline 与 ADU 的 8-shot 峰值；在 γ=1.0 时 Ours 4-shot HM=80.80%，超过 8-shot baseline（79.76%）与 ADU（76.53%）；在 γ=0.5 时 Ours 4-shot 为 76.79%。</li><li>零样本泛化鲁棒性（Table 4）：遗忘 DomainNet 特定域后，在 ImageNet-val 与 CIFAR-100 上评估；原基座模型为上限参考（ImageNet-val 63.38%、CIFAR-100 61.99%）。Ours 在多数设置下优于 ADU，例如遗忘 Clipart 时 Ours 为 57.33%/57.50%，ADU 为 36.73%/49.37%。</li><li>评估条件：论文报告的是开环图像分类基准上的评估结果，原文未报告闭环驾驶仿真或实车测试结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.31383/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.31137/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">INTERACT: Interactive Planning for Autonomous Driving via Anchor-Conditioned Prediction and Trust-Region Refinement</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

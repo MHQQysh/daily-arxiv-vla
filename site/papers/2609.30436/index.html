@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。 研究问题为：能否在不修改冻结预训练驾驶世界模型本身的前提下，将其视觉知识迁移到轨迹生成空间中。 应用场景为基于视觉观测的端到端/世界模型驱动的未来轨迹规划，并在 NAVSIMv1 与 NAVSIMv2 基准上评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.30436">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.30436.webp" alt="WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.30436" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.30436" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.30436</span></div>
+            <p class="detail-summary">论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。 研究问题为：能否在不修改冻结预训练驾驶世界模型本身的前提下，将其视觉知识迁移到轨迹生成空间中。 应用场景为基于视觉观测的端到端/世界模型驱动的未来轨迹规划，并在 NAVSIMv1 与 NAVSIMv2 基准上评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The Hong Kong University of Science and Technology · Mingkai Jia、Jintao Che…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.30436/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。</li><li>研究问题为：能否在不修改冻结预训练驾驶世界模型本身的前提下，将其视觉知识迁移到轨迹生成空间中。</li><li>应用场景为基于视觉观测的端到端/世界模型驱动的未来轨迹规划，并在 NAVSIMv1 与 NAVSIMv2 基准上评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The Hong Kong University of Science and Technology；作者：Mingkai Jia、Jintao Cheng、Ping Tan</li><li>机构：Horizon Robotics；作者：Mingkai Jia、Zhijian Shu、Jiawei Xu、Mingxiao Li、Wei Yin</li><li>机构：The Chinese University of Hong Kong；作者：Jiaxin Guo</li><li>机构：Nanjing University of Posts and Telecommunications；作者：Zhijian Shu</li><li>机构：Nankai University；作者：Jiawei Xu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。</li><li>研究问题为：能否在不修改冻结预训练驾驶世界模型本身的前提下，将其视觉知识迁移到轨迹生成空间中。</li><li>应用场景为基于视觉观测的端到端/世界模型驱动的未来轨迹规划，并在 NAVSIMv1 与 NAVSIMv2 基准上评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 WALT，据原文表述为首个在不修改冻结预训练驾驶世界模型的前提下，从该世界模型迁移信息来学习紧凑生成式轨迹隐空间的框架。</li><li>构建双分支轨迹自编码器，在保留度量的同时从冻结世界模型表征中迁移语义知识，并系统研究 JEPA 式与 REPA 式的纯轨迹表征设计。</li><li>在 NAVSIMv1 与 NAVSIMv2 上验证方法的有效性与效率：相对原始航点基线实现 0.4 PDMS 增益、0.6 EPDMS 提升以及 30.5% 轨迹生成 FLOPs 降低。</li><li>通过纯轨迹表征学习对照（JEPA-Traj、REPA-Traj）说明仅依赖轨迹本身的表征学习不足以显著提升规划器，世界模型对齐带来的场景语义监督是关键。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：动作侧轨迹规划接口，包含轨迹分词器（Stage 1）与轨迹规划头（Stage 2）两阶段流程；世界模型主干保持冻结。</li><li>输入传感器：原文报告使用前视图图像作为可视化的世界模型视觉输入；完整传感器配置原文未报告。</li><li>场景表示：使用冻结预训练驾驶世界模型 EponaV2 的隐藏状态/世界状态 token 作为教师表征，不修改世界模型本身。</li><li>模型结构：双分支轨迹自编码器，两分支共享编码器并使用独立 refiner 产生语义特征 z_sem 与重建特征 z_rec，沿通道拼接得到 z_A = [z_sem; z_rec]，再由解码器还原轨迹；Stage 2 使用 rectified-flow 轨迹头，以条件流匹配目标生成 K 个拼接隐 token。</li><li>关键技术：对语义分支施加世界模型对齐损失 L_WALT（CLIP 式对称对比目标，基于 K×M token 对余弦相似度平均并按帧/样本配对正负样本，使用跨 GPU gather 与可学习 logit 尺度 α=exp(s)）；重建分支使用 ℓ1 重建损失 L_rec，并以概率 p_sem 对语义分量做掩码，促使重建分支独立保留几何信息。</li><li>关键技术：训练目标为 L_tokenizer = λ_rec L_rec + λ_align L_WALT；Stage 2 冻结分词器，仅微调轨迹头，流匹配目标由 P 个原始航点 token 改为 K 个隐 token；推理时从高斯噪声积分至 t=1 后由解码器输出航点。</li><li>关键技术：额外设计并比较 JEPA-Traj（轨迹子段隐预测 + SIGReg 防坍缩）与 REPA-Traj（保留原始航点生成，并对轨迹流中间特征施加余弦对齐辅助损失）两种纯轨迹表征方案。</li><li>原文未报告：完整传感器套件、世界模型内部具体网络层细节、隐 token 数 K 的具体取值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集/基准：NAVSIMv1 navtest（官方规划协议）与 NAVSIMv2，均使用官方 benchmark 数据划分与评估协议。</li><li>仿真器：NAVSIM 基准评估框架；其他仿真平台原文未报告。</li><li>模型规模：以 EponaV2 作为预训练驾驶世界模型，保留其默认模型与规划器训练设置，仅替换轨迹表征与相关对齐模块；双分支分词器将轨迹压缩为 2 个 32 维 token（每个含 24 语义通道 + 8 重建通道）；每条轨迹为 8 个自车坐标系 (x, y, yaw) 航点，采样间隔 0.5 s。</li><li>训练资源：Stage 1 在 32 张 H20 GPU 上训练 100 个 epoch，固定学习率 1×10⁻⁴；语义掩码概率 0.5，对齐权重 λ_align 为 0.1；JEPA-Traj 的 SIGReg 权重为 5×10⁻⁴，REPA-Traj 余弦对齐权重为 0.1。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIMv1 与 NAVSIMv2；评估条件为基准数据集上的开环规划评估（仿真/数据集评测），未报告闭环或实车测试。</li><li>评估指标：NAVSIMv1 报告 PDMS 及 NC、DAC、EP、TTC、C；NAVSIMv2 报告 EPDMS 及 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC，所有指标 0–100 越高越好。</li><li>关键数值（NAVSIMv1）：WALT 取得最优 PDMS 89.8，NC 99.1、DAC 97.0、EP 83.6、TTC 96.3、C 100；相对纯重建自编码器基线（PDMS 89.48）、JEPA-Traj（89.46）、REPA-Traj（89.49）与原始航点基线（89.42，NC 98.62，TTC 95.26）均有提升。</li><li>关键数值（NAVSIMv2）：WALT 取得最优 EPDMS 87.9；相对无 RL 的 EponaV2（EPDMS 87.3），NC、DAC、TTC、HC 提升，EC 由 68.3 提升至 73.4，DDC 与 TLC 保持不变并匹配最佳报告值，EP 与 LK 分别小幅下降 0.2 与 0.1。</li><li>关键数值（效率）：单步去噪轨迹生成成本由原始航点的 297.47 GFLOPs 降至含解码的隐生成 206.88 GFLOPs，减少 30.5%，压缩比 4×；冻结世界模型计算未计入。全 rollout 成本约为 N 倍该值加一次性解码开销。</li><li>对比方法：NAVSIMv1 对比 LAW、DrivingGPT、World4Drive、Epona、PWM、TISA(w/o MOPT)、AdaThinkDrive(w/o RL)、Mimir、PRIX、ARTEMIS、DriveVLA-W0、DriveLaW、EponaV2(w/o RL) 及 Human；NAVSIMv2 对比 DriveVLA-W0、ARTEMIS*、PRIX*、DriveWorld-VLA、EponaV2(w/o RL) 及 Human；同时消融对比原始航点基线、纯重建自编码器、JEPA-Traj、REPA-Traj。</li><li>表征分析：在 NAVSIMv1 相同样本上对 6 类驾驶行为（左变道、左转、右变道、右转、起步、正常直行）比较原始航点、JEPA-Traj 语义隐与 WALT 语义隐的类内/类间余弦相似度与 t-SNE；WALT 六类类内相似度均高于 JEPA-Traj，同时保留部分跨类相似性，说明世界模型对齐并非单纯最大化行为标签分离。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.30557/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Auditing Latent-Space Monitors for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.29835/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Retrieve-to-Localize: Bridging Large Language Models and LiDAR Geometry for Spatial Grounding</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -28225,5 +28225,343 @@
     "inside_figure": false,
     "width": 893,
     "height": 1263
+  },
+  "2609.31383": {
+    "title": "Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization",
+    "abs_url": "https://arxiv.org/abs/2609.31383",
+    "html_url": "https://arxiv.org/html/2609.31383v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.31383v1/pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 78,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/icons/smileybones-small.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "",
+        "classes": "ds-announcement-glyph",
+        "score": -130
+      }
+    ],
+    "path": "assets/paper-images/2609.31383.webp",
+    "image_url": "https://arxiv.org/html/2609.31383v1/pipeline.png",
+    "source": "img",
+    "score": 45,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 452,
+    "height": 78
+  },
+  "2609.31137": {
+    "title": "INTERACT: Interactive Planning for Autonomous Driving via Anchor-Conditioned Prediction and Trust-Region Refinement",
+    "abs_url": "https://arxiv.org/abs/2609.31137",
+    "html_url": "https://arxiv.org/html/2609.31137v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.31137v1/score_fixed.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 423,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.31137v1/fig1_v4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 219,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.31137v1/approach.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 130,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.31137.webp",
+    "image_url": "https://arxiv.org/html/2609.31137v1/score_fixed.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 423
+  },
+  "2609.30436": {
+    "title": "WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.30436",
+    "html_url": "https://arxiv.org/html/2609.30436v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.30436v1/letraj_pipe.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 457,
+        "height": 222,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.30436v1/letraj_qual.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 208,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.30436v1/letraj_wera.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 349,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2609.30436v1/teaser.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": 476,
+        "height": 233,
+        "alt": "[Uncaptioned image]",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 55
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.30436.webp",
+    "image_url": "https://arxiv.org/html/2609.30436v1/letraj_pipe.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 457,
+    "height": 222
+  },
+  "2609.31356": {
+    "title": "Open Vocabulary Domain Unlearning",
+    "abs_url": "https://arxiv.org/abs/2609.31356",
+    "html_url": "https://arxiv.org/html/2609.31356v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.31356v1/exp4_subspace_cosine_bar.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 392,
+        "height": 177,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.31356v1/exp4_subspace_cosine_heatmap.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 370,
+        "height": 138,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.31356v1/sample_efficiency_plot_shots_clean.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 292,
+        "height": 138,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2609.31356v1/exp3_cosine_similarity.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 231,
+        "height": 138,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2609.31356.webp",
+    "image_url": "https://arxiv.org/html/2609.31356v1/exp4_subspace_cosine_bar.png",
+    "source": "img",
+    "score": 85,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 392,
+    "height": 177
+  },
+  "2609.30818": {
+    "title": "Evaluation Is All You Need for Multi-Modal Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.30818",
+    "html_url": "https://arxiv.org/html/2609.30818v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2609.30818v1/idrivevla_framework.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 537,
+        "height": 391,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2609.30818v1/intro.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 510,
+        "height": 135,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2609.30818v1/figures/probability.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 231,
+        "height": 174,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2609.30818v1/1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 272,
+        "height": 117,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2609.30818v1/2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 272,
+        "height": 117,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2609.30818.webp",
+    "image_url": "https://arxiv.org/html/2609.30818v1/idrivevla_framework.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 537,
+    "height": 391
+  },
+  "2609.30557": {
+    "title": "Auditing Latent-Space Monitors for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2609.30557",
+    "html_url": "https://arxiv.org/html/2609.30557v1",
+    "path": "assets/paper-images/2609.30557.webp",
+    "image_url": "https://arxiv.org/html/2609.30557v1",
+    "source": "playwright:figure",
+    "score": 60,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 800,
+    "height": 401
   }
 }

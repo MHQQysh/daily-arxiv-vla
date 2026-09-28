@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auditing Latent-Space Monitors for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。 应用场景是运行时失效监控：在推理阶段判断感知或规划输出是否可能不可靠，以便拒绝、延迟或进一步审查。 研究问题是：使用模型内部潜在表示（latent representation）进行失效预测，是否在已知可观测状态和输出后仍提供额外预测价值；论文审计潜在空间失效监控器相对于强非潜在基线的增量价值。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.30557">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.30557.webp" alt="Auditing Latent-Space Monitors for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Auditing Latent-Space Monitors for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.30557" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.30557" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.30557</span></div>
+            <p class="detail-summary">论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。 应用场景是运行时失效监控：在推理阶段判断感知或规划输出是否可能不可靠，以便拒绝、延迟或进一步审查。 研究问题是：使用模型内部潜在表示（latent representation）进行失效预测，是否在已知可观测状态和输出后仍提供额外预测价值；论文审计潜在空间失效监控器相对于强非潜在基线的增量价值。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Independent Researcher · Nikhil Kamalkumar Advani</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.30557/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。</p>
+  <ul class="reading-intro-points"><li>论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。</li><li>应用场景是运行时失效监控：在推理阶段判断感知或规划输出是否可能不可靠，以便拒绝、延迟或进一步审查。</li><li>研究问题是：使用模型内部潜在表示（latent representation）进行失效预测，是否在已知可观测状态和输出后仍提供额外预测价值；论文审计潜在空间失效监控器相对于强非潜在基线的增量价值。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Independent Researcher；作者：Nikhil Kamalkumar Advani</li><li>机构：Noertheastern University；作者：Vishwajeet Shivaji Hogale</li><li>机构：Bosch North America；作者：Saurav Kumar</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。</li><li>应用场景是运行时失效监控：在推理阶段判断感知或规划输出是否可能不可靠，以便拒绝、延迟或进一步审查。</li><li>研究问题是：使用模型内部潜在表示（latent representation）进行失效预测，是否在已知可观测状态和输出后仍提供额外预测价值；论文审计潜在空间失效监控器相对于强非潜在基线的增量价值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>为 LaneSegNet 在线矢量化地图生成和 VAD 端到端规划开发并审计推理时失效监控器；据作者所述，这是首个针对冻结在线矢量化地图生成模型、预测由几何误差定义的帧级失效的事后监控器。</li><li>显示运行时可见状态和预测输出基线在 LaneSegNet 和 VAD 上优于主要潜在监控器，而加入潜在特征没有带来统计上可分辨的增益。</li><li>提出一种评估协议，用强非潜在基线测试潜在监控器，并直接测量内部访问的增量价值，包括标签所需几何信息对非潜在基线不可见的端点。</li><li>发布 61,432 个样本的逐帧评估标注，覆盖 VAD 和 LaneSegNet，包括连续误差量以及轨迹不一致、智能体碰撞与间距、边界接触和车道几何质量等分解端点。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：运行时失效监控，覆盖感知/地图生成模块与端到端规划模块。</li><li>输入传感器：LaneSegNet 使用图像和 BEV 表示；VAD 使用前视摄像头 FPN、BEV 表示、规划潜在表示；非潜在输入包括驾驶命令、自车状态和预测轨迹。原文未报告激光雷达等其他传感器输入。</li><li>场景表示：LaneSegNet 使用图像潜在和 BEV 潜在；VAD 使用图像、BEV 和 512 维规划潜在。非潜在基线使用 3 维驾驶命令、9 维自车状态向量和 6 个未来 2D 航点的预测轨迹，拼接为 24 维。</li><li>模型结构：密度监控使用标准化、无白化 PCA 和 GMM，NLL 作为新颖性分数；监督监控使用轻量 MLP 探针。LaneSegNet 潜在头为 256–128–32 MLP，含 LayerNorm、GELU、dropout 0.2、AdamW 和逆 prevalence 正权重；VAD 监督监控使用两层 128→64 MLP。LaneSegNet 结构化车道输出监控使用置换不变的 DeepSets 风格编码器；VAD agent clearance 还评估 ego-conditioned agent-set attention。</li><li>关键技术：表示新颖性检测、监督潜在预测、增量潜在价值审计、源分组/场景分组交叉拟合、训练集校准和冻结操作点选择、AUROC/AP 和选择性风险曲线评估、bootstrap 置信区间。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：LaneSegNet 使用 OpenLane-V2；VAD 使用 nuScenes。</li><li>仿真器：原文未报告仿真器。</li><li>模型规模：原文报告 VAD 规划潜在为冻结 512 维，由 256 维 ego-agent 和 256 维 ego-map 规划特征拼接；LaneSegNet 图像和 BEV 潜在维度及探针维度见方法描述；未报告完整模型参数量。</li><li>训练资源：原文未报告 GPU、训练时长或算力资源。</li><li>实车平台：原文未报告实车平台；VAD 实验为开环评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：LaneSegNet 在 OpenLane-V2 验证集上评估，使用 4,439 个具有有限匹配车道 Chamfer 的验证帧；VAD 在 nuScenes 官方验证集上评估，ADE-or-collision 端点包含 5,119 个验证帧和 1,606 个正样本。</li><li>评估指标：AUROC、AP、coverage、mean Chamfer、AP_{ls}^{*}、选择性风险曲线和 bootstrap 置信区间。</li><li>LaneSegNet 关键数值：监督图像+BEV 潜在探针对高 Chamfer 误差达到 AUROC 0.780、AP 0.761；仅预测输出监控达到 AUROC 0.825、AP 0.792；将图像和 BEV 潜在加入 engineered prediction-output 表示后，AUROC 变化为 -0.0135（95% CI [-0.0347, 0.0080]），AP 变化为 -0.0093（95% CI [-0.0308, 0.0123]）。BEV spatial 2×2 密度监控保留子集 mean Chamfer 0.472 m，mean AP_{ls}^{*} 0.386。</li><li>VAD 关键数值：规划潜在探针对 mean ADE &gt; 2 m 达到 AUROC 0.868、AP 0.724；非潜在 ego + trajectory + command 基线达到 AUROC 0.924、AP 0.855；加入规划潜在后为 AUROC 0.917、AP 0.839。ADE-or-collision 端点中，非潜在 ego + trajectory + command 达到 AUROC 0.900、AP 0.839，加入规划潜在后为 AUROC 0.890、AP 0.823。Cross-track &gt; 1 m 端点中，非潜在基线 AUROC 0.909、AP 0.827，加入潜在后 AUROC 0.903、AP 0.819。Agent clearance &lt; 1 m 端点中，规划潜在监控 AUROC 0.705、AP 0.226，非潜在 ego + trajectory + command AUROC 0.703、AP 0.229。Boundary contact 端点中，规划潜在监控 AUROC 0.780、AP 0.365，非潜在基线 AUROC 0.818、AP 0.454，加入潜在后 AUROC 0.802、AP 0.422。</li><li>对比方法：密度表示新颖性、监督潜在监控、模型输出监控、自车状态+命令、预测轨迹+命令、完整非潜在基线，以及潜在+非潜在拼接；论文还测试 leakage-safe score-level stacking。</li><li>开环、闭环、仿真或实车条件：论文明确说明 VAD 实验是开环评估，agent clearance、boundary contact 和 corrected collision 仍作为闭环安全的代理；LaneSegNet 为帧级离线验证评估；原文未报告闭环或实车评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.30818/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Evaluation Is All You Need for Multi-Modal Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.30436/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

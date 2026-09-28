@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。 应用场景为闭环（closed-loop）自动驾驶仿真与实车部署下的轨迹执行。 研究问题聚焦于开环行为克隆训练与闭环执行之间的不匹配（open-loop/closed-loop gap）：论文指出除协变量偏移与因果混淆外，还存在一个互补因素，即基于路点的监督与位移指标无法保证中间轨迹的物理连贯性或易于控制器跟踪，且这些不一致主要集中在中间路点，而预测终点相对可靠。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.31383">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.31383.webp" alt="Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization</h1>
+            <div class="detail-meta">2026-09-25 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.31383" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.31383" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.31383</span></div>
+            <p class="detail-summary">论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。 应用场景为闭环（closed-loop）自动驾驶仿真与实车部署下的轨迹执行。 研究问题聚焦于开环行为克隆训练与闭环执行之间的不匹配（open-loop/closed-loop gap）：论文指出除协变量偏移与因果混淆外，还存在一个互补因素，即基于路点的监督与位移指标无法保证中间轨迹的物理连贯性或易于控制器跟踪，且这些不一致主要集中在中间路点，而预测终点相对可靠。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Toronto · Brayden Zhang、Mahsa Golchoubian、Igor Gilitschenski</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.31383/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。</p>
+  <ul class="reading-intro-points"><li>论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。</li><li>应用场景为闭环（closed-loop）自动驾驶仿真与实车部署下的轨迹执行。</li><li>研究问题聚焦于开环行为克隆训练与闭环执行之间的不匹配（open-loop/closed-loop gap）：论文指出除协变量偏移与因果混淆外，还存在一个互补因素，即基于路点的监督与位移指标无法保证中间轨迹的物理连贯性或易于控制器跟踪，且这些不一致主要集中在中间路点，而预测终点相对可靠。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Toronto；作者：Brayden Zhang、Mahsa Golchoubian、Igor Gilitschenski</li><li>机构：Vector Institute；作者：Mahsa Golchoubian、Igor Gilitschenski</li><li>机构：NVIDIA Research；作者：Kashyap Chitta</li><li>机构：ELLIS Institute Tübingen；作者：Kashyap Chitta</li><li>机构：KE:SAI；作者：Brayden Zhang</li><li>机构：Boris Ivanovic 所属机构：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。</li><li>应用场景为闭环（closed-loop）自动驾驶仿真与实车部署下的轨迹执行。</li><li>研究问题聚焦于开环行为克隆训练与闭环执行之间的不匹配（open-loop/closed-loop gap）：论文指出除协变量偏移与因果混淆外，还存在一个互补因素，即基于路点的监督与位移指标无法保证中间轨迹的物理连贯性或易于控制器跟踪，且这些不一致主要集中在中间路点，而预测终点相对可靠。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>分析开环/闭环差距，表明标准位移指标可能忽略物理不一致的路点序列，且多数运动约束违规出现在轨迹中段而非端点。</li><li>提出 Endpoint-Constrained Optimization（ECO），一个无需训练的后处理层，固定已执行历史与策略预测的终点，仅修复其间的中间路点。</li><li>ECO 不需要地图、特权仿真器状态或额外训练，可插入任意输出路点的策略与其控制器之间（生成式或回归式头均可）。</li><li>在两种闭环仿真器中提升全部六个被评估的生成式与回归式驾驶策略的聚合闭环得分，且当基础规划越频繁违反运动限值时收益往往越大。</li><li>在 HUGSIM 闭环驾驶挑战中取得第一名，并在 AlpaSim 上提升 VaVAM 与 DiffusionDrive 的场景得分。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：ECO 作为后处理层置于策略与控制器之间，在推理之后、控制之前应用。</li><li>输入传感器：策略接收来自仿真器的相机图像输入与导航指令；ECO 本身只使用输出的规划与已执行的 ego 历史。</li><li>场景表示：以固定时间间隔 Δt 的 N 个路点表示轨迹，每个路点为 x_i=(p_i, θ_i)，位置 p_i=(x_i, y_i)，航向 θ_i；对仅预测位置的路点，θ_i 定义为从前一路点到当前路点线段的航向。车辆已执行位姿以同样的 (p, θ) 形式表示为 h_{-K},...,h_{-1}，当前位姿 h_0=(0,0,0) 位于 ego 坐标系原点。</li><li>模型结构：ECO 在优化前将最近两个已执行位姿 h_{-2:-1} 与当前位姿 h_0=(0,0,0) 拼接到预测轨迹前，固定这些历史位姿与最后预测路点 x_{N-1}，优化其余路点 x_{0:N-2}。</li><li>关键技术：目标函数由平滑项 S(z)（惩罚位置与航向的二阶差分，角度差包裹到 [-π,π]）、转弯惩罚项 C(z)（用相邻轨迹段叉积惩罚急转弯，仅当 \|c_i\|&gt;c_0=0.5 m^2 且两段长度大于 0.1 m 时应用）、偏离项 D(x, x^{(0)})（限制优化轨迹偏离策略原预测）组成，位置与航向联合优化；受约束 x_{N-1}=x^{(0)}_{N-1}。使用 L-BFGS-B 求解，初始化为预测规划。</li><li>其他信息：原文未报告使用地图或特权仿真器状态；原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes、Waymo、KITTI-360、PandaSet，以及 AlpaSim NuRec set。</li><li>仿真器：HUGSIM（基于 3D Gaussian Splatting 重建的真实驾驶日志的闭环仿真器，含 345 场景“train”划分与 185 场景“test”划分，提供四个难度等级的反应式交通）与 AlpaSim（NVIDIA 的神经重建闭环仿真器，含 441 场景 NuRec 验证集）。</li><li>模型规模：VaVAM 使用发布的 VaVAM-B 检查点，另有 VaVAM-S/-L 为同一架构与训练配方的更小与更大检查点。</li><li>训练资源：ECO 不涉及训练；求解用 Xeon Gold 6238R CPU，中位数 31 次迭代、20.7 ms；对比 VaVAM 在 L40S GPU 上前向传播 44.7 ms；HUGSIM 与 AlpaSim 的控制周期分别为 250 ms 与 100 ms。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：主要闭环基准为 HUGSIM，另在 AlpaSim 评估；消融研究使用 HUGSIM test 划分的 nuScenes 子集。</li><li>评估指标：HUGSIM 主指标 HD-Score（结合路线完成度 R_c 与逐步得分，其中无碰撞 NC 与可行驶区域 DAC 作为门控，TTC 与舒适度 COM 计入剩余得分）；AlpaSim 使用 e2e_challenge 分支标准指标，包括 scene score、route progress、m/incident、in corridor、off-road、at-fault collision；轨迹可行性定义“violating a limit”为预测轨迹有限差分超过 HUGSIM 运动限值（横摆角速度 0.95 rad/s、横摆角加速度 1.93 rad/s²、纵向加速度 [-4.05,4.89] m/s²、加加速度 8.37 m/s³），并定义 kinematic deficit 为违反至少一个限值的路点比例。</li><li>关键数值：在 HUGSIM test（185 场景，3 个评估种子均值）上，VaVAM HD-Score 从 18.1±0.5 提升至 31.0±0.6（+12.9，+71%），UniAD 从 26.8±0.8 提升至 32.4±0.8，LTF 从 17.9±1.1 提升至 20.7±0.3，VAD 从 15.7±0.9 提升至 17.4±0.4，DrivoR 从 34.6±0.8 提升至 36.2±0.3；在 HUGSIM 的 nuScenes 子集（34 场景）上，VaVAM 的 HD-Score 从 23.1 提升至 39.6（+16.5），UniAD 从 27.8 提升至 37.3（+9.5），配对 ADE 变化仅 -0.03 m（VaVAM）与 +0.03 m（UniAD），配对 FDE 变化均为 +0.00 m；在 AlpaSim NuRec 验证集（441 场景）上，VaVAM（非线性 MPC）scene score 从 11.0 提升至 24.5（+123%），VaVAM（线性 MPC）从 32.8 提升至 39.2，DiffusionDrive 场景得分提升 22%。</li><li>对比方法：生成式规划头包括 VaVAM（流匹配）与 DiffusionDrive（截断扩散）；确定性或基于提案的规划器包括 DrivoR、UniAD、VAD、Latent TransFuser（LTF）；后处理基线在同一终点约束下用替代轨迹整形算子替换 ECO。</li><li>评估条件：主要为闭环仿真评估（HUGSIM 与 AlpaSim），另报告开环指标 ADE/FDE 作为对比；原文未报告实车评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.31356/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Open Vocabulary Domain Unlearning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

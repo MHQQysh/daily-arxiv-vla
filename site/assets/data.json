@@ -1,5 +1,179 @@
 [
   {
+    "date": "2026-09-25",
+    "title": "Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization",
+    "link": "https://arxiv.org/abs/2609.31383",
+    "arxiv_id": "2609.31383",
+    "detail_path": "papers/2609.31383/",
+    "cover_path": "covers/2609.31383/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.31383.webp",
+    "paper_image_full_path": "assets/paper-images/2609.31383.webp",
+    "preview_text": "论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。 应用场景为闭环（closed-loop）自动驾驶仿真与实车部署下的轨迹执行。 研究问题聚焦于开环行为克隆训练与闭环执行之间的不匹配（open-loop/closed-loop gap）：论文指出除协变量偏移与因果混淆外，还存在一个互补因素，即基于路点的监督与位移指标无法保证中间轨迹的物理连贯性或易于控制器跟踪，且这些不一致主要集中在中间路点，而预测终点相对可靠。",
+    "research_unit": "University of Toronto · Brayden Zhang、Mahsa Golchoubian、Igor Gilitschenski",
+    "hook_text": "论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。",
+    "key_points": [
+      "论文研究的任务是端到端（end-to-end）自动驾驶轨迹规划，即由预训练驾驶策略根据传感器观测与导航指令预测未来轨迹，并由控制器执行。",
+      "应用场景为闭环（closed-loop）自动驾驶仿真与实车部署下的轨迹执行。",
+      "研究问题聚焦于开环行为克隆训练与闭环执行之间的不匹配（open-loop/closed-loop gap）：论文指出除协变量偏移与因果混淆外，还存在一个互补因素，即基于路点的监督与位移指标无法保证中间轨迹的物理连贯性或易于控制器跟踪，且这些不一致主要集中在中间路点，而预测终点相对可靠。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-25",
+    "title": "Open Vocabulary Domain Unlearning",
+    "link": "https://arxiv.org/abs/2609.31356",
+    "arxiv_id": "2609.31356",
+    "detail_path": "papers/2609.31356/",
+    "cover_path": "covers/2609.31356/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.31356.webp",
+    "paper_image_full_path": "assets/paper-images/2609.31356.webp",
+    "preview_text": "论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。 现有近似领域遗忘（ADU）方法采用闭词表假设，仅在遗忘微调阶段见过的类别上评估遗忘效果，导致其仅过拟合到已见的类-域组合，对未见类别无法实现真正的领域抹除。 论文形式化提出开放词表领域遗忘（Open-Vocabulary Domain Unlearning, OVDU）协议，要求领域遗忘能泛化到留出的未见类别，即在全局类别空间上实现与类别无关的领域擦除。 论文提出一种手术式参数编辑框架，结合 Fisher 信息掩码与 Targeted Manifold Scattering（TMS）目标，以在保护基础零样本泛化能力的同时主动打散遗忘域的流形几何结构。",
+    "research_unit": "The University of Queensland · Sumanth Udupa、Yadan Luo、Mahsa Baktashmotlagh",
+    "hook_text": "论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。",
+    "key_points": [
+      "论文关注视觉语言模型（VLM）在自动驾驶等下游场景中的“领域遗忘”问题：需要选择性抹除模型对某一目标视觉域（如卡通/插画风格车辆）的识别能力，同时保留对真实域（如真实物理车辆）的识别能力。",
+      "现有近似领域遗忘（ADU）方法采用闭词表假设，仅在遗忘微调阶段见过的类别上评估遗忘效果，导致其仅过拟合到已见的类-域组合，对未见类别无法实现真正的领域抹除。",
+      "论文形式化提出开放词表领域遗忘（Open-Vocabulary Domain Unlearning, OVDU）协议，要求领域遗忘能泛化到留出的未见类别，即在全局类别空间上实现与类别无关的领域擦除。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-25",
+    "title": "INTERACT: Interactive Planning for Autonomous Driving via Anchor-Conditioned Prediction and Trust-Region Refinement",
+    "link": "https://arxiv.org/abs/2609.31137",
+    "arxiv_id": "2609.31137",
+    "detail_path": "papers/2609.31137/",
+    "cover_path": "covers/2609.31137/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.31137.webp",
+    "paper_image_full_path": "assets/paper-images/2609.31137.webp",
+    "preview_text": "论文面向密集城市交通中的交互式自动驾驶规划任务，典型场景包括无保护转弯、车道汇入和窄间隙通行。 研究问题是传统“先预测后规划”的规划器无法考虑自车对周围智能体行为的影响，导致过度保守甚至“冻结机器人”问题。 论文指出联合训练预测与规划会引入任务干扰，而保持预测与规划分离的方法又受限于预定义候选轨迹集合。 论文提出 INTERACT，将交互式规划分解为跨驾驶意图的预测与各意图内部的轨迹优化。",
+    "research_unit": "Robert Bosch GmbH, Germany · Aron Distelzweig、Faris Janjoš、Steffen Hagedorn…",
+    "hook_text": "论文面向密集城市交通中的交互式自动驾驶规划任务，典型场景包括无保护转弯、车道汇入和窄间隙通行。",
+    "key_points": [
+      "论文面向密集城市交通中的交互式自动驾驶规划任务，典型场景包括无保护转弯、车道汇入和窄间隙通行。",
+      "研究问题是传统“先预测后规划”的规划器无法考虑自车对周围智能体行为的影响，导致过度保守甚至“冻结机器人”问题。",
+      "论文指出联合训练预测与规划会引入任务干扰，而保持预测与规划分离的方法又受限于预定义候选轨迹集合。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-25",
+    "title": "Evaluation Is All You Need for Multi-Modal Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.30818",
+    "arxiv_id": "2609.30818",
+    "detail_path": "papers/2609.30818/",
+    "cover_path": "covers/2609.30818/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.30818.webp",
+    "paper_image_full_path": "assets/paper-images/2609.30818.webp",
+    "preview_text": "论文针对自动驾驶中的多模态规划任务，即在模糊和长尾场景下生成多条可行轨迹并从中选择一条执行。 应用场景包括部分占用车道、异常障碍物、临时道路结构和模糊交通交互等具有行为歧义的复杂驾驶场景。 研究问题聚焦于作者所称的“生成–评估不对称”（generation–evaluation asymmetry）：候选轨迹生成能力已能提供高 oracle 潜力，但轨迹评估器难以可靠选出最优候选，导致规划潜力未被充分释放（例如 oracle 候选达 99.21 PDMS，而学习评估器仅达 93.67 PDMS）。",
+    "research_unit": "清华大学车辆与运载学院及人工智能学院（School of Vehicle and Mobility & College of AI, Tsinghua…",
+    "hook_text": "论文针对自动驾驶中的多模态规划任务，即在模糊和长尾场景下生成多条可行轨迹并从中选择一条执行。",
+    "key_points": [
+      "论文针对自动驾驶中的多模态规划任务，即在模糊和长尾场景下生成多条可行轨迹并从中选择一条执行。",
+      "应用场景包括部分占用车道、异常障碍物、临时道路结构和模糊交通交互等具有行为歧义的复杂驾驶场景。",
+      "研究问题聚焦于作者所称的“生成–评估不对称”（generation–evaluation asymmetry）：候选轨迹生成能力已能提供高 oracle 潜力，但轨迹评估器难以可靠选出最优候选，导致规划潜力未被充分释放（例如 oracle 候选达 99.21 PDMS，而学习评估器仅达 93.67 PDMS）。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-24",
+    "title": "Auditing Latent-Space Monitors for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.30557",
+    "arxiv_id": "2609.30557",
+    "detail_path": "papers/2609.30557/",
+    "cover_path": "covers/2609.30557/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.30557.webp",
+    "paper_image_full_path": "assets/paper-images/2609.30557.webp",
+    "preview_text": "论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。 应用场景是运行时失效监控：在推理阶段判断感知或规划输出是否可能不可靠，以便拒绝、延迟或进一步审查。 研究问题是：使用模型内部潜在表示（latent representation）进行失效预测，是否在已知可观测状态和输出后仍提供额外预测价值；论文审计潜在空间失效监控器相对于强非潜在基线的增量价值。",
+    "research_unit": "Independent Researcher · Nikhil Kamalkumar Advani",
+    "hook_text": "论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。",
+    "key_points": [
+      "论文研究的自动驾驶任务包括在线矢量化地图生成（online vectorized map generation，使用 LaneSegNet）和端到端规划（end-to-end planning，使用 VAD）。",
+      "应用场景是运行时失效监控：在推理阶段判断感知或规划输出是否可能不可靠，以便拒绝、延迟或进一步审查。",
+      "研究问题是：使用模型内部潜在表示（latent representation）进行失效预测，是否在已知可观测状态和输出后仍提供额外预测价值；论文审计潜在空间失效监控器相对于强非潜在基线的增量价值。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-24",
+    "title": "WALT: Learning World-Model-Aligned Latent Trajectories for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.30436",
+    "arxiv_id": "2609.30436",
+    "detail_path": "papers/2609.30436/",
+    "cover_path": "covers/2609.30436/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.30436.webp",
+    "paper_image_full_path": "assets/paper-images/2609.30436.webp",
+    "preview_text": "论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。 研究问题为：能否在不修改冻结预训练驾驶世界模型本身的前提下，将其视觉知识迁移到轨迹生成空间中。 应用场景为基于视觉观测的端到端/世界模型驱动的未来轨迹规划，并在 NAVSIMv1 与 NAVSIMv2 基准上评估。",
+    "research_unit": "The Hong Kong University of Science and Technology · Mingkai Jia、Jintao Che…",
+    "hook_text": "论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。",
+    "key_points": [
+      "论文面向自动驾驶的轨迹规划任务，研究驾驶世界模型（DWM）视觉预测表征与几何轨迹动作接口之间的表征不匹配问题。",
+      "研究问题为：能否在不修改冻结预训练驾驶世界模型本身的前提下，将其视觉知识迁移到轨迹生成空间中。",
+      "应用场景为基于视觉观测的端到端/世界模型驱动的未来轨迹规划，并在 NAVSIMv1 与 NAVSIMv2 基准上评估。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-24",
     "title": "Retrieve-to-Localize: Bridging Large Language Models and LiDAR Geometry for Spatial Grounding",
     "link": "https://arxiv.org/abs/2609.29835",
