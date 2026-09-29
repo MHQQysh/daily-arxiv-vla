@@ -1,5 +1,498 @@
 [
   {
+    "date": "2026-09-28",
+    "title": "RefineDrive: Reliable Failure-Guided Learning for Vision-Language-Action Driving",
+    "link": "https://arxiv.org/abs/2609.35078",
+    "arxiv_id": "2609.35078",
+    "detail_path": "papers/2609.35078/",
+    "cover_path": "covers/2609.35078/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.35078.webp",
+    "paper_image_full_path": "assets/paper-images/2609.35078.webp",
+    "preview_text": "论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）规划任务，目标是在已有专家演示模仿学习基础上，利用策略自身 rollout 暴露的安全关键失败继续后训练。 应用场景为基于 NAVSIM/OpenScene/nuPlan 的自动驾驶规划评测，输入当前驾驶上下文并直接预测未来轨迹。 研究问题在于：现有 failure-learning 方法存在失败诊断不可靠、纠正目标与失败不匹配（易过度纠正）、奖励信号过于粗糙三类限制。",
+    "research_unit": "College of Computer Science and Technology, Zhejiang University, Hangzhou…",
+    "hook_text": "论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）规划任务，目标是在已有专家演示模仿学习基础上，利用策略自身 rollout 暴露的安全关键失败继续后训练。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）规划任务，目标是在已有专家演示模仿学习基础上，利用策略自身 rollout 暴露的安全关键失败继续后训练。",
+      "应用场景为基于 NAVSIM/OpenScene/nuPlan 的自动驾驶规划评测，输入当前驾驶上下文并直接预测未来轨迹。",
+      "研究问题在于：现有 failure-learning 方法存在失败诊断不可靠、纠正目标与失败不匹配（易过度纠正）、奖励信号过于粗糙三类限制。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-28",
+    "title": "When the Score Becomes the Target: Rethinking Metric Validity in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.34440",
+    "arxiv_id": "2609.34440",
+    "detail_path": "papers/2609.34440/",
+    "cover_path": "covers/2609.34440/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.34440.webp",
+    "paper_image_full_path": "assets/paper-images/2609.34440.webp",
+    "preview_text": "论文关注的自动驾驶任务是驾驶规划器在基准评分（benchmark score）被用作优化目标时的评测有效性问题，而非提出新的规划器或端到端驾驶模型。 应用场景是自动驾驶开环/闭环基准评测，包括 NAVSIM-v1、NAVSIM-v2、nuPlan 以及基于 WorldEngine 的闭环重规划评测。 研究问题是：当分数本身被优化后，分数提升是否仍然可靠地反映其意图测量的驾驶行为改进；论文将这一问题定义为“metric validity”，并分析分数-行为不一致出现的环节。 论文将评分过程分解为执行、测量、子分数映射和聚合四个环节，考察遗漏（omission）、阈值化/饱和、请求运动与执行运动之间的变换，以及在重复执行和重规划下优化收益是否保持。",
+    "research_unit": "University of North Texas · Morui Zhu、Qing Yang",
+    "hook_text": "论文关注的自动驾驶任务是驾驶规划器在基准评分（benchmark score）被用作优化目标时的评测有效性问题，而非提出新的规划器或端到端驾驶模型。",
+    "key_points": [
+      "论文关注的自动驾驶任务是驾驶规划器在基准评分（benchmark score）被用作优化目标时的评测有效性问题，而非提出新的规划器或端到端驾驶模型。",
+      "应用场景是自动驾驶开环/闭环基准评测，包括 NAVSIM-v1、NAVSIM-v2、nuPlan 以及基于 WorldEngine 的闭环重规划评测。",
+      "研究问题是：当分数本身被优化后，分数提升是否仍然可靠地反映其意图测量的驾驶行为改进；论文将这一问题定义为“metric validity”，并分析分数-行为不一致出现的环节。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-28",
+    "title": "CAR-VLA: Complexity-Aware and Risk-Adaptive Reasoning for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.34387",
+    "arxiv_id": "2609.34387",
+    "detail_path": "papers/2609.34387/",
+    "cover_path": "covers/2609.34387/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.34387.webp",
+    "paper_image_full_path": "assets/paper-images/2609.34387.webp",
+    "preview_text": "论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。 应用场景为真实道路驾驶中的安全、可靠与及时决策，尤其是复杂路口等需要深思的场景与突发切入、行人横穿等高风险场景。 研究问题在于：现有自适应推理方法主要只决定“是否推理”，忽略了不同驾驶情境下“应如何推理”的差异；论文提出应同时考虑场景复杂度与动态风险来指导推理深度、紧迫性与关注点。",
+    "research_unit": "Fudan University · Xiaolei Chen、Zhuolin He、Yuxuan Liang 等",
+    "hook_text": "论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。",
+    "key_points": [
+      "论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。",
+      "应用场景为真实道路驾驶中的安全、可靠与及时决策，尤其是复杂路口等需要深思的场景与突发切入、行人横穿等高风险场景。",
+      "研究问题在于：现有自适应推理方法主要只决定“是否推理”，忽略了不同驾驶情境下“应如何推理”的差异；论文提出应同时考虑场景复杂度与动态风险来指导推理深度、紧迫性与关注点。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-28",
+    "title": "AD-E2E-JEPA: A Joint-Embedding Predictive Architecture For End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.34085",
+    "arxiv_id": "2609.34085",
+    "detail_path": "papers/2609.34085/",
+    "cover_path": "covers/2609.34085/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.34085.webp",
+    "paper_image_full_path": "assets/paper-images/2609.34085.webp",
+    "preview_text": "论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。 应用场景为基于前视相机的端到端驾驶：输入历史图像-位姿对，预测未来自车位姿轨迹。 研究问题：现有 JEPA 世界模型（LeWM、DINO-WM、JEPA-WM）在自动驾驶中存在“精确但计算昂贵”或“高效但规划不足”的权衡。 论文采用目标条件零样本规划设置，以真实未来观测作为目标，在不训练任何驾驶策略的前提下评估世界模型质量，从而将世界模型质量与策略学习解耦。 此外研究自监督预训练投影器能否迁移到下游模仿学习。",
+    "research_unit": "New York University · Haoran Zhu",
+    "hook_text": "论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。",
+    "key_points": [
+      "论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。",
+      "应用场景为基于前视相机的端到端驾驶：输入历史图像-位姿对，预测未来自车位姿轨迹。",
+      "研究问题：现有 JEPA 世界模型（LeWM、DINO-WM、JEPA-WM）在自动驾驶中存在“精确但计算昂贵”或“高效但规划不足”的权衡。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-27",
+    "title": "3D Point Tracking with State Space Models",
+    "link": "https://arxiv.org/abs/2609.34035",
+    "arxiv_id": "2609.34035",
+    "detail_path": "papers/2609.34035/",
+    "cover_path": "covers/2609.34035/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.34035.webp",
+    "paper_image_full_path": "assets/paper-images/2609.34035.webp",
+    "preview_text": "论文针对自动驾驶等以“米”为决策单位的应用场景，研究单目、无位姿条件下的度量（绝对尺度）3D 点跟踪任务。 目标是在单张消费级 GPU 的算力预算内，实现绝对度量精度高且可复现的 3D 点跟踪，而不依赖大时间窗口、精确相机位姿或重型视频扩散骨干网络。 研究问题包括：现有 TAPVid-3D 排行榜指标为尺度不变（scale-invariant），会丢弃绝对深度信息；同时最强跟踪器依赖大窗口、位姿或重型骨干，无法在消费级单 GPU 上复现。 核心思路是：固定 2D 图像轨迹后，决定度量 3D 精度的量是沿像素射线的深度，因此组合冻结的光流前端与单目度量深度网络，仅学习深度残差。",
+    "research_unit": "The University of Tokyo, Department of Precision Engineering, Graduate Scho…",
+    "hook_text": "论文针对自动驾驶等以“米”为决策单位的应用场景，研究单目、无位姿条件下的度量（绝对尺度）3D 点跟踪任务。",
+    "key_points": [
+      "论文针对自动驾驶等以“米”为决策单位的应用场景，研究单目、无位姿条件下的度量（绝对尺度）3D 点跟踪任务。",
+      "目标是在单张消费级 GPU 的算力预算内，实现绝对度量精度高且可复现的 3D 点跟踪，而不依赖大时间窗口、精确相机位姿或重型视频扩散骨干网络。",
+      "研究问题包括：现有 TAPVid-3D 排行榜指标为尺度不变（scale-invariant），会丢弃绝对深度信息；同时最强跟踪器依赖大窗口、位姿或重型骨干，无法在消费级单 GPU 上复现。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-27",
+    "title": "ReDrive: Shaping Representations with World Modeling for End-to-End Driving",
+    "link": "https://arxiv.org/abs/2609.33854",
+    "arxiv_id": "2609.33854",
+    "detail_path": "papers/2609.33854/",
+    "cover_path": "covers/2609.33854/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.33854.webp",
+    "paper_image_full_path": "assets/paper-images/2609.33854.webp",
+    "preview_text": "论文面向端到端自动驾驶的轨迹规划任务，研究如何为规划学习到具备场景语义与未来演化信息的视觉表示。 应用场景为基于相机输入的端到端驾驶策略，在 NAVSIM 仿真基准上进行开环规划评估。 研究问题在于：现有方法要么依赖复杂感知-规划流水线，要么在推理时引入显式世界模型预测未来状态，导致系统架构与推理流程复杂、计算开销增加。 论文提出以“强通用视觉表示 + 表示空间世界建模”替代推理期辅助模块，使规划仅依赖编码器-规划器推理流水线即可获得高性能。",
+    "research_unit": "Huazhong University of Science & Technology · Yueting Zhu",
+    "hook_text": "论文面向端到端自动驾驶的轨迹规划任务，研究如何为规划学习到具备场景语义与未来演化信息的视觉表示。",
+    "key_points": [
+      "论文面向端到端自动驾驶的轨迹规划任务，研究如何为规划学习到具备场景语义与未来演化信息的视觉表示。",
+      "应用场景为基于相机输入的端到端驾驶策略，在 NAVSIM 仿真基准上进行开环规划评估。",
+      "研究问题在于：现有方法要么依赖复杂感知-规划流水线，要么在推理时引入显式世界模型预测未来状态，导致系统架构与推理流程复杂、计算开销增加。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-27",
+    "title": "MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.33737",
+    "arxiv_id": "2609.33737",
+    "detail_path": "papers/2609.33737/",
+    "cover_path": "covers/2609.33737/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.33737.webp",
+    "paper_image_full_path": "assets/paper-images/2609.33737.webp",
+    "preview_text": "论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。 论文关注长时域规划中运动趋势难以从观测历史传播到未来、单潜在状态长展开会衰减有效动力学、保留过时运动模式并干扰近端可靠规划等问题。 论文提出 MomWorld，一种面向长时域规划的动量感知潜在世界模型，将场景配置与运动趋势同时作为潜在状态联合向前传播，并通过 MoFlow 对基础轨迹进行动量条件化的流匹配细化。",
+    "research_unit": "Nanyang Technological University · Ziying Song、Lei Yang、Haozhuang Chi 等",
+    "hook_text": "论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。",
+    "key_points": [
+      "论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。",
+      "论文关注长时域规划中运动趋势难以从观测历史传播到未来、单潜在状态长展开会衰减有效动力学、保留过时运动模式并干扰近端可靠规划等问题。",
+      "论文提出 MomWorld，一种面向长时域规划的动量感知潜在世界模型，将场景配置与运动趋势同时作为潜在状态联合向前传播，并通过 MoFlow 对基础轨迹进行动量条件化的流匹配细化。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-27",
+    "title": "VehDyn: A Driving World Model Benchmark for Vehicle Dynamics",
+    "link": "https://arxiv.org/abs/2609.33264",
+    "arxiv_id": "2609.33264",
+    "detail_path": "papers/2609.33264/",
+    "cover_path": "covers/2609.33264/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.33264.webp",
+    "paper_image_full_path": "assets/paper-images/2609.33264.webp",
+    "preview_text": "论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。 应用场景为：驾驶世界模型作为数据引擎、动作规划器和生成式仿真器时，其生成的未来是否物理可行、是否在相同指令与道路条件下像真实车辆一样运动。 研究问题是：缺乏车辆、道路、机动与速度条件可独立控制、且真值车辆状态与视频同步记录的数据集与评测框架，因此无法系统衡量生成驾驶视频的车辆动力学保真度。",
+    "research_unit": "原文未明确对应：原文未明确列出作者所属机构，仅列出作者姓名（Tianyi Wang、Wangsheng Du、Jiazhou Chen、Tianyi…",
+    "hook_text": "论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。",
+    "key_points": [
+      "论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。",
+      "应用场景为：驾驶世界模型作为数据引擎、动作规划器和生成式仿真器时，其生成的未来是否物理可行、是否在相同指令与道路条件下像真实车辆一样运动。",
+      "研究问题是：缺乏车辆、道路、机动与速度条件可独立控制、且真值车辆状态与视频同步记录的数据集与评测框架，因此无法系统衡量生成驾驶视频的车辆动力学保真度。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-27",
+    "title": "FocusDrive: Reasoning with Visual Focus for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.33190",
+    "arxiv_id": "2609.33190",
+    "detail_path": "papers/2609.33190/",
+    "cover_path": "covers/2609.33190/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.33190.webp",
+    "paper_image_full_path": "assets/paper-images/2609.33190.webp",
+    "preview_text": "研究面向自动驾驶的端到端规划与驾驶推理任务，聚焦“视觉焦点”（visual focus）在推理序列中的显式表达。 应用场景包括驾驶注视点预测（gaze prediction）与基于 NAVSIM 的端到端轨迹规划（非反应式仿真）。 研究问题：现有驾驶 VLA 的中间推理主要以自然语言表达，物体描述与输入图像具体区域之间的对应关系是隐式的；论文希望将决策相关物体与其图像 patch 显式关联，再基于该关联推理驾驶响应。",
+    "research_unit": "清华大学（Tsinghua University） · Zhiyuan Liu、Zehong Ke、Yuanxin Tian 等",
+    "hook_text": "研究面向自动驾驶的端到端规划与驾驶推理任务，聚焦“视觉焦点”（visual focus）在推理序列中的显式表达。",
+    "key_points": [
+      "研究面向自动驾驶的端到端规划与驾驶推理任务，聚焦“视觉焦点”（visual focus）在推理序列中的显式表达。",
+      "应用场景包括驾驶注视点预测（gaze prediction）与基于 NAVSIM 的端到端轨迹规划（非反应式仿真）。",
+      "研究问题：现有驾驶 VLA 的中间推理主要以自然语言表达，物体描述与输入图像具体区域之间的对应关系是隐式的；论文希望将决策相关物体与其图像 patch 显式关联，再基于该关联推理驾驶响应。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-26",
+    "title": "SV2V-RSim: A Comprehensive Benchmark for Self-Selective V2V Cooperative Perception with Near-Realistic Data",
+    "link": "https://arxiv.org/abs/2609.32863",
+    "arxiv_id": "2609.32863",
+    "detail_path": "papers/2609.32863/",
+    "cover_path": "covers/2609.32863/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.32863.webp",
+    "paper_image_full_path": "assets/paper-images/2609.32863.webp",
+    "preview_text": "论文面向自动驾驶中的车车（V2V）协同感知任务，应用场景为自动驾驶车辆通过车际信息共享扩展自身感知范围、缓解遮挡与视野受限问题。 研究问题在于现有 V2V 数据集存在参与智能体数量少、协作者选择策略固定（静态）、仿真与真实环境域间差异大等局限。 论文提出 SV2V-RSim——一个大规模、多模态、接近真实的仿真数据集，旨在提升智能体多样性与真实感，并首次支持随时间动态选择协作者。 论文进一步提出 Select Vehicles Adaptively (SVA) 模块，用于在感知性能与通信带宽约束之间取得平衡。",
+    "research_unit": "Tongji University, Shanghai, China · Yulu Wu、Chao Wei、Jujun Cheng 等",
+    "hook_text": "论文面向自动驾驶中的车车（V2V）协同感知任务，应用场景为自动驾驶车辆通过车际信息共享扩展自身感知范围、缓解遮挡与视野受限问题。",
+    "key_points": [
+      "论文面向自动驾驶中的车车（V2V）协同感知任务，应用场景为自动驾驶车辆通过车际信息共享扩展自身感知范围、缓解遮挡与视野受限问题。",
+      "研究问题在于现有 V2V 数据集存在参与智能体数量少、协作者选择策略固定（静态）、仿真与真实环境域间差异大等局限。",
+      "论文提出 SV2V-RSim——一个大规模、多模态、接近真实的仿真数据集，旨在提升智能体多样性与真实感，并首次支持随时间动态选择协作者。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-26",
+    "title": "PolyTopoBench: A Benchmark for Complex Vector Polygon Generation from Remote Sensing Imagery",
+    "link": "https://arxiv.org/abs/2609.32856",
+    "arxiv_id": "2609.32856",
+    "detail_path": "papers/2609.32856/",
+    "cover_path": "covers/2609.32856/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.32856.webp",
+    "paper_image_full_path": "assets/paper-images/2609.32856.webp",
+    "preview_text": "论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。 研究问题：现有方法多聚焦简单外轮廓，难以表示或保持带孔（interior rings）的复杂多边形拓扑；已有评测也多以区域重叠或外边界质量为主，不能保证内环正确。 论文提出 PolyTopoBench，一个统一评测框架，明确以复杂矢量多边形（一个外环加零个或多个内环）为中心，同时评估外环与内环。",
+    "research_unit": "The University of Texas at Austin · Zeping Liu、Ni Lao、Junfeng Jiao 等",
+    "hook_text": "论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。",
+    "key_points": [
+      "论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。",
+      "研究问题：现有方法多聚焦简单外轮廓，难以表示或保持带孔（interior rings）的复杂多边形拓扑；已有评测也多以区域重叠或外边界质量为主，不能保证内环正确。",
+      "论文提出 PolyTopoBench，一个统一评测框架，明确以复杂矢量多边形（一个外环加零个或多个内环）为中心，同时评估外环与内环。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-26",
+    "title": "RCVLA: 4D Radar-Grounded Semantic Reasoning and Trajectory Arbitration for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.32681",
+    "arxiv_id": "2609.32681",
+    "detail_path": "papers/2609.32681/",
+    "cover_path": "covers/2609.32681/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.32681.webp",
+    "paper_image_full_path": "assets/paper-images/2609.32681.webp",
+    "preview_text": "论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。 研究场景为基于多视角摄像头与多视角4D雷达点的驾驶场景理解与开放环轨迹规划。 核心研究问题：现有以摄像头为中心的VLA模型主要从视觉观测推断几何与运动信息，在能见度下降等条件下可能不可靠；同时，标准图文预训练无法提供4D雷达-语言对齐，且语义推理与轨迹规划对4D雷达表示的需求不同。 为此，论文提出RCVLA：包含雷达锚定语义推理阶段（RCVLA-Sem）与轨迹仲裁阶段（RCVLA-Phys），并构建Cap4DR与OmniHD-QA两个数据集。",
+    "research_unit": "Tongji（同济大学） · Lianqing Zheng、Xichan Zhu、Zhixiong Ma",
+    "hook_text": "论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。",
+    "key_points": [
+      "论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。",
+      "研究场景为基于多视角摄像头与多视角4D雷达点的驾驶场景理解与开放环轨迹规划。",
+      "核心研究问题：现有以摄像头为中心的VLA模型主要从视觉观测推断几何与运动信息，在能见度下降等条件下可能不可靠；同时，标准图文预训练无法提供4D雷达-语言对齐，且语义推理与轨迹规划对4D雷达表示的需求不同。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-26",
+    "title": "From Scene Graphs to Answers: Selective Neuro-Symbolic Reasoning for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.32645",
+    "arxiv_id": "2609.32645",
+    "detail_path": "papers/2609.32645/",
+    "cover_path": "covers/2609.32645/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.32645.webp",
+    "paper_image_full_path": "assets/paper-images/2609.32645.webp",
+    "preview_text": "论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。 应用场景为基于 nuScenes-QA 基准的多帧驾驶场景理解，输入来自上游感知模块提供的 3D 目标观测，而不是直接使用原始图像或点云。 研究问题：现有视觉-语言方法通常将异构推理操作统一交给单一神经网络推理过程，忽略了部分查询可以精确符号求解、而另一部分需要语义解释的根本区别；论文研究如何按查询性质选择性地分配符号计算与神经推理。",
+    "research_unit": "The Hong Kong University of Science and Technology (Guangzhou) · Yiyao Wang…",
+    "hook_text": "论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。",
+    "key_points": [
+      "论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。",
+      "应用场景为基于 nuScenes-QA 基准的多帧驾驶场景理解，输入来自上游感知模块提供的 3D 目标观测，而不是直接使用原始图像或点云。",
+      "研究问题：现有视觉-语言方法通常将异构推理操作统一交给单一神经网络推理过程，忽略了部分查询可以精确符号求解、而另一部分需要语义解释的根本区别；论文研究如何按查询性质选择性地分配符号计算与神经推理。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-26",
+    "title": "One Perception, All Maneuvers: Directional Traffic Signal Understanding for Maneuver-Level Signal Intent Prediction",
+    "link": "https://arxiv.org/abs/2609.32316",
+    "arxiv_id": "2609.32316",
+    "detail_path": "papers/2609.32316/",
+    "cover_path": "covers/2609.32316/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.32316.webp",
+    "paper_image_full_path": "assets/paper-images/2609.32316.webp",
+    "preview_text": "论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。 论文指出，现有交通信号感知主要以实例级检测或颜色识别来表述，只能回答“信号灯在哪里、是什么颜色”，无法直接说明“哪一盏信号灯控制自车的哪一种机动动作”。 论文将任务重新表述为 Directional Traffic Signal Understanding，即从单张前视图像出发，为直行、左转、右转、掉头四种自车机动动作预测结构化的信号状态。 每个方向的信号状态包含关联的信号颜色（none/red/green/yellow）以及信号所隐含的可通行性（go/stop），预测的是信号层面的许可，而非最终机动的可行性。 下游规划器可将该信号层面的意图与车道拓扑、路线约束、周围智能体及其他交通规则进一步融合。",
+    "research_unit": "College of Computer Science and Technology, Zhejiang University · Ang Zou、R…",
+    "hook_text": "论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。",
+    "key_points": [
+      "论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。",
+      "论文指出，现有交通信号感知主要以实例级检测或颜色识别来表述，只能回答“信号灯在哪里、是什么颜色”，无法直接说明“哪一盏信号灯控制自车的哪一种机动动作”。",
+      "论文将任务重新表述为 Directional Traffic Signal Understanding，即从单张前视图像出发，为直行、左转、右转、掉头四种自车机动动作预测结构化的信号状态。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-26",
+    "title": "OneFixer: High-Quality and Consistent One-Step Autoregressive 3DGS Refinement for Driving Scenes",
+    "link": "https://arxiv.org/abs/2609.32175",
+    "arxiv_id": "2609.32175",
+    "detail_path": "papers/2609.32175/",
+    "cover_path": "covers/2609.32175/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.32175.webp",
+    "paper_image_full_path": "assets/paper-images/2609.32175.webp",
+    "preview_text": "论文面向自动驾驶仿真中的 3D Gaussian Splatting（3DGS）渲染质量退化问题，研究渲染时（render-time）修复任务：从沿单轨迹自车视角采集导致的稀疏观测、动态物体遮挡与移动几何造成的低质量 3DGS 渲染中恢复真实外观。 应用场景为自动驾驶闭环仿真：修复后的观测直接作为被测驾驶策略的输入，因此不仅要求帧级感知质量，还要求时间一致性与低延迟在线流式生成。 核心研究问题是：在 3DGS 修复这一任务中，能否用更简单的单阶段适配流程，实现高质量、时间一致的一步（one-step）因果自回归生成，而无需双向到因果的转换、教师–学生蒸馏、critic 或额外后训练阶段。 论文指出一步因果生成中每个不完美预测会立即成为后续帧的上下文，存在曝光偏置（exposure bias），降低去噪步数会同时恶化保真度与时间一致性。",
+    "research_unit": "42dot · Boseong Jeon、Juhan Cha、Hayoung Kim",
+    "hook_text": "论文面向自动驾驶仿真中的 3D Gaussian Splatting（3DGS）渲染质量退化问题，研究渲染时（render-time）修复任务：从沿单轨迹自车视角采集导致的稀疏观测、动态物体遮挡与移动几何造成的低质量 3DGS 渲染中恢复真实外观。",
+    "key_points": [
+      "论文面向自动驾驶仿真中的 3D Gaussian Splatting（3DGS）渲染质量退化问题，研究渲染时（render-time）修复任务：从沿单轨迹自车视角采集导致的稀疏观测、动态物体遮挡与移动几何造成的低质量 3DGS 渲染中恢复真实外观。",
+      "应用场景为自动驾驶闭环仿真：修复后的观测直接作为被测驾驶策略的输入，因此不仅要求帧级感知质量，还要求时间一致性与低延迟在线流式生成。",
+      "核心研究问题是：在 3DGS 修复这一任务中，能否用更简单的单阶段适配流程，实现高质量、时间一致的一步（one-step）因果自回归生成，而无需双向到因果的转换、教师–学生蒸馏、critic 或额外后训练阶段。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-26",
+    "title": "CausalDriveBench: Evaluating Causal Reasoning in Vision-Language-Action Models for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.32157",
+    "arxiv_id": "2609.32157",
+    "detail_path": "papers/2609.32157/",
+    "cover_path": "covers/2609.32157/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.32157.webp",
+    "paper_image_full_path": "assets/paper-images/2609.32157.webp",
+    "preview_text": "论文针对自动驾驶视觉-语言-动作（VLA）模型，研究其输出的自然语言推理是否真实反映场景因果结构这一未经验证的问题。 依托 Pearl 因果层级（PCH），论文提出 CausalDriveBench 评估框架，通过结构化视觉问答和替代轨迹预测来测试驾驶专用 VLA 的因果推理能力。 应用场景为从真实驾驶数据（nuScenes）构建的因果场景图评估，覆盖关联、干预、反事实及因果发现（R0–R3）四个层级。 核心研究问题：模型的流畅推理与准确轨迹是否足以作为因果理解的证据。",
+    "research_unit": "Fastcode AI · Narendiran Chembu、Navvrat Rao、Siddarth Khandelwal 等",
+    "hook_text": "论文针对自动驾驶视觉-语言-动作（VLA）模型，研究其输出的自然语言推理是否真实反映场景因果结构这一未经验证的问题。",
+    "key_points": [
+      "论文针对自动驾驶视觉-语言-动作（VLA）模型，研究其输出的自然语言推理是否真实反映场景因果结构这一未经验证的问题。",
+      "依托 Pearl 因果层级（PCH），论文提出 CausalDriveBench 评估框架，通过结构化视觉问答和替代轨迹预测来测试驾驶专用 VLA 的因果推理能力。",
+      "应用场景为从真实驾驶数据（nuScenes）构建的因果场景图评估，覆盖关联、干预、反事实及因果发现（R0–R3）四个层级。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-25",
+    "title": "DriveHierarchy: A Benchmark for Diagnosing VLM Driving Capabilities from Open-Loop Understanding to Closed-Loop Execution",
+    "link": "https://arxiv.org/abs/2609.31814",
+    "arxiv_id": "2609.31814",
+    "detail_path": "papers/2609.31814/",
+    "cover_path": "covers/2609.31814/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.31814.webp",
+    "paper_image_full_path": "assets/paper-images/2609.31814.webp",
+    "preview_text": "论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。 目标能力链包括：对交通参与者与危险目标进行感知落地、跨视角与跨时间整合上下文、对未来演化进行推理，以及在闭环交互中选择合适动作。 研究问题：现有基准通常只评估开环理解或闭环驾驶，难以解释这些能力如何组织、如何关联，也难以用于模型诊断与针对性改进。 论文提出 DriveHierarchy，将 VLM 自动驾驶能力分层为四级：R1 感知落地、R2 上下文记忆、R3 心智推理、R4 闭环执行，用于统一评估与诊断。",
+    "research_unit": "同济大学交通学院（College of Transportation, Tongji University） · Chengkai Xu、Yichen…",
+    "hook_text": "论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。",
+    "key_points": [
+      "论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。",
+      "目标能力链包括：对交通参与者与危险目标进行感知落地、跨视角与跨时间整合上下文、对未来演化进行推理，以及在闭环交互中选择合适动作。",
+      "研究问题：现有基准通常只评估开环理解或闭环驾驶，难以解释这些能力如何组织、如何关联，也难以用于模型诊断与针对性改进。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-25",
     "title": "Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization",
     "link": "https://arxiv.org/abs/2609.31383",

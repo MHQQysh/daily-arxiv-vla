@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AD-E2E-JEPA: A Joint-Embedding Predictive Architecture For End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。 应用场景为基于前视相机的端到端驾驶：输入历史图像-位姿对，预测未来自车位姿轨迹。 研究问题：现有 JEPA 世界模型（LeWM、DINO-WM、JEPA-WM）在自动驾驶中存在“精确但计算昂贵”或“高效但规划不足”的权衡。 论文采用目标条件零样本规划设置，以真实未来观测作为目标，在不训练任何驾驶策略的前提下评估世界模型质量，从而将世界模型质量与策略学习解耦。 此外研究自监督预训练投影器能否迁移到下游模仿学习。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.34085">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.34085.webp" alt="AD-E2E-JEPA: A Joint-Embedding Predictive Architecture For End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">AD-E2E-JEPA: A Joint-Embedding Predictive Architecture For End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-28 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.34085" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.34085" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.34085</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。 应用场景为基于前视相机的端到端驾驶：输入历史图像-位姿对，预测未来自车位姿轨迹。 研究问题：现有 JEPA 世界模型（LeWM、DINO-WM、JEPA-WM）在自动驾驶中存在“精确但计算昂贵”或“高效但规划不足”的权衡。 论文采用目标条件零样本规划设置，以真实未来观测作为目标，在不训练任何驾驶策略的前提下评估世界模型质量，从而将世界模型质量与策略学习解耦。 此外研究自监督预训练投影器能否迁移到下游模仿学习。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">New York University · Haoran Zhu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.34085/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。</li><li>应用场景为基于前视相机的端到端驾驶：输入历史图像-位姿对，预测未来自车位姿轨迹。</li><li>研究问题：现有 JEPA 世界模型（LeWM、DINO-WM、JEPA-WM）在自动驾驶中存在“精确但计算昂贵”或“高效但规划不足”的权衡。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：New York University；作者：Haoran Zhu</li><li>机构：New York University、AMI Labs；作者：Wancong Zhang</li><li>机构：New York University、AMI Labs；作者：Yann LeCun</li><li>机构：New York University；作者：Anna Choromanska</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶（E2EAD）任务，目标是构建动作条件化的 JEPA 世界模型，用于理解物理世界、推理与规划。</li><li>应用场景为基于前视相机的端到端驾驶：输入历史图像-位姿对，预测未来自车位姿轨迹。</li><li>研究问题：现有 JEPA 世界模型（LeWM、DINO-WM、JEPA-WM）在自动驾驶中存在“精确但计算昂贵”或“高效但规划不足”的权衡。</li><li>论文采用目标条件零样本规划设置，以真实未来观测作为目标，在不训练任何驾驶策略的前提下评估世界模型质量，从而将世界模型质量与策略学习解耦。</li><li>此外研究自监督预训练投影器能否迁移到下游模仿学习。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次将 JEPA 适配到 E2EAD 用于目标条件零样本规划，并在成功率之外报告规划效率、测地精度和可靠性等驾驶性能指标。</li><li>揭示现有 JEPA 世界模型在规划中效率与性能之间的显著权衡：要么计算高效但规划不准确，要么准确但每场景规划需超过一分钟。</li><li>提出 AD-E2E-JEPA，在 JEPA-WM 基础上引入 SIGReg 正则化的可学习投影器，将规划 patch 数量减少 16 倍、嵌入维度减少 4 倍，同时保持规划性能。</li><li>在 NAVSIM 零样本规划中，相比 LeWM 在全部 12,146 个测试场景平均提升 23.7 EPDMS，同时比 DINO-WM/JEPA-WM 规划时间少 100 倍。</li><li>证明自监督预训练投影器可有效迁移到下游模仿学习，将 EPDMS 从 80.2 提升到 85.4。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：动作条件化的 JEPA 世界模型，用于端到端自动驾驶的零样本目标条件规划与下游模仿学习迁移。</li><li>输入传感器：前视相机图像；论文考虑仅前视相机设置，原文未报告其他传感器输入。</li><li>场景表示：历史上下文为图像-位姿对 (I_{t-K:t}, P_{t-K:t})，位姿 P_j = [x_j, y_j, θ_j]^T 表示相对当前自车位的平面位置与航向角；动作为相邻帧相对位姿变化 a_t = [Δx, Δy, Δθ]^T。</li><li>模型结构：冻结的 DINOv3 ViT-L 编码器分别编码历史帧与未来帧；AdaLN 风格预测器配 RoPE；线性层 E_a 产生动作嵌入。</li><li>关键技术：引入可学习投影器 Proj(·)，由两层 stride 2×2 卷积组成，独立作用于历史与未来帧编码嵌入，将空间尺寸降低 16 倍，并将 ViT-L 嵌入维度从 D_enc=1024 降到 D_proj=256；预测器在投影后的嵌入上运行。</li><li>训练目标：对投影嵌入的 MSE 预测损失（目标端施加 stop gradient），加 SIGReg 正则项；SIGReg 独立作用于每个 patch 位置和时间步的跨 batch patch 嵌入，并在所有时间步与 patch 位置取平均，鼓励嵌入服从各向同性高斯分布以防止表示坍缩。</li><li>可选 rollout 训练：在完整未来时域 F 上加入 teacher-forcing 预测损失与自回归 rollout 一致性损失，并对 t-K 到 t+F 施加 SIGReg。</li><li>零样本规划：不使用 CEM，而是在聚类驾驶轨迹词表（8192 条候选）中按角坐标排序并等间隔子采样得到候选集；以 F 帧后的未来图像 I_{t+F} 为目标，对每个候选轨迹自回归 rollout 世界模型，选择预测未来潜在嵌入与目标嵌入 L2 距离最小的轨迹。</li><li>下游迁移：丢弃 patch 预测器，保留 DINOv3 编码器与投影器，接简单轨迹解码器并全量微调用于 E2EAD。</li><li>原文未报告：实车平台、仿真器、模型参数总量等具体资源信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM 数据集，评估使用最新 NAVSIMv2 基准。</li><li>训练划分：navtrain 划分包含 10 小时、2 Hz 驾驶视频，用于 LeWM、DINO-WM、JEPA-WM 与 AD-E2E-JEPA 的公平对比；AD-E2E-JEPA 进一步扩展到 trainval 训练部分的 70 小时驾驶视频。</li><li>模型规模：DINO、JEPA-WM 和 AD-E2E-JEPA 使用 DINOv3 ViT-L 骨干；LeWM 骨干为从头训练的 ViT-L；D_enc=1024，D_proj=256。</li><li>训练配置：K+1=4 帧历史（2 秒上下文），F=8 帧未来（4 秒时域）；AdamW，30 个训练 epoch，1 个 warmup epoch 加 cosine annealing；默认 SIGReg 权重 λ=0.09。</li><li>训练资源：LeWM 使用 4×A100、batch size 8、训练 1 天；DINO-WM 使用 4×A100、batch size 64、训练 11 小时；JEPA-WM 使用 4×A100、batch size 64、训练 13 小时；AD-E2E-JEPA（navtrain）使用 1×A100、batch size 128、训练 20 小时，加 rollout 为 1 天 22 小时；trainval 的 AD-E2E-JEPA 使用 4×A100、batch size 512、训练 2 天 5 小时，加 rollout 为 4 天 2 小时。</li><li>仿真器与实车平台：原文未报告。</li><li>开源源代码：https://github.com/HaoranZhuExplorer/AD-E2E-JEPA。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIMv2 navtest-stage-1 基准；零样本目标条件规划在 100 个采样子测试场景与全部 12,146 个测试场景上评估。</li><li>评估指标：EPDMS（含乘性安全项）、EPDMS†（不含安全项）、规划时间（s/场景，A100 GPU）、几何/测地精度（FDE、Δx、Δy、Δθ）、可靠性（Top-1/Top-5 命中率）。</li><li>零样本规划（100 子采样场景）：LeWM EPDMS 48.3、EPDMS† 73.9、时间 0.7 s；DINO-WM EPDMS 68.3、EPDMS† 91.4、时间 91.8 s；JEPA-WM EPDMS 74.2、EPDMS† 90.9、时间 101.0 s；AD-E2E-JEPA（navtrain）EPDMS 76.6、EPDMS† 92.4、时间 0.8 s；AD-E2E-JEPA + rollout EPDMS 70.4、EPDMS† 92.2、FDE 3.5 m、Top-1/Top-5 34%/67%。</li><li>零样本规划（全部 12,146 测试场景，256 候选）：LeWM EPDMS 39.8、EPDMS† 66.7、FDE 14.6 m、Top-1/Top-5 5.7%/11.3%；AD-E2E-JEPA（navtrain）EPDMS 63.5、EPDMS† 80.1、FDE 6.3 m；+ rollout EPDMS 64.9、EPDMS† 83.1、FDE 4.5 m、Top-1/Top-5 42.6%/71.0%。</li><li>Trainval 训练的世界模型（256 候选）：AD-E2E-JEPA EPDMS 63.2、EPDMS† 80.1；+ rollout EPDMS 67.3、EPDMS† 84.1、FDE 4.0 m、Top-1/Top-5 53.8%/82.7%。</li><li>扩大候选轨迹数量（trainval + rollout）：512 候选 EPDMS 69.2；1024 候选 70.5；2048 候选 71.5；4096 候选 72.1；8192 候选 EPDMS 72.9、EPDMS† 86.5、FDE 2.8 m、Δx 2.5 m、Δy 0.8 m、Δθ 2.0°；随候选数增加命中率下降，8192 候选为 15.3%/33.8%。</li><li>论文摘要报告：世界模型本身在平均 20 米外的目标上分别达到 4.0/2.8</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.34387/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">CAR-VLA: Complexity-Aware and Risk-Adaptive Reasoning for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.34035/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">3D Point Tracking with State Space Models</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RCVLA: 4D Radar-Grounded Semantic Reasoning and Trajectory Arbitration for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。 研究场景为基于多视角摄像头与多视角4D雷达点的驾驶场景理解与开放环轨迹规划。 核心研究问题：现有以摄像头为中心的VLA模型主要从视觉观测推断几何与运动信息，在能见度下降等条件下可能不可靠；同时，标准图文预训练无法提供4D雷达-语言对齐，且语义推理与轨迹规划对4D雷达表示的需求不同。 为此，论文提出RCVLA：包含雷达锚定语义推理阶段（RCVLA-Sem）与轨迹仲裁阶段（RCVLA-Phys），并构建Cap4DR与OmniHD-QA两个数据集。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.32681">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.32681.webp" alt="RCVLA: 4D Radar-Grounded Semantic Reasoning and Trajectory Arbitration for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">RCVLA: 4D Radar-Grounded Semantic Reasoning and Trajectory Arbitration for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.32681" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.32681" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.32681</span></div>
+            <p class="detail-summary">论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。 研究场景为基于多视角摄像头与多视角4D雷达点的驾驶场景理解与开放环轨迹规划。 核心研究问题：现有以摄像头为中心的VLA模型主要从视觉观测推断几何与运动信息，在能见度下降等条件下可能不可靠；同时，标准图文预训练无法提供4D雷达-语言对齐，且语义推理与轨迹规划对4D雷达表示的需求不同。 为此，论文提出RCVLA：包含雷达锚定语义推理阶段（RCVLA-Sem）与轨迹仲裁阶段（RCVLA-Phys），并构建Cap4DR与OmniHD-QA两个数据集。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Tongji（同济大学） · Lianqing Zheng、Xichan Zhu、Zhixiong Ma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.32681/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。</li><li>研究场景为基于多视角摄像头与多视角4D雷达点的驾驶场景理解与开放环轨迹规划。</li><li>核心研究问题：现有以摄像头为中心的VLA模型主要从视觉观测推断几何与运动信息，在能见度下降等条件下可能不可靠；同时，标准图文预训练无法提供4D雷达-语言对齐，且语义推理与轨迹规划对4D雷达表示的需求不同。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Tongji（同济大学）；作者：Lianqing Zheng、Xichan Zhu、Zhixiong Ma</li><li>机构：ZJU（浙江大学）；作者：Xiaokai Bai、Yixuan Luo、Hui-liang Shen</li><li>机构：HKUST（香港科技大学）；作者：Runwei Guan</li><li>机构：UTokyo（东京大学）；作者：Minghao Liu</li><li>机构：SJTU（上海交通大学）；作者：Zhiqiang Wei</li><li>注：原文标注“*Equal Contribution. Corresponding Author”，但未明确说明该标注对应的具体作者，因此未将具体作者标注为通讯作者或共同一作。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中的端到端驾驶与视觉-语言-动作（VLA）模型任务，将4D雷达引入VLA框架以支持语义推理与轨迹规划。</li><li>研究场景为基于多视角摄像头与多视角4D雷达点的驾驶场景理解与开放环轨迹规划。</li><li>核心研究问题：现有以摄像头为中心的VLA模型主要从视觉观测推断几何与运动信息，在能见度下降等条件下可能不可靠；同时，标准图文预训练无法提供4D雷达-语言对齐，且语义推理与轨迹规划对4D雷达表示的需求不同。</li><li>为此，论文提出RCVLA：包含雷达锚定语义推理阶段（RCVLA-Sem）与轨迹仲裁阶段（RCVLA-Phys），并构建Cap4DR与OmniHD-QA两个数据集。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建Cap4DR（86,016个4D雷达-图像-文本样本，用于雷达-语言对齐预训练）与OmniHD-QA（520,161个问答对，覆盖场景描述、关键物体推理、占据理解、轨迹规划，用于指令微调与评估）。</li><li>提出RCVLA雷达-相机VLA框架，将4D雷达以互补角色用于语义推理和轨迹仲裁；RCVLA-Sem融合相机与雷达token用于驾驶问答和参考轨迹生成。</li><li>RCVLA-Phys利用结构化场景查询与簇级雷达测量对轨迹候选进行截断扩散精炼，并使用雷达推导的TTC风险进行候选选择校准。</li><li>在OmniHD-QA上，实验显示语义推理与开放环规划相对所评估基线有改进；消融验证语言对齐的雷达token对场景推理的作用，以及保留的物理测量对轨迹精炼与风险感知选择的作用。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：RCVLA分为两阶段——RCVLA-Sem（雷达锚定语义推理）与RCVLA-Phys（轨迹仲裁）。</li><li>输入传感器：多视角图像与多视角4D雷达点；RCVLA-Sem使用EVA-02-L编码多视角图像，使用RadarPillarNet提取4D雷达BEV特征；实现中使用六路同步640×640相机视角与多视角4D雷达点。</li><li>场景表示：图像特征组织为带视角和相机感知3D位置编码的多视角序列，雷达BEV特征转换为带2D位置编码的紧凑空间序列；结构化场景查询包括物体查询Q^OD与占据查询Q^OCC；RCLA-Phys使用簇级雷达测量。</li><li>模型结构：IQ-Former与RQ-Former分别使用可学习查询提取固定长度语言对齐token，并投影到LLM隐藏空间；RCVLA-Sem采用门控双向交互，将token投影到紧凑交互空间并对雷达特征进行token级门控，图像分支关注门控雷达特征，雷达分支关注图像特征；增强后的图像与雷达token结合提示嵌入和自车特征输入LoRA适配的LLM；规划提示引入特殊token <code>&lt;waypoint_ego&gt;</code>，通过MLP回归未来6s的12个路点参考轨迹。</li><li>结构化查询：两个轻量Transformer解码器在共享图像与雷达特征上产生物体查询与占据查询，物体分支使用可学习3D参考点，占据分支使用规则3D网格，二者通过可变形注意力聚合图像与雷达BEV特征，并分别由3D检测与语义占据监督。</li><li>轨迹仲裁：将RCVLA-Sem的长时域参考轨迹对齐到当前自车坐标系并保留未来3s段作为候选先验，同时从离线轨迹锚点库检索额外先验；按截断扩散方式对候选先验加噪，初始化轨迹查询后送入扩散解码器迭代精炼。</li><li>扩散解码器条件：占据、物体与雷达条件分别提供自由空间与障碍约束、实例级物体表示、位置与运动的直接测量；雷达簇由4D雷达点通过DBSCAN获得；解码器层通过多头部交叉注意力与门控残差更新融合条件，扩散时间步通过FiLM调制查询；回归头预测坐标修正而非噪声，评分头预测候选分数；推理时最后层解码预测在下一DDIM时间步更新候选。</li><li>雷达风险校准：对雷达簇按恒速假设预测规划步位置，计算自车与雷达簇足迹最小平面距离、接近速度、TTC，并将所有簇与路点的最小TTC转换为候选风险；训练时用于构建风险感知软排序目标，推理时校准候选分数后进行最终选择。</li><li>训练目标：三阶段训练——先以3D检测与语义占据监督预训练雷达编码器；随后冻结雷达编码器与LLM，仅用Cap4DR以掩码自回归语言建模训练RQ-Former；再初始化图像与雷达编码器、IQ-Former、RQ-Former，在OmniHD-QA上微调RCVLA-Sem，基座LLM冻结而LoRA适配器可训练，目标联合监督语言生成、参考规划与结构化场景查询；最后冻结RCVLA-Sem，训练RCVLA-Phys进行轨迹精炼与风险感知候选排序。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Cap4DR整合View-of-Delft、TJ4DRadSet、NTU4DRadLM、MSC-RAD4R、SNAIL Radar、Dual Radar的同步前视图图像与4D雷达数据，包含86,016雷达-文本对，用于雷达-语言对齐预训练；OmniHD-QA来自OmniHD-Scenes，包含520,161问答对，覆盖场景描述、关键物体推理、占据理解、轨迹规划。</li><li>数据构建：Cap4DR进行跨数据集时间对齐与统一雷达预处理，仅保留可与雷达观测关联的物体和空间关系，抽取实体由三个VLM交叉检查并对模糊案例人工复核；OmniHD-QA使用Gemini2.5-Pro从多视角图像与可用标注生成场景描述QA，其余任务由结构化标注构建，包括物体轨迹、语义占据、自车姿态。</li><li>数据划分：Cap4DR仅用于RQ-Former预训练；下游实验均在OmniHD-QA上进行，包含358,185训练样本与161,976测试样本。</li><li>模型规模：使用Vicuna-7B作为语言模型；IQ-Former与RQ-Former各包含256个可学习查询与六层编码器；RCVLA-Phys使用五个轨迹候选、两层扩散解码器与两个DDIM精炼步。</li><li>训练资源：所有阶段使用AdamW在四张NVIDIA L20 GPU上训练。</li><li>仿真器：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：OmniHD-QA；Cap4DR仅用于RQ-Former预训练。</li><li>评估指标：场景描述使用标准caption指标（BLEU-n、ROUGE-L、CIDEr、METEOR）；关键物体推理使用速度误差与意图准确率；占据推理使用准确率（Occ.、Dyn.、Sta.、Drv.、A_occ、A_int）；轨迹规划使用开放环L2误差与碰撞率。</li><li>对比方法：LLaVA-v1.5-7B、Qwen2.5-VL-7B-Instruct、Qwen3-VL-8B-Instruct、InternVL2.5-8B、InternVL3-8B、OmniDrive、Constant-Velo、BEV-Planner、UniAD；通用VLM基线为零样本推理，OmniDrive与UniAD在没有地图监督下训练。</li><li>场景描述结果：RCVLA-Sem将CIDEr相对OmniDrive从92.49提升到102.41（提升9.92点），并在所有caption指标上取得增益；BLEU-1为41.82、BLEU-2为30.22、BLEU-3为23.40、BLEU-4为18.69、ROUGE-L为38.28、METEOR为44.91。</li><li>占据与关键物体推理结果：RCVLA-Sem将占据准确率从78.81%提升到80.41%，将关键物体速度误差从3.61 m/s降低到2.82 m/s（相对OmniDrive降低21.9%）；可行驶区域准确率与意图准确率分别比OmniDrive低0.48和1.13个百分点。</li><li>轨迹规划结果：RCVLA-Phys在对比方法中取得最低平均L2误差与碰撞率，分别为0.259 m与0.175%；相对RCVLA-Sem，轨迹仲裁将平均L2误差从0.348 m降至0.259 m，将平均开放环碰撞率从0.576%降至0.175%；3 s碰撞率从1.481%降至0.401</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.32856/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PolyTopoBench: A Benchmark for Complex Vector Polygon Generation from Remote Sensing Imagery</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.32645/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">From Scene Graphs to Answers: Selective Neuro-Symbolic Reasoning for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

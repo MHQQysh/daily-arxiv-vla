@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PolyTopoBench: A Benchmark for Complex Vector Polygon Generation from Remote Sensing Imagery - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。 研究问题：现有方法多聚焦简单外轮廓，难以表示或保持带孔（interior rings）的复杂多边形拓扑；已有评测也多以区域重叠或外边界质量为主，不能保证内环正确。 论文提出 PolyTopoBench，一个统一评测框架，明确以复杂矢量多边形（一个外环加零个或多个内环）为中心，同时评估外环与内环。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.32856">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.32856.webp" alt="PolyTopoBench: A Benchmark for Complex Vector Polygon Generation from Remote Sensing Imagery" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PolyTopoBench: A Benchmark for Complex Vector Polygon Generation from Remote Sensing Imagery</h1>
+            <div class="detail-meta">2026-09-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.32856" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.32856" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.32856</span></div>
+            <p class="detail-summary">论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。 研究问题：现有方法多聚焦简单外轮廓，难以表示或保持带孔（interior rings）的复杂多边形拓扑；已有评测也多以区域重叠或外边界质量为主，不能保证内环正确。 论文提出 PolyTopoBench，一个统一评测框架，明确以复杂矢量多边形（一个外环加零个或多个内环）为中心，同时评估外环与内环。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The University of Texas at Austin · Zeping Liu、Ni Lao、Junfeng Jiao 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.32856/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。</p>
+  <ul class="reading-intro-points"><li>论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。</li><li>研究问题：现有方法多聚焦简单外轮廓，难以表示或保持带孔（interior rings）的复杂多边形拓扑；已有评测也多以区域重叠或外边界质量为主，不能保证内环正确。</li><li>论文提出 PolyTopoBench，一个统一评测框架，明确以复杂矢量多边形（一个外环加零个或多个内环）为中心，同时评估外环与内环。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The University of Texas at Austin；作者：Zeping Liu、Ni Lao、Junfeng Jiao、Gengchen Mai</li><li>机构：Amazon；作者：Weiwei Sun、Gil Wolff</li><li>机构：University of Maryland；作者：Yiqun Xie</li><li>机构：Emory University；作者：Liang Zhao</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向从遥感影像生成矢量多边形的任务，服务于自动驾驶、矢量地图构建和遥感应用等场景。</li><li>研究问题：现有方法多聚焦简单外轮廓，难以表示或保持带孔（interior rings）的复杂多边形拓扑；已有评测也多以区域重叠或外边界质量为主，不能保证内环正确。</li><li>论文提出 PolyTopoBench，一个统一评测框架，明确以复杂矢量多边形（一个外环加零个或多个内环）为中心，同时评估外环与内环。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 PolyTopoBench，一个面向复杂矢量多边形生成而非简单外边界提取的统一遥感评测基准。</li><li>构建大规模、多类别基准：近 300K 多边形实例、超过 10K 复杂多边形、超过 42K 内环，覆盖建筑、道路、植被、无植被区域四类地物。</li><li>对 11 个公开矢量多边形生成模型进行可复现比较，涵盖 segmentation-then-polygonization、视觉基础模型辅助、表示学习到矢量和直接矢量解码方法。</li><li>提出 hole-aware 评测协议，分别评估整体多边形、外环和内环，并引入 Hole-F1 与 Topo-EM 等环结构正确性指标。</li><li>实验揭示现有方法常能恢复简单外边界，但在带孔或多环多边形上显著退化，复杂多边形生成仍未解决。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：遥感影像矢量多边形生成评测基准与统一评测器，原文未报告具体自动驾驶车载模块。</li><li>输入传感器：输入为遥感/航空影像，形式为 I ∈ R^{H×W×3}；原文未报告其他传感器。</li><li>场景表示：每个多边形实例表示为 (c, s, G)，其中 c 为类别，s 为置信度，G 为几何，包含恰好一个外环 e(G) 和零个或多个内环 I(G)；H(G)=\|I(G)\|，R(G)=1+H(G)。</li><li>模型结构：PolyTopoBench 本身不是单一新模型，而是标准化 11 个基线输出的评测框架；基线包括 U-Net + Poly.、Mask R-CNN + Poly.、SAM2 + Poly.、HiSup、ACPV-Net、FFL、GCP、HoliTracer、Pix2Poly、PolyWorld、RoIPoly。</li><li>关键技术：统一将预测归一化为一个外环加零个或多个内环的多边形；采用 role-specific ring matching，外环直接配对，内环通过 Hungarian assignment 以 per-ring BIoU 为代价一一匹配，并设置 BIoU 阈值接受孔匹配。</li><li>评测指标：区域一致性 AP50；矢量边界质量 BIoU、POLIS、MTA，并在 Overall、Exterior、Hole 三种 ring-aware scopes 下报告；环结构正确性 Hole-F1 和 Topo-EM。</li><li>默认设置：BIoU 使用一像素边界缓冲，环匹配阈值 γ=0.1；原文未报告模型规模、训练资源和网络结构细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Inria building dataset 与 Deventer land-cover polygon dataset；Inria 用于建筑轮廓生成，Deventer 用于道路、植被、无植被区域。</li><li>数据构建：基于 Inria 与 Deventer，结合 OpenStreetMap 标注并人工校正，以对齐影像并恢复缺失内环。</li><li>数据规模：基准包含近 300K 多边形实例、超过 10K 复杂多边形、超过 42K 内环。</li><li>任务统计：Inria Building 254,133 个实例，其中复杂 5,512，内环 19,854；Deventer Road 4,533 个实例，其中复杂 1,066，内环 9,992；Deventer Vegetation 23,517 个实例，其中复杂 859，内环 1,477；Deventer Unvegetated 16,552 个实例，其中复杂 2,942，内环 10,749。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：PolyTopoBench 四个单类任务，包括 Inria Building、Deventer Road、Deventer Vegetation、Deventer Unvegetated。</li><li>评估指标：AP50、BIoU、POLIS、MTA、Hole-F1、Topo-EM；AP50、BIoU、Hole-F1、Topo-EM 越高越好，POLIS、MTA 越低越好。</li><li>评估条件：原文报告为遥感影像上的开环基准评测；未报告闭环、仿真或实车条件。</li><li>对比方法：11 个基线，包括 U-Net + Poly.、Mask R-CNN + Poly.、SAM2 + Poly.、HiSup、ACPV-Net、FFL、GCP、HoliTracer、Pix2Poly、PolyWorld、RoIPoly。</li><li>Inria Building 关键数值：Mask R-CNN + Poly. AP50=0.720，U-Net + Poly. AP50=0.670；GCP AP50=0.631，ACPV-Net AP50=0.575，HiSup AP50=0.496；Pix2Poly AP50=0.102，PolyWorld AP50=0.016，RoIPoly AP50=0.001，HoliTracer AP50=0.034。</li><li>Inria Building 环结构结果：Hole-F1 由 ACPV-Net 0.527、U-Net + Poly. 0.514、HiSup 0.473 领先；Mask R-CNN + Poly. 0.167、GCP 0.015、FFL 0.000。Topo-EM 中 U-Net + Poly. 0.531，Mask R-CNN + Poly. 0.519，GCP 仅 0.065。</li><li>Deventer Road 关键数值：U-Net + Poly. AP50=0.520、BIoU(O)=0.328、BIoU(E)=0.311、BIoU(H)=0.337、POLIS(O)=5.16、Hole-F1=0.466、Topo-EM=0.144；Mask R-CNN + Poly. AP50=0.113、Hole-F1=0.010、Topo-EM=0.081；SAM2 + Poly. AP50=0.023、Topo-EM=0.012。</li><li>Deventer Vegetation 关键数值：U-Net + Poly. AP50=0.382、BIoU(O)=0.340、BIoU(H)=0.208、POLIS(O)=4.41、Hole-F1=0.022、Topo-EM=0.222；Mask R-CNN + Poly. AP50=0.357、Topo-EM=0.273。</li><li>Deventer Unvegetated 关键数值：U-Net + Poly. AP50=0.247、BIoU(O)=0.222、BIoU(H)=0.253、Hole-F1=0.428、Topo-EM=0.088；Mask R-CNN + Poly. AP50=0.181、Topo-EM=0.099。</li><li>主要结论：现有方法常能恢复简单外边界，但在带孔或多环复杂多边形上显著退化；区域一致性 AP50 与环结构正确性在 Inria 上基本不相关，仅返回外环也可能获得接近完美的 AP50，Hole-F1 与 Topo-EM 能暴露该失败模式。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.32863/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SV2V-RSim: A Comprehensive Benchmark for Self-Selective V2V Cooperative Perception with Near-Realistic Data</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.32681/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RCVLA: 4D Radar-Grounded Semantic Reasoning and Trajectory Arbitration for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

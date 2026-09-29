@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DriveHierarchy: A Benchmark for Diagnosing VLM Driving Capabilities from Open-Loop Understanding to Closed-Loop Execution - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。 目标能力链包括：对交通参与者与危险目标进行感知落地、跨视角与跨时间整合上下文、对未来演化进行推理，以及在闭环交互中选择合适动作。 研究问题：现有基准通常只评估开环理解或闭环驾驶，难以解释这些能力如何组织、如何关联，也难以用于模型诊断与针对性改进。 论文提出 DriveHierarchy，将 VLM 自动驾驶能力分层为四级：R1 感知落地、R2 上下文记忆、R3 心智推理、R4 闭环执行，用于统一评估与诊断。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.31814">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.31814.webp" alt="DriveHierarchy: A Benchmark for Diagnosing VLM Driving Capabilities from Open-Loop Understanding to Closed-Loop Execution" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DriveHierarchy: A Benchmark for Diagnosing VLM Driving Capabilities from Open-Loop Understanding to Closed-Loop Execution</h1>
+            <div class="detail-meta">2026-09-25 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.31814" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.31814" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.31814</span></div>
+            <p class="detail-summary">论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。 目标能力链包括：对交通参与者与危险目标进行感知落地、跨视角与跨时间整合上下文、对未来演化进行推理，以及在闭环交互中选择合适动作。 研究问题：现有基准通常只评估开环理解或闭环驾驶，难以解释这些能力如何组织、如何关联，也难以用于模型诊断与针对性改进。 论文提出 DriveHierarchy，将 VLM 自动驾驶能力分层为四级：R1 感知落地、R2 上下文记忆、R3 心智推理、R4 闭环执行，用于统一评估与诊断。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">同济大学交通学院（College of Transportation, Tongji University） · Chengkai Xu、Yichen…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.31814/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。</p>
+  <ul class="reading-intro-points"><li>论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。</li><li>目标能力链包括：对交通参与者与危险目标进行感知落地、跨视角与跨时间整合上下文、对未来演化进行推理，以及在闭环交互中选择合适动作。</li><li>研究问题：现有基准通常只评估开环理解或闭环驾驶，难以解释这些能力如何组织、如何关联，也难以用于模型诊断与针对性改进。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：同济大学交通学院（College of Transportation, Tongji University）；作者：Chengkai Xu、Yicheng Guo、Peng Hang、Jian Sun（通讯作者）</li><li>机构：北卡罗来纳大学教堂山分校计算机科学系（Department of Computer Science, UNC Chapel Hill）；作者：Jiaqi Liu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文关注基于视觉语言模型（VLM）的自动驾驶系统评估问题，指出驾驶能力是复合能力，而非单一能力。</li><li>目标能力链包括：对交通参与者与危险目标进行感知落地、跨视角与跨时间整合上下文、对未来演化进行推理，以及在闭环交互中选择合适动作。</li><li>研究问题：现有基准通常只评估开环理解或闭环驾驶，难以解释这些能力如何组织、如何关联，也难以用于模型诊断与针对性改进。</li><li>论文提出 DriveHierarchy，将 VLM 自动驾驶能力分层为四级：R1 感知落地、R2 上下文记忆、R3 心智推理、R4 闭环执行，用于统一评估与诊断。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出面向 VLM 自动驾驶的分层能力基准，整合多个公开自动驾驶数据集，将驾驶智能分解为从感知落地到闭环执行的四个递进层级。</li><li>构建联合仿真平台，支持在真实道路网络上的交互式场景构建，并用于多类功能驾驶场景下的闭环评估。</li><li>构建统一开环基准，包含 76,798 个问答对、覆盖 84,279 帧；用于所有报告结果的精炼版本包含 14,000 个问答对、覆盖 31,945 帧。</li><li>构建闭环基准，基于 CARLA-SUMO 联合仿真平台整理 100 个驾驶场景，用于具身评估。</li><li>对 15 个开源 VLM 进行综合评测，并开展 benchmark-guided SFT 案例研究，支持能力级分析与模型改进。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文为评估基准与诊断框架，包含开环能力评测、闭环仿真评测、能力相关性分析与 benchmark-guided SFT。</li><li>场景表示：开环样本表示为元组 (x_i, q_i, y_i)，其中 x_i 为视觉输入，可为单张图像、同步多视角观测集合或短时序片段；q_i 为任务相关自然语言查询；y_i 为真值目标。</li><li>模型结构：论文未提出新的 VLM 网络结构；评测对象为 15 个开源 VLM，包括通用 VLM 与驾驶专用模型。</li><li>输入传感器：闭环 R4 中，模型接收多模态驾驶输入，包括前视图像、鸟瞰图上下文和导航提示；开环 R1-R3 使用图像、多视角观测或短时序片段。</li><li>关键技术一：R1 感知落地包含 8 类任务，分为目标与危险识别、距离感知、视觉定位、情境描述四类能力族。</li><li>关键技术二：R2 上下文记忆包含 4 类任务，覆盖多视角记忆、时间记忆和空间关系推理。</li><li>关键技术三：R3 心智推理包含 2 类任务，包括结果预测和序列规划。</li><li>关键技术四：R4 闭环执行基于 CARLA-SUMO 联合仿真平台，CARLA 提供自车中心仿真环境与多模态观测，SUMO 生成并控制背景交通流。</li><li>关键技术五：交互式场景编辑框架支持配置自车、周边车辆、行人及其他动态元素的位置、轨迹、交互和交通控制条件。</li><li>关键技术六：闭环得分为 S_R4 = S_route · S_safety · S_eff，分别衡量路线完成、安全和效率，乘法设计避免仅靠路线进展掩盖不安全或低效行为。</li><li>开环评分：每个样本赋予有界分数 s_i ∈ [0,100]，不同问题类型使用不同评估方法。</li><li>若原文未报告某项信息，明确写“原文未报告”：模型内部结构设计、训练损失、具体网络层数等原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：整合多个公开自动驾驶数据集，构建 full-scale 与 streamlined 两种形式的开环语料。</li><li>数据规模：总规模为 84,279 帧、76,798 个问答对；用于所有报告 R1-R3 结果的精炼版本为 31,945 帧、14,000 个问答对。</li><li>仿真器：CARLA 与 SUMO 联合仿真平台，基于真实世界道路网络，保留道路拓扑、车道结构和交通语义。</li><li>场景资源：闭环 R4 包含 100 个整理场景，覆盖行人遭遇、避障、转弯、交叉口、交通干扰、急刹、汇入、让行和环岛导航等城市交互模式。</li><li>模型规模：评测 15 个 VLM，包括 Qwen3-VL 2B/8B/32B、InternVL3_5 2B/8B/38B、ZwZ 8B、MiniCPM-V-4_5 9B、Gemma-3-it 12B/27B、Pixtral 12B、Qwen2.5-VL 72B、InternVL3 78B、DA-DriveLM 4B、ReasonDrive 7B。</li><li>训练资源：论文进行 benchmark-guided SFT 时选择 Qwen3-VL-8B-Instruct，选择其与对应 state-of-the-art 结果差距最大的任务组；具体训练资源、GPU 型号与数量原文未报告。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：DriveHierarchy，包括开环 R1-R3 和闭环 R4。</li><li>评估指标：开环使用每个样本有界分数 s_i ∈ [0,100] 及加权平均分；闭环使用 S_R4 = S_route · S_safety · S_eff，并报告 10 个场景族分数与平均分和排名。</li><li>开环关键数值：Qwen2.5-VL(72B) 取得最佳加权分数 54.47，随后为 Qwen3-VL(32B) 的 49.64 和 Gemma-3-it(27B) 的 49.53。</li><li>开环对比方法：15 个开源 VLM，分为通用模型和驾驶专用模型；表 1 报告各子任务与平均分。</li><li>开环结论：领先模型在三个 rank 上均有竞争力，而非仅峰值于单一子任务；驾驶专用 VLM 在整体覆盖上明显较弱，说明领域适配更多强化局部任务族，而非形成稳健分层能力。</li><li>能力结构结论：Qwen 系列随规模提升平均性能与 profile 平衡；InternVL 提升不均衡；8B-12B 对比显示同规模模型能力 profile 差异明显。</li><li>闭环关键数值：表 2 报告 R4 在 10 个场景族上的结果；在已显示部分中，Gemma-3-it(27B) 在 Sce 1、Sce 2、Sce 4、Sce 7 上分别为 27.950、10.269、16.599、43.936，平均分为 5.405，排名 3；MiniCPM-V-4_5(9B) 平均分为 5.405，排名 3；完整排名与其余模型数值部分可见。</li><li>对比条件：开环与闭环均为仿真评测；闭环为 CARLA-SUMO 联合仿真下的连续交互评估，非实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.32157/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">CausalDriveBench: Evaluating Causal Reasoning in Vision-Language-Action Models for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.31383/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Guiding End-to-End Driving Models with Endpoint-Constrained Trajectory Optimization</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VehDyn: A Driving World Model Benchmark for Vehicle Dynamics - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。 应用场景为：驾驶世界模型作为数据引擎、动作规划器和生成式仿真器时，其生成的未来是否物理可行、是否在相同指令与道路条件下像真实车辆一样运动。 研究问题是：缺乏车辆、道路、机动与速度条件可独立控制、且真值车辆状态与视频同步记录的数据集与评测框架，因此无法系统衡量生成驾驶视频的车辆动力学保真度。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.33264">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.33264.webp" alt="VehDyn: A Driving World Model Benchmark for Vehicle Dynamics" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">VehDyn: A Driving World Model Benchmark for Vehicle Dynamics</h1>
+            <div class="detail-meta">2026-09-27 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.33264" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.33264" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.33264</span></div>
+            <p class="detail-summary">论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。 应用场景为：驾驶世界模型作为数据引擎、动作规划器和生成式仿真器时，其生成的未来是否物理可行、是否在相同指令与道路条件下像真实车辆一样运动。 研究问题是：缺乏车辆、道路、机动与速度条件可独立控制、且真值车辆状态与视频同步记录的数据集与评测框架，因此无法系统衡量生成驾驶视频的车辆动力学保真度。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确对应：原文未明确列出作者所属机构，仅列出作者姓名（Tianyi Wang、Wangsheng Du、Jiazhou Chen、Tianyi…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.33264/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。</li><li>应用场景为：驾驶世界模型作为数据引擎、动作规划器和生成式仿真器时，其生成的未来是否物理可行、是否在相同指令与道路条件下像真实车辆一样运动。</li><li>研究问题是：缺乏车辆、道路、机动与速度条件可独立控制、且真值车辆状态与视频同步记录的数据集与评测框架，因此无法系统衡量生成驾驶视频的车辆动力学保真度。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>原文未明确对应：原文未明确列出作者所属机构，仅列出作者姓名（Tianyi Wang、Wangsheng Du、Jiazhou Chen、Tianyi Zeng、Xiangyu Li、Jiseop Byeon、Yujin Wang、Yiming Xu、Yangyang Wang、Bingzhao Gao、Sikai Chen、Zhaomiao Guo、Junfeng Jiao、Christian Claudel、Alexandre Bayen），未报告作者与机构的对应关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶中的驾驶世界模型（driving world model）评测问题，指出既有基准主要评估视觉保真度和粗略物理合理性，无法验证生成视频是否遵循真实的车辆运动学与动力学。</li><li>应用场景为：驾驶世界模型作为数据引擎、动作规划器和生成式仿真器时，其生成的未来是否物理可行、是否在相同指令与道路条件下像真实车辆一样运动。</li><li>研究问题是：缺乏车辆、道路、机动与速度条件可独立控制、且真值车辆状态与视频同步记录的数据集与评测框架，因此无法系统衡量生成驾驶视频的车辆动力学保真度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个物理接地的数据集：基于 CARLA-CarSim 协同仿真，通过车辆类型、机动、速度、摩擦系数、场景与太阳角度的全因子设计生成 10,080 个配置，并配对同步的真值车辆状态。</li><li>提出车辆动力学感知的评测协议：在视觉合理性和平面轨迹对齐之外，扩展到六自由度（6-DoF）运动学一致性，以及针对真值响应的条件感知动力学一致性。</li><li>开展大规模基准测试：评估 12 个代表性视频世界模型，刻画视觉保真度与车辆动力学一致性之间的差距，并识别视觉指标无法暴露的失效模式。</li><li>额外采用 DrivingGen 与 WorldScore 两套既有协议评估视频质量，并与 VehDyn 分数进行相关性分析。</li><li>验证 VehDyn 分数与人类判断的一致性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于驾驶世界模型评测基准，包含数据集构建（VehDyn Dataset）与评测框架（VehDyn Evaluation）两部分。</li><li>输入传感器：RGB 相机，刚性地安装在车辆参考点并随车身运动，以第三人称视角记录 1920×1080、30 Hz、5 秒、150 帧的视频；车辆状态由 CarSim 在每个渲染帧记录，包括位置、朝向、速度与速率、控制输入及沿路线的进度。原文未报告其他传感器。</li><li>场景表示：CARLA 负责道路几何、场景资产、交通参与者与光照渲染；CarSim 以经过验证的多体动力学模型计算车辆响应，包括轮胎力生成、悬架运动学以及纵向和横向载荷转移。</li><li>模型结构：原文未报告提出新的生成模型结构；评测对象为 12 个开源视频世界模型。VehDyn 使用 DPVO（deep patch visual odometry）从生成视频帧和已知相机内参估计 6-DoF 相对相机位姿序列，再由刚体安装外参变换得到车身位姿。</li><li>关键技术：CARLA-CarSim 协同仿真在统一时钟上同步，CarSim 以 2,000 Hz 积分、CARLA 以 30 Hz 同步定步长渲染，CarSim 状态在每个渲染帧采样；参考路径控制器在 CARLA 中发出油门、制动和转向命令，CarSim 积分车辆动力学后返回更新后的位置、朝向与运动状态，CARLA 将车辆置于返回位姿并渲染下一帧；场景空间包含六个因子（车辆类型、目标速度、驾驶机动、轮胎-道路摩擦系数、城市场景、太阳角度），其中四个动态因子定义物理条件，两个视觉因子提供动态响应应保持不变的重复制；每个配置包含十段独立生成的片段；场景标注使用 Qwen3-VL 生成以运动为中心的描述，并由三名标注者人工审核剔除幻觉或物理歧义内容。</li><li>指标设计：轨迹对齐使用 ADE 和 FDE；运动学一致性使用纵向与横向速度（v_x、v_y）以及横滚、俯仰、偏航的 RMSE；动力学一致性使用摩擦圆约束率（FCCR）以及条件感知动力学一致性（CDC），包括响应方向一致性 CDC_Dir、响应幅度一致性 CDC_Mag 和总体趋势一致性 CDC_Trend；VehDyn 分数先将每个指标映射到 [0,1] 归一化分数（越高越好），再在各层级内平均并对三个层级求和，按机动族计算并等权宏平均。</li><li>视觉评估：DrivingGen 采用 Distribution（FVD）和 Temporal Consistency（Video Consistency 与 Trajectory Consistency）；WorldScore 采用 Quality（3D Consistency、Photometric Consistency、Style Consistency、Subjective Quality）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：VehDyn 数据集，包含 10,080 个配置，每个配置包含十段独立生成的片段，共 100,800 个样本；每个样本包含 5 秒、150 帧 RGB 片段、同步真值状态序列、场景配置和描述文本；数据集总计 140 小时视频、2 TB。</li><li>仿真器：CARLA-CarSim 协同仿真平台；CarSim 以 2,000 Hz 积分，CARLA 以 30 Hz 渲染；车辆质量、转动惯量和轴距在 CarSim 中指定。</li><li>模型规模：原文未报告所评测 12 个视频世界模型的具体参数规模；模型架构、条件与推理成本汇总在附录 Table 6 中，但提供的 HTML 原文未包含该表内容。</li><li>训练资源：原文未报告训练资源（如 GPU 型号、数量、训练时长）。</li><li>实车平台：原文未报告实车平台，数据来自 CARLA-CarSim 协同仿真。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：VehDyn 基准，包含轨迹对齐（ADE、FDE）、运动学一致性（v_x、Pitch、v_y、Roll、Yaw 的 RMSE）、动力学一致性（FCCR、CDC_Dir、CDC_Mag、CDC_Trend）与 VehDyn 综合分数；另用 DrivingGen 和 WorldScore 两套协议评估视觉质量。</li><li>评估指标：ADE ↓、FDE ↓、v_x RMSE ↓、Pitch RMSE ↓、v_y RMSE ↓、Roll RMSE ↓、Yaw RMSE ↓、FCCR ↑、CDC_Dir ↑、CDC_Mag ↑、CDC_Trend ↑、VehDyn 分数排名；视觉指标包括 FVD ↓、Video Consistency ↑、Trajectory Consistency ↑、3D Consistency ↑、Photometric Consistency ↑、Style Consistency ↑、Subjective Quality ↑。</li><li>关键数值：真值参考行为 ADE 0.514、FDE 0.814、v_x 0.897、Pitch 2.522、v_y 0.697、Roll 0.602、Yaw 3.885、FCCR 0.900、CDC_Dir 0.722、CDC_Mag 0.713、CDC_Trend 0.803。12 个模型中 DrivingWorld 获得最高 VehDyn 分数，其后为 Cosmos 3 Nano 和 LTX-Video 2.5。轨迹级指标接近饱和，12 个模型中有 10 个在真值的 20% 以内；没有模型在动力学一致性上达到真值的 92%。视觉质量指标与车辆动力学保真度仅弱相关。</li><li>对比方法：12 个开源视频世界模型，分为三类：五个通用世界模型（Wan 2.2-I2V、LTX-Video 2.5、SkyReels-V2-I2V、HunyuanVideo 1.5-I2V、CogVideoX 1.5）、三个物理世界模型（Cosmos 3 Nano、Vanilla Cosmos 3 Nano、Cosmos-Dreams）、四个驾驶世界模型（Vista、DrivingWorld、GEM、Epona）。</li><li>评估条件：仿真条件下评估，基于 CARLA-CarSim 协同仿真生成的视频与同步真值状态；原文未报告开环、闭环或实车评估结果。VehDyn 分数与人类判断高度一致。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.33737/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.33190/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">FocusDrive: Reasoning with Visual Focus for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

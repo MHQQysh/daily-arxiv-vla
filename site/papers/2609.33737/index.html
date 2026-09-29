@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。 论文关注长时域规划中运动趋势难以从观测历史传播到未来、单潜在状态长展开会衰减有效动力学、保留过时运动模式并干扰近端可靠规划等问题。 论文提出 MomWorld，一种面向长时域规划的动量感知潜在世界模型，将场景配置与运动趋势同时作为潜在状态联合向前传播，并通过 MoFlow 对基础轨迹进行动量条件化的流匹配细化。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.33737">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.33737.webp" alt="MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">MomWorld: Momentum-Aware Latent World Model for Long-Horizon Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-27 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.33737" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.33737" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.33737</span></div>
+            <p class="detail-summary">论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。 论文关注长时域规划中运动趋势难以从观测历史传播到未来、单潜在状态长展开会衰减有效动力学、保留过时运动模式并干扰近端可靠规划等问题。 论文提出 MomWorld，一种面向长时域规划的动量感知潜在世界模型，将场景配置与运动趋势同时作为潜在状态联合向前传播，并通过 MoFlow 对基础轨迹进行动量条件化的流匹配细化。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Nanyang Technological University · Ziying Song、Lei Yang、Haozhuang Chi 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.33737/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。</li><li>论文关注长时域规划中运动趋势难以从观测历史传播到未来、单潜在状态长展开会衰减有效动力学、保留过时运动模式并干扰近端可靠规划等问题。</li><li>论文提出 MomWorld，一种面向长时域规划的动量感知潜在世界模型，将场景配置与运动趋势同时作为潜在状态联合向前传播，并通过 MoFlow 对基础轨迹进行动量条件化的流匹配细化。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Nanyang Technological University；作者：Ziying Song、Lei Yang、Haozhuang Chi、Jiangtao Su、Chen Lv</li><li>机构：Beijing Jiaotong University；作者：Shengkai Zhang</li><li>机构：North University of China；作者：Yuchen Liu</li><li>机构：Dalian University of Technology；作者：Lin Liu</li><li>机构：Tsinghua University；作者：Ziyang Liu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶中的长时域规划任务，目标是让自动驾驶车辆预测未来场景演化与潜在风险，从而在复杂交互中做出安全稳定的决策。</li><li>论文关注长时域规划中运动趋势难以从观测历史传播到未来、单潜在状态长展开会衰减有效动力学、保留过时运动模式并干扰近端可靠规划等问题。</li><li>论文提出 MomWorld，一种面向长时域规划的动量感知潜在世界模型，将场景配置与运动趋势同时作为潜在状态联合向前传播，并通过 MoFlow 对基础轨迹进行动量条件化的流匹配细化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 MomWorld，通过 Latent World Rollout（LWR）将观测历史与未来想象连接起来。</li><li>提出 MoLWM，用于维护、更新和重置潜在动量以建模未来动力学，并构造 Future World Memory。</li><li>提出 MoFlow，将预测的世界演化转化为有界、时域感知的轨迹修正，以支持稳定规划。</li><li>在 NAVSIM、nuScenes 和 Bench2Drive 上进行了广泛评估，报告在 nuScenes 1–6 s 时域上相对 MomAD 平均碰撞率相对降低 12.2%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶框架，包含感知监督（Map/Det heads）、潜在世界建模、候选规划选择与轨迹细化；原文未报告该框架在完整自动驾驶系统中的具体部署模块划分。</li><li>输入传感器：NAVSIM 设置中输入两帧相机图像和四次 LiDAR 扫描；nuScenes 使用 camera-only 设置；原文未报告其他传感器输入。</li><li>场景表示：历史与当前多视角图像编码为 Scene Queries；MoLWM 使用场景状态 z_k ∈ R^D 与动量 p_k ∈ R^D 表示潜在驾驶世界；NAVSIM 中 D=256。</li><li>模型结构：MomWorld 包含 Momentum-Aware Latent World Modeling（MoLWM）与 Momentum-Conditioned Flow Matching（MoFlow）。MoLWM 包含 History-Conditioned Initialization、Scene-Adaptive Momentum Dynamics（SMD）、Latent World Rollout（LWR）和 Future World Memory（FWM）。MoFlow 包含 Momentum-Guided Residual Flow（MGRF）与 Horizon-Aware Residual Fusion（HARF）。</li><li>关键技术：SMD 预测保留门 ρ_k、重置门 g_k 和动量提案 u_k，并通过式(3)更新未来动量；LWR 通过式(4)递归更新状态，训练时使用未来观测编码为 detached target Scene Queries，推理时不使用未来观测；FWM 通过式(6)-(7)构造未来记忆 token 并自注意力聚合；MoFlow 在 p_0 与 M_t 条件下学习残差向量场，训练目标为式(10)，推理时用 J 步显式 Euler 积分；HARF 对残差进行裁剪并按 γ_k 从 0.05 到 1.0 线性增加长时域修正强度。</li><li>训练目标：世界预测损失为 L_world = L_future + 0.5 L_p + 0.2 L_aux；MoFlow 损失为 L_MoFlow = L_FM + L_τ；完整目标为 L = L_percep + L_plan + L_world + L_MoFlow。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes、NAVSIM v1、NAVSIM v2、Bench2Drive；Bench2Drive 结果在附录中。</li><li>仿真器：NAVSIM 使用伪仿真协议进行开环评估；nuScenes 使用官方 train/validation split 与 camera-only 设置；原文未报告 Bench2Drive 的仿真配置细节。</li><li>模型规模：NAVSIM 中基于 GTRS-Dense，使用 V-99-eSE VoVNet 骨干，D=256 潜在空间，产生 40 个 LWR 步骤，Δt=0.1 s，评分固定 16,384 条轨迹词汇表；MoFlow 使用 4 步显式 Euler 积分。</li><li>训练资源：NAVSIM 模型训练 20 epochs，Adam 优化器，学习率 2×10^-4，每设备 batch size 为 2，混合精度，梯度裁剪 5.0；原文未报告 GPU 数量、训练时长或总计算量。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 官方 train/validation split；NAVSIM v1 navtest 共 12,146 个索引场景；NAVSIM v2 navhard 两阶段伪仿真；Bench2Drive 结果在附录。</li><li>评估指标：nuScenes 报告 horizon-wise L2 与 predicted collision rate（越低越好），TPC 衡量连续轨迹预测的数据集级欧氏差异；NAVSIM v1 报告 PDMS 及其组件；NAVSIM v2 报告 EPDMS 与 navhard 分阶段分解（越高越好）。</li><li>关键数值：6 秒 nuScenes 规划中，MomWorld 平均 L2 为 1.17 m，平均碰撞率为 0.79%；1–6 s 各时域 L2 为 0.27、0.52、0.86、1.28、1.76、2.31 m，碰撞率为 0.02、0.17、0.42、0.83、1.36、1.97%。相对最佳先前平均 L2 1.37 m，降至 1.17 m；平均碰撞率相对最佳先前 0.79% 提升 8.1%。4–6 s TPC 为 0.93、1.19、1.46 m，平均 1.19 m，优于 MomAD 的 1.42 m。NAVSIM v1 navtest PDMS 为 90.2，比 DriveLaW 高 1.1 分。NAVSIM v2 navtest EPDMS 为 90.1，比 Latent-WAM 高 0.8 分。NAVSIM v2 navhard EPDMS 为 42.8。论文摘要报告在 6 秒规划时域上相对 MomAD 平均碰撞率降低 12.2%；正文另报告平均碰撞率相对先前最佳提升 8.1%，两者口径不同。</li><li>对比方法：nuScenes 6 秒对比 UniAD、SparseDrive、MomAD、LAW、Epona、World4Drive、DIVER、GuideFlow；TPC 对比 UniAD、VAD、SparseDrive、MomAD；NAVSIM v1 对比 VADv2、TransFuser、TransFuser_mmt*、UniAD、PARA-Drive、DRAMA、Hydra-MDP、FUMP、DiffusionDrive、DIVER、DriveSuprim、GoalFlow、ReCogDrive-IL、AutoVLA、ReCogdrive、DriveWorld-VLA 等；NAVSIM v2 对比 TransFuser、DiffusionDrive、Latent-WAM、DriveLaW、World4Drive、VLA 方法及其他世界模型方法。</li><li>条件：nuScenes 为 camera-only 开环规划评估；NAVSIM v1/v2 为非反应式伪仿真开环评估；FPS 报告使用 A100 用于 UniAD、RTX 3090 用于 LAW、RTX 4090 用于 SparseDrive、MomAD 和 GuideFlow；MomWorld 在 6 秒 nuScenes 上 FPS 为 7.2。原文未报告实车闭环评估结果。</li><li>消融与可视化：原文报告进行了 Ablation Studies 和 Visualization，但提供的 HTML 截断内容中未包含具体消融数值与可视化细节，原文未在此截断范围内报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.33854/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">ReDrive: Shaping Representations with World Modeling for End-to-End Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.33264/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">VehDyn: A Driving World Model Benchmark for Vehicle Dynamics</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

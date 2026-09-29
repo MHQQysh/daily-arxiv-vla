@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CAR-VLA: Complexity-Aware and Risk-Adaptive Reasoning for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。 应用场景为真实道路驾驶中的安全、可靠与及时决策，尤其是复杂路口等需要深思的场景与突发切入、行人横穿等高风险场景。 研究问题在于：现有自适应推理方法主要只决定“是否推理”，忽略了不同驾驶情境下“应如何推理”的差异；论文提出应同时考虑场景复杂度与动态风险来指导推理深度、紧迫性与关注点。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.34387">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.34387.webp" alt="CAR-VLA: Complexity-Aware and Risk-Adaptive Reasoning for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CAR-VLA: Complexity-Aware and Risk-Adaptive Reasoning for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-28 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.34387" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.34387" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.34387</span></div>
+            <p class="detail-summary">论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。 应用场景为真实道路驾驶中的安全、可靠与及时决策，尤其是复杂路口等需要深思的场景与突发切入、行人横穿等高风险场景。 研究问题在于：现有自适应推理方法主要只决定“是否推理”，忽略了不同驾驶情境下“应如何推理”的差异；论文提出应同时考虑场景复杂度与动态风险来指导推理深度、紧迫性与关注点。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Fudan University · Xiaolei Chen、Zhuolin He、Yuxuan Liang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.34387/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。</li><li>应用场景为真实道路驾驶中的安全、可靠与及时决策，尤其是复杂路口等需要深思的场景与突发切入、行人横穿等高风险场景。</li><li>研究问题在于：现有自适应推理方法主要只决定“是否推理”，忽略了不同驾驶情境下“应如何推理”的差异；论文提出应同时考虑场景复杂度与动态风险来指导推理深度、紧迫性与关注点。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Fudan University；作者：Xiaolei Chen、Zhuolin He、Yuxuan Liang、Xu Li、Haotian Chen、Mengyang Zhao、Wenjuan Meng、Bin Li、Xiangyang Xue</li><li>机构：Yinwang Intelligent Technology Co., Ltd；作者：Zhuolin He、Zhihao Zhu、Qingfan Wang、Jiamei Liang</li><li>机构：Fuzhou University；作者：Shi Fan</li><li>机构：Sun Yat-Sen University；作者：Zisheng Chen</li><li>机构：Huawei Technology；作者：Zhounan Jin、Hengli Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶端到端规划任务，研究基于视觉-语言-动作（VLA）模型的驾驶推理与轨迹生成问题。</li><li>应用场景为真实道路驾驶中的安全、可靠与及时决策，尤其是复杂路口等需要深思的场景与突发切入、行人横穿等高风险场景。</li><li>研究问题在于：现有自适应推理方法主要只决定“是否推理”，忽略了不同驾驶情境下“应如何推理”的差异；论文提出应同时考虑场景复杂度与动态风险来指导推理深度、紧迫性与关注点。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将自适应驾驶推理建模为两个互补因素：场景复杂度与动态风险；复杂度决定是否需要深思，风险决定响应的紧迫性与关注点。</li><li>提出 CAR-VLA 统一 VLA 框架，将四类复杂度-风险场景映射到三种推理模式：简单低风险场景使用 Fast Intuition，复杂低风险场景使用 Slow Thinking，高风险场景无论复杂度均使用 Reflex Response。</li><li>设计 Reflex Response 高风险推理模式，围绕最关键危险与即时安全响应组织推理，包含 Hazard、Urgency、Feasibility、Constraint、Action 五个部分，而非简单缩短推理。</li><li>提出渐进式监督学习策略，将场景评估、推理模式选择和轨迹生成相连接，并进一步使用推理增强强化学习提升驾驶质量与推理行为。</li><li>在 NAVSIM v1、NAVSIM v2 与 Navhard 上报告具有竞争力的结果，并在 Navtest 与内部高风险场景中进行定性比较。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：统一驾驶 VLA 模型，覆盖场景评估、推理模式选择、驾驶推理生成与未来轨迹生成。</li><li>输入传感器：相机观测、自车状态和导航指令；教师标注使用前左、前、前右相机在 2 Hz 下的四帧历史图像（每场景 12 张），SFT Stage II 使用每个视角一帧（3 张图像）。</li><li>场景表示：每个场景用类别 z_t=(C_t,D_t)∈{0,1}² 表示，C_t=0/1 表示简单/复杂，D_t=0/1 表示低/高动态风险；四类映射到三种推理模式。</li><li>模型结构：以 Qwen3-VL-4B 初始化，使用单一自回归策略依次生成场景类别、模式特定驾驶推理和轨迹；Fast Intuition 下不生成显式推理，直接生成轨迹。</li><li>关键技术：复杂度-风险引导的数据构建，使用 Qwen3-VL-235B 教师对 103k navtrain 场景进行场景评估与模式特定驾驶推理标注；渐进监督微调；基于 GSPO 的推理增强强化学习。</li><li>输出轨迹：预测未来 10 个自车位姿，间隔 0.5 s，规划时域 5 s。</li><li>奖励设计：总奖励由格式门控，结合驾驶奖励、几何奖励和推理奖励；推理奖励结合场景类别正确性与按章节的推理对齐；Fast Intuition 正确分类时对齐奖励设为 1。</li><li>原文未报告项：未报告具体模型参数量、完整网络层配置、推理模式切换的在线触发细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：navtrain 的 103k 场景用于构建场景评估与模式自适应驾驶数据；NAVSIM v1、NAVSIM v2、Navhard 用于评估；Stage I 额外使用 ReCogDrive 提供的通用驾驶数据。</li><li>仿真器：原文未报告明确仿真器名称，评估基于 NAVSIM 协议。</li><li>模型规模：CAR-VLA 从 Qwen3-VL-4B 初始化；教师模型为 Qwen3-VL-235B-A22B；推理奖励嵌入使用 Qwen3-Embedding-0.6B。</li><li>训练资源：两个 SFT 阶段均使用 8 张 NVIDIA H200 GPU；Stage I 冻结视觉编码器和投影器，学习率 10^-5；Stage II 全参数训练，学习率 2×10^-5。</li><li>强化学习资源：学习率 2×10^-6，λ_d=0.7、λ_g=0.2、λ_r=0.1，rollout/global batch size 为 256/128；从 Navtrain 中选择 10k 困难场景用于高 rollout 奖励方差或低平均奖励。</li><li>实车平台：原文未报告实车平台；论文包含内部高风险场景的定性比较。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1、NAVSIM v2 Navtest、NAVSIM v2 Navhard；评估条件为闭环指标。</li><li>评估指标：NAVSIM v1 报告 NC、DAC、EP、TTC、Comf 和 PDMS；NAVSIM v2 与 Navhard 报告 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC 和 EPDMS；Navhard 还报告 Stage 1/Stage 2 分阶段 EPDM 分数。</li><li>关键数值：CAR-VLA-RL 在 NAVSIM v1 获得 91.1 PDMS，在 NAVSIM v2 获得 90.3 EPDMS；在 Navhard 获得 35.0 EPDMS。</li><li>对比方法：包括传统端到端方法 HydraMDP++、DriveSuprim、DiffusionDrive、ResAD、LTF、GuideFlow，以及 VLA 方法 ReCogDrive、DriveVLA-W0、DriveFine、SGDrive、AutoVLA、ELF-VLA、LaST-VLA、IRR-Drive、AdaThinkDrive 等。</li><li>相对提升：CAR-VLA-RL 在 NAVSIM v2 EPDMS 上超过 IRR-Drive 1.3 分；相比 CAR-VLA-SFT，RL 在 v1 和 v2 上分别提升聚合分数 3.0 和 1.8 分；Navhard 上超过最强对比基线 GuideFlow 7.9 分，并取得最高 Stage 1 与 Stage 2 分数 79.3 和 43.5。</li><li>推理效率：Fast Intuition 总 token 数为 234，无显式推理轨迹，报告延迟 1.469 s；Slow Thinking 总 token 数为 743，原文后续内容被截断。</li><li>定性结果：Navtest 上 CAR-VLA 对简单高风险场景使用 Reflex Response、对复杂低风险场景使用 Slow Thinking，均取得更高 PDMS；内部行人横穿场景中，CAR-VLA 在低场景复杂度下识别高风险并调用 Reflex Response，ADE 为 1.289 m，AutoVLA 为 9.519 m。</li><li>消融实验：原文报告了奖励组件影响与 Stage I SFT 影响的消融分析，但提供的 HTML 内容未包含具体消融数值。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.34440/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">When the Score Becomes the Target: Rethinking Metric Validity in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.34085/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">AD-E2E-JEPA: A Joint-Embedding Predictive Architecture For End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

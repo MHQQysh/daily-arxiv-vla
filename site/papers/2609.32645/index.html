@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>From Scene Graphs to Answers: Selective Neuro-Symbolic Reasoning for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。 应用场景为基于 nuScenes-QA 基准的多帧驾驶场景理解，输入来自上游感知模块提供的 3D 目标观测，而不是直接使用原始图像或点云。 研究问题：现有视觉-语言方法通常将异构推理操作统一交给单一神经网络推理过程，忽略了部分查询可以精确符号求解、而另一部分需要语义解释的根本区别；论文研究如何按查询性质选择性地分配符号计算与神经推理。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.32645">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.32645.webp" alt="From Scene Graphs to Answers: Selective Neuro-Symbolic Reasoning for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">From Scene Graphs to Answers: Selective Neuro-Symbolic Reasoning for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.32645" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.32645" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.32645</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。 应用场景为基于 nuScenes-QA 基准的多帧驾驶场景理解，输入来自上游感知模块提供的 3D 目标观测，而不是直接使用原始图像或点云。 研究问题：现有视觉-语言方法通常将异构推理操作统一交给单一神经网络推理过程，忽略了部分查询可以精确符号求解、而另一部分需要语义解释的根本区别；论文研究如何按查询性质选择性地分配符号计算与神经推理。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The Hong Kong University of Science and Technology (Guangzhou) · Yiyao Wang…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.32645/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。</li><li>应用场景为基于 nuScenes-QA 基准的多帧驾驶场景理解，输入来自上游感知模块提供的 3D 目标观测，而不是直接使用原始图像或点云。</li><li>研究问题：现有视觉-语言方法通常将异构推理操作统一交给单一神经网络推理过程，忽略了部分查询可以精确符号求解、而另一部分需要语义解释的根本区别；论文研究如何按查询性质选择性地分配符号计算与神经推理。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The Hong Kong University of Science and Technology (Guangzhou)；作者：Yiyao Wang、Pei Liu、Jun Ma</li><li>机构：Harbin Institute of Technology；作者：Yiyao Wang、Fangzhou Liu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景的问答任务（Driving-scene QA），在给定结构化 3D 场景观测的条件下回答关于目标存在性、计数、对象类别、运动状态以及对象间比较等问题。</li><li>应用场景为基于 nuScenes-QA 基准的多帧驾驶场景理解，输入来自上游感知模块提供的 3D 目标观测，而不是直接使用原始图像或点云。</li><li>研究问题：现有视觉-语言方法通常将异构推理操作统一交给单一神经网络推理过程，忽略了部分查询可以精确符号求解、而另一部分需要语义解释的根本区别；论文研究如何按查询性质选择性地分配符号计算与神经推理。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将基于 LLM 的驾驶场景问答形式化为查询自适应推理问题，指出确定性推理与语义推理不应统一交给神经语言模型。</li><li>提出分层时空场景图（Spatiotemporal Scene Graph, STSG），分离持久实体身份与帧特定状态，并显式表示有向空间关系与时间转移。</li><li>提出带弃权机制的选择性神经-符号推理架构：符号执行器先尝试用精确图操作回答问题，仅在弃权时调用 LLM。</li><li>对未解决查询执行查询条件化的图检索与证据过滤，保留关系方向、时间局部性和对象语义，为 LLM 提供紧凑且经过验证的证据。</li><li>在 NuScenes-QA 的 5,916 个问题上验证：选择性分配推理可同时提升准确率与推理效率，尤其在计数问题上提升显著。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文方法属于自动驾驶场景问答中的结构化场景表示与神经-符号推理模块，框架由上游感知提供结构化 3D 目标观测，论文在实验中使用真实 3D 标注实例化该感知接口。</li><li>输入传感器：原文未报告具体传感器模态；输入为结构化 3D 对象观测，包括真实 3D 边界框、对象类别、实例身份、对象属性和自车位姿。</li><li>场景表示：分层时空场景图 $\mathcal{G}=(\mathcal{V},\mathcal{E})$，节点集包括持久实体节点 $\mathcal{V}_{ent}$、时间状态节点 $\mathcal{V}_{state}$ 和自车参考节点 $v_{\mathrm{ego}}$；边集包括空间关系边 $\mathcal{E}_{spat}$、层级边 $\mathcal{E}_{hier}$ 和时间转移边 $\mathcal{E}_{temp}$。</li><li>空间关系：基于同帧状态节点之间以及状态节点与自车之间的有向关系，使用 NuScenes-QA 的六方向自车对齐空间谓词，通过 BEV 中心差和 atan2 角度计算方向谓词。</li><li>层级与时间结构：层级边以 <code>HAS_STATE</code> 连接持久实体与其帧特定状态；时间边以 <code>NEXT_STATE</code> 连接同一实体的相邻观测状态。</li><li>结构化图投影与索引：完整图作为符号记忆保存，同时派生检索导向的图视图 $\mathcal{G}_{R}=\Pi_{R}(\mathcal{G})$，插入 LightRAG 图-向量索引，保留实体标识、关系方向和时间引用。</li><li>神经-符号双引擎问答：符号求解器先对完整图执行 $\Phi_{\mathrm{sym}}(Q,\mathcal{G},t_{q})$，返回答案或弃权 $\bot$；仅在弃权时，通过 LightRAG 检索候选证据并用确定性过滤得到 $\mathcal{H}_{Q}$，再由 LLM 进行语义推理。</li><li>关键技术：保守符号优先路由、基于弃权的选择性推理、查询条件化图检索、证据过滤、以及最终路由 $ \hat{a}=a_{\mathrm{sym}} $（若符号求解成功）否则 $\Phi_{\mathrm{llm}}(Q,\mathcal{H}_{Q})$。</li><li>模型规模与网络结构细节：原文未报告具体模型参数量或网络结构规模。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes v1.0-mini 的十个场景序列，包含 404 个关键帧；评估使用 5,916 个 NuScenes-QA 问题，问题来自公开训练和验证问题文件的并集，并按 sample tokens 选取。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：原文未报告模型参数量；使用的 LLM 后端为 DeepSeek-V4-Flash 和 GPT-5.4-mini，未进行任务特定微调。</li><li>检索与索引资源：LightRAG 图-向量索引，嵌入模型为 <code>text-embedding-3-small</code>，嵌入维度 1536，chunk token size 为 8192，embedding batch size 为 48，重排序关闭，实体抽取 gleaning 为 0。</li><li>训练资源：原文未报告训练资源与训练时长。</li><li>实车平台：原文未报告实车平台；实验在 oracle-perception 设置下使用真实 3D 标注构建时空场景图。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NuScenes-QA，覆盖 nuScenes v1.0-mini 全部十个场景、404 个关键帧、5,916 个问题。</li><li>评估指标：按问题类型报告平均准确率，问题类型包括 Exist、Count、Object、Status、Comparison 和 Overall；预测规范到对应答案空间，无效预测保留在分母中并计为错误。</li><li>对比方法：Full 完整框架、LLM-only 直接消融、Symbolic-only 模板感知符号基线；LLM-only 和 Full 分别在 DeepSeek-V4-Flash 与 GPT-5.4-mini 两种后端下评估。</li><li>关键数值：Full (GPT) 总体准确率 80.63%，正确回答 4,770/5,916；Full (DeepSeek) 总体准确率 77.89%；LLM-only (GPT) 总体准确率 75.15%；LLM-only (DeepSeek) 总体准确率 71.25%；Symbolic-only 总体准确率 61.43%。</li><li>选择性符号执行增益：DeepSeek 后端总体准确率从 71.25% 提升到 77.89%，提升 6.64 个百分点；GPT 后端从 75.15% 提升到 80.63%，提升 5.48 个百分点。</li><li>计数问题增益：DeepSeek 后端从 62.56% 提升到 75.17%，提升 12.61 个百分点；GPT 后端从 65.45% 提升到 75.65%，提升 10.20 个百分点。</li><li>各问题类型：Full (GPT) 在 Exist、Count、Object、Status、Overall 上最优，分别为 88.80%、75.65%、69.88%、93.26%、80.63%；GPT LLM-only 在 Comparison 上最优，为 76.21%。</li><li>效率结果：DeepSeek 后端总 QA 运行时间从 66 小时 52 分降至 37 小时 47 分，降低 43.5%；GPT 后端从 35 小时 38 分降至 24 小时 50 分，降低 30.3%；每问题摊销运行时间分别为 DeepSeek 40.69 秒 vs 22.99 秒，GPT 21.68 秒 vs 15.11 秒。</li><li>评估条件：在 oracle-perception 设置下进行，属于结构化 3D 观测下的推理评估，不衡量端到端感知准确率；未报告闭环或实车评估。</li><li>Comparison 问题说明：在 Full 中符号求解器对比较问题弃权，因此 Full 与 LLM-only 在比较问题上的差异不能归因于符号答案执行，可能反映运行随机性或神经检索与答案生成行为差异。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.32681/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">RCVLA: 4D Radar-Grounded Semantic Reasoning and Trajectory Arbitration for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.32316/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">One Perception, All Maneuvers: Directional Traffic Signal Understanding for Maneuver-Level Signal Intent Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

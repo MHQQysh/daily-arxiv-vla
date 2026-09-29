@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>One Perception, All Maneuvers: Directional Traffic Signal Understanding for Maneuver-Level Signal Intent Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。 论文指出，现有交通信号感知主要以实例级检测或颜色识别来表述，只能回答“信号灯在哪里、是什么颜色”，无法直接说明“哪一盏信号灯控制自车的哪一种机动动作”。 论文将任务重新表述为 Directional Traffic Signal Understanding，即从单张前视图像出发，为直行、左转、右转、掉头四种自车机动动作预测结构化的信号状态。 每个方向的信号状态包含关联的信号颜色（none/red/green/yellow）以及信号所隐含的可通行性（go/stop），预测的是信号层面的许可，而非最终机动的可行性。 下游规划器可将该信号层面的意图与车道拓扑、路线约束、周围智能体及其他交通规则进一步融合。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.32316">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.32316.webp" alt="One Perception, All Maneuvers: Directional Traffic Signal Understanding for Maneuver-Level Signal Intent Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">One Perception, All Maneuvers: Directional Traffic Signal Understanding for Maneuver-Level Signal Intent Prediction</h1>
+            <div class="detail-meta">2026-09-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.32316" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.32316" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.32316</span></div>
+            <p class="detail-summary">论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。 论文指出，现有交通信号感知主要以实例级检测或颜色识别来表述，只能回答“信号灯在哪里、是什么颜色”，无法直接说明“哪一盏信号灯控制自车的哪一种机动动作”。 论文将任务重新表述为 Directional Traffic Signal Understanding，即从单张前视图像出发，为直行、左转、右转、掉头四种自车机动动作预测结构化的信号状态。 每个方向的信号状态包含关联的信号颜色（none/red/green/yellow）以及信号所隐含的可通行性（go/stop），预测的是信号层面的许可，而非最终机动的可行性。 下游规划器可将该信号层面的意图与车道拓扑、路线约束、周围智能体及其他交通规则进一步融合。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">College of Computer Science and Technology, Zhejiang University · Ang Zou、R…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.32316/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。</p>
+  <ul class="reading-intro-points"><li>论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。</li><li>论文指出，现有交通信号感知主要以实例级检测或颜色识别来表述，只能回答“信号灯在哪里、是什么颜色”，无法直接说明“哪一盏信号灯控制自车的哪一种机动动作”。</li><li>论文将任务重新表述为 Directional Traffic Signal Understanding，即从单张前视图像出发，为直行、左转、右转、掉头四种自车机动动作预测结构化的信号状态。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：College of Computer Science and Technology, Zhejiang University；作者：Ang Zou、Runzhe Zheng、Xia Han、Xuewei Li、Zequn Qin、Xi Li</li><li>机构：BYD Company Limited；作者：Zhigang Li、Xia Han</li><li>机构：School of Electronic and Information Engineering, Shanghai DianJi University；作者：Xuewei Li</li><li>说明：原文仅在首页给出机构列表与邮箱，未逐行明确每位作者与机构的完整对应关系，上表依据邮箱与机构署名顺序推断，存在对应不确定的部分。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向城市信号交叉口的自动驾驶场景，研究交通信号的感知与下游规划之间的语义断层问题。</li><li>论文指出，现有交通信号感知主要以实例级检测或颜色识别来表述，只能回答“信号灯在哪里、是什么颜色”，无法直接说明“哪一盏信号灯控制自车的哪一种机动动作”。</li><li>论文将任务重新表述为 Directional Traffic Signal Understanding，即从单张前视图像出发，为直行、左转、右转、掉头四种自车机动动作预测结构化的信号状态。</li><li>每个方向的信号状态包含关联的信号颜色（none/red/green/yellow）以及信号所隐含的可通行性（go/stop），预测的是信号层面的许可，而非最终机动的可行性。</li><li>下游规划器可将该信号层面的意图与车道拓扑、路线约束、周围智能体及其他交通规则进一步融合。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>首次将 Directional Traffic Signal Understanding 表述为一个统一任务，把交通灯定位、状态识别、方向解释和信号—机动关联整合到机动级可通行性预测中。</li><li>基于 OpenLane-V2 构建了方向级交叉口基准，提供机动级监督，并设计了覆盖信号识别、机动级可通行性、结构化一致性和安全关键错误的统一评测协议。</li><li>提出方向感知基线模型，融合全局场景上下文、局部交通灯证据和机动专属表示，无需在推理时依赖精确的静态道路拓扑。</li><li>通过实验表明方向级建模在可通行性预测上优于图像级分类器和面向检测的流水线，尤其在复杂多信号交叉口处表现更明显。</li><li>提供了一种直接、可解释、面向规划的交通信号接口，可与拓扑、路线和周围智能体信息一起供下游规划使用。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向决策的交通信号感知模块，位于交通灯感知与下游规划之间的接口层，不构建完整规划系统。</li><li>输入传感器：仅使用自车前视相机图像，不需要毫米波雷达、激光雷达等其他传感器；原文未报告多传感器融合设置。</li><li>场景表示：以自车为中心的机动方向集合 D={straight, left, right, U-turn}，每个方向表示为 y^d=(c^d, p^d)，其中 c^d 为信号颜色、p^d 为信号隐含可通行性；预测输出为 Ŷ=(ŷ^s, ŷ^l, ŷ^r, ŷ^u)。</li><li>模型结构：视觉骨干网络加 FPN 提取多尺度特征 F=FPN(Backbone(I))；对特征金字塔做池化得到全局 token g，表示整体交叉口上下文；使用轻量 DETR 风格检测器生成交通灯边界框，对每个框 b̂_j 通过 RoIAlign 提取局部外观并结合空间信息构造 ROI token t_j=φ_r(RoIAlign(F,b̂_j))+φ_b(b̂_j)；将全局 token 与所有 ROI token 拼接成统一 token 序列 T=[g,t_1,…,t_K]。</li><li>方向感知预测：引入四个可学习方向查询，分别对应直行、左转、右转、掉头，每个查询对统一 token 序列做多头注意力 h^d=MHA(q^d,T,T)；再由颜色头预测 {none,red,yellow,green}、通行性头预测 {stop,go}，即 ĉ^d=Head_color(h^d)、p̂^d=Head_pass(h^d)。</li><li>关键技术：方向查询注意力实现信号证据与自车机动的关联，避免推理时手工设计信号—机动分配；颜色与可通行性双头输出结构化状态。</li><li>训练目标：颜色交叉熵损失 L_color、可通行性交叉熵损失 L_pass，以及 DETR 二部匹配检测损失 L_det（含分类、框回归和 GIoU 损失），总损失为 L=λ_c L_color+λ_p L_pass+λ_d L_det。</li><li>原文未报告各项损失权重的具体取值、检测器层数、FPN 之外的具体网络超参数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：基于 OpenLane-V2 构建方向级机动可通行性基准，使用其前视图像、交通元素、车道结构和拓扑标注。</li><li>数据规模：训练集 23,904 帧、验证集 5,147 帧，对应 95,616 和 20,588 个方向级状态。</li><li>标注构成：每帧标注 straight、left、right、U-turn 四个方向；颜色标签为 none/red/green/yellow，通行性标签为 go/stop；无法可靠关联信号的方向颜色标为 none。</li><li>数据分布特点：直行、左转、掉头方向具有密集有效信号监督，右转方向更多被标为 none。</li><li>数据构建与质控：保留信号交叉口附近、视觉和结构证据充分的帧，剔除普通路段和严重歧义样本；排除控制相邻车道、对向交通或远处交叉口的信号；采用自动一致性检查（缺失标签、无效颜色—通行性组合、与原始交通元素标注冲突）结合人工核验（多信号交叉口、方向箭头灯、小目标或被遮挡信号、歧义关联）。</li><li>仿真器：原文未报告使用任何仿真器。</li><li>模型规模：本文模型为 50.1M 参数；对比的 ResNet-18/50/101、ViT-B/16、Swin-Tiny、DeiT-Small 未报告参数量；FPN 维度为 256。</li><li>训练资源：使用 PyTorch 实现，AdamW 优化器和余弦学习率调度；原文未报告 GPU 型号、数量、训练轮数、批大小和训练时长。</li><li>实车平台：原文未报告实车部署或实车测试平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：主论文报告 Subset-A 上的结果，Subset-B 的完整实验（骨干、多模态模型、结构化方法对比）置于补充材料。</li><li>评估指标：颜色准确率 Acc_color、可通行性准确率 Acc_pass、严格全帧一致性 Exact Match EM、综合指标 Traffic Signal Score TSS=⅓(Acc_color+Acc_pass+EM)，以及安全关键指标 False-Go 率和 False-Stop 率；前四项越高越好，后两项越低越好。</li><li>视觉骨干对比（Subset-A）：Swin-Tiny 在通用模型中最好，Acc_color 0.8916、Acc_pass 0.9266、EM 0.8019、TSS 0.8734；同等骨干下本文方向感知模型将 TSS 提升至 0.8802，False-Go 从 0.1831 降至 0.1372，相对降低 25.1%；ResNet-50 获得最低 False-Stop 率 0.0297。</li><li>本文模型整体指标：Acc_color 0.9019、Acc_pass 0.9356、EM 0.8031、TSS 0.8802、False-Go 0.1372、False-Stop 0.0416。</li><li>与多模态大模型对比（Subset-A）：本文模型仅 50.1M 参数，比 7B–11B 的 SFT 模型（Qwen2.5-VL-7B-Instruct、MiniCPM-V 4.5、Llama-3.2-11B-Vision）少约 140–220 倍参数，但在 Acc_color、Acc_pass、EM、TSS 上更高，并在有监督模型中取得最低 False-Go；Qwen2.5-VL-7B-Instruct 的 False-Stop 最低（0.0268）但 False-Go 更高（0.2814），说明其错误偏好更偏宽松；Nemotron 3 Nano Omni 的 False-Go 最低（0.0130）但 False-Stop 达 0.4877、EM 为 0，说明其预测极偏保守。</li><li>与零样本模型对比：相比 30B–35B 的零样本模型（Qwen3.6-35B-A3B、Gemma 4 31B、Nemotron 3 Nano Omni），本文模型参数少约 599–699 倍，在四项主要指标上大幅领先。</li><li>与关联和拓扑方法对比（Subset-A）：TLD-READY 采用图标记映射，Acc_color 0.8563、Acc_pass 0.9187、EM 0.7516、TSS 0.8422、False-Go 0.3017、False-Stop 0.0124；TopoPoint 基于预测拓扑，TSS 0.7100、False-Go 0.5229；Reusing Attention / One-Stage 基于复用注意力拓扑，T</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.32645/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">From Scene Graphs to Answers: Selective Neuro-Symbolic Reasoning for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.32175/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">OneFixer: High-Quality and Consistent One-Step Autoregressive 3DGS Refinement for Driving Scenes</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
