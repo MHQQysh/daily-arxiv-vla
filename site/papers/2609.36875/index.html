@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>S4VY: Segment Anything in Feed-Forward 4D Visual Geometry - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向动态场景中的实例分割任务，目标是仅从一组（可能稀疏、无序）RGB 观测中恢复场景内所有实例在时空中的一致 4D 实例掩码。 应用场景包括机器人、具身智能系统与自动驾驶等需要感知与规划的领域，强调在遮挡、长时间消失后重新识别实例，以及视觉相似多物体同时运动的情形。 研究问题在于：现有 Segment Anything 模型主要输出 2D 图像/视频掩码，依赖序列记忆传播身份，不显式建模跨观测共享的空间几何；已有 3D/4D 分割多依赖点云、RGB-D 或单独重建管线，且多数方法只面向静态场景，4D 动态扩展中身份关联依赖额外特征聚类，灵活的提示接口（点、框、语言）尚未统一。 论文提出 S4VY，在前馈 4D 视觉几何表示上构建 Segment Anything 模型，统一支持无提示穷举式 4D 实例分割、点/框条件选择，以及自然语言引导的 4D 目标定位。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.36875">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.36875.webp" alt="S4VY: Segment Anything in Feed-Forward 4D Visual Geometry" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向动态场景中的实例分割任务，目标是仅从一组（可能稀疏、无序）RGB 观测中恢复场景内所有实例在时空中的一致 4D 实例掩码。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">S4VY: Segment Anything in Feed-Forward 4D Visual Geometry</h1>
+            <div class="detail-meta">2026-09-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.36875" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.36875" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.36875</span></div>
+            <p class="detail-summary">论文面向动态场景中的实例分割任务，目标是仅从一组（可能稀疏、无序）RGB 观测中恢复场景内所有实例在时空中的一致 4D 实例掩码。 应用场景包括机器人、具身智能系统与自动驾驶等需要感知与规划的领域，强调在遮挡、长时间消失后重新识别实例，以及视觉相似多物体同时运动的情形。 研究问题在于：现有 Segment Anything 模型主要输出 2D 图像/视频掩码，依赖序列记忆传播身份，不显式建模跨观测共享的空间几何；已有 3D/4D 分割多依赖点云、RGB-D 或单独重建管线，且多数方法只面向静态场景，4D 动态扩展中身份关联依赖额外特征聚类，灵活的提示接口（点、框、语言）尚未统一。 论文提出 S4VY，在前馈 4D 视觉几何表示上构建 Segment Anything 模型，统一支持无提示穷举式 4D 实例分割、点/框条件选择，以及自然语言引导的 4D 目标定位。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Texas A&amp;M University, College Station · Jingdong Zhang、Xin Li、Wenping Wang</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.36875/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向动态场景中的实例分割任务，目标是仅从一组（可能稀疏、无序）RGB 观测中恢复场景内所有实例在时空中的一致 4D 实例掩码。</p>
+  <ul class="reading-intro-points"><li>论文面向动态场景中的实例分割任务，目标是仅从一组（可能稀疏、无序）RGB 观测中恢复场景内所有实例在时空中的一致 4D 实例掩码。</li><li>应用场景包括机器人、具身智能系统与自动驾驶等需要感知与规划的领域，强调在遮挡、长时间消失后重新识别实例，以及视觉相似多物体同时运动的情形。</li><li>研究问题在于：现有 Segment Anything 模型主要输出 2D 图像/视频掩码，依赖序列记忆传播身份，不显式建模跨观测共享的空间几何；已有 3D/4D 分割多依赖点云、RGB-D 或单独重建管线，且多数方法只面向静态场景，4D 动态扩展中身份关联依赖额外特征聚类，灵活的提示接口（点、框、语言）尚未统一。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Texas A&amp;M University, College Station；作者：Jingdong Zhang、Xin Li、Wenping Wang</li><li>机构：NVIDIA；作者：Jan Kautz、Chris Choy</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向动态场景中的实例分割任务，目标是仅从一组（可能稀疏、无序）RGB 观测中恢复场景内所有实例在时空中的一致 4D 实例掩码。</li><li>应用场景包括机器人、具身智能系统与自动驾驶等需要感知与规划的领域，强调在遮挡、长时间消失后重新识别实例，以及视觉相似多物体同时运动的情形。</li><li>研究问题在于：现有 Segment Anything 模型主要输出 2D 图像/视频掩码，依赖序列记忆传播身份，不显式建模跨观测共享的空间几何；已有 3D/4D 分割多依赖点云、RGB-D 或单独重建管线，且多数方法只面向静态场景，4D 动态扩展中身份关联依赖额外特征聚类，灵活的提示接口（点、框、语言）尚未统一。</li><li>论文提出 S4VY，在前馈 4D 视觉几何表示上构建 Segment Anything 模型，统一支持无提示穷举式 4D 实例分割、点/框条件选择，以及自然语言引导的 4D 目标定位。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出前馈 4D Segment Anything 模型：将共享的视觉-几何表示转换为穷举的类无关 4D 实例掩码，每个持久对象查询在整个观测集合中绑定同一实体身份，无需种子掩码或时间顺序。</li><li>支持统一提示接口：在穷举分割之外，允许通过来自一个或多个观测的点/框提示选择任意已发现实例，且不破坏无提示实例发现能力。</li><li>提出面向 4D 观测空间的智能体式语言定位框架：结合 VLM 视觉先验与几何一致的实例特征，通过双流 Grounder、Active Tree Search 和比较式 Critic 选择最终 4D 掩码。</li><li>构建跨静态与动态场景的大规模训练数据与自蒸馏训练策略：整合 19 个多视图与视频数据集，共 33,220 个场景/片段和 6.05M 观测，并将穷举标注教师模型用于部分标注和无标注数据的掩码稠密化。</li><li>在统一评测下报告了 4D 实例分割的最优性能和较强的语言引导定位性能，覆盖静态多视图与动态视频基准。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：S4VY 由 4D 分割器（Space-Time Query Decoder + Prompt Encoder）和语言定位框架（Grounder、Active Tree Search、Critic）组成。</li><li>输入传感器：仅使用 RGB 观测，论文未报告其他传感器输入；观测可时间稀疏或非时序排列。</li><li>场景表示：基于前馈视觉几何骨干（VGGT-Ω，Wang et al., 2026a），每个观测由 patch tokens、camera token 和 register tokens 表示，并通过帧内与跨帧交替注意力联合上下文化；分割器解码上下文化的 patch tokens，register tokens 保留给语言定位接口。</li><li>模型结构：Space-Time Query Decoder 采用 Mask2Former 式端到端集合预测，使用全局可学习对象查询联合关注 LoRA 适配后的 patch tokens，输出每个查询的完整 4D 掩码；训练时通过二分匹配将每个真值 4D 实例分配给唯一可学习查询，未匹配预测归为 no-object。Prompt Encoder 从上下文化 patch tokens 中采样点/框提示的局部视觉特征，聚合为可提示对象查询，并通过单向自注意力让其与对应可学习查询匹配，同时阻止提示信号影响可学习查询；多观测提示使用学习到的相关性权重抑制遮挡、不精确或不一致的局部证据；训练时扰动点和框坐标以提升定位误差容忍度。</li><li>语言定位：Grounder 以表达式、图像、camera token 和 register token 为输入，输出每帧对象查询匹配与框提示预测；采用几何引导的思维链监督，注入物体尺寸、高度、物体间距离等场景线索。双流分别产生查询匹配掩码候选和框提示掩码候选。Critic 使用独立 VLM 对两个候选的叠加渲染进行成对偏好判断，选择与表达式更匹配的最终 4D 掩码；Grounder 用查询交叉熵和自回归语言建模损失优化，Critic 用二元交叉熵优化。</li><li>Active Tree Search：从覆盖全观测集的全局窗口开始，每层均匀采样 N_w 个观测，Grounder 预测每个采样观测的目标存在性；围绕正预测的相邻采样位置确定下一层子范围，递归重采样形成新的 Grounder 窗口，直到窗口内仅含相邻帧或达到最大深度；所有窗口预测通过投票聚合形成两个流的候选掩码，再交由 Critic 比较。</li><li>训练与数据：整合 19 个多视图/视频数据集分为四组（穷举多视图、穷举视频、部分标注视频 masklet、无标注多视图）；先利用穷举数据训练教师模型，再以时序一致 masklet 稠密化部分标注并监督无标注数据，人工标注优先，重叠教师预测被移除，不确定区域忽略；分割器经匈牙利匹配后使用物体分类、二元交叉熵和软 Dice 损失训练，训练逐步从伪标注池转向穷举数据；Prompt Encoder 可在分割器冻结时单独训练，报告结果采用该设置。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练数据集：整合 19 个数据集，包括 Infinigen、ScanNet++、RealEstate10K、VIPSeg、Cityscapes-VPS、KITTI-STEP、JRDB-PanoTrack、SA-V、YouTube-VOS、MeViS、MOSE、UVO-Dense、DynamicReplica、SAIL-VOS、LVOS、DAVIS、VOST、DL3DV、Matterport3D；共使用 33,220 个场景/片段、6,052,440 帧 RGB 观测。</li><li>评估数据集：ScanNet 验证设置、DAVIS、LVOS、VIPSeg；语言定位评估使用 ScanRefer 的 700 条查询（121 个验证场景）、ScanNet++ 的 3,320 条表达式（80 个留出场景）、Ref-DAVIS 全部 122 条表达式、MeViS 的 616 条单指代表达式（47 个视频）。</li><li>仿真器/实车平台：原文未报告仿真器与实车平台信息。</li><li>模型规模：分割器初始化自 VGGT-Ω-1B 检查点，输入 512 像素分辨率，使用 rank-256 LoRA 适配器；Grounder 初始化自 Qwen3-VL-4B，使用八观测窗口，训练约 80k 表达式；Critic 初始化自 Qwen3-VL-2B，独立训练于成对掩码候选。</li><li>训练资源：分割器训练 50,000 步；论文报告在 A100-80GB 上测量 100 个观测的延迟，但原文未报告总 GPU 数量、总训练时长等完整训练资源清单。</li><li>其他资源：原文未报告其他实车或嵌入式平台部署信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：无提示实例分割在 ScanNet 验证设置、DAVIS、LVOS、VIPSeg 上评测；语言引导定位在 ScanRefer、ScanNet++、Ref-DAVIS、MeViS 上评测。</li><li>评估指标：ScanNet 使用 T-mIoU、T-SR、J&amp;F；DAVIS 和 LVOS 使用 4D-IoU、4D-SR、J&amp;F；VIPSeg 使用 STQ 和 mAP；静态场景语言定位使用 3D 掩码 mIoU 与 IoU 0.25 下的框/掩码准确率，视频使用 J&amp;F。</li><li>关键数值：S4VY 在 ScanNet 上达到 0.803 T-mIoU 和 0.792 T-SR；在 DAVIS 和 LVOS 上分别达到 0.803 和 0.602 J&amp;F；论文称在表中所有分割基准上领先，STQ 和 mAP 的提升将结果扩展到密集全景评测。原文还报告在 100 个观测上测量延迟（s/clip，A100-80GB），但所给表格内容截断，未显示 S4VY 的具体延迟数值。</li><li>对比方法：分割对比包括 SAM3D、DEVA、GLEE、OMG-Seg、SAM 2、PanSt3R 等；语言定位对比覆盖 VLM–分割器与 3D 提议管线、端到端图像/视频指代模型、多视图几何–语言对齐方法，包括 VLM+SAM 2、MVGGT、Z3D、SAM 3 等。官方检查点接收相同观测，不使用语义标签、目标提示或首帧真值；SAM 2 使用自动掩码发现并周期性重新发现，内存密集型基线保留全部观测进行全序列或流式推理。</li><li>实验条件：论文报告的是开环离线评测，包含静态多视图与动态视频的仿真/数据集评测；原文未报告闭环控制、实车部署或在线机器人实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.37046/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Speed in the Blind Spot: An Interpretability Analysis of Dynamic Perception in VLMs for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.36851/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RoXDrive: Closed-Loop Reinforcement Learning for End-to-End Autonomous Driving via Action-Faithful Rollouts</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

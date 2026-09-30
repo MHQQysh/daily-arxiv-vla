@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoVLM-Bench: A Real-World Benchmark for Cooperative Driving Question Answering and Planning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中的协同驾驶（cooperative driving）任务，研究如何让视觉-语言模型（VLM）直接利用车端与路侧（vehicle–infrastructure）配对图像进行协同场景理解与轨迹规划。 现有驾驶 VLM 主要在自车视角（ego-centric）场景中研究，而传统 V2X 系统通常将路侧观测转换为几何表示（检测框、目标轨迹、预测状态）再交给下游规划器，未直接用于 VLM。 关键研究问题是：问答（QA）与轨迹规划此前未在同一组真实车–路配对场景上联合评估，缺少支撑该评估的基准，也无法检验面向理解的监督是否同时改善规划。 论文提出基准 CoVLM-Bench 与统一 VLM 基线 CoVLM-Drive，在同一配对帧上同时评测协同驾驶问答（CDQA）与协同规划（CP）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.35823">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.35823.webp" alt="CoVLM-Bench: A Real-World Benchmark for Cooperative Driving Question Answering and Planning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中的协同驾驶（cooperative driving）任务，研究如何让视觉-语言模型（VLM）直接利用车端与路侧（vehicle–infrastructure）配对图像进行协同场景理解与轨迹规划。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">CoVLM-Bench: A Real-World Benchmark for Cooperative Driving Question Answering and Planning</h1>
+            <div class="detail-meta">2026-09-22 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.35823" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.35823" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.35823</span></div>
+            <p class="detail-summary">论文面向自动驾驶中的协同驾驶（cooperative driving）任务，研究如何让视觉-语言模型（VLM）直接利用车端与路侧（vehicle–infrastructure）配对图像进行协同场景理解与轨迹规划。 现有驾驶 VLM 主要在自车视角（ego-centric）场景中研究，而传统 V2X 系统通常将路侧观测转换为几何表示（检测框、目标轨迹、预测状态）再交给下游规划器，未直接用于 VLM。 关键研究问题是：问答（QA）与轨迹规划此前未在同一组真实车–路配对场景上联合评估，缺少支撑该评估的基准，也无法检验面向理解的监督是否同时改善规划。 论文提出基准 CoVLM-Bench 与统一 VLM 基线 CoVLM-Drive，在同一配对帧上同时评测协同驾驶问答（CDQA）与协同规划（CP）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Renmin University of China · Kang Yang、Shuai Liu、Hang Li 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.35823/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中的协同驾驶（cooperative driving）任务，研究如何让视觉-语言模型（VLM）直接利用车端与路侧（vehicle–infrastructure）配对图像进行协同场景理解与轨迹规划。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中的协同驾驶（cooperative driving）任务，研究如何让视觉-语言模型（VLM）直接利用车端与路侧（vehicle–infrastructure）配对图像进行协同场景理解与轨迹规划。</li><li>现有驾驶 VLM 主要在自车视角（ego-centric）场景中研究，而传统 V2X 系统通常将路侧观测转换为几何表示（检测框、目标轨迹、预测状态）再交给下游规划器，未直接用于 VLM。</li><li>关键研究问题是：问答（QA）与轨迹规划此前未在同一组真实车–路配对场景上联合评估，缺少支撑该评估的基准，也无法检验面向理解的监督是否同时改善规划。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Renmin University of China；作者：Kang Yang、Shuai Liu、Hang Li、Yance Fang、Deying Li、Yongcai Wang</li><li>机构：Hebei Key Laboratory of Real-virtual Integrated Autonomous Systems (RIAS)；作者：Deying Li、Yongcai Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中的协同驾驶（cooperative driving）任务，研究如何让视觉-语言模型（VLM）直接利用车端与路侧（vehicle–infrastructure）配对图像进行协同场景理解与轨迹规划。</li><li>现有驾驶 VLM 主要在自车视角（ego-centric）场景中研究，而传统 V2X 系统通常将路侧观测转换为几何表示（检测框、目标轨迹、预测状态）再交给下游规划器，未直接用于 VLM。</li><li>关键研究问题是：问答（QA）与轨迹规划此前未在同一组真实车–路配对场景上联合评估，缺少支撑该评估的基准，也无法检验面向理解的监督是否同时改善规划。</li><li>论文提出基准 CoVLM-Bench 与统一 VLM 基线 CoVLM-Drive，在同一配对帧上同时评测协同驾驶问答（CDQA）与协同规划（CP）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出真实世界基准 CoVLM-Bench，在时间同步的车–路场景上对齐场景支撑的 CDQA 标注、三段式理由（rationale）辅助监督和协同规划目标。</li><li>建立统一 VLM 基线 CoVLM-Drive，直接消费配对的车端与路侧图像，同时支持协同理解与结构化自车轨迹规划，并取得比对比 V2X 规划器更低的 FDE。</li><li>在任务适配、监督来源、骨干网络选择以及路侧输入条件等方面对协同 VLM 进行评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基准构建（CoVLM-Bench）与统一 VLM 基线（CoVLM-Drive），覆盖协同场景理解（CDQA）与协同规划（CP）。</li><li>输入传感器：时间同步的车端（ego）图像、路侧（infrastructure/roadside）图像，以及任务提示；数据由 V2X-Seq-SPD 提供。原文未报告其他传感器类型。</li><li>场景表示：将 ego 图像 I^e、路侧图像 I^r 与提示 q 放入单一 Qwen3-VL 输入序列；规划目标为自车相对坐标系下的 6 个路点（0.5 秒间隔、覆盖 3.0 秒）与一个六类驾驶命令。</li><li>模型结构：单一 VLM 骨干（Qwen3-VL，使用 LoRA 适配），语言解码器生成 CDQA 答案或三段式理由，两个结构化头（waypoint MLP 与 command MLP）基于掩码均值隐藏表示 h̄（对图像与提示 token 求掩码均值，公式 1）分别预测命令分布与路点。</li><li>关键技术：CDQA 用自回归交叉熵做 LoRA 适配；CP 联合训练骨干适配器与结构化头，总损失为 L = λ_lm·L_lm + λ_cmd·L_cmd + λ_wp·L_wp + λ_fde·L_fde（公式 2），其中理由为 token 级交叉熵、命令为交叉熵、路点为 Smooth L1 加额外终点项；CP 训练可选地从 CDQA 微调初始化骨干适配器。推理时语言解码器回答 CDQA 提示，CP 由结构化头直接映射池化提示表示到命令与轨迹，语言解码器也可生成三段式理由。</li><li>原文未报告 λ 权重具体取值、LoRA 具体配置细节、模型参数量等训练超参细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CoVLM-Bench 构建于 V2X-Seq-SPD 之上，包含 2,196 个配对帧、35,136 条问答记录、2,129 个完整时域规划示例；CP 评测使用 654 个示例，CDQA 每条件 2,861 个合格条目。</li><li>仿真器：原文未报告仿真器。</li><li>模型规模：Qwen3-VL-32B 用于 L2 描述、L3 答案与理由的草案生成；主干基线使用 Qwen3-VL-8B，并对比 Qwen3-VL-4B、Qwen2.5-VL-3B、Qwen2.5-VL-7B、InternVL3-8B、LLaVA-OneVision-7B、Idefics3-8B 等骨干。</li><li>训练资源：效率测量在 RTX 4090、batch size 为 1 的条件下进行并报告模型计算时间；原文未报告训练所用 GPU 数量、训练时长等其他资源。</li><li>实车平台：原文未报告实车平台；数据来自 V2X-Seq-SPD 的真实车–路记录。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CoVLM-Bench 的场景不相交（scene-disjoint）划分，同时评测 CDQA 与 CP。</li><li>评估指标：轨迹 L2（在 0.5/1.0/1.5/2.0/2.5 秒各时域）与最终位移误差 FDE（3.0 秒）；命令准确率（Cmd Acc.）与平衡准确率（Bal. Acc.）；CDQA 在五个客观任务上的精确答案准确率；效率指标包括延迟（Lat.，ms）、FPS 与显存（Mem.，GiB）；零样本输出另报告 Parse（含有效命令与 6 路点的响应百分比）。</li><li>关键数值：CDQA 中 Qwen3-VL-8B 零样本 24.7%，CDQA 适配后升至 39.6%（提升 14.9 个百分点）；CP 适配检查点为 25.8%；零样本准确率范围 16.9%–51.1%（Qwen3-VL-32B 最高）。CP 标准配置 FDE 为 4.911 m，优于 MAP 的 5.240 m 与 UniMM-V2X 的 5.357 m；替代骨干 FDE 为 5.076–5.538 m，最佳零样本为 11.227 m；标准 CP 配置为 223.1 ms/帧、4.48 FPS。仅规划监督 FDE 为 5.197 m，QA 初始化降至 5.083 m，理由监督降至 4.911 m，且 QA 初始化把 CP 训练后的 CDQA 准确率提高到 37.4%。</li><li>路侧输入消融（CP）：匹配输入 FDE 4.911 m，优于仅自车 5.776 m、空白路侧 5.085 m、打乱路侧 4.976 m；打乱路侧使预测路点平均偏移 0.73 m，在 95.3% 的样本上超过 0.1 m。CDQA 中匹配输入优于最佳缺失视图对照（8 个零样本 VLM 中 7 个），并优于打乱输入（全部 10 个模型）；CDQA 适配把相对最佳缺失视图对照的差距从 5.2 个百分点扩大到 25.3 个百分点。</li><li>对比方法：CP 方面对比 UniV2X（官方发布预测）、UniMM-V2X 与 MAP（协议对齐复现），以及多种 CoVLM-Drive 骨干变体和零样本 VLM；CDQA 方面对比 8 个零样本 VLM 与 2 个基于 Qwen3-VL-8B 的 CoVLM-Drive 检查点（CP 适配与 CDQA 适配）。</li><li>开环、闭环、仿真或实车条件：原文报告的是基于真实记录数据的开环评估（离线路点与命令指标、CDQA 准确率与效率测量）；原文未报告闭环评估，也未报告仿真或实车在线测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.36438/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">World4Scorer: Outcome-Grounded World Modeling for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.35078/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RefineDrive: Reliable Failure-Guided Learning for Vision-Language-Action Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

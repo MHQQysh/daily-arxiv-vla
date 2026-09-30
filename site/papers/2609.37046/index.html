@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Speed in the Blind Spot: An Interpretability Analysis of Dynamic Perception in VLMs for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该论文研究自动驾驶场景中视觉语言模型（VLM）从视觉输入中恢复动态物理状态（速度）的能力。 应用场景为自动驾驶系统的感知与规划，涉及周围车辆速度、当前自车速度以及短时未来自车速度建议三个任务。 研究问题在于：模型是否真正编码并利用动态状态信息，还是仅依赖语言先验、提示信息或静态线索；并区分“编码”“读出”和“时间 grounding”三个失败阶段。 论文在 nuScenes 数据集上，对开放权重通用 VLM、Physical-AI VLM 以及驾驶专用 VLA（Alpamayo-1.5）进行零样本评估、线性探测与任务特定适配分析。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.37046">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.37046.webp" alt="Speed in the Blind Spot: An Interpretability Analysis of Dynamic Perception in VLMs for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该论文研究自动驾驶场景中视觉语言模型（VLM）从视觉输入中恢复动态物理状态（速度）的能力。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Speed in the Blind Spot: An Interpretability Analysis of Dynamic Perception in VLMs for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.37046" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.37046" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.37046</span></div>
+            <p class="detail-summary">该论文研究自动驾驶场景中视觉语言模型（VLM）从视觉输入中恢复动态物理状态（速度）的能力。 应用场景为自动驾驶系统的感知与规划，涉及周围车辆速度、当前自车速度以及短时未来自车速度建议三个任务。 研究问题在于：模型是否真正编码并利用动态状态信息，还是仅依赖语言先验、提示信息或静态线索；并区分“编码”“读出”和“时间 grounding”三个失败阶段。 论文在 nuScenes 数据集上，对开放权重通用 VLM、Physical-AI VLM 以及驾驶专用 VLA（Alpamayo-1.5）进行零样本评估、线性探测与任务特定适配分析。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Munich University of Applied Sciences, Intelligent Vehicles Lab (IVL), 8033…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.37046/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该论文研究自动驾驶场景中视觉语言模型（VLM）从视觉输入中恢复动态物理状态（速度）的能力。</p>
+  <ul class="reading-intro-points"><li>该论文研究自动驾驶场景中视觉语言模型（VLM）从视觉输入中恢复动态物理状态（速度）的能力。</li><li>应用场景为自动驾驶系统的感知与规划，涉及周围车辆速度、当前自车速度以及短时未来自车速度建议三个任务。</li><li>研究问题在于：模型是否真正编码并利用动态状态信息，还是仅依赖语言先验、提示信息或静态线索；并区分“编码”“读出”和“时间 grounding”三个失败阶段。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Munich University of Applied Sciences, Intelligent Vehicles Lab (IVL), 80335 Munich, Germany；作者：Katharina Winter、Stefan Englmeier、Fabian B. Flohr</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该论文研究自动驾驶场景中视觉语言模型（VLM）从视觉输入中恢复动态物理状态（速度）的能力。</li><li>应用场景为自动驾驶系统的感知与规划，涉及周围车辆速度、当前自车速度以及短时未来自车速度建议三个任务。</li><li>研究问题在于：模型是否真正编码并利用动态状态信息，还是仅依赖语言先验、提示信息或静态线索；并区分“编码”“读出”和“时间 grounding”三个失败阶段。</li><li>论文在 nuScenes 数据集上，对开放权重通用 VLM、Physical-AI VLM 以及驾驶专用 VLA（Alpamayo-1.5）进行零样本评估、线性探测与任务特定适配分析。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个面向驾驶场景 VLM 的受控评估协议，围绕三个速度任务（周围车辆速度 T1、当前自车速度 T2、3 秒后自车速度 T3），在单帧、有序/无序多帧以及自车速度提示条件下进行评估。</li><li>结合线性探针、查询条件解码和受控扰动，将模型失败分解为编码、读出和时间 grounding 三个层面。</li><li>发现周围车辆速度在智能体特定形式下编码较弱，而当前自车速度在隐藏表示中比语言输出中更易获取：连续探针 MAE 为 4.7–5.8 km/h，而语言输出 MAE 为 10.2–16.8 km/h。</li><li>发现多帧输入相对单帧没有一致收益，帧顺序很少被利用；未来速度预测甚至不如持续性基线（最差比持续性差 6.5 km/h）。</li><li>表明 QLoRA 任务特定适配可显著提升自车速度读出（如 Qwen3-VL 自车速度估计从 40.9% 提升至 90.1% macro-F1），但未来速度的时间 grounding 仍然有限。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于 VLM 可解释性与动态感知评估研究，不提出新的自动驾驶端到端模型，而是对已有 VLM/VLA 进行诊断分析。</li><li>输入传感器：nuScenes 前视相机图像；未报告使用激光雷达、雷达等其他传感器。</li><li>场景表示：单帧（1F）或五帧（5F，2 Hz 采样，约 2 秒历史）图像输入；可选在提示中提供数值自车速度提示（+S）。</li><li>模型结构：评估多个开放权重 VLM，包括 Cosmos-Reason2-8B、Cosmos-Reason1-7B、Qwen2.5-VL-7B、Qwen3-VL-8B、InternVL2-8B、InternVL2.5-8B、LLaVA-Video-7B、LLaVA-1.5-7B、Phi-3.5-Vision (4B)、MiniCPM-V-2.6 (8B)，以及驾驶专用 VLA Alpamayo-1.5-10B；视觉编码器包括 SigLIP-2、Qwen2.5-VL ViT、InternViT、CLIP ViT-L 等，语言骨干包括 Qwen3-8B、Qwen2.5-7B、internlm2_5-7b-chat、Vicuna-7B、Phi-3.5 Mini、Qwen2-7B 等。</li><li>关键技术：闭集问答、分类与连续 km/h 两种输出形式；确定性 JSON 解析；线性探针；查询条件解码；反事实自车速度提示；帧顺序打乱扰动；QLoRA 任务特定适配。</li><li>原文未报告：具体视频 tokenization 细节、探针网络层数、LoRA 秩与目标模块等实现细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes 官方训练与验证划分，训练与验证场景互不重叠。</li><li>验证集：150 个场景、6,019 个关键帧；排除每场景前四关键帧后得到 5,419 个样本用于 T2 和单帧评估；T1 保留 4,429 个有可见前视目标车辆的样本；T3 保留 4,519 个有有效 3 秒未来轨迹的样本。</li><li>线性探针训练：使用 nuScenes 训练集中 547 个场景的 6,000 个样本（约每类 2,000，联合分层）。</li><li>QLoRA 适配：使用完整合格训练集 20,275 个样本、560 个场景，采用加权采样平衡目标类别。</li><li>模型规模：见“方法描述”中列出的各模型参数量，从 4B 到 10B。</li><li>训练与推理资源：零样本推理和特征提取在单张 NVIDIA A40 48 GB 或 A100-SXM4 80 GB GPU 上完成，具体取决于模型大小；原文未报告 QLoRA 训练的具体 GPU 数量与总训练时长。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集上的三个速度任务（T1 周围车辆速度、T2 当前自车速度、T3 3 秒后自车速度）。</li><li>评估指标：三分类与二分类 macro-F1；连续预测使用 MAE、RMSE、Spearman ρ；以随机基线（三分类 33.3%，二分类 50%）、最优常数基线（T1–T3 分别为 0.7、20.2、20.7 km/h）和持续性基线（T3：v̂_{t+3s}=v_t）作为参考。</li><li>关键数值：</li></ul>
+<p> - 视觉单帧/多帧下，三分类最优结果为 T1 43.3%、T2 44.9%、T3 55.1%，分别超过随机基线 10.0、11.6、21.8 个百分点。</p>
+<p> - 连续 MAE 最优结果为 T1 10.5 km/h、T2 10.2 km/h、T3 10.6 km/h，仅比最优常数基线好 1.2、0.3、0.1 km/h。</p>
+<p> - T3 持续性基线 MAE 为 4.1 km/h，显著优于最佳 VLM 的 10.6 km/h。</p>
+<p> - 连续探针 MAE 为 4.7–5.8 km/h，语言输出 MAE 为 10.2–16.8 km/h。</p>
+<p> - 正确自车速度提示下 Qwen3-VL 在 T2 达到 82.0% macro-F1，InternVL2.5 在 T3 达到 73.0% macro-F1；反事实提示下 T2 和 T3 的中位 macro-F1 降至 11% 和 19%，低于随机基线。</p>
+<p> - QLoRA 适配后 Qwen3-VL 自车速度估计从 40.9% 提升至 90.1% macro-F1。</p>
+<p> - 分类与连续输出存在硬矛盾：单帧 18.4%、五帧 15.6% 的预测出现非相邻类别冲突。</p>
+<ul><li>对比方法：开放权重通用 VLM、Physical-AI VLM、驾驶专用 VLA Alpamayo-1.5，以及随机基线、最优常数基线和持续性基线。</li><li>评估条件：全部为零样本、闭环/开环未报告、仿真或实车未报告；论文在 nuScenes 离线数据集上进行开环式问答评估，未进行闭环规划或实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.37098/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">V2X-WAM: A Cooperative World Action Model for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.36875/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">S4VY: Segment Anything in Feed-Forward 4D Visual Geometry</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
