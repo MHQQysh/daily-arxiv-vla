@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diffusion-2BC: Hybrid Diffusion and Regression Training for Offline Behavior Cloning in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。 应用场景包括受控的 Claw 多模态预测基准、CARLA 鸟瞰图（BEV）路线条件导航、无路线多路口导航以及 Town01 到 Town02 的跨地图评估。 研究问题：确定性 MSE 回归难以表达同一观测对应多种有效动作的多模态分布；扩散策略虽能建模多模态动作分布，但在有限数据下闭环表现可能不稳定，因此能否在保留扩散多模态推理的同时，利用辅助确定性行为克隆信号改善表示学习与闭环可靠性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.38472">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.38472.webp" alt="Diffusion-2BC: Hybrid Diffusion and Regression Training for Offline Behavior Cloning in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Diffusion-2BC: Hybrid Diffusion and Regression Training for Offline Behavior Cloning in Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.38472" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.38472" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.38472</span></div>
+            <p class="detail-summary">论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。 应用场景包括受控的 Claw 多模态预测基准、CARLA 鸟瞰图（BEV）路线条件导航、无路线多路口导航以及 Town01 到 Town02 的跨地图评估。 研究问题：确定性 MSE 回归难以表达同一观测对应多种有效动作的多模态分布；扩散策略虽能建模多模态动作分布，但在有限数据下闭环表现可能不稳定，因此能否在保留扩散多模态推理的同时，利用辅助确定性行为克隆信号改善表示学习与闭环可靠性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Federal University of Santa Catarina（Department of Automation and Systems E…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.38472/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。</li><li>应用场景包括受控的 Claw 多模态预测基准、CARLA 鸟瞰图（BEV）路线条件导航、无路线多路口导航以及 Town01 到 Town02 的跨地图评估。</li><li>研究问题：确定性 MSE 回归难以表达同一观测对应多种有效动作的多模态分布；扩散策略虽能建模多模态动作分布，但在有限数据下闭环表现可能不稳定，因此能否在保留扩散多模态推理的同时，利用辅助确定性行为克隆信号改善表示学习与闭环可靠性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Federal University of Santa Catarina（Department of Automation and Systems Engineering, Graduate Program in Automation and Systems Engineering, Florianópolis, Santa Catarina, Brazil）；作者：Bruno Maciel Machado、Eric Aislan Antonelo。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。</li><li>应用场景包括受控的 Claw 多模态预测基准、CARLA 鸟瞰图（BEV）路线条件导航、无路线多路口导航以及 Town01 到 Town02 的跨地图评估。</li><li>研究问题：确定性 MSE 回归难以表达同一观测对应多种有效动作的多模态分布；扩散策略虽能建模多模态动作分布，但在有限数据下闭环表现可能不稳定，因此能否在保留扩散多模态推理的同时，利用辅助确定性行为克隆信号改善表示学习与闭环可靠性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Diffusion-2BC：在共享视觉编码器上联合扩散去噪目标与辅助确定性回归目标，辅助分支仅用于训练，推理仍为扩散式。</li><li>在 Claw 基准以及 CARLA 的路线条件导航、无路线多路口导航和 Town01→Town02 跨地图设置中比较 MSE-BC、Diffusion-BC 与 Diffusion-2BC。</li><li>分析路线进展、行为多样性、计算成本与失败模式之间的权衡，并界定所评估运行与基线支持的结论范围。</li><li>表明辅助回归信号可在受控基准中保留多模态预测能力，同时提升扩散行为克隆的闭环可靠性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶策略学习中的离线模仿学习/行为克隆，不进行在线环境交互更新策略。</li><li>输入传感器：CARLA 实验使用车辆为中心的 192×192 RGB 鸟瞰图（BEV），包含可行驶道路、车道边界和可选规划路线通道；每帧转灰度并与前 3 帧堆叠、归一化，形成 192×192×4 输入。Claw 环境使用 32×32 RGB 俯视图像。原文未报告真实传感器输入或实车传感器配置。</li><li>场景表示：CARLA 使用 BEV；路线条件实验保留黄色规划路线通道，无路线实验省略该通道，迫使策略在局部有效道路延续中自行选择。Claw 使用包含多个形状的俯视图像，动作是二维点，成功定义为落在任一目标掩码内。</li><li>模型结构：所有策略共享视觉编码器，包含两个残差卷积块，每块两个 3×3 卷积、批归一化、GELU，输出通道为 64 与 128，残差和按 1/√2 缩放，后接 2×2 最大池化；再经 8×8 平均池化和展平得到表示。CARLA 中该表示维度为 4608。扩散去噪骨干遵循 Pearce 等人的 observation-to-action Diffusion-BC：视觉表示、噪声动作和归一化扩散时间步分别嵌入为 128 维并投影为三个 64 维 token，四个 Transformer 编码块处理，每块 16 个注意力头、残差连接、批归一化和 64→256 的前馈扩展。CARLA 中 MSE-BC 使用 MLP 4608–2304–1024–64–2；Diffusion-2BC 在扩散分支外增加辅助回归头 4608→2048→512→128→32→2，隐藏层后使用 BatchNorm、ReLU 和 dropout p=0.3，辅助头训练后丢弃。</li><li>关键技术：前向扩散按方差调度加高斯噪声；条件去噪网络预测噪声，训练目标为 L_DBC。总目标为 L_D2BC = α L_MSE + (1−α) L_DBC；路线条件 CARLA 使用固定 α=0.3，多路口实验按 α_e=exp(−ke) 每 epoch 更新，k=−ln(0.01)/E，从 1.0 衰减至 0.01。扩散模型使用线性 β 调度，T=20（CARLA）或 50（Claw）。推理时辅助预测与回归损失不存在，Diffusion-2BC 与 Diffusion-BC 测试时计算结构相同。原文未报告其他未列出的传感器、实车平台或模型规模细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Claw 环境训练集含 20,000 个观测-动作对，并额外使用其 90% 子集；评估使用 7 个留出观测，每个观测采样 300 个动作。CARLA 路线条件数据集由 PID 专家沿 Town01 一条 CARLA Leaderboard 路线生成，约 1,900 个观测-动作对。无路线多路口数据集包含 Town01 的 34 条 PID 专家路线，约 16,200 个样本。</li><li>仿真器：Claw 环境和 CARLA 开源城市驾驶仿真器；CARLA 使用物理车辆动力学和可配置地图，实验涉及 Town01 和未参与训练的 Town02。</li><li>模型规模：原文报告了上述网络层与维度配置；未报告总参数量或模型大小。</li><li>训练资源：原文报告了学习率、批大小、训练轮数、扩散步数和调度等超参数，但未报告 GPU/CPU 型号、数量、训练时长或显存等训练资源。</li><li>实车平台：原文未报告实车平台，实验均在 Claw 与 CARLA 仿真中完成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Claw 受控多模态预测基准；CARLA 路线条件导航；CARLA 无路线多路口导航；Town01→Town02 跨地图评估。</li><li>评估指标：Claw 使用采样动作到最近有效掩码点的平均欧氏距离（越低越好）。路线条件 CARLA 使用行驶距离（m）和 3,000 步horizon的相对完成比例。无路线 CARLA 使用由三维仿真坐标累计的路由自由距离，报告为 UoM，而非标准米；同时观察重复 rollout 的路径多样性。Town02 报告固定预选 checkpoint 中的最高均值与 min–max 范围。</li><li>关键数值：Claw 全数据集下 MSE-BC 为 4.02，Diffusion-BC 为 0.68，Diffusion-2BC 指数 α 为 0.63，固定 α=0.3 为 0.61；90% 数据集下分别为 4.25、0.70、0.69 和 0.63。相对 Diffusion-BC 约降低 10% 平均掩码距离误差，相对确定性行为克隆约降低 85%。路线条件 CARLA 最佳完成导向 checkpoint：MSE-BC 1430.05±580.55 m、完成 0.83±0.26；Diffusion-BC 1339.85±150.60 m、完成 1.00±0.00；Diffusion-2BC 1498.09±74.81 m、完成 1.00±0.00。Diffusion-2BC 在 epoch 150 首次无违规完成所有评估 rollout，Diffusion-BC 在 epoch 300 达到完整完成。无路线 Town01 中，MSE-BC 峰值均值 124.945 UoM，Diffusion-BC 峰值均值 51.873 UoM，Diffusion-2BC 峰值均值 304.697 UoM，约为 MSE-BC 的 2.44 倍、Diffusion-BC 的 5.87 倍；其峰值 checkpoint 范围为 116.741–360.201 UoM。Town02 转移候选中，MSE-BC 最高均值 70.563 UoM，Diffusion-BC 为 165.717 UoM（范围 7.489–364.232 UoM），Diffusion-2BC 为 383.963 UoM（范围 150.107–429.379 UoM）。</li><li>对比方法：MSE-BC、Diffusion-BC、Diffusion-2BC。</li><li>评估条件：全部为离线训练策略后的开环训练评估与闭环仿真 rollout；无实车评估。CARLA 路线条件实验中每个架构训练三次，每 50 epoch 评估，每次用十条新随机路线，违规或 3,000 步终止。无路线实验中每个架构训练两个模型至 epoch 700，每 10 epoch 评估，每个模型从同一初始位置评估五次；Town02 使用 Town01 预选的五个候选 checkpoint 直接迁移评估，不进行 Town02 新 checkpoint 搜索。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.38641/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Vision-Language-Action Autonomous Driving Agent with Language-based Memory</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.38463/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">TrafficSignBench: Rule-Centric Closed-Loop Evaluation of Traffic-Sign Compliance in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

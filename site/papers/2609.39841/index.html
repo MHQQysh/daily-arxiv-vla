@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DyRAD: Radar Novel View Synthesis for Dynamic Driving Scenes - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。 应用场景包括基于重建的闭环评估、传感器配置替换以及场景编辑，用于训练和评估自动驾驶系统。 研究问题在于：现有雷达 NVS 方法在动态场景中只重建距离–方位（RA）张量而丢弃 Doppler；渲染 Doppler 的方法又假设静态场景；同时雷达信号处理链带来的点扩散函数（PSF）展宽被错误吸收进场景几何，导致偏离记录轨迹的视角渲染不正确。论文还指出既有评测只在记录轨迹内的留出帧上进行，无法检验真正的空间泛化。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.39841">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.39841.webp" alt="DyRAD: Radar Novel View Synthesis for Dynamic Driving Scenes" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DyRAD: Radar Novel View Synthesis for Dynamic Driving Scenes</h1>
+            <div class="detail-meta">2026-09-30 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.39841" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.39841" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.39841</span></div>
+            <p class="detail-summary">论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。 应用场景包括基于重建的闭环评估、传感器配置替换以及场景编辑，用于训练和评估自动驾驶系统。 研究问题在于：现有雷达 NVS 方法在动态场景中只重建距离–方位（RA）张量而丢弃 Doppler；渲染 Doppler 的方法又假设静态场景；同时雷达信号处理链带来的点扩散函数（PSF）展宽被错误吸收进场景几何，导致偏离记录轨迹的视角渲染不正确。论文还指出既有评测只在记录轨迹内的留出帧上进行，无法检验真正的空间泛化。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Technion · Merav Keidar、Tomer Borreda、Or Litany</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.39841/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。</li><li>应用场景包括基于重建的闭环评估、传感器配置替换以及场景编辑，用于训练和评估自动驾驶系统。</li><li>研究问题在于：现有雷达 NVS 方法在动态场景中只重建距离–方位（RA）张量而丢弃 Doppler；渲染 Doppler 的方法又假设静态场景；同时雷达信号处理链带来的点扩散函数（PSF）展宽被错误吸收进场景几何，导致偏离记录轨迹的视角渲染不正确。论文还指出既有评测只在记录轨迹内的留出帧上进行，无法检验真正的空间泛化。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Technion；作者：Merav Keidar、Tomer Borreda、Or Litany</li><li>机构：Cornell Tech；作者：Rajalakshmi Nandakumar</li><li>机构：NVIDIA；作者：Or Litany</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。</li><li>应用场景包括基于重建的闭环评估、传感器配置替换以及场景编辑，用于训练和评估自动驾驶系统。</li><li>研究问题在于：现有雷达 NVS 方法在动态场景中只重建距离–方位（RA）张量而丢弃 Doppler；渲染 Doppler 的方法又假设静态场景；同时雷达信号处理链带来的点扩散函数（PSF）展宽被错误吸收进场景几何，导致偏离记录轨迹的视角渲染不正确。论文还指出既有评测只在记录轨迹内的留出帧上进行，无法检验真正的空间泛化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DyRAD，据作者称为首个为动态驾驶场景渲染 Doppler 的雷达 NVS 方法：以静态背景点反射器和沿刚性目标轨迹运动的动态点反射器表示场景，渲染完整的距离–方位–Doppler（RAD）张量。</li><li>将场景结构与传感器响应解耦：点反射器通过由雷达信号处理链导出的固定、传感器特定解析 PSF 渲染，使测量展宽不被烘焙进场景表示，并支持同一场景在不同雷达配置下的零拟合迁移。</li><li>提出面向雷达 NVS 的离路径（off-path）评测：在合成基准上用位移视角的真值直接评估，在真实数据上采用适配雷达的循环一致性协议（横向偏移 2 m 往返）。</li><li>实验显示该方法在 RADIal、Boreas 和合成基准上优于 RadarSplat、RadarFields 等基线，并支持传感器配置迁移与场景编辑等附加能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：雷达传感器仿真与新视角合成（重建式传感器仿真）。</li><li>输入传感器：车载雷达；RADIal 为前向雷达并提供完整 RAD 原始测量，Boreas 为 360° 旋转 Navtech 雷达，仅提供无 Doppler 的 RA 测量。</li><li>输入数据：记录的多帧 RAD 张量 {Y_t} 及对应传感器位姿 {P_t}，以及部分帧的动态目标包围盒标注；RAD 张量维度为 D 个径向速度 bin × R 个距离 bin × A 个方位 bin。测量不分辨高度，因此几何与运动在水平面内建模，位姿由平面位置和朝向构成。</li><li>场景表示：N 个零空间尺寸的点反射器，参数包括世界位置 x_i(t)、基础反射功率 α_i=σ(o_i)、球谐系数 η_i（视角相关反射率）以及目标归属 q_i（0 表示静态背景，&gt;0 表示动态目标）；动态反射器在目标参考系下的位置为 μ_i，随目标刚性轨迹运动。</li><li>运动建模：每个运动目标由平面刚性轨迹表示，每个训练时间戳对应一个学习轨迹点 c_{j,k}，相邻时间戳间线性插值得到位置 p_j(t)，朝向由运动方向估计并插值，旋转 R_j(t) 描述相对初始朝向的变化；动态反射器世界位置为 p_j(t)+R_j(t)μ_i。</li><li>渲染：Physics-Grounded RAD Rendering，可微并在 CUDA 中实现。步骤包括反射器投影（计算距离 r_i、方位 φ_i、视线单位方向，并用球谐建模视角相关反射功率）、Doppler 计算（由轨迹导出反射器世界速度，结合本车速度投影到视线方向，并按雷达不模糊区间做周期性环绕）、传感器响应（距离、方位、Doppler 三个固定核 h_R、h_A、h_D 刻画距离 FFT 泄漏、波束形成响应与 Doppler 处理响应）、栅格化（对各反射器响应做非相干功率求和，再转换为记录强度并加入固定测量底噪）。</li><li>初始化与优化：由包围盒关联得到目标轨迹并分离动态区域；背景反射器由 Doppler 平均 RA 图的峰值初始化，动态反射器由包围盒内最强 Doppler bin 的峰值初始化；优化损失为 L = L_rec + λ_int L_int，其中 L_rec 为预测与记录 RAD 张量的均方误差，L_int 为受 RegNeRF 启发的插值一致性损失（仅在 RA 上施加，对相邻训练帧平均后做固定高斯模糊比较）；训练中周期性提取正残差峰值对静态背景反射器做稠密化。</li><li>原文未报告：网络为隐式场还是显式高斯等具体模型类别未以“模型结构”方式单独描述（方法为点反射器 + 解析 PSF 的可微光栅化），优化器类型、学习率、迭代次数等训练细节在正文中未给出，均指向附录。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：RADIal（主基准，10 个 60 帧序列，含原始雷达测量、车辆标注与自车运动测量，支持完整 RAD 重建与动态评估）；Boreas（3 个 50 帧序列，360° 旋转 Navtech 雷达，仅 RA、无 Doppler）；以及一个自建合成基准（5 个场景，采用理想化 RADIal 格式传感器模型，提供位移位姿的真值测量），作者表示将公开该合成基准及离路径真值。</li><li>仿真器：原文未报告使用既有仿真器；合成基准由自建理想化 RADIal 格式传感器模型生成。</li><li>模型规模：原文未报告参数量或反射器数量等规模信息。</li><li>训练资源：原文未报告 GPU 型号、数量、训练时长等资源信息；“Runtime”在附录 C.5 中报告，HTML 正文未给出具体数值。</li><li>实车平台：RADIal 与 Boreas 均为真实采集数据集，但论文未报告具体采集车辆平台型号等细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：RADIal、Boreas 和 5 个合成场景；对比方法为 RadarSplat、RadarFields（均在 Boreas 上用其公开配置，并适配到 RADIal 的传感器几何与分辨率），以及作者自己的 DyRAD-static（保留点反射器表示与渲染器但将所有反射器视为静态、初始化时不使用包围盒分离）；因 RF4D 代码“仍在检查中”而未比较。</li><li>评估指标：重建方面为 RAD/RA/RD 的全测量与目标区域 PSNR、SSIM，全测量 LPIPS，以及尺度不变的 Pearson 相关系数 ρ（全测量）和 ρ_obj（目标区域）；检测方面将相同的 RD-CFAR 检测应用于参考与合成 RAD 张量，报告空间 Chamfer 距离（CD）、位置–Doppler–功率联合 F1 和前景命中率（参考中被占据的标注框中同样含预测检测的比例）。检测评估覆盖 RADIal 与合成数据，Boreas 因缺少 RD-CFAR 所需的 Doppler 维度不参与。</li><li>开环/同路径结果（RADIal，留出每第 5 帧）：DyRAD 全 RAD 相关 0.272±0.062，目标区域 RAD 相关 0.658±0.070，前景命中率 0.907±0.086，CD 4.01±1.02 m，F1 0.179±0.041，PSNR 25.88±0.95；DyRAD-static 分别为 0.213±0.054、−0.013±0.072、0.070±0.083、4.71±1.29 m、0.123±0.041、25.67±0.95；RadarSplat（Doppler 由静态假设抬升）为 0.068±0.028、−0.010±0.057、0.036±0.067、6.53±5.82 m、0.073±0.048、23.56±0.85；RadarFields 为 0.015±0.009、−0.011±0.051、0.269±0.245、6.97±0.96 m、0.016±0.007、23.13±1.23。RA 相关上 DyRAD-static 达 0.533，高于 RadarSplat 的 0.291 与 RadarFields 的 0.055。Boreas 上 DyRAD 全测量相关 0.752±0.017、目标区域相关 0.622±0.130，RadarSplat 为 0.666±0.036 与 0.178±0.249。</li><li>真实数据离路径评估（2 m 横向偏移渲染–重拟合往返，在原始位姿与训练时间戳上与真实记录比较，分数与同路径结果不可直接比较）：DyRAD 在该协议各指标上取得最佳均值；RADIal 上前景命中率 0.917±0.101，最强先验基线为 0.181、静态模型为 0.209；DyRAD 的 RAD 相关 0.363±0.052、目标区域 RAD 相关 0.536±</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.39995/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Learning to Explain While Planning: Rule-Aligned Diffusion Planning for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.39601/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">GroundingPI: A Grounding Foundation Model towards Physical Intelligence with Visual Primitives</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

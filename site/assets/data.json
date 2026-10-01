@@ -1,5 +1,353 @@
 [
   {
+    "date": "2026-09-30",
+    "title": "Learning to Explain While Planning: Rule-Aligned Diffusion Planning for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.39995",
+    "arxiv_id": "2609.39995",
+    "detail_path": "papers/2609.39995/",
+    "cover_path": "covers/2609.39995/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.39995.webp",
+    "paper_image_full_path": "assets/paper-images/2609.39995.webp",
+    "preview_text": "任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。 应用场景：nuPlan 闭环仿真中的城市自动驾驶规划，重点关注安全关键与长尾场景。 研究问题：现有扩散规划器主要依靠专家示范拟合轨迹分布，将碰撞避免、车道合规、限速等规则隐含在数据分布中，而非显式训练目标；长尾场景下缺乏可模仿行为时可能产生违反安全或合规要求的轨迹；且生成过程缺乏规则级解释，难以判断哪些规则驱动了轨迹调整、何时生效、作用强度如何，从而限制故障诊断、安全验证与针对性改进。 研究思路：提出 Rule-Aligned Diffusion Planner（RADP），在训练中将可微驾驶规则纳入扩散目标；并提出 Rule-Pressure Attribution（RPA），由规则损失对预测轨迹的梯度构造监督信号，用轻量归因头在线估计各规则的优化压力。",
+    "research_unit": "Beijing Institute of Technology · Jiaxi Ye、Chunji Lv、Guoren Wang 等",
+    "hook_text": "任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。",
+    "key_points": [
+      "任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。",
+      "应用场景：nuPlan 闭环仿真中的城市自动驾驶规划，重点关注安全关键与长尾场景。",
+      "研究问题：现有扩散规划器主要依靠专家示范拟合轨迹分布，将碰撞避免、车道合规、限速等规则隐含在数据分布中，而非显式训练目标；长尾场景下缺乏可模仿行为时可能产生违反安全或合规要求的轨迹；且生成过程缺乏规则级解释，难以判断哪些规则驱动了轨迹调整、何时生效、作用强度如何，从而限制故障诊断、安全验证与针对性改进。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "DyRAD: Radar Novel View Synthesis for Dynamic Driving Scenes",
+    "link": "https://arxiv.org/abs/2609.39841",
+    "arxiv_id": "2609.39841",
+    "detail_path": "papers/2609.39841/",
+    "cover_path": "covers/2609.39841/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.39841.webp",
+    "paper_image_full_path": "assets/paper-images/2609.39841.webp",
+    "preview_text": "论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。 应用场景包括基于重建的闭环评估、传感器配置替换以及场景编辑，用于训练和评估自动驾驶系统。 研究问题在于：现有雷达 NVS 方法在动态场景中只重建距离–方位（RA）张量而丢弃 Doppler；渲染 Doppler 的方法又假设静态场景；同时雷达信号处理链带来的点扩散函数（PSF）展宽被错误吸收进场景几何，导致偏离记录轨迹的视角渲染不正确。论文还指出既有评测只在记录轨迹内的留出帧上进行，无法检验真正的空间泛化。",
+    "research_unit": "Technion · Merav Keidar、Tomer Borreda、Or Litany",
+    "hook_text": "论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。",
+    "key_points": [
+      "论文面向自动驾驶传感器仿真中的雷达新视角合成（Radar NVS）任务，目标是从已录制的雷达数据中重建动态驾驶场景，并合成原始轨迹之外的雷达观测。",
+      "应用场景包括基于重建的闭环评估、传感器配置替换以及场景编辑，用于训练和评估自动驾驶系统。",
+      "研究问题在于：现有雷达 NVS 方法在动态场景中只重建距离–方位（RA）张量而丢弃 Doppler；渲染 Doppler 的方法又假设静态场景；同时雷达信号处理链带来的点扩散函数（PSF）展宽被错误吸收进场景几何，导致偏离记录轨迹的视角渲染不正确。论文还指出既有评测只在记录轨迹内的留出帧上进行，无法检验真正的空间泛化。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "GroundingPI: A Grounding Foundation Model towards Physical Intelligence with Visual Primitives",
+    "link": "https://arxiv.org/abs/2609.39601",
+    "arxiv_id": "2609.39601",
+    "detail_path": "papers/2609.39601/",
+    "cover_path": "covers/2609.39601/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.39601.webp",
+    "paper_image_full_path": "assets/paper-images/2609.39601.webp",
+    "preview_text": "面向物理智能（physical intelligence）场景，研究视觉grounding基础模型对下游自动驾驶与机器人操作任务的支撑作用。 解决的核心问题是：现有VLA与世界动作模型（WAM）多依赖通用视觉-语言或视频生成骨干，其在密集场景、微小目标等条件下的精确grounding能力不足，感知成为动作学习的瓶颈。 提出并训练一个4B参数的grounding基础模型GroundingPI，将点与框表示为共享词表中的量化坐标，统一多种感知任务为语言条件下的结构化生成。 进一步把GroundingPI作为下游视觉骨干，验证其在nuScenes上的开环轨迹预测和在RoboTwin 2.0、RoboCasa-GR1上的机器人操作表现，并分析预训练规模与数据组成的影响。",
+    "research_unit": "XPeng Inc. · 原文未明确对应",
+    "hook_text": "面向物理智能（physical intelligence）场景，研究视觉grounding基础模型对下游自动驾驶与机器人操作任务的支撑作用。",
+    "key_points": [
+      "面向物理智能（physical intelligence）场景，研究视觉grounding基础模型对下游自动驾驶与机器人操作任务的支撑作用。",
+      "解决的核心问题是：现有VLA与世界动作模型（WAM）多依赖通用视觉-语言或视频生成骨干，其在密集场景、微小目标等条件下的精确grounding能力不足，感知成为动作学习的瓶颈。",
+      "提出并训练一个4B参数的grounding基础模型GroundingPI，将点与框表示为共享词表中的量化坐标，统一多种感知任务为语言条件下的结构化生成。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Sparse Planner: A Hybrid Planner for Efficient Sampling via a Conditional Variational Autoencoder",
+    "link": "https://arxiv.org/abs/2609.39570",
+    "arxiv_id": "2609.39570",
+    "detail_path": "papers/2609.39570/",
+    "cover_path": "covers/2609.39570/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.39570.webp",
+    "paper_image_full_path": "assets/paper-images/2609.39570.webp",
+    "preview_text": "论文面向自动驾驶轨迹规划任务，聚焦采样式运动规划（SBMP）在复杂交通场景下需要密集采样、计算开销大且运行时波动明显的问题。 应用场景为基于 Frenét 坐标的轨迹规划：以参考路径为基准，采样横向偏移 d、目标速度 ṡ 与规划时域 T（即 (d, ṡ, t) 参数），生成候选轨迹并进行可行性与代价评估。 研究问题是：如何在学习辅助下把传统均匀密集采样替换为稀疏、代价偏置的采样过程，从而在保持轨迹质量的同时降低采样密度、提升运行时间的确定性与可预测性。 论文提出的 Sparse Planner（SP）保持下游轨迹生成模块不变，仅用条件变分自编码器（CVAE）学习场景上下文与有效轨迹参数之间的条件分布。",
+    "research_unit": "Technische Hochschule Ingolstadt (THI), Research Institute AImotion Bavaria…",
+    "hook_text": "论文面向自动驾驶轨迹规划任务，聚焦采样式运动规划（SBMP）在复杂交通场景下需要密集采样、计算开销大且运行时波动明显的问题。",
+    "key_points": [
+      "论文面向自动驾驶轨迹规划任务，聚焦采样式运动规划（SBMP）在复杂交通场景下需要密集采样、计算开销大且运行时波动明显的问题。",
+      "应用场景为基于 Frenét 坐标的轨迹规划：以参考路径为基准，采样横向偏移 d、目标速度 ṡ 与规划时域 T（即 (d, ṡ, t) 参数），生成候选轨迹并进行可行性与代价评估。",
+      "研究问题是：如何在学习辅助下把传统均匀密集采样替换为稀疏、代价偏置的采样过程，从而在保持轨迹质量的同时降低采样密度、提升运行时间的确定性与可预测性。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Comparative study of adapting pre-trained models for driving behavior video captioning",
+    "link": "https://arxiv.org/abs/2609.39542",
+    "arxiv_id": "2609.39542",
+    "detail_path": "papers/2609.39542/",
+    "cover_path": "covers/2609.39542/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.39542.webp",
+    "paper_image_full_path": "assets/paper-images/2609.39542.webp",
+    "preview_text": "论文解决的自动驾驶任务是驾驶行为视频描述（driving behavior video captioning），即从驾驶视频生成描述车辆动作及其原因的自然语言文本。 应用场景包括：对驾驶场景数据库进行文本检索、以自然语言向终端用户解释机器行为、将语言作为驾驶决策的高层表示以辅助规则学习、评估数据集对运行设计域的覆盖程度。 研究问题是：在自动驾驶领域，如何将通用视频到大语言模型进行适配，并比较不同适配方法（全量微调、LoRA、提示工程）在该任务上的表现与代价。",
+    "research_unit": "University of Tübingen · Sayak Mallick",
+    "hook_text": "论文解决的自动驾驶任务是驾驶行为视频描述（driving behavior video captioning），即从驾驶视频生成描述车辆动作及其原因的自然语言文本。",
+    "key_points": [
+      "论文解决的自动驾驶任务是驾驶行为视频描述（driving behavior video captioning），即从驾驶视频生成描述车辆动作及其原因的自然语言文本。",
+      "应用场景包括：对驾驶场景数据库进行文本检索、以自然语言向终端用户解释机器行为、将语言作为驾驶决策的高层表示以辅助规则学习、评估数据集对运行设计域的覆盖程度。",
+      "研究问题是：在自动驾驶领域，如何将通用视频到大语言模型进行适配，并比较不同适配方法（全量微调、LoRA、提示工程）在该任务上的表现与代价。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "DensePed-Lite: Quality-Aware Adaptive Detection for Dense Pedestrians under Occlusion",
+    "link": "https://arxiv.org/abs/2609.39467",
+    "arxiv_id": "2609.39467",
+    "detail_path": "papers/2609.39467/",
+    "cover_path": "covers/2609.39467/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.39467.webp",
+    "paper_image_full_path": "assets/paper-images/2609.39467.webp",
+    "preview_text": "任务：面向自动驾驶、监控与公共安全场景的行人检测，聚焦密集场景下的遮挡行人检测。 应用场景：拥挤真实场景，存在严重遮挡、剧烈尺度变化以及严格实时性要求。 研究问题：现有轻量检测器难以在精度与效率之间取得平衡，且常忽视质量感知特征建模以及分类与定位之间的一致性，导致拥挤条件下性能不稳定。",
+    "research_unit": "Jilin University, China · ZiAn Wang、ChangChun Li、Fangming Gu",
+    "hook_text": "任务：面向自动驾驶、监控与公共安全场景的行人检测，聚焦密集场景下的遮挡行人检测。",
+    "key_points": [
+      "任务：面向自动驾驶、监控与公共安全场景的行人检测，聚焦密集场景下的遮挡行人检测。",
+      "应用场景：拥挤真实场景，存在严重遮挡、剧烈尺度变化以及严格实时性要求。",
+      "研究问题：现有轻量检测器难以在精度与效率之间取得平衡，且常忽视质量感知特征建模以及分类与定位之间的一致性，导致拥挤条件下性能不稳定。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "ReWAM: Reciprocal World Action Models for Interactive Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.39245",
+    "arxiv_id": "2609.39245",
+    "detail_path": "papers/2609.39245/",
+    "cover_path": "covers/2609.39245/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.39245.webp",
+    "paper_image_full_path": "assets/paper-images/2609.39245.webp",
+    "preview_text": "论文针对自动驾驶中的交互场景，要求自车在其他交通参与者行为影响下生成自车动作。 研究问题在于现有 World Action Models（WAMs）通常将其他智能体视为世界模型的一部分，而非会根本影响自车决策的决策者，导致密集交互场景中的表现受限。 论文提出 Reciprocal World Action Models（ReWAM），用博弈论式世界动作建模框架捕捉自车与其他智能体之间的相互影响。 应用场景包括密集交互驾驶、狭窄道路通行、左转、直行等需要行为相互响应的自动驾驶规划场景。",
+    "research_unit": "The Hong Kong University of Science and Technology (Guangzhou) · Benshan Ma",
+    "hook_text": "论文针对自动驾驶中的交互场景，要求自车在其他交通参与者行为影响下生成自车动作。",
+    "key_points": [
+      "论文针对自动驾驶中的交互场景，要求自车在其他交通参与者行为影响下生成自车动作。",
+      "研究问题在于现有 World Action Models（WAMs）通常将其他智能体视为世界模型的一部分，而非会根本影响自车决策的决策者，导致密集交互场景中的表现受限。",
+      "论文提出 Reciprocal World Action Models（ReWAM），用博弈论式世界动作建模框架捕捉自车与其他智能体之间的相互影响。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Efficient Multi-Modal Planning with Reward-Guided Preference Optimization for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.38862",
+    "arxiv_id": "2609.38862",
+    "detail_path": "papers/2609.38862/",
+    "cover_path": "covers/2609.38862/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.38862.webp",
+    "paper_image_full_path": "assets/paper-images/2609.38862.webp",
+    "preview_text": "面向自动驾驶的轨迹规划任务，目标是根据传感器观测预测自车未来 T 步轨迹（含位置与朝向）。 应用场景为端到端自动驾驶中的多模态轨迹生成与轨迹选择，强调实时性与安全性。 研究问题：现有端到端方法中，模仿学习存在因果混淆与分布偏移；基于规则评分的方法需要密集锚点、计算开销大且存在目标错配；基于偏好的方法依赖严格成对标注，数据利用效率低。",
+    "research_unit": "The Hong Kong University of Science and Technology (Guangzhou) · Chenglin C…",
+    "hook_text": "面向自动驾驶的轨迹规划任务，目标是根据传感器观测预测自车未来 T 步轨迹（含位置与朝向）。",
+    "key_points": [
+      "面向自动驾驶的轨迹规划任务，目标是根据传感器观测预测自车未来 T 步轨迹（含位置与朝向）。",
+      "应用场景为端到端自动驾驶中的多模态轨迹生成与轨迹选择，强调实时性与安全性。",
+      "研究问题：现有端到端方法中，模仿学习存在因果混淆与分布偏移；基于规则评分的方法需要密集锚点、计算开销大且存在目标错配；基于偏好的方法依赖严格成对标注，数据利用效率低。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-29",
+    "title": "Vision-Language-Action Autonomous Driving Agent with Language-based Memory",
+    "link": "https://arxiv.org/abs/2609.38641",
+    "arxiv_id": "2609.38641",
+    "detail_path": "papers/2609.38641/",
+    "cover_path": "covers/2609.38641/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.38641.webp",
+    "paper_image_full_path": "assets/paper-images/2609.38641.webp",
+    "preview_text": "论文面向自动驾驶中的 Vision-Language-Action（VLA）驾驶智能体任务，研究如何让 VLA 在有限视觉输入时间跨度下具备记忆能力。 应用场景包括 all-way stop（全向停车路口）到达顺序判断、通用驾驶场景理解、驾驶相关视觉问答，以及为其他模型生成可插拔语言记忆。 研究问题：VLA 因图像 token 成本高，只能接收有限帧视觉输入，难以处理记忆依赖任务；已有 latent vector memory 不可解释、不可移植，language in-context learning 又不提供 in-episode memory。 论文提出 AD-Memo，以语言形式作为 Chain-of-Thought 的扩展输出 in-episode memory，并将该记忆作为未来输入的一部分。",
+    "research_unit": "University of Illinois Urbana-Champaign · Kai Yan、Alex Schwing、Yuxiong Wang",
+    "hook_text": "论文面向自动驾驶中的 Vision-Language-Action（VLA）驾驶智能体任务，研究如何让 VLA 在有限视觉输入时间跨度下具备记忆能力。",
+    "key_points": [
+      "论文面向自动驾驶中的 Vision-Language-Action（VLA）驾驶智能体任务，研究如何让 VLA 在有限视觉输入时间跨度下具备记忆能力。",
+      "应用场景包括 all-way stop（全向停车路口）到达顺序判断、通用驾驶场景理解、驾驶相关视觉问答，以及为其他模型生成可插拔语言记忆。",
+      "研究问题：VLA 因图像 token 成本高，只能接收有限帧视觉输入，难以处理记忆依赖任务；已有 latent vector memory 不可解释、不可移植，language in-context learning 又不提供 in-episode memory。"
+    ],
+    "reading_minutes": 15,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-29",
+    "title": "Diffusion-2BC: Hybrid Diffusion and Regression Training for Offline Behavior Cloning in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.38472",
+    "arxiv_id": "2609.38472",
+    "detail_path": "papers/2609.38472/",
+    "cover_path": "covers/2609.38472/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.38472.webp",
+    "paper_image_full_path": "assets/paper-images/2609.38472.webp",
+    "preview_text": "论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。 应用场景包括受控的 Claw 多模态预测基准、CARLA 鸟瞰图（BEV）路线条件导航、无路线多路口导航以及 Town01 到 Town02 的跨地图评估。 研究问题：确定性 MSE 回归难以表达同一观测对应多种有效动作的多模态分布；扩散策略虽能建模多模态动作分布，但在有限数据下闭环表现可能不稳定，因此能否在保留扩散多模态推理的同时，利用辅助确定性行为克隆信号改善表示学习与闭环可靠性。",
+    "research_unit": "Federal University of Santa Catarina（Department of Automation and Systems E…",
+    "hook_text": "论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。",
+    "key_points": [
+      "论文面向自动驾驶中的离线行为克隆（offline behavior cloning）任务，目标是在固定专家数据集上学习视觉到控制的驾驶策略。",
+      "应用场景包括受控的 Claw 多模态预测基准、CARLA 鸟瞰图（BEV）路线条件导航、无路线多路口导航以及 Town01 到 Town02 的跨地图评估。",
+      "研究问题：确定性 MSE 回归难以表达同一观测对应多种有效动作的多模态分布；扩散策略虽能建模多模态动作分布，但在有限数据下闭环表现可能不稳定，因此能否在保留扩散多模态推理的同时，利用辅助确定性行为克隆信号改善表示学习与闭环可靠性。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-29",
+    "title": "TrafficSignBench: Rule-Centric Closed-Loop Evaluation of Traffic-Sign Compliance in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2609.38463",
+    "arxiv_id": "2609.38463",
+    "detail_path": "papers/2609.38463/",
+    "cover_path": "covers/2609.38463/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.38463.webp",
+    "paper_image_full_path": "assets/paper-images/2609.38463.webp",
+    "preview_text": "论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。 应用场景为基于真实地图的仿真闭环驾驶评估，关注车辆在交通标志约束下是否遵守规则并完成任务。 研究问题在于：现有开环与闭环基准多使用驾驶分数、目的地到达率、碰撞率等聚合指标，无法显式衡量交通规则合规性，导致规划器可能取得高分却违反基本交通规则。 论文还试图通过显式交通标志约束生成高质量 oracle 轨迹，用于微调现有规划器，使其成为规则合规的轨迹专家。",
+    "research_unit": "Lomonosov Moscow State University · Victoria Smirnova、Artem Belyaev、Vlad Sh…",
+    "hook_text": "论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。",
+    "key_points": [
+      "论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。",
+      "应用场景为基于真实地图的仿真闭环驾驶评估，关注车辆在交通标志约束下是否遵守规则并完成任务。",
+      "研究问题在于：现有开环与闭环基准多使用驾驶分数、目的地到达率、碰撞率等聚合指标，无法显式衡量交通规则合规性，导致规划器可能取得高分却违反基本交通规则。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-09-29",
+    "title": "GaugeVLM: Structuring Spatial Supervision with Measured Geometric Interventions",
+    "link": "https://arxiv.org/abs/2609.38285",
+    "arxiv_id": "2609.38285",
+    "detail_path": "papers/2609.38285/",
+    "cover_path": "covers/2609.38285/",
+    "paper_image_path": "assets/paper-images/thumbs/2609.38285.webp",
+    "paper_image_full_path": "assets/paper-images/2609.38285.webp",
+    "preview_text": "论文关注自动驾驶及具身推理中的视觉语言模型（VLM）空间推理任务，涉及距离、方向与相对关系判断。 论文指出 VLM 在同一空间关系的不同视角下可能自相矛盾，并且当空间关系改变时无法正确响应。 论文认为现有仅基于单个答案或序数偏好（ordinal preference）的监督，无法显式表达误差幅度以及跨观测的几何依赖关系。 论文提出 GaugeVLM，通过在显式 3D 场景中进行受控的物体干预与相机干预，构建带有实测空间关系差异和跨视角共享真值的关联观测。 论文的核心目标 GaugeDPO 将实测误差转化为偏好间隔（preference margin），并学习跨视角的一致性正确排序。",
+    "research_unit": "NLPR & MAIS, Institute of Automation, Chinese Academy of Sciences · Hongbo…",
+    "hook_text": "论文关注自动驾驶及具身推理中的视觉语言模型（VLM）空间推理任务，涉及距离、方向与相对关系判断。",
+    "key_points": [
+      "论文关注自动驾驶及具身推理中的视觉语言模型（VLM）空间推理任务，涉及距离、方向与相对关系判断。",
+      "论文指出 VLM 在同一空间关系的不同视角下可能自相矛盾，并且当空间关系改变时无法正确响应。",
+      "论文认为现有仅基于单个答案或序数偏好（ordinal preference）的监督，无法显式表达误差幅度以及跨观测的几何依赖关系。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-29",
     "title": "doPlan: A Variable-Horizon Dataset for Multi-Stage Language-Conditioned Planning in Autonomous Driving",
     "link": "https://arxiv.org/abs/2609.38028",

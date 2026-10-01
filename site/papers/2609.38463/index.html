@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TrafficSignBench: Rule-Centric Closed-Loop Evaluation of Traffic-Sign Compliance in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。 应用场景为基于真实地图的仿真闭环驾驶评估，关注车辆在交通标志约束下是否遵守规则并完成任务。 研究问题在于：现有开环与闭环基准多使用驾驶分数、目的地到达率、碰撞率等聚合指标，无法显式衡量交通规则合规性，导致规划器可能取得高分却违反基本交通规则。 论文还试图通过显式交通标志约束生成高质量 oracle 轨迹，用于微调现有规划器，使其成为规则合规的轨迹专家。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.38463">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.38463.webp" alt="TrafficSignBench: Rule-Centric Closed-Loop Evaluation of Traffic-Sign Compliance in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">TrafficSignBench: Rule-Centric Closed-Loop Evaluation of Traffic-Sign Compliance in Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.38463" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.38463" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.38463</span></div>
+            <p class="detail-summary">论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。 应用场景为基于真实地图的仿真闭环驾驶评估，关注车辆在交通标志约束下是否遵守规则并完成任务。 研究问题在于：现有开环与闭环基准多使用驾驶分数、目的地到达率、碰撞率等聚合指标，无法显式衡量交通规则合规性，导致规划器可能取得高分却违反基本交通规则。 论文还试图通过显式交通标志约束生成高质量 oracle 轨迹，用于微调现有规划器，使其成为规则合规的轨迹专家。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Lomonosov Moscow State University · Victoria Smirnova、Artem Belyaev、Vlad Sh…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.38463/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。</li><li>应用场景为基于真实地图的仿真闭环驾驶评估，关注车辆在交通标志约束下是否遵守规则并完成任务。</li><li>研究问题在于：现有开环与闭环基准多使用驾驶分数、目的地到达率、碰撞率等聚合指标，无法显式衡量交通规则合规性，导致规划器可能取得高分却违反基本交通规则。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Lomonosov Moscow State University；作者：Victoria Smirnova、Artem Belyaev、Vlad Shakhuro</li><li>机构：FusionBrain Lab；作者：Viktoriia Zinkovich、Andrey Kuznetsov、Denis Shepelev、Vlad Shakhuro</li><li>机构：Moscow Institute of Physics and Technology；作者：Gregorii Bukhtuev</li><li>机构：HSE University；作者：Artem Belyaev</li><li>机构：Innopolis University；作者：Andrey Kuznetsov</li><li>机构：NUST MISIS；作者：Denis Shepelev、Vlad Shakhuro</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶规划器的交通标志规则合规性评估任务，提出 TrafficSignBench，一个以交通标志规则为中心的大规模闭环基准。</li><li>应用场景为基于真实地图的仿真闭环驾驶评估，关注车辆在交通标志约束下是否遵守规则并完成任务。</li><li>研究问题在于：现有开环与闭环基准多使用驾驶分数、目的地到达率、碰撞率等聚合指标，无法显式衡量交通规则合规性，导致规划器可能取得高分却违反基本交通规则。</li><li>论文还试图通过显式交通标志约束生成高质量 oracle 轨迹，用于微调现有规划器，使其成为规则合规的轨迹专家。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>扩展 MetaDrive 模拟器，实现 34 个交通标志的可执行规则，每个标志配有自动在线检查器；并提出规则目标场景生成模块，使合规需要显式规划决策。</li><li>提出据作者所述首个大规模基准，联合广泛的交通标志分类体系、自动规则检查器和规则目标闭环场景，用于系统性交通规则合规评估；包含 29,000 个场景、29 种功能场景类型，来自 26,020 个真实地图裁剪池。</li><li>场景参数基于真实驾驶数据校准，同时保留可控的规则关键交互。</li><li>评估 17 个规划器，显示传统指标会掩盖系统性规则失败；在要求目标规则合规且完成目的地的联合准则下，标准规划器仅达到 2.9–9.0%。</li><li>通过 oracle 选出的专家轨迹微调 PlanT-2，将联合准则得分从 5.9% 提升到 72.3%，为规则感知规划提供强基线。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文聚焦规划层面的规则合规评估，而非完整感知到控制流水线；作者在局限性中说明规划器接收结构化交通标志信息，抽象掉标志检测与识别误差。</li><li>输入传感器：原文未报告真实传感器输入；方法基于语义鸟瞰图（BEV）表示，支持大规模场景生成和独立于感知误差的规划器评估。</li><li>场景表示：使用扩展后的 MetaDrive 模拟器；从 OpenStreetMap 采集莫斯科真实地图中无标志的车道级片段，再按语义需求程序化放置交通标志；包含三类结构：路口、双路径地图和走廊。</li><li>规则形式化：参考俄罗斯交通规则，因其符合 1968 年《维也纳道路交通标志和信号公约》；筛选对道路使用者施加明确强制规则的标志，排除警告或信息类标志；最终得到 34 个交通标志，并交叉参考莫斯科交通标志数据库。跨国家语义等价性平均重叠 92%。</li><li>测试分类：34 个标志合并为 29 种不同闭环场景类型，分为 4 个语义组：Priority 6 类、Speed 4 类、Obstacles 8 类、Routing 11 类。</li><li>规则目标场景生成：为避免随机放置无法触发目标规则，设计规则目标交互，例如让主路车队在自车接近冲突区时释放；在双路径地图上，使被禁止分支成为最短路径以诱导违规；人行横道使用受控时间预设行人。</li><li>场景扩展与背景交通：将 2,900 张地图扩展为 10 个不同场景，变化维度包括自车出生车道、路线长度、初始速度、交通密度和背景 agent 动态；背景 agent 使用 IDM 控制；随机参数从 nuPlan 数据估计的分布中采样。</li><li>评估指标：提出 Sign Compliance × Destination（SCD），其中 Sign Compliance 表示目标标志验证器是否记录违规；SCD 按三种层级报告：单场景类型 SCD、四个语义组的 Group SCD、所有 29 类宏平均的 Overall SCD；同时报告 Driving Score、Destination Rate、Efficiency、Collision Rate。</li><li>基线分类：17 个规划器分为四类：无显式规则访问的 Base Planners，包括 IDM 及四个随机变体、PPO、CaRL、PlanT-2；Rule-Compliant Experts，通过显式规则动作约束构造，如 IDMe、PlanT-2e；Oracle Expert，聚合所有规则合规专家并为每个场景选择最佳者，用于收集真值轨迹；Rule-Supervised Baseline，PlanT-2-FT，仅在 Oracle Expert 生成轨迹上微调。</li><li>Oracle 轨迹收集：对 23,200 个训练场景运行 8 个专家规划器；成功定义为完成路线且目标规则无违规，即 SCD=100%；若专家失败则迭代重采样该专家场景配置直至成功；过滤与排序后保留每个训练场景 top-2 轨迹，共 36,828 条高质量训练轨迹。</li><li>微调细节：PlanT-2-FT 在 37.2M 参数 PlanT 风格 HFLM 规划器上微调；交通标志编码为带学习类投影的 object token；持久 sign-state token 存储活跃标志类别和发布值；可学习 speed token 输入离散自车速度头；新增 147,976 参数（0.4%）。</li><li>训练目标：联合优化 L1 路径与航点损失，以及对 soft two-hot 速度目标的交叉熵；速度区间目标使用未来 4 秒专家最小速度；最低速度标志 4.6 的目标为发布值以上 3 km/h；机动标志使用专家 4 秒轨迹作为路径目标；方向限制路线沿禁止分支，迫使进行标志条件机动选择；路权标志使用帧局部目标；对标志相关决策窗口加权，并平衡标志家族使任一家族不超过 batch 的 25%；每帧额外从横向扰动 1.0 m、偏航扰动 5° 的自车姿态渲染，但保留原轨迹目标以监督恢复。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：TrafficSignBench 包含 29,000 个闭环场景，其中 23,200 训练 / 5,800 测试；29 种场景类型；来自 26,020 个真实世界地图裁剪；地图来自 OpenStreetMap 的莫斯科真实地图，按唯一 ID 在标志分配前进行 80/20 划分以避免泄漏；每个标志获得 100 张地图（80 训练 / 20 测试）。</li><li>场景结构池：路口 6,457 个 T/X 交叉口和环岛；双路径地图 6,507 个；走廊 13,056 个。</li><li>仿真器：扩展的 MetaDrive 模拟器；原文报告实现了 34 个交通标志的规则和自动检查器。</li><li>真实数据校准：背景交通动态参数从 nuPlan 数据集估计；图 2 比较 nuPlan 真实数据与 TrafficSignBench 记录值的经验 CDF。</li><li>模型规模：PlanT-2-FT 基于 37.2M 参数 PlanT 风格 HFLM 规划器；新增 147,976 参数，约 0.4%。</li><li>训练资源：使用 1 块 NVIDIA A100；训练 26 个 epoch；AdamW、cosine decay、基础学习率 10^-4、梯度裁剪 1.0、batch size 128；backbone 使用 0.8 的逐层学习率衰减，新参数使用 5× 倍数；新 sign projections 从最接近的预训练类初始化。</li><li>训练数据量：使用 80% 训练划分中的 29,462 条轨迹，剩余 7,366 条用于验证，覆盖全部 29 种场景类型。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：TrafficSignBench 全部 29 种场景类型的闭环评估；测试集为 5,800 个场景。</li><li>评估指标：Driving Score、Destination Rate、Efficiency、Collision Rate，以及 Sign Compliance × Destination（SCD）；SCD 按单场景类型、四个语义组和 Overall 宏平均报告；传统指标按 episode 加权，SCD 按场景类型宏平均；置信区间见图 4。</li><li>开环/闭环/仿真/实车条件：本文为闭环仿真评估；原文未报告开环评估和实车评估。</li><li>关键结果：标准规划器 Overall SCD 仅为 2.9–9.0%；PlanT-2-FT 达到 72.3%，相比 PlanT-2 的 5.9% 提升 66.4 个百分点，相比最强标准基线提升 63.3 个百分点。</li><li>分组结果：PlanT-2-FT 在 Priority 为 57.2%，Speed 为 96.2%，Obstacle 为 90.8%，Routing 为 58.4%；Ob</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2609.38472/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Diffusion-2BC: Hybrid Diffusion and Regression Training for Offline Behavior Cloning in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2609.38285/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">GaugeVLM: Structuring Spatial Supervision with Measured Geometric Interventions</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

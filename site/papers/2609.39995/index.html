@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learning to Explain While Planning: Rule-Aligned Diffusion Planning for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。 应用场景：nuPlan 闭环仿真中的城市自动驾驶规划，重点关注安全关键与长尾场景。 研究问题：现有扩散规划器主要依靠专家示范拟合轨迹分布，将碰撞避免、车道合规、限速等规则隐含在数据分布中，而非显式训练目标；长尾场景下缺乏可模仿行为时可能产生违反安全或合规要求的轨迹；且生成过程缺乏规则级解释，难以判断哪些规则驱动了轨迹调整、何时生效、作用强度如何，从而限制故障诊断、安全验证与针对性改进。 研究思路：提出 Rule-Aligned Diffusion Planner（RADP），在训练中将可微驾驶规则纳入扩散目标；并提出 Rule-Pressure Attribution（RPA），由规则损失对预测轨迹的梯度构造监督信号，用轻量归因头在线估计各规则的优化压力。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2609.39995">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2609.39995.webp" alt="Learning to Explain While Planning: Rule-Aligned Diffusion Planning for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Learning to Explain While Planning: Rule-Aligned Diffusion Planning for Autonomous Driving</h1>
+            <div class="detail-meta">2026-09-30 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2609.39995" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2609.39995" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2609.39995</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。 应用场景：nuPlan 闭环仿真中的城市自动驾驶规划，重点关注安全关键与长尾场景。 研究问题：现有扩散规划器主要依靠专家示范拟合轨迹分布，将碰撞避免、车道合规、限速等规则隐含在数据分布中，而非显式训练目标；长尾场景下缺乏可模仿行为时可能产生违反安全或合规要求的轨迹；且生成过程缺乏规则级解释，难以判断哪些规则驱动了轨迹调整、何时生效、作用强度如何，从而限制故障诊断、安全验证与针对性改进。 研究思路：提出 Rule-Aligned Diffusion Planner（RADP），在训练中将可微驾驶规则纳入扩散目标；并提出 Rule-Pressure Attribution（RPA），由规则损失对预测轨迹的梯度构造监督信号，用轻量归因头在线估计各规则的优化压力。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Beijing Institute of Technology · Jiaxi Ye、Chunji Lv、Guoren Wang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2609.39995/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。</li><li>应用场景：nuPlan 闭环仿真中的城市自动驾驶规划，重点关注安全关键与长尾场景。</li><li>研究问题：现有扩散规划器主要依靠专家示范拟合轨迹分布，将碰撞避免、车道合规、限速等规则隐含在数据分布中，而非显式训练目标；长尾场景下缺乏可模仿行为时可能产生违反安全或合规要求的轨迹；且生成过程缺乏规则级解释，难以判断哪些规则驱动了轨迹调整、何时生效、作用强度如何，从而限制故障诊断、安全验证与针对性改进。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Beijing Institute of Technology；作者：Jiaxi Ye、Chunji Lv、Guoren Wang、Changsheng Li</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的扩散规划（diffusion planning），在生成未来自车轨迹的同时输出规则级解释。</li><li>应用场景：nuPlan 闭环仿真中的城市自动驾驶规划，重点关注安全关键与长尾场景。</li><li>研究问题：现有扩散规划器主要依靠专家示范拟合轨迹分布，将碰撞避免、车道合规、限速等规则隐含在数据分布中，而非显式训练目标；长尾场景下缺乏可模仿行为时可能产生违反安全或合规要求的轨迹；且生成过程缺乏规则级解释，难以判断哪些规则驱动了轨迹调整、何时生效、作用强度如何，从而限制故障诊断、安全验证与针对性改进。</li><li>研究思路：提出 Rule-Aligned Diffusion Planner（RADP），在训练中将可微驾驶规则纳入扩散目标；并提出 Rule-Pressure Attribution（RPA），由规则损失对预测轨迹的梯度构造监督信号，用轻量归因头在线估计各规则的优化压力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出规则对齐的扩散规划框架，将可微驾驶规则集成到训练中，实现规则一致的规划，且无需推理时的规则精修。</li><li>提出在线规则压力归因（RPA），将基于轨迹梯度的规则压力蒸馏到轻量归因头中，在轨迹生成的同时提供高效的规则感知解释。</li><li>提出时间风险对齐协议，将规则压力与闭环仿真实时后续的规则对应风险关联，为归因的有效性与行为相关性提供实证验证。</li><li>在 nuPlan 上表明 RADP 在安全关键的挑战性场景中改善闭环规划，同时 RPA 与后续规则特定风险呈现一致的时间对齐。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：规划模块（planning），在 Diffusion Planner 基础上构建，用于生成自车未来轨迹并同时输出规则压力向量。</li><li>输入传感器：原文未报告具体传感器类型；场景观测 S_t 包含自车与其他交通参与者历史、地图元素、路线信息与静态障碍物，并包含扩散噪声 ε。</li><li>场景表示：以自车与周围智能体联合未来轨迹建模（沿用 Diffusion Planner 的 x₀ 预测目标与掩码自车–邻居重建损失）；场景条件编码 S_t 联合包含周围智能体、地图、路线与车道信息。</li><li>模型结构：基于 Transformer 的扩散去噪器（DPM），微调时在解码器中加入轻量 LoRA 适配器；归因头以最终 DPM 去噪调用的自车 token 与生成轨迹几何特征拼接作为输入，通过多头注意力关注场景编码，再对 6 条规则各用一个独立两层 MLP 输出非负压力（Softplus）。</li><li>关键技术：① 六个可微规则通道（碰撞、车道、速度、运动学、舒适性、目标进度），规则在物理坐标下以 0.1 s 分辨率定义，通过 softplus 平方形式的可微局部惩罚与聚合得到轨迹级代价，并以 stop-gradient EMA 尺度归一化（EMA 衰减 0.99，下界 1e-3）；② 规则对齐规划器训练目标 L_RADP = L_diff + λ_rule Σ w_i J̃_i，取 λ_rule=0.004，权重 (w_col, w_lane, w_speed, w_kin, w_comfort, w_goal)=(2.5,0.8,0.8,0.5,0.8,1.5)；③ 梯度压力教师，以规则代价对轨迹的梯度均方根并做尺度校准对数变换得到教师归因；④ 在线归因头，以加权 Smooth-L1 回归损失加批内成对排序损失训练，仅使用缓存教师归因，推理时复用规划器特征且不改变生成轨迹。</li><li>碰撞规则细节：使用基于后轴状态与 nuPlan Pacifica 几何构造的有向自车框，通过分离轴定理计算框间距，安全距离由 d₀=0.5 m、车头时距项与制动项构成，σ_col=0.5 m，并以距离、闭合速度、TTC 与违规严重度的 detached gate 抑制无关交互，其他智能体轨迹视为固定上下文。</li><li>训练流程：两阶段，先做规则对齐的规划器适配（冻结后），再以冻结规划器构造梯度压力目标并蒸馏到在线归因头；推理时仅执行规划器与归因头，不使用教师梯度、规则引导或轨迹优化。</li><li>原文未报告：具体传感器配置、模型参数量与规模。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuPlan，使用 val14、test14-random、test14-hard 的 reactive 划分；非 reactive 结果保留在附录 Table 9。</li><li>仿真器：nuPlan 闭环仿真框架。</li><li>模型规模：原文未报告；仅说明使用 LoRA 轻量适配、归因头每条规则为独立两层 MLP。</li><li>训练资源：原文未报告具体 GPU 训练资源；推理延迟在 RTX 4080 上测得。</li><li>实车平台：原文未报告；论文声明为计算性工作，使用公开 nuPlan 数据集与仿真框架，不涉及实车部署。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuPlan val14、test14-random、test14-hard 的 reactive 闭环划分（另有非 reactive 结果在附录）；对比方法包括 Diffusion Planner，以及文献报告的 Log-replay、PDM-Open、UrbanDriver、GameFormer、PlanTF、PLUTO。</li><li>评估指标：闭环规划使用 Score 及 Collision、TTC、Drivable、Progress、Speed、Comfort；归因评估使用 Head–Teacher 保真度（宏观 Spearman、MAE、Top-1 一致率）与时间风险对齐（AUPRC、Lift@10%、情景内时间 Spearman、时间打乱对照）。</li><li>闭环规划关键数值（reactive）：val14 上 Diffusion Planner 得分 82.70，RADP 81.37（碰撞 92.98→94.01，TTC 87.84→89.53，可行驶 97.85→98.03，进度 96.60→94.90，速度 98.29→98.87，舒适性 89.45→89.27）；test14-random 上 82.82→84.48（碰撞 94.06→96.36，TTC 89.66→91.95，速度 97.07→97.98，舒适性 85.44→87.36）；test14-hard 上 68.94→70.62（碰撞 86.95→92.10，TTC 79.78→83.46，可行驶 94.85→95.59，速度 97.39→98.29）。</li><li>规划结论：RADP 在两个 test 划分上提升 reactive 得分与安全指标；val14 上安全指标提升但进度下降使总得分降低，体现安全–效率权衡；文献对比表显示 RADP 在 test14-random 与 test14-hard 取得报告的最高分，在 val14 保持竞争力。</li><li>Head–Teacher 保真度（reactive 闭环）：val14 宏观 Spearman 0.536、MAE 0.216、Top-1 70.6%，教师 ρ_macro 0.235、Head ρ_macro 0.207；test14-random 为 0.570、0.200、71.7%、0.199、0.177；test14-hard 为 0.554、0.238、71.9%、0.221、0.192。</li><li>时间风险对齐（val14-r）：碰撞 vs 物理碰撞 AUPRC 教师 0.540/Head 0.514，Lift@10% 1.823/1.598，时间 ρ 0.234/0.160；碰撞 vs TTC 辅助端点为 0.555/0.489、1.926/1.610、0.237/0.158；车道 0.911/0.840、1.518/1.340、0.314/0.234；速度 0.779/0.761、1.890/1.895、0.303/0.297；运动学（正例率 0.013%）0.167/0.250、0.000/0.000、0.112/0.159；舒适性（0.102%）0.376/0.371、1.750/1.750、0.102/0.122；目标进度 0.850/0.798、1.804/1.626、0.343/0.316；所有时间打乱对照 ρ 接近 0。</li><li>效率：规划器单步 251.05 ms，规划器+Head 245.50 ms（-1.64%）；规划器+精确教师 465.29 ms（+89.18%）；规划器+梯度引导 571.10 ms（+130.76%）；在相同缓存状态上精确教师 62.51 ms、Head 8.18 ms，加速 7.65×。</li><li>消融（test14-hard-r）：碰撞引导扩散规划器得分 59.92；无规则</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2609.39841/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DyRAD: Radar Novel View Synthesis for Dynamic Driving Scenes</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
