@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Survey on End-to-End Autonomous Driving Training from the Perspectives of Data, Strategy, and Platform - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。 研究对象是 E2E-AD 的训练生态，即把多模态传感器输入直接映射到驾驶动作的统一可微模型的训练过程。 应用场景为智能交通系统中的自动驾驶，目标是提升模型性能、鲁棒性与可部署性。 研究问题在于：E2E-AD 的发展瓶颈不仅在模型设计，还在于训练生态能否提供足够覆盖与治理的数据、能对齐多任务目标且稳定长时域学习的优化策略，以及支持规模化与持续演进的平台。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.00926">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.00926.webp" alt="A Survey on End-to-End Autonomous Driving Training from the Perspectives of Data, Strategy, and Platform" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Survey on End-to-End Autonomous Driving Training from the Perspectives of Data, Strategy, and Platform</h1>
+            <div class="detail-meta">2026-10-01 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.00926" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.00926" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.00926</span></div>
+            <p class="detail-summary">论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。 研究对象是 E2E-AD 的训练生态，即把多模态传感器输入直接映射到驾驶动作的统一可微模型的训练过程。 应用场景为智能交通系统中的自动驾驶，目标是提升模型性能、鲁棒性与可部署性。 研究问题在于：E2E-AD 的发展瓶颈不仅在模型设计，还在于训练生态能否提供足够覆盖与治理的数据、能对齐多任务目标且稳定长时域学习的优化策略，以及支持规模化与持续演进的平台。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">同济大学交通学院（College of Transportation, Tongji University） · Chengkai Xu、Yiming…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.00926/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。</p>
+  <ul class="reading-intro-points"><li>论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。</li><li>研究对象是 E2E-AD 的训练生态，即把多模态传感器输入直接映射到驾驶动作的统一可微模型的训练过程。</li><li>应用场景为智能交通系统中的自动驾驶，目标是提升模型性能、鲁棒性与可部署性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：同济大学交通学院（College of Transportation, Tongji University）；作者：Chengkai Xu、Yiming Cui、Yicheng Guo、Cheng Qin、Geyuan Zhang、Xinwei Dong、Shiyu Fang、Peng Hang、Jian Sun。</li><li>机构：北卡罗来纳大学教堂山分校计算机科学系（Department of Computer Science, University of North Carolina at Chapel Hill）；作者：Jiaqi Liu。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。</li><li>研究对象是 E2E-AD 的训练生态，即把多模态传感器输入直接映射到驾驶动作的统一可微模型的训练过程。</li><li>应用场景为智能交通系统中的自动驾驶，目标是提升模型性能、鲁棒性与可部署性。</li><li>研究问题在于：E2E-AD 的发展瓶颈不仅在模型设计，还在于训练生态能否提供足够覆盖与治理的数据、能对齐多任务目标且稳定长时域学习的优化策略，以及支持规模化与持续演进的平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Data-Strategy-Platform（数据-策略-平台）分类法，将 E2E-AD 训练视为系统级挑战，而非孤立算法问题。</li><li>综述数据层、学习范式与训练基础设施的最新进展，并分析三者在塑造模型性能、鲁棒性与可部署性方面的相互作用。</li><li>强调从数据数量转向数据价值、从孤立优化转向基础模型驱动泛化、从静态训练转向训练-测试一体化闭环的未来愿景。</li><li>维护一个持续更新的前沿文献与工作仓库。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：综述论文，围绕数据层、策略层、平台层三层训练生态展开，不涉及单一模型实现。</li><li>输入传感器：数据层讨论真实世界数据、虚拟数据与合成数据；数据集表格涉及 Camera、LiDAR、RaDAR 等传感器维度，原文未报告具体传感器配置参数。</li><li>场景表示：将场景视为受道路几何、交通参与者、规则与环境约束的、时间上有界的交通交互；其价值取决于对规划相关性能的预期贡献，而非仅频率。</li><li>模型结构：策略层综述模仿学习（IL）、强化学习（RL）以及新兴生成式范式，包括扩散策略、多模态大语言模型（MLLM/VLM/VLA）与世界模型（WM）；原文未报告统一模型结构。</li><li>关键技术：</li></ul>
+<p> - 数据层：真实数据、虚拟数据、合成数据、世界模型数据引擎、值引导的混合采集、价值评分函数 V(s)=w_r·R(s)+w_u·U(s\|θ)+w_d·D(s\|D_train)、数据版本树与数据治理。</p>
+<p> - 策略层：行为克隆、IRL、GAIL、DAgger、SafeDAgger、离线 RL、约束 RL、风险敏感方法、RLHF、分层 RL、领域随机化、持续学习、课程学习、扩散去噪、MLLM 指令微调与思维链、世界模型潜在 rollout 与闭环适配。</p>
+<p> - 平台层：数据并行（DP）、张量并行（TP）、流水线并行（PP）、序列并行（SP）、专家并行（EP）、混合并行、仿真闭环测试、实车测试、云边协同、异步更新、模型治理、灰度更新与回滚。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：论文表 II 列出代表性数据集，包括 DDD17、BDD、DDD20、A2D2、Nuscenes、DriveLM、DriveMLM、CoVLA、OpenScene、PhysicalAI、Bench2Drive、DriveCoT、StyleDrive、AoTA、TAD-E2E、WOMD-E2E。</li><li>仿真器：CARLA、nuPlan 被提及为闭环基准或仿真平台；原文未报告具体版本与配置。</li><li>模型规模：原文未报告统一模型规模；表 IV 讨论代表性 E2E-AD 方法的计算需求，但提供的 HTML 原文在表格处截断，具体数值未完整呈现。</li><li>训练资源：原文讨论分布式与并行训练平台，包括 DeepSpeed、ZeRO、GShard、DeepSpeed MoE、DeepSpeed Ulysses 等；原文未报告具体 GPU/TPU 数量、训练时长或算力预算。</li><li>实车平台：原文提及 instrumented fleets、shadow-mode operations、roadside sensing、crowdsourced vehicles 等真实数据来源，以及实车测试与实时评估；原文未报告具体实车平台型号或部署细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：包括离线评估与闭环基准，如 CARLA、nuPlan；Bench2Drive 等闭环基准被列为强调数据价值的数据集。</li><li>评估指标：论文提到安全、舒适、合规、闭环稳定性、长时域目标等；原文未报告统一的定量评估指标数值。</li><li>关键数值：提供的 HTML 原文在表 IV 处截断，未完整呈现具体计算需求数值；论文未报告具体实验结果数值。</li><li>对比方法：论文对比了代表性综述，包括 Zhou et al.、Cui et al.、Chen et al.、Zhao et al.、Wu et al.、Jiang et al.、Wang et al.、Liu et al.，并指出本文聚焦训练生态。</li><li>开环/闭环/仿真/实车条件：论文讨论离线代理指标与在线性能之间的错位，强调闭环基准如 CARLA、nuPlan，并区分仿真测试闭环验证与真实世界测试实时评估；原文未报告具体实验条件与结果数值。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.01531/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Towards Reliable Vision-Language Models for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.00705/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Meta-Multi-Agent Reinforcement Learning for Fast Adaptation of Interactive Policies with Applications to Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

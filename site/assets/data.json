@@ -1,5 +1,208 @@
 [
   {
+    "date": "2026-10-01",
+    "title": "Weather-Aware Domain Adaptation for Street-View Weather Recognition",
+    "link": "https://arxiv.org/abs/2610.02000",
+    "arxiv_id": "2610.02000",
+    "detail_path": "papers/2610.02000/",
+    "cover_path": "covers/2610.02000/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.02000.webp",
+    "paper_image_full_path": "assets/paper-images/2610.02000.webp",
+    "preview_text": "论文研究自动驾驶场景下基于街景图像的多类天气识别任务，目标是在存在显著域偏移的情况下，从街景图像中识别 Clear、Rain、Snow、Fog、Sand 等天气类别。 应用场景为车载摄像头感知，用于支持下游安全逻辑，例如自适应速度策略、传感器融合重加权、行人/车道检测器动态灵敏度等。 研究问题是：现有多数可用天气训练数据来自非街景来源或合成增强数据，与真实驾驶场景在视角、光学和场景组成上差异明显，导致模型在真实街景图像上泛化较差；同时，面向街景图像的直接多类天气识别仍较少被研究。",
+    "research_unit": "University of Central Florida, Department of Electrical and Computer Engine…",
+    "hook_text": "论文研究自动驾驶场景下基于街景图像的多类天气识别任务，目标是在存在显著域偏移的情况下，从街景图像中识别 Clear、Rain、Snow、Fog、Sand 等天气类别。",
+    "key_points": [
+      "论文研究自动驾驶场景下基于街景图像的多类天气识别任务，目标是在存在显著域偏移的情况下，从街景图像中识别 Clear、Rain、Snow、Fog、Sand 等天气类别。",
+      "应用场景为车载摄像头感知，用于支持下游安全逻辑，例如自适应速度策略、传感器融合重加权、行人/车道检测器动态灵敏度等。",
+      "研究问题是：现有多数可用天气训练数据来自非街景来源或合成增强数据，与真实驾驶场景在视角、光学和场景组成上差异明显，导致模型在真实街景图像上泛化较差；同时，面向街景图像的直接多类天气识别仍较少被研究。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-01",
+    "title": "MapLightning: Online Vectorized HD Map Construction with 1D Map Tokens",
+    "link": "https://arxiv.org/abs/2610.01905",
+    "arxiv_id": "2610.01905",
+    "detail_path": "papers/2610.01905/",
+    "cover_path": "covers/2610.01905/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.01905.webp",
+    "paper_image_full_path": "assets/paper-images/2610.01905.webp",
+    "preview_text": "论文关注在线向量化高精地图（HD Map）构建任务，目标是从车载多视角图像实时构建包含车道线、人行横道、道路边界等静态道路元素的向量化地图。 应用场景为自动驾驶在线感知与局部地图构建，减少对离线 SLAM/SfM 地图构建与维护的依赖。 研究问题在于：现有方法通常依赖密集 BEV 网格作为中间表示，但向量化地图输出稀疏，在 nuScenes 上仅占栅格化感知范围的 4.27%、在 Argoverse 2 上占 2.65%，因此密集 BEV 表示对向量化地图任务并不高效。 论文提出用紧凑的 1D 可学习 map tokens 替代密集 BEV 网格，并研究从图像特征构建 map tokens 的注意力机制选择问题。",
+    "research_unit": "Carnegie Mellon University · Shen Zheng、Anurag Ghosh、Mani Ramanagopal 等",
+    "hook_text": "论文关注在线向量化高精地图（HD Map）构建任务，目标是从车载多视角图像实时构建包含车道线、人行横道、道路边界等静态道路元素的向量化地图。",
+    "key_points": [
+      "论文关注在线向量化高精地图（HD Map）构建任务，目标是从车载多视角图像实时构建包含车道线、人行横道、道路边界等静态道路元素的向量化地图。",
+      "应用场景为自动驾驶在线感知与局部地图构建，减少对离线 SLAM/SfM 地图构建与维护的依赖。",
+      "研究问题在于：现有方法通常依赖密集 BEV 网格作为中间表示，但向量化地图输出稀疏，在 nuScenes 上仅占栅格化感知范围的 4.27%、在 Argoverse 2 上占 2.65%，因此密集 BEV 表示对向量化地图任务并不高效。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-01",
+    "title": "End-to-End Learning vs. Modular Architectures: Comparative Insights into Autonomous Driving Systems",
+    "link": "https://arxiv.org/abs/2610.01746",
+    "arxiv_id": "2610.01746",
+    "detail_path": "papers/2610.01746/",
+    "cover_path": "covers/2610.01746/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.01746.webp",
+    "paper_image_full_path": "assets/paper-images/2610.01746.webp",
+    "preview_text": "论文聚焦自动驾驶系统的实现范式比较，涉及端到端学习（End-to-End Learning，E2E Learning）与模块化架构（Modular Architectures）两类主流设计范式。 应用场景为智能交通研究中的自动驾驶系统设计与选型。 研究问题：两类范式各自的优势、局限与权衡，以及它们在可解释性、可扩展性、鲁棒性和真实世界适用性等关键因素上的差异，最终为不同自动驾驶应用提供架构选择依据。",
+    "research_unit": "原文未明确 · Kartik B. Kapse（原文页面仅列出作者姓名、未给出其所属机构、故作者与机构的对应关系无法提供）",
+    "hook_text": "论文聚焦自动驾驶系统的实现范式比较，涉及端到端学习（End-to-End Learning，E2E Learning）与模块化架构（Modular Architectures）两类主流设计范式。",
+    "key_points": [
+      "论文聚焦自动驾驶系统的实现范式比较，涉及端到端学习（End-to-End Learning，E2E Learning）与模块化架构（Modular Architectures）两类主流设计范式。",
+      "应用场景为智能交通研究中的自动驾驶系统设计与选型。",
+      "研究问题：两类范式各自的优势、局限与权衡，以及它们在可解释性、可扩展性、鲁棒性和真实世界适用性等关键因素上的差异，最终为不同自动驾驶应用提供架构选择依据。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Evaluating Physical Consistency and Plausibility in Generative Scenario Models for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.01581",
+    "arxiv_id": "2610.01581",
+    "detail_path": "papers/2610.01581/",
+    "cover_path": "covers/2610.01581/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.01581.webp",
+    "paper_image_full_path": "assets/paper-images/2610.01581.webp",
+    "preview_text": "论文面向自动驾驶中的生成式场景生成任务，研究问题为：生成式 AI 模型虽能生成看起来逼真的驾驶场景，但其学习到的内部表示缺乏透明度，且与真实世界车辆动力学的物理一致性缺乏形式化保证，从而限制了其在安全关键验证与认证流程中的应用。 论文提出一种分层评估协议，用于评估生成式场景模型的物理一致性与合理性。",
+    "research_unit": "原文未明确对应 · Manasa Mariam Mammen、Zafer Kayatas、Stefan Wagner（原文摘要页未列出作者所属机构 等",
+    "hook_text": "论文面向自动驾驶中的生成式场景生成任务，研究问题为：生成式 AI 模型虽能生成看起来逼真的驾驶场景，但其学习到的内部表示缺乏透明度，且与真实世界车辆动力学的物理一致性缺乏形式化保证，从而限制了其在安全关键验证与认证流程中的应用。",
+    "key_points": [
+      "论文面向自动驾驶中的生成式场景生成任务，研究问题为：生成式 AI 模型虽能生成看起来逼真的驾驶场景，但其学习到的内部表示缺乏透明度，且与真实世界车辆动力学的物理一致性缺乏形式化保证，从而限制了其在安全关键验证与认证流程中的应用。",
+      "论文提出一种分层评估协议，用于评估生成式场景模型的物理一致性与合理性。",
+      "提出一套分层评估协议（layered evaluation protocol），在五个层次上评估生成式场景模型，作为对现有方法的补充。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-01",
+    "title": "Towards Reliable Vision-Language Models for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.01531",
+    "arxiv_id": "2610.01531",
+    "detail_path": "papers/2610.01531/",
+    "cover_path": "covers/2610.01531/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.01531.webp",
+    "paper_image_full_path": "assets/paper-images/2610.01531.webp",
+    "preview_text": "论文面向自动驾驶中的视觉-语言模型（VLM）可靠性问题，关注场景理解、驾驶推理、决策与端到端驾驶等任务。 研究场景为真实驾驶条件下摄像头输入可能受到传感器缺陷与环境条件影响（如光照变化、恶劣天气、运动模糊、镜头遮挡）而发生视觉退化。 研究问题包括：(1) 真实世界视觉损坏如何影响 VLM 在不同自动驾驶任务和视觉输入设置下的准确率与校准；(2) 推理时视觉增强能在多大程度上提升模型在视觉扰动下的鲁棒性。",
+    "research_unit": "Technical University of Munich, Heilbronn, Germany · Manasa Mariam Mammen、S…",
+    "hook_text": "论文面向自动驾驶中的视觉-语言模型（VLM）可靠性问题，关注场景理解、驾驶推理、决策与端到端驾驶等任务。",
+    "key_points": [
+      "论文面向自动驾驶中的视觉-语言模型（VLM）可靠性问题，关注场景理解、驾驶推理、决策与端到端驾驶等任务。",
+      "研究场景为真实驾驶条件下摄像头输入可能受到传感器缺陷与环境条件影响（如光照变化、恶劣天气、运动模糊、镜头遮挡）而发生视觉退化。",
+      "研究问题包括：(1) 真实世界视觉损坏如何影响 VLM 在不同自动驾驶任务和视觉输入设置下的准确率与校准；(2) 推理时视觉增强能在多大程度上提升模型在视觉扰动下的鲁棒性。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-01",
+    "title": "A Survey on End-to-End Autonomous Driving Training from the Perspectives of Data, Strategy, and Platform",
+    "link": "https://arxiv.org/abs/2610.00926",
+    "arxiv_id": "2610.00926",
+    "detail_path": "papers/2610.00926/",
+    "cover_path": "covers/2610.00926/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.00926.webp",
+    "paper_image_full_path": "assets/paper-images/2610.00926.webp",
+    "preview_text": "论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。 研究对象是 E2E-AD 的训练生态，即把多模态传感器输入直接映射到驾驶动作的统一可微模型的训练过程。 应用场景为智能交通系统中的自动驾驶，目标是提升模型性能、鲁棒性与可部署性。 研究问题在于：E2E-AD 的发展瓶颈不仅在模型设计，还在于训练生态能否提供足够覆盖与治理的数据、能对齐多任务目标且稳定长时域学习的优化策略，以及支持规模化与持续演进的平台。",
+    "research_unit": "同济大学交通学院（College of Transportation, Tongji University） · Chengkai Xu、Yiming…",
+    "hook_text": "论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。",
+    "key_points": [
+      "论文是一篇关于端到端自动驾驶（E2E-AD）训练方法的综述，而非提出单一新模型。",
+      "研究对象是 E2E-AD 的训练生态，即把多模态传感器输入直接映射到驾驶动作的统一可微模型的训练过程。",
+      "应用场景为智能交通系统中的自动驾驶，目标是提升模型性能、鲁棒性与可部署性。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Meta-Multi-Agent Reinforcement Learning for Fast Adaptation of Interactive Policies with Applications to Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.00705",
+    "arxiv_id": "2610.00705",
+    "detail_path": "papers/2610.00705/",
+    "cover_path": "covers/2610.00705/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.00705.webp",
+    "paper_image_full_path": "assets/paper-images/2610.00705.webp",
+    "preview_text": "论文面向多智能体系统（MAS）中交互式策略的快速适应问题，提出 meta-multi-agent reinforcement learning（meta-MARL）框架。 应用场景为自动驾驶中的多车交互决策，具体评估于高速公路强制汇入（highway forced-merging）场景。 研究问题是：现有 meta-RL 多关注单智能体系统，扩展到多智能体系统时任务不仅由环境定义，还由智能体间的策略交互定义，因此需要新的解概念与算法来支持快速交互策略适应。",
+    "research_unit": "Virginia Tech, Department of Mechanical Engineering · Huiwen Yan、Mushuang L…",
+    "hook_text": "论文面向多智能体系统（MAS）中交互式策略的快速适应问题，提出 meta-multi-agent reinforcement learning（meta-MARL）框架。",
+    "key_points": [
+      "论文面向多智能体系统（MAS）中交互式策略的快速适应问题，提出 meta-multi-agent reinforcement learning（meta-MARL）框架。",
+      "应用场景为自动驾驶中的多车交互决策，具体评估于高速公路强制汇入（highway forced-merging）场景。",
+      "研究问题是：现有 meta-RL 多关注单智能体系统，扩展到多智能体系统时任务不仅由环境定义，还由智能体间的策略交互定义，因此需要新的解概念与算法来支持快速交互策略适应。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
     "date": "2026-09-30",
     "title": "Learning to Explain While Planning: Rule-Aligned Diffusion Planning for Autonomous Driving",
     "link": "https://arxiv.org/abs/2609.39995",

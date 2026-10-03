@@ -31163,5 +31163,356 @@
     "inside_figure": true,
     "width": 521,
     "height": 343
+  },
+  "2610.00705": {
+    "title": "Meta-Multi-Agent Reinforcement Learning for Fast Adaptation of Interactive Policies with Applications to Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.00705",
+    "html_url": "https://arxiv.org/html/2610.00705v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.00705v1/HighwayMerging_MetaMARL.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 317,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00705v1/convergence.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 310,
+        "height": 195,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00705v1/HighwayMerging_ConflictPoint.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 90,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00705v1/Aggr2Cons2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 143,
+        "height": 95,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00705v1/Aggr3Cons1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 143,
+        "height": 95,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2610.00705.webp",
+    "image_url": "https://arxiv.org/html/2610.00705v1/HighwayMerging_MetaMARL.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 429,
+    "height": 317
+  },
+  "2610.00926": {
+    "title": "A Survey on End-to-End Autonomous Driving Training from the Perspectives of Data, Strategy, and Platform",
+    "abs_url": "https://arxiv.org/abs/2610.00926",
+    "html_url": "https://arxiv.org/html/2610.00926v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.00926v1/Fig_genai.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 621,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_portrait",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00926v1/Fig_overview_1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 339,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00926v1/Fig_interaction.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 374,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00926v1/Fig_datavalue.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 296,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.00926v1/Fig_collabration.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 224,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.00926.webp",
+    "image_url": "https://arxiv.org/html/2610.00926v1/Fig_genai.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 621
+  },
+  "2610.02000": {
+    "title": "Weather-Aware Domain Adaptation for Street-View Weather Recognition",
+    "abs_url": "https://arxiv.org/abs/2610.02000",
+    "html_url": "https://arxiv.org/html/2610.02000v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.02000v1/t-sne2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 190,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02000v1/Blockdiagram.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 224,
+        "height": 320,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_portrait",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2610.02000.webp",
+    "image_url": "https://arxiv.org/html/2610.02000v1/t-sne2.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 190
+  },
+  "2610.01905": {
+    "title": "MapLightning: Online Vectorized HD Map Construction with 1D Map Tokens",
+    "abs_url": "https://arxiv.org/abs/2610.01905",
+    "html_url": "https://arxiv.org/html/2610.01905v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.01905v1/ICLR27_MapLightning_Global.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 484,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.01905v1/ICLR27_MapLightning_Global_supp.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 499,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.01905v1/ICLR27_MapLightning_Attn.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 494,
+        "height": 273,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.01905v1/figures/rotation_nuscenes.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 264,
+        "height": 176,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2610.01905v1/figures/translation_nuscenes.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 264,
+        "height": 175,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 70
+      }
+    ],
+    "path": "assets/paper-images/2610.01905.webp",
+    "image_url": "https://arxiv.org/html/2610.01905v1/ICLR27_MapLightning_Global.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 548,
+    "height": 484
+  },
+  "2610.01531": {
+    "title": "Towards Reliable Vision-Language Models for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.01531",
+    "html_url": "https://arxiv.org/html/2610.01531v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.01531v1/perturbations.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 179,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/icons/smileybones-small.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "",
+        "classes": "ds-announcement-glyph",
+        "score": -130
+      }
+    ],
+    "path": "assets/paper-images/2610.01531.webp",
+    "image_url": "https://arxiv.org/html/2610.01531v1/perturbations.png",
+    "source": "img",
+    "score": 85,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 179
+  },
+  "2610.01746": {
+    "title": "End-to-End Learning vs. Modular Architectures: Comparative Insights into Autonomous Driving Systems",
+    "abs_url": "https://arxiv.org/abs/2610.01746",
+    "html_url": "https://arxiv.org/html/2610.01746v1",
+    "path": "assets/paper-images/2610.01746.webp",
+    "image_url": "https://arxiv.org/pdf/2610.01746",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 893,
+    "height": 1263
+  },
+  "2610.01581": {
+    "title": "Evaluating Physical Consistency and Plausibility in Generative Scenario Models for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.01581",
+    "html_url": "https://arxiv.org/html/2610.01581v1",
+    "path": "assets/paper-images/2610.01581.webp",
+    "image_url": "https://arxiv.org/pdf/2610.01581",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 918,
+    "height": 1188
   }
 }
