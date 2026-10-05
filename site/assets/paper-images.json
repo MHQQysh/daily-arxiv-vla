@@ -31514,5 +31514,200 @@
     "inside_figure": false,
     "width": 918,
     "height": 1188
+  },
+  "2610.02765": {
+    "title": "Localized Conformal Safety Monitoring with Vision-Language Models for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.02765",
+    "html_url": "https://arxiv.org/html/2610.02765v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.02765v1/corl_titleFigure.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 255,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02765v1/corl_method_figure.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 339,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02765v1/figures/nvidia_eye.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 9,
+        "height": 8,
+        "alt": "[Uncaptioned image]",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02765v1/figures/qwen_logo.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 7,
+        "height": 7,
+        "alt": "[Uncaptioned image]",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": -15
+      },
+      {
+        "url": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2610.02765.webp",
+    "image_url": "https://arxiv.org/html/2610.02765v1/corl_titleFigure.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 255
+  },
+  "2610.02513": {
+    "title": "From Fragments to Global Maps: Learning Vectorized Map Aggregation with Large Language Models",
+    "abs_url": "https://arxiv.org/abs/2610.02513",
+    "html_url": "https://arxiv.org/html/2610.02513v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.02513v1/app_comp_baselines2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 778,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_portrait",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02513v1/app_comp_tokenizers2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 705,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_portrait",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02513v1/teaser_3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 238,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02513v1/method_overview2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 258,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02513v1/main_exp_vis3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 548,
+        "height": 132,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2610.02513.webp",
+    "image_url": "https://arxiv.org/html/2610.02513v1/app_comp_baselines2.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 548,
+    "height": 778
+  },
+  "2610.02825": {
+    "title": "TerrainForge: Physics-Grounded road geometry Editing for Counterfactual Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.02825",
+    "html_url": "https://arxiv.org/html/2610.02825v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.02825v1/generators_main_150623.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 456,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02825v1/carsim_forward_holdout.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 255,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02825v1/figures/zod_profile_validation.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 209,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02825v1/figures/zod_by_type.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 182,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.02825v1/figures/zod_lidar.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 199,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.02825.webp",
+    "image_url": "https://arxiv.org/html/2610.02825v1/generators_main_150623.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 452,
+    "height": 456
   }
 }

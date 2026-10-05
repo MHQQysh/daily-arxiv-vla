@@ -1,5 +1,92 @@
 [
   {
+    "date": "2026-10-02",
+    "title": "TerrainForge: Physics-Grounded road geometry Editing for Counterfactual Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.02825",
+    "arxiv_id": "2610.02825",
+    "detail_path": "papers/2610.02825/",
+    "cover_path": "covers/2610.02825/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.02825.webp",
+    "paper_image_full_path": "assets/paper-images/2610.02825.webp",
+    "preview_text": "论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。 应用场景为基于真实驾驶片段重建出的多车驾驶 episode，在保持交通上下文与恢复出的控制输入不变的前提下，对道路进行可控编辑并重新生成视频与物理状态。 研究问题在于：道路编辑不仅要改变视觉外观，还必须传播到车辆动力学、相机运动和车间净空，且周围车辆是否响应同一条被编辑道路会影响对 ego–lead 间距变化的评估。",
+    "research_unit": "Rochester Institute of Technology · Yang Chen、Yicheng Zhu、Zilin Bian",
+    "hook_text": "论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。",
+    "key_points": [
+      "论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。",
+      "应用场景为基于真实驾驶片段重建出的多车驾驶 episode，在保持交通上下文与恢复出的控制输入不变的前提下，对道路进行可控编辑并重新生成视频与物理状态。",
+      "研究问题在于：道路编辑不仅要改变视觉外观，还必须传播到车辆动力学、相机运动和车间净空，且周围车辆是否响应同一条被编辑道路会影响对 ego–lead 间距变化的评估。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-02",
+    "title": "Localized Conformal Safety Monitoring with Vision-Language Models for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.02765",
+    "arxiv_id": "2610.02765",
+    "detail_path": "papers/2610.02765/",
+    "cover_path": "covers/2610.02765/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.02765.webp",
+    "paper_image_full_path": "assets/paper-images/2610.02765.webp",
+    "preview_text": "任务：为自动驾驶规划器输出的候选轨迹设计安全监视器，在执行前判断该轨迹在其固定时间视界内是否会导致碰撞（safe / unsafe）。 应用场景：自动驾驶车辆执行规划轨迹前的安全筛查，输入为前视 RGB 相机图像叠加候选轨迹以及描述安全监控任务的提示词，可与任意黑盒规划器解耦、后处理式部署。 研究问题：VLM 虽具备常识推理能力，但其原始 safe/unsafe 预测过度自信、可靠性不足，无法直接用于安全关键场景；同时真实场景中不安全样本稀少、预测难度随场景变化，需要在有限样本下对 VLM 预测做概率校准，保证低漏报率的同时尽量抑制误报。",
+    "research_unit": "University of Michigan, Ann Arbor, MI, USA · Luís Marques、Rong Fang、Disha K…",
+    "hook_text": "任务：为自动驾驶规划器输出的候选轨迹设计安全监视器，在执行前判断该轨迹在其固定时间视界内是否会导致碰撞（safe / unsafe）。",
+    "key_points": [
+      "任务：为自动驾驶规划器输出的候选轨迹设计安全监视器，在执行前判断该轨迹在其固定时间视界内是否会导致碰撞（safe / unsafe）。",
+      "应用场景：自动驾驶车辆执行规划轨迹前的安全筛查，输入为前视 RGB 相机图像叠加候选轨迹以及描述安全监控任务的提示词，可与任意黑盒规划器解耦、后处理式部署。",
+      "研究问题：VLM 虽具备常识推理能力，但其原始 safe/unsafe 预测过度自信、可靠性不足，无法直接用于安全关键场景；同时真实场景中不安全样本稀少、预测难度随场景变化，需要在有限样本下对 VLM 预测做概率校准，保证低漏报率的同时尽量抑制误报。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-01",
+    "title": "From Fragments to Global Maps: Learning Vectorized Map Aggregation with Large Language Models",
+    "link": "https://arxiv.org/abs/2610.02513",
+    "arxiv_id": "2610.02513",
+    "detail_path": "papers/2610.02513/",
+    "cover_path": "covers/2610.02513/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.02513.webp",
+    "paper_image_full_path": "assets/paper-images/2610.02513.webp",
+    "preview_text": "论文研究自动驾驶中大规模矢量化高精地图（HD Map）的构建问题，聚焦于将车辆轨迹上沿路采集的局部矢量化地图预测聚合为连贯的全局地图。 具体任务为“矢量化地图聚合”（vectorized map aggregation），即对同一地图元素的多次重叠、含噪局部观测进行关联、合并与几何精化。 应用场景为自动驾驶的感知、定位与规划所需的结构化道路信息（如车道线、道路边界）。 研究问题在于：现有聚合方法依赖固定参数的几何规则（如距离阈值、重叠判据、拟合间隔），难以泛化到多样道路结构和不同上游检测器的误差模式，常需针对检测器重新调参或人工调整。",
+    "research_unit": "Bosch Research North America · Ziwei Li、Xiaoqi Wang、Wenbin He 等",
+    "hook_text": "论文研究自动驾驶中大规模矢量化高精地图（HD Map）的构建问题，聚焦于将车辆轨迹上沿路采集的局部矢量化地图预测聚合为连贯的全局地图。",
+    "key_points": [
+      "论文研究自动驾驶中大规模矢量化高精地图（HD Map）的构建问题，聚焦于将车辆轨迹上沿路采集的局部矢量化地图预测聚合为连贯的全局地图。",
+      "具体任务为“矢量化地图聚合”（vectorized map aggregation），即对同一地图元素的多次重叠、含噪局部观测进行关联、合并与几何精化。",
+      "应用场景为自动驾驶的感知、定位与规划所需的结构化道路信息（如车道线、道路边界）。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
     "date": "2026-10-01",
     "title": "Weather-Aware Domain Adaptation for Street-View Weather Recognition",
     "link": "https://arxiv.org/abs/2610.02000",

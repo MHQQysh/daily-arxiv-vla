@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TerrainForge: Physics-Grounded road geometry Editing for Counterfactual Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。 应用场景为基于真实驾驶片段重建出的多车驾驶 episode，在保持交通上下文与恢复出的控制输入不变的前提下，对道路进行可控编辑并重新生成视频与物理状态。 研究问题在于：道路编辑不仅要改变视觉外观，还必须传播到车辆动力学、相机运动和车间净空，且周围车辆是否响应同一条被编辑道路会影响对 ego–lead 间距变化的评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.02825">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.02825.webp" alt="TerrainForge: Physics-Grounded road geometry Editing for Counterfactual Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">TerrainForge: Physics-Grounded road geometry Editing for Counterfactual Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-02 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.02825" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.02825" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.02825</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。 应用场景为基于真实驾驶片段重建出的多车驾驶 episode，在保持交通上下文与恢复出的控制输入不变的前提下，对道路进行可控编辑并重新生成视频与物理状态。 研究问题在于：道路编辑不仅要改变视觉外观，还必须传播到车辆动力学、相机运动和车间净空，且周围车辆是否响应同一条被编辑道路会影响对 ego–lead 间距变化的评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Rochester Institute of Technology · Yang Chen、Yicheng Zhu、Zilin Bian</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.02825/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。</li><li>应用场景为基于真实驾驶片段重建出的多车驾驶 episode，在保持交通上下文与恢复出的控制输入不变的前提下，对道路进行可控编辑并重新生成视频与物理状态。</li><li>研究问题在于：道路编辑不仅要改变视觉外观，还必须传播到车辆动力学、相机运动和车间净空，且周围车辆是否响应同一条被编辑道路会影响对 ego–lead 间距变化的评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Rochester Institute of Technology；作者：Yang Chen、Yicheng Zhu、Zilin Bian</li><li>机构：University of Macau；作者：Zhenning Li</li><li>机构：City University of Hong Kong；作者：Tao Li（通讯作者）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景中的反事实生成任务，聚焦道路几何（如 crest、sag、speed hump）与路面条件（如湿滑或结冰）发生变化时，车辆运动、相机视角与车间距如何随之改变。</li><li>应用场景为基于真实驾驶片段重建出的多车驾驶 episode，在保持交通上下文与恢复出的控制输入不变的前提下，对道路进行可控编辑并重新生成视频与物理状态。</li><li>研究问题在于：道路编辑不仅要改变视觉外观，还必须传播到车辆动力学、相机运动和车间净空，且周围车辆是否响应同一条被编辑道路会影响对 ego–lead 间距变化的评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 TerrainForge，一个物理接地的 real-to-counterfactual 框架，将道路几何视为记录驾驶场景中的可控干预，在保持交通上下文和恢复控制的前提下生成成对的反事实 episode。</li><li>提出统一道路模型，用同一道路场同时驱动 Gaussian 场景变形、相机运动和耦合四轮车辆动力学，使被编辑地形与多车响应在物理上保持同步。</li><li>构建场景不相交的干预–响应数据集，并训练第一阶段代理模型，预测 ego 终端间距变化并识别有实质影响的道路编辑，从而在全多车 rollout 前低成本筛选候选编辑。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：包含统一道路模型、事实接地与耦合车辆 rollout、物理同步场景渲染以及代理预测；输入包括重建驾驶 episode、标定相机位姿、地图几何和跟踪车辆。</li><li>输入传感器：原文报告使用 Waymo 跟踪框位姿、相机标定、ZOD 的 OXTS 高度与测量速度/加速度，以及 LiDAR 作为独立地面估计；未报告其他传感器输入。</li><li>场景表示：使用 Gaussian 场景表示，道路和人行道 Gaussian 根据共享道路干预位移并旋转到编辑后的表面法线；移动车辆重建为刚性 object-centric Gaussian 模型。</li><li>模型结构：道路干预表示为 $\mathcal{R}_{\eta}(x,y)=[z_{\eta}(x,y),\nabla z_{\eta}(x,y),\mu_{\eta}(x,y)]$，包含高程、梯度和轮胎–道路摩擦；车辆模型为 32 状态耦合模型，包含平面运动、heave、pitch、roll、四个非簧载质量、轮胎滑移动力学和车轮旋转，轮胎力由 TMeasy 提供并受摩擦圆约束。</li><li>关键技术：从记录运动推断每辆车的控制（如 Savitzky–Golay 速度目标、迭代学习纵向力矩、固定轮上力矩分配），在编辑道路上重放冻结控制并计算反事实轨迹；场景按道路干预变形后从物理同步相机位姿重新渲染。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo 重建场景与 Waymo Motion episodes、Zenseact Open Dataset（ZOD）记录、CarSim 2022.1 验证套件；代理模型训练使用 scene-disjoint Waymo bank。</li><li>仿真器：CarSim 2022.1 用于车辆模型验证；原文未报告训练仿真器的具体硬件或训练时长。</li><li>模型规模：32 状态耦合车辆模型；代理模型使用 histogram gradient-boosted regressors 和 class-balanced boosted-tree classifier；原文未报告神经网络参数量。</li><li>训练资源：原文未报告 GPU 型号、数量或训练时长。</li><li>实车平台：原文未报告实车平台；使用 ZOD 真实道路观测和 LiDAR 进行验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CarSim 车辆动力学验证、ZOD/LiDAR 真实道路剖面验证、重建 Waymo 场景中的几何实现与多车传播、与视频编辑模型的对比、以及 scene-disjoint 代理银行筛选。</li><li>评估指标：速度 RMSE、pitch RMSE、法向载荷极值差、横向位置 RMSE、apex 深度误差、垂直曲率误差、表面 RMS、ego–lead gap 变化、最小间距变化、终端间距 MAE、Spearman $\rho$、平均精度 AP、相机轨迹一致性 RMSE/相关性。</li><li>关键数值：CarSim 垂直对齐 holdout 上速度 RMSE 0.004–0.007 m/s，pitch RMSE 0.051–0.061°；ZOD held-out split 上 world-frame pitch RMSE 为 1.03°/0.24°/0.26°（flat/kinematic/half-car），相对 LiDAR 地面估计恢复剖面误差 0.14° 对比 flat-road 0.45°；10 个 Waymo 场景中 88 条垂直曲线和 30 个 hump 的 apex 深度与垂直曲率中位误差 0.17% 和 0.05%，表面 RMS 1.2 mm；18 个 episode 中 crest/sag 的 ego–lead gap 中位最大差异 1.52 m/1.41 m，且每个 episode 均超过 0.5 m；15,758 次道路编辑代理预测中 SAG 终端间距 MAE 0.270 m（较无变化降低 40%），Hump 0.569 m（降低 22%），$\rho$ 分别为 0.89 和 0.81；consequential-edit 检测 AP 0.85，对比随机 0.20 和仅用编辑几何 0.35。</li><li>对比方法：CarSim 2022.1；视频编辑模型 VACE、Cosmos-Transfer2.5、LTX-Video；代理预测中的 no-change baseline 和仅编辑几何基线。</li><li>评估条件：涵盖开环车辆动力学对比、真实道路剖面验证、仿真场景中的几何实现与多车 rollout、视频编辑模型输出比较，以及 scene-disjoint 代理筛选；原文未报告实车闭环测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2610.02765/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Localized Conformal Safety Monitoring with Vision-Language Models for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
