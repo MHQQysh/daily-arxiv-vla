@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autoware in Construction: Gap Analysis and LiDAR Perception Toward Off-Road Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。 应用场景为建筑工地的越野自动驾驶，包括运输道路行驶、装载与卸载区作业、与挖掘机和推土机等重型机械协同。 研究问题在于：建筑工地与公共道路在传感、地图、定位、感知、规划、控制与车辆接口等模块上的假设存在根本差异，现有 Autoware 主要为公共道路设计，难以直接迁移。 论文通过模块级差距分析、LiDAR 感知流水线现场开发经验以及面向端到端自动驾驶的路线图，讨论如何将 Autoware 扩展到建筑越野场景。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.04187">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.04187.webp" alt="Autoware in Construction: Gap Analysis and LiDAR Perception Toward Off-Road Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Autoware in Construction: Gap Analysis and LiDAR Perception Toward Off-Road Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.04187" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.04187" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.04187</span></div>
+            <p class="detail-summary">论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。 应用场景为建筑工地的越野自动驾驶，包括运输道路行驶、装载与卸载区作业、与挖掘机和推土机等重型机械协同。 研究问题在于：建筑工地与公共道路在传感、地图、定位、感知、规划、控制与车辆接口等模块上的假设存在根本差异，现有 Autoware 主要为公共道路设计，难以直接迁移。 论文通过模块级差距分析、LiDAR 感知流水线现场开发经验以及面向端到端自动驾驶的路线图，讨论如何将 Autoware 扩展到建筑越野场景。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">加州大学欧文分校（University of California, Irvine，UCI）土木与环境工程系 · Yu Otsuki</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.04187/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。</li><li>应用场景为建筑工地的越野自动驾驶，包括运输道路行驶、装载与卸载区作业、与挖掘机和推土机等重型机械协同。</li><li>研究问题在于：建筑工地与公共道路在传感、地图、定位、感知、规划、控制与车辆接口等模块上的假设存在根本差异，现有 Autoware 主要为公共道路设计，难以直接迁移。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：加州大学欧文分校（University of California, Irvine，UCI）土木与环境工程系；作者：Yu Otsuki</li><li>机构：TIER IV, Inc.（日本东京品川）；作者：Teja Emmey、Sena Matsushita、Akiro Harada、Takeshi Miura</li><li>机构：EARTHBRAIN、Komatsu、Taisei Corporation；作者：原文未明确对应（致谢中仅按字母序列出贡献公司，未指定对应作者）</li><li>机构：TIER IV 团队及合作者；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。</li><li>应用场景为建筑工地的越野自动驾驶，包括运输道路行驶、装载与卸载区作业、与挖掘机和推土机等重型机械协同。</li><li>研究问题在于：建筑工地与公共道路在传感、地图、定位、感知、规划、控制与车辆接口等模块上的假设存在根本差异，现有 Autoware 主要为公共道路设计，难以直接迁移。</li><li>论文通过模块级差距分析、LiDAR 感知流水线现场开发经验以及面向端到端自动驾驶的路线图，讨论如何将 Autoware 扩展到建筑越野场景。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Autoware 在公共道路与建筑工地越野自动驾驶之间的模块级技术差距分析，覆盖 Sensing、Mapping、Localization、Perception、Planning、Control and Vehicle Interface 等模块。</li><li>总结基于 LiDAR 的工地感知流水线开发与现场测试经验，重点包括地面分割、尘土滤波和外参传感器标定。</li><li>在地面分割中比较 scan_ground_filter 与 GSeg3D 在越野环境下的表现，指出 GSeg3D 能更好区分非地面对象与不平坦地面。</li><li>讨论尘土条件下 LiDAR 回波模式选择与基于强度的滤波策略，并提出多 LiDAR 场景下传感器特定低强度预处理的实现方式。</li><li>提出面向建筑车辆端到端自动驾驶的路线图，包括缓解数据稀缺和逐步从模块化架构过渡到端到端/VLA 架构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文聚焦 Autoware 的 LiDAR 感知流水线，整体流程为 LiDAR 传感器 → 传感器驱动 → 预处理滤波器 → 多 LiDAR 拼接 → 后处理滤波器 → 地面分割 → 尘土滤波 → 目标检测。</li><li>输入传感器：使用 Hesai AT128 LiDAR；车辆还改装了 LiDAR、相机、GNSS 和 IMU 传感器、车载计算单元及电子控制单元接口。</li><li>场景表示：以 LiDAR 点云为核心表示，涉及地面点、非地面对象、尘土回波、正障碍与负障碍等；论文指出仅地面分割不足，还需要可通行性分析来评估坡度、粗糙度和材质等。</li><li>模型结构：论文方法基于扩展已有 Autoware 流水线，并非提出全新的统一模型；地面分割候选包括 Autoware 的 scan_ground_filter、Patchwork++ 和 GSeg3D；目标检测器提及 Autoware 中标准 LiDAR-based CenterPoint 模型作为背景，但未报告其在本工作中的改造细节。</li><li>关键技术一：地面分割面对越野不平地形时，单一 slope 与 height 阈值难以兼顾，容易把不平地面误判为障碍或把岩石等小障碍误判为地面；论文比较 scan_ground_filter 与 GSeg3D，后者在本场景中表现更好。</li><li>关键技术二：尘土滤波中比较 STRONGEST 与 LAST 等 LiDAR 回波模式，指出 STRONGEST 易被近处尘土主导，LAST 更能保留尘土后方地面和物体；同时利用尘土回波低强度、空间分散、时间持续性有限等特性进行识别，并采用简单强度滤波。</li><li>关键技术三：多 LiDAR 情况下强度值不可直接比较，论文不采用跨传感器强度归一化，而是在每个 LiDAR 驱动输出处使用传感器特定低强度阈值进行预处理标记；这些点在地面分割阶段保留，地面分割后再由尘土滤波移除非地面的低强度点。</li><li>外参标定：论文指出大型建筑车辆常需拆解运输并在现场重装，传感器可能被移除或重新定位，因此需要现场外参标定；现有 Autoware 标定流程常假设平坦地面和具有明显环境特征的重叠视场，而工地可能缺少平坦表面、传感器视场重叠有限且环境特征稀少。论文未报告其提出的具体标定算法实现。</li><li>端到端路线图：近期优先保留 Autoware 模块化架构并用建筑专用能力替代公共道路假设，同时通过现场数据采集建立建筑专用数据集；长期目标是集成可联合执行感知、推理和轨迹生成的端到端模型，并提及 Alpamayo–Autoware 作为公共道路中的早期示例，以及 VLA 模型可接受任务级指令。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：论文未提出或发布新的建筑工地数据集；提到当前 Autoware 学习型感知模块主要基于公共道路数据集训练。</li><li>相关数据集：提及公开越野数据集多由小型无人地面车辆或乘用车级车辆采集，与大型建筑机械在传感器视角、感知范围和遮挡模式上差异较大；提及 AutoMine 数据集包含宽体卡车和矿用运输卡车数据，是最相关的数据集之一。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：Autoware 集成到大型建筑自卸卡车上，并在越野环境中测试；车辆改装了 LiDAR、相机、GNSS、IMU、车载计算机和 ECU 接口；实验中使用的 LiDAR 为 Hesai AT128。</li><li>现场测试：论文报告了 LiDAR 感知流水线的现场部署经验，包括尘土环境、地面分割对比和外参标定问题，但未报告测试里程、时长等资源规模信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：论文未报告标准定量基准；主要评估形式为越野现场测试与定性对比。</li><li>评估指标：原文未报告精度、召回率、mAP、定位误差等定量指标。</li><li>地面分割结果：在越野环境对比中，GSeg3D 成功将人体模型、车辆和植被分类为非地面，同时将不平坦地形保留为地面；scan_ground_filter 则误分类了这些对象的部分区域。</li><li>尘土环境结果：在 STRONGEST 回波模式下，密集近处尘土产生最强回波并主导点云；在 LAST 模式下，尘土后方地面和其他表面更能被保留，因此在该场景中更优；强度为 1 或更低的点主要对应尘土和被尘土遮挡的地面，锥桶和人体模型强度仍较高，说明基于强度的滤波可减少误检。</li><li>多 LiDAR 结果：论文指出跨 LiDAR 强度不可直接比较，未采用跨传感器强度归一化，而采用每个 LiDAR 驱动后的传感器特定低强度阈值预处理；该策略用于避免多 LiDAR 拼接点云上单一强度阈值失效。</li><li>外参标定结果：论文说明大型车辆在工地重装后需要现场标定或验证，现有依赖平坦地面和重叠特征视场的流程可能不适用；原文未报告标定精度或误差结果。</li><li>对比方法：地面分割对比 scan_ground_filter 与 GSeg3D，并提及 Patchwork++；回波模式对比 STRONGEST 与 LAST；尘土滤波对比近邻搜索方法与简单强度滤波，并说明近邻搜索计算开销较大。</li><li>开环、闭环、仿真或实车条件：论文主要报告现场实车/越野环境下的 LiDAR 感知开发经验与定性结果；未报告开环、闭环或仿真定量评测。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.04356/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SelectOccFlow: Selective Spatiotemporal Aggregation for 3D Occupancy and Scene Flow Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.04088/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Towards Safer Autonomous Driving in an Open World: A Dual-Process Approach</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

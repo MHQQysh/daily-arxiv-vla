@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Radar2Plan: Benchmarking 4D Radar for End-to-End Open-Loop Ego-Trajectory Planning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。 应用场景包括乘用车城市/郊区驾驶与大卡车高速/支线/终端道路驾驶，尤其关注恶劣天气与不良光照条件。 研究问题包括：4D 雷达单独作为环境感知模态时能否生成有竞争力的自车轨迹；在恶劣条件下基于雷达的规划是否优于相机或 LiDAR；将 4D 雷达与相机、LiDAR 或相机-LiDAR 组合时是否能改善规划。 论文指出已有 4D 雷达基准主要关注感知任务，而未系统评估其对轨迹规划的价值。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.06121">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.06121.webp" alt="Radar2Plan: Benchmarking 4D Radar for End-to-End Open-Loop Ego-Trajectory Planning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Radar2Plan: Benchmarking 4D Radar for End-to-End Open-Loop Ego-Trajectory Planning</h1>
+            <div class="detail-meta">2026-10-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.06121" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.06121" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.06121</span></div>
+            <p class="detail-summary">论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。 应用场景包括乘用车城市/郊区驾驶与大卡车高速/支线/终端道路驾驶，尤其关注恶劣天气与不良光照条件。 研究问题包括：4D 雷达单独作为环境感知模态时能否生成有竞争力的自车轨迹；在恶劣条件下基于雷达的规划是否优于相机或 LiDAR；将 4D 雷达与相机、LiDAR 或相机-LiDAR 组合时是否能改善规划。 论文指出已有 4D 雷达基准主要关注感知任务，而未系统评估其对轨迹规划的价值。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">HKUST(GZ) · 原文未明确对应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.06121/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。</li><li>应用场景包括乘用车城市/郊区驾驶与大卡车高速/支线/终端道路驾驶，尤其关注恶劣天气与不良光照条件。</li><li>研究问题包括：4D 雷达单独作为环境感知模态时能否生成有竞争力的自车轨迹；在恶劣条件下基于雷达的规划是否优于相机或 LiDAR；将 4D 雷达与相机、LiDAR 或相机-LiDAR 组合时是否能改善规划。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：HKUST(GZ)；作者：原文未明确对应</li><li>机构：Shanghai Jiao Tong University；作者：原文未明确对应</li><li>机构：University of Oxford；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。</li><li>应用场景包括乘用车城市/郊区驾驶与大卡车高速/支线/终端道路驾驶，尤其关注恶劣天气与不良光照条件。</li><li>研究问题包括：4D 雷达单独作为环境感知模态时能否生成有竞争力的自车轨迹；在恶劣条件下基于雷达的规划是否优于相机或 LiDAR；将 4D 雷达与相机、LiDAR 或相机-LiDAR 组合时是否能改善规划。</li><li>论文指出已有 4D 雷达基准主要关注感知任务，而未系统评估其对轨迹规划的价值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Radar2Plan，作者称其为首个面向真实世界 4D 雷达端到端开环自车轨迹规划的基准。</li><li>将 DSERT-RoLL 与 MAN TruckScenes 转换为统一规划基准，采用一致的任务定义、数据划分和评估指标。</li><li>设计模块化基准框架，通过标准化接口解耦数据集适配、传感器编码、规划特定场景表示和规划方法，支持受控比较与独立扩展。</li><li>在四种代表性规划基线、七种相机/4D 雷达/LiDAR 传感器组合以及 12 种天气和光照条件下进行评估。</li><li>实验显示 4D 雷达单独使用时具有竞争力，并通常改善多模态规划，且传感器组合和规划架构会影响雷达收益。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于基准/评估框架工作，连接传感器编码器、场景表示与规划头，而非提出单一端到端规划网络。</li><li>输入传感器：相机、4D 雷达、LiDAR 三类模态，评估配置为 {C,R,L,C+R,C+L,R+L,C+R+L}，其中 C、R、L 分别表示相机、4D 雷达和 LiDAR。</li><li>数据集适配：针对 DSERT-RoLL 和 MAN TruckScenes 分别实现数据集适配器，将连续记录转换为以参考时间戳定义、并关联未来自车轨迹的统一规划样本。</li><li>轨迹构造：每个样本在当前传感器观测时间戳作为锚点，在锚点自车坐标系中构造 6 秒未来自车轨迹，采样 30 个未来路点，间隔 0.2 秒。</li><li>相机编码器：使用 DINOv3，常见配置为冻结的 DINOv3 ViT-S/16 骨干，输入分辨率 192×288，仅训练输出投影。</li><li>雷达与 LiDAR 编码器：分别使用独立的 PTv3-based 编码器，均包含三层 PTv3，patch size 为 64，网格分辨率 0.5 m；雷达点特征包括自车坐标系位置 (x,y,z)、反射率和多普勒/纵向相对速度属性，LiDAR 点特征包括位置 (x,y,z)、强度和相对扫描时间。</li><li>时序聚合：雷达和 LiDAR 输入聚合当前点云与前一帧点云，前一帧点云运动补偿到当前自车坐标系，并附加帧级时间偏移；每样本最多保留 2,048 个雷达点和 4,096 个 LiDAR 点。</li><li>场景表示：TransFuser-style 使用密集 BEV 表示；SparseDrive-style 使用学习稀疏查询；VADv2-style 使用潜在场景 token；DiffusionDrive-style 使用细化 BEV 特征构造条件 token。</li><li>规划基线：TransFuser-style GRU 路点回归、SparseDrive-style 稀疏查询规划、VADv2-style 轨迹词表评分、DiffusionDrive-style 扩散轨迹细化。</li><li>输出接口：统一返回候选自车轨迹及其分数，形状为 \hat{\mathbf{Y}}\in\mathbb{R}^{B\times K_f\times 30\times 2} 和 \mathbf{s}\in\mathbb{R}^{B\times K_f}，并按分数选择 Top-1 轨迹。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：DSERT-RoLL 和 MAN TruckScenes。</li><li>DSERT-RoLL：约 22,000 个同步多模态帧，使用左右 RGB 相机、4D 雷达点云、倾斜 Livox LiDAR 和自车姿态；规划协议下样本数为 10,650，train/val/test 为 7,052 / 1,305 / 2,293，条件组为 6。</li><li>MAN TruckScenes：包含 747 个发布场景，每个约 20 秒，使用左前和右前相机、全部六个 4D 雷达、全部六个 LiDAR 的关键帧点云、标定和自车姿态；规划协议下样本数为 16,403，train/val/test 为 13,113 / 1,643 / 1,647，条件组为 6。</li><li>训练协议：每个配置训练 80 epochs，使用 AdamW，学习率 10^{-4}，权重衰减 10^{-4}，batch size 16，seed 42，无学习率调度器。</li><li>输入设置：相机输入缩放至 192×288；雷达最多 2,048 点，LiDAR 最多 4,096 点；模型接收 5 Hz 采样的 6 步自车运动历史。</li><li>仿真器与实车平台：原文未报告仿真器；实车平台信息原文未明确报告，仅说明使用 DSERT-RoLL 与 MAN TruckScenes 的真实传感器日志。</li><li>模型规模与训练资源：除上述编码器、训练轮数、学习率、batch size 等外，模型参数量、GPU 型号、GPU 数量、训练时长等原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Radar2Plan 统一协议下的 DSERT-RoLL 和 MAN TruckScenes 开环规划评估。</li><li>评估指标：Top-1 Average Displacement Error，主要指标为 Top1ADE@6s，也报告 2 s、4 s、6 s 时域；条件特定评估按天气和光照分组报告。</li><li>对比方法/配置：四种规划基线（GRU、Sparse Query、Vocabulary、Diffusion）与七种传感器配置（C、R、L、C+R、C+L、R+L、C+R+L）对比。</li><li>开环/闭环条件：论文评估开环规划，使用真实记录序列；原文明确指出当前评估不包含闭环，并在结论中列为未来工作。</li><li>独立雷达规划：Table III 显示，在两个数据集上，Radar-only 输入在每个规划基线中取得最低的单模态 Top1ADE。</li><li>DSERT-RoLL 单模态结果：雷达相对相机和 LiDAR 分别降低误差约 0.16–0.56 m 和 0.02–0.16 m。</li><li>MAN TruckScenes 单模态结果：雷达相对相机和 LiDAR 分别降低误差约 3.44–4.85 m 和 4.13–9.70 m。</li><li>多模态互补性：在两个数据集共 24 个比较中，加入雷达降低 Top1ADE 的有 22 个；MAN TruckScenes 中 12 个比较全部降低。</li><li>DSERT-RoLL 多模态例外：Sparse Query 在 L→R+L 时 Top1ADE 增加 0.75 m，Vocabulary 在 C+L→C+R+L 时增加 0.31 m。</li><li>恶劣条件结果：DSERT-RoLL 中，雷达单独输入在 20 个恶劣天气基线-条件对中有 19 个优于相机单独输入；相机加雷达也在 20 个中有 19 个改善。</li><li>雾与大雪增益：DSERT-RoLL 雾条件下 R 相对 C 降低 0.43–4.72 m，大雪条件下降低 6.35–15.72 m；C+R 分别降低 0.40–3.89 m 和 4.18–14.53 m。</li><li>MAN TruckScenes 恶劣条件结果：R 与 C+R 在 Clear、Overcast、Rain、Illumination、Twilight、Dark 六类条件下的全部 24 个 planner-condition 比较中均优于 C。</li><li>定性结果：Fig. 3 展示 DSERT-RoLL 大雨和 MAN TruckScenes 阴天条件下 4D 雷达规划的可视化；Fig. 5 展示加入雷达后的匹配 Top1ADE 增益。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.06171/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Controllable and Photorealistic Pedestrian Risky Motion Generation for End-to-End Driving Safety Evaluation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.05707/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Difference Feature Map Distillation: Transferring Inter-Sample Relational Knowledge Towards Efficient Transformer-Based Tracking</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

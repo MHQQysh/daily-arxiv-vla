@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Difference Feature Map Distillation: Transferring Inter-Sample Relational Knowledge Towards Efficient Transformer-Based Tracking - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。 应用场景强调车载跟踪模块需在严格的计算、散热和时延预算下运行，同时保持复杂动态环境中的鲁棒性。 研究问题：Transformer 跟踪器精度高但计算与内存开销大，难以部署在实时、资源受限平台；现有跟踪知识蒸馏方法主要为实例级（instance-wise），只让学生逐样本模仿教师的绝对特征图，忽略了教师特征空间中跨样本的批内拓扑（inter-sample relational knowledge）。 论文提出 Difference Feature Map Knowledge Distillation（DFM-KD，差异特征图蒸馏），通过迁移样本间特征差异来对齐教师与学生的关系结构。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.05707">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.05707.webp" alt="Difference Feature Map Distillation: Transferring Inter-Sample Relational Knowledge Towards Efficient Transformer-Based Tracking" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Difference Feature Map Distillation: Transferring Inter-Sample Relational Knowledge Towards Efficient Transformer-Based Tracking</h1>
+            <div class="detail-meta">2026-10-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.05707" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.05707" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.05707</span></div>
+            <p class="detail-summary">论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。 应用场景强调车载跟踪模块需在严格的计算、散热和时延预算下运行，同时保持复杂动态环境中的鲁棒性。 研究问题：Transformer 跟踪器精度高但计算与内存开销大，难以部署在实时、资源受限平台；现有跟踪知识蒸馏方法主要为实例级（instance-wise），只让学生逐样本模仿教师的绝对特征图，忽略了教师特征空间中跨样本的批内拓扑（inter-sample relational knowledge）。 论文提出 Difference Feature Map Knowledge Distillation（DFM-KD，差异特征图蒸馏），通过迁移样本间特征差异来对齐教师与学生的关系结构。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Bowling Green State University, Department of Computer Science, OH 43402, U…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.05707/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。</li><li>应用场景强调车载跟踪模块需在严格的计算、散热和时延预算下运行，同时保持复杂动态环境中的鲁棒性。</li><li>研究问题：Transformer 跟踪器精度高但计算与内存开销大，难以部署在实时、资源受限平台；现有跟踪知识蒸馏方法主要为实例级（instance-wise），只让学生逐样本模仿教师的绝对特征图，忽略了教师特征空间中跨样本的批内拓扑（inter-sample relational knowledge）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Bowling Green State University, Department of Computer Science, OH 43402, USA；作者：Zhicheng Ding、Xinyu Chu</li><li>机构：University of Alabama at Birmingham, Department of Computer Science, AL 35294, USA；作者：Qing Tian</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。</li><li>应用场景强调车载跟踪模块需在严格的计算、散热和时延预算下运行，同时保持复杂动态环境中的鲁棒性。</li><li>研究问题：Transformer 跟踪器精度高但计算与内存开销大，难以部署在实时、资源受限平台；现有跟踪知识蒸馏方法主要为实例级（instance-wise），只让学生逐样本模仿教师的绝对特征图，忽略了教师特征空间中跨样本的批内拓扑（inter-sample relational knowledge）。</li><li>论文提出 Difference Feature Map Knowledge Distillation（DFM-KD，差异特征图蒸馏），通过迁移样本间特征差异来对齐教师与学生的关系结构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种新的蒸馏机制，通过对齐样本间差异特征图来迁移教师的批内拓扑，捕获实例级方法忽略的结构知识。</li><li>DFM-KD 灵活，可选择性地应用于任意 Transformer 层，使实践者能针对信息量最大的层进行蒸馏并减少开销。</li><li>证明 DFM-KD 可无缝集成到现代 Transformer 跟踪器（如 STARK、MixFormerV2），并在最小计算成本下显著提升跟踪精度和成功率。</li><li>通过消融实验表明 DFM 项与标准特征级蒸馏项互补，二者结合取得最佳整体性能。</li><li>指出差异特征图仅沿 batch 维度用相邻样本差分构造，将复杂度由 O(B²) 降到 O(B)，保持轻量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：知识蒸馏框架，作用于 Transformer 跟踪器的中间层输出 token embeddings，可跨编码器-解码器结构（STARK）与纯 Transformer 堆栈（MixFormerV2）使用。</li><li>输入传感器：原文未报告具体传感器类型；数据为 LaSOT 视频序列的 tracking pair（template, search area）或 triplet（template, online template, search area）。</li><li>场景表示：对某一 Transformer 层 ℓ，教师与学生特征张量表示为 F^T_ℓ ∈ R^{B×N×C} 与 F^S_ℓ ∈ R^{B×N×C}，其中 B 为 mini-batch 大小，N 为 token 数（template 与 search token 合计），C 为通道/embedding 维度。</li><li>模型结构：不修改跟踪器主干结构；学生模型通过减少 Transformer 层数构造（STARK 12→6 层；MixFormerV2 12→8 层）；教师与学生层按固定规则（如均匀间隔选择教师层）一一对齐，蒸馏直接作用于对应 Transformer 输出。</li><li>关键技术一：基线特征级蒸馏，按逐样本方式最小化教师与学生激活之间的 MSE：</li></ul>
+<p> L^(ℓ)_feat = 1/(BNC) Σ_b Σ_n Σ_c (F^S_{ℓ,b,n,c} − F^T_{ℓ,b,n,c})²。</p>
+<ul><li>关键技术二：差异特征图构造，沿 batch 维度取离散差分：</li></ul>
+<p> D^T_{ℓ,i,n,c} = F^T_{ℓ,i+1,n,c} − F^T_{ℓ,i,n,c}，i = 1,…,B−1；</p>
+<p> D^S_{ℓ,i,n,c} = F^S_{ℓ,i+1,n,c} − F^S_{ℓ,i,n,c}，i = 1,…,B−1。</p>
+<p> 得到 D^T_ℓ, D^S_ℓ ∈ R^{(B−1)×N×C}，可理解为沿样本维度的“有序 batch-wise 导数”，编码外观变化、上下文相似性和结构关系。</p>
+<ul><li>关键技术三：DFM loss，对教师与学生的差异特征图计算 MSE：</li></ul>
+<p> L^(ℓ)_DFM = 1/((B−1)NC) Σ_{i=1}^{B−1} Σ_n Σ_c (D^S_{ℓ,i,n,c} − D^T_{ℓ,i,n,c})²。</p>
+<ul><li>关键技术四：多层级聚合与总体目标：</li></ul>
+<p> L_DFM = Σ_{ℓ∈L_d} α_ℓ L^(ℓ)_DFM；</p>
+<p> L_total = L_track + λ_feat L_feat + λ_DFM L_DFM。</p>
+<ul><li>设计说明：不对 D^T_ℓ 与 D^S_ℓ 做归一化，以同时保留方向和相对强度信息；使用数据加载器提供的随机打乱 mini-batch 顺序，因此相邻差分编码通用样本间关系而非特定时间顺序；未采用全对差分以避免 O(B²) 复杂度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：LaSOT2019 大规模长期跟踪基准，包含 1,400 条序列、共 70 类；论文构建子集 LaSOT-RoadUsers，包含 6 类：bicycle、motorcycle、car、bus、truck、person。</li><li>仿真器：原文未报告。</li><li>模型规模：STARK 教师为 12 层 Transformer + ResNet-50 主干；MixFormerV2 教师为官方 12 层、288-base 模型；学生分别为 STARK 6 层、MixFormerV2 8 层；MixFormerV2 教师参数 86.60M、FLOPs 42.10G，学生 58.25M、28.16G；STARK 教师参数 27.87M、FLOPs 5.80G，学生 19.19M、3.29G。</li><li>训练资源：2 张 NVIDIA A100 GPU。</li><li>训练细节：STARK 使用 MMTracking 仓库教师模型，λ_feat=0.2、λ_DFM=0.5；MixFormerV2 遵循其蒸馏协议，λ_feat=0.2、λ_DFM=0.3。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：LaSOT-RoadUsers（基于 LaSOT2019 构建），遵循官方 LaSOT 协议。</li><li>评估指标：AUC、Precision（P）、Normalized Precision（NP）。</li><li>条件：论文报告的是跟踪精度与成功率评估，原文未明确报告开环、闭环、仿真或实车测试条件。</li><li>MixFormerV2 对比（TABLE I）：教师 75.33 AUC / 81.10 P / 86.66 NP；学生 MixFormerV2 73.21 / 77.90 / 84.27；TDSC-KD 73.78 / 78.39 / 84.74；DFM-KD 74.03 / 78.85 / 85.25。DFM-KD 相较 vanilla student 提升 NP +0.98，相较 TDSC-KD 提升 NP +0.51。</li><li>STARK 对比（TABLE II，FLOPs 仅计 Transformer 部分）：教师 68.63 / 72.91 / 79.95；Student-baseline 64.20 / 62.77 / 72.07；Conventional KD 65.94 / 67.98 / 74.59；DFM-KD 68.76 / 72.17 / 78.65。DFM-KD 显著缩小师生差距并在 AUC 上超过教师，且未增加参数或 FLOPs。</li><li>STARK 消融（TABLE III）：Baseline 64.20 / 62.77 / 72.07；Feat-only 65.94 / 67.98 / 74.59；DFM-only 67.81 / 70.70 / 77.75；DFM-KD（combined）68.76 / 72.17 / 78.65。DFM-only 提升大于 Feat-only，两者结合在三个指标上均最佳。</li><li>定性结果：在 bicycle、bus、truck 等序列上，DFM-KD 相比学生基线在遮挡、视角变化和干扰物条件下给出更稳定、更紧致的定位；基线在遮挡增加时框逐渐缩小并最终跟踪失败，而 DFM-KD 保持准确定位。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.06121/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Radar2Plan: Benchmarking 4D Radar for End-to-End Open-Loop Ego-Trajectory Planning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.05604/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Building A Multi-Sensor Platform For Autonomous Driving Research: Challenges and Lessons Learned</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

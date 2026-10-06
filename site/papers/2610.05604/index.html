@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Building A Multi-Sensor Platform For Autonomous Driving Research: Challenges and Lessons Learned - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。 应用场景为需要便携、可灵活部署、可跨城市采集数据的自动驾驶与多传感器导航研究，尤其关注 GNSS 受限环境。 研究问题在于：现有多传感器自动驾驶数据集众多，但关于平台搭建过程中的机械设计、传感器标定、时间同步、供电、系统架构等最佳实践与挑战缺少公开记录。 论文目标是为后续希望自建多传感器采集平台的研究者提供参考，以提升可复现性与鲁棒性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.05604">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.05604.webp" alt="Building A Multi-Sensor Platform For Autonomous Driving Research: Challenges and Lessons Learned" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Building A Multi-Sensor Platform For Autonomous Driving Research: Challenges and Lessons Learned</h1>
+            <div class="detail-meta">2026-10-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.05604" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.05604" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.05604</span></div>
+            <p class="detail-summary">论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。 应用场景为需要便携、可灵活部署、可跨城市采集数据的自动驾驶与多传感器导航研究，尤其关注 GNSS 受限环境。 研究问题在于：现有多传感器自动驾驶数据集众多，但关于平台搭建过程中的机械设计、传感器标定、时间同步、供电、系统架构等最佳实践与挑战缺少公开记录。 论文目标是为后续希望自建多传感器采集平台的研究者提供参考，以提升可复现性与鲁棒性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Queen’s University, Kingston, ON, Canada · Paulo Ricardo Marques de Araujo、…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.05604/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。</li><li>应用场景为需要便携、可灵活部署、可跨城市采集数据的自动驾驶与多传感器导航研究，尤其关注 GNSS 受限环境。</li><li>研究问题在于：现有多传感器自动驾驶数据集众多，但关于平台搭建过程中的机械设计、传感器标定、时间同步、供电、系统架构等最佳实践与挑战缺少公开记录。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Queen’s University, Kingston, ON, Canada；作者：Paulo Ricardo Marques de Araujo, Qamar Bader, Emma Dawson</li><li>机构：Ain Shams University, Cairo, Egypt；作者：Eslam Mounier</li><li>机构：Royal Military College of Canada, Kingston, ON, Canada；作者：Aboelmagd Noureldin</li><li>机构：Eslam Mounier 同时署名 Queen’s University 与 Ain Shams University；作者：Eslam Mounier</li><li>机构：Aboelmagd Noureldin 同时署名 Queen’s University 与 Royal Military College of Canada；作者：Aboelmagd Noureldin</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。</li><li>应用场景为需要便携、可灵活部署、可跨城市采集数据的自动驾驶与多传感器导航研究，尤其关注 GNSS 受限环境。</li><li>研究问题在于：现有多传感器自动驾驶数据集众多，但关于平台搭建过程中的机械设计、传感器标定、时间同步、供电、系统架构等最佳实践与挑战缺少公开记录。</li><li>论文目标是为后续希望自建多传感器采集平台的研究者提供参考，以提升可复现性与鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>系统报告了 NavINST 多传感器平台从 2021 到 2024 年的迭代演进过程，包括传感器配置、计算架构与部署方式的变化。</li><li>总结了平台开发中的关键挑战，涵盖机械设计、标定、参考系统、系统架构、供电与数据采集流程管理。</li><li>提出多项可操作的 mitigation strategies，例如使用 GNSS 时间与 NTP 协议实现系统级时间同步、针对不同传感器配置开发定制标定流程、使用数字孪生辅助机械设计。</li><li>报告了电磁干扰对 GNSS 参考系统的影响及应对经验，例如避免 USB 3.0、使用屏蔽与铁氧体磁珠、增大 GNSS 天线与干扰设备距离。</li><li>强调数据采集日志、元数据与检查清单对数据完整性和后续复现的重要性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于自动驾驶多传感器数据采集平台建设与工程实践经验报告，不是感知算法或端到端自动驾驶模型论文。</li><li>输入传感器：包括 stereo cameras、monocular camera、mechanical LiDAR、solid-state LiDAR、radar、IMU、GNSS receiver、odometer 等；具体型号随年份迭代而变化。</li><li>场景表示：平台用于采集多传感器自动驾驶与导航数据，文中提及面向城市环境、GNSS-challenged environments、高楼密集区域等场景；未报告统一的数据表示方法。</li><li>模型结构：原文未报告感知模型结构；系统架构包括多台计算机、统一 Ethernet 网络、NVIDIA Orin 平台、compact high-performance computers。</li><li>关键技术：使用 aluminum frames 与数字孪生进行机械设计；使用 open-source toolbox、MATLAB toolboxes、Vicon tracking system 与 custom calibration algorithm 进行标定；使用 ROS 作为软件中间件；使用 Chrony 与 GPSd 实现系统级时间同步；使用 GNSS timing 与 NTP 协议。</li><li>时间同步：一台计算机作为 time master，通过 GPSd 连接专用 GNSS receiver 获取精确时间，Chrony 将其对齐到 GNSS 时间并配置为本地 NTP server，其他计算机作为 NTP clients；LAN 场景下 NTP 可保持 1 毫秒精度。</li><li>标定：2021 使用粗略测量；2022 使用可计算 mechanical LiDAR、radar 与 stereo camera 外参的开源工具箱，但存在不确定性传播问题；2023 使用激光测量与 Vicon 系统验证复杂外参，并使用 MATLAB 工具箱完成相机内参与相机-mechanical LiDAR 外参；solid-state LiDAR 使用自定义标定算法。</li><li>若原文未报告某项信息，明确写“原文未报告”：原文未报告统一的模型结构、网络输入输出张量表示或训练算法。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：论文提及 NavINST dataset，并说明该数据集面向 object detection、odometry、3D map construction、indoor positioning 等任务；同时引用 KITTI、Cityscapes、ApolloScape、nuScenes、Boreas、Hong Kong UrbanNav 等作为背景数据集。</li><li>仿真器：原文未报告仿真器。</li><li>模型规模：原文未报告模型规模。</li><li>训练资源：原文未报告训练资源；文中报告的是数据采集与计算平台资源。</li><li>计算与硬件平台：2021 使用 multiple laptops；2022 继续使用 laptops 并建立 unified Ethernet network；2023 使用 main computer 加 NVIDIA Orin；2024 使用 unified Ethernet network、two compact high-performance computers、Power-over-Ethernet cameras、multiple solid-state LiDAR，并保留部分低带宽 USB 2.0 传感器。</li><li>相机与存储：2021 使用三台 StereoLabs ZED 2i；2022 增加两台 ZED 2i，五台相机通过 USB-C 3.1 Gen 1 连接，聚合原始数据率约 25 Gbps，约 3.1 GB/s，平均约 3 GB/s，使用 high-speed NVMe SSDs；2023 过渡到 ZED X，使用 GMSL2 coaxial cables，每链路 6 Gbps，并由 NVIDIA Orin 卸载 stereo depth 与视频编码；2024 使用 Luxonis OAK-D stereo cameras，通过 Ethernet 采集。</li><li>实车平台：2021 与 2022 无固定车辆，传感器与计算机使用便携电池供电；2023 实验室获得 dedicated vehicle，允许改装，在 trunk 中安装连接到车辆 alternator 的 power inverter；平台曾通过飞机运输到加拿大不同城市，并由当地团队按预设说明组装采集数据。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：论文未设置传统算法性能基准；其“评估”主要是平台开发与部署经验总结，以及若干工程现象与数量指标报告。</li><li>评估指标：文中报告的工程指标包括系统重量、数据率、存储速率、GNSS 载噪比下降、NTP 同步精度、基站距离经验规则等；未报告开环或闭环自动驾驶评价指标。</li><li>关键数值：</li></ul>
+<p> - 2022 版本在安装全部设备时总重量约 40 kg。</p>
+<p> - 2022 年五台 ZED 2i 相机聚合原始数据率约 25 Gbps，约 3.1 GB/s，平均约 3 GB/s。</p>
+<p> - USB 3.0 相机与 mechanical LiDAR 造成 GNSS 电磁干扰，受影响信号 C/N0 下降约 10 dB-Hz，从标称 45–50 dB-Hz 降至 35–40 dB-Hz。</p>
+<p> - 干扰主要影响仰角低于 30° 的卫星。</p>
+<p> - LAN 场景下 NTP 可保持 1 毫秒精度。</p>
+<p> - 基站与车辆距离建议最大 10 km。</p>
+<ul><li>对比方法：论文对比了不同年份的平台设计、供电方式、标定方式、计算架构与相机接口方案；未与其他自动驾驶算法进行性能对比。</li><li>开环、闭环、仿真或实车条件：论文内容基于真实车辆与真实城市环境中的实车数据采集和部署经验；未报告开环或闭环自动驾驶算法评估，未报告仿真评估。</li><li>评估结论：作者认为数字孪生、定制标定、GNSS 时间与 NTP 同步、合理供电与日志管理等措施有助于提升多传感器平台在真实驾驶条件下的可扩展性、鲁棒性与数据完整性。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.05707/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Difference Feature Map Distillation: Transferring Inter-Sample Relational Knowledge Towards Efficient Transformer-Based Tracking</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.04883/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Reflection-Robust 6DoF Object Tracking with Light Fields</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

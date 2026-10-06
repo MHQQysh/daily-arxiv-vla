@@ -1,5 +1,411 @@
 [
   {
+    "date": "2026-10-05",
+    "title": "Analysis of SWIR Imaging Detection Performance Under Adverse Environmental Conditions for Autonomous Driving Systems",
+    "link": "https://arxiv.org/abs/2610.06596",
+    "arxiv_id": "2610.06596",
+    "detail_path": "papers/2610.06596/",
+    "cover_path": "covers/2610.06596/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.06596.webp",
+    "paper_image_full_path": "assets/paper-images/2610.06596.webp",
+    "preview_text": "任务：在自动驾驶感知场景下，对配对 RGB 与 SWIR（短波红外）图像进行目标检测性能的系统对比分析。 应用场景：自动驾驶车辆在晴天、多云、雨天、雪天四类天气条件下的道路目标检测。 研究问题：SWIR 相对 RGB 在实际自动驾驶场景中是否以及何时具有检测优势，并识别 SWIR 真正带来收益的安全关键场景，而非仅依赖聚合指标。",
+    "research_unit": "Université Clermont Auvergne, Clermont Auvergne INP, CNRS, Institut Pascal…",
+    "hook_text": "任务：在自动驾驶感知场景下，对配对 RGB 与 SWIR（短波红外）图像进行目标检测性能的系统对比分析。",
+    "key_points": [
+      "任务：在自动驾驶感知场景下，对配对 RGB 与 SWIR（短波红外）图像进行目标检测性能的系统对比分析。",
+      "应用场景：自动驾驶车辆在晴天、多云、雨天、雪天四类天气条件下的道路目标检测。",
+      "研究问题：SWIR 相对 RGB 在实际自动驾驶场景中是否以及何时具有检测优势，并识别 SWIR 真正带来收益的安全关键场景，而非仅依赖聚合指标。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Preference-Adaptive Control in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.06539",
+    "arxiv_id": "2610.06539",
+    "detail_path": "papers/2610.06539/",
+    "cover_path": "covers/2610.06539/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.06539.webp",
+    "paper_image_full_path": "assets/paper-images/2610.06539.webp",
+    "preview_text": "论文研究自动驾驶车辆中面向乘客偏好的控制问题，关注乘客在速度、加速度舒适性和晕动症之间的差异化权衡。 应用场景为承载一名乘客的自动驾驶车辆在多车道高速公路上与周围车辆共存的闭环行驶过程。 核心研究问题是：如何在有限时域优化控制中纳入个体化、历史依赖的晕动症预测，并根据乘客反馈自适应学习偏好权重，同时维持碰撞风险处理。",
+    "research_unit": "Cornell University（Systems Engineering Program, Ithaca, NY 14853 USA） · Zho…",
+    "hook_text": "论文研究自动驾驶车辆中面向乘客偏好的控制问题，关注乘客在速度、加速度舒适性和晕动症之间的差异化权衡。",
+    "key_points": [
+      "论文研究自动驾驶车辆中面向乘客偏好的控制问题，关注乘客在速度、加速度舒适性和晕动症之间的差异化权衡。",
+      "应用场景为承载一名乘客的自动驾驶车辆在多车道高速公路上与周围车辆共存的闭环行驶过程。",
+      "核心研究问题是：如何在有限时域优化控制中纳入个体化、历史依赖的晕动症预测，并根据乘客反馈自适应学习偏好权重，同时维持碰撞风险处理。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Odyssey: A Closed-Loop Benchmark for Long-Horizon Real-World Driving with Explicit Navigation Routes",
+    "link": "https://arxiv.org/abs/2610.06469",
+    "arxiv_id": "2610.06469",
+    "detail_path": "papers/2610.06469/",
+    "cover_path": "covers/2610.06469/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.06469.webp",
+    "paper_image_full_path": "assets/paper-images/2610.06469.webp",
+    "preview_text": "任务：面向端到端（E2E）自动驾驶规划器的闭环评估，尤其是长时域真实世界驾驶中的导航能力评估。 应用场景：基于 nuPlan 真实驾驶日志重建的 3D 场景中进行闭环仿真，评估规划器沿显式标准定义（SD）地图路线完成连续导航的能力。 研究问题：现有闭环基准评估时域短（通常约 20 秒），无法反映早期决策对后续驾驶的影响；高层方向性指令（如“右转”）存在歧义；长时域渲染在新视角下出现伪影；交通信号与行人运动建模不足。",
+    "research_unit": "Seoul National University, Republic of Korea · Jungho Kim、Hongjae Shin、Seun…",
+    "hook_text": "任务：面向端到端（E2E）自动驾驶规划器的闭环评估，尤其是长时域真实世界驾驶中的导航能力评估。",
+    "key_points": [
+      "任务：面向端到端（E2E）自动驾驶规划器的闭环评估，尤其是长时域真实世界驾驶中的导航能力评估。",
+      "应用场景：基于 nuPlan 真实驾驶日志重建的 3D 场景中进行闭环仿真，评估规划器沿显式标准定义（SD）地图路线完成连续导航的能力。",
+      "研究问题：现有闭环基准评估时域短（通常约 20 秒），无法反映早期决策对后续驾驶的影响；高层方向性指令（如“右转”）存在歧义；长时域渲染在新视角下出现伪影；交通信号与行人运动建模不足。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Generative World Models Enable Predictive Control of Laser Melt Pool Dynamics",
+    "link": "https://arxiv.org/abs/2610.06250",
+    "arxiv_id": "2610.06250",
+    "detail_path": "papers/2610.06250/",
+    "cover_path": "covers/2610.06250/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.06250.webp",
+    "paper_image_full_path": "assets/paper-images/2610.06250.webp",
+    "preview_text": "论文解决的是局部高动态激光熔池（laser melt pool）的预测与闭环控制问题，聚焦激光粉末床熔融（LPBF）等基于熔化的制造过程。 应用场景是在激光扫描过程中在线调节激光功率与扫描速度，使熔池深度在悬垂（overhang）等支撑厚度变化区域维持目标值，从而抑制未熔合、过度熔化或穿透等缺陷。 研究问题是：在只有部分观测（温度与相指示场，缺少速度场与压力场）的条件下，能否学习一个动作条件生成式世界模型，稳定地进行递归三维 rollout，并提供可用于预测控制的可微梯度，且其选出的控制策略在高保真 CFD 重新仿真中仍然有效。",
+    "research_unit": "ETH Zürich, Advanced Manufacturing Lab · Yiyang Yan、Markus Bambach、Mohamadr…",
+    "hook_text": "论文解决的是局部高动态激光熔池（laser melt pool）的预测与闭环控制问题，聚焦激光粉末床熔融（LPBF）等基于熔化的制造过程。",
+    "key_points": [
+      "论文解决的是局部高动态激光熔池（laser melt pool）的预测与闭环控制问题，聚焦激光粉末床熔融（LPBF）等基于熔化的制造过程。",
+      "应用场景是在激光扫描过程中在线调节激光功率与扫描速度，使熔池深度在悬垂（overhang）等支撑厚度变化区域维持目标值，从而抑制未熔合、过度熔化或穿透等缺陷。",
+      "研究问题是：在只有部分观测（温度与相指示场，缺少速度场与压力场）的条件下，能否学习一个动作条件生成式世界模型，稳定地进行递归三维 rollout，并提供可用于预测控制的可微梯度，且其选出的控制策略在高保真 CFD 重新仿真中仍然有效。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "AUTOPILOT An Advanced Perception, Localization and Path Planning Techniques for Autonomous Vehicles Using YOLOv7 and MiDaS",
+    "link": "https://arxiv.org/abs/2610.06232",
+    "arxiv_id": "2610.06232",
+    "detail_path": "papers/2610.06232/",
+    "cover_path": "covers/2610.06232/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.06232.webp",
+    "paper_image_full_path": "assets/paper-images/2610.06232.webp",
+    "preview_text": "任务：面向自动驾驶车辆，结合 YOLO（You Only Look Once）目标检测与 MiDaS 深度感知，实现障碍物的感知与定位，并配合透视变换与决策进行路径规划。 应用场景：自动驾驶（self driving cars）的感知、定位、决策与控制环节。 研究问题：如何将目标检测与深度估计组合成一个鲁棒的障碍物检测与深度感知系统，并用于路径规划决策。",
+    "research_unit": "原文未报告 · Harshkumar Devmurari、Gautham Kuckian、Prajjwal Vishwakarma（原文摘要页仅列出作…",
+    "hook_text": "任务：面向自动驾驶车辆，结合 YOLO（You Only Look Once）目标检测与 MiDaS 深度感知，实现障碍物的感知与定位，并配合透视变换与决策进行路径规划。",
+    "key_points": [
+      "任务：面向自动驾驶车辆，结合 YOLO（You Only Look Once）目标检测与 MiDaS 深度感知，实现障碍物的感知与定位，并配合透视变换与决策进行路径规划。",
+      "应用场景：自动驾驶（self driving cars）的感知、定位、决策与控制环节。",
+      "研究问题：如何将目标检测与深度估计组合成一个鲁棒的障碍物检测与深度感知系统，并用于路径规划决策。"
+    ],
+    "reading_minutes": 4,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Controllable and Photorealistic Pedestrian Risky Motion Generation for End-to-End Driving Safety Evaluation",
+    "link": "https://arxiv.org/abs/2610.06171",
+    "arxiv_id": "2610.06171",
+    "detail_path": "papers/2610.06171/",
+    "cover_path": "covers/2610.06171/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.06171.webp",
+    "paper_image_full_path": "assets/paper-images/2610.06171.webp",
+    "preview_text": "论文面向端到端自动驾驶安全评估任务，重点研究带行人的安全关键车辆-行人交互场景生成问题。 应用场景为在真实驾驶日志中罕见的车辆-行人高危交互，需要生成传感器级、照片级真实且行为可控的测试场景。 研究问题：轨迹级场景生成方法无法合成原始视觉观测，而视频级方法缺乏行为可控性，因此需要同时实现宏观冲突轨迹控制、微观行人动作控制与照片级多视角渲染。",
+    "research_unit": "Tsinghua University · Siyuan Liu、Qing Zhou、Bingbing Nie",
+    "hook_text": "论文面向端到端自动驾驶安全评估任务，重点研究带行人的安全关键车辆-行人交互场景生成问题。",
+    "key_points": [
+      "论文面向端到端自动驾驶安全评估任务，重点研究带行人的安全关键车辆-行人交互场景生成问题。",
+      "应用场景为在真实驾驶日志中罕见的车辆-行人高危交互，需要生成传感器级、照片级真实且行为可控的测试场景。",
+      "研究问题：轨迹级场景生成方法无法合成原始视觉观测，而视频级方法缺乏行为可控性，因此需要同时实现宏观冲突轨迹控制、微观行人动作控制与照片级多视角渲染。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Radar2Plan: Benchmarking 4D Radar for End-to-End Open-Loop Ego-Trajectory Planning",
+    "link": "https://arxiv.org/abs/2610.06121",
+    "arxiv_id": "2610.06121",
+    "detail_path": "papers/2610.06121/",
+    "cover_path": "covers/2610.06121/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.06121.webp",
+    "paper_image_full_path": "assets/paper-images/2610.06121.webp",
+    "preview_text": "论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。 应用场景包括乘用车城市/郊区驾驶与大卡车高速/支线/终端道路驾驶，尤其关注恶劣天气与不良光照条件。 研究问题包括：4D 雷达单独作为环境感知模态时能否生成有竞争力的自车轨迹；在恶劣条件下基于雷达的规划是否优于相机或 LiDAR；将 4D 雷达与相机、LiDAR 或相机-LiDAR 组合时是否能改善规划。 论文指出已有 4D 雷达基准主要关注感知任务，而未系统评估其对轨迹规划的价值。",
+    "research_unit": "HKUST(GZ) · 原文未明确对应",
+    "hook_text": "论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。",
+    "key_points": [
+      "论文面向自动驾驶中的开环自车轨迹规划任务，研究真实世界 4D 雷达感知鲁棒性能否转化为下游规划性能。",
+      "应用场景包括乘用车城市/郊区驾驶与大卡车高速/支线/终端道路驾驶，尤其关注恶劣天气与不良光照条件。",
+      "研究问题包括：4D 雷达单独作为环境感知模态时能否生成有竞争力的自车轨迹；在恶劣条件下基于雷达的规划是否优于相机或 LiDAR；将 4D 雷达与相机、LiDAR 或相机-LiDAR 组合时是否能改善规划。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Difference Feature Map Distillation: Transferring Inter-Sample Relational Knowledge Towards Efficient Transformer-Based Tracking",
+    "link": "https://arxiv.org/abs/2610.05707",
+    "arxiv_id": "2610.05707",
+    "detail_path": "papers/2610.05707/",
+    "cover_path": "covers/2610.05707/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.05707.webp",
+    "paper_image_full_path": "assets/paper-images/2610.05707.webp",
+    "preview_text": "论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。 应用场景强调车载跟踪模块需在严格的计算、散热和时延预算下运行，同时保持复杂动态环境中的鲁棒性。 研究问题：Transformer 跟踪器精度高但计算与内存开销大，难以部署在实时、资源受限平台；现有跟踪知识蒸馏方法主要为实例级（instance-wise），只让学生逐样本模仿教师的绝对特征图，忽略了教师特征空间中跨样本的批内拓扑（inter-sample relational knowledge）。 论文提出 Difference Feature Map Knowledge Distillation（DFM-KD，差异特征图蒸馏），通过迁移样本间特征差异来对齐教师与学生的关系结构。",
+    "research_unit": "Bowling Green State University, Department of Computer Science, OH 43402, U…",
+    "hook_text": "论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。",
+    "key_points": [
+      "论文面向自动驾驶感知中的视觉目标跟踪（Visual Object Tracking, VOT）任务，用于对行人、自行车、车辆等周围交通参与者进行连续定位，支撑交互预测、换道规划、碰撞避免、跟车控制等安全关键功能。",
+      "应用场景强调车载跟踪模块需在严格的计算、散热和时延预算下运行，同时保持复杂动态环境中的鲁棒性。",
+      "研究问题：Transformer 跟踪器精度高但计算与内存开销大，难以部署在实时、资源受限平台；现有跟踪知识蒸馏方法主要为实例级（instance-wise），只让学生逐样本模仿教师的绝对特征图，忽略了教师特征空间中跨样本的批内拓扑（inter-sample relational knowledge）。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-04",
+    "title": "Building A Multi-Sensor Platform For Autonomous Driving Research: Challenges and Lessons Learned",
+    "link": "https://arxiv.org/abs/2610.05604",
+    "arxiv_id": "2610.05604",
+    "detail_path": "papers/2610.05604/",
+    "cover_path": "covers/2610.05604/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.05604.webp",
+    "paper_image_full_path": "assets/paper-images/2610.05604.webp",
+    "preview_text": "论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。 应用场景为需要便携、可灵活部署、可跨城市采集数据的自动驾驶与多传感器导航研究，尤其关注 GNSS 受限环境。 研究问题在于：现有多传感器自动驾驶数据集众多，但关于平台搭建过程中的机械设计、传感器标定、时间同步、供电、系统架构等最佳实践与挑战缺少公开记录。 论文目标是为后续希望自建多传感器采集平台的研究者提供参考，以提升可复现性与鲁棒性。",
+    "research_unit": "Queen’s University, Kingston, ON, Canada · Paulo Ricardo Marques de Araujo、…",
+    "hook_text": "论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。",
+    "key_points": [
+      "论文面向自动驾驶研究中的多传感器数据采集平台建设任务，报告 NavINST 实验平台在开发与部署过程中的挑战与经验教训。",
+      "应用场景为需要便携、可灵活部署、可跨城市采集数据的自动驾驶与多传感器导航研究，尤其关注 GNSS 受限环境。",
+      "研究问题在于：现有多传感器自动驾驶数据集众多，但关于平台搭建过程中的机械设计、传感器标定、时间同步、供电、系统架构等最佳实践与挑战缺少公开记录。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-04",
+    "title": "Reflection-Robust 6DoF Object Tracking with Light Fields",
+    "link": "https://arxiv.org/abs/2610.04883",
+    "arxiv_id": "2610.04883",
+    "detail_path": "papers/2610.04883/",
+    "cover_path": "covers/2610.04883/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.04883.webp",
+    "paper_image_full_path": "assets/paper-images/2610.04883.webp",
+    "preview_text": "论文研究的是运动刚体目标的六自由度（6DoF）位姿跟踪任务，属于机器人学与自动驾驶中的基础问题。 应用场景针对具有反光表面的物体：现有跟踪器假设物体外观在序列中稳定，但反射表面会随镜像环境变化而改变外观，导致该假设失效。 核心研究问题是：在反射表面导致外观与位姿、几何、材质、光照耦合、深度估计受退化的情况下，如何利用视角相关的反射信息作为位姿线索，实现反射鲁棒的在线 6DoF 目标跟踪。 论文将反射从“干扰”转化为“位姿线索”，通过光场逐帧重建并重光照物体，使跟踪问题转化为对齐正确光照下的模型。",
+    "research_unit": "Australian Centre for Robotics, School of Aerospace, Mechanical and Mechatr…",
+    "hook_text": "论文研究的是运动刚体目标的六自由度（6DoF）位姿跟踪任务，属于机器人学与自动驾驶中的基础问题。",
+    "key_points": [
+      "论文研究的是运动刚体目标的六自由度（6DoF）位姿跟踪任务，属于机器人学与自动驾驶中的基础问题。",
+      "应用场景针对具有反光表面的物体：现有跟踪器假设物体外观在序列中稳定，但反射表面会随镜像环境变化而改变外观，导致该假设失效。",
+      "核心研究问题是：在反射表面导致外观与位姿、几何、材质、光照耦合、深度估计受退化的情况下，如何利用视角相关的反射信息作为位姿线索，实现反射鲁棒的在线 6DoF 目标跟踪。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-03",
+    "title": "SelectOccFlow: Selective Spatiotemporal Aggregation for 3D Occupancy and Scene Flow Prediction",
+    "link": "https://arxiv.org/abs/2610.04356",
+    "arxiv_id": "2610.04356",
+    "detail_path": "papers/2610.04356/",
+    "cover_path": "covers/2610.04356/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.04356.webp",
+    "paper_image_full_path": "assets/paper-images/2610.04356.webp",
+    "preview_text": "论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。 应用场景为动态交通环境下的环视相机感知，强调相似占用状态可能对应不同场景流，从而影响自车路径交互与风险评估。 研究问题在于：相机式占用与场景流预测对不可靠的空间与时间聚合敏感，具体来源于语义不兼容的图像特征、未对齐的历史观测以及不完整的体素结构。 论文提出选择性时空聚合框架 SelectOccFlow，在图像、时间、体素三个域中逐步筛选与精炼上下文证据。",
+    "research_unit": "湖南大学人工智能与机器人学院、机器人视觉感知与控制技术国家工程研究中心（School of Artificial Intelligence and R…",
+    "hook_text": "论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。",
+    "key_points": [
+      "论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。",
+      "应用场景为动态交通环境下的环视相机感知，强调相似占用状态可能对应不同场景流，从而影响自车路径交互与风险评估。",
+      "研究问题在于：相机式占用与场景流预测对不可靠的空间与时间聚合敏感，具体来源于语义不兼容的图像特征、未对齐的历史观测以及不完整的体素结构。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-03",
+    "title": "Autoware in Construction: Gap Analysis and LiDAR Perception Toward Off-Road Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.04187",
+    "arxiv_id": "2610.04187",
+    "detail_path": "papers/2610.04187/",
+    "cover_path": "covers/2610.04187/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.04187.webp",
+    "paper_image_full_path": "assets/paper-images/2610.04187.webp",
+    "preview_text": "论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。 应用场景为建筑工地的越野自动驾驶，包括运输道路行驶、装载与卸载区作业、与挖掘机和推土机等重型机械协同。 研究问题在于：建筑工地与公共道路在传感、地图、定位、感知、规划、控制与车辆接口等模块上的假设存在根本差异，现有 Autoware 主要为公共道路设计，难以直接迁移。 论文通过模块级差距分析、LiDAR 感知流水线现场开发经验以及面向端到端自动驾驶的路线图，讨论如何将 Autoware 扩展到建筑越野场景。",
+    "research_unit": "加州大学欧文分校（University of California, Irvine，UCI）土木与环境工程系 · Yu Otsuki",
+    "hook_text": "论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。",
+    "key_points": [
+      "论文面向自动驾驶软件栈 Autoware 在建筑工地等越野环境中的扩展应用，任务背景是将 Autoware 集成到大型建筑自卸卡车上。",
+      "应用场景为建筑工地的越野自动驾驶，包括运输道路行驶、装载与卸载区作业、与挖掘机和推土机等重型机械协同。",
+      "研究问题在于：建筑工地与公共道路在传感、地图、定位、感知、规划、控制与车辆接口等模块上的假设存在根本差异，现有 Autoware 主要为公共道路设计，难以直接迁移。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-02",
+    "title": "Towards Safer Autonomous Driving in an Open World: A Dual-Process Approach",
+    "link": "https://arxiv.org/abs/2610.04088",
+    "arxiv_id": "2610.04088",
+    "detail_path": "papers/2610.04088/",
+    "cover_path": "covers/2610.04088/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.04088.webp",
+    "paper_image_full_path": "assets/paper-images/2610.04088.webp",
+    "preview_text": "面向自动驾驶规划任务，提出在开放世界中提升安全性的双过程（Dual-Process）框架，将神经网络规划器与基于模型预测控制（MPC）的规划器相结合。 应用场景为常规驾驶中由神经网络生成类人轨迹，而在分布外（out-of-distribution）或高风险场景中切换到基于推理的 MPC 规划器，以保证安全、遵守交通规则与社会规范。 研究问题在于：仅依赖数据训练的神经网络在未充分出现的新颖场景中泛化能力不足，可能产生过度自信或错误预测，因此需要一种能够判断何时不可靠并进行干预的机制。",
+    "research_unit": "Netherlands Organisation for Applied Scientific Research, Integrated Vehicl…",
+    "hook_text": "面向自动驾驶规划任务，提出在开放世界中提升安全性的双过程（Dual-Process）框架，将神经网络规划器与基于模型预测控制（MPC）的规划器相结合。",
+    "key_points": [
+      "面向自动驾驶规划任务，提出在开放世界中提升安全性的双过程（Dual-Process）框架，将神经网络规划器与基于模型预测控制（MPC）的规划器相结合。",
+      "应用场景为常规驾驶中由神经网络生成类人轨迹，而在分布外（out-of-distribution）或高风险场景中切换到基于推理的 MPC 规划器，以保证安全、遵守交通规则与社会规范。",
+      "研究问题在于：仅依赖数据训练的神经网络在未充分出现的新颖场景中泛化能力不足，可能产生过度自信或错误预测，因此需要一种能够判断何时不可靠并进行干预的机制。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-02",
+    "title": "Retrieval-Augmented Large Language Model Decision-Making for Autonomous Driving Guided by Chinese Philosophical Wisdom",
+    "link": "https://arxiv.org/abs/2610.03948",
+    "arxiv_id": "2610.03948",
+    "detail_path": "papers/2610.03948/",
+    "cover_path": "covers/2610.03948/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.03948.webp",
+    "paper_image_full_path": "assets/paper-images/2610.03948.webp",
+    "preview_text": "任务：面向自动驾驶的闭环决策，在复杂交通交互中由 LLM 生成驾驶动作。 应用场景：Highway-env 仿真器中的多车道高速公路驾驶任务（highway-v0）。 研究问题：现有基于数值优化、序列预测和 LLM 的自动驾驶决策方法对哲学与伦理价值关注有限；文献尚未确立如何将基于文化的哲学原则表示为可复用、场景级的驾驶示例，从而限制了抽象价值原则在具体交通交互中的系统化应用。 解决思路：提出 CPW-Drive，一个闭环检索增强生成（RAG）框架，将源自中国哲学（以儒家思想为知识源）的价值引导融入自动驾驶决策。",
+    "research_unit": "Key Laboratory of Ethnic Language Intelligent Analysis and Security Governa…",
+    "hook_text": "任务：面向自动驾驶的闭环决策，在复杂交通交互中由 LLM 生成驾驶动作。",
+    "key_points": [
+      "任务：面向自动驾驶的闭环决策，在复杂交通交互中由 LLM 生成驾驶动作。",
+      "应用场景：Highway-env 仿真器中的多车道高速公路驾驶任务（highway-v0）。",
+      "研究问题：现有基于数值优化、序列预测和 LLM 的自动驾驶决策方法对哲学与伦理价值关注有限；文献尚未确立如何将基于文化的哲学原则表示为可复用、场景级的驾驶示例，从而限制了抽象价值原则在具体交通交互中的系统化应用。"
+    ],
+    "reading_minutes": 15,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
     "date": "2026-10-02",
     "title": "TerrainForge: Physics-Grounded road geometry Editing for Counterfactual Autonomous Driving",
     "link": "https://arxiv.org/abs/2610.02825",

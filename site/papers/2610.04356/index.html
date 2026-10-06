@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SelectOccFlow: Selective Spatiotemporal Aggregation for 3D Occupancy and Scene Flow Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。 应用场景为动态交通环境下的环视相机感知，强调相似占用状态可能对应不同场景流，从而影响自车路径交互与风险评估。 研究问题在于：相机式占用与场景流预测对不可靠的空间与时间聚合敏感，具体来源于语义不兼容的图像特征、未对齐的历史观测以及不完整的体素结构。 论文提出选择性时空聚合框架 SelectOccFlow，在图像、时间、体素三个域中逐步筛选与精炼上下文证据。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.04356">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.04356.webp" alt="SelectOccFlow: Selective Spatiotemporal Aggregation for 3D Occupancy and Scene Flow Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SelectOccFlow: Selective Spatiotemporal Aggregation for 3D Occupancy and Scene Flow Prediction</h1>
+            <div class="detail-meta">2026-10-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.04356" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.04356" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.04356</span></div>
+            <p class="detail-summary">论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。 应用场景为动态交通环境下的环视相机感知，强调相似占用状态可能对应不同场景流，从而影响自车路径交互与风险评估。 研究问题在于：相机式占用与场景流预测对不可靠的空间与时间聚合敏感，具体来源于语义不兼容的图像特征、未对齐的历史观测以及不完整的体素结构。 论文提出选择性时空聚合框架 SelectOccFlow，在图像、时间、体素三个域中逐步筛选与精炼上下文证据。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">湖南大学人工智能与机器人学院、机器人视觉感知与控制技术国家工程研究中心（School of Artificial Intelligence and R…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.04356/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。</li><li>应用场景为动态交通环境下的环视相机感知，强调相似占用状态可能对应不同场景流，从而影响自车路径交互与风险评估。</li><li>研究问题在于：相机式占用与场景流预测对不可靠的空间与时间聚合敏感，具体来源于语义不兼容的图像特征、未对齐的历史观测以及不完整的体素结构。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：湖南大学人工智能与机器人学院、机器人视觉感知与控制技术国家工程研究中心（School of Artificial Intelligence and Robotics and the National Engineering Research Center of Robot Visual Perception and Control Technology, Hunan University, China）；作者：Yuhang Wang、Kai Luo、Yuanfan Zheng、Kailun Yang。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中基于多视角图像的 3D 语义占用预测与场景流预测任务，目标是同时建模场景的几何、语义和运动信息。</li><li>应用场景为动态交通环境下的环视相机感知，强调相似占用状态可能对应不同场景流，从而影响自车路径交互与风险评估。</li><li>研究问题在于：相机式占用与场景流预测对不可靠的空间与时间聚合敏感，具体来源于语义不兼容的图像特征、未对齐的历史观测以及不完整的体素结构。</li><li>论文提出选择性时空聚合框架 SelectOccFlow，在图像、时间、体素三个域中逐步筛选与精炼上下文证据。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SelectOccFlow，一个基于空间兼容性与时间可靠性选择证据的选择性时空聚合框架，用于 3D 占用与场景流预测。</li><li>设计 Semantic-Guided Sampling（SGS），在图像特征提升到体素空间前，用语义先验调控图像空间采样位置与响应权重。</li><li>提出 State-Conditioned Temporal Aggregation（SCTA），根据体素状态选择历史证据，使用状态特定的时间范围与空间采样策略。</li><li>提出 Extent-Aware Spatial Aggregation（ESA），利用方向性结构支撑细化前景几何与体素表示。</li><li>在 OpenOcc、Occ3D-nus 和 nuScenes-C 上验证方法有效性，报告 OpenOcc 上 OccScore 达到 44.9，nuScenes-C 六类腐蚀下平均 OccScore 提升 11.1%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：属于相机式 3D 占用与场景流预测的 lift-and-refine 流水线，基于 OA Transformer 构建多尺度体素表示。</li><li>输入传感器：多视角图像输入，输入为 N_I 张图像 I ∈ R^(N_I×H×W×3)；原文未报告使用 LiDAR 作为在线输入传感器。</li><li>场景表示：以占用网格 O_c ∈ R^(X×Y×Z) 表示体素语义，以场景流网格 O_f ∈ R^(X×Y×Z×2) 表示平面运动。</li><li>模型结构：SGS 先细化多视角图像特征，再通过视图变换提升到体素空间，并由 OA Transformer 编码为尺度 s ∈ {1/8, 1/4, 1/2} 的多尺度体素特征 {F_t^s}。</li><li>SGS 关键技术：使用冻结的 YOLO26 语义分割模型生成语义图 M_n，语义图与 RGB 图像经历相同几何变换；轻量语义编码器产生引导特征 G_n；采样预测器输出 K=9 个偏移和调制权重，偏移限制在 H′×W′ 特征图的 ±2 单元内；通过双线性采样聚合响应，采样值仅来自 RGB 特征 F_n^I。</li><li>SCTA 关键技术：每个尺度维护 FIFO 历史队列 H_t^s，存储 detach 后的融合体素特征与占用线索；通过递归组合的自车运动变换将当前体素转到历史帧，并用三线性插值采样。</li><li>SCTA 状态划分：根据非空概率、可移动类概率与预测置信度，将候选划分为运动敏感集合 Ω_M^s、稳定集合 Ω_S^s 和自由主导集合 Ω_F^s；运动敏感集合使用尺度相关偏移候选并进行帧内 softmax 聚合，稳定集合使用完整自车对齐历史与帧级可靠性权重，自由主导集合使用较短窗口的点采样。</li><li>ESA 关键技术：沿六个方向 D={x+, x−, y+, y−, z+, z−} 定义方向范围 d_r(v)，通过三线性采样六个支撑特征，并用方向注意力权重 α_r(v) 聚合，最终经输出投影得到 refined 体素特征。</li><li>损失函数：训练由深度损失、占用损失、方向范围损失和场景流损失组成；辅助占用损失应用于多尺度体素表示；范围损失对可移动体素与静态占用体素分别计算平均误差并加权组合。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：OpenOcc 用于 3D 语义占用与场景流联合训练和评估；Occ3D-nus 用于补充 3D 语义占用评估；nuScenes-C 用于视觉腐蚀鲁棒性评估，包含六类合成腐蚀、三级严重程度。</li><li>仿真器：原文未报告。</li><li>模型规模：主实验使用 ResNet-50 骨干、输入尺寸 256×704；对比表中还涉及 ResNet-101、Swin-Base、ConvNeXt-Base、Intern-T 等其他方法配置。</li><li>训练资源：原文未报告 GPU 类型、数量、训练时长等训练资源信息。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：OpenOcc、Occ3D-nus、nuScenes-C；评估条件为开环数据集评测，包括标准验证集与腐蚀鲁棒性评测；原文未报告闭环或实车评估。</li><li>评估指标：RayIoU（1m、2m、4m 及平均值）、mIoU、mAVE、OccScore；OccScore = 0.9 × RayIoU + 0.1 × max(1 − mAVE, 0)。</li><li>OpenOcc 主要结果：SelectOccFlow 取得 OccScore 44.9，较之前最佳提升 +4.2%；RayIoU 43.1%，mAVE 0.394。</li><li>OpenOcc 对比方法：包括 OccNeRF-L、RenderOcc、LetOccFlow-L、CascadeFlow、F-Occ、FB-Occ、VoxelSplat、STCOcc、ALOcc-2D、ALOcc 等。</li><li>Occ3D-nus 结果：SelectOccFlow 使用 R50、256×704 输入，在无 camera-visible mask 训练条件下 RayIoU_1 为 37.8%，RayIoU_2 为 44.2%，RayIoU_4 为 47.9%，平均 RayIoU 为 43.3%；表注显示与 ALOcc、ALOcc-2D、STCOcc、COTR、SparseOcc、FB-Occ、BEVDet-Occ、RenderOcc、BEVFormer 等方法比较。</li><li>Occ3D-nus mIoU：表格中出现该方法行，但截断文本未能完整给出其 mIoU 数值与完整对比结论。</li><li>nuScenes-C 鲁棒性：在六类腐蚀下，OpenOcc 上的平均 OccScore 提升 +11.1%。</li><li>消融与定性分析：原文目录显示包含 Ablation Studies 与 Qualitative Analysis，但截断内容未提供具体消融数值与定性结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.04883/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Reflection-Robust 6DoF Object Tracking with Light Fields</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.04187/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Autoware in Construction: Gap Analysis and LiDAR Perception Toward Off-Road Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
