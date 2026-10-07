@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grounding What Shapes the Plan: Rethinking Groundedness for Physical Intelligence in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。 研究问题：正确 grounded reasoning 不会自动带来理想的驾驶结果，即存在从 grounding 到 plan 的 transfer gap；论文以 PAI-AV 安全性样本上的碰撞率来衡量这一差距。 论文提出 GroundAct，核心思想是以物理实体及其交互作为 grounding 单元，通过 reference token 保持连续实体状态可寻址，并让被引用实体与演化中提案的交互选择性修正规划。 应用场景包括正常、分布外、安全关键的开环规划，以及 AlpaSim 闭环仿真驾驶。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.07521">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.07521.webp" alt="Grounding What Shapes the Plan: Rethinking Groundedness for Physical Intelligence in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Grounding What Shapes the Plan: Rethinking Groundedness for Physical Intelligence in Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.07521" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.07521" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.07521</span></div>
+            <p class="detail-summary">论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。 研究问题：正确 grounded reasoning 不会自动带来理想的驾驶结果，即存在从 grounding 到 plan 的 transfer gap；论文以 PAI-AV 安全性样本上的碰撞率来衡量这一差距。 论文提出 GroundAct，核心思想是以物理实体及其交互作为 grounding 单元，通过 reference token 保持连续实体状态可寻址，并让被引用实体与演化中提案的交互选择性修正规划。 应用场景包括正常、分布外、安全关键的开环规划，以及 AlpaSim 闭环仿真驾驶。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">15 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Michigan · Minkyoung Cho、Zewei Zhou、Wenhao Ding 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.07521/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。</p>
+  <ul class="reading-intro-points"><li>论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。</li><li>研究问题：正确 grounded reasoning 不会自动带来理想的驾驶结果，即存在从 grounding 到 plan 的 transfer gap；论文以 PAI-AV 安全性样本上的碰撞率来衡量这一差距。</li><li>论文提出 GroundAct，核心思想是以物理实体及其交互作为 grounding 单元，通过 reference token 保持连续实体状态可寻址，并让被引用实体与演化中提案的交互选择性修正规划。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Michigan；作者：Minkyoung Cho、Zewei Zhou、Wenhao Ding、Shuhan Tan、Boyi Li、Yuxiao Chen、Yan Wang、Zheng Lian、Min-Hung Chen、Chaowei Xiao、Boris Ivanovic、Marco Pavone、Yulong Cao</li><li>机构：UCLA；作者：Minkyoung Cho</li><li>机构：NVIDIA；作者：Zewei Zhou</li><li>机构：Johns Hopkins University；作者：Chaowei Xiao</li><li>机构：University of Southern California；作者：Z. Morley Mao</li><li>机构：Stanford University；作者：Marco Pavone</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。</li><li>研究问题：正确 grounded reasoning 不会自动带来理想的驾驶结果，即存在从 grounding 到 plan 的 transfer gap；论文以 PAI-AV 安全性样本上的碰撞率来衡量这一差距。</li><li>论文提出 GroundAct，核心思想是以物理实体及其交互作为 grounding 单元，通过 reference token 保持连续实体状态可寻址，并让被引用实体与演化中提案的交互选择性修正规划。</li><li>应用场景包括正常、分布外、安全关键的开环规划，以及 AlpaSim 闭环仿真驾驶。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 grounded planning，建立从推理中所 grounding 的实体到动作后果之间显式且可追踪的路径。</li><li>提出 Token-as-Reference，用轻量符号引用让连续实体状态保持在模型中，同时由推理选择规划关键实体。</li><li>提出 interaction-driven selective correction，使用被引用实体与演化 ego 提案之间的预测交互指导选择性精修。</li><li>在 PAI-AV 的开环 Normal、OOD、Safety-Critical 基准以及 AlpaSim 闭环驾驶基准上评估 GroundAct。</li><li>通过受控消融测试 reasoning-selected physical states 是否对规划有实质影响，并分析 GroundAct 是否能在修正不安全规划的同时保留已安全规划。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：GroundAct 覆盖连续多模态编码、离散自回归推理和迭代连续动作生成，包含 Physical AI reasoner 与 action expert。</li><li>输入传感器：原文报告使用 temporal observations and driving context O；prefill-time grounding 中学习式 query 聚合 temporal visual features；实现中预测 clearance 时使用 four observed frames；原文未报告更细粒度传感器类型、分辨率或完整传感器配置。</li><li>场景表示：以物理实体为 grounding 单元；向多模态 prefill 追加 K=64 个 entity tokens q_1,...,q_K，每个 token 的 Transformer 输出 M_i 作为可在模型中按索引寻址的连续实体状态。</li><li>Reference-based reasoning：离散 reference e_i = &lt;\|entity i\|&gt; 绑定到连续 prefill 状态 M_i；解码时通过 gate π_t 和 entity pointer 分配概率质量，pointer softmax 在存在非空候选时排除 detector-null slots；解析 reference 时读取原始 prefill 状态 M_i，并通过输入嵌入 u_{t+1} 供下一步解码使用。</li><li>Reference-driven planning：action expert 是 flow-matching trajectory generator，保留完整场景上下文；只有 reasoning sequence r 中被引用的实体集合 R(r) 的状态 M_R 进入显式 physical prediction 和 interaction modeling。</li><li>交互与修正：对每个被引用实体预测运动 \hat{S}_i^{(k)}，并计算 proposal-relative interaction C_i^{(k)} = Interact(\hat{P}^{(k)}, \hat{S}_i^{(k)})；集合编码器聚合 M_i、\hat{S}_i^{(k)}、C_i^{(k)}，residual adapter R_φ 在 gate γ^{(k)} 下修正 base field；当没有有效实体被引用或 gate 不活跃时，该通路被 bypass，恢复 base field。</li><li>训练目标：entity states 使用类别/null 预测、BEV box 回归和语言建模损失；physical references 使用 masked token prediction、matched-entity association 和 reference timing gate 损失；selective correction 使用 forecast 或 proposal-relative clearance 监督、field/raw/off/reg 残差损失，并与冻结的 base action expert 配合。</li><li>原文未报告：更具体的网络层数、视觉骨干结构、推理文本模板、完整超参数设置在提供文本中未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：PAI-AV Normal 开环基准，n=4K；PAI-AV OOD 开环基准，n=290；PAI-AV* Safety-Critical 基准，n=512；Safety-Critical 样本用于衡量 grounding-to-plan transfer gap。</li><li>仿真器/闭环基准：AlpaSim closed-loop driving benchmark。</li><li>模型规模：GroundAct 为 3.9B 参数；对比模型包括 2.1B、0.6B、3.8B、10B、34B 等规模的 driving foundation models。</li><li>训练资源：原文报告计算设置见 Appendix D，但提供的 HTML 文本未展开具体 GPU 类型、数量和训练时长，原文未报告可提取的完整训练资源细节。</li><li>实车平台：原文未报告实车平台；评估为 PAI-AV 开环基准与 AlpaSim 闭环仿真。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：PAI-AV Normal、PAI-AV OOD、PAI-AV* Safety-Critical 开环规划，以及 AlpaSim 闭环驾驶。</li><li>评估指标：开环包括 ADE 2.5s/5.0s/6.4s、Collision 2.5s/5.0s、Corner Dist. 2.5s/5.0s/6.4s；安全关键表还包括 Off-road 2.5s/5.0s/6.4s；闭环指标原文未在提供文本中列出具体数值。</li><li>PAI-AV Normal 关键结果：GroundAct 为 ADE 0.266、1.204、2.091，Collision 2.149、5.967，Corner Dist. 2.138；表中显示其在 Normal 多项 ADE 上为最佳。</li><li>PAI-AV OOD 关键结果：GroundAct 为 ADE 0.371、1.545、2.540，Collision 2.185、11.923，Corner Dist. 2.592；表中显示其在 OOD 多项 ADE 上为最佳。</li><li>PAI-AV* Safety-Critical 关键结果：GroundAct 为 ADE 0.325、1.332、2.210，Collision 2.474、6.873，Corner Dist. 2.278；Off-road 结果在提供文本中未完整展开。</li><li>对比方法：Token-as-Content 方法包括 FSDrive、Alpamayo-R1、AutoVLA、LCDrive、Alpamayo 1.5、SpanVLA、Alpamayo 2 Super；Token-as-Reference 方法为 GroundAct。</li><li>对比结论：论文摘要称 GroundAct 具有强开环规划表现，覆盖正常、OOD 和安全关键场景，并与 34B state-of-the-art driving foundation model 竞争、在若干指标上优于它；闭环结果将证据扩展到仿真驾驶。</li><li>评估条件：包括开环、闭环、仿真；论文提到 Safety-Critical 数据集和 closed-loop driving evaluation，但提供文本未展示完整闭环数值结果。</li><li>消融与分析：包括 grounding connection、current entity associations、reference dependence and selection、selective correction and preservation、grounding reasoning through entity references，以及 reasoning alignment with predicted/GT behaviors 和 object detection/referencing。</li><li>开环样本选择、baseline 配置、计算设置、reference-objective metrics、open-loop metrics、closed-loop metrics 等在附录中列出，但提供文本未展开具体细节。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.07783/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">From Laboratory to Road: Evaluating Wearable Gaze Accuracy for Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.07381/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">GeoWM: Efficient Direct World Modeling in Explicit Geometry</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

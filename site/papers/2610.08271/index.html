@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reinforcement Learning with Segment Reward Feedback under Linear Function Approximation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。 解决的问题是：经典 RL 假设每个访问到的状态-动作对都能立即观察到奖励，但在自动驾驶等真实应用中，细粒度奖励代价高、难收集，而轨迹级反馈又过于稀疏，因此需要介于两者之间的分段反馈模型。 应用场景包括自动驾驶中按安全性、舒适性、效率等多准则评估每个状态-动作对较困难，以及机器人操作中更易判断任务是否成功而非给每个动作可靠奖励。 研究问题包括：分段反馈的粒度（segment granularity）和分段选择（choice of segmentation）如何影响学习性能；分段级奖励信息能否在线性 MDP 中被高效利用；按状态-动作特征选择分段是否能可证明地带来收益。 论文采用 episodic linear MDP 框架，考虑 binary feedback 与 sum feedback 两种反馈类型，并覆盖已知转移与未知转移设置，以及 equal-length 与 variable segment 设置。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.08271">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.08271.webp" alt="Reinforcement Learning with Segment Reward Feedback under Linear Function Approximation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Reinforcement Learning with Segment Reward Feedback under Linear Function Approximation</h1>
+            <div class="detail-meta">2026-10-06 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.08271" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.08271" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.08271</span></div>
+            <p class="detail-summary">论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。 解决的问题是：经典 RL 假设每个访问到的状态-动作对都能立即观察到奖励，但在自动驾驶等真实应用中，细粒度奖励代价高、难收集，而轨迹级反馈又过于稀疏，因此需要介于两者之间的分段反馈模型。 应用场景包括自动驾驶中按安全性、舒适性、效率等多准则评估每个状态-动作对较困难，以及机器人操作中更易判断任务是否成功而非给每个动作可靠奖励。 研究问题包括：分段反馈的粒度（segment granularity）和分段选择（choice of segmentation）如何影响学习性能；分段级奖励信息能否在线性 MDP 中被高效利用；按状态-动作特征选择分段是否能可证明地带来收益。 论文采用 episodic linear MDP 框架，考虑 binary feedback 与 sum feedback 两种反馈类型，并覆盖已知转移与未知转移设置，以及 equal-length 与 variable segment 设置。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">17 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">National University of Singapore · Fengxu Liu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.08271/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。</p>
+  <ul class="reading-intro-points"><li>论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。</li><li>解决的问题是：经典 RL 假设每个访问到的状态-动作对都能立即观察到奖励，但在自动驾驶等真实应用中，细粒度奖励代价高、难收集，而轨迹级反馈又过于稀疏，因此需要介于两者之间的分段反馈模型。</li><li>应用场景包括自动驾驶中按安全性、舒适性、效率等多准则评估每个状态-动作对较困难，以及机器人操作中更易判断任务是否成功而非给每个动作可靠奖励。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：National University of Singapore；作者：Fengxu Liu</li><li>机构：Microsoft Research Asia；作者：Siwei Wang</li><li>机构：NVIDIA Research；作者：Gal Dalal</li><li>机构：NVIDIA Research；作者：Shie Mannor</li><li>机构：Technion；作者：Shie Mannor</li><li>机构：ESD, Singapore University of Technology and Design；作者：Yihan Du</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。</li><li>解决的问题是：经典 RL 假设每个访问到的状态-动作对都能立即观察到奖励，但在自动驾驶等真实应用中，细粒度奖励代价高、难收集，而轨迹级反馈又过于稀疏，因此需要介于两者之间的分段反馈模型。</li><li>应用场景包括自动驾驶中按安全性、舒适性、效率等多准则评估每个状态-动作对较困难，以及机器人操作中更易判断任务是否成功而非给每个动作可靠奖励。</li><li>研究问题包括：分段反馈的粒度（segment granularity）和分段选择（choice of segmentation）如何影响学习性能；分段级奖励信息能否在线性 MDP 中被高效利用；按状态-动作特征选择分段是否能可证明地带来收益。</li><li>论文采用 episodic linear MDP 框架，考虑 binary feedback 与 sum feedback 两种反馈类型，并覆盖已知转移与未知转移设置，以及 equal-length 与 variable segment 设置。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>研究线性函数近似下的分段奖励反馈 RL，提供一种统一反馈范式，将逐状态-动作反馈与轨迹级反馈作为两个极端，覆盖 binary 与 sum 反馈以及已知/未知转移。</li><li>对 equal-length segments 且已知转移的情况，提出 binary feedback 算法 <code>SegBiTS-d</code> 和 sum feedback 算法 <code>E-LinUCB-d</code>；<code>SegBiTS-d</code> 使用 posterior sampling with planning，<code>E-LinUCB-d</code> 使用 E-optimal experimental design，前者 regret 含 <code>exp(Hr_max/(2m))</code> 依赖，后者在忽略对数因子时 regret 不依赖 <code>m</code>。</li><li>为已知转移下 binary 与 sum segment feedback 建立 dimension-dependent regret lower bounds；binary 下通过 Bernoulli KL-divergence 分析表明 <code>H/m</code> 的指数依赖不可避免，sum 下验证上界近最优且 <code>m</code> 不影响 regret（至对数因子）。</li><li>对 equal-length segments 且未知转移的情况，提出统一 <code>Seg-LSVI-TS</code> 框架，并给出 binary 与 sum feedback 的计算与样本高效实例；该框架将奖励参数 posterior sampling 与 optimistic least-squares value iteration 结合，解决段级奖励不确定性与状态-动作级值迭代不匹配的问题。</li><li>研究 variable and binary segment feedback with known transitions，提出允许任意分段（包括自适应、episode 相关分段）的算法 <code>Uneq-SegBiTS-d</code>；其 regret bound 表明在常用 elliptical potential 分析下，状态-动作特征影响仅进入对数因子，feature-dependent segmentation 不会显著提升学习，equal segmentation 达到最佳性能。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文属于强化学习算法与理论分析工作，提出面向线性 MDP 的分段奖励反馈学习算法，并给出 regret 上界与下界；原文未报告其属于自动驾驶系统中的具体感知、规划或控制模块。</li><li>输入传感器：原文未报告具体传感器输入；论文使用抽象的 MDP 状态、动作、特征映射 <code>ψ(s,a)</code> 与奖励反馈，不报告相机、激光雷达等传感器配置。</li><li>场景表示：采用 episodic linear MDP <code>M=(S,A,H,r,P,ρ)</code>；状态空间可为可测或大/连续空间，动作空间有限，episode horizon 为 <code>H</code>，初始状态分布为 <code>ρ</code>；奖励函数与转移核通过已知 <code>d</code> 维特征映射 <code>ψ(s,a)</code> 线性表示，即 <code>r(s,a)=&lt;ψ(s,a), θ*&gt;</code>，<code>P_h(·\|s,a)=&lt;ψ(s,a), μ_h*(·)&gt;</code>；奖励参数 <code>θ*</code> 未知，转移 <code>P</code> 在已知转移设置中已知，在未知转移设置中需学习。</li><li>反馈模型：episode 被划分为若干 segment，agent 只观察每个 segment 的奖励反馈；equal-length 设置将 episode 分为 <code>m</code> 个长度为 <code>H/m</code> 的等长 segment；binary feedback 中每个 segment 观察 Bernoulli 结果，其参数为 segment 累积奖励的 sigmoid；sum feedback 中观察 segment 累积随机奖励的和，包含零均值、1-sub-Gaussian 噪声；variable binary feedback 中 segment 数量和划分可由算法在观察到轨迹后自适应决定。</li><li>模型结构：线性函数近似；聚合特征定义为 <code>φ^τ = Σ_{(s,a)∈τ} ψ(s,a)</code>；策略为 <code>π={π_h}</code>，学习目标是使累计 regret <code>R(K)=Σ_{k=1}^K E[V_1^*(s_1^k)-V_1^{π^k}(s_1^k)]</code> 最小。</li><li>关键技术：对 binary feedback 的已知转移设置，<code>SegBiTS-d</code> 使用正则化 logistic regression 估计奖励参数，构造 segment covariance matrix，采样高斯噪声并形成 posterior estimated reward parameter，再利用线性 MDP planning 求解策略；对 sum feedback 的已知转移设置，<code>E-LinUCB-d</code> 使用 E-optimal experimental design 改善 covariance matrix conditioning；对未知转移设置，<code>Seg-LSVI-TS</code> 将 posterior estimated reward parameters 融入 least-squares value iteration；对 variable binary feedback，<code>Uneq-SegBiTS-d</code> 允许任意分段并考虑每个 segment 的 sigmoid curvature。</li><li>原文未报告：神经网络结构、模型层数、参数量、训练超参数、感知输入编码方式、具体线性 MDP planning 实现细节等均未在给定 HTML 中报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告使用任何公开数据集；论文为理论 RL 与 regret 分析工作。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：原文未报告模型参数量、网络规模或计算图规模；主要复杂度以特征维度 <code>d</code>、horizon <code>H</code>、segment 数 <code>m</code>、episode 数 <code>K</code>、正则化参数 <code>λ</code> 等理论量表示。</li><li>训练资源：原文未报告 GPU、CPU、集群、训练时长、能耗等资源信息。</li><li>实车平台：原文未报告实车平台；自动驾驶仅作为动机和应用场景被提及，未报告实车实验。</li><li>其他资源：论文报告了理论分析中的参数，如 <code>δ</code>、<code>δ&#x27;=δ/3</code>、<code>λ</code>、<code>α</code>、<code>ν(K)</code>、<code>ν_U(K)</code> 等，但这些属于算法与理论资源，不是计算训练资源。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：论文主要评估理论 regret 性能，评估设置为 episodic linear MDP 下的分段奖励反馈；包括 equal-length segments 与 variable segments，binary 与 sum feedback，known 与 unknown transitions。</li><li>评估指标：累计 regret <code>R(K)</code>、regret upper bounds、dimension-dependent regret lower bounds、对 <code>K</code>、<code>d</code>、<code>H</code>、<code>m</code>、<code>r_max</code>、<code>λ</code>、<code>α</code> 等变量的依赖关系。</li><li>已知转移、equal-length、binary feedback：算法 <code>SegBiTS-d</code> 的 regret upper bound 为 <code>Õ(exp(Hr_max/(2m)) ν(K) d sqrt(Km max{H^2/(mαλ),1}))</code>；对应 lower bound 为 <code>Ω(exp(Hr_max/(2m)) d sqrt(Km))</code>，表明 binary feedback 下增加 segment 数 <code>m</code> 会通过指数因子显著降低 regret，且该指数依赖不可避免。</li><li>已知转移、equal-length、sum feedback：算法 <code>E-LinUCB-d</code> 的 regret upper bound 为 <code>Õ(d sqrt(HK))</code>；对应 lower bound 为 <code>Ω(d sqrt(HK))</code>，表明 sum feedback 下 segment 粒度 <code>m</code> 基本不影响 regret（至对数因子），上界近最优。</li><li>未知转移、equal-length、binary feedback：<code>Seg-LSVI-TS</code> 实例的 regret upper bound 为 <code>Õ(exp(Hr_max/(2m)) ν(K) d sqrt(Km max{H^2/(mαλ),1}) + d^2 H^2 sqrt(K)(ν(K)/sqrt(λ)+r_max))</code>；结果保持与已知转移相同的核心洞察：binary feedback 下增加 <code>m</code> 显著降低 regret。</li><li>未知转移、equal-length、sum feedback：<code>Seg-LSVI-TS</code> 实例的 regret upper bound 为 <code>Õ(d^{5/2} H^2 sqrt(K)(r_max+1/sqrt(λ)) + d(1+r_max sqrt(λ)) sqrt(KHd max{H/λ,1}))</code>；结果保持相同洞察：sum feedback 下增加 <code>m</code> 不会显著改善学习。</li><li>variable and binary segment feedback with known transitions：算法 <code>Uneq-SegBiTS-d</code> 的 regret upper bound 为 `Õ(ν_U(K) d sqrt(Σ_{k=1}^K max{Σ_{i=1</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.08297/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Mitigating Concept Drift in QoS Prediction for Teleoperation of Autonomous Vehicles Using Historic Data</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.08123/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Beyond Waypoint Regression: Query-Based Cost Learning over Reachable Ego Futures for End-to-End Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>From Laboratory to Road: Evaluating Wearable Gaze Accuracy for Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。 任务为在真实道路驾驶中测量驾驶员注视方向与参考目标之间的角误差，并用同驾驶员、同设备的受控室内实验解释这些误差来源，为基于 BEV 的不确定性感知注视监督提供依据。 应用场景涵盖自动驾驶中利用驾驶员注视作为行为信号（如驾驶预测、模仿学习、目标相关性估计）时的空间监督可靠性评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.07783">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.07783.webp" alt="From Laboratory to Road: Evaluating Wearable Gaze Accuracy for Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">From Laboratory to Road: Evaluating Wearable Gaze Accuracy for Driving</h1>
+            <div class="detail-meta">2026-10-06 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.07783" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.07783" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.07783</span></div>
+            <p class="detail-summary">论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。 任务为在真实道路驾驶中测量驾驶员注视方向与参考目标之间的角误差，并用同驾驶员、同设备的受控室内实验解释这些误差来源，为基于 BEV 的不确定性感知注视监督提供依据。 应用场景涵盖自动驾驶中利用驾驶员注视作为行为信号（如驾驶预测、模仿学习、目标相关性估计）时的空间监督可靠性评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Intelligent Vehicles Lab, Hochschule München, Germany · William Engel、Fabia…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.07783/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。</li><li>任务为在真实道路驾驶中测量驾驶员注视方向与参考目标之间的角误差，并用同驾驶员、同设备的受控室内实验解释这些误差来源，为基于 BEV 的不确定性感知注视监督提供依据。</li><li>应用场景涵盖自动驾驶中利用驾驶员注视作为行为信号（如驾驶预测、模仿学习、目标相关性估计）时的空间监督可靠性评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Intelligent Vehicles Lab, Hochschule München, Germany；作者：William Engel、Fabian Flohr</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。</li><li>任务为在真实道路驾驶中测量驾驶员注视方向与参考目标之间的角误差，并用同驾驶员、同设备的受控室内实验解释这些误差来源，为基于 BEV 的不确定性感知注视监督提供依据。</li><li>应用场景涵盖自动驾驶中利用驾驶员注视作为行为信号（如驾驶预测、模仿学习、目标相关性估计）时的空间监督可靠性评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出据作者所知首个在真实驾驶条件下量化可穿戴注视精度的统一框架，结合道路测量与五个受控室内协议。</li><li>构建包含 41 个经验证场景的道路研究，驾驶员明确注视选定车辆车牌，以车牌中心作为几何定位的参考注视点。</li><li>通过同一驾驶员与设备的室内实验系统分析距离、光照、头部运动、目标运动和注视偏心率对系统偏差与注视精度的影响。</li><li>报告原始道路平均误差为 4.58°，应用室内估计的偏移后降至 1.10°，并改善全部 41 个场景。</li><li>指出该偏移在会话间存在变化，可靠的 BEV 监督可能需要在线重校准和随条件变化的注视不确定性估计。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：属于自动驾驶感知/行为监督中的注视数据处理与误差评估模块，连接驾驶员行为信号与 BEV 空间监督。</li><li>输入传感器：可穿戴眼动仪（glasses）、场景相机（scene camera），并使用同步的场景相机音频进行语音声明检测；原文未报告具体设备型号与传感器规格。</li><li>场景表示：以场景相机坐标下的注视射线与目标射线进行角度比较；目标为选定车辆的车牌中心，车牌中心作为精确注视点参考。</li><li>模型结构与关键技术：使用基于关键词的语音检测器定位驾驶员的语音声明；使用基于 YOLO 的检测器提供车辆候选，人工选择并跟踪声明目标；使用第二个检测器定位车牌；将注视样本与目标检测同步，使用相机内参去畸变并转换为单位射线；角度注视误差定义为朝向被注视车牌中心的射线与眼镜报告注视射线之间的夹角；用带符号的方位角与俯仰角误差衡量系统偏差，用注视内变化衡量精度；室内五个协议分别针对光照、运动与振动、追踪滞后、偏心注视和深度歧义；偏移估计取校准场景各注视目标到注视角误差在方位角与俯仰角上的中位数，迁移时将某场景偏移不加改变地加到另一场景注视上并排除自配对，道路结果使用六个静态场景偏移的中位数。</li><li>真实驾驶注视误差测量流程：驾驶员主动注视目标车辆车牌并口头声明目标车辆，所有检测与注视均经人工复核，得到 41 个经验证场景。</li><li>受控室内因子分析：同一驾驶员与眼动仪；光照协议通过棋盘格角点注视时的亮度扫描；运动与振动协议通过头部旋转和平台振动时的圆形网格，其质心对模糊和卷帘快门畸变稳健；追踪滞后协议通过 ArUco 板上以预定速度移动的十字准线；偏心注视协议覆盖棋盘格角点；深度歧义协议通过 2–12 m 处保持恒定角尺寸的缩放棋盘格，静态 2 m 条件作为基线。</li><li>视野与内饰分割：分析 30 分钟自然驾驶以定义受控目标注视范围；163 帧场景相机中 32% 显示外部道路内容，68% 被车辆内饰遮挡；约 80% 注视落在方位角 −20° 至 +20°、俯仰角 0° 至 +20°，据此确定棋盘格的方位/俯仰与 FOV 覆盖。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：自建真实道路驾驶数据集，包含 41 个经验证场景；室内数据集包含 405 个目标注视和 3 段追踪记录；另分析 30 分钟自然驾驶和 163 帧场景相机帧用于视野与内饰分割。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告具体车辆平台信息，仅说明为真实驾驶条件；眼动设备为可穿戴眼动仪，原文未报告型号与详细规格。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：单驾驶员试点，包含 41 个经验证的道路场景；室内测试覆盖光照、头部运动、追踪、偏心率和深度；室内数据含 405 个目标注视和 3 段追踪记录。</li><li>评估指标：注视误差角度、带符号方位角与俯仰角误差、注视内精度（中位数与均值）、误差离散度。</li><li>关键数值：系统基线中静态 2 m 棋盘格条件重复三次，驾驶员每次重复注视 15 个角点，平均精度为 4.08°，目标相对精度中位数 0.31°、均值 0.37°；偏差校正中系统性佩戴相关偏移主导原始误差，校准场景间迁移在所有组合中均有改善（100% 正向迁移，平均改善约 3°）；将偏移应用于道路场景后平均误差从 4.58° 降至 1.10°（改善 76%），并改善每个场景；偏心率方面，按与场景相机中心角距离分组为三分位，中位方位角偏差从中心区域约 0.22° 增至外围区域 0.74°；距离与速度方面，2–12 m 扫描中平均误差为 4.78–5.26°，追踪中位数为 4.03–4.31°，二者均无单调趋势；光照方面，亮度变化使离散度增加约 40–50%；头部运动方面，相机相对离散度出现最大表观增加，达到 10°，但该结果不能量化追踪器误差，因为补偿性眼动和可能的滑动未被分离。</li><li>对比方法：文中提及 Jia 等人使用检测到的交通标志校正注视漂移 [9]，但其以概率方式推断意图目标；本文则用驾驶员明确声明且几何定位的目标验证可穿戴注视输出。</li><li>开环、闭环、仿真或实车条件：评估为真实道路实车条件下的开环注视误差测量，并辅以受控室内实验；论文未报告闭环评估或仿真评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.08043/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Vector Map Quality Metrics for Contextual Autonomous Driving Systems</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.07521/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Grounding What Shapes the Plan: Rethinking Groundedness for Physical Intelligence in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

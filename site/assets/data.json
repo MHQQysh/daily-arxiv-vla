@@ -1,5 +1,353 @@
 [
   {
+    "date": "2026-10-06",
+    "title": "Sparse2comm: Towards Robust Cooperative 3D Object Detection",
+    "link": "https://arxiv.org/abs/2610.08573",
+    "arxiv_id": "2610.08573",
+    "detail_path": "papers/2610.08573/",
+    "cover_path": "covers/2610.08573/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08573.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08573.webp",
+    "preview_text": "论文面向自动驾驶中的协同 3D 目标检测任务，利用车辆与路侧基础设施等协作智能体之间的互补观测来提升自车感知能力。 应用场景覆盖车-基础设施（vehicle–infrastructure）与车-车（vehicle–vehicle）协同感知，包括仿真与真实世界 V2V/V2X 场景。 研究问题是在有限带宽与不可靠协同条件下，如何处理丢包（packet loss）、传输延迟（transmission delay）和空间失配（spatial misalignment）耦合造成的协同特征退化。 论文将不可靠协同建模为对退化协同特征的渐进式恢复问题，目标是在最终检测前恢复语义完整性、时间一致性与空间对齐。",
+    "research_unit": "Nanyang Technological University（南洋理工大学） · Lei Yang、Chen Lv",
+    "hook_text": "论文面向自动驾驶中的协同 3D 目标检测任务，利用车辆与路侧基础设施等协作智能体之间的互补观测来提升自车感知能力。",
+    "key_points": [
+      "论文面向自动驾驶中的协同 3D 目标检测任务，利用车辆与路侧基础设施等协作智能体之间的互补观测来提升自车感知能力。",
+      "应用场景覆盖车-基础设施（vehicle–infrastructure）与车-车（vehicle–vehicle）协同感知，包括仿真与真实世界 V2V/V2X 场景。",
+      "研究问题是在有限带宽与不可靠协同条件下，如何处理丢包（packet loss）、传输延迟（transmission delay）和空间失配（spatial misalignment）耦合造成的协同特征退化。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Behavioral Safety Assessment towards Large-scale Deployment of Autonomous Vehicles, Part II: Assessment Results",
+    "link": "https://arxiv.org/abs/2610.08458",
+    "arxiv_id": "2610.08458",
+    "detail_path": "papers/2610.08458/",
+    "cover_path": "covers/2610.08458/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08458.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08458.webp",
+    "preview_text": "该论文是自动驾驶行为安全评估研究的第二部分，目标是验证第一部分提出的第三方行为安全评估框架。 任务是对自动驾驶系统进行系统化行为安全评估，包括基本行为能力和整体驾驶智能评价。 应用场景为城市驾驶运行设计域，包括交叉口、环岛、城市干道、无保护左转、行人交互等，限速约30 mph，白天，晴天或多云天气。 研究问题在于现有NCAP、IIHS及ISO/UL等标准不足以评估L4-L5自动驾驶在复杂交通中的整体驾驶行为，并且现代自动驾驶系统具有非确定性，需要概率化、第三方、黑盒式评估。 论文通过仿真和Mcity实体测试场验证框架的适用性。",
+    "research_unit": "University of Michigan Transportation Research Institute, Ann Arbor, MI 481…",
+    "hook_text": "该论文是自动驾驶行为安全评估研究的第二部分，目标是验证第一部分提出的第三方行为安全评估框架。",
+    "key_points": [
+      "该论文是自动驾驶行为安全评估研究的第二部分，目标是验证第一部分提出的第三方行为安全评估框架。",
+      "任务是对自动驾驶系统进行系统化行为安全评估，包括基本行为能力和整体驾驶智能评价。",
+      "应用场景为城市驾驶运行设计域，包括交叉口、环岛、城市干道、无保护左转、行人交互等，限速约30 mph，白天，晴天或多云天气。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Behavioral Safety Assessment towards Large-scale Deployment of Autonomous Vehicles, Part I: Methodology",
+    "link": "https://arxiv.org/abs/2610.08450",
+    "arxiv_id": "2610.08450",
+    "detail_path": "papers/2610.08450/",
+    "cover_path": "covers/2610.08450/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08450.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08450.webp",
+    "preview_text": "论文面向自动驾驶车辆（AV）大规模部署前的安全评估问题，提出从功能安全（FuSa/SOTIF）转向“行为安全（behavioral safety）”的评估范式。 论文关注 AV 在交通环境中的反应行为（reactive behavior）与交互行为（interactive behavior），而不仅是硬件/软件功能是否可靠。 研究问题是：如何以第三方、黑盒、系统化方式评估 AV 是否会在与交通环境交互时产生或加剧安全风险，并给出统计上有意义的安全指标。 论文定位为 Part I：方法学论文，建立整体框架与方法；Part II 才报告仿真与实车测试结果。 应用场景包括 AV 大规模部署前的行为安全认证、监管与公众信任建立。",
+    "research_unit": "University of Michigan Transportation Research Institute, Ann Arbor, MI 481…",
+    "hook_text": "论文面向自动驾驶车辆（AV）大规模部署前的安全评估问题，提出从功能安全（FuSa/SOTIF）转向“行为安全（behavioral safety）”的评估范式。",
+    "key_points": [
+      "论文面向自动驾驶车辆（AV）大规模部署前的安全评估问题，提出从功能安全（FuSa/SOTIF）转向“行为安全（behavioral safety）”的评估范式。",
+      "论文关注 AV 在交通环境中的反应行为（reactive behavior）与交互行为（interactive behavior），而不仅是硬件/软件功能是否可靠。",
+      "研究问题是：如何以第三方、黑盒、系统化方式评估 AV 是否会在与交通环境交互时产生或加剧安全风险，并给出统计上有意义的安全指标。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Digital Twin-Driven Real2Sim2Real: Simulator-Conditioned Generation via Paired Driving-Scene Reconstruction",
+    "link": "https://arxiv.org/abs/2610.08339",
+    "arxiv_id": "2610.08339",
+    "detail_path": "papers/2610.08339/",
+    "cover_path": "covers/2610.08339/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08339.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08339.webp",
+    "preview_text": "论文面向自动驾驶中基于相机的 3D 感知任务，解决在新目标区域部署 3D 检测系统时，需要重新采集并标注大量区域特定数据的问题。 研究问题在于：现有生成式数据增强方法存在根本性权衡，标签条件生成方法会消耗本应替代的标注，而模拟器条件生成方法虽可获得免费标注，却缺乏对特定真实环境的视觉锚定。 论文提出数字孪生驱动的 Real2Sim2Real 流水线 DT-R2S2R，目标是在数字孪生覆盖区域内，用生成的合成数据替代目标区域真实数据，用于训练 3D 检测器并降低现场采集与标注成本。",
+    "research_unit": "Technical University of Munich · Hojun Lim",
+    "hook_text": "论文面向自动驾驶中基于相机的 3D 感知任务，解决在新目标区域部署 3D 检测系统时，需要重新采集并标注大量区域特定数据的问题。",
+    "key_points": [
+      "论文面向自动驾驶中基于相机的 3D 感知任务，解决在新目标区域部署 3D 检测系统时，需要重新采集并标注大量区域特定数据的问题。",
+      "研究问题在于：现有生成式数据增强方法存在根本性权衡，标签条件生成方法会消耗本应替代的标注，而模拟器条件生成方法虽可获得免费标注，却缺乏对特定真实环境的视觉锚定。",
+      "论文提出数字孪生驱动的 Real2Sim2Real 流水线 DT-R2S2R，目标是在数字孪生覆盖区域内，用生成的合成数据替代目标区域真实数据，用于训练 3D 检测器并降低现场采集与标注成本。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Transferable Spatial Temporal Coherence Adversarial Attack on Black-Box Vision Language Models for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.08331",
+    "arxiv_id": "2610.08331",
+    "detail_path": "papers/2610.08331/",
+    "cover_path": "covers/2610.08331/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08331.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08331.webp",
+    "preview_text": "论文针对自动驾驶场景中视频输入下的视觉语言模型（VLM）安全问题，提出面向黑盒 VLM 的视频对抗攻击任务。 应用场景为自动驾驶视频理解：VLM 对驾驶视频生成场景描述或决策文本，攻击者希望使模型输出与原始视频语义显著偏离的错误描述。 研究问题为：现有 VLM 对抗攻击多集中于静态图像或白盒设定，忽略了视频的时序动态，以及文本指令多样性和视觉视角变化带来的挑战。 论文将攻击形式化为对输入视频施加不易察觉的扰动，使受害 VLM 输出不良响应，并定义时序语义一致性以刻画相邻帧之间的语义关系。",
+    "research_unit": "原文未明确对应 · Heyam M. Bin Jahlan、Areej M. Alhothali、Abeer Alhothali（原文仅列出作者姓名 等",
+    "hook_text": "论文针对自动驾驶场景中视频输入下的视觉语言模型（VLM）安全问题，提出面向黑盒 VLM 的视频对抗攻击任务。",
+    "key_points": [
+      "论文针对自动驾驶场景中视频输入下的视觉语言模型（VLM）安全问题，提出面向黑盒 VLM 的视频对抗攻击任务。",
+      "应用场景为自动驾驶视频理解：VLM 对驾驶视频生成场景描述或决策文本，攻击者希望使模型输出与原始视频语义显著偏离的错误描述。",
+      "研究问题为：现有 VLM 对抗攻击多集中于静态图像或白盒设定，忽略了视频的时序动态，以及文本指令多样性和视觉视角变化带来的挑战。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Mitigating Concept Drift in QoS Prediction for Teleoperation of Autonomous Vehicles Using Historic Data",
+    "link": "https://arxiv.org/abs/2610.08297",
+    "arxiv_id": "2610.08297",
+    "detail_path": "papers/2610.08297/",
+    "cover_path": "covers/2610.08297/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08297.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08297.webp",
+    "preview_text": "面向自动驾驶远程操控（teleoperation）场景，解决移动网络服务质量（QoS）波动导致远程操控可靠性无法保证的问题。 研究任务是基于预测性服务质量（pQoS）概念，预测远程操控中两个关键网络 KPI：上行链路数据率（UL data-rate）和往返时延（round-trip latency）。 研究问题是在模型部署到训练数据未覆盖的新区域时，由 concept drift 引起的机器学习预测模型性能退化，以及如何在无需显式重训练的情况下缓解这种退化。 采用 Over-the-Top（OTT）部署方式，即 pQoS 由第三方（如车辆制造商）作为服务部署在被远程操控的车辆上。",
+    "research_unit": "Technical University of Munich (TUM), Institute of Automotive Technology ·…",
+    "hook_text": "面向自动驾驶远程操控（teleoperation）场景，解决移动网络服务质量（QoS）波动导致远程操控可靠性无法保证的问题。",
+    "key_points": [
+      "面向自动驾驶远程操控（teleoperation）场景，解决移动网络服务质量（QoS）波动导致远程操控可靠性无法保证的问题。",
+      "研究任务是基于预测性服务质量（pQoS）概念，预测远程操控中两个关键网络 KPI：上行链路数据率（UL data-rate）和往返时延（round-trip latency）。",
+      "研究问题是在模型部署到训练数据未覆盖的新区域时，由 concept drift 引起的机器学习预测模型性能退化，以及如何在无需显式重训练的情况下缓解这种退化。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Reinforcement Learning with Segment Reward Feedback under Linear Function Approximation",
+    "link": "https://arxiv.org/abs/2610.08271",
+    "arxiv_id": "2610.08271",
+    "detail_path": "papers/2610.08271/",
+    "cover_path": "covers/2610.08271/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08271.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08271.webp",
+    "preview_text": "论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。 解决的问题是：经典 RL 假设每个访问到的状态-动作对都能立即观察到奖励，但在自动驾驶等真实应用中，细粒度奖励代价高、难收集，而轨迹级反馈又过于稀疏，因此需要介于两者之间的分段反馈模型。 应用场景包括自动驾驶中按安全性、舒适性、效率等多准则评估每个状态-动作对较困难，以及机器人操作中更易判断任务是否成功而非给每个动作可靠奖励。 研究问题包括：分段反馈的粒度（segment granularity）和分段选择（choice of segmentation）如何影响学习性能；分段级奖励信息能否在线性 MDP 中被高效利用；按状态-动作特征选择分段是否能可证明地带来收益。 论文采用 episodic linear MDP 框架，考虑 binary feedback 与 sum feedback 两种反馈类型，并覆盖已知转移与未知转移设置，以及 equal-length 与 variable segment 设置。",
+    "research_unit": "National University of Singapore · Fengxu Liu",
+    "hook_text": "论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。",
+    "key_points": [
+      "论文研究线性函数近似下的分段奖励反馈强化学习（RL with segment reward feedback under linear function approximation）。",
+      "解决的问题是：经典 RL 假设每个访问到的状态-动作对都能立即观察到奖励，但在自动驾驶等真实应用中，细粒度奖励代价高、难收集，而轨迹级反馈又过于稀疏，因此需要介于两者之间的分段反馈模型。",
+      "应用场景包括自动驾驶中按安全性、舒适性、效率等多准则评估每个状态-动作对较困难，以及机器人操作中更易判断任务是否成功而非给每个动作可靠奖励。"
+    ],
+    "reading_minutes": 17,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Beyond Waypoint Regression: Query-Based Cost Learning over Reachable Ego Futures for End-to-End Driving",
+    "link": "https://arxiv.org/abs/2610.08123",
+    "arxiv_id": "2610.08123",
+    "detail_path": "papers/2610.08123/",
+    "cover_path": "covers/2610.08123/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08123.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08123.webp",
+    "preview_text": "论文面向端到端自动驾驶的运动规划任务，目标是在多视角图像、自车状态与高层导航指令输入下输出未来自车轨迹。 论文指出基于航点回归的端到端规划器虽然开环精度高，但主要模仿专家几何轨迹，难以显式区分安全行为与导致碰撞的困难负样本，也不易适配部署时的安全约束。 论文研究问题是如何在保留代价地图可解释、可优化、可外部修复优势的同时，避免在密集 BEV 栅格或大量不可达区域上进行代价监督，并缩小与回归式规划器在开环精度上的差距。",
+    "research_unit": "FZI Research Center for Information Technology · Ahmed Abouelazm、Rupert Pol…",
+    "hook_text": "论文面向端到端自动驾驶的运动规划任务，目标是在多视角图像、自车状态与高层导航指令输入下输出未来自车轨迹。",
+    "key_points": [
+      "论文面向端到端自动驾驶的运动规划任务，目标是在多视角图像、自车状态与高层导航指令输入下输出未来自车轨迹。",
+      "论文指出基于航点回归的端到端规划器虽然开环精度高，但主要模仿专家几何轨迹，难以显式区分安全行为与导致碰撞的困难负样本，也不易适配部署时的安全约束。",
+      "论文研究问题是如何在保留代价地图可解释、可优化、可外部修复优势的同时，避免在密集 BEV 栅格或大量不可达区域上进行代价监督，并缩小与回归式规划器在开环精度上的差距。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Vector Map Quality Metrics for Contextual Autonomous Driving Systems",
+    "link": "https://arxiv.org/abs/2610.08043",
+    "arxiv_id": "2610.08043",
+    "detail_path": "papers/2610.08043/",
+    "cover_path": "covers/2610.08043/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08043.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08043.webp",
+    "preview_text": "论文面向自动驾驶高精（HD）矢量地图的维护与质量评估任务，关注如何判断地图何时何地需要更新，以及新编译地图是否可部署。 应用场景包括众包数据驱动的地图更新、移动测绘系统（MMS）地图维护，以及依赖地图的自动驾驶/ADAS 功能。 研究问题在于：现有 Precision、Recall、F1-score、MSE/RMSE 等指标无法在单一框架内同时刻画几何定位误差、缺失检测（FN）与虚假特征（FP），缺少统一且可解释的矢量地图质量度量。 论文提出一种新的地图质量指标 GOSPA_M，用于衡量待评估地图与参考地图之间的位置误差、存在性与完整性差异。",
+    "research_unit": "Université de Technologie de Compiègne · Marie-Ngoïe Badibanga Kalenda、Phil…",
+    "hook_text": "论文面向自动驾驶高精（HD）矢量地图的维护与质量评估任务，关注如何判断地图何时何地需要更新，以及新编译地图是否可部署。",
+    "key_points": [
+      "论文面向自动驾驶高精（HD）矢量地图的维护与质量评估任务，关注如何判断地图何时何地需要更新，以及新编译地图是否可部署。",
+      "应用场景包括众包数据驱动的地图更新、移动测绘系统（MMS）地图维护，以及依赖地图的自动驾驶/ADAS 功能。",
+      "研究问题在于：现有 Precision、Recall、F1-score、MSE/RMSE 等指标无法在单一框架内同时刻画几何定位误差、缺失检测（FN）与虚假特征（FP），缺少统一且可解释的矢量地图质量度量。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "title": "From Laboratory to Road: Evaluating Wearable Gaze Accuracy for Driving",
+    "link": "https://arxiv.org/abs/2610.07783",
+    "arxiv_id": "2610.07783",
+    "detail_path": "papers/2610.07783/",
+    "cover_path": "covers/2610.07783/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.07783.webp",
+    "paper_image_full_path": "assets/paper-images/2610.07783.webp",
+    "preview_text": "论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。 任务为在真实道路驾驶中测量驾驶员注视方向与参考目标之间的角误差，并用同驾驶员、同设备的受控室内实验解释这些误差来源，为基于 BEV 的不确定性感知注视监督提供依据。 应用场景涵盖自动驾驶中利用驾驶员注视作为行为信号（如驾驶预测、模仿学习、目标相关性估计）时的空间监督可靠性评估。",
+    "research_unit": "Intelligent Vehicles Lab, Hochschule München, Germany · William Engel、Fabia…",
+    "hook_text": "论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。",
+    "key_points": [
+      "论文面向自动驾驶中 BEV（鸟瞰图）感知与规划接口的行为相关性缺口，研究如何量化可穿戴眼动仪在真实驾驶条件下的注视精度。",
+      "任务为在真实道路驾驶中测量驾驶员注视方向与参考目标之间的角误差，并用同驾驶员、同设备的受控室内实验解释这些误差来源，为基于 BEV 的不确定性感知注视监督提供依据。",
+      "应用场景涵盖自动驾驶中利用驾驶员注视作为行为信号（如驾驶预测、模仿学习、目标相关性估计）时的空间监督可靠性评估。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Grounding What Shapes the Plan: Rethinking Groundedness for Physical Intelligence in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.07521",
+    "arxiv_id": "2610.07521",
+    "detail_path": "papers/2610.07521/",
+    "cover_path": "covers/2610.07521/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.07521.webp",
+    "paper_image_full_path": "assets/paper-images/2610.07521.webp",
+    "preview_text": "论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。 研究问题：正确 grounded reasoning 不会自动带来理想的驾驶结果，即存在从 grounding 到 plan 的 transfer gap；论文以 PAI-AV 安全性样本上的碰撞率来衡量这一差距。 论文提出 GroundAct，核心思想是以物理实体及其交互作为 grounding 单元，通过 reference token 保持连续实体状态可寻址，并让被引用实体与演化中提案的交互选择性修正规划。 应用场景包括正常、分布外、安全关键的开环规划，以及 AlpaSim 闭环仿真驾驶。",
+    "research_unit": "University of Michigan · Minkyoung Cho、Zewei Zhou、Wenhao Ding 等",
+    "hook_text": "论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。",
+    "key_points": [
+      "论文聚焦自动驾驶规划任务，指出驾驶模型的最终输出是动作/轨迹，因此需要重新思考“groundedness”在动作输出语境下的含义。",
+      "研究问题：正确 grounded reasoning 不会自动带来理想的驾驶结果，即存在从 grounding 到 plan 的 transfer gap；论文以 PAI-AV 安全性样本上的碰撞率来衡量这一差距。",
+      "论文提出 GroundAct，核心思想是以物理实体及其交互作为 grounding 单元，通过 reference token 保持连续实体状态可寻址，并让被引用实体与演化中提案的交互选择性修正规划。"
+    ],
+    "reading_minutes": 15,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-05",
+    "title": "GeoWM: Efficient Direct World Modeling in Explicit Geometry",
+    "link": "https://arxiv.org/abs/2610.07381",
+    "arxiv_id": "2610.07381",
+    "detail_path": "papers/2610.07381/",
+    "cover_path": "covers/2610.07381/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.07381.webp",
+    "paper_image_full_path": "assets/paper-images/2610.07381.webp",
+    "preview_text": "研究任务是自动驾驶与机器人场景下的世界模型（world model）几何预测：给定最近 K 帧 RGB 观测，预测指定未来时刻 t+h 的深度图 D_{t+h} 与相对相机位姿 T_{t→t+h}，并由深度与位姿导出 3D 点云。 应用场景覆盖城市驾驶、航拍飞行与动态机械臂操作三类领域。 研究问题：现有世界模型多预测未来图像或潜特征、再从中恢复几何，未显式建模几何结构；且依赖对短期预测的递归 rollout 到达长时域，导致误差累积与推理成本随时域增长。 论文提出的思路是把未来预测直接放在显式几何空间（几何基础模型的深度输出空间）中，并把预测时域 h 作为模型输入，支持对任意时域的一次性直接查询。",
+    "research_unit": "Huawei Noah’s Ark Lab, Canada · Mehrdad Noori、Guile Wu、Sam Hosseini 等",
+    "hook_text": "研究任务是自动驾驶与机器人场景下的世界模型（world model）几何预测：给定最近 K 帧 RGB 观测，预测指定未来时刻 t+h 的深度图 D_{t+h} 与相对相机位姿 T_{t→t+h}，并由深度与位姿导出 3D 点云。",
+    "key_points": [
+      "研究任务是自动驾驶与机器人场景下的世界模型（world model）几何预测：给定最近 K 帧 RGB 观测，预测指定未来时刻 t+h 的深度图 D_{t+h} 与相对相机位姿 T_{t→t+h}，并由深度与位姿导出 3D 点云。",
+      "应用场景覆盖城市驾驶、航拍飞行与动态机械臂操作三类领域。",
+      "研究问题：现有世界模型多预测未来图像或潜特征、再从中恢复几何，未显式建模几何结构；且依赖对短期预测的递归 rollout 到达长时域，导致误差累积与推理成本随时域增长。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 5,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
     "date": "2026-10-05",
     "title": "Analysis of SWIR Imaging Detection Performance Under Adverse Environmental Conditions for Autonomous Driving Systems",
     "link": "https://arxiv.org/abs/2610.06596",
