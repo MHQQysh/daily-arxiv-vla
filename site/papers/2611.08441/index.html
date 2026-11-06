@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edge-Assisted Crowdsensing for Explainable Cyclist Safety Perception - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向骑行安全的“感知安全（perceived safety）”连续监测任务，应用场景为自行车把手摄像头采集的街景与骑行者判断的融合。 研究问题：碰撞统计与多模型检测流水线都无法规模化地沿路线连续测量骑行者“感觉到的安全”，问卷法也难以覆盖路线级变化。 论文提出边缘辅助的移动群智感知系统：将街景帧转为结构化交通属性的视觉语言模型放在网络边缘，仅传输紧凑属性向量，再用可解释模型预测众包的 1–9 安全评分。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.08441">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.08441.webp" alt="Edge-Assisted Crowdsensing for Explainable Cyclist Safety Perception" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向骑行安全的“感知安全（perceived safety）”连续监测任务，应用场景为自行车把手摄像头采集的街景与骑行者判断的融合。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Edge-Assisted Crowdsensing for Explainable Cyclist Safety Perception</h1>
+            <div class="detail-meta">2026-11-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.08441" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.08441" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.08441</span></div>
+            <p class="detail-summary">面向骑行安全的“感知安全（perceived safety）”连续监测任务，应用场景为自行车把手摄像头采集的街景与骑行者判断的融合。 研究问题：碰撞统计与多模型检测流水线都无法规模化地沿路线连续测量骑行者“感觉到的安全”，问卷法也难以覆盖路线级变化。 论文提出边缘辅助的移动群智感知系统：将街景帧转为结构化交通属性的视觉语言模型放在网络边缘，仅传输紧凑属性向量，再用可解释模型预测众包的 1–9 安全评分。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Queen Mary University of London, School of EECS · Hongsen Cao、Chia-Yen Chia…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.08441/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向骑行安全的“感知安全（perceived safety）”连续监测任务，应用场景为自行车把手摄像头采集的街景与骑行者判断的融合。</p>
+  <ul class="reading-intro-points"><li>面向骑行安全的“感知安全（perceived safety）”连续监测任务，应用场景为自行车把手摄像头采集的街景与骑行者判断的融合。</li><li>研究问题：碰撞统计与多模型检测流水线都无法规模化地沿路线连续测量骑行者“感觉到的安全”，问卷法也难以覆盖路线级变化。</li><li>论文提出边缘辅助的移动群智感知系统：将街景帧转为结构化交通属性的视觉语言模型放在网络边缘，仅传输紧凑属性向量，再用可解释模型预测众包的 1–9 安全评分。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Queen Mary University of London, School of EECS；作者：Hongsen Cao、Chia-Yen Chiang、Mona Jaber</li><li>机构：Imperial College London, School of Public Health；作者：Meihui Wang</li><li>机构：University of Cambridge, Department of Engineering；作者：Yasmin Fathy</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向骑行安全的“感知安全（perceived safety）”连续监测任务，应用场景为自行车把手摄像头采集的街景与骑行者判断的融合。</li><li>研究问题：碰撞统计与多模型检测流水线都无法规模化地沿路线连续测量骑行者“感觉到的安全”，问卷法也难以覆盖路线级变化。</li><li>论文提出边缘辅助的移动群智感知系统：将街景帧转为结构化交通属性的视觉语言模型放在网络边缘，仅传输紧凑属性向量，再用可解释模型预测众包的 1–9 安全评分。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出可部署于边缘的群智感知流水线，用单个 VLM 提示把把手视频转成结构化交通属性，并与 OpenStreetMap 道路基础设施和骑行运动学融合；提取阶段在开放权重模型上占用不超过 9.2 GB GPU 显存。</li><li>提出基于可解释提升机（EBM）的可解释评分阶段，CPU 上耗时 0.4 ms，可在系统任一层运行，与黑盒基线准确率差距在一个百分点内，并给出以评分点表示的各特征贡献。</li><li>给出面向城市级运行的逐阶段部署预算（上行、边缘计算、采样频率）：重编码将负载降低 23 倍，20 s 采样间隔以 1000 名骑行者、54 Mbit/s 服务，代价为 1.4 个准确率点。</li><li>报告了标注者间一致性（Krippendorff α = 0.4695）、属性审计，以及将属性误差与准确率关联的敏感性分析。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：三阶段流水线（数据采集与安全评分、边缘端 VLM 多模态特征提取、EBM 安全建模与可解释分析）。</li><li>输入传感器：把手安装的 GoPro 相机，记录视频、惯性数据（speed3d、accl3d）与 GPS。</li><li>场景表示：每帧由 Grok-2-Vision-1212 通过单一提示生成 14 个属性的 JSON；其中 5 个属性（骑行道、车道隔离、施工场地、交通直接碰撞风险、高交通密度）进入模型，另加 OSM 聚合道路等级（6 级）与两个运动学通道，共 p=8 个特征。</li><li>模型结构：EBM 以梯度提升的浅层决策树学习单变量形状函数并加入少量成对交互项，回归用恒等链接、分类用 logit 链接；回归最小化均方误差、分类最小化交叉熵。</li><li>关键技术：VLM 结构化提示替代专门的多模型检测流水线；OSM 地图匹配（最大匹配距离 46.4 m）；边缘卸载与 MEG 式“草图”传输（0.13 MB 重编码图像进、14 字段 JSON 出）；空间分块交叉验证（200 m 连续块、GroupKFold、124 块）。</li><li>协议设置：默认 EBM（interpret 库）；对比模型为逻辑回归（max_iter=1000）、决策树（max_depth=5）、随机森林（200 树、max_depth=8）、XGBoost（200 树、max_depth=4、学习率 0.05）；随机五折（KFold 打乱、random_state=42），每折 272–273 帧，未分层；模型内部随机种子为 1。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：伦敦两条路线的自采数据——Route A 11 km（玛丽女王大学附近）、Route B 2.9 km（Farringdon）；每 5 s 取一帧，质量过滤后 1,419 帧（Route A 1,220、Route B 199），分辨率 5312×2988、单帧 3.13 MB；32 段录制共 21.9 km；带 GPS 的 1,362 帧构成建模集（62.3 帧/骑行者公里）。</li><li>标注：自建众包平台，99 名每周至少骑行三次的标注者按 1–9 序数评分；1,252 帧保留逐标注者记录，共 7,045 条评分（均值 5.63/帧，中位数 5，范围 1–29）；二分类阈值 τ=5，45.2% 安全、54.8% 不安全；均值评分中位数 4.88、四分位数 4.00 与 6.14。</li><li>模型规模：商业 VLM 为 Grok-2-Vision-1212、Claude Sonnet、GPT-4o；自托管模型为 Qwen3-VL 4B/8B/32B、InternVL3 8B、Llama-3.2 11B（显存 9.2–67.2 GB）；CLIP ViT-L/14 线性探针作为端到端基线。</li><li>训练与计算资源：A100-80GB（bf16、batch 1、1024 px 长边）；原文未报告训练时长与训练集规模等更多资源信息。</li><li>实车平台：两名骑行者使用把手安装 GoPro 的自行车；原文未报告其他实车或仿真平台，亦未报告仿真器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：1,362 帧带 GPS 的建模集；随机五折交叉验证与空间分块五折交叉验证两套协议（仅分组方式不同，均不分层）。</li><li>评估指标：二分类准确率、加权 F1、不安全/安全类召回、1–9 量表 MAE 与 RMSE、±1/±2 容差准确率、McNemar 检验与 Holm 校正、bootstrap 特征重要性稳定性。</li><li>关键数值：EBM 回归器二分类准确率 72.2%、加权 F1 0.719、召回（不安全/安全）0.815/0.623、MAE 1.011、RMSE 1.303，±1 约 60%、±2 约 87%；EBM 分类器准确率 0.711；逻辑回归 0.665、决策树 0.669、随机森林 0.732（MAE 0.988）、XGBoost 0.715（MAE 1.016）。</li><li>可解释性结果：物理隔离 +0.97 分、画线车道 +0.70 分、施工场地 −0.65 分；道路等级边际对比 Δ=1.52 但模型内排名较低；最重要五特征依次为物理隔离骑行道、画线骑行道、骑行者加速度、速度、施工场地；150 次按 124 个空间块 bootstrap 中两个骑行道项始终在前三。</li><li>鲁棒性与部署：随机折相对空间分块使随机森林高 3.7 点（95% CI [1.8, 5.7]，Holm p&lt;0.001）、EBM 回归器高 2.6 点（[0.8, 4.7]，p=0.004）；空间分块下 15 个 McNemar 检验无模型对可分；属性噪声约每 10 点误差损失 3.3 点准确率，p=0.30 时损失 9.8 点；CLIP 线性探针与 EBM 不可分（Holm p=0.3676，最佳设置领先 2.6 点但该设置在评估折上选择）；VLM 属性平均准确率 66.7%（Grok-2-Vision），5 个输入属性平均 69.4%；自托管最快 InternVL3 8B 每帧 2.49 s、1444 帧/GPU 小时。</li><li>条件说明：全部评估为离线/开环的交叉验证结果，非闭环控制或实车在线评测；20 s 采样使 1000 名骑行者上行需求降至 54 Mbit/s、代价 1.4 个准确率点；该车队每小时产生 180,000 帧，按最快吞吐需约 125 块 A100 级加速器持续运行。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.08449/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.08393/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Adaptive Low-Light Enhancement for Road Anomaly Detection: A Multi-Architecture Benchmark and Edge Deployment Study</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

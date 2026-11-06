@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Low-Density 3D Point Cloud Classification - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：3D 点云分类（3D point cloud classification）。 应用场景：增强现实与虚拟现实、机器人、自动驾驶等。 研究问题：现实场景中传感器限制与环境条件导致点云密度变化，低密度点云缺少足够几何细节，现有在稠密点云上表现良好的分类方法在低密度条件下性能显著下降；论文旨在实现跨不同密度、尤其低密度下稳定准确的 3D 点云分类。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.05291">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.05291.webp" alt="Low-Density 3D Point Cloud Classification" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：3D 点云分类（3D point cloud classification）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Low-Density 3D Point Cloud Classification</h1>
+            <div class="detail-meta">2026-11-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.05291" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.05291" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.05291</span></div>
+            <p class="detail-summary">任务：3D 点云分类（3D point cloud classification）。 应用场景：增强现实与虚拟现实、机器人、自动驾驶等。 研究问题：现实场景中传感器限制与环境条件导致点云密度变化，低密度点云缺少足够几何细节，现有在稠密点云上表现良好的分类方法在低密度条件下性能显著下降；论文旨在实现跨不同密度、尤其低密度下稳定准确的 3D 点云分类。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Efrei Research Lab · Ahmed Baha Ben Jmaa、Faten Chaieb</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.05291/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：3D 点云分类（3D point cloud classification）。</p>
+  <ul class="reading-intro-points"><li>任务：3D 点云分类（3D point cloud classification）。</li><li>应用场景：增强现实与虚拟现实、机器人、自动驾驶等。</li><li>研究问题：现实场景中传感器限制与环境条件导致点云密度变化，低密度点云缺少足够几何细节，现有在稠密点云上表现良好的分类方法在低密度条件下性能显著下降；论文旨在实现跨不同密度、尤其低密度下稳定准确的 3D 点云分类。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Efrei Research Lab；作者：Ahmed Baha Ben Jmaa、Faten Chaieb</li><li>机构：Paris Panthéon-Assas University, France；作者：Ahmed Baha Ben Jmaa、Faten Chaieb</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：3D 点云分类（3D point cloud classification）。</li><li>应用场景：增强现实与虚拟现实、机器人、自动驾驶等。</li><li>研究问题：现实场景中传感器限制与环境条件导致点云密度变化，低密度点云缺少足够几何细节，现有在稠密点云上表现良好的分类方法在低密度条件下性能显著下降；论文旨在实现跨不同密度、尤其低密度下稳定准确的 3D 点云分类。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>开展首个针对低密度 3D 点云分类的基准研究，系统评估现有代表性方法在不同输入密度下的鲁棒性，揭示其在低密度场景中的显著性能退化。</li><li>提出 LD-PointNet++，一种专门面向低密度 3D 点云分类优化的 PointNet++ 变体。</li><li>通过扩大球形邻域来扩展感受野，使模型在稀疏区域纳入更多邻点，从而捕获更充分的全局与局部特征。</li><li>在 ModelNet 基准上，LD-PointNet++ 在低密度场景优于现有方法，并在不同密度水平下保持 90% 以上准确率；原文称此前没有方法能在如此低密度下达到同等精度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：3D 点云分类网络，包含特征提取模块与分类模块。</li><li>输入传感器：原文未报告具体传感器；输入为点云坐标 (x, y, z)。</li><li>场景表示：点云表示为 P = {p_i ∈ R^3}_{i&lt;N}，每个点由三维欧氏坐标组成；训练使用稠密点云，测试使用低密度点云（m &lt; n）。</li><li>模型结构：特征提取模块由采样（sampling）、分组（grouping）和 PointNet 三类模块组成；对每个采样点及其邻域通过 PointNet 编码局部特征，再对局部特征集合再次应用 PointNet 得到点云的可学习表示；最后通过全连接层映射到类别。特征聚合使用 MAX 对称函数，公式为 f_i = A_{j=1}^{K}(h_θ(p_i, p_ij))。</li><li>关键技术：采用球形邻域（由半径和最大邻点数定义）而非 KNN；通过扩大邻域半径扩大感受野，球形邻域体积 V(R)=4/3πR^3，半径增大会立方级增加邻域体积，降低点被孤立的概率；原文指出 LD-PointNet++ 不使用 PointNet++ 的层次化架构来扩展感受野，而是以更大邻域实现扩展。</li><li>原文未报告：具体传感器型号、模型参数量等模型规模信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：ModelNet40（12,311 个 CAD 模型，40 类；训练 9,843、测试 2,468；每点云 1024 点，仅使用 (x,y,z) 坐标）；ModelNet10（4,899 个 CAD 模型，10 类）。均采用标准数据划分。</li><li>密度设置：训练使用每对象 1024 点；测试降采样至 64 点；基准研究中的采样点数 k ∈ {64, 96, 128, 160, 192, 224, 256, 512, 1024}。</li><li>训练资源：Nvidia GeForce RTX 3090；从零训练，Adam 优化器，200 epochs，batch size 24，初始学习率 0.001，学习率衰减 0.0001，交叉熵损失。</li><li>模型配置：球形邻域半径 0.8，每个局部区域最多 64 个邻点；每个 PointNet 含三层全连接，第一个 PointNet 宽度 [128, 128, 256]，第二个宽度 [256, 512, 1024]；分类模块与 PointNet++ 相同。</li><li>仿真器：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：ModelNet40（主要分类对比与鲁棒性实验）、ModelNet10（t-SNE 可视化）。</li><li>评估指标：准确率（Accuracy）、精确率（Precision）、召回率（Recall）、F1-score；对比表中使用总体准确率（OA）和平均类别准确率（mAcc）；并采用 t-SNE 可视化特征可分性。</li><li>基准研究发现（表 I，ES1 为 1024 点训练与测试，ES2 为 1024 点训练、64 点测试）：</li></ul>
+<p> - PointNet++：ES1 准确率 92.42%，ES2 降至 35.45%（下降 56.97%）。</p>
+<p> - Point-TnT：ES1 准确率 92.79%，ES2 降至 38.17%（下降 54.62%）。</p>
+<p> - DGCNN：ES1 准确率 93.27%，ES2 降至 4.62%（下降 88.65%）。</p>
+<p> - PointMLP：ES1 准确率 94.08%，ES2 降至 4.29%（下降 89.79%）。</p>
+<p> - 原文指出输入点少于 160 时性能显著退化；图 1 显示 PointNet++ 在 64 点时仅 34.45% 准确率（与表 I 的 35.45% 存在原文内部差异）；ES2 下所有模型的 t-SNE 特征分离均较差。</p>
+<ul><li>LD-PointNet++ 结果：</li></ul>
+<p> - 低密度对比（表 III，1024 点训练、64 点测试）：LD-PointNet++ OA 90.10%、mAcc 86.43%；PointNet++ 35.39%/37.35%，Point-TnT 38.16%/34.39%，DGCNN 4.61%/5.05%，PointMLP 4.29%/7.75%。原文称 OA 相比 PointNet++ 提升 54.71%，相比 PointMLP 提升最多 85.81%。</p>
+<p> - 鲁棒性：在不同采样比例下准确率几乎保持恒定并超过 90%；ES2 下 F1-score 为 90.16%，仅比 ES1 低 1.96%；ES2 的 t-SNE 仍保持较好的类间分离。</p>
+<p> - 原文说明 LD-PointNet++ 在稠密点云场景并未取得最高准确率，优势主要体现在低密度场景。</p>
+<ul><li>对比方法：PointNet++、Point-TnT、DGCNN、PointMLP。</li><li>实验条件：全部为 ModelNet 数据集上的开环离线分类评测（训练稠密、测试稀疏）；原文未报告闭环、仿真或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.06007/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MotoVerse: A Benchmark for Predictive Perception of Motorized Two-Wheelers in Dense Unstructured Traffic</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.05448/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Jev with Foresight: Safe Language-Guided Autonomous Driving via a Language World Model</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reinforcing End-to-End Autonomous Driving Safety via Negative-Aware Planning in a Unified World-Action Model - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对端到端自动驾驶中的世界-动作模型（World-Action Models, WAMs），研究其在安全关键场景下的安全性后训练问题。 应用场景为端到端自动驾驶规划：模型同时建模未来交通状态与驾驶动作，从当前相机观测与自车状态生成未来轨迹。 研究问题是：现有 WAM 的动作分支主要依赖专家轨迹的流匹配模仿学习，只告诉模型“模仿什么”，未约束与专家轨迹几何接近但实际不安全的“近专家失败轨迹”，因此仅靠更强的世界建模无法建立显式安全边界；同时现有后训练依赖闭环仿真奖励或外部评分器，分别受 sim-to-real gap、重建伪影与规则/评分器偏差限制。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.08111">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.08111.webp" alt="Reinforcing End-to-End Autonomous Driving Safety via Negative-Aware Planning in a Unified World-Action Model" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对端到端自动驾驶中的世界-动作模型（World-Action Models, WAMs），研究其在安全关键场景下的安全性后训练问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Reinforcing End-to-End Autonomous Driving Safety via Negative-Aware Planning in a Unified World-Action Model</h1>
+            <div class="detail-meta">2026-11-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.08111" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.08111" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.08111</span></div>
+            <p class="detail-summary">论文针对端到端自动驾驶中的世界-动作模型（World-Action Models, WAMs），研究其在安全关键场景下的安全性后训练问题。 应用场景为端到端自动驾驶规划：模型同时建模未来交通状态与驾驶动作，从当前相机观测与自车状态生成未来轨迹。 研究问题是：现有 WAM 的动作分支主要依赖专家轨迹的流匹配模仿学习，只告诉模型“模仿什么”，未约束与专家轨迹几何接近但实际不安全的“近专家失败轨迹”，因此仅靠更强的世界建模无法建立显式安全边界；同时现有后训练依赖闭环仿真奖励或外部评分器，分别受 sim-to-real gap、重建伪影与规则/评分器偏差限制。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Southeast University · Zihao Zhang、Xinyu Zhang、Bing Zeng</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.08111/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对端到端自动驾驶中的世界-动作模型（World-Action Models, WAMs），研究其在安全关键场景下的安全性后训练问题。</p>
+  <ul class="reading-intro-points"><li>论文针对端到端自动驾驶中的世界-动作模型（World-Action Models, WAMs），研究其在安全关键场景下的安全性后训练问题。</li><li>应用场景为端到端自动驾驶规划：模型同时建模未来交通状态与驾驶动作，从当前相机观测与自车状态生成未来轨迹。</li><li>研究问题是：现有 WAM 的动作分支主要依赖专家轨迹的流匹配模仿学习，只告诉模型“模仿什么”，未约束与专家轨迹几何接近但实际不安全的“近专家失败轨迹”，因此仅靠更强的世界建模无法建立显式安全边界；同时现有后训练依赖闭环仿真奖励或外部评分器，分别受 sim-to-real gap、重建伪影与规则/评分器偏差限制。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Southeast University；作者：Zihao Zhang、Xinyu Zhang、Bing Zeng</li><li>机构：Shenzhen Loop Area Institute；作者：Zihao Zhang</li><li>机构：Guangxi University；作者：Xingyu Chen</li><li>机构：University of Macau；作者：Zhenning Li</li><li>机构：Beihang University；作者：Bin Yu</li><li>机构：原文未明确对应；作者：Ziyuan Pu（原文未标注该作者的机构）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对端到端自动驾驶中的世界-动作模型（World-Action Models, WAMs），研究其在安全关键场景下的安全性后训练问题。</li><li>应用场景为端到端自动驾驶规划：模型同时建模未来交通状态与驾驶动作，从当前相机观测与自车状态生成未来轨迹。</li><li>研究问题是：现有 WAM 的动作分支主要依赖专家轨迹的流匹配模仿学习，只告诉模型“模仿什么”，未约束与专家轨迹几何接近但实际不安全的“近专家失败轨迹”，因此仅靠更强的世界建模无法建立显式安全边界；同时现有后训练依赖闭环仿真奖励或外部评分器，分别受 sim-to-real gap、重建伪影与规则/评分器偏差限制。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>从安全性后训练视角重新审视统一世界-动作模型，证明在流匹配模仿之外引入近专家负样本监督，可在不损害常规驾驶性能的前提下提升挑战性场景表现。</li><li>提出 NegWAM，一种面向 WAM 的近专家负安全后训练框架，联合优化原始流匹配目标与两个互补的近专家负目标，且不引入额外推理开销。</li><li>提出两种互补的近专家负机制：以负轨迹作为轨迹空间中的“排斥锚点”将预测推离局部不安全轨迹；以场景条件 rider token 让统一 WAM 通过共享注意力判断轨迹与当前场景的兼容性。</li><li>负样本通过离线方式从 GTRS 轨迹词表挖掘，仅用 EPDMS 评估器离线筛选；rider 分支与兼容性头在推理阶段被移除。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶规划的安全性后训练，作用于统一世界-动作模型的动作生成分支与共享世界-动作表征。原文未报告独立的感知/预测子模块设计。</li><li>输入传感器：当前相机图像（原文表格中本文方法标注为 SV 单视图相机输入，对比方法含 MV/SV），以及导航命令与自车状态条件（含四帧历史自车位姿）；未来视觉目标作为训练监督。</li><li>场景表示：冻结的因果视频 VAE 将观测帧与未来帧编码为干净视觉流；动作 tokenizer 将专家八步 Δ 位姿归一化并前置零条件块形成动作 token；共享 DiT 接收四段序列（含噪视觉、视觉条件流、含噪动作、动作条件流），沿用原始块因果掩码。</li><li>模型结构：以 Wan2.2-TI2V-5B 预训练视频骨干初始化，按 DriveWAM 的统一世界-动作流匹配范式适配；两阶段训练：阶段一仅优化流匹配目标得到共享基座检查点，阶段二从该检查点进行硬负样本安全后训练。</li><li>关键技术一（近专家负轨迹构造）：诊断探针显示同场景八条采样轨迹平均两两 ADE 仅 0.02 m，采样多样性有限，故从 GTRS 16K 密集轨迹词表挖掘；每条词表轨迹为 4 s、40 个自车坐标系位姿，按每第五个位姿下采样为八步；先保留与专家 ADE &lt; 1.0 m 的候选，再用 NAVSIM v2 指标缓存与 log-replay 交通评估原始 40 步轨迹，将 EPDMS 为 0 者缓存为场景特定失败池；每次训练迭代重新计算下采样后 ADE，保留 ADE ≥ 0.3 m 者（最终范围 [0.3, 1.0) m），每场景最多无放回随机选 K=16 条并零填充，用有效性掩码区分。</li><li>关键技术二（噪声感知锚点排斥）：以单步解码轨迹与第 k 条负样本的 ADE 构造距离自适应 hinge 损失 [α·a_{i,k} − d_{i,k}]₊，α=0.9；用 (1 − t_i^a) 加权并按有效负样本平均；在精确专家轨迹处该项为零；复用原动作输出，不额外前向。</li><li>关键技术三（场景条件 rider token）：专家与每条负样本编码为独立 rider 组，共享动作嵌入与相同旋转位置编码网格，每组 16 个动作 token，无扩散噪声、流时间输入 t=0；通过自定义注意力可见性使 rider 只能看到当前观测视觉 token 与自身轨迹组，且原序列无法注意到 rider，保持原前向注意力路径；对 16 个 token 输出特征取平均后经共享兼容性头（线性投影至 256 维、SiLU、标量线性输出，末层零初始化）打分，用温度 τ_s=0.1 的排序损失将专家排在有效负样本之上。</li><li>训练目标：L_post = L_FM + λ_rep·L_rep + λ_compat·L_compat；λ 取值原文未报告。</li><li>推理：丢弃 rider 组与兼容性头，使用更新后的骨干按原世界-动作生成路径，视觉潜变量 3 步 Euler、八步动作块 10 步 Euler（为积分步数而非骨干前向调用次数）；不使用负样本候选或评估器。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM（基于 OpenScene 与 nuPlan，103K 训练样本），训练集 navtrain，评估集 navtest 与 navhard；跨基准零样本闭环评估使用 HUGSIM。</li><li>负样本词表：GTRS 的 16K 密集轨迹词表（4 s、40 步轨迹）。</li><li>仿真器：HUGSIM 用于零样本闭环 rollout；NAVSIM v2 场景评估使用指标缓存与 log-replay 交通、以及 navhard 的反应式交通仿真。</li><li>模型规模：基座为 Wan2.2-TI2V-5B 预训练视频生成模型；兼容性头中间维度 256。其余可训练参数量原文未报告。</li><li>训练资源：原文未报告（GPU 型号、数量、训练时长未在给定原文中出现）。</li><li>实车平台：原文未报告，未进行实车验证。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与条件：NAVSIM v2 的 navhard（S1 初始真实场景、S2 预生成反应式后续场景）与 navtest 上的开环评估，全部采用修正后的官方 NAVSIM v2.2 评估协议；HUGSIM 上的零样本闭环评估。</li><li>评估指标：EPDMS 及子指标 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC（均为越高越好）；HUGSIM 上使用 HD-Score。</li><li>关键结果（navhard）：NegWAM 在 NAVSIM v2 上 navhard 取得 40.4 EPDMS，相对最强对比的无评分器 WAM 基线提升 4.1%（相对值）；navtest 取得 93.3 EPDMS，超过最强基线 92.9 达 0.4 分。</li><li>文中报告的对比数值（navhard，表格中为 S2 行）：DriveWAM 37.7、BeyondDrive 38.8、EponaV2 36.1、DriveFuture† 34.6、DriveLAW 30.4、SpanVLA 40.1、PDM-Closed 29.7、DiffusionDrive 24.2、GuideFlow 27.1、DriveVLA-W0 24.4；对应 S1 行分别为 DriveWAM 78.7、BeyondDrive 79.6、EponaV2 80.4、DriveFuture† 60.9、DriveLAW 76.9、SpanVLA 72.1、PDM-Closed 56.6、DiffusionDrive 73.8、GuideFlow 67.8、DriveVLA-W0 78.2；本文方法 S1 为 79.6。</li><li>零样本闭环（HUGSIM）：NegWAM 的 HD-Score 高于 DriveWAM（30.6 vs. 27.2）。</li><li>负样本统计：85.8% 的训练样本至少含一个有效硬负样本；全部有效负样本相对专家轨迹的 ADE 中位数为 0.80 m，约 9% 落在 [0.3, 0.5] m。</li><li>消融与分析：原文目录包含排斥锚点效果、场景条件 rider token 效果、后训练预算与超参数敏感性分析（具体数值在给定原文截断部分未报告）。</li><li>推理效率：原文声称推理时不增加额外模块与开销（未移除前的具体时延数值在给定原文中未报告）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.08117/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">A Hybrid UKF with Explicit Drivetrain Modeling for Low-Velocity State Estimation of Electric Vehicles</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.07912/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">GuidedWAM: Training-Free Energy Guidance for World Action Models in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IGSW: Multi-Weather Urban Scene Reconstruction with Intrinsic-Decoupled Gaussian Splatting - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景仿真与数据生成，研究多天气（雨、雪）条件下的城市动态场景重建与天气编辑。 任务是在给定标定的多视角驾驶图像序列及目标天气文本提示下，学习一个可渲染目标天气外观的动态 4D 高斯场景。 核心问题是：扩散式图像编辑生成的天气教师图像常含结构畸变（如云遮挡建筑、车辆细节不一致），直接拟合其外观会把误差传到 4D 场景，破坏原场景结构与时间连续性；而强锚定原始 RGB 又会削弱天气效果。 需同时回答两个耦合问题：哪些场景因素应随天气改变，哪些教师区域提供可靠监督。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.04374">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.04374.webp" alt="IGSW: Multi-Weather Urban Scene Reconstruction with Intrinsic-Decoupled Gaussian Splatting" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景仿真与数据生成，研究多天气（雨、雪）条件下的城市动态场景重建与天气编辑。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">IGSW: Multi-Weather Urban Scene Reconstruction with Intrinsic-Decoupled Gaussian Splatting</h1>
+            <div class="detail-meta">2026-11-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.04374" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.04374" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.04374</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景仿真与数据生成，研究多天气（雨、雪）条件下的城市动态场景重建与天气编辑。 任务是在给定标定的多视角驾驶图像序列及目标天气文本提示下，学习一个可渲染目标天气外观的动态 4D 高斯场景。 核心问题是：扩散式图像编辑生成的天气教师图像常含结构畸变（如云遮挡建筑、车辆细节不一致），直接拟合其外观会把误差传到 4D 场景，破坏原场景结构与时间连续性；而强锚定原始 RGB 又会削弱天气效果。 需同时回答两个耦合问题：哪些场景因素应随天气改变，哪些教师区域提供可靠监督。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">重庆大学机械与运载工程学院 · Zhongquan Wang、Long Cao、Peijia Xie 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.04374/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景仿真与数据生成，研究多天气（雨、雪）条件下的城市动态场景重建与天气编辑。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景仿真与数据生成，研究多天气（雨、雪）条件下的城市动态场景重建与天气编辑。</li><li>任务是在给定标定的多视角驾驶图像序列及目标天气文本提示下，学习一个可渲染目标天气外观的动态 4D 高斯场景。</li><li>核心问题是：扩散式图像编辑生成的天气教师图像常含结构畸变（如云遮挡建筑、车辆细节不一致），直接拟合其外观会把误差传到 4D 场景，破坏原场景结构与时间连续性；而强锚定原始 RGB 又会削弱天气效果。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：重庆大学机械与运载工程学院；作者：Zhongquan Wang、Long Cao、Peijia Xie、Senlei Ma、Jie Li、Guofa Li</li><li>机构：原文未明确对应（论文仅列出单一机构及作者邮箱，未给出其他机构）；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景仿真与数据生成，研究多天气（雨、雪）条件下的城市动态场景重建与天气编辑。</li><li>任务是在给定标定的多视角驾驶图像序列及目标天气文本提示下，学习一个可渲染目标天气外观的动态 4D 高斯场景。</li><li>核心问题是：扩散式图像编辑生成的天气教师图像常含结构畸变（如云遮挡建筑、车辆细节不一致），直接拟合其外观会把误差传到 4D 场景，破坏原场景结构与时间连续性；而强锚定原始 RGB 又会削弱天气效果。</li><li>需同时回答两个耦合问题：哪些场景因素应随天气改变，哪些教师区域提供可靠监督。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出内在解耦的 4D 高斯天气表示：把高斯外观分解为天气共享的反照率/法线与天气特定的辐照度/残差，赋予稳定内容与天气变化不同的表示角色。</li><li>引入内在特征约束引导解耦高斯表示的迭代优化（特征级软监督），在建模天气光照变化的同时促进材质与结构一致性。</li><li>提出内在保持的高斯天气细化方法：结构保持门融合语义冲突与跨天气反照率/法线差异，抑制教师图像结构误差向 3D 场景传播。</li><li>在几何与共享内在表示固定后，用逐高斯天气传输变量与天气特定分支优化辐照度与残差，增强目标天气外观。</li><li>在 nuScenes 与 Waymo 上做全序列雨/雪评估、视觉对比与消融，验证天气表达、内容/语义保持与时间连续性的平衡。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：两阶段框架 IGSW（Intrinsic Gaussian Splatting Weather），Stage I 为内在解耦 4D 高斯外观建模，Stage II 为内在保持的天气细化。</li><li>输入传感器：标定多视角驾驶图像（nuScenes/Waymo 前置三相机同步时间戳）；原文未报告激光雷达、IMU 等其他传感器输入。</li><li>场景表示：保留高斯几何表示（位置 μ∈R³、尺度 s∈R³、旋转四元数 q∈R⁴、不透明度 α∈[0,1]、32 维外观特征 f），背景外观解耦为反照率 A、法线 N（天气共享头）与辐照度 E、残差 R（天气特定头）；颜色 c = clip(A⊙E + λ_R·R)；含动态物体分支。</li><li>教师与先验：用 Qwen-Image 以天气特定提示生成雨/雪教师图像；用 IntrinsicWeather 中基于 Stable Diffusion 3.5 的逆渲染器估计原图与教师的反照率、法线、辐照度。</li><li>关键技术一：特征级内在约束——固定轻量编码器 Φ 提取平均池化低频颜色与 Sobel 边缘并拼接归一化，以 patch 级余弦距离约束反照率/法线（对原始与目标天气渲染均以原图内在图为参考），并以方向约束 L_dir 约束辐照度变化趋势而非逐像素一致。</li><li>关键技术二：结构保持门——UPerNet–ConvNeXt-XL 语义预测，保护类别（墙、建筑、道路、人行道、人、车辆、房屋、摩天楼）发生类别变化构成语义冲突掩码；结合反照率 L1 与法线余弦差异构成内在差异 D，仅在语义冲突邻域内使用；经最大池化膨胀与平均池化得到软门 G∈[0,1]。</li><li>关键技术三：安全教师——在可靠像素上按语义类别计算原图与教师的 RGB 通道均值/标准差做统计迁移（σ 比裁剪至 [0.65,1.35]，类别可靠像素少于 256 时用全局统计），T_safe = (1−G)⊙T^w + G⊙S_w(I^o)，保留原图空间内容与教师色调。</li><li>关键技术四：逐高斯天气传输——每个背景高斯附加目标天气标量 u、v，E&#x27; = E·exp(2tanh(u))，R&#x27; = R + 2tanh(v)·1₃，零初始化，增益限幅 [e⁻²,e²]、残差增量限幅 [−2,2]，属低维无色度通道。</li><li>训练目标：Stage I 为 L_I = Σ_{x∈{o,w}}(L_rec + L_content + λ_AN·L_AN + L_aux) + λ_dir·L_dir，含冻结 VGG-19 内容损失、稀疏深度、前景占用掩码、相机颜色校正、高斯形状与动态物体正则；Stage II 为 L_II = L_weather + λ_local·L_local + λ_edge·L_edge + λ_dir·L_dir + λ_uv·L_uv，其中天气重建损失结合全分辨率与低频 ℓ1，局部 VGG 特征匹配在有限邻域搜索以容忍教师微小错位，Sobel 边缘损失在门控区域保护轮廓。</li><li>最终渲染：投影二维协方差 Σ²ᴰ = J W Σ Wᵀ Jᵀ，按深度排序 alpha 合成，并加入天气天空色 B 与相机仿射颜色校正 A_k。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（10 个场景）与 Waymo Open Dataset；每场景 100 个同步时间戳、3 个前向相机，每种天气条件 300 张图像；原始分辨率分别为 1600×900 与 1920×1280。</li><li>仿真器：原文未报告使用仿真器。</li><li>模型规模：单个高斯为位置、尺度、四元数、不透明度与 32 维外观特征，具体高斯数量与网络参数量原文未报告。</li><li>训练资源：单台 NVIDIA RTX 4080 GPU；Stage I 训练 30,000 步；Stage II 为 800 步原始观测恢复加 3,000 步天气细化；优化器设置、损失权重与门构造细节见补充材料（原文未给出）。</li><li>预训练模型：Qwen-Image（天气教师）、基于 Stable Diffusion 3.5 的 IntrinsicWeather 逆渲染器、UPerNet–ConvNeXt-XL（ADE20K 预训练）、CLIP ViT-B/32、RAFT-Large、冻结 VGG-19。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 与 Waymo 上的全序列雨、雪场景编辑；每个场景分别训练 original/rain 与 original/snow 模型。</li><li>评估指标：CLIP-S（与原图的图像特征相似度）、CLIP-DS（原图到天气图像变化与固定文本特征方向的一致性）、Sem-CS（频率加权语义 IoU）、E_warp（用相邻原帧 RAFT-Large 光流对齐天气帧后的 RGB 平方误差，时间一致性）；图像指标用全部 300 张图像，时间指标用全部 297 个相机内相邻帧对。</li><li>对比方法：Qwen-Image、FRESCO、IntrinsicWeather、WeatherEdit、WeatherCity；场景级方法使用相同文本引导天气教师。</li><li>nuScenes 结果：IGSW 雨 CLIP-S 0.8718、CLIP-DS 0.1599、Sem-CS 0.8992、E_warp 0.0021；雪 CLIP-S 0.8782、CLIP-DS 0.2732、Sem-CS 0.8792、E_warp 0.0028；其中 CLIP-S、Sem-CS、E_warp 为最优，雨 CLIP-DS 低于 Qwen-Image（0.2090），雪 CLIP-DS 为最优。</li><li>Waymo 结果：IGSW 雨 CLIP-S 0.9031、CLIP-DS 0.2940、Sem-CS 0.8723、E_warp 0.0009；雪 CLIP-S 0.8971、CLIP-DS 0.2869、Sem-CS 0.8050、E_warp 0.0019；四项指标在雨雪下均为最优（原文表格加粗标示）。</li><li>论文表格 IV 报告 nuScenes 时间 warp 误差对比，并称 IGSW 在全部对比方法中时间误差最低；原文提供的 HTML 在该表处被截断，具体逐方法数值原文未完整报告。</li><li>评估条件：均在 nuScenes 与 Waymo 真实采集数据上的开环重建/新视角与天气渲染评估；闭环评估、实车测试与仿真平台测试原文未报告。</li><li>消融：原文报告包含模块消融与组件消融两节，但所提供的 HTML 在进入该节前已省略其结果与数值，具体消融配置与数值原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.04710/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DenseTwins: Dense Modality Decoupling for Multimodal Self-Supervision</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.08573/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Sparse2comm: Towards Robust Cooperative 3D Object Detection</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

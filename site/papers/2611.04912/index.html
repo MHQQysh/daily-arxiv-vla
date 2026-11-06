@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MiCaDe: Online LiDAR-Camera Miscalibration Change Detection for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶中相机与 LiDAR 的外参标定漂移问题，研究如何在长期部署中在线检测标定参数何时不再准确。 应用场景为车载多传感器感知系统：振动、热效应和轻微机械冲击会导致外参随时间变化，进而给下游融合任务带来系统性误差。 核心研究问题：在不使用标定靶标、不修改感知栈、不进行任务特定训练的前提下，在线检测外参漂移并控制误报率。 论文将该问题建模为序列变化检测（sequential change detection），而非逐帧二分类。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.04912">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.04912.webp" alt="MiCaDe: Online LiDAR-Camera Miscalibration Change Detection for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶中相机与 LiDAR 的外参标定漂移问题，研究如何在长期部署中在线检测标定参数何时不再准确。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">MiCaDe: Online LiDAR-Camera Miscalibration Change Detection for Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.04912" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.04912" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.04912</span></div>
+            <p class="detail-summary">论文针对自动驾驶中相机与 LiDAR 的外参标定漂移问题，研究如何在长期部署中在线检测标定参数何时不再准确。 应用场景为车载多传感器感知系统：振动、热效应和轻微机械冲击会导致外参随时间变化，进而给下游融合任务带来系统性误差。 核心研究问题：在不使用标定靶标、不修改感知栈、不进行任务特定训练的前提下，在线检测外参漂移并控制误报率。 论文将该问题建模为序列变化检测（sequential change detection），而非逐帧二分类。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Politecnico di Milano · Carlo Sgaravatti、Matteo Corno、Sergio M. Savaresi 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.04912/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶中相机与 LiDAR 的外参标定漂移问题，研究如何在长期部署中在线检测标定参数何时不再准确。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶中相机与 LiDAR 的外参标定漂移问题，研究如何在长期部署中在线检测标定参数何时不再准确。</li><li>应用场景为车载多传感器感知系统：振动、热效应和轻微机械冲击会导致外参随时间变化，进而给下游融合任务带来系统性误差。</li><li>核心研究问题：在不使用标定靶标、不修改感知栈、不进行任务特定训练的前提下，在线检测外参漂移并控制误报率。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Politecnico di Milano；作者：Carlo Sgaravatti、Matteo Corno、Sergio M. Savaresi、Luca Magri、Giacomo Boracchi</li><li>机构：Niulinx；作者：Riccardo Pieroni</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶中相机与 LiDAR 的外参标定漂移问题，研究如何在长期部署中在线检测标定参数何时不再准确。</li><li>应用场景为车载多传感器感知系统：振动、热效应和轻微机械冲击会导致外参随时间变化，进而给下游融合任务带来系统性误差。</li><li>核心研究问题：在不使用标定靶标、不修改感知栈、不进行任务特定训练的前提下，在线检测外参漂移并控制误报率。</li><li>论文将该问题建模为序列变化检测（sequential change detection），而非逐帧二分类。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将 LiDAR–相机失准检测表述为统计变化检测问题，持续监测跨模态几何一致性指标的似然流，以较低误报率发现持续性的分布变化。</li><li>提出一种轻量的失准监测方法：仅利用现代感知栈已输出的 2D 与 3D 目标检测框构建几何一致性指标，不需要额外传感器、监督标注或重新训练。</li><li>使用固定大小批次聚合指标，并以参考分布（GMM）打分，再通过 Lepage 变化点模型（CPM）在线监测，从而累积统计证据，检测单帧难以察觉的细微漂移。</li><li>构建并报告了首个在已知时刻物理施加失准的公开真实道路数据集，用于真实条件下的定量评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：在线标定监测模块，作为触发后续标定修正的轻量组件；原文未报告其与具体感知栈的集成实现细节。</li><li>输入传感器：同步的 RGB 相机图像与 LiDAR 点云；另假定已有 2D 与 3D 目标检测器输出。</li><li>场景表示：不构建稠密场景表示，而是基于 3D/2D 检测框及其投影关系；每个匹配对计算 7 维几何一致性向量（x/y 位移、位移幅值、方向的正弦/余弦、IoU、深度误差）。</li><li>模型结构：跨模态对应提取（将 3D 框投影到图像，按同类别的 2D IoU 求解线性指派问题，IoU 阈值 0.1）→ 几何一致性指标计算 → 丢弃截断框和过远匹配，并按固定大小批次聚合为 9 维特征（均值与方向分量方差）→ 以参考 GMM 计算对数似然 → Lepage CPM 在线监测并估计变化点。</li><li>关键技术：使用匈牙利指派进行 2D–3D 匹配；通过 GMM 拟合参考序列的标称分布；使用 Ross 等人的非参数 CPM，并在停机时用合成噪声离线预计算阈值；计算复杂度主要由匹配决定，为 O(max(L_t, ℓ_t)^3)。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：KITTI Raw、ZOD、ONCE 用于合成扰动实验；真实世界数据集包含一小时序列，含三路 RGB 相机与一台 128 线 LiDAR，通过将一台相机旋转约 3° 物理引入漂移，包含 2,151 帧已标定和 5,234 帧失准帧，前 1,000 帧已标定数据用于参考集。</li><li>检测器：KITTI Raw 使用 PV-RCNN 与 Faster R-CNN；ZOD 使用 PointPillars 与 Faster R-CNN；ONCE 使用 PointPillars 与 DDQ；真实数据集使用在 ZOD 上训练的检测器。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告（方法是无需训练的监测框架）。</li><li>训练资源：原文未报告。</li><li>实车平台：原文报告了真实数据采集平台（三相机 + 128 线 LiDAR），但未报告车辆型号等平台细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：三个公开数据集上的合成突变/渐变扰动（每条序列生成 50 个变体），以及带物理诱导失准的真实世界数据集；含干净序列、突变序列和渐变序列。</li><li>评估指标：ARL0（秒与批次数）、FP/h、FPR、FNR、平均检测延迟（秒）、渐变情形下检测时的旋转角，以及 AUC 和单帧处理耗时（ms）。</li><li>关键数值：KITTI 上 MiCaDe（ARL0=10000）在突变情形 FNR 0.088、FPR 0.001、延迟 8.78 s，渐变 FNR 0.044、FPR 0.043、延迟 8.47 s、角度 1.865°，AUC 0.9976，耗时 2 ms；ZOD 上突变 FNR 0.000、FPR 0.000、延迟 4.66 s，渐变延迟 21.43 s，AUC 0.9965，耗时 2 ms；ONCE 上突变 FNR 0.070、FPR 0.002、延迟 56.48 s，渐变延迟 84.29 s，AUC 0.9989，耗时 2 ms。</li><li>对比方法：Tahiraj 等人的方法（含原始阈值 0.5 以及调整至匹配 MiCaDe 经验 ARL0=10000 的阈值）；Levinson–Thrun 与 Chen 等人的方法因无官方实现未纳入比较。</li><li>实验条件：主要包括开环数据集序列上的在线监测评估（合成扰动与真实物理扰动）；闭环仿真或闭环实车控制评估原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.04988/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">From Roadside Sensing to Risk-Informed Safety Control: Surrogate Safety Measures as a Cyber-Physical Interface</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.04710/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DenseTwins: Dense Modality Decoupling for Multimodal Self-Supervision</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quo Vadis, Driving Scene Reconstruction? Occlusion-Aware Gaussian Densification - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景的前馈式驾驶场景重建与新视角合成任务。 应用场景为由车辆环视六相机图像进行驾驶场景三维重建，并在单帧（SF）设定下合成未来帧 t+1 的环视视图。 研究问题：前馈像素对齐 3D Gaussian Splatting 只在当前帧有观测像素处生成高斯，导致前进运动使被遮挡区域（树木、杆、围栏、建筑边缘后方）在 t+1 帧去遮挡时缺乏高斯支撑，产生空洞和拉伸的“橡皮膜”伪影；论文将其重新表述为遮挡感知的高斯致密化问题，目标是补全缺失的场景几何而非缺失的像素。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.06273">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.06273.webp" alt="Quo Vadis, Driving Scene Reconstruction? Occlusion-Aware Gaussian Densification" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景的前馈式驾驶场景重建与新视角合成任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Quo Vadis, Driving Scene Reconstruction? Occlusion-Aware Gaussian Densification</h1>
+            <div class="detail-meta">2026-11-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.06273" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.06273" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.06273</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景的前馈式驾驶场景重建与新视角合成任务。 应用场景为由车辆环视六相机图像进行驾驶场景三维重建，并在单帧（SF）设定下合成未来帧 t+1 的环视视图。 研究问题：前馈像素对齐 3D Gaussian Splatting 只在当前帧有观测像素处生成高斯，导致前进运动使被遮挡区域（树木、杆、围栏、建筑边缘后方）在 t+1 帧去遮挡时缺乏高斯支撑，产生空洞和拉伸的“橡皮膜”伪影；论文将其重新表述为遮挡感知的高斯致密化问题，目标是补全缺失的场景几何而非缺失的像素。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Ho Chi Minh City University of Technology (HCMUT), AITech Lab. · Dung Do Ti…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.06273/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景的前馈式驾驶场景重建与新视角合成任务。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景的前馈式驾驶场景重建与新视角合成任务。</li><li>应用场景为由车辆环视六相机图像进行驾驶场景三维重建，并在单帧（SF）设定下合成未来帧 t+1 的环视视图。</li><li>研究问题：前馈像素对齐 3D Gaussian Splatting 只在当前帧有观测像素处生成高斯，导致前进运动使被遮挡区域（树木、杆、围栏、建筑边缘后方）在 t+1 帧去遮挡时缺乏高斯支撑，产生空洞和拉伸的“橡皮膜”伪影；论文将其重新表述为遮挡感知的高斯致密化问题，目标是补全缺失的场景几何而非缺失的像素。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Ho Chi Minh City University of Technology (HCMUT), AITech Lab.；作者：Dung Do Tien、Kien Nguyen Do Trung、Kiet Dang Vu、Trung Thai Tran、Duc Dung Nguyen</li><li>机构：Vietnam National University Ho Chi Minh City (VNUHCM)；作者：Dung Do Tien、Kien Nguyen Do Trung、Kiet Dang Vu、Trung Thai Tran、Duc Dung Nguyen</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景的前馈式驾驶场景重建与新视角合成任务。</li><li>应用场景为由车辆环视六相机图像进行驾驶场景三维重建，并在单帧（SF）设定下合成未来帧 t+1 的环视视图。</li><li>研究问题：前馈像素对齐 3D Gaussian Splatting 只在当前帧有观测像素处生成高斯，导致前进运动使被遮挡区域（树木、杆、围栏、建筑边缘后方）在 t+1 帧去遮挡时缺乏高斯支撑，产生空洞和拉伸的“橡皮膜”伪影；论文将其重新表述为遮挡感知的高斯致密化问题，目标是补全缺失的场景几何而非缺失的像素。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 OccSplat，一个前馈框架，将遮挡处理重新表述为 Occlusion-Aware Gaussian Densification，针对缺失场景几何预测新的高斯基元，而不是对渲染图像做图像空间修补。</li><li>设计 Gaussian Occlusion Mapping 模块，通过双背景渲染识别缺乏高斯支撑的遮挡区域。</li><li>设计 Gaussian Occlusion Completion 模块，为不支持区域生成新的高斯基元，并将其融合进原始表示。</li><li>在 nuScenes 基准上相比对比的前馈方法取得提升，并在遮挡区域获得尤其大的增益。</li><li>保持前馈推理，无需逐场景优化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于前馈环视骨干（沿用 DrivingForward）构建，增加两个直接作用于高斯表示的遮挡处理模块。</li><li>输入传感器：当前帧 t 的 N 路环视相机图像；原文未报告其他传感器输入（仅使用 RGB）。</li><li>场景表示：像素对齐的 3D 高斯集合 S0，每个高斯包含中心、不透明度 α、各向异性尺度 s、旋转四元数 q 和球谐系数 sh。</li><li>基础高斯重建：编码器提取多尺度图像特征，经 Volumetric Fusion Network (VFNet) 跨视图融合得到稠密深度图；每像素深度反投影得到高斯中心，轻量高斯头由特征与深度预测其余属性，形成 S0 并做可微光栅化。</li><li>Gaussian Occlusion Mapping：将 S0 渲染到目标视角 π_{t+1} 两次，背景分别设为全黑 [0,0,0] 与全白 [1,1,1]；由双背景响应的阈值不等式（阈值 ε）生成遮挡掩码，无额外可学习参数。</li><li>Gaussian Occlusion Completion：先用轻量编码器-解码器 U-Net（Pixel Refiner）对渲染的未来视角图像做残差修正；再以精修图像为查询、源帧深度与多尺度特征为键值，使用线性注意力的 Depth Attention 与 Feature Attention 两个分支分别推断未来视角深度与特征；由推断深度反投影初始化新高斯中心，并复用预训练高斯头预测新基元属性；掩码筛选后与 S0 合并为 S1 并渲染未来帧。</li><li>训练目标：两阶段训练。Stage I 优化深度网络、位姿网络、高斯头与 Pixel Refiner（其余冻结），损失包含重投影、平滑、时空、gs 与精修损失（MSE 加 LPIPS）。Stage II 冻结 Stage I 模块，仅训练 Depth Attention 与 Feature Attention，额外加入新视角深度监督（以 Depth Anything V2 伪深度为目标）和新视角特征监督。</li><li>原文未报告：可行驶区域的语义/地图输入、激光雷达监督、动态目标显式建模方式等细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes，1,000 个驾驶场景，六路环视相机 360° 覆盖，相邻视角约 10% 重叠；按官方划分 700 个场景训练、150 个验证，分辨率 114×228。</li><li>仿真器：原文未报告。</li><li>模型规模：OccSplat 参数量 63.16M（对比 DrivingForward 61.88M）；VRAM 3.10 GB（对比 2.96 GB）。</li><li>训练资源：单张 NVIDIA RTX 4090；学习率 1×10⁻⁴，batch size 1，两阶段各训练 10 个 epoch；深度范围 [1.5, 80.0] m，遮挡阈值 ε=0.7；损失权重 λ_ref=0.05、λ_MSE=1.0、λ_LPIPS=0.05、λ_nd=1.0、λ_nf=0.5。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集，在 t 帧观测下于 t+1 帧评估新视角合成质量，分辨率 114×228；评估指标为 PSNR（↑）、SSIM（↑）、LPIPS（↓）。</li><li>对比方法：SelfOcc、UniPad、EmerNeRF、DistillNeRF、MVSplat、DrivingForward。</li><li>主结果（nuScenes 验证集，开环新视角合成）：OccSplat 取得最佳整体性能，PSNR 23.50 dB、SSIM 0.767、LPIPS 0.182；相比 DrivingForward（21.76 dB、0.767、0.194）PSNR 提升 1.74 dB，LPIPS 从 0.194 降至 0.182。MVSplat 为 20.23 dB / 0.479 / 0.366；DistillNeRF 为 20.78 dB / 0.590；EmerNeRF 为 20.95 dB / 0.585；SelfOcc 为 18.22 dB / 0.464；UniPad 为 16.45 dB / 0.375。</li><li>消融结果：仅加 Gaussian Occlusion Completion（全图致密化）使 PSNR 降至 19.92 dB、SSIM 0.747、LPIPS 0.182；再加 Pixel Refiner 得 20.71 dB / 0.753 / 0.175；仅加 Completion 与 Occlusion Mapping 得 22.27 dB / 0.765 / 0.187；三者全用得 23.50 dB / 0.767 / 0.182。</li><li>遮挡阈值影响：ε=0.99 为 22.91 dB / 0.764 / 0.187；ε=0.8 为 23.41 dB / 0.767 / 0.183；ε=0.7 为 23.50 dB / 0.767 / 0.182；ε=0.6 为 23.30 dB / 0.757 / 0.192；ε=0.5 为 22.55 dB / 0.741 / 0.204。</li><li>去遮挡区域评估（统一遮挡掩码）：DrivingForward 为 11.498 dB / 0.759 / 1.178；MVSplat 为 18.606 dB / 0.509 / 0.620；OccSplat 为 18.602 dB / 0.763 / 0.465，SSIM 与 LPIPS 最优。</li><li>效率：OccSplat 约 1.01 FPS、992.9 ms，对比 DrivingForward 1.74 FPS、574.7 ms；3DGS 每场景约 9 分钟优化。</li><li>条件说明：所有结果均为 nuScenes 数据集上的开环离线评估与仿真式新视角合成评估；原文未报告闭环评测与实车实验。定性结果（图 3、图 4）显示 OccSplat 在去遮挡区域补全内容并保持已有结构，新增基元分布在场景上边界、道路前景等覆盖不完整区域。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.06911/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">BEAKER: An Expert-Curated Benchmark for Embodied Brains in Self-Driving Chemical Laboratories</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.06160/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DSRS: Teaching MLLMs to Perceive, Reason, and Segment in Complex Driving Scenes</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

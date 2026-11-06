@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trajectory Evaluation via Rollout-Free World Model for End-to-end Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶中的候选轨迹评估任务，研究在给定多条候选未来轨迹时如何选择最优轨迹。 应用场景为基于多视图图像、LiDAR、自车状态和历史帧输入的端到端规划，评估在 NAVSIM 开环基准和 Bench2Drive 闭环仿真基准上进行。 研究问题：现有基于世界模型的轨迹评估器需为每条候选轨迹显式预测未来状态（rollout），推理开销随规划时域和候选数量增长，并累积预测误差；论文探究是否可以不重建完整未来场景、仅通过共享记忆读取未来相关信息来完成候选评分。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.05072">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.05072.webp" alt="Trajectory Evaluation via Rollout-Free World Model for End-to-end Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶中的候选轨迹评估任务，研究在给定多条候选未来轨迹时如何选择最优轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Trajectory Evaluation via Rollout-Free World Model for End-to-end Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-03 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.05072" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.05072" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.05072</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶中的候选轨迹评估任务，研究在给定多条候选未来轨迹时如何选择最优轨迹。 应用场景为基于多视图图像、LiDAR、自车状态和历史帧输入的端到端规划，评估在 NAVSIM 开环基准和 Bench2Drive 闭环仿真基准上进行。 研究问题：现有基于世界模型的轨迹评估器需为每条候选轨迹显式预测未来状态（rollout），推理开销随规划时域和候选数量增长，并累积预测误差；论文探究是否可以不重建完整未来场景、仅通过共享记忆读取未来相关信息来完成候选评分。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">北京航空航天大学虚拟现实技术与系统国家重点实验室（State Key Laboratory of Virtual Reality Technology…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.05072/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶中的候选轨迹评估任务，研究在给定多条候选未来轨迹时如何选择最优轨迹。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶中的候选轨迹评估任务，研究在给定多条候选未来轨迹时如何选择最优轨迹。</li><li>应用场景为基于多视图图像、LiDAR、自车状态和历史帧输入的端到端规划，评估在 NAVSIM 开环基准和 Bench2Drive 闭环仿真基准上进行。</li><li>研究问题：现有基于世界模型的轨迹评估器需为每条候选轨迹显式预测未来状态（rollout），推理开销随规划时域和候选数量增长，并累积预测误差；论文探究是否可以不重建完整未来场景、仅通过共享记忆读取未来相关信息来完成候选评分。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：北京航空航天大学虚拟现实技术与系统国家重点实验室（State Key Laboratory of Virtual Reality Technology and Systems, Beihang University）；作者：Junzhe Wang、Jinqing Zhang、Qingjie Liu</li><li>机构：小米汽车（Xiaomi EV）；作者：Jinqing Zhang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶中的候选轨迹评估任务，研究在给定多条候选未来轨迹时如何选择最优轨迹。</li><li>应用场景为基于多视图图像、LiDAR、自车状态和历史帧输入的端到端规划，评估在 NAVSIM 开环基准和 Bench2Drive 闭环仿真基准上进行。</li><li>研究问题：现有基于世界模型的轨迹评估器需为每条候选轨迹显式预测未来状态（rollout），推理开销随规划时域和候选数量增长，并累积预测误差；论文探究是否可以不重建完整未来场景、仅通过共享记忆读取未来相关信息来完成候选评分。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>指出未来感知轨迹评估中的关键错配：模型评估器依赖候选条件的未来 rollout，而端到端规划只需通过规划充分接口查询未来相关信息。</li><li>提出 RFWorld，一种无 rollout 的世界模型轨迹评估框架：构建共享场景记忆，训练时以轻量时序读出和语义监督塑造记忆，推理时通过稀疏空间读出为候选轨迹打分。</li><li>通过共享记忆一次构建、多候选复用，显著降低推理计算（约减少规划时域×候选轨迹数倍的重复计算），并避免递归 rollout 误差。</li><li>在 NAVSIM 上取得 ResNet-34 设置下 90.5 PDMS 的最优结果，并在 CARLA 闭环 Bench2Drive 上验证性能。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端规划中的候选轨迹评估器（世界模型分支）与基于锚点的候选轨迹生成分支。</li><li>输入传感器：历史帧信息、当前 LiDAR 特征、当前自车状态、当前多视图图像；采用 TransFuser 式多模态融合，将历史 LiDAR 特征对齐到当前自车坐标系并与视觉观测融合为 BEV 场景表示。</li><li>场景表示：BEV 场景表示经展平加空间位置编码，由 Transformer 潜在世界模型编码为轨迹无关的共享记忆（L×d token）。</li><li>候选生成：预定义轨迹锚点词汇表，每个锚点与场景表示交互预测偏移得到候选轨迹。</li><li>训练时：将共享记忆重排为 BEV 空间形式，全局池化得到上下文，结合可学习时序嵌入做 SE 式通道调制得到时间条件特征，经共享语义解码器输出各监督时间戳的 BEV 语义图，以当前和未来语义目标监督，塑造未来可读记忆。</li><li>推理时：不做候选级 rollout，每个候选航点经编码为空间查询并注入自车状态上下文，通过可变形空间注意力预测采样偏移与权重，在共享记忆上双线性采样并加权聚合为航点特征，沿轨迹时域聚合为轨迹嵌入，再预测模仿奖励和仿真奖励（NC、DAC、EP、TTC、Comfort），聚合为最终分数并选择最高分轨迹。</li><li>训练目标：轨迹损失、语义损失（焦点损失）、模仿奖励损失（基于候选与专家轨迹相对距离的软目标交叉熵）、仿真奖励损失（BCE 及 EP 边际排序正则）的加权和。</li><li>原文未报告模型参数量等规模信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM-v1（官方 trainval 85,109 训练样本、18,179 验证样本，test split 12,146 场景）；Bench2Drive（CARLA 0.9.15，官方 220 条测试路线）。</li><li>仿真器：CARLA 0.9.15（Bench2Drive 闭环）。</li><li>模型规模：原文未报告参数量；NAVSIM 使用 ResNet-34 骨干，1024 个候选轨迹锚点；Bench2Drive 输入三张前视相机图像拼接缩放至 1024×256，LiDAR 栅格化为 256×256 BEV 网格（各方向 32 m，0.25 m 分辨率）。</li><li>训练资源：NAVSIM 使用 2 块 RTX 3090 GPU，batch size 16，训练 50 epoch，AdamW，学习率 1×10⁻⁴；Bench2Drive 从原 RFWorld 预训练权重初始化，训练 30,000 迭代，batch size 8，学习率 5×10⁻⁶，权重衰减 10⁻⁴，梯度裁剪 5；消融中 WoTE 使用 2 块 A6000（48 GB×2）训练以适配其内存需求，推理延迟在单块 RTX 3090 上测量；训练内存对比为 RFWorld 8.7 GB 对 WoTE 33.9 GB（1024 锚点、batch size 16）。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>NAVSIM 开环评估：基准为 NAVSIM-v1 官方 test split（12,146 场景），指标为 PDMS 及其组成 NC、DAC、TTC、Comfort、EP；RFWorld 取得 PDMS 90.5、NC 99.0、DAC 97.8、TTC 96.0、Comfort 100.0、EP 84.6，在所有对比学习型方法中 PDMS、NC、TTC 最高；对比方法包括 Human、Ego Status MLP、VADv2、UniAD、LTF、Transfuser、DRAMA、GoalFlow、Hydra-MDP、Hydra-MDP++、DiffusionDrive、DriveSuprim、DriveDPO、LAW、WoTE、ResWorld（均在 ResNet-34 骨干下比较）。</li><li>Bench2Drive 闭环评估：基准为 CARLA 0.9.15 中官方 220 条测试路线，指标为 Success Rate 和 Driving Score；RFWorld 取得 31.36% 和 62.38，相比 TCP 分别高 1.36 个百分点和 2.48 分，在对比基线中领先；对比方法包括 AD-MLP、UniAD、VAD、TCP。</li><li>消融（NAVSIM）：无世界模型且无未来监督 PDMS 88.9；仅未来监督 89.4；仅世界模型无未来监督 88.4；完整 RFWorld 90.5，表明未来监督与共享记忆世界建模互补。</li><li>推理锚点数量与延迟消融：RFWorld 在 256/512/1024 个候选下 PDMS 分别为 89.6/90.2/（1024 设置结果为原文截断处未完整呈现），延迟从 35.1 ms 增至 37.5 ms；WoTE 在 256/512/1024 下 PDMS 为 88.3/88.4/88.7，延迟为 37.0/41.2/49.2 ms，RFWorld 在所有测试锚点数下均更快。</li><li>评估条件：NAVISIM 为开环评估，Bench2Drive 为闭环仿真评估；未报告实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.05249/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Should the Action Expert Train the VLM? Action-Token Supervision and Gradient Routing in Mixture-of-Transformer VLAs</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.04988/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">From Roadside Sensing to Risk-Informed Safety Control: Surrogate Safety Measures as a Cyber-Physical Interface</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

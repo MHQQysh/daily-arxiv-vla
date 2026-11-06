@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DSRS: Teaching MLLMs to Perceive, Reason, and Segment in Complex Driving Scenes - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景，提出“驾驶场景推理分割”（Driving Scene Reasoning Segmentation, DSRS）任务，属于语言驱动的推理分割任务在自动驾驶领域的场景化扩展。 应用场景为复杂混合交通环境中的自动驾驶感知，要求模型理解隐式人类指令、理解交通规则、推断空间关系、检测潜在风险（如交通事故、正负障碍物），并处理复杂地形、极端光照与天气等挑战性条件。 研究问题在于：现有基于多模态大语言模型（MLLM）的推理分割框架缺乏驾驶场景特定感知能力；且简单拼接 RGB 与深度图等几何线索无法有效利用几何信息，还可能破坏 MLLM 原有的视觉-语言对齐。 论文同时构建 DSRS 基准数据集并提出 DSRS-Net 网络以推进该任务研究。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.06160">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.06160.webp" alt="DSRS: Teaching MLLMs to Perceive, Reason, and Segment in Complex Driving Scenes" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景，提出“驾驶场景推理分割”（Driving Scene Reasoning Segmentation, DSRS）任务，属于语言驱动的推理分割任务在自动驾驶领域的场景化扩展。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DSRS: Teaching MLLMs to Perceive, Reason, and Segment in Complex Driving Scenes</h1>
+            <div class="detail-meta">2026-11-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.06160" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.06160" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.06160</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景，提出“驾驶场景推理分割”（Driving Scene Reasoning Segmentation, DSRS）任务，属于语言驱动的推理分割任务在自动驾驶领域的场景化扩展。 应用场景为复杂混合交通环境中的自动驾驶感知，要求模型理解隐式人类指令、理解交通规则、推断空间关系、检测潜在风险（如交通事故、正负障碍物），并处理复杂地形、极端光照与天气等挑战性条件。 研究问题在于：现有基于多模态大语言模型（MLLM）的推理分割框架缺乏驾驶场景特定感知能力；且简单拼接 RGB 与深度图等几何线索无法有效利用几何信息，还可能破坏 MLLM 原有的视觉-语言对齐。 论文同时构建 DSRS 基准数据集并提出 DSRS-Net 网络以推进该任务研究。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">同济大学（College of Electronic &amp; Information Engineering, Tongji University） ·…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.06160/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景，提出“驾驶场景推理分割”（Driving Scene Reasoning Segmentation, DSRS）任务，属于语言驱动的推理分割任务在自动驾驶领域的场景化扩展。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景，提出“驾驶场景推理分割”（Driving Scene Reasoning Segmentation, DSRS）任务，属于语言驱动的推理分割任务在自动驾驶领域的场景化扩展。</li><li>应用场景为复杂混合交通环境中的自动驾驶感知，要求模型理解隐式人类指令、理解交通规则、推断空间关系、检测潜在风险（如交通事故、正负障碍物），并处理复杂地形、极端光照与天气等挑战性条件。</li><li>研究问题在于：现有基于多模态大语言模型（MLLM）的推理分割框架缺乏驾驶场景特定感知能力；且简单拼接 RGB 与深度图等几何线索无法有效利用几何信息，还可能破坏 MLLM 原有的视觉-语言对齐。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：同济大学（College of Electronic &amp; Information Engineering, Tongji University）；作者：Sicen Guo、Zhengfei Song、Kuanhsun Chen、Xu Huang、Wei Ye、Rui Fan</li><li>机构：中南大学（Department of Computer Science and Technology, Central South University）；作者：Ping Zhong</li><li>机构：西安交通大学（National Key Laboratory of Human-Machine Hybrid Augmented Intelligence / Institute of Artificial Intelligence and Robotics, Xi’an Jiaotong University）；作者：Shaoyi Du、Rui Fan</li><li>机构：上海创新研究院（Shanghai Innovation Institute）；作者：Wei Ye</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景，提出“驾驶场景推理分割”（Driving Scene Reasoning Segmentation, DSRS）任务，属于语言驱动的推理分割任务在自动驾驶领域的场景化扩展。</li><li>应用场景为复杂混合交通环境中的自动驾驶感知，要求模型理解隐式人类指令、理解交通规则、推断空间关系、检测潜在风险（如交通事故、正负障碍物），并处理复杂地形、极端光照与天气等挑战性条件。</li><li>研究问题在于：现有基于多模态大语言模型（MLLM）的推理分割框架缺乏驾驶场景特定感知能力；且简单拼接 RGB 与深度图等几何线索无法有效利用几何信息，还可能破坏 MLLM 原有的视觉-语言对齐。</li><li>论文同时构建 DSRS 基准数据集并提出 DSRS-Net 网络以推进该任务研究。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出场景特定的 DSRS 任务，显式评估交通规则理解、空间推理、危险感知及挑战性驾驶条件下的感知能力。</li><li>发布面向自动驾驶的 DSRS 基准数据集，包含超过 1,500 个图像-指令-掩码样本（原文报告共 1,561 个标注样本）。</li><li>提出 DSRS-Net，建立将几何先验融入基于 MLLM 的分割模型的路径。</li><li>提出深度引导层级特征交互（DHFI）策略，将几何先验有效投影到层级视觉特征空间。</li><li>在驾驶场景推理分割及多个公开数据集的语言驱动分割任务上报告了 DSRS-Net 的优越性能。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：整体为基于 MLLM 的推理分割框架，包含 CLIP 视觉编码器分支、几何先验提取器（GPE）、DHFI 模块、大语言模型与分割头。</li><li>输入传感器：原文报告输入为 RGB 图像、相对深度图与文本指令；未报告其他车载传感器输入。</li><li>场景表示：将 RGB 图像划分为 14×14 非重叠 patch 并映射为 D 维 token；深度图经 GPE 生成几何先验特征；视觉与几何特征分别经投影层映射为视觉 token T^V 与 T^S 后送入 LLM。原文未报告显式三维场景表示或 BEV 表示。</li><li>模型结构：CLIP 视觉编码器被均匀分为四个阶段；GPE 使用 ResNet 块从相对深度图提取结构化几何先验；DHFI 由四个堆叠的深度感知可变形注意力（DA²）块组成，逐级对齐语义与几何表示；LLM 接收视觉、几何与文本 token，自回归生成文本响应及 &lt;MASK&gt; token；分割头以 &lt;MASK&gt; 隐藏嵌入为查询、对图像嵌入计算缩放点积相似度图并转换为二值掩码，再拼接、重塑为高分辨率掩码。</li><li>关键技术：DHFI 中 DA² 采用两阶段偏移生成——先基于平均池化深度图计算几何亲和矩阵 D 与位置亲和矩阵 L，经 MLP 生成候选偏移；再由 MLP 筛选候选偏移以抑制噪声；随后在变形点处采样视觉特征，并采用多头交叉注意力与 MLP 融合；使用 LoRA 进行高效微调。</li><li>原文未报告：模型总参数量、推理时延等具体规模信息（正文可见部分未报告）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：DSRS 数据集，共 1,561 个样本，划分训练 832 对、验证 312 对、测试 417 对；每样本含 RGB 图像、相对深度图、隐式推理指令与像素级掩码；图像选自多个真实驾驶数据集。另使用 RefCOCO、RefCOCO+、RefCOCOg 与 ReasonSeg（239 个训练样本微调）进行评估。</li><li>仿真器：原文未报告。</li><li>模型规模：DSRS-Net 分别基于 LLaVA1.5 7B 与 InternVL2.5 8B 构建；对比方法包括 LLaVA v1 7B、Qwen-VL 7B、Qwen2.5-VL 3B/7B、LISA-7B 等。</li><li>训练资源：在 A800 GPU 上训练 120,000 次迭代，批大小为 2，使用 DeepSpeed 引擎，AdamW 优化器，学习率 0.0002。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：DSRS 数据集（验证集与测试集）；补充基准为 RefCOCO、RefCOCO+、RefCOCOg 与 ReasonSeg。</li><li>评估指标：gIoU 与 cIoU。</li><li>关键数值（DSRS 数据集，表 I）：DSRS-Net（LLaVA1.5 7B）零样本验证集 gIoU 37.4 / cIoU 35.0，测试集 gIoU 47.5 / cIoU 50.2；微调后验证集 gIoU 56.0 / cIoU 70.3，测试集 gIoU 61.1 / cIoU 77.8。DSRS-Net（InternVL2.5 8B）零样本验证集 gIoU 45.8 / cIoU 40.5，测试集 gIoU 54.9 / cIoU 53.1；微调后验证集 gIoU 67.2 / cIoU 76.7，测试集 gIoU 71.2 / cIoU 79.7（表内加粗为最优）。</li><li>对比方法：ReLA、X-Decoder、SEEM、Grounded-SAM、LISA、GSVA、PixelLM、M²SA、SegAgent、Seg-R1、ConverSeg-Net，以及在 RefCOCO 系列上的 CRIS、POPEN、SAM 3 Agent、READ、WISE 等。</li><li>语言驱动分割结果（表 II/III 可见部分）：DSRS-Net-InternVL2.5 (ft) 在 RefCOCO 验证集 80.9、TestA 82.1、TestB 77.2，RefCOCO+ 验证集 74.3、TestA 78.2、TestB 71.2，RefCOCOg 验证集 75.4、测试集 76.2；在 ReasonSeg 上微调后验证集 gIoU 62.5 / cIoU 66.8，测试集 gIoU 65.2 / cIoU 69.4。</li><li>实验条件：评估为数据集上的开环分割评测（零样本与微调两种设置）；提供定性对比（图 6）。原文可见部分未报告闭环仿真或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.06273/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Quo Vadis, Driving Scene Reconstruction? Occlusion-Aware Gaussian Densification</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.06007/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">MotoVerse: A Benchmark for Predictive Perception of Motorized Two-Wheelers in Dense Unstructured Traffic</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

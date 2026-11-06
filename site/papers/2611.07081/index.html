@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wide View Synthesis from Overlapping Perspective Cameras in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究自动驾驶场景下的宽视角合成（Wide View Synthesis, WVS）任务：利用空间分离、部分视场重叠的多个透视相机同步观测，在指定虚拟视点合成几何一致的宽视场图像。 应用场景为自动驾驶多相机感知系统，目标是将互补但视点不同的相机图像融合为统一宽视角图像。 研究问题包括：相机间有限重叠导致深度相关视差与遮挡难以处理；单张透视投影渲染宽视场时出现边缘拉伸；跨相机曝光、白平衡等差异造成光度不一致；现有数据集缺乏宽视场真值，难以定量评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.07081">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.07081.webp" alt="Wide View Synthesis from Overlapping Perspective Cameras in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究自动驾驶场景下的宽视角合成（Wide View Synthesis, WVS）任务：利用空间分离、部分视场重叠的多个透视相机同步观测，在指定虚拟视点合成几何一致的宽视场图像。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Wide View Synthesis from Overlapping Perspective Cameras in Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-04 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.07081" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.07081" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.07081</span></div>
+            <p class="detail-summary">论文研究自动驾驶场景下的宽视角合成（Wide View Synthesis, WVS）任务：利用空间分离、部分视场重叠的多个透视相机同步观测，在指定虚拟视点合成几何一致的宽视场图像。 应用场景为自动驾驶多相机感知系统，目标是将互补但视点不同的相机图像融合为统一宽视角图像。 研究问题包括：相机间有限重叠导致深度相关视差与遮挡难以处理；单张透视投影渲染宽视场时出现边缘拉伸；跨相机曝光、白平衡等差异造成光度不一致；现有数据集缺乏宽视场真值，难以定量评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Nanjing University of Science and Technology · Kaixuan Zhang、Zhipeng Xiong、…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.07081/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究自动驾驶场景下的宽视角合成（Wide View Synthesis, WVS）任务：利用空间分离、部分视场重叠的多个透视相机同步观测，在指定虚拟视点合成几何一致的宽视场图像。</p>
+  <ul class="reading-intro-points"><li>论文研究自动驾驶场景下的宽视角合成（Wide View Synthesis, WVS）任务：利用空间分离、部分视场重叠的多个透视相机同步观测，在指定虚拟视点合成几何一致的宽视场图像。</li><li>应用场景为自动驾驶多相机感知系统，目标是将互补但视点不同的相机图像融合为统一宽视角图像。</li><li>研究问题包括：相机间有限重叠导致深度相关视差与遮挡难以处理；单张透视投影渲染宽视场时出现边缘拉伸；跨相机曝光、白平衡等差异造成光度不一致；现有数据集缺乏宽视场真值，难以定量评估。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Nanjing University of Science and Technology；作者：Kaixuan Zhang、Zhipeng Xiong、Minxian Li、Mingwu Ren</li><li>机构：University of Surrey；作者：Kaixuan Zhang、Xiatian Zhu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究自动驾驶场景下的宽视角合成（Wide View Synthesis, WVS）任务：利用空间分离、部分视场重叠的多个透视相机同步观测，在指定虚拟视点合成几何一致的宽视场图像。</li><li>应用场景为自动驾驶多相机感知系统，目标是将互补但视点不同的相机图像融合为统一宽视角图像。</li><li>研究问题包括：相机间有限重叠导致深度相关视差与遮挡难以处理；单张透视投影渲染宽视场时出现边缘拉伸；跨相机曝光、白平衡等差异造成光度不一致；现有数据集缺乏宽视场真值，难以定量评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>形式化定义宽视角合成（WVS）任务，要求从空间分离相机的部分重叠透视图像合成几何一致的宽视角图像。</li><li>提出前馈式高斯泼溅框架 Wide-View Gaussian Splatting（WV-GS），无需逐场景优化即可合成宽视角图像。</li><li>提出分段透视渲染（Piecewise Perspective Rendering, PPR），通过共享同一光心的多个局部透视投影缓解宽视场渲染的边缘拉伸。</li><li>提出空间仿射光度建模（Spatial Affine Photometric Modeling, SAPM），在训练中建模相机相关的光度变化，以缓解跨相机光度不一致。</li><li>构建合成基准 WideDrive（基于 CARLA，含稠密宽视场真值），并将 LiDAR 投影稀疏参考（LPSR）协议适配到 nuScenes、Lyft 等真实数据集用于评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：前馈式 3D 高斯泼溅（3DGS）场景表示与渲染框架，包含几何感知高斯预测、渲染与外观、SAPM、PPR 及联合优化。</li><li>输入传感器：多个空间分离、标定好的透视相机的同步图像，以及相机内参和外参；训练时还使用参考深度进行几何监督。</li><li>场景表示：每个场景预测共享的 3D 高斯集合，包含均值、协方差、不透明度和球谐外观系数；以深度预测反投影点作为高斯初始位置。</li><li>模型结构：采用预训练 OmniVGGT 作为前馈骨干，聚合跨相机与跨时间戳特征，接三个预测头：稠密深度头、高斯属性预测头、SAPM 头；高斯属性预测头结合 DINO 图像特征与聚合多视图特征回归高斯属性及融合置信度。</li><li>关键技术一：SAPM 结合局部图像块特征与相机 token，经分支预测三通道增益与偏置残差场，上采样并经 tanh 有界化得到空间仿射参数，以恒等映射初始化，对渲染图像做逐像素仿射校正后再与观测图像计算光度损失。</li><li>关键技术二：PPR 将宽视场划分为 M 个相邻角度段，使用共享目标光心的 M 个局部透视相机分别渲染，再沿方位角水平拼接为分段透视宽视场图像；各局部相机共享光心、内参和分辨率，朝向由目标旋转与绕竖直轴旋转组合得到。</li><li>时间上下文：用最近 L 个时间戳的 NL 张图像构成上下文窗口；高斯属性与 SAPM 仅用最新时间戳训练，历史帧仅提供特征。</li><li>优化目标：光度重建损失（ℓ2、D-SSIM、LPIPS 加权）、深度监督损失（预测深度与参考深度的 ℓ1）、渲染深度一致性损失（光栅化深度与预测深度的 ℓ2²），总损失加权组合。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：真实世界使用 nuScenes 和 Lyft 进行训练与测试；合成数据使用基于 CARLA 构建的 WideDrive，包含 120 个驾驶序列，每个序列有三个重叠透视相机的同步观测及对应宽视场真值图像。</li><li>仿真器：CARLA。</li><li>模型规模：原文未报告参数量等模型规模信息。</li><li>训练资源：4 块 NVIDIA RTX 4090 GPU（每块 24 GB 显存）；训练 15,000 次迭代，批大小为 1，使用 AdamW 优化器，基础学习率 2×10⁻⁵，权重衰减 10⁻⁴。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：WideDrive 使用稠密宽视场真值直接评估；nuScenes 和 Lyft 使用适配的 LiDAR-Projected Sparse-Reference（LPSR）协议构建稀疏参考，并在评估前做逐面板直方图匹配（HM）。</li><li>评估指标：WideDrive 使用 PSNR、SSIM、MAE、RMSE、LPIPS；nuScenes/Lyft 使用 HM-PSNR、HM-SSIM、HM-MAE、HM-RMSE，以及 Sparse-SSIM；所有数据集报告 Success（%）即有效宽视场输出比例；WideDrive 稠密评估不应用直方图匹配。</li><li>对比方法：AutoStitch、APAP、UDIS2、REwarp、RopStitch、DSFN、UniStitch、StabStitch++，共八种图像/视频拼接方法。</li><li>关键数值（nuScenes）：WV-GS（L=1）取得 22.06 dB HM-PSNR、0.919 HM-SSIM、16.70 HM-MAE、25.28 HM-RMSE，Success 为 100.00%；WV-GS（L=3）为 22.28 dB HM-PSNR、0.960 HM-SSIM、13.40 HM-MAE、21.74 HM-RMSE、100.00% Success。</li><li>关键数值（Lyft）：WV-GS（L=1）取得 23.35 dB HM-PSNR、0.976 HM-SSIM、10.20 HM-MAE、18.46 HM-RMSE，Success 为 100.00%；WV-GS（L=3）为 23.76 dB HM-PSNR、0.977 HM-SSIM、9.62 HM-MAE、17.69 HM-RMSE、100.00% Success。</li><li>关键数值（WideDrive）：WV-GS（L=1）取得 26.49 dB PSNR、0.771 SSIM、7.76 MAE、13.31 RMSE、0.366 LPIPS，Success 为 100.00%；WV-GS（L=3）为 26.57 dB PSNR、0.796 SSIM、7.46 MAE、13.24 RMSE、0.301 LPIPS、100.00% Success。</li><li>对比结论：WV-GS（L=1）在三个数据集的 PSNR、SSIM、MAE、RMSE 上均优于所有对比方法；在 nuScenes 和 Lyft 上 HM-PSNR 分别超过最强对比方法 5.02 dB 和 9.50 dB；在 WideDrive 上 PSNR 超过 DSFN 11.10 dB；WV-GS 在三个测试集上均达到 100% 成功率，而部分拼接方法成功率显著较低（如 StabStitch++ 在 nuScenes 为 18.01%，DSFN 为 7.92%）。</li><li>时间上下文收益：L=3 相比 L=1 在 nuScenes 和 Lyft 上 HM-PSNR 分别提升 0.22 dB 和 0.41 dB，在 WideDrive 上 PSNR 提升 0.08 dB，SSIM、MAE、RMSE 也一致改善。</li><li>评估条件：全部为数据集上的开环离线评估，包含真实数据集（nuScenes、Lyft）的稀疏参考评估和合成数据集（WideDrive）的稠密参考评估；原文未报告闭环仿真或实车评估结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.07613/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Towards Real-Time Full-Waveform LiDAR Transformers via Intensity-Guided Token Reduction and Physics-Aware Augmentation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.06911/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">BEAKER: An Expert-Curated Benchmark for Embodied Brains in Self-Driving Chemical Laboratories</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
