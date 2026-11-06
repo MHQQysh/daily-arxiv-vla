@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Safety4DM: A Vision-Language Framework for Risk-Aware Dynamic Maps in Vehicle-Road-Cloud Collaborative Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向车–路–云（VRC）协同自动驾驶中的动态地图（DM），解决两个安全能力缺口：一是缺少从真实道路观测到 DM 中细粒度、可解释风险实体的处理流程；二是 DM 缺少面向驾驶风险的自然语言接口。 研究任务包括：基于真实道路图像的道路安全风险感知（道路状况类型与风险等级判定），以及在 VRC 协同动态地图上进行自然语言安全查询与可执行驾驶建议生成。 应用场景为车辆、路侧单元与云端协同感知下的超视距安全决策，查询对象同时涵盖车辆信息与道路环境风险信息。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.01996">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.01996.webp" alt="Safety4DM: A Vision-Language Framework for Risk-Aware Dynamic Maps in Vehicle-Road-Cloud Collaborative Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向车–路–云（VRC）协同自动驾驶中的动态地图（DM），解决两个安全能力缺口：一是缺少从真实道路观测到 DM 中细粒度、可解释风险实体的处理流程；二是 DM 缺少面向驾驶风险的自然语言接口。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Safety4DM: A Vision-Language Framework for Risk-Aware Dynamic Maps in Vehicle-Road-Cloud Collaborative Driving</h1>
+            <div class="detail-meta">2026-11-01 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.01996" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.01996" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.01996</span></div>
+            <p class="detail-summary">论文面向车–路–云（VRC）协同自动驾驶中的动态地图（DM），解决两个安全能力缺口：一是缺少从真实道路观测到 DM 中细粒度、可解释风险实体的处理流程；二是 DM 缺少面向驾驶风险的自然语言接口。 研究任务包括：基于真实道路图像的道路安全风险感知（道路状况类型与风险等级判定），以及在 VRC 协同动态地图上进行自然语言安全查询与可执行驾驶建议生成。 应用场景为车辆、路侧单元与云端协同感知下的超视距安全决策，查询对象同时涵盖车辆信息与道路环境风险信息。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">天津科技大学人工智能学院 · Zhengshu Zhou、Shaoyu Wang、Xinhui Hu 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.01996/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向车–路–云（VRC）协同自动驾驶中的动态地图（DM），解决两个安全能力缺口：一是缺少从真实道路观测到 DM 中细粒度、可解释风险实体的处理流程；二是 DM 缺少面向驾驶风险的自然语言接口。</p>
+  <ul class="reading-intro-points"><li>论文面向车–路–云（VRC）协同自动驾驶中的动态地图（DM），解决两个安全能力缺口：一是缺少从真实道路观测到 DM 中细粒度、可解释风险实体的处理流程；二是 DM 缺少面向驾驶风险的自然语言接口。</li><li>研究任务包括：基于真实道路图像的道路安全风险感知（道路状况类型与风险等级判定），以及在 VRC 协同动态地图上进行自然语言安全查询与可执行驾驶建议生成。</li><li>应用场景为车辆、路侧单元与云端协同感知下的超视距安全决策，查询对象同时涵盖车辆信息与道路环境风险信息。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：天津科技大学人工智能学院；作者：Zhengshu Zhou、Shaoyu Wang、Xinhui Hu、Jiaqi Gu、Tingting Zhao</li><li>机构：武汉大学资源与环境科学学院；作者：Lu Tao</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向车–路–云（VRC）协同自动驾驶中的动态地图（DM），解决两个安全能力缺口：一是缺少从真实道路观测到 DM 中细粒度、可解释风险实体的处理流程；二是 DM 缺少面向驾驶风险的自然语言接口。</li><li>研究任务包括：基于真实道路图像的道路安全风险感知（道路状况类型与风险等级判定），以及在 VRC 协同动态地图上进行自然语言安全查询与可执行驾驶建议生成。</li><li>应用场景为车辆、路侧单元与云端协同感知下的超视距安全决策，查询对象同时涵盖车辆信息与道路环境风险信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Safety4DM，用于打通从真实世界视觉感知、结构化风险表示到自然语言安全查询的完整流程，并支持对车辆风险与道路环境风险的自然语言安全查询。</li><li>构建 RoadRisk 真实道路图像数据集，覆盖四类道路状况与四个风险等级，用于微调视觉语言模型进行具有显式视觉推理的道路安全风险感知，输出可被 DM 直接接收的结构化风险表示。</li><li>设计 SafeVRC-Sim 车–路–云协同仿真框架，用于模拟协同感知交通场景并注入道路环境风险；在其上构建包含 1,600 个混合交通场景和 23.5K 问答对的安全问答基准 SafeDM-QA。</li><li>提出 SafeStep 分步提示机制作为 DM 的自然语言查询接口，将空间关系与安全指标计算卸载到查询工具箱，使 LLM 能精确回答结构化场景上的安全查询并结合常识生成可执行驾驶建议。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：Safety4DM 包含道路安全风险感知模型、RoadRisk 数据集、SafeVRC-Sim 仿真框架、SafeDM-QA 数据工程与 SafeStep 提示机制五个关键组件。</li><li>输入传感器：风险感知模型输入为真实道路图像；仿真中的感知节点包括车载（AV）节点与路侧（RSU）节点，均感知车辆风险与环境风险；SafeVRC-Sim 通过 SUMO/TraCI 获取交通数据流，原文未报告具体物理传感器配置。</li><li>场景表示：DM 按更新频率分为静态、半静态、半动态和动态四层；车辆信息属于动态层，道路风险实体填充半动态层。云端构建数字向量场景（DVS），并以 JSON 组织语言场景（LS）供下游 LLM 使用。OI 模式包含 id、时间戳、坐标、速度、加速度、航向、尺寸、类型、颜色、车道与道路等字段；EI 模式包含道路、风险类别、风险等级（0–3）、受影响车道、检测传感器与时间戳等字段。</li><li>模型结构：道路风险感知被建模为带显式视觉推理的条件生成问题，视觉编码器与文本嵌入层分别编码图像与指令并拼接为统一上下文，生成推理链与结构化答案（道路状况类别、风险等级）。风险等级按积水最深处深度、积雪车道覆盖率与厚度、障碍物横向占道比例等物理量分级。</li><li>关键技术：SafeStep 包括查询解析、风险计算与安全响应三个步骤；SafeDM-QA 数据工程包括目标关联与关系计算、属性–实体–关系图构建、问题模板设计与细化（自我车锚定问答与道路锚定问答）以及问答实例化；共定义 18 类安全相关查询任务，包括道路风险类别、风险等级、TTC、THW、安全速度与制动距离等。</li><li>原文未报告：视觉编码器与语言模型的具体骨干网络细节、模型参数规模、训练资源与实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：RoadRisk 为 6,000 张真实道路图像构成的问答数据集，覆盖四类道路状况与四个风险等级，图像来源包括 BDD100K、Lost and Found 及网络采集；场景涵盖城市街道、高速公路、小巷、村庄、隧道与城镇，包含白天与夜间、行车记录仪、CCTV、行人视角与无人机视角。</li><li>基准：SafeDM-QA 包含 1,600 个混合交通语言场景与 23.5K 问答对，覆盖 18 类安全相关查询任务。</li><li>仿真器：SafeVRC-Sim 基于 SUMO、ROS2 与 PyQt6 构建。</li><li>模型规模：实验涉及 Qwen3-VL-4B 等紧凑模型，以及五个模型家族中 20B 及以上的中大型模型；原文未报告各模型的具体参数配置细节。</li><li>训练资源与实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：RoadRisk 上的道路风险感知任务，以及 SafeDM-QA 上的自然语言安全查询任务。</li><li>评估指标：风险感知使用准确率；自然语言查询使用查询准确率；SafeDM-QA 统计中使用归一化香农熵衡量答案分布平衡性。</li><li>关键数值：紧凑的 Qwen3-VL-4B 经微调后在风险感知任务上达到 89.83% 准确率；SafeStep 在五个模型家族的中大型模型（20B 及以上）上均取得超过 93% 的自然语言查询准确率。</li><li>对比方法：原文实验设置部分包含 Baselines，但所给 HTML 内容未报告具体基线名称与逐项对比数值；论文概述表格中与 DriveGPT4、DriveVLM、DriveLM、Talk2BEV、PromptTrack、NuScenes-QA、LMDrive、V2X-VLM、V2V-LLM 等研究进行了任务覆盖比较。</li><li>实验条件：风险感知基于真实道路图像；SafeDM-QA 评估基于 SafeVRC-Sim 生成的语言场景，属于仿真条件下的问答评估。开环、闭环与实车评估：原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.02240/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">When to Probe and When to Act: Clarity-Aware Risk-Adaptive Control for Interactive Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.01682/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Leveraging 2D Foundation Priors for Generalized Category Discovery under Test-Time Adaptation in 3D LiDAR Segmentation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

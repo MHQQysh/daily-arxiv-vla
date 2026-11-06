@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STEER: Route-Aware Adaptive Reasoning for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向端到端自动驾驶的视觉-语言-动作（VLA）模型轨迹生成，即给定前视驾驶图像与结构化驾驶上下文，自回归输出文本形式的未来自车轨迹。 应用场景：自动驾驶规划，特别是常规场景与需要多步推理的复杂场景（如无保护路口、密集汇入、部分遮挡危险）。 研究问题：VLA 模型过度调用思维链（CoT）推理，即“过度思考”，带来额外计算开销并可能反而降低规划性能；核心是决定“何时”调用显式推理。 关键问题：已有显式路由方法依赖场景难度标注来监督路由选择，而此类标注费力、难扩展、主观且与推理的实际效用未必对齐；论文探索在无场景难度标签条件下实现显式路由优化。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.00718">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.00718.webp" alt="STEER: Route-Aware Adaptive Reasoning for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向端到端自动驾驶的视觉-语言-动作（VLA）模型轨迹生成，即给定前视驾驶图像与结构化驾驶上下文，自回归输出文本形式的未来自车轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">STEER: Route-Aware Adaptive Reasoning for Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-31 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.00718" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.00718" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.00718</span></div>
+            <p class="detail-summary">任务：面向端到端自动驾驶的视觉-语言-动作（VLA）模型轨迹生成，即给定前视驾驶图像与结构化驾驶上下文，自回归输出文本形式的未来自车轨迹。 应用场景：自动驾驶规划，特别是常规场景与需要多步推理的复杂场景（如无保护路口、密集汇入、部分遮挡危险）。 研究问题：VLA 模型过度调用思维链（CoT）推理，即“过度思考”，带来额外计算开销并可能反而降低规划性能；核心是决定“何时”调用显式推理。 关键问题：已有显式路由方法依赖场景难度标注来监督路由选择，而此类标注费力、难扩展、主观且与推理的实际效用未必对齐；论文探索在无场景难度标签条件下实现显式路由优化。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Data Science, Fudan University · Yangang Zou、Nan Song、Bozhou Zhan…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.00718/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向端到端自动驾驶的视觉-语言-动作（VLA）模型轨迹生成，即给定前视驾驶图像与结构化驾驶上下文，自回归输出文本形式的未来自车轨迹。</p>
+  <ul class="reading-intro-points"><li>任务：面向端到端自动驾驶的视觉-语言-动作（VLA）模型轨迹生成，即给定前视驾驶图像与结构化驾驶上下文，自回归输出文本形式的未来自车轨迹。</li><li>应用场景：自动驾驶规划，特别是常规场景与需要多步推理的复杂场景（如无保护路口、密集汇入、部分遮挡危险）。</li><li>研究问题：VLA 模型过度调用思维链（CoT）推理，即“过度思考”，带来额外计算开销并可能反而降低规划性能；核心是决定“何时”调用显式推理。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Data Science, Fudan University；作者：Yangang Zou、Nan Song、Bozhou Zhang、Li Zhang</li><li>机构：Shanghai Innovation Institute；作者：Yangang Zou、Nan Song、Bozhou Zhang、Li Zhang</li><li>机构：Logos Intelligence Lab；作者：Yangang Zou、Nan Song、Bozhou Zhang、Li Zhang</li><li>机构：HKUST(GZ)；作者：Pei Liu、Jun Ma</li><li>机构：HKUST；作者：Pei Liu、Jun Ma</li><li>机构：Li Auto Inc.；作者：Mingyu Guo</li><li>机构：Imperial College London；作者：Jiankang Deng</li><li>机构：University of Surrey；作者：Xiatian Zhu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向端到端自动驾驶的视觉-语言-动作（VLA）模型轨迹生成，即给定前视驾驶图像与结构化驾驶上下文，自回归输出文本形式的未来自车轨迹。</li><li>应用场景：自动驾驶规划，特别是常规场景与需要多步推理的复杂场景（如无保护路口、密集汇入、部分遮挡危险）。</li><li>研究问题：VLA 模型过度调用思维链（CoT）推理，即“过度思考”，带来额外计算开销并可能反而降低规划性能；核心是决定“何时”调用显式推理。</li><li>关键问题：已有显式路由方法依赖场景难度标注来监督路由选择，而此类标注费力、难扩展、主观且与推理的实际效用未必对齐；论文探索在无场景难度标签条件下实现显式路由优化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>识别 VLA 自动驾驶中的“过度思考”问题，并首次探索能否完全从比较性任务结果中学习显式路由偏好，而无需任何场景难度标注。</li><li>提出 STEER，一种通用的过度推理缓解策略，包含路由均衡监督微调、路由不确定性感知 rollout 与跨路由优势信用分配三个组件。</li><li>路由均衡 SFT 通过路由校准与长度归一化保持双路由先验，避免模型在 RL 前过早坍缩到较短直接响应。</li><li>路由不确定性感知 rollout 根据初始路由分布的二元熵动态分配采样，实现同提示下推理与直接路由的对比探索。</li><li>跨路由优势信用分配引入差分度量，以环境奖励而非主观标签强化最优路由决策，并从期望更新分析上说明其提升高期望奖励路由的概率。</li><li>在 NAVSIM v1/v2 上取得与先进方法有竞争力的结果，并同时改善规划质量、路由质量与推理效率的 Pareto 前沿。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端 VLA 驾驶框架，包含显式路由决策模块与轨迹生成模块；不额外使用规划器，直接自回归文本航点轨迹。</li><li>输入传感器：前视驾驶图像（1x C）与结构化驾驶上下文组成的多模态驾驶提示；原文未报告其他传感器输入的详细配置。</li><li>场景表示：以多模态驾驶提示表示场景，输出为文本形式的未来自车轨迹；未使用显式 BEV 或栅格场景表示（原文未报告）。</li><li>模型结构：基于自回归视觉语言模型 Qwen2.5-VL-8B；响应分布分解为路由策略 pθ(R\|x) 与条件轨迹生成 pθ(y\|x,R)。</li><li>路由形式：首步为离散路由决策 R∈{reason, direct}；推理路由格式为 <code> &lt;answer&gt; trajectory &lt;/answer&gt;</code>，直接路由格式为 <code>&lt;answer&gt; trajectory &lt;/answer&gt;</code>。</li><li>训练流程：三阶段，包括驾驶中心预训练、路由均衡监督微调、路由感知策略优化。</li><li>路由均衡 SFT：每个提示同时提供推理与直接两个目标，损失包含路由校准项（对初始路由决策做均匀分布正则）与按路由长度归一化的下一词损失，并用 α 平衡两路由。</li><li>路由不确定性感知 rollout：以路由特殊 token 的首 token 概率归一化得到 p_reason 与 p_direct，计算二元熵 H(x) 与少数路由概率 p_min；按阈值 ε、τ_low、τ_high 分为模式 A（各半强制对比）、模式 B（对比加 on-policy 混合）、模式 C（标准 on-policy）。</li><li>跨路由优势信用分配：对推理与直接 rollout 子集分别以对方路由平均奖励为基线构造 A_route，在初始路由位置额外施加裁剪代理目标；其余响应 token 使用组相对归一化优势 A_content。</li><li>优化目标：L = L_content + λ_r L_route + β_KL L_KL，基于序列级 RL（如 GRPO）并加入 KL 正则。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM v1 与 NAVSIM v2，使用官方模拟器评估；SFT 与 RL 数据由官方 navtrain 划分构建。</li><li>预训练数据：ReCogDrive、LingoQA、NuScenes-QA、DriveLM、OmniDrive 等公开驾驶推理数据集，以及自建驾驶中心预训练数据（场景结构与关键障碍理解、轨迹可行性与安全判断）。</li><li>仿真器：NAVSIM 官方模拟器；原文未报告实车平台。</li><li>模型规模：Qwen2.5-VL-8B，全参数微调。</li><li>训练资源：64 张 NVIDIA H20 GPU，使用 DeepSpeed ZeRO-3 实现。</li><li>实车平台：原文未报告。</li><li>其他资源规模（如数据量、训练时长）：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1 navtest 与 NAVSIM v2 navtest。</li><li>评估指标：规划指标包括 PDMS（v1）与 EPDMS（v2），以及 NC、DAC、EP、TTC、C（v1）和 DDC、TLC、LK、HC、EC（v2）；路由指标包括 RouteAcc、AUC、AvgRegret（以 oracle route 为参照），并报告平均路由概率与路由不确定性、平均响应 token 数。</li><li>开环/闭环条件：论文在 NAVSIM 官方模拟器上评估，表 1 标注为 closed-loop metrics；未报告实车实验。</li><li>NAVSIM v1 关键结果：STEER 取得 91.2 PDMS，优于 AdaThinkDrive 的 90.3（后者依赖场景难度标注），并略高于 SGDrive 的 91.1；Best-of-N（6 候选）下 STEER† 达 93.4 PDMS。</li><li>NAVSIM v2 关键结果：STEER 取得最佳 87.2 EPDMS，比 SGDrive 的 86.2 高 1.0，并获得最佳 DAC 97.6 与 EP 95.6。</li><li>自适应路由对比（NAVSIM v1，RL 后）：强制直接 89.9 PDMS/156 token，强制推理 90.8 PDMS/415 token，自适应 91.2 PDMS/315 token；SFT 后自适应仅 86.5 PDMS，说明该阶段主要保留双路由能力。</li><li>路由优化消融：同时启用不确定性感知 rollout 与跨路由优势时 RouteAcc 81.1%、AUC 79.1%、AvgRegret 0.018、平均响应 315 token、PDMS 91.2；单独启用任一组件均更差（如仅跨路由优势为 77.5%/76.5%/0.024/350/89.9）。</li><li>SFT 消融：无长度归一化与路由校准时推理概率 26.6%、PDMS 86.4；两者均启用时推理概率 49.1%、PDMS 86.5。</li><li>训练流程消融：无预训练且无 RL 为 85.9 PDMS；仅预训练为 86.5 PDMS；预训练加 RL 的完整流程为 91.2 PDMS（表中 STEER 行数值与表 1 一致）。</li><li>对比方法：包括 Ego-MLP、UniAD、PARA-Drive、Hydra-MDP、DiffusionDrive、DiffusionDriveV2、ImagiDrive-S、ReCogDrive、SGDrive、Qwen2.5-VL、InternVL3、AutoVLA、AdaThinkDrive、Curious-VLA，以及 NAVSIM v2 上的 VADv2、TransFuser、HydraMDP、HydraMDP++、ARTEMIS 等。</li><li>效率分析：论文以平均响应 token 数刻画推理开销，并声称在推理效率 Pareto 前沿上优于固定路由与既有自适应推理方法；原文未报告具体延迟或 FLOPs 数值。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.01283/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DriftingPlanner: Drifting Generative Models for One-Step Trajectory Planning in End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.41834/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">ObjectGuidedMap: An Object-Aware Model for Robust Bird&#x27;s Eye View Map Prediction in High-Occlusion Scenarios</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

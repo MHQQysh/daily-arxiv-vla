@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Review of Max-Pressure Traffic Signal Control Algorithms: State of the Art and Research Opportunities - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文是一篇关于 Max-Pressure（MP，又称 backpressure）交通信号控制算法的综述，面向城市信号交叉口实时自适应信号控制场景。 研究问题：系统梳理 MP 信号控制的理论基础、移动权重定义演进、控制结构与实现扩展、多模式与多尺度网络扩展，以及与 CAV、AI 等新兴技术的结合，并识别研究空白。 论文明确指出 MP 源自通信网络调度，不能直接照搬到交通信号控制，需要针对最小绿灯、清空时间、周期结构、有限路段存储、固定相位集与行人需求等差异进行改造。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.04029">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.04029.webp" alt="A Review of Max-Pressure Traffic Signal Control Algorithms: State of the Art and Research Opportunities" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文是一篇关于 Max-Pressure（MP，又称 backpressure）交通信号控制算法的综述，面向城市信号交叉口实时自适应信号控制场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Review of Max-Pressure Traffic Signal Control Algorithms: State of the Art and Research Opportunities</h1>
+            <div class="detail-meta">2026-11-02 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.04029" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.04029" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.04029</span></div>
+            <p class="detail-summary">论文是一篇关于 Max-Pressure（MP，又称 backpressure）交通信号控制算法的综述，面向城市信号交叉口实时自适应信号控制场景。 研究问题：系统梳理 MP 信号控制的理论基础、移动权重定义演进、控制结构与实现扩展、多模式与多尺度网络扩展，以及与 CAV、AI 等新兴技术的结合，并识别研究空白。 论文明确指出 MP 源自通信网络调度，不能直接照搬到交通信号控制，需要针对最小绿灯、清空时间、周期结构、有限路段存储、固定相位集与行人需求等差异进行改造。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Maine, Department of Civil and Environmental Engineering · Ab…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.04029/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文是一篇关于 Max-Pressure（MP，又称 backpressure）交通信号控制算法的综述，面向城市信号交叉口实时自适应信号控制场景。</p>
+  <ul class="reading-intro-points"><li>论文是一篇关于 Max-Pressure（MP，又称 backpressure）交通信号控制算法的综述，面向城市信号交叉口实时自适应信号控制场景。</li><li>研究问题：系统梳理 MP 信号控制的理论基础、移动权重定义演进、控制结构与实现扩展、多模式与多尺度网络扩展，以及与 CAV、AI 等新兴技术的结合，并识别研究空白。</li><li>论文明确指出 MP 源自通信网络调度，不能直接照搬到交通信号控制，需要针对最小绿灯、清空时间、周期结构、有限路段存储、固定相位集与行人需求等差异进行改造。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Maine, Department of Civil and Environmental Engineering；作者：Abdullah Al Asif、Hao Liu</li><li>机构：Technische Universität Dresden, Chair of Traffic Process Automation；作者：Chaopeng Tan</li><li>机构：The Pennsylvania State University；作者：Vikash V. Gayah</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文是一篇关于 Max-Pressure（MP，又称 backpressure）交通信号控制算法的综述，面向城市信号交叉口实时自适应信号控制场景。</li><li>研究问题：系统梳理 MP 信号控制的理论基础、移动权重定义演进、控制结构与实现扩展、多模式与多尺度网络扩展，以及与 CAV、AI 等新兴技术的结合，并识别研究空白。</li><li>论文明确指出 MP 源自通信网络调度，不能直接照搬到交通信号控制，需要针对最小绿灯、清空时间、周期结构、有限路段存储、固定相位集与行人需求等差异进行改造。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出多维分类框架组织 MP 文献，涵盖理论公式、面向实现的扩展（多模式、多尺度与系统级协调）以及与新兴技术的集成，而非简单罗列单篇研究。</li><li>从理论假设、感知与数据需求、适用场景、实践含义和局限等角度批判性评估代表性 MP 方法，揭示不同方法选择之间的权衡。</li><li>纳入近年新进展，提供 MP 信号控制演化与现状的最新理解，并识别剩余研究空白与未来方向。</li><li>给出 MP 的理论基础回顾，包括原始假设、store-and-forward 模型、一般控制步骤以及最大稳定性性质与 Lyapunov 漂移证明示例。</li><li>归纳 MP 在多模式交通（公交优先、行人、非机动车）、系统级与结构性扩展（信号协调、网络边界控制、选择性部署）、CAV 环境与 AI/数据驱动方法中的扩展方向。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文为综述，不提出新的控制模型；所述方法属于城市交通信号控制中的分散式实时自适应控制模块。</li><li>输入传感器：原文未报告统一的传感器配置；正文指出 MP 控制依赖交通状态变量（如排队长度、旅行时间、延误）及转向比例等信息，并讨论不同变体的感知与数据需求。</li><li>场景表示：采用 store-and-forward 排队模型，将路网表示为链路与转向移动（有序链路对 (l,m)），假定每个转向移动有独立点队列、车辆到达为独立同分布随机过程、转向比例固定且已知、链路存储容量无限。</li><li>模型结构：在每个信号更新时刻，先计算各移动权重 w(l,m)(t)，即上游移动交通状态量减去按转向比例加权的下游移动状态量；再按饱和度加权求和得到各相位压力；最后选择压力最大的相位。</li><li>关键技术：最大压力/backpressure 原理、最大稳定性（吞吐最优性）及其 Lyapunov 漂移分析证明；并按信号更新机制区分基于时间步（无周期）与周期式 MP 两类实现。</li><li>原文未报告具体模型规模或网络架构细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告特定数据集名称；文献检索使用 Scopus 与 Web of Science，检索 2013–2026 年英文文献，初检 237 条记录，去重后 148 篇进入标题摘要筛选，75 篇保留评估，最终纳入 90 项研究（含通过参考文献和既有知识补充的 arXiv 预印本等）。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：论文为综述，原文未报告统一的实验基准；正文提到第 5 节在共同实验设置下比较代表性 MP 变体，但所提供 HTML 原文未包含该比较的具体实验数值。</li><li>评估指标：原文未报告综述层面的统一评估指标；理论部分讨论了最大稳定性、吞吐最优性、长期平均排队长度有界等性质。</li><li>关键数值：理论部分给出稳定性定义与证明框架，但原文未报告可引用的仿真或实测性能数值。</li><li>对比方法：原文按类别讨论并比较了多种 MP 变体，包括基于车辆数的 MP（容量感知 MP、车辆位置感知 MP）、基于旅行时间的 MP、基于延误的 MP、变换状态变量的 MP（环境加权 MP、基于到达的 MP）以及周期式 MP、考虑相位切换损失时间的 MP 等。</li><li>开环、闭环、仿真或实车条件：原文未报告具体实验条件；仅指出 MP 的稳定性通常在微观交通仿真中用有限需求场景评估。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.04034/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Do Pretrained Backbones Transfer to Physical Sensors? A Systematic Study of Multimodal Initialization Across the Sensor Stack</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.03465/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">HIVE-Diff: High Frame Rate HDR Video Reconstruction from a Single LDR Frame and Events</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

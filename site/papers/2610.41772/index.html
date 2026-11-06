@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WorkIng: A Real-World and Synthetic Highway Work-Zone Benchmark Dataset for Autonomous Navigation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文聚焦自动驾驶车辆在高速公路施工区（highway work zone）中的导航任务，该场景是标准运行设计域（ODD）之外的关键边缘场景。 应用场景为真实高速公路施工区，包含临时车道几何、临时交通规则、昼夜光照变化和区域法规差异。 研究问题：现有基准要么仅为单目 RGB、缺乏 LiDAR 与 3D 标注，要么只标注静态前视物体，且没有覆盖多辖区法规差异的大规模场景，难以支撑多模态感知与轨迹规划的可泛化评测。 论文提出双域基准与训练资源 WorkIng，同时提供真实世界数据集（WorkIng-Highway）与合成仿真数据集（WorkIng-CARLA）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.41772">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.41772.webp" alt="WorkIng: A Real-World and Synthetic Highway Work-Zone Benchmark Dataset for Autonomous Navigation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文聚焦自动驾驶车辆在高速公路施工区（highway work zone）中的导航任务，该场景是标准运行设计域（ODD）之外的关键边缘场景。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">WorkIng: A Real-World and Synthetic Highway Work-Zone Benchmark Dataset for Autonomous Navigation</h1>
+            <div class="detail-meta">2026-10-30 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.41772" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.41772" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.41772</span></div>
+            <p class="detail-summary">论文聚焦自动驾驶车辆在高速公路施工区（highway work zone）中的导航任务，该场景是标准运行设计域（ODD）之外的关键边缘场景。 应用场景为真实高速公路施工区，包含临时车道几何、临时交通规则、昼夜光照变化和区域法规差异。 研究问题：现有基准要么仅为单目 RGB、缺乏 LiDAR 与 3D 标注，要么只标注静态前视物体，且没有覆盖多辖区法规差异的大规模场景，难以支撑多模态感知与轨迹规划的可泛化评测。 论文提出双域基准与训练资源 WorkIng，同时提供真实世界数据集（WorkIng-Highway）与合成仿真数据集（WorkIng-CARLA）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">AImotion Bavaria, Technische Hochschule Ingolstadt, Germany · Xujun Xie、Dom…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.41772/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文聚焦自动驾驶车辆在高速公路施工区（highway work zone）中的导航任务，该场景是标准运行设计域（ODD）之外的关键边缘场景。</p>
+  <ul class="reading-intro-points"><li>论文聚焦自动驾驶车辆在高速公路施工区（highway work zone）中的导航任务，该场景是标准运行设计域（ODD）之外的关键边缘场景。</li><li>应用场景为真实高速公路施工区，包含临时车道几何、临时交通规则、昼夜光照变化和区域法规差异。</li><li>研究问题：现有基准要么仅为单目 RGB、缺乏 LiDAR 与 3D 标注，要么只标注静态前视物体，且没有覆盖多辖区法规差异的大规模场景，难以支撑多模态感知与轨迹规划的可泛化评测。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：AImotion Bavaria, Technische Hochschule Ingolstadt, Germany；作者：Xujun Xie、Dominik Rößle、Adithya Mohan、Torsten Schön</li><li>机构：Technische Universität München, Germany；作者：Daniel Cremers</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文聚焦自动驾驶车辆在高速公路施工区（highway work zone）中的导航任务，该场景是标准运行设计域（ODD）之外的关键边缘场景。</li><li>应用场景为真实高速公路施工区，包含临时车道几何、临时交通规则、昼夜光照变化和区域法规差异。</li><li>研究问题：现有基准要么仅为单目 RGB、缺乏 LiDAR 与 3D 标注，要么只标注静态前视物体，且没有覆盖多辖区法规差异的大规模场景，难以支撑多模态感知与轨迹规划的可泛化评测。</li><li>论文提出双域基准与训练资源 WorkIng，同时提供真实世界数据集（WorkIng-Highway）与合成仿真数据集（WorkIng-CARLA）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 WorkIng-Highway：一个 360° LiDAR-相机-RTK 的施工区基准数据集，包含同步的六路 RGB 相机、128 线 LiDAR 与 RTK-GPS，覆盖 19.3 km 白天与 12.7 km 夜间驾驶，产出 12,000+ 标注帧、227,399 个 3D 包围框和 6,044 个 track ID。</li><li>提出 WorkIng-CARLA：一个程序化仿真框架，基于六种典型拓扑与两种交互模式生成 24 个安全关键施工区场景，并通过 region 参数替换 100+ 自定义 3D 资产以适配六种国际交通标准。</li><li>在统一类目体系下对代表性 3D 检测器（CenterPoint、PETR、BEVFusion）与端到端规划器（UniAD、VAD）进行双域基准评测，并给出四项发现：真实数据是性能主要驱动因素；夜间 LiDAR 感知更强、多模态优于纯相机；矢量化 VAD 碰撞率低于查询式 UniAD；场景分层的合成数据增强对 2D 识别、3D 检测与轨迹规划均有一致增益。</li><li>开源数据集与资源（https://github.com/cvims/WorkIng）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据集构建与基准评测，涵盖 3D 目标检测、2D 施工区资产识别与端到端轨迹规划。</li><li>输入传感器：真实数据使用 1 个 128 线 LiDAR（20 Hz，360° 水平 FOV，−25° 至 15° 垂直 FOV，≥10% 反射率下最远 240 m）、6 个 RGB 相机（1920×1080 @ 20 FPS，4 个 60° 水平 FOV、2 个 100° 水平 FOV）、1 个 RTK-GPS/IMU（100 Hz，厘米级精度）；仿真数据的自车传感器套件镜像真实采集车。</li><li>场景表示与标注：真实数据以 5 Hz 人工标注，每个实例为 (x,y,z)、(l,w,h)、yaw 的 3D 包围框，具有跨序列一致的跟踪 ID，共九类；人脸与车牌做高斯模糊匿名化。仿真数据包含同步 RGB、深度与语义分割标注，CARLA 资产类目映射到 nuScenes 兼容类目，仅排除 Trailer。</li><li>仿真框架关键技术：基于 CARLA Leaderboard 的参数化场景，六种典型布局为单车道封闭、多车道封闭、半幅封闭（对向交通）、内部施工区、横向车道偏移、路肩施工区；两种交互模式为无遮挡接近与前车遮挡接近；支持 Australia、China、Nordic、USA、Europe（Vienna Convention）、DACH 六种法规。轨迹由增强的 PDM-Lite 智能体生成，加入施工区限速调整、响应临时标志变道、沿锥桶边界跟踪等法规合规导航行为。</li><li>检测与规划基线：CenterPoint（纯 LiDAR，100 m×100 m 网格、体素 (0.1,0.1,0.2) m、25 epoch）、PETR（纯相机，FCOS3D V2-99-eSE、384×960 输入、75 epoch）、BEVFusion（多模态，Swin-Tiny 图像编码器、VoxelNet LiDAR、体素 (0.075,0.075,0.2) m、50 epoch）；UniAD-Tiny（查询式端到端，10 epoch、queue 3、体素 (0.2,0.2,8) m）与 VAD-Tiny（矢量化端到端，10 epoch、体素 (0.2,0.2,8) m），两者由原始纯相机设计改造为相机-LiDAR 融合，且省略 HD 地图分支，因为 WorkIng-Highway 不提供 HD 地图真值。</li><li>2D 资产识别基线：Mask R-CNN（ResNet-50-FPN）与 Mask DINO（DETR 系），与 ROADWork 报告的基线对齐以便直接比较。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：WorkIng-Highway（真实）与 WorkIng-CARLA（合成，含 312 个施工区 episode 与 174 个通用高速 episode，合计超过 45,000 帧、850,000+ 3D 包围框、26,149 个 track ID）；对比与消融中用到 DrivIng 与 ROADWork。</li><li>仿真器：CARLA（基于 CARLA Leaderboard 框架），含 100+ 自定义 3D 资产（Table 3 资产目录）。</li><li>数据划分：WorkIng-Highway 按昼/夜各自切成 50 个不重叠子序列，以 80%/10%/10% 分层划分为训练/验证/测试；WorkIng-CARLA 共 486 个场景（训练 313 = 216 施工区 + 97 通用，Towns 04/06/12；验证 88 = 48 + 40；测试 85 = 48 + 37），验证与测试仅在未见过的 Town 13 生成。</li><li>训练资源：所有模型在 8 块 NVIDIA L40S GPU 上训练；UniAD-Tiny（Day、10 epoch、batch 3）约需 3 天。</li><li>模型规模：原文未报告参数量等模型规模信息。</li><li>实车平台：原文报告了采集车的传感器配置（1 LiDAR、1 GPS/IMU、6 RGB 相机），但未报告具体车辆平台型号，该信息原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与协议：3D 检测沿用 nuScenes 评测协议与类目映射（Car/Van 映射为 Car，Cyclist 并入 Motorcycle），指标为 mAP、ATE、ASE、AOE 与 NDS（×100）；轨迹估计在 0.5/1.0/2.0 s 及时间平均上报告 L2 误差（m）与碰撞率（%）；2D 资产识别在 ROADWork 留出真实测试集上报告 COCO 风格 mask AP（IoU 0.5:0.95）。因标注密度不足，Night 排除 Bus、Motorcycle、Pedestrian，CARLA 排除 Trailer。</li><li>3D 检测 within-domain 结果（Table 4，真实为仅用 WorkIng-Highway 训练，CARLA 为仅用 WorkIng-CARLA 训练）：Day 上 CenterPoint mAP 0.76 / NDS 79.40，BEVFusion 0.75 / 76.59，PETR 0.37 / 43.52；Night 上 CenterPoint 0.78 / 81.55，BEVFusion 0.78 / 77.71，PETR 0.33 / 44.04；CARLA 上 CenterPoint mAP 0.97 / NDS 94.65，BEVFusion 0.93 / 85.12，PETR 0.56 / 61.35。结论为纯 LiDAR 与多模态在昼夜均优于纯相机，CenterPoint 的 NDS 略高于 BEVFusion，差距来自尺度与朝向误差（ASE、AOE）而非定位误差（ATE）；CARLA 中带 LiDAR 的检测器接近饱和，纯相机差距缩小。</li><li>训练数据组合消融（Table 5，全部在 WorkIng-Highway 测试集上评估）：配置为 W（仅 WorkIng-Highway）、D（仅 DrivIng）、C（仅 WorkIng-CARLA）、W+D、W+D+C；其中 W+D+C 将 WorkIng-CARLA 在每个场景内下采样至 1/8 帧以保留 24 个场景、六种拓扑与六种区域标准的完整覆盖。原文可读到 CenterPoint 在 W 配置下的 Day 结果为 ATE 0.21、ASE 0.18、AOE 0.07、mAP 0.76、NDS 79.40；其余组合的完整数值在提供的原文中被截断，原文未报告。</li><li>其他评估：2</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.41834/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">ObjectGuidedMap: An Object-Aware Model for Robust Bird&#x27;s Eye View Map Prediction in High-Occlusion Scenarios</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.41185/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Mechanistic Interpretability for End-to-End Self-Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

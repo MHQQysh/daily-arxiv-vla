@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GraTED: Graph--Tensor EEG Decoding for Passenger Hazard Perception in Autonomous Vehicles - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向自动驾驶场景中的乘客危险感知解码任务，利用乘客脑电（EEG）信号识别道路风险。 包含两个互补任务：风险预测（RP，使用事件前窗口评估潜在风险）与危险识别（DI，检测事件发生附近的实际危险），并支持 Risk-aware Sequential Labeling（RSL）让 RP 知识辅助 DI。 研究问题：能否以参数高效的方式建模乘客 EEG，同时保留电极的真实头皮几何结构，并捕捉时间与特征模态之间的高阶交互，从而准确解码危险感知。 指出既有方法（如 3D-CRNN）将 54 个电极映射到 6×9 人工网格、并用 GRU 将时间–特征表示当作序列处理，破坏了不规则的 10–20 电极几何与高阶结构。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.02827">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.02827.webp" alt="GraTED: Graph--Tensor EEG Decoding for Passenger Hazard Perception in Autonomous Vehicles" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向自动驾驶场景中的乘客危险感知解码任务，利用乘客脑电（EEG）信号识别道路风险。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">GraTED: Graph--Tensor EEG Decoding for Passenger Hazard Perception in Autonomous Vehicles</h1>
+            <div class="detail-meta">2026-11-02 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.02827" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.02827" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.02827</span></div>
+            <p class="detail-summary">面向自动驾驶场景中的乘客危险感知解码任务，利用乘客脑电（EEG）信号识别道路风险。 包含两个互补任务：风险预测（RP，使用事件前窗口评估潜在风险）与危险识别（DI，检测事件发生附近的实际危险），并支持 Risk-aware Sequential Labeling（RSL）让 RP 知识辅助 DI。 研究问题：能否以参数高效的方式建模乘客 EEG，同时保留电极的真实头皮几何结构，并捕捉时间与特征模态之间的高阶交互，从而准确解码危险感知。 指出既有方法（如 3D-CRNN）将 54 个电极映射到 6×9 人工网格、并用 GRU 将时间–特征表示当作序列处理，破坏了不规则的 10–20 电极几何与高阶结构。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Imperial College London（Department of Electrical and Electronic Engineering…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.02827/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向自动驾驶场景中的乘客危险感知解码任务，利用乘客脑电（EEG）信号识别道路风险。</p>
+  <ul class="reading-intro-points"><li>面向自动驾驶场景中的乘客危险感知解码任务，利用乘客脑电（EEG）信号识别道路风险。</li><li>包含两个互补任务：风险预测（RP，使用事件前窗口评估潜在风险）与危险识别（DI，检测事件发生附近的实际危险），并支持 Risk-aware Sequential Labeling（RSL）让 RP 知识辅助 DI。</li><li>研究问题：能否以参数高效的方式建模乘客 EEG，同时保留电极的真实头皮几何结构，并捕捉时间与特征模态之间的高阶交互，从而准确解码危险感知。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Imperial College London（Department of Electrical and Electronic Engineering, Imperial College London, United Kingdom）；作者：Yuxuan Gu、Yingkai Yang、Qiyu Rao、Tania Stathaki、Danilo Mandic</li><li>机构：原文未明确对应（原文仅以通讯作者标记与致谢脚注出现，未给出其他单位）；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向自动驾驶场景中的乘客危险感知解码任务，利用乘客脑电（EEG）信号识别道路风险。</li><li>包含两个互补任务：风险预测（RP，使用事件前窗口评估潜在风险）与危险识别（DI，检测事件发生附近的实际危险），并支持 Risk-aware Sequential Labeling（RSL）让 RP 知识辅助 DI。</li><li>研究问题：能否以参数高效的方式建模乘客 EEG，同时保留电极的真实头皮几何结构，并捕捉时间与特征模态之间的高阶交互，从而准确解码危险感知。</li><li>指出既有方法（如 3D-CRNN）将 54 个电极映射到 6×9 人工网格、并用 GRU 将时间–特征表示当作序列处理，破坏了不规则的 10–20 电极几何与高阶结构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出基于头皮坐标的无向电极图，保留电极间真实的不规则空间关系，而非人为规则网格。</li><li>提出 GraTED 图–张量解码架构，结合 Chebyshev 图滤波与张量分类，同时保留空间拓扑以及时间与特征模态的结构。</li><li>采用 Tucker 低秩参数化的分类器（以及 Tucker 参数化的图级聚合），在不展平模态的前提下建模时间、特征与类别轴之间的交互并控制参数量。</li><li>在 PassengerEEG 数据集上与七种最先进基线比较，在全部三种评估设置下取得最高 balanced accuracy，且可学习参数最少。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：乘客 EEG 解码/脑机接口（BCI）感知模块，包含 RP 与 DI 两个分支（DI 可选 RSL 融合）。</li><li>输入传感器：54 个头皮电极的 EEG，采样率 250 Hz，试次对齐到交通事件起始点；完整试次为 X∈R^{54×750}（[-2,1] s）。RP 窗口为 54×375（[-2,-0.5] s），DI 窗口为 54×300（[-0.2,1] s）。</li><li>场景表示：以电极节点构建无向图，边由 10–20 montage 归一化三维头皮坐标的测地距离 d_ij=arccos(p_i^T p_j) 定义，每节点连接 k=4 近邻并对称化，边权为指数核 exp(−d_ij²/2σ²)（σ 为中位成对电极距离），邻接矩阵加自环并对称归一化。</li><li>模型结构：</li></ul>
+<p> - 时间编码：对每个电极独立做一维卷积、批归一化、逐元素平方、平均池化与对数变换；RP 映射为 R^{19×16}，DI 映射为 R^{5×16}，堆叠得到 H_RP^{(0)}∈R^{N×19×16}、H_DI^{(0)}∈R^{N×5×16}。</p>
+<p> - 图编码：Chebyshev 图卷积（λ_max=2，化简为 L̃=−Â），阶数 Q=3，两层图卷积，含残差与 LayerNorm；滤波器参数 16×16。</p>
+<p> - 图级聚合：用 Tucker 参数化的系数张量 W^{(agg)}∈R^{32×N×16}（Tucker 秩 (8,24,8)）对电极与图特征模态做收缩，得到每时刻 32 维表示 z_t，经 ELU；得到 Z_RP∈R^{19×32}、Z_DI∈R^{5×32}。</p>
+<p> - 张量分类：对 RP、DI 无 RSL、DI 有 RSL 分别使用独立分类器；DI 有 RSL 时沿时间维拼接 Z_RSL∈R^{24×32}。系数张量 W^{(cls)}∈R^{T×32×C}（C=2）用 Tucker 分解参数化，logits 为 W^{(cls)}×_{1,2}Z+b，softmax 输出类别。</p>
+<ul><li>关键技术：Chebyshev 谱图卷积、Tucker 张量分解与低秩参数化、RSL 跨任务表示拼接。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：PassengerEEG，预处理后的乘客 EEG 数据集，11 名参与者、15 个交通场景，原文摘要称包含 45 小时记录；试次分为 safe、low-risk、high-risk 三类。</li><li>标签设置：RP 中 safe 为非风险、low-risk 与 high-risk 为风险；DI 中 safe 与 low-risk 为非危险、high-risk 为危险；DI 有/无 RSL 使用相同标签。</li><li>数据划分：每位参与者 60% 训练、40% 测试，训练数据中 30% 用于验证。</li><li>训练配置：AdamW 优化器，批大小 1024，每任务最多 60 个 epoch，基于验证 balanced accuracy 早停；所有模型使用相同数据划分与训练设置。</li><li>模型规模：GraTED 参数为 RP 6,388、DI 无 RSL 5,451、DI 有 RSL 12,805；Tucker 分类器分别仅 1,028、283、966 个参数。</li><li>仿真器与实车平台：原文未报告（论文为基于 PassengerEEG 的离线解码实验，未报告仿真器或实车部署平台）。</li><li>训练硬件资源：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：PassengerEEG 数据集；三种评估设置——RP、DI without RSL、DI with RSL。</li><li>评估指标：Precision、Recall、F1-score（正类为 RP 的风险类与 DI 的危险类）、Balanced Accuracy（BA，主指标），结果为 11 名参与者上的均值±标准差。</li><li>对比方法（七种基线）：EEGNet、ShallowConvNet、DeepConvNet、XGB-DIM、CTNet、DSC-ConvLSTM、3D-CRNN。</li><li>关键数值：</li></ul>
+<p> - RP：GraTED 参数 6,388，Precision 0.977±0.034，Recall 0.913±0.044，F1 0.943±0.028，BA 0.946±0.026；最佳基线 ShallowConvNet BA 0.943±0.033、参数 89,002。</p>
+<p> - DI 无 RSL：GraTED 参数 5,451，Precision 0.653±0.027，Recall 0.848±0.053，F1 0.737±0.023，BA 0.827±0.026；BA 相比 ShallowConvNet 与 3D-CRNN 分别提升 2.1% 与 2.4%。</p>
+<p> - DI 有 RSL：GraTED 参数 12,805，Precision 0.660±0.015，Recall 0.894±0.031，F1 0.759±0.010，BA 0.848±0.012；相比最强基线 3D-CRNN（BA 0.838±0.035）提升 1.2%；RSL 使 GraTED 的 BA 由 0.827 提升至 0.848，F1 由 0.737 提升至 0.759。</p>
+<p> - 参数效率：相比 3D-CRNN，三种设置参数量分别减少 80.9%、87.3%、83.9%；DI 有 RSL 时 Tucker 分类模块比 3D-CRNN 的 3,170 参数 GRU 融合模块少 69.5%。</p>
+<ul><li>实验条件：全部为基于 PassengerEEG 的离线开环解码评估（按参与者划分训练/测试），原文未报告闭环控制、仿真器实验或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.02853/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Scaling Action-Free Video Latent Prediction for Transferable Representations in End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.02648/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">ReinSeg: Retrieval-Guided Bounded Multimodal Refinement for 3-D Road Anomaly Segmentation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

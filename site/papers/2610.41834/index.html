@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ObjectGuidedMap: An Object-Aware Model for Robust Bird&#x27;s Eye View Map Prediction in High-Occlusion Scenarios - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的在线矢量化鸟瞰图（BEV）地图预测，即从多视角环绕相机图像预测矢量化、实例级的地图元素（Lane Lines、Crosswalks、Curbs）。 应用场景：自动驾驶感知流水线中的静态环境建图，服务于下游轨迹预测与规划控制。 研究问题：现有 BEV 地图预测模型（如 Mask2Map、MapTRv2、BeMapNet）主要仅从图像可见证据推理地图几何，显式地与目标级场景理解解耦，因而在交通参与者造成遮挡、能见度差的场景中鲁棒性不足；论文希望利用环境中目标的信息作为几何与上下文先验，提升高遮挡场景下的地图预测鲁棒性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.41834">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.41834.webp" alt="ObjectGuidedMap: An Object-Aware Model for Robust Bird&#x27;s Eye View Map Prediction in High-Occlusion Scenarios" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的在线矢量化鸟瞰图（BEV）地图预测，即从多视角环绕相机图像预测矢量化、实例级的地图元素（Lane Lines、Crosswalks、Curbs）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ObjectGuidedMap: An Object-Aware Model for Robust Bird&#x27;s Eye View Map Prediction in High-Occlusion Scenarios</h1>
+            <div class="detail-meta">2026-10-30 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.41834" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.41834" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.41834</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的在线矢量化鸟瞰图（BEV）地图预测，即从多视角环绕相机图像预测矢量化、实例级的地图元素（Lane Lines、Crosswalks、Curbs）。 应用场景：自动驾驶感知流水线中的静态环境建图，服务于下游轨迹预测与规划控制。 研究问题：现有 BEV 地图预测模型（如 Mask2Map、MapTRv2、BeMapNet）主要仅从图像可见证据推理地图几何，显式地与目标级场景理解解耦，因而在交通参与者造成遮挡、能见度差的场景中鲁棒性不足；论文希望利用环境中目标的信息作为几何与上下文先验，提升高遮挡场景下的地图预测鲁棒性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Wuppertal · Christian Bohn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.41834/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的在线矢量化鸟瞰图（BEV）地图预测，即从多视角环绕相机图像预测矢量化、实例级的地图元素（Lane Lines、Crosswalks、Curbs）。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的在线矢量化鸟瞰图（BEV）地图预测，即从多视角环绕相机图像预测矢量化、实例级的地图元素（Lane Lines、Crosswalks、Curbs）。</li><li>应用场景：自动驾驶感知流水线中的静态环境建图，服务于下游轨迹预测与规划控制。</li><li>研究问题：现有 BEV 地图预测模型（如 Mask2Map、MapTRv2、BeMapNet）主要仅从图像可见证据推理地图几何，显式地与目标级场景理解解耦，因而在交通参与者造成遮挡、能见度差的场景中鲁棒性不足；论文希望利用环境中目标的信息作为几何与上下文先验，提升高遮挡场景下的地图预测鲁棒性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Wuppertal；作者：Christian Bohn</li><li>机构：University of Wuppertal；作者：Harsh Yadav</li><li>机构：Aptiv；作者：Klaus Friedrichs</li><li>机构：University of Wuppertal；作者：Hasan Tercan</li><li>机构：University of Wuppertal；作者：Tobias Meisen</li><li>说明：原文作者信息中所有作者均标注 “Germany”，属于国家信息而非机构，已归并入对应机构条目。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的在线矢量化鸟瞰图（BEV）地图预测，即从多视角环绕相机图像预测矢量化、实例级的地图元素（Lane Lines、Crosswalks、Curbs）。</li><li>应用场景：自动驾驶感知流水线中的静态环境建图，服务于下游轨迹预测与规划控制。</li><li>研究问题：现有 BEV 地图预测模型（如 Mask2Map、MapTRv2、BeMapNet）主要仅从图像可见证据推理地图几何，显式地与目标级场景理解解耦，因而在交通参与者造成遮挡、能见度差的场景中鲁棒性不足；论文希望利用环境中目标的信息作为几何与上下文先验，提升高遮挡场景下的地图预测鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出多任务架构 ObjectGuidedMap，联合预测 3D 目标与矢量化 BEV 地图，显式利用目标级场景理解作为地图元素重建的几何与上下文线索。</li><li>在 Mask2Map 基础上引入目标检测分支，并在 BEV 特征层（Deformable Latent Fusion，基于可变形注意力）与实例查询层（Cross-Task-Attention，基于多头跨注意力）实现跨任务特征融合。</li><li>提出随训练轮次变化的注意力因子（epoch-dependent attention factor）α 及相应的残差连接，在训练中逐步增强跨任务交互，以稳定多任务联合训练。</li><li>在 nuScenes 与 Argoverse 2 上验证方法有效性，并在高遮挡场景中取得显著增益（重度遮挡场景 mAP 最高提升 21%），支持“目标感知可提升遮挡鲁棒性”的假设。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自动驾驶感知中的多任务 BEV 感知（目标检测 + 矢量化地图预测），以 Mask2Map 为主干基线，目标检测分支沿用 BEVFormer 方案。</li><li>输入传感器：仅使用 c 路环绕视角相机图像（nuScenes 为 6 路，Argoverse 2 为 7 路）；LiDAR 点云仅在评估阶段用于量化遮挡程度，不作为模型输入。原文未报告使用 Radar。</li><li>场景表示：两个任务各自维护网格状 BEV 隐表征，地图分支尺寸 [h_map, w_map]，目标分支尺寸 [h_obj, w_obj]，实验中 h_obj=w_obj=150，h_map=200、w_map=100；地图实例表示为折线点序列加类别标签。</li><li>模型结构：</li></ul>
+<p> - 共享骨干网络对每张图像提取特征图。</p>
+<p> - 地图编码器使用 Lift-Splat-Shoot 将图像特征提升到 3D/BEV；目标编码器使用 Deformable Cross Attention 从 BEV 网格单元采样图像特征。</p>
+<p> - Deformable Latent Fusion（DLF）：以地图 BEV 特征为 query、目标 BEV 特征为 input 做可变形注意力，按 F_map^BEV = (1−α)·F̃_map^BEV + α·DefAttn(...) 融合；目标分支不接收地图信息（单向融合，双向性留作未来工作）。</p>
+<p> - Epoch-Dependent-Attention Factor：α 在训练早期为 0，使地图分支相对独立学习，随后线性增大；nuScenes 上前 13 个 epoch 为 0、至第 16 个 epoch 线性增至 0.14，Argoverse 2 上在第 7 至第 10 个 epoch 完成同样增长。</p>
+<p> - 目标解码器：n_obj 个可学习目标 query，经 6 层迭代细化，每层先自注意力、再对目标 BEV 特征做 Deformable Cross Attention，输出置信度、类别及位置、长宽高与偏航角。</p>
+<p> - 地图解码器：每个地图实例的每个折线点对应一个 query，共 n_map = p·n′_map 个 query；先经 Mask-Aware Query Generator、Positional Query Generator、Geometric Feature Extractor 及跨注意力生成实例查询（与 Mask2Map 相同），再经过 6 层细化，每层包含自注意力、对地图 BEV 特征的可变形跨注意力、Cross-Task-Attention 与 FFN。</p>
+<p> - Cross-Task-Attention：以多头注意力让地图 query 关注目标 query（q=地图 query，k/v=目标 query），输出按同一 α 加权残差融合；目标 query 不关注地图 query。</p>
+<ul><li>损失函数：地图任务沿用 Mask2Map 的全部损失（记为 L_map）；目标任务在每一细化层加入 Focal Loss 与 L1 Loss（记为 L_obj），总损失 L = L_map + λ·L_obj，λ=3.0。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（1000 个 20 秒场景，2Hz 关键帧，约 28K 训练帧、6K 验证帧，6 路相机；评估用 LiDAR 点云量化遮挡）与 Argoverse 2（1000 个 15 秒场景，10Hz，700 训练 / 150 验证，其余为测试集，7 路相机）。</li><li>预测范围与类别：地图实例横向 ±15m、纵向 ±30m；目标检测感知范围 ±51.2m；地图类别为 Lane Lines、Crosswalks、Curbs。</li><li>输入分辨率：nuScenes 由 1600×900 填充缩放至 800×480；Argoverse 2 前相机 2048×1550、其余 6 路 1550×2048，均填充缩放至 640×640。</li><li>模型规模与算力：骨干为 ResNet50；n_obj=900 个目标 query，p=20 点/实例、n′_map=50 个实例，共 n_map=1000 个地图 query；模型 77.9M 参数（Mask2Map 为 60.4M），单次推理 885.15 GFLOPs（Mask2Map 为 727.36 GFLOPs，约增加 22%）。</li><li>训练资源：单张 A100 GPU、batch size 4、AdamW（weight decay 0.01）、余弦退火；nuScenes 训练 24 个 epoch、初始学习率 6·10⁻⁴，Argoverse 2 训练 12 个 epoch、初始学习率 6·10⁻⁵。Mask2Map 基线复现亦在该单卡设置下完成（原 Mask2Map 为 4 卡、每卡 batch 4）。</li><li>仿真器与实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与指标：nuScenes 验证集与 Argoverse 2 验证集上的矢量化地图预测；基于预测与真值实例的 Chamfer Distance，在 {0.5m, 1.0m, 1.5m} 匹配阈值下计算 AP，报告 Lane Line AP、Crosswalk AP、Curb AP 与 mAP；目标检测报告 nuScenes Detection Score（NDS）。评估为数据集上的离线（开环）评估，未报告闭环或实车实验。</li><li>nuScenes 主要结果：ObjectGuidedMap 取得 mAP 0.661（±0.008），相对复现的 Mask2Map 基线 0.629（±0.021）提升 4.99%；Lane Line AP 0.655（+4.47%）、Crosswalk AP 0.627（+6.97%）、Curb AP 0.699（+3.74%）；NDS 为 0.309（±0.006），与 BEVFormer+Mask2Map 骨干的单任务检测模型 NDS 0.304 大致相当，说明无负迁移。原文另指出 Mask2Map 原论文发表 mAP 为 0.716，提升结论以相同设置下复现的基线为对照。</li><li>nuScenes 对比方法：MapTR（mAP 0.503）、MapVR（0.512）、PivotNet（0.576）、BeMapNet（0.598）、MapTRv2（0.615）、Mask2Map*（0.629）。</li><li>Argoverse 2 结果（跨数据集消融）：完整模型 mAP 0.5090（+7.57%）、Lane Line AP 0.5339（+5.06%）、Crosswalk AP 0.4123（+11.16%）、Curb AP 0.5808（+7.46%）；去掉 DLF 为 mAP 0.4921（+3.99%），同时去掉 Cross-Task-Attn 与 DLF 为 mAP 0.4732。</li><li>高遮挡场景分析：以单</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.00718/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">STEER: Route-Aware Adaptive Reasoning for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.41772/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">WorkIng: A Real-World and Synthetic Highway Work-Zone Benchmark Dataset for Autonomous Navigation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
