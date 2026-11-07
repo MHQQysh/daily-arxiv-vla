@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RSKD: Grounding Semantic Consistency in Driving VLMs via Distillation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景中的视觉问答（DrivingVQA 类任务），研究如何通过知识蒸馏将大型多模态语言模型（MLLM）压缩为紧凑学生模型。 应用场景为自动驾驶场景理解、交通参与者/交通状态/空间关系/道路约束/驾驶行为的问答与推理。 研究问题：传统 token 级均匀蒸馏会稀释与规划相关的语义，并可能把教师模型的错误传递给学 生；需要在“哪些知识对任务关键”与“教师在该知识上是否语义一致”两个层面同时调节监督。 提出 RSKD，一种语义一致性引导的蒸馏框架，按答案短语的任务重要性与教师语义一致性路由监督信号。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.34689">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.34689.webp" alt="RSKD: Grounding Semantic Consistency in Driving VLMs via Distillation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景中的视觉问答（DrivingVQA 类任务），研究如何通过知识蒸馏将大型多模态语言模型（MLLM）压缩为紧凑学生模型。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">RSKD: Grounding Semantic Consistency in Driving VLMs via Distillation</h1>
+            <div class="detail-meta">2026-10-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.34689" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.34689" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.34689</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景中的视觉问答（DrivingVQA 类任务），研究如何通过知识蒸馏将大型多模态语言模型（MLLM）压缩为紧凑学生模型。 应用场景为自动驾驶场景理解、交通参与者/交通状态/空间关系/道路约束/驾驶行为的问答与推理。 研究问题：传统 token 级均匀蒸馏会稀释与规划相关的语义，并可能把教师模型的错误传递给学 生；需要在“哪些知识对任务关键”与“教师在该知识上是否语义一致”两个层面同时调节监督。 提出 RSKD，一种语义一致性引导的蒸馏框架，按答案短语的任务重要性与教师语义一致性路由监督信号。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">清华大学车辆与运载学院 · Chuchu Xie、Kangan Qian、Kun Jiang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.34689/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景中的视觉问答（DrivingVQA 类任务），研究如何通过知识蒸馏将大型多模态语言模型（MLLM）压缩为紧凑学生模型。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景中的视觉问答（DrivingVQA 类任务），研究如何通过知识蒸馏将大型多模态语言模型（MLLM）压缩为紧凑学生模型。</li><li>应用场景为自动驾驶场景理解、交通参与者/交通状态/空间关系/道路约束/驾驶行为的问答与推理。</li><li>研究问题：传统 token 级均匀蒸馏会稀释与规划相关的语义，并可能把教师模型的错误传递给学 生；需要在“哪些知识对任务关键”与“教师在该知识上是否语义一致”两个层面同时调节监督。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：清华大学车辆与运载学院；作者：Chuchu Xie、Kangan Qian、Kun Jiang、Diange Yang</li><li>机构：小米汽车（Xiaomi Corporation, Automotive and Robotics）；作者：Yang Zhong、Hao Ye</li><li>机构：原文未明确对应；作者：Chuchu Xie、Kangan Qian、Yang Zhong、Hao Ye、Kun Jiang、Diange Yang 的完整机构归属与邮箱仅按上标 1/2 标注，原文未逐一明确列出每位作者与其机构的独立对应关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景中的视觉问答（DrivingVQA 类任务），研究如何通过知识蒸馏将大型多模态语言模型（MLLM）压缩为紧凑学生模型。</li><li>应用场景为自动驾驶场景理解、交通参与者/交通状态/空间关系/道路约束/驾驶行为的问答与推理。</li><li>研究问题：传统 token 级均匀蒸馏会稀释与规划相关的语义，并可能把教师模型的错误传递给学 生；需要在“哪些知识对任务关键”与“教师在该知识上是否语义一致”两个层面同时调节监督。</li><li>提出 RSKD，一种语义一致性引导的蒸馏框架，按答案短语的任务重要性与教师语义一致性路由监督信号。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 RSKD 语义一致性引导的驾驶 VLM 蒸馏框架，显式识别任务关键语义短语，而不是对所有答案 token 统一处理。</li><li>提出短语级语义一致性机制，将教师预测与真实答案语义比较，并据此自适应路由 JSD 蒸馏与真值监督；仅在语义一致处加强教师指导，在语义不一致处加强真值监督。</li><li>在 DrivingVQA、LingoQA 与 MapLMv2 上评估，在两个 QA 基准上优于所比较的学生基线，在 MapLMv2 上保持竞争力。</li><li>通过消融表明任务关键语义定位、语义一致性估计与 SFT 路由各自对性能有贡献。</li><li>指出方法依赖教师短语抽取与冻结 MiniLM 编码器，且仅验证单一教师–学生组合等局限。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向自动驾驶多模态问答的知识蒸馏方法，包含语义定位、语义一致性估计与一致性感知知识路由三个模块。</li><li>输入传感器：多模态输入 x（图文观测与问题）与真值答案 y；原文未报告具体传感器类型、相机数量或传感器配置。</li><li>场景表示：以答案 token 序列及短语级语义片段为表示；未报告 BEV、3D 检测框等显式场景表示。</li><li>模型结构：教师为基于 Qwen3-VL-30B-A3B-Instruct 内部微调的 XEmbodied；学生为 Qwen3-VL-4B-Instruct，使用 LoRA（rank 8、scaling factor 32、dropout 0.05）适配所有线性语言模型层，视觉编码器与 aligner 冻结；教师在整个语义抽取与蒸馏过程中保持冻结。</li><li>关键技术一：教师引导的任务关键语义定位——提示教师从真值答案中抽取描述交通参与者、状态、空间关系、道路约束或所需行为的连续子串，形成短语集合 K，并通过精确 token 子序列匹配对齐到答案 token，得到关键 token 掩码 a_t。</li><li>关键技术二：语义一致性估计——在教师强制下，于对齐位置取教师 argmax 并用 Qwen3 tokenizer BBPE 解码重建教师短语，使用冻结的 all-MiniLM-L6-v2 编码器计算余弦相似度 s_i，经阈值 τ_l=0.6、τ_h=0.8 线性裁剪得到短语级一致性 g_i；对预定义互斥驾驶关系（左/右、前/后、运动/停止、加速/减速）的矛盾赋 g_i=0，并将短语分数广播到对齐 token。</li><li>关键技术三：语义一致性感知知识路由——按 w_t^JSD = 1−a_t + a_t[w_min^JSD+(w_max^JSD−w_min^JSD)g_t] 与 w_t^SFT = 1−a_t + a_t[w_min^SFT+(w_max^SFT−w_min^SFT)(1−g_t)] 对 JSD 蒸馏与真值监督反向加权；两分支各自按权重和归一化，最终损失为加权 JSD 项加 α 倍加权 SFT 项。</li><li>基础蒸馏形式：采用 GKD 的广义 Jensen–Shannon 散度 D_JSD^β(p_t‖q_t^θ)=βD_KL(p_t‖m_t)+(1−β)D_KL(q_t^θ‖m_t)，m_t=βp_t+(1−β)q_t^θ。</li><li>超参数：α=1、β=0.5、温度为 1，JSD/SFT 权重范围分别为 [0,2]/[2,4]，均在验证集上选取，未使用测试数据。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：DrivingVQA、LingoQA、MapLMv2；所有训练的学生方法使用三者的相同训练混合。</li><li>仿真器：原文未报告。</li><li>模型规模：学生 Qwen3-VL-4B-Instruct；教师为基于 Qwen3-VL-30B-A3B-Instruct 的内部微调 XEmbodied；语义编码器为冻结 all-MiniLM-L6-v2。</li><li>训练资源：96 张 NVIDIA H20 GPU，平均每次运行 52 小时 20 分钟；BF16，训练 2 个 epoch，学习率 1×10⁻⁵，每设备批大小 1，无梯度累积，warmup 比例 0.05，最大序列长度 32,000；每种配置用 3 个随机种子并报告均值。</li><li>实车平台：原文未报告。</li><li>消融资源：在相同缩减训练预算下使用固定的 50% LingoQA 子集。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：DrivingVQA、LingoQA、MapLMv2，并使用各自官方指标。</li><li>评估指标：DrivingVQA 与 MapLMv2 为数值型分数（越高越好），LingoQA 为分数（越高越好）；原文未逐一展开各官方指标的详细定义。</li><li>对比方法：Teacher、Student（未适配）、SFT、off-policy GKD、ToDi、RSKD。</li><li>关键数值（均值，越高越好）：Teacher 为 DrivingVQA 49.81 / LingoQA 0.642 / MapLMv2 79.00；Student 为 3.30 / 0.584 / 53.26；SFT 为 14.06 / 0.631 / 81.85；GKD 为 16.34 / 0.640 / 81.08；ToDi 为 16.35 / 0.649 / 81.80；RSKD 为 16.60 / 0.672 / 81.82。</li><li>消融结果（50% LingoQA 子集、相同缩减预算）：Random Spans 0.474、w/o Consistency 0.475、w/o SFT Routing 0.468、完整 RSKD 0.480；说明语义定位、语义一致性估计与 SFT 路由均有贡献，其中移除 SFT 路由下降最大。</li><li>条件：评估为问答基准上的开环评测；原文未报告闭环评测、仿真器评测或实车评测结果。</li><li>结论性观察：在 MapLMv2 上教师本身较弱（79.00），限制可迁移知识，RSKD 仍达 81.82，显著高于教师与 GKD，并接近 SFT（81.85）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.34976/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Sparse Recovery Bird&#x27;s-Eye View Model Soup for Robust Camera-Based 3D Object Detection</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.34466/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">IntNet: A Communication-Driven Multi-Agent Reinforcement Learning Framework for Cooperative Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

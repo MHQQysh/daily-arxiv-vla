@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Unified Benchmark for Aerial-Enhanced Autonomous Driving: The KITScenes Aerial Dataset - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶中的三类相关任务：仅航空影像的 HD 地图构建、航空–地面联合在线 HD 地图构建、以及跨视角定位（ground-to-aerial 车辆位姿估计）。 应用场景为利用航空/正射影像提供车载传感器感知范围之外的道路结构先验，以缓解遮挡、视场和感知距离限制。 研究问题在于：地图构建与跨视角定位通常在不同数据和基准上分别研究，缺少同时包含同步车载传感器数据、车辆位姿、丰富 Lanelet2 地图标注与空间关联航空影像的统一数据基准。 论文提出 KITScenes Aerial 数据集/基准，扩展 KITScenes Multimodal，并给出代表性基线实验，系统比较不同利用航空信息的方式。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.40455">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.40455.webp" alt="A Unified Benchmark for Aerial-Enhanced Autonomous Driving: The KITScenes Aerial Dataset" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶中的三类相关任务：仅航空影像的 HD 地图构建、航空–地面联合在线 HD 地图构建、以及跨视角定位（ground-to-aerial 车辆位姿估计）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Unified Benchmark for Aerial-Enhanced Autonomous Driving: The KITScenes Aerial Dataset</h1>
+            <div class="detail-meta">2026-10-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.40455" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.40455" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.40455</span></div>
+            <p class="detail-summary">论文面向自动驾驶中的三类相关任务：仅航空影像的 HD 地图构建、航空–地面联合在线 HD 地图构建、以及跨视角定位（ground-to-aerial 车辆位姿估计）。 应用场景为利用航空/正射影像提供车载传感器感知范围之外的道路结构先验，以缓解遮挡、视场和感知距离限制。 研究问题在于：地图构建与跨视角定位通常在不同数据和基准上分别研究，缺少同时包含同步车载传感器数据、车辆位姿、丰富 Lanelet2 地图标注与空间关联航空影像的统一数据基准。 论文提出 KITScenes Aerial 数据集/基准，扩展 KITScenes Multimodal，并给出代表性基线实验，系统比较不同利用航空信息的方式。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Technical University of Applied Sciences Augsburg · Richard Schwarzkopf、Fab…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.40455/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶中的三类相关任务：仅航空影像的 HD 地图构建、航空–地面联合在线 HD 地图构建、以及跨视角定位（ground-to-aerial 车辆位姿估计）。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶中的三类相关任务：仅航空影像的 HD 地图构建、航空–地面联合在线 HD 地图构建、以及跨视角定位（ground-to-aerial 车辆位姿估计）。</li><li>应用场景为利用航空/正射影像提供车载传感器感知范围之外的道路结构先验，以缓解遮挡、视场和感知距离限制。</li><li>研究问题在于：地图构建与跨视角定位通常在不同数据和基准上分别研究，缺少同时包含同步车载传感器数据、车辆位姿、丰富 Lanelet2 地图标注与空间关联航空影像的统一数据基准。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Technical University of Applied Sciences Augsburg；作者：Richard Schwarzkopf、Fabian Immel、Rupert Polley、Frank Bieder、J. Marius Zöllner、Christoph Stiller（原文中 Christoph Stiller 的署名机构标注与 Augsburg/FZI 组相同，但作者列表未单独列出其机构，原文未明确对应其唯一机构）</li><li>机构：FZI Research Center for Information Technology；作者：Richard Schwarzkopf、Fabian Immel、Rupert Polley、Frank Bieder、J. Marius Zöllner、Christoph Stiller（同上，Christoph Stiller 的机构对应关系原文未明确单独说明）</li><li>机构：Karlsruhe Institute of Technology (KIT)；作者：Jan-Hendrik Pauls</li><li>机构：Technical University of Munich；作者：Jan-Hendrik Pauls</li><li>机构：Parallel Domain；作者：Jan-Hendrik Pauls</li><li>机构：原文未明确对应；作者：Daniel Lengerer（仅给出邮箱 Daniel.Lengerer@tha.de，未列出机构）</li><li>机构：原文未明确对应；作者：Jonas Merkert（原文未列机构）</li><li>机构：原文未明确对应；作者：Klaus Bogenberger（原文未列机构）</li><li>机构：原文未明确对应；作者：Carsten Markgraf（原文未列机构）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶中的三类相关任务：仅航空影像的 HD 地图构建、航空–地面联合在线 HD 地图构建、以及跨视角定位（ground-to-aerial 车辆位姿估计）。</li><li>应用场景为利用航空/正射影像提供车载传感器感知范围之外的道路结构先验，以缓解遮挡、视场和感知距离限制。</li><li>研究问题在于：地图构建与跨视角定位通常在不同数据和基准上分别研究，缺少同时包含同步车载传感器数据、车辆位姿、丰富 Lanelet2 地图标注与空间关联航空影像的统一数据基准。</li><li>论文提出 KITScenes Aerial 数据集/基准，扩展 KITScenes Multimodal，并给出代表性基线实验，系统比较不同利用航空信息的方式。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 KITScenes Aerial 基准，在保留 KITScenes Multimodal 传感器数据、车辆位姿、Lanelet2 地图和数据集划分不变的基础上，加入空间关联的航空影像，支持航空地图构建、航空–地面地图构建和跨视角定位。</li><li>提供多分辨率航空表示：公开的 20 cm/px RGB 正射影像，以及从更高分辨率 8 cm/px 正射影像预计算得到的神经特征，使难以直接获取的高分辨率航空信息可用于研究与基准。</li><li>以代表性基线实例化该基准，覆盖三类研究设置，并系统比较训练和推理阶段利用航空信息的不同方式（仅车载、仅航空、训练时航空引导、航空融合）。</li><li>在 53 类地图元素和扩展空间范围下展示航空信息的显著收益，并分析航空影像分辨率的影响。</li><li>在地理不相交条件下评估跨视角定位，给出适配的细粒度特征匹配基线结果。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据集与基准构建，覆盖航空地图构建、航空–地面在线 HD 地图构建和跨视角定位三个模块；原文未报告统一的端到端模型结构。</li><li>输入传感器：继承 KITScenes Multimodal 的同步车载多模态传感器数据（含相机、LiDAR 等，原文在实验图中展示环视相机与 LiDAR 反射率），以及空间关联的航空正射影像；原文未报告完整传感器清单与具体参数。</li><li>场景表示：以车辆位姿（EPSG:25832 坐标）为空间关联基准；航空影像以向北朝上的瓦片网格提供，而非固定 ego 中心、固定朝向的逐帧裁剪，从而可按配置生成以 ego 为中心/对齐的裁剪区域，支持最大 240×60 m 的扩展建图区域。</li><li>地图标注：继承 KITScenes Multimodal 的完整 Lanelet2 HD 地图，包含 53 个建图类别、拓扑连通性和 3D 规制元素；报告中聚合为六类：Lane Markings、Lane Centerlines、Road Infrastructure、Traffic Lights、Traffic Signs、Road Markings。</li><li>航空特征表示：发布 DINOv3 SAT ViT-L/16 特征瓦片（保持航空影像连续空间组织）以及 UNet++ 特征（以 ego 为中心的 60×30 m 裁剪，与车载坐标系对齐）；原文未报告特征维度等细节。</li><li>关键技术：利用 KITScenes 位姿与正射影像同一坐标参考系实现直接空间关联；释放 20 cm/px RGB、DINOv3 特征瓦片、UNet++ 帧对齐特征裁剪及灵活航空裁剪工具。</li><li>基线模型：在线建图比较 StreamMapNet（仅车载）与 AerialFusionMapNet（航空融合），并涉及训练时航空引导方式；跨视角定位采用适配的细粒度特征匹配基线 FG² 类方法。原文未报告各模型的完整网络结构与超参数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：KITScenes Aerial，扩展自 KITScenes Multimodal；航空影像来源为官方州地理数据服务的公开数字正射影像（DOP20，20 cm/px），以及商业许可的市政正射影像（8 cm/px）。</li><li>训练与评估使用 KITScenes early release；原文明确“所有实验使用 KITScenes early release，完整数据集上的更新评估尚在计划中”。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告参数量或计算量；仅报告预计算特征来自 DINOv3 SAT ViT-L/16 与 UNet++。</li><li>训练资源：原文未报告 GPU 型号、数量与训练时长。</li><li>实车平台：数据继承 KITScenes Multimodal 的实车采集记录，但原文未在可见内容中报告具体车型、传感器配置等实车平台细节。</li><li>发布资源：20 cm/px RGB 航空影像、DINOv3 特征瓦片、UNet++ 帧对齐特征裁剪、灵活航空裁剪工具；项目页 https://kitscenes.com/aerial。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：KITScenes Aerial 上的三类任务——航空–地面在线 HD 地图构建、仅航空 HD 地图构建、跨视角定位；地图评估覆盖全部 53 个 KITScenes 地图类别，同时保留常用三类别设置兼容性。</li><li>地图构建评估协议：主基准在 60×30 m 感兴趣区域内评估 53 类，并聚合为六类报告；另在扩展的 100×50 m 区域评估以研究远距离建图性能。</li><li>评估指标：地图构建使用 mAP；跨视角定位使用平均平移误差（mean translation error）。</li><li>关键数值：摘要报告航空上下文在较大建图范围下使 53 类 mAP 提升超过一倍；更高分辨率航空影像进一步带来 4.3 mAP（+24%）提升，收益延伸至红绿灯等困难地图元素；跨视角定位在地理不相交条件下，适配的细粒度特征匹配基线平均平移误差为 5.13 m。</li><li>对比方法：在线建图对比 StreamMapNet（仅车载）与 AerialFusionMapNet（航空融合），并比较不同航空信息利用方式（仅车载、仅航空、训练时航空引导、航空融合）；跨视角定位使用适配 FG² 类细粒度特征匹配基线。原文摘要另提到更高分辨率影像的分辨率消融（Tab. 6）。</li><li>实验条件：全部为数据集上的离线评估；开环、闭环、仿真或实车在线评测条件原文未报告。原文提及仅航空建图受遮挡影响，并给出定性对比图；具体分项数值在所提供的截断原文中未完整给出。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2610.40002/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">How Much Should a VLA Trust Its Reasoning? Step-Level Guidance as a Measured Action-Value Function</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

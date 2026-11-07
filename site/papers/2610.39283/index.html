@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PriorMaskMap: Robust Online Vectorized Map Construction with Biased Priors - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的自动驾驶任务是：基于多视角图像与带偏置的先验地图，在线构建矢量化高清（HD）地图（online vectorized HD map construction）。 应用场景为自动驾驶车辆提供实时语义与几何场景理解，支撑轨迹规划与决策等下游任务。 研究问题是：现有先验增强在线建图方法通常将先验地图视为完全可靠，或只建模有限噪声模式，当先验因信息过时、道路改造或传感器错位而存在偏差（尤其涉及多相邻车道的结构性偏差）时性能显著退化；如何在利用先验结构信息的同时，显式建模并传播先验的空间可变可靠性，实现置信度引导的特征融合。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.39283">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.39283.webp" alt="PriorMaskMap: Robust Online Vectorized Map Construction with Biased Priors" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的自动驾驶任务是：基于多视角图像与带偏置的先验地图，在线构建矢量化高清（HD）地图（online vectorized HD map construction）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PriorMaskMap: Robust Online Vectorized Map Construction with Biased Priors</h1>
+            <div class="detail-meta">2026-10-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.39283" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.39283" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.39283</span></div>
+            <p class="detail-summary">论文研究的自动驾驶任务是：基于多视角图像与带偏置的先验地图，在线构建矢量化高清（HD）地图（online vectorized HD map construction）。 应用场景为自动驾驶车辆提供实时语义与几何场景理解，支撑轨迹规划与决策等下游任务。 研究问题是：现有先验增强在线建图方法通常将先验地图视为完全可靠，或只建模有限噪声模式，当先验因信息过时、道路改造或传感器错位而存在偏差（尤其涉及多相邻车道的结构性偏差）时性能显著退化；如何在利用先验结构信息的同时，显式建模并传播先验的空间可变可靠性，实现置信度引导的特征融合。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The Research Center for Intelligent Computing Systems, SKLP, Institute of C…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.39283/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的自动驾驶任务是：基于多视角图像与带偏置的先验地图，在线构建矢量化高清（HD）地图（online vectorized HD map construction）。</p>
+  <ul class="reading-intro-points"><li>论文研究的自动驾驶任务是：基于多视角图像与带偏置的先验地图，在线构建矢量化高清（HD）地图（online vectorized HD map construction）。</li><li>应用场景为自动驾驶车辆提供实时语义与几何场景理解，支撑轨迹规划与决策等下游任务。</li><li>研究问题是：现有先验增强在线建图方法通常将先验地图视为完全可靠，或只建模有限噪声模式，当先验因信息过时、道路改造或传感器错位而存在偏差（尤其涉及多相邻车道的结构性偏差）时性能显著退化；如何在利用先验结构信息的同时，显式建模并传播先验的空间可变可靠性，实现置信度引导的特征融合。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The Research Center for Intelligent Computing Systems, SKLP, Institute of Computing Technology, Chinese Academy of Sciences, Beijing 100190, China；作者：Haoming Xu、Wei Li、Yu Hu</li><li>机构：Hangzhou Institute for Advanced Study, University of Chinese Academy of Sciences, Hangzhou 310024, China；作者：Haoming Xu</li><li>机构：University of Chinese Academy of Sciences, Beijing 100049, China；作者：Wei Li、Yu Hu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的自动驾驶任务是：基于多视角图像与带偏置的先验地图，在线构建矢量化高清（HD）地图（online vectorized HD map construction）。</li><li>应用场景为自动驾驶车辆提供实时语义与几何场景理解，支撑轨迹规划与决策等下游任务。</li><li>研究问题是：现有先验增强在线建图方法通常将先验地图视为完全可靠，或只建模有限噪声模式，当先验因信息过时、道路改造或传感器错位而存在偏差（尤其涉及多相邻车道的结构性偏差）时性能显著退化；如何在利用先验结构信息的同时，显式建模并传播先验的空间可变可靠性，实现置信度引导的特征融合。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 PriorMaskMap 鲁棒框架，核心为 Prior-Aware Confidence Estimator（PACE），将栅格化先验的每个网格相对当前视觉观测分类为可靠、错误、空白，生成逐网格置信图，自适应识别偏置先验中的可信区域。</li><li>提出 Dual-Prior Query Generator（DPQG），以置信图引导掩蔽，分别编码栅格化与矢量化先验，过滤不可靠结构并融合为融合先验特征，通过交叉注意力初始化先验感知的地图查询。</li><li>提出 Confidence-Guided Prior Fusion（CGPF），对初始置信进行空间传播（Spatial Confidence Propagation）与置信精化（Confidence Refinement Module），用精化掩码控制 BEV 特征与先验地图的融合，为地图解码器提供上下文表示。</li><li>扩展 nuScenes 数据集，补充一组模拟多车道结构偏差的偏置矢量化地图，并实验表明 PriorMaskMap 相比现有方法具有更高精度和对不准确先验的更强鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：在线矢量化 HD 地图构建，属于先验增强的在线建图框架；整体由 PACE、DPQG、CGPF 三部分组成。</li><li>输入传感器：多视角环视 RGB 相机图像（nuScenes 六路相机）以及带偏置的先验地图（栅格化先验与矢量化先验）。</li><li>场景表示：鸟瞰图（BEV）栅格表示；BEV 特征为 F_BEV ∈ R^{H×W×C}，栅格化先验为 M_R ∈ R^{H×W×3}，置信图为 M_conf ∈ R^{H×W×3}（reliable / erroneous / empty 三类）。</li><li>模型结构：</li></ul>
+<p> - PACE：将 F_BEV 与栅格化先验沿通道拼接后输入 U-Net 头，输出逐网格置信；训练时以图像块级 Bernoulli(α) 混合真值栅格与偏置栅格构造输入，标签始终由 (M_Rgt, M_Rerr) 网格级对比生成，使用 Focal Loss 缓解类别不平衡。</p>
+<p> - DPQG：矢量化支路对点的实例索引、顺序、2D 位置、语义类型做嵌入，采用类内与类间分层注意力；依据置信得到栅格掩码与点级掩码，将不可靠/空白区域点特征置零；栅格支路用位置嵌入与标签嵌入得到 F_Ras 并仅保留置信网格；两路 token 拼接为 F_fuse，通过交叉注意力更新可学习基础查询得到 Q_map。</p>
+<p> - CGPF：Spatial Confidence Propagation 计算非空条件下的可靠比例 r(u)，分 T 个置信带，用不同核参数 D_κℓ 与权重 w_ℓ 做扩散得到 D_m，并以 F_enh = F_BEV + D_m ⊙ F_PV 注入多视角证据；Confidence Refinement Module 将 F_enh 与栅格化先验拼接经浅层 CNN 与 sigmoid 得到 G(u)，与 m_rel 相乘得精化置信 β(u)，仅对先验支路加权后与 F_enh 融合得到 BEV 地图上下文 F_ctx，作为地图解码器的 Key 和 Value。</p>
+<ul><li>关键技术：先验可靠性显式估计、置信引导掩蔽、双先验（栅格+矢量）查询生成、置信带扩散式空间传播、晚期融合权重精化；解码器与损失沿用 MapTRv2 系列设置。</li><li>原文未报告：网络各模块的具体通道数、U-Net 与注意力层数、推理时延等细节原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（1000 个城市驾驶场景，约 20 s/场景，2 Hz，六路环视相机，官方 700/150/150 划分）；Argoverse2 仅提及含少量偏置地图但规模不足，未作为主要数据。</li><li>偏置地图生成：采用开源 Syn-D-Maps 流程生成五类偏置（车道加宽、车道变窄、车道增加、车道减少、旋转），四类拓扑改变偏置的破坏比例为 0.6；每帧每种类型生成一份偏置先验；训练时每个样本从四类拓扑改变偏置中均匀抽取一种，旋转偏置用于消融实验。MapEX 的错误类别不公开且未建模显式拓扑变化。</li><li>仿真器：原文未报告。</li><li>模型规模：ResNet-50 骨干；总 batch size 为 32；U-Net 分支学习率 1.2×10⁻³，基础学习率 6×10⁻⁴；训练超参 α=0.5、N=35、M=20；训练 24 epoch（另报 110 epoch 设置）。</li><li>训练资源：八块 NVIDIA A100 GPU。</li><li>实车平台：原文未报告（仅在 nuScenes 数据集上评估）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 验证集在线矢量化地图构建基准；使用官方 Chamfer 距离阈值 {0.5, 1.0, 1.5} m 的 class-wise AP 与 mAP，预测范围为 X 轴 [-15,15] m、Y 轴 [-30,30] m；评估仅输入偏置地图（Err. 标记）。</li><li>评估指标：AP_ped、AP_div、AP_boun 与 mAP。</li><li>关键数值：PriorMaskMap（R50，24 epoch，偏置先验）AP_ped 78.1、AP_div 85.1、AP_boun 80.9、mAP 81.4；110 epoch 设置下 AP_ped 81.7、AP_div 88.9（其余数值在提供的原文中被截断，原文未完整报告）。</li><li>对比方法：第一类为不依赖先验/历史的方法（StreamMapNet 58.1、MGMap 64.8、HIMap 66.7、MapQR 66.4、Mask2Map 71.6、MapTRv2 61.5、DAMap 72.6，均为 mAP）；第二类为先验/历史方法（SQD-MapNet 63.9、P-MapNet 53.1、MapTracker 76.1、PriorMapNet 67.1、PriorDrive 65.7、HRMapNet 67.2、PrevPredMap 67.6、UniPrevPred 74.0、PriorFusion 70.4）；第三类为在相同混合偏置设置下重训的基线（SQD-MapNet† 55.5、PrevPredMap† 64.3、HRMapNet† 79.7（24 epoch）、HRMapNet† 83.4（110 epoch））。</li><li>对比结论：在偏置先验条件下，PriorMaskMap 的 mAP 81.4 高于重训的 HRMapNet†（79.7）与其它先验方法，且在明显错误先验下表现出显著鲁棒性。</li><li>评估条件：仅在 nuScenes 数据集上进行离线开环评估；消融实验包含旋转偏置类型；非重叠空间划分结果与消融细节在提供的原文中被截断，原文未完整报告；未报告闭环或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.39689/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">AI for Science in Space: Orbital Laboratories, Planetary Fieldwork, and Embodied Autonomy</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.38320/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SSQA: Sibling-Selective Quadtree Attention for Hierarchical Modeling in Perception Tasks</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

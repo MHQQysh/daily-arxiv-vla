@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A heuristic for optimal coordination of autonomous vehicles: static problems - 自动驾驶每日论文卡</title>
+    <meta name="description" content="针对无信号四向交叉口（unsignalized intersection）的自动驾驶车辆协同问题，研究轨迹规划与通行顺序（crossing order）同时优化的问题。 该问题需要同时完成两类决策：(a) 轨迹规划；(b) 无碰撞的车辆通行排序；二者强耦合，整体求解为混合整数非线性规划（MINLP），实际不可解。 论文聚焦“静态问题”：给定一组到达交叉口的车辆，求最优通行顺序及对应轨迹，不处理动态到达/离开场景（该扩展在姊妹论文中研究）。 目标是获得比先进先出（FIFO）更好的调度，同时保持计算可解性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.37275">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.37275.webp" alt="A heuristic for optimal coordination of autonomous vehicles: static problems" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">针对无信号四向交叉口（unsignalized intersection）的自动驾驶车辆协同问题，研究轨迹规划与通行顺序（crossing order）同时优化的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A heuristic for optimal coordination of autonomous vehicles: static problems</h1>
+            <div class="detail-meta">2026-10-27 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.37275" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.37275" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.37275</span></div>
+            <p class="detail-summary">针对无信号四向交叉口（unsignalized intersection）的自动驾驶车辆协同问题，研究轨迹规划与通行顺序（crossing order）同时优化的问题。 该问题需要同时完成两类决策：(a) 轨迹规划；(b) 无碰撞的车辆通行排序；二者强耦合，整体求解为混合整数非线性规划（MINLP），实际不可解。 论文聚焦“静态问题”：给定一组到达交叉口的车辆，求最优通行顺序及对应轨迹，不处理动态到达/离开场景（该扩展在姊妹论文中研究）。 目标是获得比先进先出（FIFO）更好的调度，同时保持计算可解性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确标注机构 · Saugat Shahi、Filippo Fabiani、Mario Zanon（原文仅列出作者 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.37275/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">针对无信号四向交叉口（unsignalized intersection）的自动驾驶车辆协同问题，研究轨迹规划与通行顺序（crossing order）同时优化的问题。</p>
+  <ul class="reading-intro-points"><li>针对无信号四向交叉口（unsignalized intersection）的自动驾驶车辆协同问题，研究轨迹规划与通行顺序（crossing order）同时优化的问题。</li><li>该问题需要同时完成两类决策：(a) 轨迹规划；(b) 无碰撞的车辆通行排序；二者强耦合，整体求解为混合整数非线性规划（MINLP），实际不可解。</li><li>论文聚焦“静态问题”：给定一组到达交叉口的车辆，求最优通行顺序及对应轨迹，不处理动态到达/离开场景（该扩展在姊妹论文中研究）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未明确标注机构；作者：Saugat Shahi、Filippo Fabiani、Mario Zanon（原文仅列出作者，未给出所属机构及对应关系）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>针对无信号四向交叉口（unsignalized intersection）的自动驾驶车辆协同问题，研究轨迹规划与通行顺序（crossing order）同时优化的问题。</li><li>该问题需要同时完成两类决策：(a) 轨迹规划；(b) 无碰撞的车辆通行排序；二者强耦合，整体求解为混合整数非线性规划（MINLP），实际不可解。</li><li>论文聚焦“静态问题”：给定一组到达交叉口的车辆，求最优通行顺序及对应轨迹，不处理动态到达/离开场景（该扩展在姊妹论文中研究）。</li><li>目标是获得比先进先出（FIFO）更好的调度，同时保持计算可解性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种分层结构的启发式协同方案：下层为一系列非线性规划（NLP），在给定通行顺序下联合优化所有车辆的轨迹及进入/离开时间。</li><li>高层启发式利用下层 NLP 中先后约束（precedence constraints）的 Lagrange 乘子，即排序决策对应成本的一阶灵敏度，来生成新的候选通行顺序。</li><li>由于灵敏度信息是局部的，每个候选交换仅在成本实际下降时才被接受，从而只探索置换空间中最有希望的部分，仅求解少量 NLP。</li><li>给出两种变体：Heuristic 1（frozen swaps，已尝试的相邻对不再重复尝试）与 Heuristic 2（revisitable swaps，允许后续迭代重访被拒的相邻对）。</li><li>构建 MINLP 与 MIQP 两种基线公式用于对比，并在大量交通场景仿真中表明方法在保持计算可行性的同时显著优于 FIFO。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：交叉口协同调度与轨迹规划，采用上下层分解的优化型协同框架。</li><li>输入传感器：原文未报告（未涉及感知传感器数据，问题以车辆初始状态与预定路径为输入）。</li><li>场景表示：四向无信号交叉口；每辆车沿预定义直线路径行驶、不换道；冲突区以进入位置 p_i^in 与离开位置 p_i^out 及对应进入/离开时间 t_i^in、t_i^out 刻画；碰撞避免通过先后约束 t_{S_c}^in ≥ t_{S_{c-1}}^out 保证同一时刻至多一辆车占据交叉口。</li><li>模型结构：车辆动力学 x_{i,k+1}=f_i(x_{i,k},u_{i,k})（假设二次连续可微），局部约束 h_i(x_{i,k},u_{i,k})≤0（如执行器限制、车道保持）；总成本为各车成本之和，含阶段成本与终端成本。</li><li>下层 NLP：对固定调度 S，优化状态、控制与进入/离开时间，并施加位置等式约束 p_i(t_i^†,x_i,u_i)=p_i^† 与先后约束。</li><li>上层启发式：读取先后约束的 Lagrange 乘子 λ_c（对应 t_{S_c}^out − t_{S_c+1}^in ≤ 0），选取乘子最大的相邻对进行交换得到 S^swap；重新求解 NLP，若 V(S^swap) &lt; V(S^(r)) 则接受，否则拒绝并将该索引从候选集合中移除。</li><li>关键技术：参数灵敏度/影子价格信息用于引导排序搜索；以贪心方式探索置换空间，牺牲最优性保证换取计算效率；算法以 K_max 限制交换尝试次数。</li><li>基线公式：MINLP 公式通过 one-hot 二值变量 b 与位置函数离散化显式表达位置约束；MIQP 公式对线性车辆模型将时间离散化，以二值变量编码进入/离开时刻，构造混合整数二次规划。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告公开数据集，评估基于自建数值仿真交通场景（多组交通场景、含 12 辆车场景）。</li><li>仿真器：原文未报告具体仿真平台名称（仅报告数值仿真实验）。</li><li>模型规模：车辆数 M 与时间步数 N 为一般符号；实验涉及 12 辆车场景；原文未报告参数量等模型规模信息。</li><li>训练资源：不适用/原文未报告（方法为优化求解，无学习训练过程）。</li><li>实车平台：原文未报告（仅仿真验证）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：以 MINLP 公式、MIQP 公式、FIFO 排序、暴力枚举（brute force）以及基于规则/基于预约（reservation-based）的启发式作为对比对象。</li><li>评估指标：总成本/调度成本（目标函数值 J 或 V(S)）、相对 FIFO 的改进、与最优（暴力或混合整数解）的差距、计算时间与可扩展性。</li><li>关键数值：原文摘要定性报告“在广泛交通场景下显著改善调度（相对 FIFO）并保持计算可解性”，但提供的 HTML 内容未包含第 V 节的具体数值结果，故具体数值原文未报告。</li><li>对比方法：FIFO、MINLP、MIQP、brute force、rule-based 与 reservation-based 启发式，以及 Heuristic 1 与 Heuristic 2 的相互比较。</li><li>实验条件：全部为仿真条件下的开环/静态调度评估；未报告闭环实验或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.37299/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Structured Representation Probing for Risk Anticipation in End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.37153/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">FastBEVFusion: Simple Multi-Modal Fusion for 3D Object Detection at 50 FPS</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

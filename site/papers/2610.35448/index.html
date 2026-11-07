@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Model-Aware Generation of Safety-Critical Scenes for Robust End-to-End Driving via Distilled Planner Surrogates - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向基于视觉的端到端（E2E）自动驾驶规划器，解决其在安全关键交互场景中碰撞率高的问题。 研究场景为 NeuroNCAP 闭环评估中的三类碰撞场景（静止、迎面、侧面）以及 Challenger 开环对抗回放与干净 nuScenes 常规驾驶。 核心研究问题：真实驾驶日志中安全关键交互极度稀少（不足真实驾驶时间的 0.03%），规划器几乎未在此类场景上训练；而针对特定视觉规划器生成照片级真实对抗训练场景的现有方法尚属空白。 论文先在 NeuroNCAP 上做失效模式分析，发现 DiffusionDrive 95.9% 的碰撞属于“已检测到威胁但规划失败”，据此将瓶颈定位在规划而非感知，并据此只微调规划头。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.35448">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.35448.webp" alt="Model-Aware Generation of Safety-Critical Scenes for Robust End-to-End Driving via Distilled Planner Surrogates" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向基于视觉的端到端（E2E）自动驾驶规划器，解决其在安全关键交互场景中碰撞率高的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Model-Aware Generation of Safety-Critical Scenes for Robust End-to-End Driving via Distilled Planner Surrogates</h1>
+            <div class="detail-meta">2026-10-26 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.35448" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.35448" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.35448</span></div>
+            <p class="detail-summary">论文面向基于视觉的端到端（E2E）自动驾驶规划器，解决其在安全关键交互场景中碰撞率高的问题。 研究场景为 NeuroNCAP 闭环评估中的三类碰撞场景（静止、迎面、侧面）以及 Challenger 开环对抗回放与干净 nuScenes 常规驾驶。 核心研究问题：真实驾驶日志中安全关键交互极度稀少（不足真实驾驶时间的 0.03%），规划器几乎未在此类场景上训练；而针对特定视觉规划器生成照片级真实对抗训练场景的现有方法尚属空白。 论文先在 NeuroNCAP 上做失效模式分析，发现 DiffusionDrive 95.9% 的碰撞属于“已检测到威胁但规划失败”，据此将瓶颈定位在规划而非感知，并据此只微调规划头。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">斯图加特大学信号处理与系统理论研究所（Institute of Signal Processing and System Theory, Univer…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.35448/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向基于视觉的端到端（E2E）自动驾驶规划器，解决其在安全关键交互场景中碰撞率高的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向基于视觉的端到端（E2E）自动驾驶规划器，解决其在安全关键交互场景中碰撞率高的问题。</li><li>研究场景为 NeuroNCAP 闭环评估中的三类碰撞场景（静止、迎面、侧面）以及 Challenger 开环对抗回放与干净 nuScenes 常规驾驶。</li><li>核心研究问题：真实驾驶日志中安全关键交互极度稀少（不足真实驾驶时间的 0.03%），规划器几乎未在此类场景上训练；而针对特定视觉规划器生成照片级真实对抗训练场景的现有方法尚属空白。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：斯图加特大学信号处理与系统理论研究所（Institute of Signal Processing and System Theory, University of Stuttgart, Germany）；作者：Khaled M. Seyam、Samar Fathalah、Bin Yang</li><li>机构：梅赛德斯-奔驰股份公司（Mercedes-Benz AG, Stuttgart, Germany）；作者：Julian Wiederer、Markus Braun</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向基于视觉的端到端（E2E）自动驾驶规划器，解决其在安全关键交互场景中碰撞率高的问题。</li><li>研究场景为 NeuroNCAP 闭环评估中的三类碰撞场景（静止、迎面、侧面）以及 Challenger 开环对抗回放与干净 nuScenes 常规驾驶。</li><li>核心研究问题：真实驾驶日志中安全关键交互极度稀少（不足真实驾驶时间的 0.03%），规划器几乎未在此类场景上训练；而针对特定视觉规划器生成照片级真实对抗训练场景的现有方法尚属空白。</li><li>论文先在 NeuroNCAP 上做失效模式分析，发现 DiffusionDrive 95.9% 的碰撞属于“已检测到威胁但规划失败”，据此将瓶颈定位在规划而非感知，并据此只微调规划头。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 NeuroNCAP 上的失效模式分析：95.9% 的 DiffusionDrive 闭环碰撞（SparseDrive 为 95.8%）发生在感知可靠检测到对手的情况下，说明应只微调规划头。</li><li>提出一种基于规划器自身冻结规划头的可微代理规划器：由小型适配器将真值 BEV 状态映射到上下文特征空间，并针对真实规划器进行验证。</li><li>提出据称首个面向视觉 E2E 规划器的模型感知照片级真实安全关键场景生成流水线：通过代理规划器做质量-多样性攻击搜索、用几何求解器为每个场景生成安全逃生标签并剔除无逃生场景。</li><li>仅用每个规划器 50 个场景即可将两个规划器的闭环碰撞率约减半，同时基本保持正常驾驶性能。</li><li>跨规划器迁移实验表明增益来自“针对特定规划器”：每个规划器在针对自身生成的场景上提升最大，DiffusionDrive 仅在 SparseDrive 场景上微调时保留 18.3 点碰撞率下降中的 6.7 点。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：规划（planning）训练数据生成与规划头微调框架，包含四个阶段：(A) 蒸馏可微代理规划器；(B) 模型感知攻击生成；(C) 求解安全逃生；(D) 渲染与微调。</li><li>输入传感器：真实规划器使用环视图像（六相机，848×1600 像素/相机，65 帧、12 Hz，约 5.4 s）；代理规划器输入为真值 BEV 状态 b，包括带类别与运动历史的智能体框、地图车道、自车状态与导航指令。</li><li>场景表示：BEV 场景状态与上下文特征 c；攻击为单个对抗车辆的加速度 a 与转向角 δ 控制序列，经运动学自行车模型展开为轨迹并替换原轨迹得到攻击后 BEV 状态 b(a,δ)。</li><li>模型结构：代理规划器为 π̂(b)=f_head(A_θ(b))，其中 f_head 为规划器自身复制并冻结的规划头，A_θ 为小型可微适配器（0.83 M 参数，对比 SparseDrive 86.2 M、DiffusionDrive 92.1 M）；适配器按输入组（智能体、地图车道、自车状态）各设一个编码器，分别产生部分上下文特征。DiffusionDrive 的轨迹模式选择被软化以保持前向可微。</li><li>关键技术：通过碰撞目标 J(a,δ) 对控制量的梯度下降优化攻击（含拉向预测自车路径、时间同步、可行驶区域、避让其他智能体、转向/加速度/加加速度约束等项），并在展开轨迹的多个时刻评估代理规划器以保持动态耦合；用 MAP-Elites 质量-多样性搜索（描述子为接触时间间隔与接近角，5×5 网格，每基础场景一个网格，保留最接近自车的攻击）自动发现攻击类型。</li><li>关键技术（续）：逃生阶段固定攻击者轨迹，用同样 MAP-Elites（纵向制动-加速、横向左-右描述子）求解最大化间距、满足在路、避让、运动学可行与路线目标的逃生轨迹，取间距最大者为标签；若 1 s（12 帧）反应延迟后无轨迹能保持 4 m 间距则场景判为不可避免并剔除（约占攻击的 15%）。</li><li>关键技术（续）：对存活场景重算 BEV 地图、3D 边界框、相机可见性掩码与相对位姿嵌入，用 MagicDriveV2 渲染为六相机照片级视频；微调时混合干净 nuScenes，冻结感知，仅更新规划头参数，代理仅用于找场景、不部署。蒸馏损失为特征空间与轨迹空间的双重匹配（λ_f=1，λ_t=0.1）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（训练/验证，场景基础取自 nuScenes 训练划分，常规驾驶检查用 nuScenes val）；NeuroNCAP（闭环评估）；Challenger（开环对抗回放评估）。</li><li>仿真器/渲染器：MagicDriveV2 生成式视频渲染器（基线也用同一渲染器）；NeuroNCAP 使用神经重建渲染；原文未报告使用其他闭环仿真器。</li><li>模型规模：适配器 0.83 M 参数；SparseDrive 86.2 M；DiffusionDrive 92.1 M。</li><li>训练资源：每个规划器的攻击搜索约 30 GPU 小时；50 个场景渲染约 70 GPU 小时（每场景约 1.4 GPU 小时）；文中估算无梯度搜索配合真实规划器约需 4300 GPU 小时。适配器训练 20 epoch，AdamW，学习率 1×10⁻⁴，权重衰减 0.01，批大小 8；攻击搜索每场景 60 次优化、每次 40 步 Adam、15 次无改进早停。微调时 50 个场景重复 8 次、约占训练样本 13.6%，训练 30 epoch、余弦退火；DiffusionDrive 运动交互层基础学习率 1×10⁻⁵、扩散分支减半，SparseDrive 规划输出分支 1×10⁻⁴、批大小 8；仅启用规划损失。</li><li>实车平台：原文未报告（所有评估均为仿真/数据集基准）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NeuroNCAP 闭环（指标为 score↑，按类别宏平均，与碰撞率 CR%↓）；Challenger 开环对抗回放（CR%↓、L2↓）；干净 nuScenes val（CR%↓、L2↓）。每个微调结果报告 3 个种子的均值与标准差。</li><li>对比方法：recovery（受 SimScale 启发的恢复式增强）、rule-based（脚本化静止/迎面对手 + CEM-Diffusion 逃生标签）、Challenger-style（Challenger 生成、以不反应的记录自车轨迹为标签），三者均使用 MagicDriveV2 且同为 50 场景、同一微调配方。</li><li>关键结果（NeuroNCAP 闭环）：SparseDrive 碰撞率 28.0%→12.2%，score 4.009→4.639；DiffusionDrive 碰撞率 37.5%→19.2%，score 3.624→4.394；每个种子均优于原始模型。侧面场景提升最大（约 1.5 分），SparseDrive 静止场景得分达满分 5.0。</li><li>基线对比：recovery 分别为 23.8%/34.7%，rule-based 为 17.9%/34.3%，Challenger-style 为 19.1%/38.8%；本文方法在两个规划器上均为最优。</li><li>常规驾驶保持：nuScenes 碰撞率 SparseDrive 0.088 vs 0.094（无变化），DiffusionDrive 0.071 vs 0.079（略降）；nuScenes L2 增幅最多 0.06（SparseDrive 0.668 vs 0.609，DiffusionDrive 0.580 vs 0.574）。</li><li>Challenger 开环：本文 CR 在两个规划器上均低于原始模型（SparseDrive 0.86 vs 1.00，DiffusionDrive 1.02 vs 1.67），但 L2 高于原始模型；Challenger-style 在 DiffusionDrive 上的 Challenger 指标最好（CR 0.63、L2 1.22），说明开环 Challenger 指标不反映闭环安全性。</li><li>逃生标签消融（表 III，DiffusionDrive）：solved 闭环 score 3.939、CR 30.8%，高于 brake-always（3.833/33.1%）与 CEM-Diffusion（3.759/34.3%）；Challenger 上 CEM-Diffusion 最优（CR 0.78、L2 1.38），brake-always 最差（CR 1</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.35630/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Revisiting Direct Control: A Field Evaluation of Sensor Fusion Efficacy in Teleoperating Full-Scale Autonomous Vehicles via Bird&#x27;s Eye View</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.34976/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Sparse Recovery Bird&#x27;s-Eye View Model Soup for Robust Camera-Based 3D Object Detection</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

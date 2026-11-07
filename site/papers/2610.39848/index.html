@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LiDAR-SHIELD: A Fully Dockerized Adversarial Robustness Assessment Framework for LiDAR-Based 3D Perception Models - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶与机器人中的 LiDAR 3D 感知，解决部署前对抗鲁棒性压力测试缺乏统一、可复现工具的问题。 涉及两个核心任务：3D 语义分割（稠密场景语义标注、可行驶区域推理）与 3D 物体检测（动态目标定位与分类，用于预测与避碰）。 研究问题：现有对抗攻击实现分散在各仓库、绑定特定架构与任务，需要手工重建环境并编写模型专用集成代码；通用对抗工具包（ART、Foolbox、CleverHans、secml）采用库中心式集成，且不原生支持 LiDAR 点云与 3D 感知输出；已有 LiDAR 鲁棒性工作或仅覆盖单一任务、或针对自然腐蚀而非对抗攻击。 目标是构建统一的、完全 Docker 化的对抗鲁棒性评估框架，使新模型或新数据集只需一个加载函数或适配器即可接入。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.39848">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.39848.webp" alt="LiDAR-SHIELD: A Fully Dockerized Adversarial Robustness Assessment Framework for LiDAR-Based 3D Perception Models" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶与机器人中的 LiDAR 3D 感知，解决部署前对抗鲁棒性压力测试缺乏统一、可复现工具的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">LiDAR-SHIELD: A Fully Dockerized Adversarial Robustness Assessment Framework for LiDAR-Based 3D Perception Models</h1>
+            <div class="detail-meta">2026-10-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.39848" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.39848" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.39848</span></div>
+            <p class="detail-summary">论文面向自动驾驶与机器人中的 LiDAR 3D 感知，解决部署前对抗鲁棒性压力测试缺乏统一、可复现工具的问题。 涉及两个核心任务：3D 语义分割（稠密场景语义标注、可行驶区域推理）与 3D 物体检测（动态目标定位与分类，用于预测与避碰）。 研究问题：现有对抗攻击实现分散在各仓库、绑定特定架构与任务，需要手工重建环境并编写模型专用集成代码；通用对抗工具包（ART、Foolbox、CleverHans、secml）采用库中心式集成，且不原生支持 LiDAR 点云与 3D 感知输出；已有 LiDAR 鲁棒性工作或仅覆盖单一任务、或针对自然腐蚀而非对抗攻击。 目标是构建统一的、完全 Docker 化的对抗鲁棒性评估框架，使新模型或新数据集只需一个加载函数或适配器即可接入。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Industrial Systems Institute, Athena Research Center, Patras Science Park…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.39848/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶与机器人中的 LiDAR 3D 感知，解决部署前对抗鲁棒性压力测试缺乏统一、可复现工具的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶与机器人中的 LiDAR 3D 感知，解决部署前对抗鲁棒性压力测试缺乏统一、可复现工具的问题。</li><li>涉及两个核心任务：3D 语义分割（稠密场景语义标注、可行驶区域推理）与 3D 物体检测（动态目标定位与分类，用于预测与避碰）。</li><li>研究问题：现有对抗攻击实现分散在各仓库、绑定特定架构与任务，需要手工重建环境并编写模型专用集成代码；通用对抗工具包（ART、Foolbox、CleverHans、secml）采用库中心式集成，且不原生支持 LiDAR 点云与 3D 感知输出；已有 LiDAR 鲁棒性工作或仅覆盖单一任务、或针对自然腐蚀而非对抗攻击。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Industrial Systems Institute, Athena Research Center, Patras Science Park, Greece；作者：Ioulia Kapsali、Christos Anagnostopoulos、Aris S. Lalos</li><li>机构：AviSense.AI, Patras Science Park, Greece；作者：Alexandros Gkillas</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶与机器人中的 LiDAR 3D 感知，解决部署前对抗鲁棒性压力测试缺乏统一、可复现工具的问题。</li><li>涉及两个核心任务：3D 语义分割（稠密场景语义标注、可行驶区域推理）与 3D 物体检测（动态目标定位与分类，用于预测与避碰）。</li><li>研究问题：现有对抗攻击实现分散在各仓库、绑定特定架构与任务，需要手工重建环境并编写模型专用集成代码；通用对抗工具包（ART、Foolbox、CleverHans、secml）采用库中心式集成，且不原生支持 LiDAR 点云与 3D 感知输出；已有 LiDAR 鲁棒性工作或仅覆盖单一任务、或针对自然腐蚀而非对抗攻击。</li><li>目标是构建统一的、完全 Docker 化的对抗鲁棒性评估框架，使新模型或新数据集只需一个加载函数或适配器即可接入。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出模型无关的评估架构，通过最小 REST 接口将对抗评估与目标模型解耦，消除手工环境重建与模型专用胶水代码。</li><li>提供同时覆盖 3D 语义分割与 3D 物体检测的统一工作流，在单一框架内完成两大 LiDAR 感知任务的直接鲁棒性评估。</li><li>实现任务感知的先进攻击套件以暴露异构 LiDAR 骨干的薄弱点：分割使用 PGD 与 Square Attack；检测使用点扰动、点移除、点注入与 LiDAttack。</li><li>提供完全 Docker 化的部署模式，隔离数据处理、模型执行与攻击编排，把对抗鲁棒性测试的工程开销降低为即插即用的系统组件。</li><li>给出跨数据集的实证结果，显示集成攻击能在异构骨干上暴露显著脆弱性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：框架由三个 Docker 化组件构成——User Client / Data Adapter（负责数据集交互与样本封装）、Assessment Engine（负责对抗协议、扰动状态维护、干净/对抗前向协调与任务感知控制逻辑）、Model Service（负责网络执行、模型构建、检查点加载、任务损失定义及模型相关前后处理）。</li><li>输入传感器：LiDAR；分割模型输入为距离视图（range-view）张量，检测模型输入为原始点云。具体传感器型号/通道数原文未报告（仅实验数据集处说明 KITTI 为 64 线、SemanticPOSS 为 PANDORA 40 线、SemanticKITTI 为 Velodyne HDL-64E）。</li><li>场景表示：分割任务以距离视图张量表示（H 为垂直光束数，W 为水平角分辨率）；检测任务以点云 P={p_i∈R^3} 表示。</li><li>模型结构与关键技术：采用服务导向设计，目标模型保留在原生环境中，通过三个 HTTP 端点通信——/info 返回模型与任务元数据，/forward 返回任务原生预测，/gradient 返回白盒攻击所需的输入梯度。框架由两个契约约束：数据契约（任务标签的样本载荷，含编码后的模型输入、监督信息与元数据）与模型契约（三端点接口）。新骨干只需实现 load_model(device) 返回 (model, criterion, info, device)，其中 info 含模型标识、类别数、输入形状等任务级属性。引擎每个模型会话查询一次 /info，获取干净参考预测后实例化攻击并迭代至生成对抗输入，再经同一服务边界执行并收集输出；黑盒仅用 /forward，白盒额外调用 /gradient，编排层在两种威胁模型下不变。</li><li>分割攻击：在距离视图上加扰动 Δ（‖Δ‖_p≤ε），最大化分割损失；PGD 迭代含步长 α、投影到 ℓ_p 球与 p∈{2,∞} 的梯度归一化；Square Attack 为仅用 /forward 的 ℓ_∞ 随机搜索黑盒基线。</li><li>检测攻击：点扰动为每点施加 ℓ_2 约束（‖δ_i‖_2≤ε）的位移并用 PGD 迭代优化；点移除按检测损失梯度 ℓ_2 范数排序做显著性贪心删除；点注入按 P={p_i+δ_i} 之外的 P_adv=P∪Z 方式在最高显著性位置初始化注入点并在 Chamfer 距离约束下仅优化 Z；黑盒使用 LiDAttack（遗传算法结合模拟退火，仅前向查询）。</li><li>原文未报告：检测攻击目标函数的具体闭式表达、分割模型的网络内部结构细节（除引用的 LENet/CENet/FIDNet 简介外）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>检测数据集：KITTI（64 线真实 LiDAR 点云，城市驾驶 3D 标注，结果在 moderate 难度下报告）；基于 CARLA 的仿真数据集（Town06，3000 帧以上，10 Hz，64 线 LiDAR，多车辆场景，含原始点云、真值位姿、时间戳与变换矩阵）。</li><li>分割数据集：SemanticKITTI（Velodyne HDL-64E，距离视图 64×1024，序列 00–04 训练、05 验证、06–08 测试）；SemanticPOSS（PANDORA 40 线，距离视图 40×1800，序列 0,1,4,5 训练、3 验证、2 测试）。</li><li>仿真器：CARLA（用于构建 Town06 数据集）。</li><li>模型规模：原文未报告参数量或计算量。</li><li>训练资源：原文未报告 GPU 型号、数量或训练时长。</li><li>实车平台：原文未报告；KITTI 与 SemanticKITTI 为真实车载采集数据，但未给出本文自建实车平台。</li><li>代码公开：https://github.com/alexandrosgk/LiDAR-shield。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与条件：全部为数字域对抗攻击评估（非闭环、非实车）；检测在 KITTI 与 CARLA 上进行，分割在 SemanticKITTI 与 SemanticPOSS 上进行。</li><li>评估指标：检测使用绝对 mAP 与 mAP 比值 (mAP_adv/mAP_clean)×100（越低表示退化越强），并用对称 Chamfer Distance（CD）衡量几何可感知性（越低越几何合理）；分割使用全类平均 mIoU。</li><li>对比方法/被评估模型：检测评估 SECOND（稀疏卷积体素）与 PointPillars（pillar 编码伪图像）；分割评估 LENet、CENet、FIDNet；攻击包括白盒 PGD（分割 ℓ_2/ℓ_∞；检测 ℓ_2）与黑盒 Square Attack、LiDAttack。</li><li>攻击配置：检测点扰动为无目标 ℓ_2 PGD，ε∈{5,7,10} cm，40 次迭代，α=ε/30，随机初始化；点移除为 10 次迭代显著性贪心，移除比例 {0.5,1.0,1.5}%；点注入注入 300 个点，位移预算 ε∈{0.3,0.5,0.7} m；LiDAttack 用 K=20 个对抗点、目标框 0.5 m 边界内、每目标最多 1000 次前向查询，在 KITTI 的 SECOND 上评估。分割 PGD 在 ℓ_2 下 ε∈{3,6,9}、ℓ_∞ 下 ε∈{0.1,0.3,0.5}，T=40 次迭代，α=ε/T；Square Attack 为 ℓ_∞、ε=0.3、1000 次查询、一次随机重启、p_init=0.4，在 SemanticKITTI 的 LENet 上评估。</li><li>检测关键数值：点扰动退化最强且随位移预算一致加重，PointPillars 在 ε=10 cm 时 mAP 比值降至 KITTI 10.59%、CARLA 3.46%；SECOND 相对保持更高（KITTI ε=5/7/10 cm 分别为 90.91/83.10/65.48%，CARLA 为 89.06/82.80/73.21%）。点移除退化较缓，最高移除比例下 SECOND 保持 KITTI 67.98%、CARLA 85.32%，PointPillars 保持 57.40% 与 80.02%，CD 随移除比例上升。点注入退化适中且 CD 较低：KITTI 上 SECOND 在 ε=0.5 m 降至 65.28% 但在 ε=0.7 m 回升至 71.12%，PointPillars 呈类似行为。黑盒 LiDAttack 使 KITTI 上 SECOND 的 mAP 从 70.43 降至 52.51（相对下降约 25%）。</li></ul>
+<p>-</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.40002/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">How Much Should a VLA Trust Its Reasoning? Step-Level Guidance as a Measured Action-Value Function</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.39689/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">AI for Science in Space: Orbital Laboratories, Planetary Fieldwork, and Embodied Autonomy</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

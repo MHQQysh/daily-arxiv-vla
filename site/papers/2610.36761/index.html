@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Making Self-Driving Laboratories Auditable:A Unified Framework for Hybrid Actions,Measurements, and Safe Execution - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自驱动实验室（Self-Driving Laboratories, SDLs），即把实验规划、自动化执行与测量反馈耦合为闭环的实验室系统。 解决的核心问题是执行接口挑战：如何将灵活的机器人控制与实验室仪器提供的类型化 API 及连续测量集成起来。 应用场景包括材料发现与反应优化中的重复决策循环：目标转为实验操作、由仪器与机器人执行、采集测量与设备状态、再依据证据进行下一步决策。 研究问题聚焦于混合动作（连续机器人轨迹与离散仪器 API 调用）的生成、执行协调、可追溯记录、运行时安全监控以及可复现评估。 论文定位为提出框架设计而非已完成训练与验证的系统；原文明确指出 LAM 端到端训练、跨设备迁移实验以及系统性的硬件与安全验证仍待完成。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.36761">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.36761.webp" alt="Making Self-Driving Laboratories Auditable:A Unified Framework for Hybrid Actions,Measurements, and Safe Execution" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自驱动实验室（Self-Driving Laboratories, SDLs），即把实验规划、自动化执行与测量反馈耦合为闭环的实验室系统。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Making Self-Driving Laboratories Auditable:A Unified Framework for Hybrid Actions,Measurements, and Safe Execution</h1>
+            <div class="detail-meta">2026-10-27 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.36761" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.36761" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.36761</span></div>
+            <p class="detail-summary">论文面向自驱动实验室（Self-Driving Laboratories, SDLs），即把实验规划、自动化执行与测量反馈耦合为闭环的实验室系统。 解决的核心问题是执行接口挑战：如何将灵活的机器人控制与实验室仪器提供的类型化 API 及连续测量集成起来。 应用场景包括材料发现与反应优化中的重复决策循环：目标转为实验操作、由仪器与机器人执行、采集测量与设备状态、再依据证据进行下一步决策。 研究问题聚焦于混合动作（连续机器人轨迹与离散仪器 API 调用）的生成、执行协调、可追溯记录、运行时安全监控以及可复现评估。 论文定位为提出框架设计而非已完成训练与验证的系统；原文明确指出 LAM 端到端训练、跨设备迁移实验以及系统性的硬件与安全验证仍待完成。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">SII–ECNU Joint Autonomous Chemistry Laboratory, Shanghai Innovation Institu…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.36761/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自驱动实验室（Self-Driving Laboratories, SDLs），即把实验规划、自动化执行与测量反馈耦合为闭环的实验室系统。</p>
+  <ul class="reading-intro-points"><li>论文面向自驱动实验室（Self-Driving Laboratories, SDLs），即把实验规划、自动化执行与测量反馈耦合为闭环的实验室系统。</li><li>解决的核心问题是执行接口挑战：如何将灵活的机器人控制与实验室仪器提供的类型化 API 及连续测量集成起来。</li><li>应用场景包括材料发现与反应优化中的重复决策循环：目标转为实验操作、由仪器与机器人执行、采集测量与设备状态、再依据证据进行下一步决策。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：SII–ECNU Joint Autonomous Chemistry Laboratory, Shanghai Innovation Institute；作者：Zihan Zhang、Xin Zhang、Haohui Que、Tong Zhu</li><li>机构：Nankai University；作者：Zihan Zhang</li><li>机构：East China Normal University；作者：Haohui Que、Tong Zhu</li><li>机构：Shanghai Jiao Tong University；作者：Xin Zhang</li><li>机构：Shanghai Lixun Intelligent Technology Co.,Ltd；作者：Zihan Zhang、Zeyu Wu、Xin Zhang、Mingyu Luo、Haohui Que、Tong Zhu</li><li>注：原文以数字上标形式统一标注作者与机构对应关系，未逐一给出作者—机构映射表；上述对应依据上标编号整理，若需精确到个别作者的机构归属，原文未逐一明确对应。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自驱动实验室（Self-Driving Laboratories, SDLs），即把实验规划、自动化执行与测量反馈耦合为闭环的实验室系统。</li><li>解决的核心问题是执行接口挑战：如何将灵活的机器人控制与实验室仪器提供的类型化 API 及连续测量集成起来。</li><li>应用场景包括材料发现与反应优化中的重复决策循环：目标转为实验操作、由仪器与机器人执行、采集测量与设备状态、再依据证据进行下一步决策。</li><li>研究问题聚焦于混合动作（连续机器人轨迹与离散仪器 API 调用）的生成、执行协调、可追溯记录、运行时安全监控以及可复现评估。</li><li>论文定位为提出框架设计而非已完成训练与验证的系统；原文明确指出 LAM 端到端训练、跨设备迁移实验以及系统性的硬件与安全验证仍待完成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出由 LAM（Lab Action Model）、OpenSDL、Safe-SDL 和 L3-Bench 四部分构成的可追溯框架。</li><li>提出 LAM 这一测量条件化策略架构设想，将视觉-语言-动作范式扩展为同时生成连续机器人轨迹与类型化仪器 API 调用。</li><li>提出 OpenSDL 执行底座及初始控制实现，用于将角色级操作映射到异构设备、协调执行并记录带时间戳的因果事件。</li><li>提出 Safe-SDL 运行时门控，结合派发前的 schema 与资源检查以及执行期间（包括延长等待期）的信号时序逻辑监控。</li><li>提出 L3-Bench 的 episode 级评估协议，覆盖物理结果、时序、可复现性、安全违规与故障恢复。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：LAM 为策略接口模块，OpenSDL 为执行基础设施模块，Safe-SDL 为运行时安全门控模块，L3-Bench 为评估协议模块。</li><li>输入传感器：任务语言指令、RGB/RGB-D 视觉观测、机器人本体感知状态、带时间戳的仪器遥测测量流；观测记为 {I_t, q_t, M_t}。</li><li>场景表示：将实验室过程建模为部分可观测马尔可夫决策过程（POMDP），状态为潜在物理状态，动作为连续臂动作空间与离散仪器动作空间的笛卡尔积；状态、动作与事件共享统一时间线与事件账本。</li><li>模型结构：LAM 由多模态上下文骨干（目标规模约 3B 参数）、连续运动专家（目标规模约 300M 参数，使用流匹配生成轨迹块）和离散函数调用头（生成 Role–Op–Parameters 调用）组成；可选的动力学头预测下一测量状态 M_{t+1}。</li><li>关键技术：类型化测量 token（保留角色、单位、采样时间与数据质量）、缺失/过期状态嵌入、schema 约束的结构化解码、动作级置信度与设备质量摘要、流匹配训练目标、交叉熵调用监督与可选测量预测损失。</li><li>执行与安全：OpenSDL 使用角色描述符与 DeviceProvider 契约、六类生命周期事件（proposal、gate、dispatch、acknowledge、complete、compensate）与因果父事件、单调时钟与设备时钟记录；Safe-SDL 定义 STL 安全规范（温度、接触力、器皿间距）与鲁棒度阈值门控，超时、测量退化或鲁棒度不足触发阻断与安全降级/中止。</li><li>原文未报告：POMDP 的转移模型与奖励模型在当前实现中未指定；置信度估计器的具体构造、校准误差与弃权阈值原文未报告；跨模态一致性与安全监督辅助损失的具体定义原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告已存在的数据集名称与规模；提及 SDL-Traj 轨迹数据格式设想（对齐 LeRobot 风格数据），并计划按实验批次划分训练、校准与测试集。</li><li>仿真器：原文未报告具体仿真器名称；提及数字孪生（seeded digital twin）、Clean-3D 版本化场景/几何资产集，以及硬件在环（HIL）评估。</li><li>模型规模：LAM 多模态骨干目标约 3B 参数，连续运动专家目标约 300M 参数；实际训练模型规模原文未报告。</li><li>训练资源：原文未报告 GPU/算力等训练资源信息。</li><li>实车/实机平台：原文未报告具体机器人或仪器硬件型号；OpenSDL 初始实现提及 Rust 控制引擎、MQTT/串口/TCP 传输、ESP32 桥接与 SQLite 存储。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：提出 L3-Bench（Level-3 Laboratory Benchmark），包含三类场景族（自适应稀释、测量条件化滴定、带恢复的故障注入）与四种评估设置：标称、测量偏移、故障注入、设备迁移。</li><li>评估指标：归一化物理产率 Y、时间成本 C、质量转移误差 Δm、分配均匀性 CV、温度超调、调节时间、ITAE、时序安全违规率 SVR、危险动作拦截率、正常动作误报率、故障到安全状态时间、完成率、恢复时间、schema 失败与迁移差距、校准误差等。</li><li>关键数值：原文未报告任何实验结果数值；所有指标均为预先规定的评估协议定义。</li><li>对比方法：视觉单臂策略基线与不带测量 token 的 LAM 基线，与完整 LAM × OpenSDL 框架比较。</li><li>开环/闭环/仿真/实车条件：评估计划以 episode 级闭环评估为基本统计单元，包含仿真与可选的 HIL 回放，安全门控消融限定在仿真或经风险评估的 HIL 中进行；实车硬件验证原文明确列为尚待完成的工作，未报告实车结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.36882/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Hyperparameter and Neural Architecture Search via Evolutionary Optimization for Reinforcement Learning: HPNAS-RL</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.36395/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">When Can a Learned Design Surrogate Be Trusted in a Self-Driving Microfluidics Laboratory? An Offline Closed-Loop Framework Built and Tested on Six Public Tables</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
