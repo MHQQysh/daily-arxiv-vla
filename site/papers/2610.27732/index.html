@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。 论文针对现有 RL 与 MPC 混合框架中的“结构性不匹配”问题：RL 输出逐点决策，而 MPC 在轨迹层面进行优化，导致 MPC 难以准确实现 RL 的规划意图，轨迹平滑性不足且缺乏严格安全保证。 论文提出一种分层框架，通过 RL 轨迹生成、带预设性能约束（PPC）的 MPC 以及 CBF 安全过滤器，实现安全、平滑且舒适的环岛导航，并将 CBF 的安全修正反馈给 RL 训练。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.27732">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.27732.webp" alt="Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles</h1>
+            <div class="detail-meta">2026-10-20 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.27732" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.27732" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.27732</span></div>
+            <p class="detail-summary">论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。 论文针对现有 RL 与 MPC 混合框架中的“结构性不匹配”问题：RL 输出逐点决策，而 MPC 在轨迹层面进行优化，导致 MPC 难以准确实现 RL 的规划意图，轨迹平滑性不足且缺乏严格安全保证。 论文提出一种分层框架，通过 RL 轨迹生成、带预设性能约束（PPC）的 MPC 以及 CBF 安全过滤器，实现安全、平滑且舒适的环岛导航，并将 CBF 的安全修正反馈给 RL 训练。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">7 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">香港科技大学（广州）机器人与自主系统学域、系统枢纽 · Wenhan Li、Yangrui Zhang、Hang Zhou 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.27732/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。</p>
+  <ul class="reading-intro-points"><li>论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。</li><li>论文针对现有 RL 与 MPC 混合框架中的“结构性不匹配”问题：RL 输出逐点决策，而 MPC 在轨迹层面进行优化，导致 MPC 难以准确实现 RL 的规划意图，轨迹平滑性不足且缺乏严格安全保证。</li><li>论文提出一种分层框架，通过 RL 轨迹生成、带预设性能约束（PPC）的 MPC 以及 CBF 安全过滤器，实现安全、平滑且舒适的环岛导航，并将 CBF 的安全修正反馈给 RL 训练。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：香港科技大学（广州）机器人与自主系统学域、系统枢纽；作者：Wenhan Li、Yangrui Zhang、Hang Zhou、Peiran Liu、Yiding Ji</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。</li><li>论文针对现有 RL 与 MPC 混合框架中的“结构性不匹配”问题：RL 输出逐点决策，而 MPC 在轨迹层面进行优化，导致 MPC 难以准确实现 RL 的规划意图，轨迹平滑性不足且缺乏严格安全保证。</li><li>论文提出一种分层框架，通过 RL 轨迹生成、带预设性能约束（PPC）的 MPC 以及 CBF 安全过滤器，实现安全、平滑且舒适的环岛导航，并将 CBF 的安全修正反馈给 RL 训练。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>设计轨迹生成机制，将 RL 的单步输出转换为带自适应参数的参考轨迹供 MPC 跟踪，以缓解 RL 与 MPC 之间的结构性不匹配，并加速训练收敛。</li><li>在 RL-MPC 分层框架中引入 PPC 来调节基于 RL 的规划与基于 MPC 的控制之间的耦合；据作者所述，这是该框架中首次采用该做法。</li><li>通过 PPC 逐步缩小规划层与控制层之间的轨迹跟踪误差，在复杂场景适应性与系统安全性之间取得平衡，并通过更平滑的轨迹提升乘坐舒适性。</li><li>引入基于 CBF 的安全过滤层，对 MPC 输出的潜在不安全控制进行实时修正，并将修正结果反馈到 RL 策略学习中。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：分层框架包含三层——高层 RL 决策层（RLTrajGen）、低层 MPC 控制层（PPMPC）和安全中介层（CBF 安全过滤器）。</li><li>输入传感器：原文提到通过车载传感器（如 LiDAR）感知周围环境，并编码为 259 维观测向量；向量包含车速、转向角、上一时刻油门/制动命令、上一时刻转向角、横摆角速度、与车道航向差、左右车道边界距离、横向车道位置、沿车道航向投影距离、横向投影距离、车道曲率半径、转向方向标志、车道角度及周围 LiDAR 特征。</li><li>场景表示：在二维环岛场景中，其他车辆随机出现；对进入控制区的车辆分配索引，车辆驶出后移除该索引，以维持动态索引映射。</li><li>车辆模型：采用离散时间运动学自行车模型，状态为纵向/横向位置、速度、航向，控制输入为加速度与转向角。</li><li>RL 部分：采用 PPO 训练策略网络与价值网络，使用 GAE 计算优势函数；动作定义为 (q_t, w_t)，其中 q_t=[ν_t*, κ_t*] 指定轨迹生成器结构，w_t=[w_t^v, w_t^θ] 调节 MPC 中预设性能跟踪的严格程度；轨迹生成器按匀速剖面与连续分段线性航向演化生成参考轨迹。</li><li>MPC 部分：将 PPC 离散化并引入跟踪误差距离函数，目标函数包含状态误差、控制代价与终端代价，约束包括车辆动力学与控制输入上下界。</li><li>安全过滤：将车辆近似为椭圆，基于椭圆间距离构造障碍规避函数 h(x)，求解以最小化与 MPC 控制偏差为目标、满足离散时间 CBF 约束的优化问题，得到修正控制。</li><li>RL 损失修正：当 CBF 修正状态与 MPC 状态偏差超过阈值 δ_z 时，用鼓励策略均值对齐 CBF 修正状态的损失项替代原 PPO 裁剪损失项，使策略学习 CBF 诱导的修正行为。</li><li>奖励设计：r1 包含到达目标进展、速度调节、转向变化惩罚与到达终端奖励；r2 为碰撞惩罚。其中撞车惩罚为 -5，到达奖励为 10。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未报告使用公开数据集；实验在 MetaDrive 中构建的环岛仿真环境进行。</li><li>仿真器：MetaDrive。</li><li>模型规模：原文未报告网络层数、参数量等模型规模信息。</li><li>训练资源：原文未报告计算资源、训练时长等训练资源信息。</li><li>实车平台：原文未报告实车平台；实验为仿真实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：MetaDrive 环岛仿真环境；与基线方法进行比较（原文提及 CBFG-PPO 等 RL-MPC/CBF 基线，具体对比方法清单在所提供的截断原文中未完整呈现）。</li><li>评估指标：平均成功率、运动病剂量值（MSDV），并考察训练收敛速度、乘坐舒适性与行为表现。</li><li>关键数值：相比最优基线，平均成功率提升 6.25%，MSDV 降低 65.87%，同时加速训练收敛。</li><li>消融分析：原文设置了针对 RLTrajGen 模块与 PPMPC 模块的消融实验（具体消融数值在所提供的截断原文中未完整呈现）。</li><li>实验条件：全部为仿真实验；开环、闭环与实车结果：原文未报告实车结果，闭环/开环划分在截断原文中未明确说明。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.28508/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Deep Learning-Based Road Lane Quality Assessment from Egocentric Dashcam Video</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.27617/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Provisioning Robust and Efficient LiDAR Perception for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

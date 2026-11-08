@@ -1,5 +1,585 @@
 [
   {
+    "date": "2026-10-24",
+    "title": "C-DFF: Concept-Level Diagnostics for Mechanism Parity in Simulation-Based Validation of Autonomous Driving Perception",
+    "link": "https://arxiv.org/abs/2610.33760",
+    "arxiv_id": "2610.33760",
+    "detail_path": "papers/2610.33760/",
+    "cover_path": "covers/2610.33760/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.33760.webp",
+    "paper_image_full_path": "assets/paper-images/2610.33760.webp",
+    "preview_text": "论文面向基于仿真的自动驾驶感知验证与确认（V&V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。 应用场景为配对真实—合成数据评估，具体使用 KITTI ↔ Virtual KITTI 2 克隆数据对，检验仿真图像是否保持“机制一致性（mechanism parity）”。 研究问题：如何将原始决定性证据图（decisive map）之间的差异转化为可解释、可指导工程行动的语义概念层诊断；输出一致是否足以证明机制一致。",
+    "research_unit": "WMG, University of Warwick, Coventry, U.K. · Danial Safaei、Siddartha Khastg…",
+    "hook_text": "论文面向基于仿真的自动驾驶感知验证与确认（V&V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。",
+    "key_points": [
+      "论文面向基于仿真的自动驾驶感知验证与确认（V&V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。",
+      "应用场景为配对真实—合成数据评估，具体使用 KITTI ↔ Virtual KITTI 2 克隆数据对，检验仿真图像是否保持“机制一致性（mechanism parity）”。",
+      "研究问题：如何将原始决定性证据图（decisive map）之间的差异转化为可解释、可指导工程行动的语义概念层诊断；输出一致是否足以证明机制一致。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Road Infrastructure Perception for Autonomous Driving: Taxonomy, Representations, Tasks, and Challenges",
+    "link": "https://arxiv.org/abs/2610.33758",
+    "arxiv_id": "2610.33758",
+    "detail_path": "papers/2610.33758/",
+    "cover_path": "covers/2610.33758/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.33758.webp",
+    "paper_image_full_path": "assets/paper-images/2610.33758.webp",
+    "preview_text": "论文为综述性研究，聚焦自动驾驶中的道路基础设施感知（road infrastructure perception），即恢复定义道路几何、限定可行驶空间并编码交通规则的结构化道路元素。 应用场景覆盖车道级定位、地图对齐、运动规划、停车、规则合规决策等自动驾驶下游功能。 研究问题在于：该领域在任务定义、传感假设、坐标系、输出表示、标注协议、评估指标、基准数据集与下游接口上高度碎片化，缺乏按驾驶功能组织道路基础设施元素的统一框架。",
+    "research_unit": "香港科技大学（广州） · Guoyang Zhao、Weiqing Qi、Kai Zhang 等",
+    "hook_text": "论文为综述性研究，聚焦自动驾驶中的道路基础设施感知（road infrastructure perception），即恢复定义道路几何、限定可行驶空间并编码交通规则的结构化道路元素。",
+    "key_points": [
+      "论文为综述性研究，聚焦自动驾驶中的道路基础设施感知（road infrastructure perception），即恢复定义道路几何、限定可行驶空间并编码交通规则的结构化道路元素。",
+      "应用场景覆盖车道级定位、地图对齐、运动规划、停车、规则合规决策等自动驾驶下游功能。",
+      "研究问题在于：该领域在任务定义、传感假设、坐标系、输出表示、标注协议、评估指标、基准数据集与下游接口上高度碎片化，缺乏按驾驶功能组织道路基础设施元素的统一框架。"
+    ],
+    "reading_minutes": 6,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-24",
+    "title": "FreqPKC: Frequency-Aware PeakConv for Radar Semantic Segmentation",
+    "link": "https://arxiv.org/abs/2610.33504",
+    "arxiv_id": "2610.33504",
+    "detail_path": "papers/2610.33504/",
+    "cover_path": "covers/2610.33504/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.33504.webp",
+    "paper_image_full_path": "assets/paper-images/2610.33504.webp",
+    "preview_text": "任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。 应用场景：雨、雾、极端光照等相机与激光雷达性能下降的条件下，利用毫米波雷达的天气与光照鲁棒性提升环境感知与场景理解。 研究问题：现有雷达专用神经算子 PeakConv（PKC）源于 CFAR，其保护带宽多为固定值或被当作可学习参数直接学习，未显式刻画 PKC 算子的频率响应，缺乏物理可解释的频率选择性指导；同时现有 RSS 方法多把雷达数据当作普通图像处理，存在域差异与计算冗余。 思路切入点：分析发现目标区域保留较多中高频成分、背景杂波以低频为主，而 PKC 的传递带中心随保护带宽呈 1/b_G 变化，据此提出频率感知的 PeakConv 及分割框架。",
+    "research_unit": "College of Electronic Science and Technology, National University of Defens…",
+    "hook_text": "任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。",
+    "key_points": [
+      "任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。",
+      "应用场景：雨、雾、极端光照等相机与激光雷达性能下降的条件下，利用毫米波雷达的天气与光照鲁棒性提升环境感知与场景理解。",
+      "研究问题：现有雷达专用神经算子 PeakConv（PKC）源于 CFAR，其保护带宽多为固定值或被当作可学习参数直接学习，未显式刻画 PKC 算子的频率响应，缺乏物理可解释的频率选择性指导；同时现有 RSS 方法多把雷达数据当作普通图像处理，存在域差异与计算冗余。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Robust Offset-Free Lane-Keeping Control Framework for Vision-Only Automated Vehicles",
+    "link": "https://arxiv.org/abs/2610.32666",
+    "arxiv_id": "2610.32666",
+    "detail_path": "papers/2610.32666/",
+    "cover_path": "covers/2610.32666/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.32666.webp",
+    "paper_image_full_path": "assets/paper-images/2610.32666.webp",
+    "preview_text": "论文解决的自动驾驶任务是仅依赖视觉输入的自动车辆车道保持控制（lane-keeping control），属于车辆横向控制问题。 应用场景为高速过弯（高车速约 20.0/21.1 m/s）、大曲率/紧弯道路场景，要求在车载计算资源受限条件下实现实时控制。 研究问题包括：在存在非线性道路曲率扰动、模型失配与测量噪声时消除横向稳态跟踪误差，保证鲁棒稳定性与实时性，并对视觉感知模型（multitask UNet）在未见场景下的感知不确定性进行量化。",
+    "research_unit": "National Yang Ming Chiao Tung University（原文标注为作者曾隶属单位，具体为 Department of Ele…",
+    "hook_text": "论文解决的自动驾驶任务是仅依赖视觉输入的自动车辆车道保持控制（lane-keeping control），属于车辆横向控制问题。",
+    "key_points": [
+      "论文解决的自动驾驶任务是仅依赖视觉输入的自动车辆车道保持控制（lane-keeping control），属于车辆横向控制问题。",
+      "应用场景为高速过弯（高车速约 20.0/21.1 m/s）、大曲率/紧弯道路场景，要求在车载计算资源受限条件下实现实时控制。",
+      "研究问题包括：在存在非线性道路曲率扰动、模型失配与测量噪声时消除横向稳态跟踪误差，保证鲁棒稳定性与实时性，并对视觉感知模型（multitask UNet）在未见场景下的感知不确定性进行量化。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-23",
+    "title": "DriveOSS: Dataset and Benchmark for 3D Anomaly Segmentation and Open-set Semantic Segmentation in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.32612",
+    "arxiv_id": "2610.32612",
+    "detail_path": "papers/2610.32612/",
+    "cover_path": "covers/2610.32612/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.32612.webp",
+    "paper_image_full_path": "assets/paper-images/2610.32612.webp",
+    "preview_text": "论文面向自动驾驶中的 3D 场景理解任务，关注现有 3D 语义分割方法普遍采用闭集假设、无法处理未见过物体的问题。 应用场景为真实道路驾驶，包括城市中心、行人区、城乡道路、停车场与工业区域，并覆盖晴天、夜间、多云、雨天、雪天等天气与光照条件。 研究问题是：构建面向 3D 异常分割与 3D 开集语义分割的真实世界多模态数据集与基准，联合评估已知类识别与未知物体检测能力。 论文提出 DriveOSS 数据集与基准，包含 ID（仅已知类）与 OOD（含标注为 outlier 的未知物体）子集。",
+    "research_unit": "Technische Hochschule Ingolstadt · Zhiran Yan、Savankumar Bhanderi、Sourabh L…",
+    "hook_text": "论文面向自动驾驶中的 3D 场景理解任务，关注现有 3D 语义分割方法普遍采用闭集假设、无法处理未见过物体的问题。",
+    "key_points": [
+      "论文面向自动驾驶中的 3D 场景理解任务，关注现有 3D 语义分割方法普遍采用闭集假设、无法处理未见过物体的问题。",
+      "应用场景为真实道路驾驶，包括城市中心、行人区、城乡道路、停车场与工业区域，并覆盖晴天、夜间、多云、雨天、雪天等天气与光照条件。",
+      "研究问题是：构建面向 3D 异常分割与 3D 开集语义分割的真实世界多模态数据集与基准，联合评估已知类识别与未知物体检测能力。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Towards Effective and Transferable Physical Camouflage against Multi-View BEV-based 3D Perception in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.32230",
+    "arxiv_id": "2610.32230",
+    "detail_path": "papers/2610.32230/",
+    "cover_path": "covers/2610.32230/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.32230.webp",
+    "paper_image_full_path": "assets/paper-images/2610.32230.webp",
+    "preview_text": "论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。 目标任务是生成覆盖目标车辆全车身的对抗纹理，使多视角 BEV 3D 目标检测与 BEV 语义分割对目标车辆的感知性能显著下降。 应用场景为视觉自动驾驶系统中环绕相机（六个相机）输入的多视角 3D 感知，攻击需在多种视角、数字仿真与物理世界条件下有效。 研究问题：既有迷彩攻击主要面向单视角 2D 检测器，难以直接迁移到多视角 3D 感知；已有攻击依赖目标模型检测分数优化，黑盒迁移性受限；且小面积对抗补丁无法在全视角覆盖车辆。",
+    "research_unit": "Harbin Institute of Technology, Shenzhen · 原文未明确对应",
+    "hook_text": "论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。",
+    "key_points": [
+      "论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。",
+      "目标任务是生成覆盖目标车辆全车身的对抗纹理，使多视角 BEV 3D 目标检测与 BEV 语义分割对目标车辆的感知性能显著下降。",
+      "应用场景为视觉自动驾驶系统中环绕相机（六个相机）输入的多视角 3D 感知，攻击需在多种视角、数字仿真与物理世界条件下有效。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-22",
+    "title": "RaSFNet: Ray-aligned and Scan-aware Fusion Network for LiDAR Semantic Segmentation",
+    "link": "https://arxiv.org/abs/2610.31186",
+    "arxiv_id": "2610.31186",
+    "detail_path": "papers/2610.31186/",
+    "cover_path": "covers/2610.31186/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.31186.webp",
+    "paper_image_full_path": "assets/paper-images/2610.31186.webp",
+    "preview_text": "任务：自动驾驶与机器人 3D 感知中的 LiDAR 点云语义分割。 应用场景：室外自动驾驶场景的细粒度环境感知，需区分停车场、人行道、地形等几何相似的地面类别。 研究问题：基于投影（距离图像/视锥）的方法在将 3D 点云压缩到 2D 网格时，同一视锥内多点聚合会掩盖几何差异；局部特征提取难以建模跨扫描区域的远距离空间关系；投影邻近不等于 3D 空间邻近，点特征与投影特征交互易混入不同距离范围的特征，降低语义可分性；点云增强引入的外部点还可能加剧投影冲突。",
+    "research_unit": "四川大学 视觉合成图形图像技术国防重点学科实验室（National Key Laboratory of Fundamental Science on…",
+    "hook_text": "任务：自动驾驶与机器人 3D 感知中的 LiDAR 点云语义分割。",
+    "key_points": [
+      "任务：自动驾驶与机器人 3D 感知中的 LiDAR 点云语义分割。",
+      "应用场景：室外自动驾驶场景的细粒度环境感知，需区分停车场、人行道、地形等几何相似的地面类别。",
+      "研究问题：基于投影（距离图像/视锥）的方法在将 3D 点云压缩到 2D 网格时，同一视锥内多点聚合会掩盖几何差异；局部特征提取难以建模跨扫描区域的远距离空间关系；投影邻近不等于 3D 空间邻近，点特征与投影特征交互易混入不同距离范围的特征，降低语义可分性；点云增强引入的外部点还可能加剧投影冲突。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Evaluation of Front-End Feature Matching for Lunar Visual SLAM",
+    "link": "https://arxiv.org/abs/2610.30774",
+    "arxiv_id": "2610.30774",
+    "detail_path": "papers/2610.30774/",
+    "cover_path": "covers/2610.30774/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.30774.webp",
+    "paper_image_full_path": "assets/paper-images/2610.30774.webp",
+    "preview_text": "论文面向月球车视觉导航中的前端特征匹配问题，评估视觉里程计（VO）与视觉SLAM前端中检测器–匹配器组合在月球及类似地形上的表现。 应用场景为月球巡视器在低纹理、强阴影/苛刻光照条件下的相对导航、VO 与回环检测。 研究问题是：在月球合成、月面试验台与地球类似场数据上，哪些经典与学习型检测器–匹配器组合能更准确地恢复相对位姿、在多大基线上可工作，以及成对匹配结果能否推广到 VO 轨迹与回访验证。",
+    "research_unit": "Stanford University, Department of Aeronautics and Astronautics · Guillem C…",
+    "hook_text": "论文面向月球车视觉导航中的前端特征匹配问题，评估视觉里程计（VO）与视觉SLAM前端中检测器–匹配器组合在月球及类似地形上的表现。",
+    "key_points": [
+      "论文面向月球车视觉导航中的前端特征匹配问题，评估视觉里程计（VO）与视觉SLAM前端中检测器–匹配器组合在月球及类似地形上的表现。",
+      "应用场景为月球巡视器在低纹理、强阴影/苛刻光照条件下的相对导航、VO 与回环检测。",
+      "研究问题是：在月球合成、月面试验台与地球类似场数据上，哪些经典与学习型检测器–匹配器组合能更准确地恢复相对位姿、在多大基线上可工作，以及成对匹配结果能否推广到 VO 轨迹与回访验证。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Decision Making and Ride Comfort Evaluation Based on Lane-Change Prediction for Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2610.30528",
+    "arxiv_id": "2610.30528",
+    "detail_path": "papers/2610.30528/",
+    "cover_path": "covers/2610.30528/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.30528.webp",
+    "paper_image_full_path": "assets/paper-images/2610.30528.webp",
+    "preview_text": "任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。 应用场景：车辆合流/加塞风险场景——目标车辆接近前车后向自车所在车道实施风险换道（CARLA 仿真）。 研究问题：换道预测带来的提前响应，究竟应转化为纵向制动还是横向避让；两类预测驱动策略在安全性、响应时机、车辆运动与振动舒适性上与纯反应式驾驶相比有何差异。",
+    "research_unit": "University of Alcalá, Madrid, Spain（Computer Engineering Department） · Moha…",
+    "hook_text": "任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。",
+    "key_points": [
+      "任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。",
+      "应用场景：车辆合流/加塞风险场景——目标车辆接近前车后向自车所在车道实施风险换道（CARLA 仿真）。",
+      "研究问题：换道预测带来的提前响应，究竟应转化为纵向制动还是横向避让；两类预测驱动策略在安全性、响应时机、车辆运动与振动舒适性上与纯反应式驾驶相比有何差异。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Integrated Longitudinal and Lateral Control for High-Speed Platooning of Articulated Vehicles",
+    "link": "https://arxiv.org/abs/2610.30437",
+    "arxiv_id": "2610.30437",
+    "detail_path": "papers/2610.30437/",
+    "cover_path": "covers/2610.30437/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.30437.webp",
+    "paper_image_full_path": "assets/paper-images/2610.30437.webp",
+    "preview_text": "论文面向铰接式车辆（articulated vehicles）的高速车辆编队（platooning）自动驾驶任务，提出纵向与横向控制一体化的控制框架。 应用场景为高速、弯曲道路等具有挑战性的编队行驶工况，目标是解决安全、高效自动驾驶中的车间距保持与路径跟踪问题。 研究问题包括：在动态工况下保持队列稳定性（string stability）的纵向车间距调节、弯道下纵向误差定义的可适用性，以及高速下基于回旋曲线（clothoid）的路径跟踪振荡与稳定性问题。",
+    "research_unit": "原文未明确 · Aashish Shaju、Steve Southward、Mehdi Ahmadian（原文未明确作者与机构的对应关系）",
+    "hook_text": "论文面向铰接式车辆（articulated vehicles）的高速车辆编队（platooning）自动驾驶任务，提出纵向与横向控制一体化的控制框架。",
+    "key_points": [
+      "论文面向铰接式车辆（articulated vehicles）的高速车辆编队（platooning）自动驾驶任务，提出纵向与横向控制一体化的控制框架。",
+      "应用场景为高速、弯曲道路等具有挑战性的编队行驶工况，目标是解决安全、高效自动驾驶中的车间距保持与路径跟踪问题。",
+      "研究问题包括：在动态工况下保持队列稳定性（string stability）的纵向车间距调节、弯道下纵向误差定义的可适用性，以及高速下基于回旋曲线（clothoid）的路径跟踪振荡与稳定性问题。"
+    ],
+    "reading_minutes": 5,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Foundation4D: Towards a unified perception and reconstruction model for autonomous vehicles",
+    "link": "https://arxiv.org/abs/2610.30340",
+    "arxiv_id": "2610.30340",
+    "detail_path": "papers/2610.30340/",
+    "cover_path": "covers/2610.30340/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.30340.webp",
+    "paper_image_full_path": "assets/paper-images/2610.30340.webp",
+    "preview_text": "论文面向自动驾驶多相机视频，提出统一的自动驾驶感知与重建模型 Foundation4D。 解决的任务包括：几何估计（相机位姿、位姿标定、度量深度）、3D 目标检测与跟踪、语义占据预测、以及基于 3D 高斯泼溅的场景重建与渲染。 应用场景为自动驾驶行车环境的理解（感知）与面向仿真的可渲染场景重建。 研究问题：如何用一个前馈共享模型，在多相机、多时间戳的驾驶视频上同时完成上述多种输出；如何高效融合跨相机与跨时间信息；如何将窗口级预测拼装为长视频级几何与轨迹；以及联合训练不同任务时的收益与干扰。",
+    "research_unit": "NVIDIA · 原文仅标注 NVIDIA、完整作者列表见附录 A、HTML 正文摘要部分未给出具体作者与机构对应关系 等",
+    "hook_text": "论文面向自动驾驶多相机视频，提出统一的自动驾驶感知与重建模型 Foundation4D。",
+    "key_points": [
+      "论文面向自动驾驶多相机视频，提出统一的自动驾驶感知与重建模型 Foundation4D。",
+      "解决的任务包括：几何估计（相机位姿、位姿标定、度量深度）、3D 目标检测与跟踪、语义占据预测、以及基于 3D 高斯泼溅的场景重建与渲染。",
+      "应用场景为自动驾驶行车环境的理解（感知）与面向仿真的可渲染场景重建。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "TerraTransfer++: Demonstration-Free End-to-End Planner",
+    "link": "https://arxiv.org/abs/2610.30319",
+    "arxiv_id": "2610.30319",
+    "detail_path": "papers/2610.30319/",
+    "cover_path": "covers/2610.30319/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.30319.webp",
+    "paper_image_full_path": "assets/paper-images/2610.30319.webp",
+    "preview_text": "论文面向端到端自动驾驶，解决“驾驶能力学习”与“视觉感知学习”耦合导致的高成本问题：模仿学习依赖车队规模人类驾驶日志，而安全关键长尾事件在日志中极为稀疏；在照片级渲染仿真器中做闭环强化学习又受样本效率、逐帧渲染开销和大视觉骨干前向计算限制。 应用场景为相机输入的端到端闭环驾驶与伪闭环轨迹规划，分别在 HUGSim（照片级 3D Gaussian splatting 闭环基准）与 NAVSIM（伪闭环规划基准）上评估。 核心研究问题是：能否不依赖任何人工专家演示轨迹，仅通过向量化仿真器中的多智能体自博弈获得驾驶能力，再将其迁移到图像输入的端到端学生策略与规划器。",
+    "research_unit": "Applied Intuition · Zikang Xiong、Weixin Li、Zhouchonghao Wu 等",
+    "hook_text": "论文面向端到端自动驾驶，解决“驾驶能力学习”与“视觉感知学习”耦合导致的高成本问题：模仿学习依赖车队规模人类驾驶日志，而安全关键长尾事件在日志中极为稀疏；在照片级渲染仿真器中做闭环强化学习又受样本效率、逐帧渲染开销和大视觉骨干前向计算限制。",
+    "key_points": [
+      "论文面向端到端自动驾驶，解决“驾驶能力学习”与“视觉感知学习”耦合导致的高成本问题：模仿学习依赖车队规模人类驾驶日志，而安全关键长尾事件在日志中极为稀疏；在照片级渲染仿真器中做闭环强化学习又受样本效率、逐帧渲染开销和大视觉骨干前向计算限制。",
+      "应用场景为相机输入的端到端闭环驾驶与伪闭环轨迹规划，分别在 HUGSim（照片级 3D Gaussian splatting 闭环基准）与 NAVSIM（伪闭环规划基准）上评估。",
+      "核心研究问题是：能否不依赖任何人工专家演示轨迹，仅通过向量化仿真器中的多智能体自博弈获得驾驶能力，再将其迁移到图像输入的端到端学生策略与规划器。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "DriveMLP: When Training Strategy Outperforms Model Complexity in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.29676",
+    "arxiv_id": "2610.29676",
+    "detail_path": "papers/2610.29676/",
+    "cover_path": "covers/2610.29676/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.29676.webp",
+    "paper_image_full_path": "assets/paper-images/2610.29676.webp",
+    "preview_text": "任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。 应用场景：城市与高速场景下的闭环规划，包括 nuPlan 的 Non-Reactive 与 Reactive 仿真评估、Highway-env 多车道高速场景，以及 InterPlan 长尾场景。 研究问题：模仿学习（IL）在开环数据上易受分布偏移、因果混淆与误差累积影响；强化学习（RL）则依赖手工规则奖励和大规模仿真。论文探究“训练策略”相较“模型规模与复杂度”对闭环性能的贡献，并提出以专家轨迹距离奖励引导的闭环训练策略 Expert-Guided RL（EGRL），用轻量 MLP 策略 DriveMLP 验证其有效性。",
+    "research_unit": "Mercedes-Benz AG, Research & Development, Sindelfingen, Germany · Alessandr…",
+    "hook_text": "任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。",
+    "key_points": [
+      "任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。",
+      "应用场景：城市与高速场景下的闭环规划，包括 nuPlan 的 Non-Reactive 与 Reactive 仿真评估、Highway-env 多车道高速场景，以及 InterPlan 长尾场景。",
+      "研究问题：模仿学习（IL）在开环数据上易受分布偏移、因果混淆与误差累积影响；强化学习（RL）则依赖手工规则奖励和大规模仿真。论文探究“训练策略”相较“模型规模与复杂度”对闭环性能的贡献，并提出以专家轨迹距离奖励引导的闭环训练策略 Expert-Guided RL（EGRL），用轻量 MLP 策略 DriveMLP 验证其有效性。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-21",
+    "title": "NeuralSRender: G-Buffer Guided Video Diffusion for Sim-to-Real Rendering",
+    "link": "https://arxiv.org/abs/2610.29200",
+    "arxiv_id": "2610.29200",
+    "detail_path": "papers/2610.29200/",
+    "cover_path": "covers/2610.29200/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.29200.webp",
+    "paper_image_full_path": "assets/paper-images/2610.29200.webp",
+    "preview_text": "解决的自动驾驶任务：面向自动驾驶感知的数据生成，即“仿真到真实”（sim-to-real）视频转换，用生成模型把仿真器渲染的驾驶视频转换为照片级真实风格视频，同时保持与原场景的几何与标注一致性。 应用场景：用高真实感的转换后仿真视频替代原始仿真渲染帧，为自动驾驶检测、分割等感知模型提供规模化训练数据，并支持文本控制天气、光照、时段等全局外观。 研究问题：仿真器可大规模产生带自动标注的数据，但仿真渲染的外观真实度不足（纹理/材质制作成本高、实时渲染简化光照），造成与真实数据的域差；真实视频有真实外观但缺乏准确的 G-buffer 标注；核心问题是既要学到可靠的几何与材质条件控制，又要适配真实世界外观，且不破坏场景结构与标注一致性。",
+    "research_unit": "Wuhan University（武汉大学） · Yipeng Lu、Youqi Liao、Zhenyu Wang 等",
+    "hook_text": "解决的自动驾驶任务：面向自动驾驶感知的数据生成，即“仿真到真实”（sim-to-real）视频转换，用生成模型把仿真器渲染的驾驶视频转换为照片级真实风格视频，同时保持与原场景的几何与标注一致性。",
+    "key_points": [
+      "解决的自动驾驶任务：面向自动驾驶感知的数据生成，即“仿真到真实”（sim-to-real）视频转换，用生成模型把仿真器渲染的驾驶视频转换为照片级真实风格视频，同时保持与原场景的几何与标注一致性。",
+      "应用场景：用高真实感的转换后仿真视频替代原始仿真渲染帧，为自动驾驶检测、分割等感知模型提供规模化训练数据，并支持文本控制天气、光照、时段等全局外观。",
+      "研究问题：仿真器可大规模产生带自动标注的数据，但仿真渲染的外观真实度不足（纹理/材质制作成本高、实时渲染简化光照），造成与真实数据的域差；真实视频有真实外观但缺乏准确的 G-buffer 标注；核心问题是既要学到可靠的几何与材质条件控制，又要适配真实世界外观，且不破坏场景结构与标注一致性。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-20",
+    "title": "HorizonComposer: Spatiotemporally Consistent Driving Video Editing with Enriched Traffic Semantics",
+    "link": "https://arxiv.org/abs/2610.28829",
+    "arxiv_id": "2610.28829",
+    "detail_path": "papers/2610.28829/",
+    "cover_path": "covers/2610.28829/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.28829.webp",
+    "paper_image_full_path": "assets/paper-images/2610.28829.webp",
+    "preview_text": "面向自动驾驶的指令引导驾驶视频编辑任务，通过生成模型对已有驾驶日志进行全局外观变换（如天气、季节、昼夜），以低成本扩展自动驾驶系统的运行设计域（ODD）测试覆盖。 应用场景为对同一驾驶场景施加多样化环境条件，用于压力测试感知与规划算法，并可作为下游感知任务的数据增广来源。 核心研究问题：如何在驾驶视频编辑中蒸馏并保护稠密交通语义（多主体、车道几何、道路设施），在实现指令对齐的全局外观编辑同时严格保持局部场景结构，避免结构幻觉与“时序冲击”（temporal shock）。",
+    "research_unit": "Simon Fraser University · Mauricio Soroco、Yuqiu Liu、Wuyang Chen",
+    "hook_text": "面向自动驾驶的指令引导驾驶视频编辑任务，通过生成模型对已有驾驶日志进行全局外观变换（如天气、季节、昼夜），以低成本扩展自动驾驶系统的运行设计域（ODD）测试覆盖。",
+    "key_points": [
+      "面向自动驾驶的指令引导驾驶视频编辑任务，通过生成模型对已有驾驶日志进行全局外观变换（如天气、季节、昼夜），以低成本扩展自动驾驶系统的运行设计域（ODD）测试覆盖。",
+      "应用场景为对同一驾驶场景施加多样化环境条件，用于压力测试感知与规划算法，并可作为下游感知任务的数据增广来源。",
+      "核心研究问题：如何在驾驶视频编辑中蒸馏并保护稠密交通语义（多主体、车道几何、道路设施），在实现指令对齐的全局外观编辑同时严格保持局部场景结构，避免结构幻觉与“时序冲击”（temporal shock）。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Deep Learning-Based Road Lane Quality Assessment from Egocentric Dashcam Video",
+    "link": "https://arxiv.org/abs/2610.28508",
+    "arxiv_id": "2610.28508",
+    "detail_path": "papers/2610.28508/",
+    "cover_path": "covers/2610.28508/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.28508.webp",
+    "paper_image_full_path": "assets/paper-images/2610.28508.webp",
+    "preview_text": "论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。 任务：从低成本智能手机行车记录仪（ego-centric dashcam）视频与 GPS 元数据中，评估车道标线的对比度/可见性、几何连续性与语义正确性。 研究问题：在缺少密集人工标注的条件下，如何构建开放数据集与透明、无参考的车道标线质量指标与基线模型，并验证其与人类感知排序的一致性。",
+    "research_unit": "Department of Electrical Engineering and Computer Science, Texas A&M Univer…",
+    "hook_text": "论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。",
+    "key_points": [
+      "论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。",
+      "任务：从低成本智能手机行车记录仪（ego-centric dashcam）视频与 GPS 元数据中，评估车道标线的对比度/可见性、几何连续性与语义正确性。",
+      "研究问题：在缺少密集人工标注的条件下，如何构建开放数据集与透明、无参考的车道标线质量指标与基线模型，并验证其与人类感知排序的一致性。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2610.27732",
+    "arxiv_id": "2610.27732",
+    "detail_path": "papers/2610.27732/",
+    "cover_path": "covers/2610.27732/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.27732.webp",
+    "paper_image_full_path": "assets/paper-images/2610.27732.webp",
+    "preview_text": "论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。 论文针对现有 RL 与 MPC 混合框架中的“结构性不匹配”问题：RL 输出逐点决策，而 MPC 在轨迹层面进行优化，导致 MPC 难以准确实现 RL 的规划意图，轨迹平滑性不足且缺乏严格安全保证。 论文提出一种分层框架，通过 RL 轨迹生成、带预设性能约束（PPC）的 MPC 以及 CBF 安全过滤器，实现安全、平滑且舒适的环岛导航，并将 CBF 的安全修正反馈给 RL 训练。",
+    "research_unit": "香港科技大学（广州）机器人与自主系统学域、系统枢纽 · Wenhan Li、Yangrui Zhang、Hang Zhou 等",
+    "hook_text": "论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。",
+    "key_points": [
+      "论文研究自动驾驶车辆（CAV）在环岛场景中的安全导航问题，环岛交通交互密集、其他车辆行为难以预测，对规划与控制的自适应性和安全性要求高。",
+      "论文针对现有 RL 与 MPC 混合框架中的“结构性不匹配”问题：RL 输出逐点决策，而 MPC 在轨迹层面进行优化，导致 MPC 难以准确实现 RL 的规划意图，轨迹平滑性不足且缺乏严格安全保证。",
+      "论文提出一种分层框架，通过 RL 轨迹生成、带预设性能约束（PPC）的 MPC 以及 CBF 安全过滤器，实现安全、平滑且舒适的环岛导航，并将 CBF 的安全修正反馈给 RL 训练。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Provisioning Robust and Efficient LiDAR Perception for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.27617",
+    "arxiv_id": "2610.27617",
+    "detail_path": "papers/2610.27617/",
+    "cover_path": "covers/2610.27617/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.27617.webp",
+    "paper_image_full_path": "assets/paper-images/2610.27617.webp",
+    "preview_text": "任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。 应用场景：车载感知需在每帧延迟预算与加速器内存约束内处理流式点云，并向下游跟踪、预测、运动规划提供检测结果。 研究问题：现有工作在“点云退化下的鲁棒性”与“推理延迟/显存资源效率”上分别处理，导致紧凑检测器在退化下脆弱、鲁棒检测器部署成本高；论文将其统一为在保持干净数据精度的同时提升退化下精度，并降低平均推理延迟与峰值分配 GPU 显存。",
+    "research_unit": "南京大学计算机软件新技术国家重点实验室（State Key Laboratory for Novel Software Technology, Nan…",
+    "hook_text": "任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。",
+    "key_points": [
+      "任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。",
+      "应用场景：车载感知需在每帧延迟预算与加速器内存约束内处理流式点云，并向下游跟踪、预测、运动规划提供检测结果。",
+      "研究问题：现有工作在“点云退化下的鲁棒性”与“推理延迟/显存资源效率”上分别处理，导致紧凑检测器在退化下脆弱、鲁棒检测器部署成本高；论文将其统一为在保持干净数据精度的同时提升退化下精度，并降低平均推理延迟与峰值分配 GPU 显存。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Real-Time Radar Semantic and Panoptic Scene Understanding",
+    "link": "https://arxiv.org/abs/2610.26816",
+    "arxiv_id": "2610.26816",
+    "detail_path": "papers/2610.26816/",
+    "cover_path": "covers/2610.26816/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.26816.webp",
+    "paper_image_full_path": "assets/paper-images/2610.26816.webp",
+    "preview_text": "论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。 应用场景为自动驾驶车辆在雨、雪、雾等不利天气和低照度条件下的环境感知，利用旋转 FMCW 雷达提供 360° 覆盖、远距离、低计算与低带宽优势。 研究问题包括：雷达信号返回复杂、时间分辨率有限、标注数据稀缺；现有方法多依赖多普勒信息（旋转雷达难以获得）或完整 360° 扫描，等待整圈扫描会延迟预测；此前尚无面向旋转 FMCW 雷达的全景分割工作。",
+    "research_unit": "University of Freiburg · Santosh Parit、Julia Hindel、Rohit Mohan 等",
+    "hook_text": "论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。",
+    "key_points": [
+      "论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。",
+      "应用场景为自动驾驶车辆在雨、雪、雾等不利天气和低照度条件下的环境感知，利用旋转 FMCW 雷达提供 360° 覆盖、远距离、低计算与低带宽优势。",
+      "研究问题包括：雷达信号返回复杂、时间分辨率有限、标注数据稀缺；现有方法多依赖多普勒信息（旋转雷达难以获得）或完整 360° 扫描，等待整圈扫描会延迟预测；此前尚无面向旋转 FMCW 雷达的全景分割工作。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-19",
+    "title": "A Semantic Knowledge Graph Construction Pipeline for Vehicle Intention Prediction in nuScenes",
+    "link": "https://arxiv.org/abs/2610.26528",
+    "arxiv_id": "2610.26528",
+    "detail_path": "papers/2610.26528/",
+    "cover_path": "covers/2610.26528/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.26528.webp",
+    "paper_image_full_path": "assets/paper-images/2610.26528.webp",
+    "preview_text": "任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。 应用场景：ego-centric 驾驶数据（nuScenes），作为感知与下游意图预测器之间的显式语义上下文层。 研究问题：现有交通场景知识图谱多面向轨迹预测或通用场景理解，且意图相关上下文（自车相对运动、空间构型、碰撞时间风险）通常隐含在学习编码器内部，缺乏显式、本体支撑、可查询复用的语义资源。 目标：将三类意图相关信号提升为每个场景参与者的一等关系属性，并发布可复现的构建流水线与验证协议。",
+    "research_unit": "German University in Cairo, Cairo, Egypt · Khaled Nowara、Catherine Elias",
+    "hook_text": "任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。",
+    "key_points": [
+      "任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。",
+      "应用场景：ego-centric 驾驶数据（nuScenes），作为感知与下游意图预测器之间的显式语义上下文层。",
+      "研究问题：现有交通场景知识图谱多面向轨迹预测或通用场景理解，且意图相关上下文（自车相对运动、空间构型、碰撞时间风险）通常隐含在学习编码器内部，缺乏显式、本体支撑、可查询复用的语义资源。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
     "date": "2026-10-29",
     "title": "A Unified Benchmark for Aerial-Enhanced Autonomous Driving: The KITScenes Aerial Dataset",
     "link": "https://arxiv.org/abs/2610.40455",

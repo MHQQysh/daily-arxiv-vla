@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Semantic Knowledge Graph Construction Pipeline for Vehicle Intention Prediction in nuScenes - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。 应用场景：ego-centric 驾驶数据（nuScenes），作为感知与下游意图预测器之间的显式语义上下文层。 研究问题：现有交通场景知识图谱多面向轨迹预测或通用场景理解，且意图相关上下文（自车相对运动、空间构型、碰撞时间风险）通常隐含在学习编码器内部，缺乏显式、本体支撑、可查询复用的语义资源。 目标：将三类意图相关信号提升为每个场景参与者的一等关系属性，并发布可复现的构建流水线与验证协议。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.26528">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.26528.webp" alt="A Semantic Knowledge Graph Construction Pipeline for Vehicle Intention Prediction in nuScenes" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Semantic Knowledge Graph Construction Pipeline for Vehicle Intention Prediction in nuScenes</h1>
+            <div class="detail-meta">2026-10-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.26528" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.26528" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.26528</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。 应用场景：ego-centric 驾驶数据（nuScenes），作为感知与下游意图预测器之间的显式语义上下文层。 研究问题：现有交通场景知识图谱多面向轨迹预测或通用场景理解，且意图相关上下文（自车相对运动、空间构型、碰撞时间风险）通常隐含在学习编码器内部，缺乏显式、本体支撑、可查询复用的语义资源。 目标：将三类意图相关信号提升为每个场景参与者的一等关系属性，并发布可复现的构建流水线与验证协议。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">German University in Cairo, Cairo, Egypt · Khaled Nowara、Catherine Elias</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.26528/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。</li><li>应用场景：ego-centric 驾驶数据（nuScenes），作为感知与下游意图预测器之间的显式语义上下文层。</li><li>研究问题：现有交通场景知识图谱多面向轨迹预测或通用场景理解，且意图相关上下文（自车相对运动、空间构型、碰撞时间风险）通常隐含在学习编码器内部，缺乏显式、本体支撑、可查询复用的语义资源。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：German University in Cairo, Cairo, Egypt；作者：Khaled Nowara、Catherine Elias</li><li>机构：Computer Engineering Department, University of Alcalá, Madrid, Spain；作者：Mohamed Manzour</li><li>说明：原文以脚注给出两个机构地址与三个作者邮箱，但未逐一标注每位作者的具体所属机构；上列为基于邮箱域名（guc.edu.eg、uah.es）推断，原文未明确对应。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的车辆意图预测，构建以自车为中心的语义上下文知识图谱（nuScenes Intention Knowledge Graph, NIKG）。</li><li>应用场景：ego-centric 驾驶数据（nuScenes），作为感知与下游意图预测器之间的显式语义上下文层。</li><li>研究问题：现有交通场景知识图谱多面向轨迹预测或通用场景理解，且意图相关上下文（自车相对运动、空间构型、碰撞时间风险）通常隐含在学习编码器内部，缺乏显式、本体支撑、可查询复用的语义资源。</li><li>目标：将三类意图相关信号提升为每个场景参与者的一等关系属性，并发布可复现的构建流水线与验证协议。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个自描述的 OWL 本体，将 motionTowardEgo、spatialConfiguration、ttcRisk 提升为 SceneParticipant 上的一等对象属性，并采用封闭枚举值域。</li><li>提出模块化的 nuScenes 到单一合并 Turtle 图（同时包含 TBox 与 ABox）的构建流水线，输入契约仅需自车位姿、标注位置、稳定实例 ID 与关键帧顺序。</li><li>发布本体支撑、自描述的图工件及可复现构建流水线与验证协议，供 KGE、SPARQL 特征抽取或神经符号混合推理复用。</li><li>在 nuScenes mini 上给出工件的实证刻画：规模与覆盖、语义一致性含义、运动标签的时间前向一致性。</li><li>将 NIKG 定位为介于场景导向交通知识图谱与意图预测模型之间的小型显式语义层。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：位于感知（检测、跟踪）与意图预测/知识图谱嵌入/规划之间，作为语义上下文层。</li><li>输入传感器：原文未报告使用相机/LiDAR/雷达原始传感器数据；流水线仅消费 nuScenes 标注级字段（自车平面位姿 (x,y,ψ)、标注位置、实例标识、关键帧顺序），相机内参与图像为可选、仅用于图示。</li><li>场景表示：OWL 本体 + Turtle RDF 图；类层次 Dataset → Trip → Sequence → Scene，继承自 nSKG，含 hasNextScene/hasPreviousScene 时序链接；Participant 表示跨帧稳定身份，EgoVehicle 与交通参与者区分，SceneParticipant 表示“该参与者在当前场景中的观测”，通过 isSceneParticipantOf/hasSceneParticipant 关联，质心以 CAM_FRONT 归一化图像坐标 Point2D 记录。</li><li>模型结构：无学习模型；包含五阶段流水线（1 数据摄取、2 转换为 KeyframeRecord/SceneBundle 中性记录、3 组装领域对象、4 关系计算、5 RDF 导出并合并本体与实例）。</li><li>关键技术：</li></ul>
+<p> - 粗类别映射：将 nuScenes 检测类别映射为 Vehicle、Pedestrian、MovableObject、Infrastructure 四类，原始类别字符串可作为字面量保留。</p>
+<p> - motionTowardEgo：基于相邻关键帧到自车平面距离变化，\|Δd\|&lt; 0.5 m 记为 Stationary，否则按符号记为 Approaching 或 Receding；首次出现不发射。</p>
+<p> - spatialConfiguration：投影到自车车身坐标系，纵向阈值 3.0 m、横向阈值 1.75 m、最大 50 m 范围，划分为八个周边区域（如 Preceding、Following、Left/Right × {Preceding, Alongside, Following}）。</p>
+<p> - ttcRisk：一步闭合速度近似计算 TTC（Δt = 0.5 s），High 为 TTC &lt; 4 s，Medium 为 4 s ≤ TTC &lt; 10 s，Low 为 TTC ≥ 10 s；首次出现或闭合速度可忽略（约 0.1 m/s 门限）时不发射。</p>
+<ul><li>原文未报告：模型规模、训练过程、学习式参数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（使用 v1.0-mini 版本，10 个场景、404 个关键帧）；CLI 示例指定 data/nuscenes、v1.0-mini。</li><li>仿真器：原文未报告。</li><li>模型规模：不适用（无学习模型）；原文未报告其他规模信息。</li><li>训练资源：不适用；环境通过 environment.yml 固定（conda、Python 3.11），单一命令可复现。</li><li>实车平台：原文未报告（使用公开数据集离线构建）。</li><li>代码与工件：公开伴随仓库（github.com/KhaledNowara/nuScenes-Intention-Knowledge-Graph）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes mini 生成的 NIKG 图工件；场景研究为 scene-1100 第 19–22 帧（2 Hz 关键帧率、间隔 0.5 s）。</li><li>评估指标与关键数值：</li></ul>
+<p> - 规模与覆盖：211,335 条三元组，404 个关键帧（场景），911 个唯一参与者，18,538 个 SceneParticipant 实例；hasCoarseCategory 与 hasNuScenesCategory 各 18,538 条；motionTowardEgo 17,627 条、spatialConfiguration 15,166 条、ttcRisk 8,156 条；全部 8 个 SpatialZone 值与 3 个 TTCRiskLevel 值均被实例化。</p>
+<p> - 语义一致性（前提满足实例中结论成立比例）：ttcRisk=High ⇒ Approaching 为 1,988/1,990 = 99.9%；ttcRisk=High ⇒ 前向区域 spatialConfiguration 为 1,688/1,892 = 89.2%；Stationary ⇒ ttcRisk ≠ High 为 3,782/3,784 = 99.9%。</p>
+<p> - 时间标签一致性：16,746 个有标签转移上总体 92.5%；Receding 99.1%、Approaching 91.0%、Stationary 84.7%；跨方向错误（Approaching→Receding 或反向）仅 158/16,746 = 0.9%。</p>
+<ul><li>对比方法：原文未报告与其他方法的定量对比，仅与 nSKG 等先前工作进行定性定位。</li><li>开环/闭环/仿真/实车条件：仅离线图构建与图层面的统计验证；未进行开环或闭环意图预测实验，未进行仿真或实车测试；对下游意图预测的支持属于未来工作。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.26816/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Real-Time Radar Semantic and Panoptic Scene Understanding</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.40455/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A Unified Benchmark for Aerial-Enhanced Autonomous Driving: The KITScenes Aerial Dataset</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

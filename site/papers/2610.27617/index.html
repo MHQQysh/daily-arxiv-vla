@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Provisioning Robust and Efficient LiDAR Perception for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。 应用场景：车载感知需在每帧延迟预算与加速器内存约束内处理流式点云，并向下游跟踪、预测、运动规划提供检测结果。 研究问题：现有工作在“点云退化下的鲁棒性”与“推理延迟/显存资源效率”上分别处理，导致紧凑检测器在退化下脆弱、鲁棒检测器部署成本高；论文将其统一为在保持干净数据精度的同时提升退化下精度，并降低平均推理延迟与峰值分配 GPU 显存。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.27617">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.27617.webp" alt="Provisioning Robust and Efficient LiDAR Perception for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Provisioning Robust and Efficient LiDAR Perception for Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-20 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.27617" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.27617" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.27617</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。 应用场景：车载感知需在每帧延迟预算与加速器内存约束内处理流式点云，并向下游跟踪、预测、运动规划提供检测结果。 研究问题：现有工作在“点云退化下的鲁棒性”与“推理延迟/显存资源效率”上分别处理，导致紧凑检测器在退化下脆弱、鲁棒检测器部署成本高；论文将其统一为在保持干净数据精度的同时提升退化下精度，并降低平均推理延迟与峰值分配 GPU 显存。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">南京大学计算机软件新技术国家重点实验室（State Key Laboratory for Novel Software Technology, Nan…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.27617/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。</li><li>应用场景：车载感知需在每帧延迟预算与加速器内存约束内处理流式点云，并向下游跟踪、预测、运动规划提供检测结果。</li><li>研究问题：现有工作在“点云退化下的鲁棒性”与“推理延迟/显存资源效率”上分别处理，导致紧凑检测器在退化下脆弱、鲁棒检测器部署成本高；论文将其统一为在保持干净数据精度的同时提升退化下精度，并降低平均推理延迟与峰值分配 GPU 显存。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：南京大学计算机软件新技术国家重点实验室（State Key Laboratory for Novel Software Technology, Nanjing University）；作者：Tingxu Han、Zijie Shen、Chunrong Fang、Zhenyu Chen</li><li>机构：香港理工大学计算学系（Department of Computing, Hong Kong Polytechnic University）；作者：An Guo</li><li>机构：香港中文大学（深圳）理工学院（School of Science and Engineering, The Chinese University of Hong Kong, Shenzhen）；作者：Lyuke Wang</li><li>机构：格里菲斯大学信息与通信技术学院（Information and Communication Technology School, Griffith University）；作者：Wei Song</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的 LiDAR 三维目标检测服务供给（provisioning），在部署前离线构造一个固定的检测器。</li><li>应用场景：车载感知需在每帧延迟预算与加速器内存约束内处理流式点云，并向下游跟踪、预测、运动规划提供检测结果。</li><li>研究问题：现有工作在“点云退化下的鲁棒性”与“推理延迟/显存资源效率”上分别处理，导致紧凑检测器在退化下脆弱、鲁棒检测器部署成本高；论文将其统一为在保持干净数据精度的同时提升退化下精度，并降低平均推理延迟与峰值分配 GPU 显存。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>建立 LiDAR 感知服务的离线供给设定，同时考虑点云退化鲁棒性与部署效率。</li><li>提出包含两个协同组件的供给框架：按扰动敏感性对干净—退化样本对排序以进行鲁棒训练；通过通道宽度缩减与数据驱动的预算分配降低推理成本。</li><li>使用 7 个异构三维检测器集成，从置信度、BEV 重叠和未匹配检测三方面估计扰动敏感性，并据此确定训练顺序。</li><li>在 KITTI 与 ONCE 上，使用点式 PointRCNN 与体素式 SECOND、覆盖三个类别进行评估；相对对应原始检测器，退化下 AP 平均提升 4.03 点，平均推理延迟与峰值分配 GPU 显存分别降低 14.4% 与 38.0%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：LiDAR 三维目标检测的离线服务供给框架，包含训练数据构造与排序、资源高效检测器构造两部分。</li><li>输入传感器：LiDAR 点云（原文未报告具体传感器型号与线数）。</li><li>场景表示：PointRCNN 使用点式表示与逐步点采样/邻域聚合；SECOND 使用体素化与稀疏三维卷积加 BEV 主干。</li><li>退化注入：对每个干净训练帧生成并缓存一个退化对应样本，退化类型包括密度降低、密度增加、高斯噪声、背景噪声、雨、雪，全部在 5 级严重度中的第 4 级施加，标注保持不变。</li><li>扰动敏感性评分：使用 K=7 个预训练固定检测器（PointRCNN、PointRCNN-IoU、Part-A²、PointPillars、SECOND、SECOND-IoU、PV-RCNN）分别对干净与退化点云做集成融合检测；按类别以 BEV IoU 阈值 0.5 贪心匹配，计算置信度差、BEV 重叠差与未匹配检测差，帧级得分为 u_i = Δscore + Δbox + λ_miss·Δmiss，λ_miss=0.5。</li><li>优先训练顺序：将 N 个干净样本与 N 个退化样本共 2N 条按敏感性升序排序，禁用打乱，每个 epoch 均按同一顺序遍历；仅改变呈现顺序，保留全部样本且不改变损失与样本权重。</li><li>资源高效构造：PointRCNN 将主干、特征传播、point head、ROI head 的 MLP/全连接宽度乘以 0.7（如 [256,256]→[176,176]），并依据离线点密度统计（中位有效点数、各分组半径内平均邻居数）设定点采样与邻居采样预算；SECOND 在 BEV 主干与上采样层缩减通道宽度，并依据离线点计数统计分配体素预算；所有宽度与预算在训练和推理中固定。</li><li>训练方式：在排序后的 2N 训练列表上从头训练 T 个 epoch；原文未报告 T 的具体数值及网络参数量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：KITTI 与 ONCE；在两个数据集的干净验证集及其退化对应集上评估 Car、Pedestrian、Cyclist。</li><li>退化数据生成：每个干净帧对应一个固定退化版本，使用文献[30]的工具包按六种退化类型在 5 级中的第 4 级生成；训练集包含全部干净训练帧与其缓存退化对应样本，比例 1:1。</li><li>软件与硬件：OpenPCDet v0.6、PyTorch 1.13、CUDA 11.3、单张 NVIDIA RTX 4090D。</li><li>模型规模：原文未报告参数量或 FLOPs；仅报告 PointRCNN 部分层宽度由 [256,256] 降至 [176,176]。</li><li>仿真器：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：KITTI（AP_R40，Easy/Moderate/Hard）与 ONCE（R40 变体，按 0–30 m、30–50 m、&gt;50 m 距离区间及三区间算术平均“range-average AP”）；主比较使用 KITTI Moderate AP。</li><li>评估指标：干净与退化条件下的 AP、平均推理延迟、峰值分配 GPU 显存。</li><li>对比方法：Original（发布检查点与默认配置）、Retrain（在 1:1 干净—退化混合上重训全尺寸检测器）、GMP（非结构化幅值剪枝）、LTH/IMP（迭代幅值剪枝与权重回绕）、Network Slimming（按 BN 尺度缩减通道）、Ours。</li><li>关键数值：KITTI Car + PointRCNN 上，退化 Moderate AP 由 61.03 提升至 64.35（+3.32），干净 Moderate AP 为 80.04 对 80.65；平均延迟降低 19.8%，峰值分配 GPU 显存降低 53.9%。KITTI 与 ONCE 的十二个数据集—检测器—类别组合上，退化 AP 平均提升 4.03 点；KITTI Moderate AP 平均提升 3.26 点，ONCE range-average AP 平均提升 4.80 点。跨两数据集、两架构、三类别的总体平均延迟降低 14.4%、峰值显存降低 38.0%。</li><li>例外与条件：ONCE 上 PointRCNN Pedestrian 的退化 AP 由 4.19 降至 3.87（−0.32）；十二个组合中 KITTI 六组全部提升、ONCE 五组提升。退化 AP 在混合退化验证集上一次评估，而非六种退化分别平均。</li><li>评估条件：全部为数据集验证集上的离线开环评估（干净/退化输入），原文未报告闭环、仿真或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.27732/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.26816/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Real-Time Radar Semantic and Panoptic Scene Understanding</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

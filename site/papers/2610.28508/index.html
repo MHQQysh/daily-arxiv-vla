@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Deep Learning-Based Road Lane Quality Assessment from Egocentric Dashcam Video - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。 任务：从低成本智能手机行车记录仪（ego-centric dashcam）视频与 GPS 元数据中，评估车道标线的对比度/可见性、几何连续性与语义正确性。 研究问题：在缺少密集人工标注的条件下，如何构建开放数据集与透明、无参考的车道标线质量指标与基线模型，并验证其与人类感知排序的一致性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.28508">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.28508.webp" alt="Deep Learning-Based Road Lane Quality Assessment from Egocentric Dashcam Video" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Deep Learning-Based Road Lane Quality Assessment from Egocentric Dashcam Video</h1>
+            <div class="detail-meta">2026-10-20 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.28508" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.28508" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.28508</span></div>
+            <p class="detail-summary">论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。 任务：从低成本智能手机行车记录仪（ego-centric dashcam）视频与 GPS 元数据中，评估车道标线的对比度/可见性、几何连续性与语义正确性。 研究问题：在缺少密集人工标注的条件下，如何构建开放数据集与透明、无参考的车道标线质量指标与基线模型，并验证其与人类感知排序的一致性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Department of Electrical Engineering and Computer Science, Texas A&amp;M Univer…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.28508/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。</li><li>任务：从低成本智能手机行车记录仪（ego-centric dashcam）视频与 GPS 元数据中，评估车道标线的对比度/可见性、几何连续性与语义正确性。</li><li>研究问题：在缺少密集人工标注的条件下，如何构建开放数据集与透明、无参考的车道标线质量指标与基线模型，并验证其与人类感知排序的一致性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Department of Electrical Engineering and Computer Science, Texas A&amp;M University–Kingsville；作者：Shaif Chowdhury、Akhila Yeruvasu、Moshiur Rahman Tonmoy、Ayush Goyal、Dunren Che（原文以统一单位列出全部作者，未逐人区分所属）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶与道路养护场景，解决“车道标线质量评估”问题：现有自动驾驶数据集通常面向车道检测与场景理解，缺少面向维护的车道标线可见性、连续性、退化标签。</li><li>任务：从低成本智能手机行车记录仪（ego-centric dashcam）视频与 GPS 元数据中，评估车道标线的对比度/可见性、几何连续性与语义正确性。</li><li>研究问题：在缺少密集人工标注的条件下，如何构建开放数据集与透明、无参考的车道标线质量指标与基线模型，并验证其与人类感知排序的一致性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出据称为首个公开的车道标线质量评估基准，由南德州采集的超过 63,000 帧地理参考行车记录仪帧及评估框架组成，融合 egocentric 手机视频与同步 GPS。</li><li>提出三个互补、透明的车道质量指标：Contrast Stability Index（CSI，基于 Laplacian 响应刻画车道–背景对比）、Line Continuity Ratio（LCR，基于边缘与 Hough 线段聚合刻画几何连续性）、Regression Lane Confidence Score（RLCS，回归车道计数与 OSM 地图标签一致性的语义置信度）。</li><li>构建基于 OSM 车道计数弱监督的匹配子集（3,339 帧），并对车道计数采用回归而非分类，以保留序关系、处理类别不平衡并支持置信度输出。</li><li>使用 50 张人工排序图像开展试点验证，将所提指标与 PSNR、SSIM、BRISQUE、NIQE、LPIPS 对比，显示 LCR、CSI 与人类排序一致性更强。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据采集与帧提取、地理空间弱监督标签获取、车道线分割、指标计算与学习式基线回归。</li><li>输入传感器：Android 智能手机（Samsung Galaxy S16 PM 相机）固定前向安装，使用 GPS Map Camera（v1.7.2）采集同步视频与 GPS 元数据；假设相机内参已由设备预标定、镜头畸变可忽略、GPS 与视频时间同步。</li><li>场景表示：逐帧 RGB 图像 I_t∈R^{H×W×3} 与 GPS 坐标 g_t=[纬度,经度]^T；学习式基线将帧缩放至固定分辨率（如 96×96）。</li><li>地理空间标签：通过 OpenStreetMap Overpass API 在 15 m 半径内查询最近道路段，优先使用 lanes 标签，否则用 lanes:forward+lanes:backward；无标签记为 N/A；构建 Matched 与 Unmatched 两个帧集。</li><li>分割与指标：使用现成预训练 YOLOP 仅保留车道线分割掩码；CSI 为分割车道灰度图 Laplacian 响应的标准差（可选按均值归一化）；LCR 为 Canny 边缘图上概率 Hough 线段总长度除以边缘像素数；RLCS=exp(−d_i²/τ²)，其中 d_i=\|ŷ_i−y_i\|，τ&gt;0。</li><li>学习式基线：以 ImageNet 预训练 MobileNetV2 为骨干，用 MSE 损失训练连续车道计数回归及 CSI、LCR 的百分位归一化（[0,1]）回归；车道计数使用类别权重处理不平衡。</li><li>原文未报告：CSI/LCR 百分位模型的具体训练轮数、τ 的取值、MobileNetV2 的具体参数量与模型规模。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：自建 Smartphone Dashcam Road Quality 数据集，23 段视频、63,839 个有效地理参考帧，覆盖南德州（约 27.0604°–27.8830° N，−97.8837°–−97.8051° W）；约 60% 为高速场景，其余为乡村道路；白天晴或多云，车速 40–80 mph。</li><li>标注子集：Matched 集 3,339 帧，车道数分布 {1:196, 2:2872, 4:271}，无 3 车道样本；OSM 车道数仅作弱地图监督，非人工视觉标注。</li><li>仿真器：原文未报告（未使用仿真器）。</li><li>模型规模：原文未报告具体参数量；仅说明使用 ImageNet 预训练 MobileNetV2 骨干。</li><li>训练资源：NVIDIA RTX 3080 Ti GPU；车道计数回归训练 20 个 epoch。</li><li>实车平台：商品 Android 智能手机加装于车辆挡风玻璃的普通驾驶采集，非自动驾驶实车平台；原文未报告具体车型。</li><li>其他资源：现成预训练 YOLOP 分割模型；数据与代码发布于 https://github.com/Shaif95/Road_Quality。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Matched 子集（OSM 车道计数弱标签）用于车道计数回归与 RLCS；Unmatched 帧用于训练 CSI/LCR 百分位回归，Matched 集上定性查看分数分布；另设 50 张人工排序图像作为人类基准。</li><li>评估指标：MSE、MAE、R²、Spearman ρ、Kendall τ。</li><li>车道计数回归：MSE 0.096，R² 0.751（20 epoch，含类别权重）。</li><li>CSI 百分位回归：MAE 0.039，MSE 0.0021，R² 0.97。</li><li>LCR 百分位回归：MAE 0.093，MSE 0.013，R² 0.84。</li><li>人类排序一致性（50 张图像）：LCR ρ=0.7316、τ=0.5472；CSI ρ=0.6112、τ=0.4400；NIQE ρ=−0.5699、τ=−0.3959；LPIPS ρ=−0.5251、τ=−0.3878；SSIM ρ=−0.4504、τ=−0.3469；PSNR ρ=−0.2526、τ=−0.1804；BRISQUE ρ=−0.2279、τ=−0.1535。</li><li>对比方法：PSNR、SSIM、BRISQUE、NIQE、LPIPS；负相关对 BRISQUE、NIQE、LPIPS 属预期（其分数越低表示质量越好）。</li><li>条件说明：全部为离线开环评估，基于预训练 YOLOP 分割结果，未进行闭环控制、仿真或自动驾驶实车测试；作者指出人工验证仅 50 张、属试点证据，且结果受限于南德州白天场景与分割误差传播。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.28829/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">HorizonComposer: Spatiotemporally Consistent Driving Video Editing with Enriched Traffic Semantics</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.27732/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

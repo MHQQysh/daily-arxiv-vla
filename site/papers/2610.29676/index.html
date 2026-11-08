@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DriveMLP: When Training Strategy Outperforms Model Complexity in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。 应用场景：城市与高速场景下的闭环规划，包括 nuPlan 的 Non-Reactive 与 Reactive 仿真评估、Highway-env 多车道高速场景，以及 InterPlan 长尾场景。 研究问题：模仿学习（IL）在开环数据上易受分布偏移、因果混淆与误差累积影响；强化学习（RL）则依赖手工规则奖励和大规模仿真。论文探究“训练策略”相较“模型规模与复杂度”对闭环性能的贡献，并提出以专家轨迹距离奖励引导的闭环训练策略 Expert-Guided RL（EGRL），用轻量 MLP 策略 DriveMLP 验证其有效性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.29676">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.29676.webp" alt="DriveMLP: When Training Strategy Outperforms Model Complexity in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DriveMLP: When Training Strategy Outperforms Model Complexity in Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.29676" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.29676" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.29676</span></div>
+            <p class="detail-summary">任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。 应用场景：城市与高速场景下的闭环规划，包括 nuPlan 的 Non-Reactive 与 Reactive 仿真评估、Highway-env 多车道高速场景，以及 InterPlan 长尾场景。 研究问题：模仿学习（IL）在开环数据上易受分布偏移、因果混淆与误差累积影响；强化学习（RL）则依赖手工规则奖励和大规模仿真。论文探究“训练策略”相较“模型规模与复杂度”对闭环性能的贡献，并提出以专家轨迹距离奖励引导的闭环训练策略 Expert-Guided RL（EGRL），用轻量 MLP 策略 DriveMLP 验证其有效性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Mercedes-Benz AG, Research &amp; Development, Sindelfingen, Germany · Alessandr…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.29676/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。</p>
+  <ul class="reading-intro-points"><li>任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。</li><li>应用场景：城市与高速场景下的闭环规划，包括 nuPlan 的 Non-Reactive 与 Reactive 仿真评估、Highway-env 多车道高速场景，以及 InterPlan 长尾场景。</li><li>研究问题：模仿学习（IL）在开环数据上易受分布偏移、因果混淆与误差累积影响；强化学习（RL）则依赖手工规则奖励和大规模仿真。论文探究“训练策略”相较“模型规模与复杂度”对闭环性能的贡献，并提出以专家轨迹距离奖励引导的闭环训练策略 Expert-Guided RL（EGRL），用轻量 MLP 策略 DriveMLP 验证其有效性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Mercedes-Benz AG, Research &amp; Development, Sindelfingen, Germany；作者：Alessandro Canevaro（原文脚注标注其邮箱为 alessandro.canevaro@mercedes-benz.com，并与该机构对应）</li><li>机构：University of Tübingen, Tübingen, Germany；作者：原文未明确对应</li><li>机构：Karlsruhe Institute of Technology, ITIV, Karlsruhe, Germany；作者：原文未明确对应</li><li>机构：Technical University of Munich, Munich, Germany；作者：原文未明确对应</li><li>机构：University of Freiburg, Freiburg, Germany；作者：原文未明确对应</li><li>说明：论文作者列表为 Alessandro Canevaro、Julian Schmidt、Hang Yu、Ye Jin、Sajad Marvi、Georg Martius、Julian jordan，但原文仅对第一作者给出邮箱与单位标识，未逐一标注各作者与上述机构的对应关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：自动驾驶运动规划（motion planning）策略学习，输出低层控制动作（归一化转向角与加速度）。</li><li>应用场景：城市与高速场景下的闭环规划，包括 nuPlan 的 Non-Reactive 与 Reactive 仿真评估、Highway-env 多车道高速场景，以及 InterPlan 长尾场景。</li><li>研究问题：模仿学习（IL）在开环数据上易受分布偏移、因果混淆与误差累积影响；强化学习（RL）则依赖手工规则奖励和大规模仿真。论文探究“训练策略”相较“模型规模与复杂度”对闭环性能的贡献，并提出以专家轨迹距离奖励引导的闭环训练策略 Expert-Guided RL（EGRL），用轻量 MLP 策略 DriveMLP 验证其有效性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>通过受控实证分析表明，性能提升在很大程度上来自训练过程，而非单纯增加模型规模或复杂度。</li><li>提出 DriveMLP：一个用 EGRL 训练的轻量 MLP 策略，在 nuPlan Val14 Reactive 上取得 86.51，相比此前最佳 IL 规划器 Flow Planner 提升 +3.2 分，且推理快于 15 倍以上。</li><li>提出面向自动驾驶的指数型轨迹距离奖励公式（基于 Peng et al. 的工作），提供稠密稳定监督，并优于 Peng et al. 的公式。</li><li>证明 EGRL 可迁移到其他 SOTA 规划器骨干（PlanTF、PLUTO、Diffusion Planner 编码器），一致提升其 Reactive 性能。</li><li>通过闭环 RL 探索，模型在动作噪声下更鲁棒、数据效率更高（相比 SOTA 开环 IL）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：规划模块（ego-planning），输出低层控制；不涉及感知端到端。</li><li>输入传感器/状态：矢量化地图（车道几何、红绿灯状态、路线信息）、周围动态智能体（位置、速度、朝向）、静态障碍物，以及多数 IL 模型不使用的自车动态状态（速度、加速度、转向角、横摆角速度）；所有空间信息在自车坐标系下表示。原文未报告相机/激光雷达等原始传感器输入。</li><li>场景表示：以自车为中心的矢量化场景；每个输入类别（自车状态、地图、路线、邻近智能体、静态障碍物）使用独立编码器，编码器由共享 MLP＋均值池化＋第二层 MLP 构成，属置换不变集合编码器；各编码输出拼接后经 MLP 映射为联合隐表征。</li><li>模型结构：策略网络 πθ 与价值网络 Vφ 为分离的 MLP；策略头参数化对角高斯分布，输出连续动作的均值与方差。</li><li>关键技术：</li></ul>
+<p> - EGRL：在非反应式（non-reactive）日志回放仿真器中训练，自车由策略控制并遵循动力学约束，其他智能体按记录轨迹运动，静态环境固定；该设置使专家轨迹始终是有效参照，避免对抗式奖励学习或访问专家策略。</p>
+<p> - 轨迹距离奖励：位置项 r_pos = exp(−α1·δt/(κ_expert+ε))，δt 为自车与专家位置 L2 距离，κ_expert 为专家位移归一化；速度项 r_vel = exp(−α2·\|\|v_ego−v_expert\|\|2)；总奖励 r_t = α3·r_pos + (1−α3)·r_vel。</p>
+<p> - 回合终止：驶出可行驶区域、自车包围盒与其他智能体/障碍物重叠、或显著偏离专家轨迹时终止并给予固定惩罚 r_p。</p>
+<p> - 策略优化：使用标准 RL 算法，实验中测试了 SAC（Highway-Env）与 PPO（nuPlan）。</p>
+<ul><li>原文未报告：具体网络层数/隐藏维度细节在截断原文中未给出；是否使用实车部署未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuPlan（1500+ 小时真实驾驶日志，覆盖 Las Vegas、Pittsburgh、Boston、Singapore 四城），训练用训练集场景，评估用 Val14、Test14-Hard、Test14；另在 InterPlan 基准补充评估；Highway-env 使用默认观测配置与连续控制动作空间。</li><li>仿真器：非反应式日志回放仿真器（自车动力学模型由仿真器提供）；nuPlan 官方闭环评估协议；Highway-env。</li><li>模型规模：DriveMLP 约 2.33M 参数；对比模型参数：PlanTF 2.02M、PLUTO w/o refine 4.06M、Diffusion Planner 6.04M、Flow Planner 14.27M；EGRL 迁移实验中 PlanTF 2.0M、PLUTO w/o ref. 2.4M、Diff. Planner 2.3M。</li><li>训练资源：DriveMLP 约 112 NVIDIA L4 GPU 小时（约为 BC 的 4.7 倍）；参考复现中 Diffusion Planner 约 240 NVIDIA A100 GPU 小时；按 TFLOPS 归一化后 DriveMLP 比 Diffusion Planner 少约 3–5 倍计算量。推理测速在 NVIDIA P6000 上。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与条件：Highway-env（闭环仿真，3 个随机种子平均）；nuPlan 闭环仿真，报告 Non-Reactive（NR）与 Reactive（R）总分；另含 InterPlan（附录）与动作高斯噪声注入实验。</li><li>评估指标：nuPlan 总体得分；Highway-env 的 Reward、Episode Length、Termination 率；推理时延（ms）、参数量（M）。</li><li>关键数值：</li></ul>
+<p> - 受控训练策略对比（同一 DriveMLP 架构）：Highway-env 上 EGRL Reward 21.02±0.79、Ep. Len 29.17±1.01、Term. 7.3%±3.55；BC 为 17.20±3.26 / 23.56±4.28 / 48.7%±21.48；AIRL 为 20.37±0.40 / 28.48±0.46 / 9.3%±2.87；BC-RL 为 20.28±0.92 / 28.70±1.15 / 20.0%±17.38。nuPlan 上 EGRL 为 Val14 NR/R 90.38/86.51、Test14-Hard 76.68/74.50、Test14 86.38/87.06；BC-RL 为 77.19/78.05、66.05/65.35、77.17/77.23；AIRL 为 51.74/58.74、43.00/52.09、48.88/61.15；BC 为 53.64/32.36、17.06/19.50、30.36/33.01。AIRL 收敛所需训练步数约为本文方法 3 倍。</p>
+<p> - EGRL 迁移（Val14-R）：PlanTF 76.95→78.26（+1.70）；PLUTO w/o ref. 78.11→83.41（+6.78）；Diff. Planner 82.80→86.05（+3.92）。</p>
+<p> - 与 SOTA 对比（nuPlan NR/R）：DriveMLP 90.38/86.51（Val14）、76.68/74.50（Test14-Hard）、86.38/87.06（Test14）；PlanTF 84.27/76.95、69.70/61.61、85.62/79.58；PLUTO w/o refine 88.89/78.11、70.03/59.74、89.90/78.62；Diffusion Planner 89.87/82.80、75.99/69.22、89.19/82.93；Flow Planner 90.43/83.31、76.47/70.42、89.88/82.93。</p>
+<p> - 推理时延与规模：DriveMLP 2.76 ms、2.33M、Val14-R 86.51；Flow Planner 42.31</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.30319/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">TerraTransfer++: Demonstration-Free End-to-End Planner</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.29200/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">NeuralSRender: G-Buffer Guided Video Diffusion for Sim-to-Real Rendering</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decision Making and Ride Comfort Evaluation Based on Lane-Change Prediction for Autonomous Vehicles - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。 应用场景：车辆合流/加塞风险场景——目标车辆接近前车后向自车所在车道实施风险换道（CARLA 仿真）。 研究问题：换道预测带来的提前响应，究竟应转化为纵向制动还是横向避让；两类预测驱动策略在安全性、响应时机、车辆运动与振动舒适性上与纯反应式驾驶相比有何差异。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.30528">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.30528.webp" alt="Decision Making and Ride Comfort Evaluation Based on Lane-Change Prediction for Autonomous Vehicles" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Decision Making and Ride Comfort Evaluation Based on Lane-Change Prediction for Autonomous Vehicles</h1>
+            <div class="detail-meta">2026-10-21 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.30528" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.30528" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.30528</span></div>
+            <p class="detail-summary">任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。 应用场景：车辆合流/加塞风险场景——目标车辆接近前车后向自车所在车道实施风险换道（CARLA 仿真）。 研究问题：换道预测带来的提前响应，究竟应转化为纵向制动还是横向避让；两类预测驱动策略在安全性、响应时机、车辆运动与振动舒适性上与纯反应式驾驶相比有何差异。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Alcalá, Madrid, Spain（Computer Engineering Department） · Moha…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.30528/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。</li><li>应用场景：车辆合流/加塞风险场景——目标车辆接近前车后向自车所在车道实施风险换道（CARLA 仿真）。</li><li>研究问题：换道预测带来的提前响应，究竟应转化为纵向制动还是横向避让；两类预测驱动策略在安全性、响应时机、车辆运动与振动舒适性上与纯反应式驾驶相比有何差异。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Alcalá, Madrid, Spain（Computer Engineering Department）；作者：Mohamed Manzour、Aditya Kumar、Rubén Izquierdo、Miguel Ángel Sotelo（原文四位作者均标注同一机构上标“1”，作者与机构对应关系明确）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶，利用对周围车辆换道意图的预测来改进自车决策，并评估由此带来的乘坐舒适性。</li><li>应用场景：车辆合流/加塞风险场景——目标车辆接近前车后向自车所在车道实施风险换道（CARLA 仿真）。</li><li>研究问题：换道预测带来的提前响应，究竟应转化为纵向制动还是横向避让；两类预测驱动策略在安全性、响应时机、车辆运动与振动舒适性上与纯反应式驾驶相比有何差异。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将基于知识图谱嵌入与贝叶斯推断的换道预测模型接入自车决策流程，在目标车实际开始换道前即把它分配到预期目标车道。</li><li>提出基于车道风险评分（各车道相关车辆正有限 TTC 倒数之和）的选道决策，并结合 IDM–PID（车道保持/纵向）与 MPC（换道轨迹跟踪）执行。</li><li>在 CARLA 中对比三种策略：反应式驾驶、预测驱动纵向动作、预测驱动横向动作，覆盖安全性、响应时机、加速度与 jerk。</li><li>引入基于 ISO 2631-1 的水平振动加权 RMS 加速度指标，在安全性之外给出乘坐舒适性的指示性评估。</li><li>揭示安全与舒适权衡：横向避让总体运动最平顺，但会引入额外横向运动；纵向制动减少纵向冲击但幅度有限。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：换道意图预测 + 决策规划 + 乘坐舒适性评估。</li><li>输入传感器：原文未报告具体传感器配置；预测模型使用 12 个特征——横向速度与加速度、车道身份、车道线偏移、车头时距、与周围车辆的 5 个 TTC 值、吸引力得分最高的车道与最大前向间隙车道。</li><li>场景表示：数值输入被转换为语言类别并表示为知识图谱三元组；采用 TransE（基于 AmpliGraph 实现）学习 100 维嵌入，再由贝叶斯推断输出左换道、车道保持或右换道。</li><li>决策结构：按 \(R_{\ell}=\sum_{j\in\mathcal{N}_{\ell}}1/\mathrm{TTC}_{\ell j}\) 计算各车道风险（仅计正的有限接近 TTC），在车道可用约束下选择风险最低车道；车道保持时用 IDM 计算期望纵向加速度、PID 生成油门/制动；换道时用 MPC 跟踪五阶换道轨迹，机动之外的纵向运动由 IDM–PID 控制。</li><li>反应式基线：同样使用 IDM–PID 纵向控制，但仅在目标车进入自车车道后才予以考虑，因而响应更晚。</li><li>舒适性评估：对纵向、横向加速度施加 ISO 2631-1 的 \(W_d\) 频率加权（phonometry 3.3.0 实现），按式(1)合成加权 RMS 加速度 \(a_{v,h}\)，评估窗口为反应式碰撞前 3 s；原文注明未完整表征垂向、转动及高频振动，属指示性水平舒适估计。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：highD 与 CRASH 数据集（用于训练预测模型的图谱嵌入）。</li><li>仿真器：CARLA。</li><li>模型规模：知识图谱嵌入维度为 100；其他网络规模与参数量原文未报告。</li><li>训练资源：原文未报告（GPU、训练时长等均未说明）。</li><li>实车平台：原文未报告，研究完全基于仿真。</li><li>场景设置：反应式与预测纵向制动在双车道道路评估，横向避让在三车道道路评估；每种配置 3 次运行，图表与数值取自其中一次代表性运行。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARLA 中目标车风险换道合流场景，对比反应式驾驶、预测驱动纵向制动、预测驱动横向避让。</li><li>评估指标：碰撞结果、最小 TTC、制动响应时间、纵向/横向加速度与 jerk 的峰值及 RMS、组合 RMS、ISO 2631-1 加权 RMS 加速度 \(a_{wx}\)、\(a_{wy}\)、\(a_{v,h}\)。</li><li>预测时机：所选场景中提前约 2.5 s 预测到目标车跨越车道线（其他场景曾展示 3–4 s）；预测策略比反应式提前约 3.5 s 制动，而反应式仅在碰撞前 0.97 s 制动，多出约 2.5 s 响应时间。</li><li>安全性：反应式发生碰撞，最小 TTC 为 0.015 s；预测纵向最小 TTC 为 3.9 s；预测横向最小 TTC 为 1.3 s（原文指出 TTC 不反映横向间距，低值不必然意味着碰撞）。两种预测策略在评估记录中均无碰撞。</li><li>碰撞相关运动：反应式碰撞产生 18.8 m/s² 峰值纵向减速度与 41.0 m/s³ 纵向 jerk。</li><li>碰撞前 3 s（排除碰撞诱发运动）：峰值减速度 6.427 / 4.406 / 0.578 m/s²（反应式/预测制动/横向避让），相比反应式分别降低 31.5% 与 91.0%；峰值 \(\|a_y\|\) 0.131 / 0.130 / 0.530 m/s²；峰值 \(\|j_x\|\) 11.853 / 4.116 / 1.087 m/s³；\(A_{xy,\mathrm{RMS}}\) 3.366 / 2.659 / 0.451 m/s²；\(J_{xy,\mathrm{RMS}}\) 4.674 / 1.929 / 0.569 m/s³。</li><li>组合 RMS 对比：相对反应式，预测制动使组合 RMS jerk 降低 58.7%，横向避让降低 87.8%；两种预测策略之间，横向避让使组合 RMS 加速度降低 83.0%、组合 RMS jerk 降低 70.5%。</li><li>ISO 加权结果：\(a_{v,h}\) 为 1.52 / 1.42 / 0.53 m/s²（反应式/预测制动/横向避让），横向避让相对前两者分别降低 65% 与 63%；按 Annex C 近似区间，前两者落在“uncomfortable”与“very uncomfortable”重叠区，横向避让落在“a little uncomfortable”与“fairly uncomfortable”重叠区。</li><li>条件说明：全部结果为闭环仿真结果，无开环评测与实车验证；作者指出需在更多交通场景与座椅振动实测下进一步验证泛化性与舒适性结论。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.30774/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Evaluation of Front-End Feature Matching for Lunar Visual SLAM</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.30437/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Integrated Longitudinal and Lateral Control for High-Speed Platooning of Articulated Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

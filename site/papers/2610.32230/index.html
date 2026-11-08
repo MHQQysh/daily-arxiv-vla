@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Towards Effective and Transferable Physical Camouflage against Multi-View BEV-based 3D Perception in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。 目标任务是生成覆盖目标车辆全车身的对抗纹理，使多视角 BEV 3D 目标检测与 BEV 语义分割对目标车辆的感知性能显著下降。 应用场景为视觉自动驾驶系统中环绕相机（六个相机）输入的多视角 3D 感知，攻击需在多种视角、数字仿真与物理世界条件下有效。 研究问题：既有迷彩攻击主要面向单视角 2D 检测器，难以直接迁移到多视角 3D 感知；已有攻击依赖目标模型检测分数优化，黑盒迁移性受限；且小面积对抗补丁无法在全视角覆盖车辆。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.32230">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.32230.webp" alt="Towards Effective and Transferable Physical Camouflage against Multi-View BEV-based 3D Perception in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Towards Effective and Transferable Physical Camouflage against Multi-View BEV-based 3D Perception in Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-23 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.32230" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.32230" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.32230</span></div>
+            <p class="detail-summary">论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。 目标任务是生成覆盖目标车辆全车身的对抗纹理，使多视角 BEV 3D 目标检测与 BEV 语义分割对目标车辆的感知性能显著下降。 应用场景为视觉自动驾驶系统中环绕相机（六个相机）输入的多视角 3D 感知，攻击需在多种视角、数字仿真与物理世界条件下有效。 研究问题：既有迷彩攻击主要面向单视角 2D 检测器，难以直接迁移到多视角 3D 感知；已有攻击依赖目标模型检测分数优化，黑盒迁移性受限；且小面积对抗补丁无法在全视角覆盖车辆。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Harbin Institute of Technology, Shenzhen · 原文未明确对应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.32230/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。</p>
+  <ul class="reading-intro-points"><li>论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。</li><li>目标任务是生成覆盖目标车辆全车身的对抗纹理，使多视角 BEV 3D 目标检测与 BEV 语义分割对目标车辆的感知性能显著下降。</li><li>应用场景为视觉自动驾驶系统中环绕相机（六个相机）输入的多视角 3D 感知，攻击需在多种视角、数字仿真与物理世界条件下有效。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Harbin Institute of Technology, Shenzhen；作者：原文未明确对应</li><li>机构：Zhejiang University；作者：原文未明确对应</li><li>说明：原文作者邮箱列表为 lyulinye、zhoujiawei6666、yu.li.sallylee、hedaojinghit，但机构与作者的逐一对应关系在所提供的 HTML 中无法确定。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究自动驾驶场景下针对多视角 BEV（鸟瞰图）3D 感知模型的对抗性物理迷彩（adversarial camouflage）攻击生成问题。</li><li>目标任务是生成覆盖目标车辆全车身的对抗纹理，使多视角 BEV 3D 目标检测与 BEV 语义分割对目标车辆的感知性能显著下降。</li><li>应用场景为视觉自动驾驶系统中环绕相机（六个相机）输入的多视角 3D 感知，攻击需在多种视角、数字仿真与物理世界条件下有效。</li><li>研究问题：既有迷彩攻击主要面向单视角 2D 检测器，难以直接迁移到多视角 3D 感知；已有攻击依赖目标模型检测分数优化，黑盒迁移性受限；且小面积对抗补丁无法在全视角覆盖车辆。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 BEVCA 框架，用于面向多视角 BEV 3D 感知模型的对抗迷彩生成，结合 BEV 特征级攻击与多视角神经渲染。</li><li>提出带掩码增强的 BEV 特征对抗损失，定位与目标车辆纹理高度相关的 BEV 特征区域，从而提升跨 BEV 感知模型与下游任务的迁移性。</li><li>将单视角神经渲染扩展为多视角神经渲染，在多相机视角下生成真实且一致的对抗车辆图像，支持基于梯度的迷彩优化。</li><li>在数字与物理实验中验证方法相对现有基线的有效性：黑盒设置下 3D 检测平均提升约 36.2%、分割平均提升约 21.6%；物理世界黑盒平均攻击成功率 51.18%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向多视角 BEV 3D 感知的对抗迷彩生成框架，包含多视角神经渲染模块与 BEV 特征对抗攻击模块。</li><li>输入传感器：目标车辆多视角图像、相机配置（六路环视相机）以及 ego 到 target 的坐标变换矩阵；数据格式遵循 nuScenes 数据集格式。</li><li>场景表示：以 BEV 特征（H×W×C）作为攻击空间；通过“去除目标车辆”的同配置无车参考场景构造 BEV 特征差异，定位目标车辆相关区域。</li><li>模型结构：多视角神经渲染使用 PyTorch3D 扩展的神经渲染器，渲染目标车辆网格与对抗纹理；使用预训练的环境特征渲染器（EFR，来自 CNCA）融合背景环境，输出真实的多视角迷彩图像；攻击侧将渲染图像与无车图像分别输入 BEV 编码器，通过 BEV 特征差与极坐标掩码（距离阈值 Δr、角度阈值 Δθ）计算对抗损失，并结合 TV 损失优化纹理。</li><li>关键技术：多视角相机位姿变换（CARLA 左手系到 PyTorch3D 右手系转换，逐相机计算目标车辆坐标系下的相机位姿）、BEV 掩码定位（以目标极坐标 (r_tar, θ_tar) 为基准的环形扇区掩码）、对抗损失为掩码 BEV 差异非零元素的均值、总损失为 αL_adv + βL_tv。</li><li>原文未报告：模型参数量与具体网络规模细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：使用 CARLA 仿真器生成；目标车辆模型为 Audi E-Tron；迷彩生成数据集 2500 样本，测试集 500 样本，另有 500 样本微调集；物理实验采集三个各 150 样本的真实多视角数据集（正常涂装、CNCA 纹理、BEVCA 迷彩）。</li><li>仿真器：CARLA；渲染库 PyTorch3D；环境特征渲染器使用 CNCA 预训练模型。</li><li>模型规模：原文未报告 BEVCA 自身的模型参数量；目标模型包括 BEVFormer-base（白盒）、BEVFormer small/tiny/base-seg-det/small-seg-det、LSS、CVT、SinBEVT（黑盒），物理实验另含 BEVDet-R50、BEVDet-R50-CBGS。</li><li>训练资源：1 块 NVIDIA RTX A800 80GB GPU，迷彩优化约 20 小时；优化器 Adam，学习率 0.01，随机初始化纹理，训练 10 个 epoch；α=1、β=1000；掩码阈值 Δr=15 米、Δθ=15 度。</li><li>实车平台：全尺寸 Audi 车辆，打印 2D UV 图贴附车身；自建遵循 nuScenes 相机配置的多视角数据采集平台；原文未报告采集平台的具体硬件型号。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：数字实验在 CARLA 仿真数据集上评估 3D 目标检测与 BEV 语义分割；物理实验在自建真实多视角数据集上评估。</li><li>评估指标：3D 检测使用基于地平面 2D 中心距离的 AP；BEV 分割使用车辆类 IoU；物理实验使用 ASR（在 IoU 阈值 0.5 下，正常涂装可检出而迷彩后不再检出的比例）。</li><li>关键数值：数字实验（表 1）中 BEVCA 在 BEVFormer base/small/tiny/base-seg-det/small-seg-det 的 AP 分别为 0.191/0.285/0.381/0.329/0.331，在 LSS/CVT/SinBEVT 的 IoU 分别为 0.253/0.307/0.273，全部低于基线与正常涂装（正常涂装对应为 0.618/0.721/0.514/0.750/0.634 与 0.509/0.609/0.570）；黑盒设置下 3D 检测平均提升约 36.2%，分割平均提升约 21.6%。物理实验（表 2）中 BEVCA 在 BEVFormer-base、BEVFormer-small、BEVDet-r50、BEVDet-r50-cbgs 上的 ASR 分别为 49.60%、46.99%、64.41%、42.13%，黑盒平均 51.18%，高于 CNCA 的 30.00%、29.49%、42.80%、34.99%。</li><li>对比方法：FCA、DTA、ACTIVE、RAUCA、CNCA（面向 2D 检测）与 AdvPatch（面向 3D 检测的对抗补丁）；基线纹理使用官方发布版本，未针对本文设定重新优化。</li><li>消融结果：以 BEVFormer-base 为白盒目标，对比 L_det、L_enc、L_head、无掩码 L_bev 与 L_bev+M_bev；无掩码 BEV 损失几乎无攻击效果，完整方法在各黑盒模型上最优（如 Tiny 检测 AP 0.381，LSS IoU 0.253）。</li><li>实验条件：包含开环的数字仿真评估与物理世界实车评估；物理实验为黑盒设置，数字实验同时报告白盒与黑盒设置；闭环条件原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.32612/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DriveOSS: Dataset and Benchmark for 3D Anomaly Segmentation and Open-set Semantic Segmentation in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.31186/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RaSFNet: Ray-aligned and Scan-aware Fusion Network for LiDAR Semantic Segmentation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

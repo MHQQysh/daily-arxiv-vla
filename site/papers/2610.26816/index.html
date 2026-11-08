@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Real-Time Radar Semantic and Panoptic Scene Understanding - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。 应用场景为自动驾驶车辆在雨、雪、雾等不利天气和低照度条件下的环境感知，利用旋转 FMCW 雷达提供 360° 覆盖、远距离、低计算与低带宽优势。 研究问题包括：雷达信号返回复杂、时间分辨率有限、标注数据稀缺；现有方法多依赖多普勒信息（旋转雷达难以获得）或完整 360° 扫描，等待整圈扫描会延迟预测；此前尚无面向旋转 FMCW 雷达的全景分割工作。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.26816">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.26816.webp" alt="Real-Time Radar Semantic and Panoptic Scene Understanding" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Real-Time Radar Semantic and Panoptic Scene Understanding</h1>
+            <div class="detail-meta">2026-10-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.26816" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.26816" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.26816</span></div>
+            <p class="detail-summary">论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。 应用场景为自动驾驶车辆在雨、雪、雾等不利天气和低照度条件下的环境感知，利用旋转 FMCW 雷达提供 360° 覆盖、远距离、低计算与低带宽优势。 研究问题包括：雷达信号返回复杂、时间分辨率有限、标注数据稀缺；现有方法多依赖多普勒信息（旋转雷达难以获得）或完整 360° 扫描，等待整圈扫描会延迟预测；此前尚无面向旋转 FMCW 雷达的全景分割工作。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Freiburg · Santosh Parit、Julia Hindel、Rohit Mohan 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.26816/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。</li><li>应用场景为自动驾驶车辆在雨、雪、雾等不利天气和低照度条件下的环境感知，利用旋转 FMCW 雷达提供 360° 覆盖、远距离、低计算与低带宽优势。</li><li>研究问题包括：雷达信号返回复杂、时间分辨率有限、标注数据稀缺；现有方法多依赖多普勒信息（旋转雷达难以获得）或完整 360° 扫描，等待整圈扫描会延迟预测；此前尚无面向旋转 FMCW 雷达的全景分割工作。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Freiburg；作者：Santosh Parit、Julia Hindel、Rohit Mohan、Abhinav Valada</li><li>机构：University of Oxford；作者：Georgi Pramatarov、Paul Newman、Daniele De Martini</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶场景下的 FMCW（调频连续波）旋转雷达场景理解任务，目标是实现实时语义分割与全景分割。</li><li>应用场景为自动驾驶车辆在雨、雪、雾等不利天气和低照度条件下的环境感知，利用旋转 FMCW 雷达提供 360° 覆盖、远距离、低计算与低带宽优势。</li><li>研究问题包括：雷达信号返回复杂、时间分辨率有限、标注数据稀缺；现有方法多依赖多普勒信息（旋转雷达难以获得）或完整 360° 扫描，等待整圈扫描会延迟预测；此前尚无面向旋转 FMCW 雷达的全景分割工作。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 StreamRPS 框架，包含基于 LiDAR 场景补全的稠密语义与全景雷达标签自动生成管线，以及面向语义/全景分割的实时流式网络。</li><li>提出支持流式处理的 FMCW 雷达分割网络，在 SAX 与 Boreas 基准上取得语义 mIoU 最高、以及在 4 扇区设置下全景质量最优的结果。</li><li>发布人工标注：350 帧 LiDAR 与 100 帧经标定的 SAX 雷达扫描，用于独立评估整个框架。</li><li>提出雷达专用编码器设计（RadarStem、各向异性 patch 嵌入、轴向极坐标注意力）与方位角循环滚动增强。</li><li>声明接收后公开代码与训练模型。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：包含跨模态稠密标签生成与流式雷达分割两大部分。</li><li>输入传感器：旋转 FMCW 雷达（SAX 为 Navtech CTS350-X，Boreas 为 Navtech CIR304-H，均为 4 Hz）与 LiDAR（SAX 为 Velodyne HDL-64E，Boreas 为 128 线 Velodyne Alpha-Prime，10 Hz）。</li><li>场景表示：雷达数据使用极坐标表示（方位角为图像高度、距离为宽度）；标签由预训练 LiDAR 场景补全网络 PaSCo 生成稠密体素，经 BEV 投影、外参标定与最近邻插值对齐到雷达笛卡尔坐标，再转换为极坐标标签图。</li><li>标签生成关键技术：按方位角选择时间最近的 LiDAR 帧进行同步合成；全景实例由极坐标语义标签经同类别连通域提取，限制为最大连通分量，并丢弃像素面积小于 25 或包围框高度小于 4 的实例。</li><li>模型结构：编码器-解码器架构；编码器为雷达定制的分层 Mix Transformer，包含 RadarStem（归一化位置嵌入、1×5 与 5×1 非对称深度可分离卷积、1×1 卷积与 SE 块实现时间加权）、3×7 各向异性 patch 嵌入（步幅 2×4）、轴向极坐标注意力（方位角轴循环填充、距离轴零填充，两分支并行求和）、Polar Mix-FFN（方位角循环填充、距离零填充）。</li><li>解码器：语义分支为 All-MLP 解码器；全景分支将四级特征送入 FPN，thing 类接 Mask R-CNN 头，语义分支上采样至 1/4 分辨率并逐元素相加后线性投影，再按既有策略融合语义与实例预测。</li><li>流式处理：将极坐标图沿方位角切分为 N 个连续扇区；沿通道维聚合 t 帧（标签锚定最后一帧）；方位角循环滚动增强以模拟自车旋转，训练时以概率 p 应用。</li><li>损失：语义使用类别加权交叉熵与 Dice 损失；全景使用语义交叉熵、实例交叉熵（框分类与掩码）与 L1 框回归损失。</li><li>原文未报告：模型参数量、解码器中值等具体规模信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：SAX（20,875 帧雷达扫描，最大距离 163 m，极坐标图 400×3768；人工标注 350 帧 LiDAR 并投影得到 100 帧雷达标注，覆盖 12 类）与 Boreas（16,450 帧雷达扫描，极坐标图 400×3371，自动标注 8 类）。</li><li>仿真器：原文未报告。</li><li>模型规模：编码器四级特征维度为 32、64、160、256；其余规模原文未报告。</li><li>训练资源：使用 AdamW，训练 80k 迭代，batch size 16，权重衰减 0.01，骨干与分割头学习率分别为 10⁻³ 与 10⁻²，1500 迭代线性预热，并在 60k 与 72k 迭代进行 10 倍 Multi-Step 衰减；数据按 70%-15%-15% 划分；输入裁剪为 400×1024，时间窗口 t=3，滚动增强概率 p=0.7，损失权重 α=1、β=3；推理速度在 NVIDIA GeForce RTX 2080 Ti 上测量；具体训练硬件数量与时长原文未报告。</li><li>实车平台：原文仅说明 SAX 与 Boreas 的采集传感器配置，未报告本文使用的实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：SAX 与 Boreas 数据集，覆盖全扫描（N=1）以及 2、4、8、16、32 扇区的流式设置。</li><li>评估指标：语义分割用 mIoU（并按大目标、小目标、背景分组）；全景分割用 PQ、PQ_st、PQ_th、SQ、RQ；另测 FPS。</li><li>语义分割关键数值：StreamRPS 在所有设置下优于基线；Boreas 全扫描 31.73 mIoU、SAX 全扫描 34.35 mIoU；8 扇区时分别领先次优方法 1.54pp（Boreas）与 3pp（SAX）；在 32 扇区（12×1024）下仍保持 21.82（Boreas）与 23.23（SAX）mIoU。摘要报告整体至少领先最强基线 1.4pp，并在 4 扇区流式设置下以超过 400 FPS 处理扇区。</li><li>全景分割关键数值：Boreas 全扫描 PQ 21.80、4 扇区 PQ 23.31（SQ 56.84、RQ 33.39）；SAX 全扫描 PQ 15.43、4 扇区 PQ 13.37（SQ 56.86、RQ 19.86）。Boreas 上至少领先 1.78pp PQ；SAX 上四扇区设置最优，但全扫描低于 Mask2Former。</li><li>对比方法：语义分割对比 TMVANet、RSSNet、TransRadar、Mask2Former、SegFormer、MobileNetV3；全景分割对比 PanopticFPN、Mask2Former、OneFormer。</li><li>消融实验：包括训练标签生成、网络组件、时间聚合窗口三部分（原文 HTML 在相关章节前被截断，具体消融数值未在提供的原文中报告）。</li><li>条件：全部为数据集上的离线评估（开环式分割精度与推理速度），未报告闭环仿真或实车闭环测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.27617/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Provisioning Robust and Efficient LiDAR Perception for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.26528/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A Semantic Knowledge Graph Construction Pipeline for Vehicle Intention Prediction in nuScenes</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

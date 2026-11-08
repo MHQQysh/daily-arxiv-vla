@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FreqPKC: Frequency-Aware PeakConv for Radar Semantic Segmentation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。 应用场景：雨、雾、极端光照等相机与激光雷达性能下降的条件下，利用毫米波雷达的天气与光照鲁棒性提升环境感知与场景理解。 研究问题：现有雷达专用神经算子 PeakConv（PKC）源于 CFAR，其保护带宽多为固定值或被当作可学习参数直接学习，未显式刻画 PKC 算子的频率响应，缺乏物理可解释的频率选择性指导；同时现有 RSS 方法多把雷达数据当作普通图像处理，存在域差异与计算冗余。 思路切入点：分析发现目标区域保留较多中高频成分、背景杂波以低频为主，而 PKC 的传递带中心随保护带宽呈 1/b_G 变化，据此提出频率感知的 PeakConv 及分割框架。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.33504">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.33504.webp" alt="FreqPKC: Frequency-Aware PeakConv for Radar Semantic Segmentation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">FreqPKC: Frequency-Aware PeakConv for Radar Semantic Segmentation</h1>
+            <div class="detail-meta">2026-10-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.33504" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.33504" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.33504</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。 应用场景：雨、雾、极端光照等相机与激光雷达性能下降的条件下，利用毫米波雷达的天气与光照鲁棒性提升环境感知与场景理解。 研究问题：现有雷达专用神经算子 PeakConv（PKC）源于 CFAR，其保护带宽多为固定值或被当作可学习参数直接学习，未显式刻画 PKC 算子的频率响应，缺乏物理可解释的频率选择性指导；同时现有 RSS 方法多把雷达数据当作普通图像处理，存在域差异与计算冗余。 思路切入点：分析发现目标区域保留较多中高频成分、背景杂波以低频为主，而 PKC 的传递带中心随保护带宽呈 1/b_G 变化，据此提出频率感知的 PeakConv 及分割框架。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">College of Electronic Science and Technology, National University of Defens…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.33504/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。</li><li>应用场景：雨、雾、极端光照等相机与激光雷达性能下降的条件下，利用毫米波雷达的天气与光照鲁棒性提升环境感知与场景理解。</li><li>研究问题：现有雷达专用神经算子 PeakConv（PKC）源于 CFAR，其保护带宽多为固定值或被当作可学习参数直接学习，未显式刻画 PKC 算子的频率响应，缺乏物理可解释的频率选择性指导；同时现有 RSS 方法多把雷达数据当作普通图像处理，存在域差异与计算冗余。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：College of Electronic Science and Technology, National University of Defense Technology, Changsha, Hunan 410073, China；作者：Yangyong Deng、Pengyu Zhang、Shaoqiu Song、Xiaotao Huang、Jian Wang（原文注明五位作者均隶属该学院，且 Yangyong Deng 与 Pengyu Zhang 贡献等同，Jian Wang 为通讯作者）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的毫米波雷达语义分割（RSS），对雷达张量进行像素级语义标注。</li><li>应用场景：雨、雾、极端光照等相机与激光雷达性能下降的条件下，利用毫米波雷达的天气与光照鲁棒性提升环境感知与场景理解。</li><li>研究问题：现有雷达专用神经算子 PeakConv（PKC）源于 CFAR，其保护带宽多为固定值或被当作可学习参数直接学习，未显式刻画 PKC 算子的频率响应，缺乏物理可解释的频率选择性指导；同时现有 RSS 方法多把雷达数据当作普通图像处理，存在域差异与计算冗余。</li><li>思路切入点：分析发现目标区域保留较多中高频成分、背景杂波以低频为主，而 PKC 的传递带中心随保护带宽呈 1/b_G 变化，据此提出频率感知的 PeakConv 及分割框架。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>揭示 PKC 中保护带宽直接决定算子的频率通带，建立频谱特性与峰值感受野（PRF）设计之间的原理性联系。</li><li>提出 Frequency-Aware PeakConv（FreqPKC）：通过级联的频率解耦、频带级可学习调制与频谱能量驱动的保护带宽估计，实现有物理依据的自适应 PRF 控制。</li><li>构建 FreqPKC-Net：融合频率引导的自适应调制与多视角（RD、RA，AD 为辅助）跨视角融合，同时可适配单视角数据，输出 RD 与 RA 两个视角的像素级分割。</li><li>构建自采数据集 RS-SAR（Vehicle-Mounted Millimeter-Wave Rotary Scan Synthetic Aperture Radar Image Dataset）：由旋转扫描 SAR 成像系统采集，角度分辨率优于 0.8°、具备 360° 全景覆盖，补充现有前向 FMCW 雷达数据集。</li><li>在 CARRADA、CARRADA-RAC 与 RS-SAR 上验证 FreqPKC-Net 在 RD 与 RA 视角均持续优于现有 SoTA。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：雷达语义分割中的雷达专用神经算子与端到端分割网络；核心算子 FreqPKC 并行包含频率感知（FA）模块与峰值卷积。</li><li>输入传感器：毫米波雷达张量；CARRADA 系列为多视角 RAD 张量，RS-SAR 为 77 GHz 旋转扫描 SAR 的单视角 RA 图像。光学相机图像仅用于 CARRADA 数据说明与场景对照；LiDAR 在 RS-SAR 采集中提供辅助标注数据。原文未报告实车部署中所用传感器配置细节。</li><li>场景表示：range-Doppler（RD）、range-angle（RA）视角，angle-Doppler（AD）为辅助视角；CARRADA 张量尺寸 256×256×64，RS-SAR 的 RA 图像为 288×288。</li><li>理论分析：将 PKC 建模为等价的线性移不变核（各向同性 2D 均匀权重核），得到“中心减环绕”结构；通过零阶汉克尔变换给出闭式频率响应；证明零直流增益（Ĥ_PKC(0)=0）与通带中心 ρ_peak≈1.841/(2πb_G)∝1/b_G、−3 dB 带宽 Δρ∝1/b_G（在 b_R≫b_G 条件下）。</li><li>频率解耦：对输入特征做 2D FFT 与频谱中心化 Shift(·)；用一组截止尺度因子 K={k_1,…,k_M} 生成矩形低通掩码，经逆中心化与逆 FFT 得低频分量，再以残差方式逐级相减，得到 M+1 个互不重叠子带（从高频目标散射结构到低频背景残差）。</li><li>频带级可学习调制：每个子带经零初始化深度卷积生成空间注意力图，Sigmoid 后逐元素加权；最终低频残差亦被额外注意力图调制，所有 M+1 个子带加权求和得到频率调制特征。</li><li>保护带宽估计：用 (2b_max^G+1)×(2b_max^G+1) 卷积（b_max^G=3，即 7×7）加 BatchNorm 融合多频带能量，输出四个方向（上、下、左、右）的注意力权重，经 Sigmoid 并按 (b_max^G−1) 缩放，得到保护带宽偏移 B^{G†}∈R^{4×H×W}，取值在 [0, b_max^G−1]。</li><li>可微重采样：将 B^{G†} 分解为四方向带宽，映射为参考点坐标偏移，得到浮点坐标后用双线性插值（1D 线性核逐轴相乘）采样特征值，保证梯度可回传至 FA 模块，实现端到端训练。</li><li>网络结构：FreqPKC-Net 采用三流编码器与双流解码器；每个视角分支先经 Double 3D Convolution Block 做时空特征提取，再经两个 Double FreqPKC Block（各含两层级联 FreqPKC），随后接 ASPP 聚合多尺度上下文；Latent Space Encoder（LSE）融合三视角隐嵌入，两个并行解码器分别重建 RD 与 RA 全分辨率分割掩码；联合损失为加权交叉熵、Dice 与一致性项。</li><li>计算开销：原文称 FA 模块仅引入 FFT 解耦与单个估计头卷积的边际开销，完整效率对比（参数量、GFLOPs、FPS）置于补充材料 Table S1，正文未报告具体数值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CARRADA（相机-雷达同步数据，三类：car、pedestrian、cyclist，多视角 RAD 张量 256×256×64）；CARRADA-RAC（对 CARRADA 的 RA 标注进行细化）；自建 RS-SAR（77 GHz 毫米波旋转扫描 SAR 系统采集，单视角 RA 图像 288×288，两类：小型车与大型车）。训练/验证/测试划分沿用先前工作。</li><li>仿真器：原文未报告使用仿真器，数据为公开数据集与自采实测数据。</li><li>模型规模：FreqPKC-Net 为 6.4M 参数、输入 5 帧；对比方法参数量在 4.8M–106.4M 之间（如 MVA-Net 4.8M@3、PKCIn-Net 6.3M@5、AXFL-Net 4.9M@5、MARSS 9.3M@5、RAMP-CNN 106.4M@9）。</li><li>训练资源：单块 NVIDIA RTX 3090 GPU，Adam 优化器，余弦退火，训练 300 个 epoch；CARRADA/CARRADA-RAC 使用加权交叉熵、Dice 与一致性损失，初始学习率 1×10⁻⁴、batch size 3；RS-SAR 使用加权交叉熵与 Dice 损失，学习率 1×10⁻⁴、batch size 12。GFLOPs、FPS 与显存等未在正文报告。</li><li>实车/采集平台：RS-SAR 由旋转扫描 SAR 成像系统采集，系统包含 MIMO 天线阵列雷达子系统、旋转臂子系统与无人地面车（UGV），LiDAR 提供辅助数据用于雷达图像标注；角度分辨率优于 0.8°，支持 360° 全景覆盖。正文未报告具体实车道路测试平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARRADA、CARRADA-RAC、RS-SAR 三个数据集；对比 RD 与 RA 两个视角的分割性能。</li><li>评估指标：mIoU 与 mDice，在所有类别上取平均，于测试集上评估；消融表中报告 RD 与 RA 视角各自的 mIoU/mDice（四项指标）。</li><li>频率选择性分析：向训练后模型输入频谱平坦白噪声，统计各归一化频带的输出功率比。标准卷积将约 65% 输出能量集中在最低频带 [0,1/8)，呈低通特性；FreqPKC 将功率重新分配到中频带 [1/8,1/4) 与 [1/4,3/8)，相对标准卷积增益分别为 Δ=+0.232 与 Δ=+0.203；被强化的 [1/8,3/8) 与类别平均谱中目标-背景可分区域一致。</li><li>消融实验（CARRADA-RAC）：频带配置扫描中 K={2,4,8}（四频带分解）取得最佳精度，并被后续实验采用；K={2}、{2,4} 谱分辨率不足，{2,4,6,8}、{2,4,6,8,10} 引入冗余高频</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.33758/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Road Infrastructure Perception for Autonomous Driving: Taxonomy, Representations, Tasks, and Challenges</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.32666/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Robust Offset-Free Lane-Keeping Control Framework for Vision-Only Automated Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

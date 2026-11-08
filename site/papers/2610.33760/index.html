@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>C-DFF: Concept-Level Diagnostics for Mechanism Parity in Simulation-Based Validation of Autonomous Driving Perception - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向基于仿真的自动驾驶感知验证与确认（V&amp;V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。 应用场景为配对真实—合成数据评估，具体使用 KITTI ↔ Virtual KITTI 2 克隆数据对，检验仿真图像是否保持“机制一致性（mechanism parity）”。 研究问题：如何将原始决定性证据图（decisive map）之间的差异转化为可解释、可指导工程行动的语义概念层诊断；输出一致是否足以证明机制一致。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.33760">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.33760.webp" alt="C-DFF: Concept-Level Diagnostics for Mechanism Parity in Simulation-Based Validation of Autonomous Driving Perception" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向基于仿真的自动驾驶感知验证与确认（V&amp;V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">C-DFF: Concept-Level Diagnostics for Mechanism Parity in Simulation-Based Validation of Autonomous Driving Perception</h1>
+            <div class="detail-meta">2026-10-24 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.33760" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.33760" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.33760</span></div>
+            <p class="detail-summary">论文面向基于仿真的自动驾驶感知验证与确认（V&amp;V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。 应用场景为配对真实—合成数据评估，具体使用 KITTI ↔ Virtual KITTI 2 克隆数据对，检验仿真图像是否保持“机制一致性（mechanism parity）”。 研究问题：如何将原始决定性证据图（decisive map）之间的差异转化为可解释、可指导工程行动的语义概念层诊断；输出一致是否足以证明机制一致。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">WMG, University of Warwick, Coventry, U.K. · Danial Safaei、Siddartha Khastg…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.33760/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向基于仿真的自动驾驶感知验证与确认（V&amp;V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向基于仿真的自动驾驶感知验证与确认（V&amp;V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。</li><li>应用场景为配对真实—合成数据评估，具体使用 KITTI ↔ Virtual KITTI 2 克隆数据对，检验仿真图像是否保持“机制一致性（mechanism parity）”。</li><li>研究问题：如何将原始决定性证据图（decisive map）之间的差异转化为可解释、可指导工程行动的语义概念层诊断；输出一致是否足以证明机制一致。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：WMG, University of Warwick, Coventry, U.K.；作者：Danial Safaei、Siddartha Khastgir、Matthew Higgins</li><li>机构：Eindhoven University of Technology (TU/e), Eindhoven, The Netherlands；作者：Mohsen Alirezaei</li><li>机构：2getthere, Utrecht, The Netherlands；作者：Jeroen Ploeg</li><li>机构：Siemens Digital Industries Software, Leuven, Belgium；作者：Son Tong、Ludo Gielen</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向基于仿真的自动驾驶感知验证与确认（V&amp;V）任务，解决真实图像与其合成对应图像在冻结被测系统（SUT）上输出相似、但系统依赖的视觉证据不一致的问题。</li><li>应用场景为配对真实—合成数据评估，具体使用 KITTI ↔ Virtual KITTI 2 克隆数据对，检验仿真图像是否保持“机制一致性（mechanism parity）”。</li><li>研究问题：如何将原始决定性证据图（decisive map）之间的差异转化为可解释、可指导工程行动的语义概念层诊断；输出一致是否足以证明机制一致。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出概念层机制一致性诊断指标 C-DFF：将冻结 SUT 上的决定性证据通过现成分割器投影到共享语义概念空间，并用概念重要性向量之间的距离度量真实与合成输入的机制差异。</li><li>提出可行动的概念漂移诊断：定义逐对概念漂移向量与数据集级平均漂移、Top-k 增/减概念、概念级分位数包络等汇总，用于识别合成图像中哪些场景概念变得更/更不决定性。</li><li>给出面向验证流程的操作化方案：将 C-DFF 作为标量门限加排序语义诊断，用于筛选、分诊与需求式监控，并提供阈值校准与通过率定义。</li><li>在 2126 对 KITTI ↔ Virtual KITTI 2 匹配帧、三个冻结 SUT（转向回归、YOLOP 可行驶区域、YOLOP 车道线）上开展多 SUT 实证研究，并报告任务特定输出值上下文指标，说明输出一致不等同于机制一致。</li><li>补充诊断分析：利用 VKITTI2 真值标签对合成侧标签来源敏感性进行单侧界定，并报告校准阈值与测试集分位数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：验证与确认中的感知模型诊断层；不修改、不重训练 SUT，也不引入生成器校准目标。</li><li>输入传感器：KITTI ↔ Virtual KITTI 2 前视单目相机图像，分辨率 1248×376。</li><li>场景表示：概念空间。用语义分割器得到逐像素概念标签图 S(x)，采用 Cityscapes-19 分类体系（K=19），概念如 road、sidewalk、building、sky 等。</li><li>模型结构：</li></ul>
+<p> - 决定性证据图：M(x)=H(F, T_sut(x))，在 SUT 输入几何上定义；H 采用直接图像空间扰动优化（CF-XAI），目标函数包含输出标量摘要与目标值差平方、扰动幅度惩罚（权重 w_t）与总变分正则（λ_TV），用 Adam 并裁剪到 [0,1]；优化后以通道均值绝对扰动作为决定性图。</p>
+<p> - 语义分割：现成 Mask2Former（Cityscapes 训练检查点），不训练、不微调。</p>
+<p> - 几何对齐与池化：概念标签经与 SUT 完全相同的预处理变换 T_sut 以最近邻插值变换；决定性图平均池化到 16×16，标签图最近邻缩放到 16×16。</p>
+<p> - 概念重要性向量：对每个概念 k，计算池化决定性质量 B_k 与面积 A_k，取 c_k(x)=B_k(x)/max(1,A_k(x))，不做跨概念归一化，得到 c(x)∈R^K。</p>
+<p> - C-DFF 距离：D_c 采用均方误差，C-DFF(x_r,x_s;F)=D_c(c(x_r),c(x_s))。</p>
+<p> - 阈值与通过率：在校准划分上取 90/95 百分位作为 ε_90、ε_95，在留出测试集上报告通过率。</p>
+<p> - 诊断：概念漂移向量 Δc(x_r,x_s)=c(x_s)−c(x_r)，并报告 Top-k 增减、数据集级平均漂移、概念级分位数包络。</p>
+<ul><li>关键技术：扰动式反事实解释（CF-XAI）、现成语义分割作为可解释脚手架、确定性几何对齐、概念空间距离度量与概念漂移汇总。</li><li>原文未报告：论文未报告 C-DFF 对决定性图估计器替换的鲁棒性实验、未报告替代分割器或替代距离度量的系统性比较。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：KITTI ↔ Virtual KITTI 2，按共享序列 ID 与帧索引构造帧级配对（示例：KITTI tracking sequence 0001 → V-KITTI Scene01）；使用 2126 对评估帧，覆盖五个配对序列（Scene01/02/06 用于校准，Scene18/20 用于留出评估）。</li><li>冻结 SUT：</li></ul>
+<p> - Steering：PilotNet 风格 CNN 回归（3 个卷积层 + 2 个全连接层），输入 200×66 RGB，在 Udacity steering-angle 数据集（Challenge 2）上训练。</p>
+<p> - YOLOP 可行驶区域头（DA）：YOLOP 多任务网络共享编码器加任务头，输入 640×384 RGB。</p>
+<p> - YOLOP 车道线头（LL）：同骨干的任务头。</p>
+<ul><li>预处理：Steering 缩放至 200×66 并归一化到 [0,1]；YOLOP 缩放至 640×384 并归一化到 [0,1]；推理无数据增强；所有 SUT 权重冻结。</li><li>分割器：Mask2Former，Cityscapes 训练检查点，Cityscapes-19 分类体系（K=19），未训练或适配。</li><li>超参数搜索：Optuna，每个 SUT 20 次试验，调参子集与留出评估划分不相交。</li><li>CF-XAI 配置：Steering 80 步、YOLOP 头 60 步；Adam 并裁剪到 [0,1]；目标侧裕度 τ=0.1；λ_TV=1×10^-3；池化网格 16×16；扰动幅度权重前一半 w_t=0.1，后一半 Steering 为 0.5、YOLOP 头为 0.3；收敛诊断阈值 0.8τ=0.08。</li><li>仿真器：原文未报告具体仿真器软件；Virtual KITTI 2 作为合成数据来源。</li><li>模型规模：原文仅报告 Steering 为 3 卷积 + 2 全连接、YOLOP 为共享编码器加任务头，未报告参数量等规模信息。</li><li>训练资源：原文未报告 GPU 型号、数量或训练时长；仅报告调参与优化步数等设置。</li><li>实车平台：原文未报告实车平台；数据为 KITTI 真实图像与 Virtual KITTI 2 合成图像离线配对评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：KITTI ↔ Virtual KITTI 2 留出评估划分（Scene18/20），校准划分（Scene01/02/06）；共 2126 对匹配帧；三个冻结 SUT。</li><li>评估指标：</li></ul>
+<p> - 主指标 C-DFF（MSE，越低越好），报告均值、中位数、标准差、P@ε_90、P@ε_95。</p>
+<p> - 上下文指标（仅同一 SUT 内解释，不跨 SUT 排名）：Steering 为 exp(−\|θ_r−θ_s\|/0.2)；YOLOP-DA 为二值可行驶区域掩码 IoU；YOLOP-LL 为 0.4·Chamfer_score + 0.6·F1（容差 3 px）。</p>
+<ul><li>关键数值（留出划分）：</li></ul>
+<p> - Steering：C-DFF 均值 3.12×10^-4，中位数 2.94×10^-4，标准差 1.71×10^-4，P@ε_90=77.1%，P@ε_95=92.8%，OV 上下文 0.3742。</p>
+<p> - YOLOP-DA：C-DFF 均值 1.25×10^-4，中位数 1.00×10^-4，标准差 1.03×10^-4，P@ε_90=97.0%，P@ε_95=100.0%，OV 上下文 0.4518。</p>
+<p> - YOLOP-LL：C-DFF 均值 3.90×10^-5，中位数 3.20×10^-5，标准差 3.30×10^-5，P@ε_90=66.9%，P@ε_95=74.7%，OV 上下文 0.0730。</p>
+<p> - 结论：C-DFF 能区分三个冻结 SUT；OV 指标与 C-DFF 表现不一致</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2610.33758/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Road Infrastructure Perception for Autonomous Driving: Taxonomy, Representations, Tasks, and Challenges</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -36757,5 +36757,1213 @@
     "inside_figure": true,
     "width": 579,
     "height": 431
+  },
+  "2610.32230": {
+    "title": "Towards Effective and Transferable Physical Camouflage against Multi-View BEV-based 3D Perception in Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.32230",
+    "html_url": "https://arxiv.org/html/2610.32230v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.32230v1/Pipeline_v7.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 254,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32230v1/figures/appendix/example_1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 216,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32230v1/figures/appendix/example_2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 216,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32230v1/figures/appendix/example_3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 216,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32230v1/figures/appendix/real_world/example_1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 181,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.32230.webp",
+    "image_url": "https://arxiv.org/html/2610.32230v1/Pipeline_v7.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 254
+  },
+  "2610.33758": {
+    "title": "Road Infrastructure Perception for Autonomous Driving: Taxonomy, Representations, Tasks, and Challenges",
+    "abs_url": "https://arxiv.org/abs/2610.33758",
+    "html_url": "https://arxiv.org/html/2610.33758v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.33758v1/fig/core-tasks520b.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 228,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33758v1/fig/taxonomy520.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 238,
+        "height": 134,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33758v1/fig/modalities521.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 238,
+        "height": 193,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33758v1/fig/cover-fig521.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": 476,
+        "height": 135,
+        "alt": "[Uncaptioned image]",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 35
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33758v1/fig/icon/rgb.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 9,
+        "height": 8,
+        "alt": "[Uncaptioned image]",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": -15
+      }
+    ],
+    "path": "assets/paper-images/2610.33758.webp",
+    "image_url": "https://arxiv.org/html/2610.33758v1/fig/core-tasks520b.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 228
+  },
+  "2610.33504": {
+    "title": "FreqPKC: Frequency-Aware PeakConv for Radar Semantic Segmentation",
+    "abs_url": "https://arxiv.org/abs/2610.33504",
+    "html_url": "https://arxiv.org/html/2610.33504v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.33504v1/PRF2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 476,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33504v1/PRF.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 462,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33504v1/paper_image_cam.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 397,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33504v1/paper_image_radar.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 391,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33504v1/image/intro/fig_a_mean_spectrum.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 286,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.33504.webp",
+    "image_url": "https://arxiv.org/html/2610.33504v1/PRF2.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 476
+  },
+  "2610.30774": {
+    "title": "Evaluation of Front-End Feature Matching for Lunar Visual SLAM",
+    "abs_url": "https://arxiv.org/abs/2610.30774",
+    "html_url": "https://arxiv.org/html/2610.30774v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.30774v1/dataset_overview.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 185,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30774v1/qualitative_matches.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 222,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30774v1/lunapolaris_lighting_matches.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 204,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30774v1/loop_closure_qualitative.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 242,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_figure_panel ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      }
+    ],
+    "path": "assets/paper-images/2610.30774.webp",
+    "image_url": "https://arxiv.org/html/2610.30774v1/dataset_overview.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 185
+  },
+  "2610.31186": {
+    "title": "RaSFNet: Ray-aligned and Scan-aware Fusion Network for LiDAR Semantic Segmentation",
+    "abs_url": "https://arxiv.org/abs/2610.31186",
+    "html_url": "https://arxiv.org/html/2610.31186v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.31186v1/Figure/qualitative_results_error.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 544,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.31186v1/Figure/flowcharts.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 192,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.31186v1/Figure/RAGDE.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 314,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.31186v1/Figure/STAM.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 249,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.31186v1/Figure/qualitative_results.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 225,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.31186.webp",
+    "image_url": "https://arxiv.org/html/2610.31186v1/Figure/qualitative_results_error.jpg",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/jpeg",
+    "inside_figure": true,
+    "width": 476,
+    "height": 544
+  },
+  "2610.32666": {
+    "title": "Robust Offset-Free Lane-Keeping Control Framework for Vision-Only Automated Vehicles",
+    "abs_url": "https://arxiv.org/abs/2610.32666",
+    "html_url": "https://arxiv.org/html/2610.32666v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.32666v1/trackAB_map.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 324,
+        "height": 123,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2610.32666.webp",
+    "image_url": "https://arxiv.org/html/2610.32666v1/trackAB_map.jpg",
+    "source": "img",
+    "score": 70,
+    "content_type": "image/jpeg",
+    "inside_figure": true,
+    "width": 324,
+    "height": 123
+  },
+  "2610.33760": {
+    "title": "C-DFF: Concept-Level Diagnostics for Mechanism Parity in Simulation-Based Validation of Autonomous Driving Perception",
+    "abs_url": "https://arxiv.org/abs/2610.33760",
+    "html_url": "https://arxiv.org/html/2610.33760v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.33760v1/Pictures/pipeline_final.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 448,
+        "height": 250,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33760v1/Pictures/fig_qualitative.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 467,
+        "height": 370,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.33760v1/fig_concept_shift.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 448,
+        "height": 118,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 60
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2610.33760.webp",
+    "image_url": "https://arxiv.org/html/2610.33760v1/Pictures/pipeline_final.jpg",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/jpeg",
+    "inside_figure": true,
+    "width": 448,
+    "height": 250
+  },
+  "2610.30319": {
+    "title": "TerraTransfer++: Demonstration-Free End-to-End Planner",
+    "abs_url": "https://arxiv.org/abs/2610.30319",
+    "html_url": "https://arxiv.org/html/2610.30319v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.30319v1/figures/method_phase3_see.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 320,
+        "height": 170,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30319v1/figures/method_phase1_selfplay.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 320,
+        "height": 116,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30319v1/figures/method_phase2_plan.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 320,
+        "height": 81,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30319v1/extreme_tiers.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 91,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      }
+    ],
+    "path": "assets/paper-images/2610.30319.webp",
+    "image_url": "https://arxiv.org/html/2610.30319v1/figures/method_phase3_see.png",
+    "source": "img",
+    "score": 85,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 320,
+    "height": 170
+  },
+  "2610.30528": {
+    "title": "Decision Making and Ride Comfort Evaluation Based on Lane-Change Prediction for Autonomous Vehicles",
+    "abs_url": "https://arxiv.org/abs/2610.30528",
+    "html_url": "https://arxiv.org/html/2610.30528v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.30528v1/01_introduction_scenario.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 620,
+        "height": 349,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30528v1/02_prediction_methodology.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 620,
+        "height": 293,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30528v1/orcid.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": 12,
+        "height": 12,
+        "alt": "[Uncaptioned image]",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": -5
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2610.30528.webp",
+    "image_url": "https://arxiv.org/html/2610.30528v1/01_introduction_scenario.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 620,
+    "height": 349
+  },
+  "2610.30340": {
+    "title": "Foundation4D: Towards a unified perception and reconstruction model for autonomous vehicles",
+    "abs_url": "https://arxiv.org/abs/2610.30340",
+    "html_url": "https://arxiv.org/html/2610.30340v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.30340v1/architecture-v38.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 210,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30340v1/pai_label_pipeline.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 206,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30340v1/pai_gt_depth_occupancy_stacked_compressed.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 282,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30340v1/geometry_pai_foundation4d_depth.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 467,
+        "height": 421,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.30340v1/assets/prototypes/teaser3d-41e3893a-palette-v04.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 251,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.30340.webp",
+    "image_url": "https://arxiv.org/html/2610.30340v1/architecture-v38.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 210
+  },
+  "2610.29676": {
+    "title": "DriveMLP: When Training Strategy Outperforms Model Complexity in Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.29676",
+    "html_url": "https://arxiv.org/html/2610.29676v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.29676v1/noise3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 131,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2610.29676v1/failure3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 131,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2610.29676v1/NR_sim_wl.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 108,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 60
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2610.29676.webp",
+    "image_url": "https://arxiv.org/html/2610.29676v1/noise3.png",
+    "source": "img",
+    "score": 85,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 131
+  },
+  "2610.28829": {
+    "title": "HorizonComposer: Spatiotemporally Consistent Driving Video Editing with Enriched Traffic Semantics",
+    "abs_url": "https://arxiv.org/abs/2610.28829",
+    "html_url": "https://arxiv.org/html/2610.28829v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.28829v1/teaser.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 230,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28829v1/page_05_20260503_194846.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 231,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28829v1/downstream_task.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 183,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28829v1/dataset_development.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 161,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28829v1/rewardmap.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 286,
+        "height": 58,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2610.28829.webp",
+    "image_url": "https://arxiv.org/html/2610.28829v1/teaser.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 230
+  },
+  "2610.27617": {
+    "title": "Provisioning Robust and Efficient LiDAR Perception for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.27617",
+    "html_url": "https://arxiv.org/html/2610.27617v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.27617v1/methodology.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 184,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.27617v1/casestudy.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 462,
+        "height": 115,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 60
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/funders/simons-foundation.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/funders/simons-foundation-international.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Simons Foundation International",
+        "classes": "ds-funder-logo",
+        "score": -120
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/funders/schmidt-sciences.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "Schmidt Sciences",
+        "classes": "ds-funder-logo",
+        "score": -120
+      }
+    ],
+    "path": "assets/paper-images/2610.27617.webp",
+    "image_url": "https://arxiv.org/html/2610.27617v1/methodology.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 184
+  },
+  "2610.28508": {
+    "title": "Deep Learning-Based Road Lane Quality Assessment from Egocentric Dashcam Video",
+    "abs_url": "https://arxiv.org/abs/2610.28508",
+    "html_url": "https://arxiv.org/html/2610.28508v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.28508v1/img/frame_000007.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 357,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28508v1/img/csi.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 315,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28508v1/img/lcr.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 315,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28508v1/img/frame_000003.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 157,
+        "height": 80,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2610.28508v1/img/frame_000027.jpg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 157,
+        "height": 80,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2610.28508.webp",
+    "image_url": "https://arxiv.org/html/2610.28508v1/img/frame_000007.jpg",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/jpeg",
+    "inside_figure": true,
+    "width": 476,
+    "height": 357
+  },
+  "2610.26528": {
+    "title": "A Semantic Knowledge Graph Construction Pipeline for Vehicle Intention Prediction in nuScenes",
+    "abs_url": "https://arxiv.org/abs/2610.26528",
+    "html_url": "https://arxiv.org/html/2610.26528v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.26528v1/figures/Ontology_Diagram.jpeg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 438,
+        "height": 252,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26528v1/figures/frame_019.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26528v1/figures/frame_020.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26528v1/figures/frame_021.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26528v1/figures/frame_022.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.26528.webp",
+    "image_url": "https://arxiv.org/html/2610.26528v1/figures/Ontology_Diagram.jpeg",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/jpeg",
+    "inside_figure": true,
+    "width": 438,
+    "height": 252
+  },
+  "2610.27732": {
+    "title": "Prescribed Performance Guided Safe Reinforcement Learning for Roundabout Navigation of Autonomous Vehicles",
+    "abs_url": "https://arxiv.org/abs/2610.27732",
+    "html_url": "https://arxiv.org/html/2610.27732v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.27732v1/check.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 452,
+        "height": 233,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2610.27732.webp",
+    "image_url": "https://arxiv.org/html/2610.27732v1/check.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 452,
+    "height": 233
+  },
+  "2610.26816": {
+    "title": "Real-Time Radar Semantic and Panoptic Scene Understanding",
+    "abs_url": "https://arxiv.org/abs/2610.26816",
+    "html_url": "https://arxiv.org/html/2610.26816v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.26816v1/images/qual/seg_full_boreas/test_1615317994307459.png_3_gt.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 206,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26816v1/images/qual/seg_full_boreas/test_1615317994307459.png_3_theirs_box.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 206,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26816v1/images/qual/seg_full_boreas/test_1615317994307459.png_3_ours.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 206,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26816v1/images/qual/seg_full_sax/test_1615207641531425.png_36_gt.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 206,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.26816v1/images/qual/seg_full_sax/test_1615207641531425.png_36_theirs_box.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 206,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2610.26816.webp",
+    "image_url": "https://arxiv.org/html/2610.26816v1/images/qual/seg_full_boreas/test_1615317994307459.png_3_gt.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 206
+  },
+  "2610.32612": {
+    "title": "DriveOSS: Dataset and Benchmark for 3D Anomaly Segmentation and Open-set Semantic Segmentation in Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2610.32612",
+    "html_url": "https://arxiv.org/html/2610.32612v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.32612v1/figure_1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 346,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32612v1/figs/calibration.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 292,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32612v1/anomaly_objects.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 301,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32612v1/ood_spatial_distribution_overall_scientific.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 583,
+        "height": 466,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2610.32612v1/suppl_fig1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 351,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      }
+    ],
+    "path": "assets/paper-images/2610.32612.webp",
+    "image_url": "https://arxiv.org/html/2610.32612v1/figure_1.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 685,
+    "height": 346
+  },
+  "2610.29200": {
+    "title": "NeuralSRender: G-Buffer Guided Video Diffusion for Sim-to-Real Rendering",
+    "abs_url": "https://arxiv.org/abs/2610.29200",
+    "html_url": "https://arxiv.org/html/2610.29200v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2610.29200v1/tesear7.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 285,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.29200v1/result_07_low.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 429,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2610.29200v1/pipeline3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 131,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2610.29200v1/abla_07_low.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 87,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_figure_panel ltx_img_landscape",
+        "score": 45
+      },
+      {
+        "url": "https://arxiv.org/html/2610.29200v1/downstream_low.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 56,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_figure_panel ltx_img_landscape",
+        "score": 45
+      }
+    ],
+    "path": "assets/paper-images/2610.29200.webp",
+    "image_url": "https://arxiv.org/html/2610.29200v1/tesear7.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 285
+  },
+  "2610.30437": {
+    "title": "Integrated Longitudinal and Lateral Control for High-Speed Platooning of Articulated Vehicles",
+    "abs_url": "https://arxiv.org/abs/2610.30437",
+    "html_url": "https://arxiv.org/html/2610.30437v1",
+    "path": "assets/paper-images/2610.30437.webp",
+    "image_url": "https://arxiv.org/pdf/2610.30437",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 918,
+    "height": 1188
   }
 }
