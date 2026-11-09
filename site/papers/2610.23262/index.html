@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expand-and-Prune: Test-Time Candidate-Space Adaptation for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶中基于候选轨迹的规划器（candidate-based planners），研究如何在没有参数更新的情况下提升规划性能。 应用场景为闭环仿真与真实数据规划基准（LangAuto、Bench2Drive、Fail2Drive、NAVSIMv2），尤其关注长距离闭环与分布外场景。 核心研究问题：稀疏候选集对当前语义意图或时序上下文相关机动的支持不足，且固定下游候选预算（如固定 Top-K）无法根据预测不确定性调整候选容量。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.23262">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.23262.webp" alt="Expand-and-Prune: Test-Time Candidate-Space Adaptation for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶中基于候选轨迹的规划器（candidate-based planners），研究如何在没有参数更新的情况下提升规划性能。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Expand-and-Prune: Test-Time Candidate-Space Adaptation for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.23262" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.23262" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.23262</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶中基于候选轨迹的规划器（candidate-based planners），研究如何在没有参数更新的情况下提升规划性能。 应用场景为闭环仿真与真实数据规划基准（LangAuto、Bench2Drive、Fail2Drive、NAVSIMv2），尤其关注长距离闭环与分布外场景。 核心研究问题：稀疏候选集对当前语义意图或时序上下文相关机动的支持不足，且固定下游候选预算（如固定 Top-K）无法根据预测不确定性调整候选容量。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Esslingen University of Applied Sciences · Fabian Schmidt、Karol Fedurko、Mar…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.23262/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶中基于候选轨迹的规划器（candidate-based planners），研究如何在没有参数更新的情况下提升规划性能。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶中基于候选轨迹的规划器（candidate-based planners），研究如何在没有参数更新的情况下提升规划性能。</li><li>应用场景为闭环仿真与真实数据规划基准（LangAuto、Bench2Drive、Fail2Drive、NAVSIMv2），尤其关注长距离闭环与分布外场景。</li><li>核心研究问题：稀疏候选集对当前语义意图或时序上下文相关机动的支持不足，且固定下游候选预算（如固定 Top-K）无法根据预测不确定性调整候选容量。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Esslingen University of Applied Sciences；作者：Fabian Schmidt、Karol Fedurko、Markus Enzweiler</li><li>机构：University of Freiburg；作者：Fabian Schmidt、Abhinav Valada</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶中基于候选轨迹的规划器（candidate-based planners），研究如何在没有参数更新的情况下提升规划性能。</li><li>应用场景为闭环仿真与真实数据规划基准（LangAuto、Bench2Drive、Fail2Drive、NAVSIMv2），尤其关注长距离闭环与分布外场景。</li><li>核心研究问题：稀疏候选集对当前语义意图或时序上下文相关机动的支持不足，且固定下游候选预算（如固定 Top-K）无法根据预测不确定性调整候选容量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Expand-and-Prune 测试时框架，联合调整预训练候选规划器的候选支持范围与下游候选容量，且不更新学习参数、不修改原生评分流程。</li><li>设计意图引导候选扩展：基于语义驾驶意图构建轨迹原型库（action banks），并按意图置信度分配扩展候选数量。</li><li>设计熵自适应时序记忆：根据上一帧轨迹分数的归一化熵，在最小/最大记忆容量间线性插值保留历史候选，并做相对位姿变换。</li><li>设计置信度感知自适应剪枝：依据中间轨迹分数的归一化熵，在最小/最大剪枝预算间线性插值确定保留候选数。</li><li>在四种异构候选规划器与四个基准上验证一致提升，并报告在 LangAuto 上取得 SOTA，且新增意图/时序候选占总选择轨迹的 72.5%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：规划器推理阶段的候选处理边界（候选扩展在去噪前；自适应剪枝可置于去噪阶段之间或候选筛选/细化边界），学习参数与评分为原文保持不动。</li><li>输入传感器：原文未在方法部分明确报告传感器输入类型；原文仅说明骨干包含视觉编码器，并在适用时包含语言模块。</li><li>场景表示：以有限候选轨迹集合表示多模态未来运动假设；候选可为轨迹锚点、粗运动提案、路径假设或分层路径–速度表示。</li><li>模型结构：Expand-and-Prune 由三部分组成——意图引导候选扩展、熵自适应时序记忆、置信度感知自适应剪枝；主实验规划器 LAD-Drive 含 6 类元动作概率信念与 20 个轨迹锚点的两阶段扩散解码器。</li><li>关键技术：</li></ul>
+<p> - 多集合并：C_t^(0) = C_t^base ⊎ C_t^int ⊎ C_t^temp。</p>
+<p> - 动作库离线构建：用确定性标签函数按横向位移、航向演化等几何量标注专家轨迹，再在各动作子集内做 k-means，得到每个动作 M_a 个原型。</p>
+<p> - 意图条件候选分配：按 n_{t,a} ≈ N_int · q_{t,a} 分配并取整使总和为 N_int，再从对应动作库随机采样。</p>
+<p> - 时序记忆：p_{t-1}=softmax(s_{t-1}/τ)，h_{t-1} 为归一化熵，K_t^mem 由 K_min^mem 与 K_max^mem 线性插值并取整；用 T_{t←t-1}=(T_t^w)^{-1}T_{t-1}^w 变换到当前自车坐标系，原文明确不做时间重采样。</p>
+<p> - 自适应剪枝：在最早提供有意义分数的阶段 ℓ_p 计算 softmax 与归一化熵 h_t^(ℓ_p)，K_t^prune 由 K_min^prune 与 K_max^prune 线性插值并取整，仅保留最高分候选进入后续阶段。</p>
+<p> - 集成差异：LAD-Drive 使用意图+时序+剪枝；BridgeDrive 使用时序+剪枝；DriveSuprim 与 SparseDriveV2 仅使用剪枝（因其为稠密固定词表选择式规划器）。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集/基准：LangAuto（8 个城镇，Tiny &lt;150 m、Short 150–500 m、Long &gt;500 m）、Bench2Drive（220 条短路线、44 个交互场景、15 个城镇）、Fail2Drive（base 与 generalization 设置）、NAVSIMv2（真实驾驶数据评估）。</li><li>仿真器：LangAuto、Bench2Drive、Fail2Drive 均构建于 CARLA 仿真器。</li><li>模型规模：原文报告 DriveSuprim 使用 R34 与 ViT-L 两种骨干；LAD-Drive 使用 20 个轨迹锚点、两阶段去噪；其他模型规模原文未报告。</li><li>训练资源：原文未报告训练资源；所有适配均为测试时进行，使用官方检查点复现基线。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与指标：</li></ul>
+<p> - LangAuto：Route Completion (RC)、Infraction Score (IS)、Driving Score (DS=RC×IS)，按 Tiny/Short/Long 与 Mean 报告。</p>
+<p> - Bench2Drive：DS、Success Rate (SR)。</p>
+<p> - Fail2Drive：DS、SR、HM（DS 与 SR 的调和平均）。</p>
+<p> - NAVSIMv2：Extended PDM Score (EPDMS)。</p>
+<ul><li>开环/闭环/仿真/实车条件：LangAuto、Bench2Drive、Fail2Drive 为闭环仿真；NAVSIMv2 为真实驾驶数据上的非闭环评估；原文未报告实车实验。</li><li>关键数值：</li></ul>
+<p> - LangAuto 上 LAD-Drive 平均 DS 由 68.2 提升至 75.9，平均 RC 由 74.5 提升至 81.1，平均 IS 由 0.90 提升至 0.93；Tiny DS 83.5→85.4，Short DS 71.3→83.4，Long DS 49.8→58.9。</p>
+<p> - 候选来源分析：完整实例中 72.5% 的被选轨迹来自新引入的意图引导或时序候选。</p>
+<p> - BridgeDrive + Temporal + Pruning：Bench2Drive DS 95.9→96.5、SR 88.2→88.7；Fail2Drive Base DS 92.2→93.2、SR 95.0→98.0、HM 93.6→95.5；Fail2Drive Generalization DS 80.2→83.1、SR 73.0→78.0、HM 76.4→80.5。</p>
+<p> - NAVSIMv2：DriveSuprim (R34) EPDMS 83.07→83.67；DriveSuprim (ViT-L) 87.03→87.27；SparseDriveV2 87.04→87.37。</p>
+<p> - 组件消融（LangAuto 均值 DS）：无扩展/记忆/剪枝基线 68.2；意图候选 30 时 DS 72.1；时序记忆 Entropy (1,5) 时 DS 73.4；自适应剪枝 Entropy (4,12) 时 DS 75.9（最终配置）。</p>
+<ul><li>对比方法：LangAuto 上对比 DSDrive、LMDrive、AD-H、BEVDriver、SToRM、VLDrive、AdaDrive、SAMoE-VLA、LMGenDrive 以及 LAD-Drive 基线；迁移实验对比各规划器未修改版本。</li><li>定性结果：LangAuto 上展示左转护栏碰撞被避免、路线偏离被缓解，轨迹颜色编码置信度。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.23537/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PanoBench: A Panoptic Occupancy Prediction Benchmark for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.22825/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">World Action Critic (WAC) Model: Joint Foresight and Criticism for Policy Learning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

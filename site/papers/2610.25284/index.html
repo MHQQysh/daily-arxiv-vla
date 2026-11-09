@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learning Lane-Structured Conditioning Fields for Online HD Mapping - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的在线高清（HD）地图构建，重点为车道段感知与中心线感知及车道拓扑推理。 应用场景：基于车载多相机观测实时推断 BEV 下的结构化道路地图，为下游运动规划等任务提供道路结构信息。 研究问题：现有外部先验表示存在权衡——稠密栅格易集成但忽略地图几何属性，稀疏矢量保留几何结构但需专用编码器且难以插入现有架构；同时外部先验可能不准确、获取昂贵或难以维护。矢量化的 DETR 式查询解码只利用少量 BEV 特征，导致 BEV 表示空间结构被削弱、难以捕获细粒度几何线索。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.25284">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.25284.webp" alt="Learning Lane-Structured Conditioning Fields for Online HD Mapping" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的在线高清（HD）地图构建，重点为车道段感知与中心线感知及车道拓扑推理。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Learning Lane-Structured Conditioning Fields for Online HD Mapping</h1>
+            <div class="detail-meta">2026-10-18 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.25284" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.25284" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.25284</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的在线高清（HD）地图构建，重点为车道段感知与中心线感知及车道拓扑推理。 应用场景：基于车载多相机观测实时推断 BEV 下的结构化道路地图，为下游运动规划等任务提供道路结构信息。 研究问题：现有外部先验表示存在权衡——稠密栅格易集成但忽略地图几何属性，稀疏矢量保留几何结构但需专用编码器且难以插入现有架构；同时外部先验可能不准确、获取昂贵或难以维护。矢量化的 DETR 式查询解码只利用少量 BEV 特征，导致 BEV 表示空间结构被削弱、难以捕获细粒度几何线索。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Parma, Italy · Andrea Bertogalli、Marcello Ceresini、Federico P…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.25284/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的在线高清（HD）地图构建，重点为车道段感知与中心线感知及车道拓扑推理。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的在线高清（HD）地图构建，重点为车道段感知与中心线感知及车道拓扑推理。</li><li>应用场景：基于车载多相机观测实时推断 BEV 下的结构化道路地图，为下游运动规划等任务提供道路结构信息。</li><li>研究问题：现有外部先验表示存在权衡——稠密栅格易集成但忽略地图几何属性，稀疏矢量保留几何结构但需专用编码器且难以插入现有架构；同时外部先验可能不准确、获取昂贵或难以维护。矢量化的 DETR 式查询解码只利用少量 BEV 特征，导致 BEV 表示空间结构被削弱、难以捕获细粒度几何线索。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Parma, Italy；作者：Andrea Bertogalli、Marcello Ceresini、Federico Pirazzoli、Lorenzo Cipelli、Massimo Bertozzi</li><li>机构：VisLab, Italy；作者：Anthony Dell’Eva、Nicola Marinello</li><li>机构：University of Bologna, Italy；作者：Filippo D’Addeo</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的在线高清（HD）地图构建，重点为车道段感知与中心线感知及车道拓扑推理。</li><li>应用场景：基于车载多相机观测实时推断 BEV 下的结构化道路地图，为下游运动规划等任务提供道路结构信息。</li><li>研究问题：现有外部先验表示存在权衡——稠密栅格易集成但忽略地图几何属性，稀疏矢量保留几何结构但需专用编码器且难以插入现有架构；同时外部先验可能不准确、获取昂贵或难以维护。矢量化的 DETR 式查询解码只利用少量 BEV 特征，导致 BEV 表示空间结构被削弱、难以捕获细粒度几何线索。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Lane Field（LF），一种定义在 BEV 网格上的稠密几何表示，在每个空间位置编码局部无向车道方向、邻近度与方向置信度，并提供从矢量地图标注解析构造真值场的几何方法。</li><li>提出即插即用的 BEV 特征调制模块，通过类似 SPADE 的残差块将 Lane Field 的车道结构线索注入潜在 BEV 特征。</li><li>提出即插即用的可变形注意力引导机制，利用 Lane Field 条件化采样位置，将查询采样引导向有意义的车道几何区域。</li><li>展示 LF 既可从车载观测学习预测，也可由任意折线先验（如 SD 地图）通过同一解析流程构造。</li><li>在 OpenLane-V2 上验证该框架可一致提升现有方法，并在车道段感知上取得最优性能。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：在线 HD 地图构建的编码器—解码器流水线中的 BEV 特征增强与查询解码阶段；框架对传感模态与 BEV 编码器不敏感，原文实现采用相机输入。</li><li>输入传感器：原文实现使用多相机环视图像（七路环视相机）；原文指出框架本身与传感模态无关。</li><li>场景表示：BEV 特征网格 F_BEV ∈ R^{H×W×C}，由共享图像骨干与视图变换模块生成；Lane Field 为同分辨率五通道张量 R ∈ R^{H×W×5}。</li><li>Lane Field 构造：将每条车道中心线折线分解为 n−1 段，计算单位切向与平均车道宽度；以高斯核沿线段的线积分（有闭式解、含 erf 项）为每段对每个 BEV 位置赋平滑权重；累加外积 t̂⊗t̂ 得到对称 2×2 方向张量 M（通道 M_xx、M_xy、M_yy），累加段贡献得到邻近度 P，由 M 的各向异性 Δ/tr 得到方向置信度 C；方向通道与置信度被邻近度软掩码，归一化后 M_xx、M_yy、P、C 位于 [0,1]，M_xy 位于 [−1/2, 1/2]。高斯展宽 σ_i 可按 σ_i = f·w̄_i 随局部车道宽度自适应。</li><li>模型结构：图像骨干 + 视图变换得到 BEV 特征；DeepLabV3 式头部从 F_BEV 稠密预测 LF；类似 SPADE 的调制分支由 LF 预测空间变化的仿射参数 γ、β，按 F_OUT = γ⊙F_IN + β 在残差 BEV 精炼块中调制特征；DETR 式解码器中使用可变形注意力引导：在参考点双线性采样 LF，取 M(r) 主特征向量作为无向切向轴 t̂ 与法向 n̂，保留法向分量并沿切向按 [1 + g_C(r)g_U(r)g_H(h)(Δ_∥ − 1)] 拉伸采样位置，其中 g_C 为方向置信度门、g_U 为不确定性门、g_H 为可学习逐头门，Δ_∥ 为最大切向拉伸因子；切向坐标带符号，使公式对 t̂ 的任意符号不变。</li><li>关键技术：Lane Field 解析稠密化、高斯线段线积分闭式解、SPADE 式空间仿射调制、车道对齐的可变形注意力采样引导、方向置信度与不确定性门控。</li><li>损失函数：方向张量通道使用 Smooth-L1 回归损失 L_R；方向通道空间梯度（水平/垂直有限差分）使用 L1 损失 L_G；邻近度通道预测均值与对数尺度，使用加权 Laplacian β-NLL 损失 L_L（对高邻近度区域加权），总损失为三项加权和；置信度通道不做直接监督，由预测通道解析导出。原文未报告各损失权重的具体数值（称在补充材料中给出）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：主要评估 OpenLane-V2 子集 A（基于 Argoverse 2，六个城市约 1k 场景，约 27k 训练帧与 4.8k 验证帧）；包含车道段标注（中心线、左右边界、边界线型标签、有向车道邻接）与中心线标注。原文提及在“额外数据集与任务”上评估，但提供的原文内容未给出这些数据集的具体名称与细节。</li><li>仿真器：原文未报告。</li><li>模型规模：骨干为 ResNet-50；BEV 分辨率为 100×200，感知范围 ±50 m × ±25 m；原文称参数量分析在补充材料中给出，未在正文报告具体数值。</li><li>训练资源：8 块 NVIDIA RTX 4000 Ada Generation GPU；训练 24 个 epoch，全局 batch size 为 8，使用 AdamW 与原始学习率调度。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：OpenLane-V2 子集 A 官方评估协议；分别评估车道段感知（含车道段间拓扑）与中心线感知（含中心线间拓扑）。</li><li>评估指标：车道段感知报告 mAP、AP_ls、AP_ped、TOP_lsls（距离阈值 1.0/2.0/3.0 m）；中心线感知报告 DET_l、TOP_ll 及 OLS_l（仅用中心线检测与车道—车道拓扑计算）。</li><li>关键数值（车道段感知，LaneSegNet + Ours）：mAP 36.1（+4.0，相对 +12.5%）、AP_ls 35.8（+3.6，+11.2%）、AP_ped 36.4（+4.5，+14.1%）、TOP_lsls 28.4（+2.9，+11.4%）；基线 LaneSegNet 为 32.1/32.2/31.9/25.5。对比方法包括 StreamMapNet、TopoNet、SQD-MapNet、MapTR、MapTRv2、LaneSegNet、TopoLogic、Topo2Seq；原文称在车道段感知上达到最优，拓扑推理保持有竞争力。</li><li>关键数值（中心线感知）：LaneSegNet + Ours 为 DET_l 35.2（+4.1）、TOP_ll 28.0（+3.0）、OLS_l 44.1（+3.5）；TopoPoint + Ours 为 32.8（+1.7）、30.0（+1.5）、43.8（+1.6）；基线 LaneSegNet 为 31.1/25.0/40.6，TopoPoint 为 31.1/28.5/42.2；其他对比含 MapTR、TopoNet、TopoMLP、TopoLogic、TopoFormer、Topo2Seq。</li><li>组件消融（LaneSegNet，车道段感知）：仅引导为 mAP 33.2（+1.1）/AP_ls 33.4（+1.2）/AP_ped 32.9（+1.0）/TOP_lsls 26.8（+1.3）；仅调制为 34.9（+2.8）/35.7（+3.5）/34.0（+2.1）/27.9（+2.4）；两者结合为 36.1（+4.0）/35.8（+3.6）/36.4（+4.5）/28.4（+2.9）。原文该段后续内容被截断。</li><li>基于 SD 地图先验构造 Lane Field 的对比：LaneSegNet + Ours (SD) 为 mAP 36.8（+4.7）、AP_ls 36.6（+4.4）、AP_ped 37.0（+5.1）、TOP_lsls 29.7（+4.2），相对提升 +14.6%/+13.7%/+16.0%/+16.5%。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.25396/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PolarVis: A Dataset and Diffusion Framework for RGB-to-Polarization Perception in Adverse Driving Scenes</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.24588/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Physics-Informed Koopman Learning for Data-Efficient System Identification of Automated Vehicle Dynamics</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

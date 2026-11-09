@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Diversity Without Labels: Task-Agnostic Coreset Selection Across Perception and Action - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究自动驾驶及相关机器人系统中的数据子集（coreset）选择问题，目标是在无标签条件下从大规模数据集中选出高质量、任务无关的训练子集。 应用场景覆盖感知任务（图像分类、语义分割、深度估计）与动作/决策任务（端到端驾驶模仿学习、移动操作模仿学习）。 核心研究问题是：现有 coreset 方法要么依赖代理模型训练或全量标注，要么将样本仅与另一张图或固定参考分布做成对比较，无法反映整个数据集分布，且难以跨任务泛化。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.23642">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.23642.webp" alt="Diversity Without Labels: Task-Agnostic Coreset Selection Across Perception and Action" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究自动驾驶及相关机器人系统中的数据子集（coreset）选择问题，目标是在无标签条件下从大规模数据集中选出高质量、任务无关的训练子集。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Diversity Without Labels: Task-Agnostic Coreset Selection Across Perception and Action</h1>
+            <div class="detail-meta">2026-10-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.23642" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.23642" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.23642</span></div>
+            <p class="detail-summary">论文研究自动驾驶及相关机器人系统中的数据子集（coreset）选择问题，目标是在无标签条件下从大规模数据集中选出高质量、任务无关的训练子集。 应用场景覆盖感知任务（图像分类、语义分割、深度估计）与动作/决策任务（端到端驾驶模仿学习、移动操作模仿学习）。 核心研究问题是：现有 coreset 方法要么依赖代理模型训练或全量标注，要么将样本仅与另一张图或固定参考分布做成对比较，无法反映整个数据集分布，且难以跨任务泛化。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Freiburg · Julia Hindel、Nick Heppert、Abhinav Valada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.23642/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究自动驾驶及相关机器人系统中的数据子集（coreset）选择问题，目标是在无标签条件下从大规模数据集中选出高质量、任务无关的训练子集。</p>
+  <ul class="reading-intro-points"><li>论文研究自动驾驶及相关机器人系统中的数据子集（coreset）选择问题，目标是在无标签条件下从大规模数据集中选出高质量、任务无关的训练子集。</li><li>应用场景覆盖感知任务（图像分类、语义分割、深度估计）与动作/决策任务（端到端驾驶模仿学习、移动操作模仿学习）。</li><li>核心研究问题是：现有 coreset 方法要么依赖代理模型训练或全量标注，要么将样本仅与另一张图或固定参考分布做成对比较，无法反映整个数据集分布，且难以跨任务泛化。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Freiburg；作者：Julia Hindel、Nick Heppert、Abhinav Valada</li><li>机构：University of Oxford；作者：Benjamin Ramtoula、Kyuhwan Yeon、Paul Newman、Daniele De Martini</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究自动驾驶及相关机器人系统中的数据子集（coreset）选择问题，目标是在无标签条件下从大规模数据集中选出高质量、任务无关的训练子集。</li><li>应用场景覆盖感知任务（图像分类、语义分割、深度估计）与动作/决策任务（端到端驾驶模仿学习、移动操作模仿学习）。</li><li>核心研究问题是：现有 coreset 方法要么依赖代理模型训练或全量标注，要么将样本仅与另一张图或固定参考分布做成对比较，无法反映整个数据集分布，且难以跨任务泛化。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 CoreDNA，一种无监督、任务无关的 coreset 估计方法，将视觉基础模型各层神经元激活池化为逐图像与数据集级分布，并以图像分布相对数据集分布的偏离程度刻画样本。</li><li>发现高质量样本集中于最后一层激活统计量的尾部，并通过与基于训练的 coreset 方法（AUM、EL2N、Forgetting）的难度分数关联分析予以支持。</li><li>基于分析确定三维选择空间（最后一层的均值 μ12、标准差 σ12 与跨层排名离散度 δmax），并给出两类高效选择机制：基于切片 Wasserstein 距离的保真度选择与基于最远点采样的覆盖度选择。</li><li>在分类、语义分割、深度估计、端到端驾驶与移动操作模仿学习上验证方法可匹配或超过现有基于训练与无需训练的方法，展示跨感知与动作任务的泛化性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据侧 one-shot coreset 选择（不迭代重训练），分为模式提取与子集选择两部分。</li><li>输入传感器：原文报告使用视觉输入（单目图像；对多视觉输入任务将各输入的描述子拼接）；并提出可将位姿、速度、加速度等记录信息经 PCA 压缩为一维后加入，视频序列可加入帧索引；具体实车传感器配置原文未报告。</li><li>场景表示：使用冻结的 Mugs ViT-B/16 骨干（12 层、每层 768 个神经元），对每个神经元在图像上的激活构建直方图，并按公式 (1) 计算其与数据集级直方图的 EMD，再逐层汇总为均值 μℓ、标准差 σℓ、最大值 mℓ，以及跨全部层的同类统计量；另提出基于排名的跨层离散度 δmax 与 δavg（公式 2）。</li><li>模型结构：不训练新网络，仅用冻结视觉基础模型做特征提取；最终选择空间为 z(x)=(μ12, σ12, δmax)，得到 P×3 特征矩阵。</li><li>关键技术：轴选择依据 5,265 次历史训练运行的覆盖度/保真度指标与下游性能的相关性分析；保真度方案最小化切片 Wasserstein 距离（1D 时取各分位数箱中心，多维时采样 E 个单位方向），含近重复间距阈值 g=0.01·(0.1/α)^{1/D} 的去冗余；覆盖度方案采用最远点采样，复杂度 O(PC)；切片 Wasserstein 选择复杂度 O(EP log P)；对相关性超过 0.95 的轴进行去除。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CIFAR10、PascalVOC、Cityscapes、Cityscapes-DVPS、SemanticKITTI-DVPS、NAVSIM、LIBERO-10。</li><li>仿真器：原文未报告。</li><li>模型规模：视觉骨干为 Mugs ViT-B/16（L=12 层，N=768 神经元）；下游任务模型规模原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：7 个基准、41 组数据集-保留比例设置，保留比例包括 0.01、0.05、0.1、0.2、0.3、0.5、0.7（不同数据集略有差异）；每个实验 3 个随机种子取平均。</li><li>评估指标：分类与分割用准确率/mIoU（%），深度估计用 RMSE；并与全量数据训练（Full）对比。</li><li>对比方法：Random、Forgetting、EL2N、AUM、CCS、BOSS、ELFS（AUM/Forgetting）、FreeSel、ZCore；此外 Temporal Stride 作为序列数据基线。</li><li>关键数值：</li></ul>
+<p> - CIFAR10（全量 95.05）：α=0.01 时 CoreDNA (WS) 为 41.95，优于 label-free 基线与 Random 41.41；α=0.7 时 WS 为 94.40，接近全量。</p>
+<p> - Cityscapes（全量 76.22）：FPS 在低比例占优，α=0.01 为 50.20；α=0.7 时 WS 达 75.32，比最优基线至少高 0.64 pp。</p>
+<p> - PascalVOC（全量 79.01）：α=0.1 时 WS 为 59.21，较基線高约 2 pp；α=0.7 时 WS 78.16。</p>
+<p> - Cityscapes-DVPS 分割（全量 66.43）与 SemanticKITTI-DVPS 分割（全量 55.58）：α≥0.5 时 CoreDNA 至少高 0.82 pp；SemanticKITTI-DVPS 分割在 α=0.3、深度在 α=0.1 时与全量差距约 ±1 pp。</p>
+<p> - 非精选序列数据上无需训练方法整体优于基于训练的方法；深度估计中 Random 甚至优于训练型方法；加入帧索引（WS+T）在 10 个分割设置中的 9 个、6 个深度设置中的 2 个优于纯 WS。</p>
+<p> - 附录报告端到端驾驶（NAVSIM）与移动操作（LIBERO-10）的详细结果，但正文截断部分未给出具体数值，原文未报告于可见文本中。</p>
+<ul><li>评估条件：以离线训练-评估（开环式下游训练）为主，仿真/闭环驾驶评测细节与实车验证在提供的原文中未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.24436/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">BodyBridge: Grounded Body Layers for Sim-to-Real Translation of Vulnerable Road Users</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.23537/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">PanoBench: A Panoptic Occupancy Prediction Benchmark for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

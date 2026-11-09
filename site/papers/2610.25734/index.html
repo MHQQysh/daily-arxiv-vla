@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Think Densely, Act Sparsely: Latent Expert Cognitive Chains for Vision-Language-Action Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向自动驾驶的端到端视觉-语言-动作（VLA）任务，输入多视角驾驶图像与语言指令，输出驾驶动作（轨迹）及语言形式的感知与预测结果。 应用场景涵盖开环轨迹规划（nuScenes-Plan）、闭环轨迹规划（NAVSIM）以及语言驱动的风险目标感知、状态/运动预测与场景描述（NuInstruct、DriveLM、OmniDrive）。 研究问题：现有 VLA 模型依赖语言指令或轨迹等稀疏监督，将稠密视觉观测直接映射到稀疏动作表示，导致关键场景信息被压缩或丢弃；已有解耦动作建模或显式几何增强方法未能从根本上解决稠密视觉信息损失问题，且可能带来推理开销与任务干扰。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.25734">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.25734.webp" alt="Think Densely, Act Sparsely: Latent Expert Cognitive Chains for Vision-Language-Action Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向自动驾驶的端到端视觉-语言-动作（VLA）任务，输入多视角驾驶图像与语言指令，输出驾驶动作（轨迹）及语言形式的感知与预测结果。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Think Densely, Act Sparsely: Latent Expert Cognitive Chains for Vision-Language-Action Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-19 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.25734" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.25734" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.25734</span></div>
+            <p class="detail-summary">面向自动驾驶的端到端视觉-语言-动作（VLA）任务，输入多视角驾驶图像与语言指令，输出驾驶动作（轨迹）及语言形式的感知与预测结果。 应用场景涵盖开环轨迹规划（nuScenes-Plan）、闭环轨迹规划（NAVSIM）以及语言驱动的风险目标感知、状态/运动预测与场景描述（NuInstruct、DriveLM、OmniDrive）。 研究问题：现有 VLA 模型依赖语言指令或轨迹等稀疏监督，将稠密视觉观测直接映射到稀疏动作表示，导致关键场景信息被压缩或丢弃；已有解耦动作建模或显式几何增强方法未能从根本上解决稠密视觉信息损失问题，且可能带来推理开销与任务干扰。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">天津大学人工智能学院（School of Artificial Intelligence, Tianjin University） · Jie Wan…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.25734/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向自动驾驶的端到端视觉-语言-动作（VLA）任务，输入多视角驾驶图像与语言指令，输出驾驶动作（轨迹）及语言形式的感知与预测结果。</p>
+  <ul class="reading-intro-points"><li>面向自动驾驶的端到端视觉-语言-动作（VLA）任务，输入多视角驾驶图像与语言指令，输出驾驶动作（轨迹）及语言形式的感知与预测结果。</li><li>应用场景涵盖开环轨迹规划（nuScenes-Plan）、闭环轨迹规划（NAVSIM）以及语言驱动的风险目标感知、状态/运动预测与场景描述（NuInstruct、DriveLM、OmniDrive）。</li><li>研究问题：现有 VLA 模型依赖语言指令或轨迹等稀疏监督，将稠密视觉观测直接映射到稀疏动作表示，导致关键场景信息被压缩或丢弃；已有解耦动作建模或显式几何增强方法未能从根本上解决稠密视觉信息损失问题，且可能带来推理开销与任务干扰。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：天津大学人工智能学院（School of Artificial Intelligence, Tianjin University）；作者：Jie Wang、Yahong Han（原文以邮箱 wangjiexy、yahong 标注为该校联系邮箱，作者列表与机构行相邻，但原文未逐人明确对应，故按邮箱可推断；若需严格对应，原文未明确对应）</li><li>机构：山西大学人工智能学院（School of Artificial Intelligence, Shanxi University）；作者：原文未明确对应</li><li>机构：小米汽车（Xiaomi EV）；作者：Chenxu Dang、Hangjun Ye、Long Chen（依据邮箱 dangchenxu、yehangjun、chenlong37@xiaomi.com 推断，原文未逐人明确对应）</li><li>补充说明：作者列表为 Jie Wang、Guang Li、Zhijian Huang、Jinlong Li、Chenxu Dang、Hangjun Ye、Yahong Han、Long Chen；原文脚注说明部分工作完成于小米具身智能团队实习期间，但原文未逐一给出作者与机构的完整对应关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向自动驾驶的端到端视觉-语言-动作（VLA）任务，输入多视角驾驶图像与语言指令，输出驾驶动作（轨迹）及语言形式的感知与预测结果。</li><li>应用场景涵盖开环轨迹规划（nuScenes-Plan）、闭环轨迹规划（NAVSIM）以及语言驱动的风险目标感知、状态/运动预测与场景描述（NuInstruct、DriveLM、OmniDrive）。</li><li>研究问题：现有 VLA 模型依赖语言指令或轨迹等稀疏监督，将稠密视觉观测直接映射到稀疏动作表示，导致关键场景信息被压缩或丢弃；已有解耦动作建模或显式几何增强方法未能从根本上解决稠密视觉信息损失问题，且可能带来推理开销与任务干扰。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出“Think Densely, Act Sparsely”驾驶建模范式：在潜空间中先构建稠密世界理解，再生成稀疏动作，为 VLA 框架中的稠密信息损失问题提供原则性解决思路。</li><li>提出高效且可解释的潜在专家认知链（Latent Expert Cognitive Chain），通过注入紧凑的任务特定潜变量 token，渐进式内化视觉表征（DINOv3）、语义结构（SAM3）与空间几何（DepthAnything3）知识。</li><li>设计三个轻量级稠密感知能力头，分别用于表征对齐、交通相关语义分割与度量深度预测，并以课程式方式组织监督。</li><li>面向轨迹预测设计混合公式，将离散运动基元检索与连续偏移精化相结合，以提升鲁棒性与精度。</li><li>在多个自动驾驶基准上验证 LECDrive 对基础 VLM 性能的一致性提升，覆盖开环与闭环轨迹规划以及语言驱动的感知与预测任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：整体框架由 VLM 骨干（Qwen2.5-VL）、潜在专家认知链与稠密感知能力头三部分组成。</li><li>输入传感器：nuScenes 系列基准使用当前帧六路环视相机图像（C=6）；NAVSIM 轨迹规划使用前左、前、前右三路前视相机（C=3）；轨迹规划任务还将自车状态与高层导航命令并入语言指令。</li><li>场景表示：不依赖显式 3D 点云输入；通过注入任务特定潜变量 token 在 VLM 隐空间中构建稠密世界表征，并由感知头输出语义分割与度量深度等稠密预测。</li><li>模型结构：在每一视角的视觉 token 之后插入三组紧凑任务特定潜变量 token（&lt;DINO_TOKEN&gt;、&lt;SAM_TOKEN&gt;、&lt;DEPTH_TOKEN&gt;，每组 n 个）；这些 token 经 VLM 的 28 层 Transformer 产生层级隐状态，从第 4、10、18、28 层按固定位置 ID 掩码抽取任务特定嵌入并跨层聚合（维度为 B×C·n×4·D），再送入对应稠密感知头。</li><li>关键技术：三阶段认知链按“视觉表征→语义结构→空间几何”渐进组织，且各阶段并非独立多任务目标，而是相互依赖的潜空间推理链；训练采用标准交叉熵损失与三类稠密监督的联合目标，权重为 λ1=1、λ2=0.5、λ3=0.5、λ4=1.5。</li><li>感知头细节：表征头通过 Pixel Shuffle 与线性投影将嵌入上采样为 2D 特征图，并以 MSE 对齐 DINO 特征；语义头以加权交叉熵监督六类交通相关语义（背景权重 0.2，其余类别 1.0）；几何头以掩码 Smooth L1 损失监督深度，仅在 0&lt;深度≤60 的有效区域计算损失，并在生成深度伪标签时引入相机参数。</li><li>轨迹输出形式：将轨迹数据聚类为 2048 个运动基元，把直接航点预测转化为离散运动基元检索加连续偏移精化的混合形式；具体细节原文称见附录 A.3。</li><li>推理效率：原文强调该设计仅增加极少的推理开销，但未报告具体推理时延或吞吐数值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NuInstruct、DriveLM、OmniDrive、nuScenes-Plan、NAVSIM（含 NAVSIM-v1 与 NAVSIM-v2 navtest）；稠密伪标签由 DINOv3、SAM3、DepthAnything3 等冻结视觉专家模型生成。</li><li>仿真器：原文未报告（NAVSIM 相关闭环评估环境未在给定原文中说明具体仿真器配置）。</li><li>模型规模：基座为 Qwen2.5-VL-7B；DINOv3 使用 840M 参数的 ViT 模型（在 LVD-1689M 上预训练）；DepthAnything3 使用 DA3NESTED-GIANT-LARGE 变体，1.4B 参数；SAM3 参数量原文未报告。</li><li>训练资源：8 块 NVIDIA H200 GPU；学习率 5×10⁻⁵；训练 5 个 epoch；每个专家的任务特定潜变量 token 数 n=8。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与指标：NAVSIM-v1 使用 NC、DAC、EP、TTC、Comfort、PDMS；NAVSIM-v2 使用 NC、DAC、DCC、TLC、EP、TTC、LK、HC、EC、EPDMS；NuInstruct 使用 MAP、Accuracy、MAE、BLEU 及 Average；DriveLM 使用 Accuracy、ChatGPT、Language、Match 及 Average；OmniDrive 与 nuScenes-Plan 细节原文称见附录。</li><li>评估条件：NAVSIM 为闭环轨迹评估；nuScenes-Plan 为开环轨迹规划；NuInstruct、DriveLM、OmniDrive 为语言驱动感知与预测评估；原文未报告实车评估。</li><li>NAVSIM-v1 关键结果：LECDrive 的 PDMS 为 89.81，NC 98.72、DAC 96.97、EP 83.68、TTC 96.39、Comfort 99.99；相较 AdaThinkDrive（PDMS 87.5）提升 +2.31，相较 VGGDrive（PDMS 88.76）提升 +1.05；对比方法还包括 PARA-Drive、DRAMA、Hydra-MDP、DiffusionDrive、WoTE、Hydra-NeXt、Baseline、ImagiDrive、AutoVLA、ReCogDrive、DriveVLA-W0、LatentVLA、OneDrive、LaST-VLA 等。</li><li>NAVSIM-v2 navtest 关键结果：LECDrive 的 EPDMS 为 89.44，NC 98.73、DAC 96.97、DCC 99.49、TLC 99.88、EP 87.89、TTC 98.43、LK 97.34、HC 98.34、EC 84.50；相较 VGGDrive（EPDMS 88.50）提升 +0.94；对比方法还包括 Ego-MLP、TransFuser、Hydra-MDP++、DriveSuprim、ReCogDrive、DiffusionDrive 等。</li><li>NuInstruct 关键结果：LECDrive 的 MAP 38.25、Accuracy 57.02、MAE 3.57、BLEU 82.38、Average 43.52；相较基线在 MAP 与 Accuracy 上分别提升 +32.10 与 +9.31；对比方法包括 GPT-4o、RoboTron、Qwen2.5-VL、Baseline、InMLLM、VGGDrive。</li><li>DriveLM 关键结果：LECDrive 的 Accuracy 79.81、ChatGPT 65.69、Language 56.53、Match 47.73、Average 61.41；相较基线 Accuracy 与 Average 分别提升 15.46 与 6.82；对比方法包括 Baseline、DriveLM、TMLMM、OmniDrive、FSDrive、IVL4Drive、VGGDrive。</li><li>消融结果（NAVSIM-v1 闭环）：在 Baseline+MT+Offset 基础上（PDMS</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.08631/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">BEVCast: Path-Adaptive BEV for Efficient End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.25448/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">UBD-Bench: Benchmarking and Analyzing Unimodal Branch Degradation in Multimodal Perception for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

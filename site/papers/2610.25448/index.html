@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UBD-Bench: Benchmarking and Analyzing Unimodal Branch Degradation in Multimodal Perception for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对自动驾驶多模态（Camera–LiDAR）感知中的“单模态分支退化”（Unimodal Branch Degradation, UBD）问题，研究联合训练得到的模态分支是否仍保有与独立单模态训练相当的任务相关表征质量。 应用场景覆盖四类自动驾驶感知任务：3D 目标检测、在线矢量化地图构建、BEV 地图分割与占据预测。 核心研究问题：融合模型整体性能更强是否意味着每个模态分支的表征同样更强；退化的来源是训练方式还是模态本身；退化发生在模态分支通路的哪些环节；能否通过针对性干预缓解。 动机来自观察到的“输出级评测盲区”：传统任务指标无法分离联合训练对单个模态分支表征的影响，且存在 Camera-only 模型在部分场景预测优于 Camera–LiDAR 模型的现象。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.25448">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.25448.webp" alt="UBD-Bench: Benchmarking and Analyzing Unimodal Branch Degradation in Multimodal Perception for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对自动驾驶多模态（Camera–LiDAR）感知中的“单模态分支退化”（Unimodal Branch Degradation, UBD）问题，研究联合训练得到的模态分支是否仍保有与独立单模态训练相当的任务相关表征质量。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">UBD-Bench: Benchmarking and Analyzing Unimodal Branch Degradation in Multimodal Perception for Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-18 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.25448" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.25448" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.25448</span></div>
+            <p class="detail-summary">论文针对自动驾驶多模态（Camera–LiDAR）感知中的“单模态分支退化”（Unimodal Branch Degradation, UBD）问题，研究联合训练得到的模态分支是否仍保有与独立单模态训练相当的任务相关表征质量。 应用场景覆盖四类自动驾驶感知任务：3D 目标检测、在线矢量化地图构建、BEV 地图分割与占据预测。 核心研究问题：融合模型整体性能更强是否意味着每个模态分支的表征同样更强；退化的来源是训练方式还是模态本身；退化发生在模态分支通路的哪些环节；能否通过针对性干预缓解。 动机来自观察到的“输出级评测盲区”：传统任务指标无法分离联合训练对单个模态分支表征的影响，且存在 Camera-only 模型在部分场景预测优于 Camera–LiDAR 模型的现象。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Beihang University · Ang Liu、Xiang Gu、Ruikai Li 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.25448/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对自动驾驶多模态（Camera–LiDAR）感知中的“单模态分支退化”（Unimodal Branch Degradation, UBD）问题，研究联合训练得到的模态分支是否仍保有与独立单模态训练相当的任务相关表征质量。</p>
+  <ul class="reading-intro-points"><li>论文针对自动驾驶多模态（Camera–LiDAR）感知中的“单模态分支退化”（Unimodal Branch Degradation, UBD）问题，研究联合训练得到的模态分支是否仍保有与独立单模态训练相当的任务相关表征质量。</li><li>应用场景覆盖四类自动驾驶感知任务：3D 目标检测、在线矢量化地图构建、BEV 地图分割与占据预测。</li><li>核心研究问题：融合模型整体性能更强是否意味着每个模态分支的表征同样更强；退化的来源是训练方式还是模态本身；退化发生在模态分支通路的哪些环节；能否通过针对性干预缓解。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Beihang University；作者：Ang Liu、Xiang Gu、Ruikai Li、Qiyue Wang、Yizhe Fan、Hao Shan、Ziyang Yan、Han Jiang、Yilong Ren、Zhiyong Cui、Haiyang Yu</li><li>机构：Xiaomi EV；作者：Ang Liu、Ruikai Li、Hao Shan、Ziyang Yan、Xiaoshuai Hao</li><li>机构：University of Macau；作者：Zhenning Li</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对自动驾驶多模态（Camera–LiDAR）感知中的“单模态分支退化”（Unimodal Branch Degradation, UBD）问题，研究联合训练得到的模态分支是否仍保有与独立单模态训练相当的任务相关表征质量。</li><li>应用场景覆盖四类自动驾驶感知任务：3D 目标检测、在线矢量化地图构建、BEV 地图分割与占据预测。</li><li>核心研究问题：融合模型整体性能更强是否意味着每个模态分支的表征同样更强；退化的来源是训练方式还是模态本身；退化发生在模态分支通路的哪些环节；能否通过针对性干预缓解。</li><li>动机来自观察到的“输出级评测盲区”：传统任务指标无法分离联合训练对单个模态分支表征的影响，且存在 Camera-only 模型在部分场景预测优于 Camera–LiDAR 模型的现象。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 UBD-Bench，首个面向多模态自动驾驶感知中单模态分支退化的系统评测基准，基于 Paired Frozen-Branch Probe 在匹配解码条件下比较同一模态在独立单模态训练与多模态联合训练后的任务相关表征质量。</li><li>在 4 个感知任务、10 个模型上验证 Camera 分支退化普遍存在，并揭示 Camera 与 LiDAR 之间显著的模态不对称性（LiDAR 分支变化更弱且更依赖模型）。</li><li>提出 Hierarchical Probe，沿 Camera–BEV 生成通路逐级上移探针位置定位退化，发现退化已存在于任务解码器之前的冻结表征中，贯穿视觉骨干、图像 neck 与 BEV 编码器，并在 pre-fusion Camera BEV 表征处最为严重。</li><li>设计单模态到多模态（unimodal-to-multimodal）反向蒸馏干预，从独立训练的 Camera teacher 向其多模态模型对应分支迁移知识，同时提升分支 Probe 性能与全模型端到端性能，为退化诊断提供干预性证据。</li><li>结合定性可视化展示 F2C（联合训练 Camera 分支）pre-fusion BEV 表征空间结构性弱于 C2C 参考，蒸馏后更接近 C2C。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：模态分支表征评测与诊断方法（benchmark + probe 协议）及表征干预方法（知识蒸馏）；不改变推理架构。</li><li>输入传感器：Camera 与 LiDAR（Camera–LiDAR 融合框架）。</li><li>场景表示：BEV（bird&#x27;s-eye-view）表征；Camera 分支由视觉骨干、图像 neck、BEV 编码器（含视角变换）构成，探针位置为各模态 pre-fusion BEV 表征。</li><li>Paired Frozen-Branch Probe：定义从原始传感器输入到探针位置的表征提取器 g；成对实例化两个提取器，一个加载独立训练单模态模型权重，另一个加载多模态模型对应分支权重；两者全程冻结，分别接架构相同、初始化权重相同的任务解码器；仅训练解码器，使用相同数据划分、优化设置与训练预算；唯一变量为冻结表征提取器来源。</li><li>Probe 性能定义：P(g)=S(q*_g∘g)，S 为固定验证集上的任务指标；探针配置记法 A2B，A∈{C, L, F} 表示 Camera-only、LiDAR-only、Camera–LiDAR 联合训练，B 表示被评测表征类型（Camera、LiDAR、Fused）。</li><li>退化度量：Δ_v = P(g_v^F) − P(g_v^v)，v∈{C, L}；Δ_v&lt;0 定义为单模态分支退化。</li><li>Hierarchical Probe：P0 冻结整条 Camera–BEV 通路仅训练任务解码器；P1 探针移至 BEV 编码器输入，冻结骨干与图像 neck，重训 BEV 编码器与解码器；P2 移至骨干输出，仅冻结骨干，重训图像 neck、BEV 编码器与解码器；P3、P4 分别置于最后 1 个和 2 个骨干阶段的输入，冻结其前所有骨干模块并重训相应骨干阶段与全部后续模块。</li><li>蒸馏干预：冻结的独立训练 Camera-only 模型为 teacher、多模态模型 Camera 分支为 student，对二者 pre-fusion Camera BEV 特征施加 L_KD = MSE(F_cam,S(x), F_cam,T(x))，损失覆盖全部空间位置与通道；总损失 L = L_task + λ_t·L_KD；teacher 训练后移除，推理无额外开销。</li><li>原文未报告：具体骨干网络名称与版本、λ_t 取值、解码器具体结构细节、模型参数量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（引用官方 nuScenes mAP/NDS 作为 3D 检测评测指标）；在线矢量化地图、BEV 分割、占据预测所用具体数据集划分原文未报告。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告（未报告参数量或 FLOPs）。</li><li>训练资源：原文未报告（未报告 GPU 型号、数量或训练时长；仅报告配对比较使用相同优化设置与训练预算）。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估任务与基线模型：3D 目标检测（BEVFusion、CMT）、在线矢量化地图构建（MapTR、HIMap、MapTRv2、MapQR）、BEV 地图分割（BEVFusion、MapPrior、DifFUSER）、占据预测（CONet），共 4 任务 10 个模型。</li><li>评估指标：nuScenes mAP 与 NDS（3D 检测）、mAP（矢量化地图）、六类地图类别 mean IoU（BEV 分割）、IoU 与 fine-grained semantic mIoU（占据预测）；另有端到端 Full C / Full L / Full F 与 Fusion Probe F2F。</li><li>评估条件：基于冻结表征探针的开环离线评测，非闭环、非仿真闭环、非实车。</li><li>分支级退化（Table 1）：全部 Camera 分支比较均 Δ_C&lt;0；CMT 3D 检测 mAP 由 C2C 36.43 降至 F2C 10.50（Δ_C=−25.93），NDS 由 41.94 降至 25.88（−16.06）；BEVFusion 3D 检测 mAP 由 33.47 降至 11.58（−21.89），NDS 由 36.49 降至 19.02（−17.47）；MapTR 矢量化地图 mAP 下降 10.67；HIMap 下降 7.24（且 LiDAR 分支 −0.71）；MapTRv2 下降 7.28（LiDAR +3.33）；MapQR 下降 6.94；BEVFusion BEV 分割 mIoU 下降 5.24（LiDAR −2.40）；MapPrior 下降 5.22（LiDAR −2.02）；DifFUSER 下降 10.15（LiDAR +0.94）；CONet IoU 下降 0.70、mIoU_fine 下降 1.10（LiDAR 分别 +0.00 与 +0.10）。</li><li>模态不对称：CMT 的 LiDAR 分支 mAP 由 61.64 微增至 61.88（+0.24），NDS +0.55；LiDAR 变化方向依模型与任务而异。</li><li>分层探针（Table 2）：MapTR mAP 的 Δ_C 由 P0 −10.67、P1 −7.78、P2 −4.11、P3 −2.58，P4 为 +0.40（C2C 降至 26.09，判定 P4 不可靠并从整体比较中排除）；BEVFusion BEV 分割 mIoU Δ_C 为 P0 −5.24、P1 −4.42、P2 −1.99、P3 −2.14、P4 −1.36；BEVFusion 3D 检测 mAP Δ_C 为 P0 −21.89、P1 −19.32、P2 −9.55、P3 −6.45、P4 −1.71，NDS 为 −17.47、−15.84、−8.25、−5.66、−1.01；CONet IoU Δ_C 为 P0 −0.70、P1 −0.20、P2 −1.20、P3 −0.40、P4 −0.60，mIoU_fine 为 −1.10、−0.60、−0.50、−0.30、−0.20；P2（骨干冻结）仍为负表明退化存在于</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.25734/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Think Densely, Act Sparsely: Latent Expert Cognitive Chains for Vision-Language-Action Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.25396/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">PolarVis: A Dataset and Diffusion Framework for RGB-to-Polarization Perception in Adverse Driving Scenes</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

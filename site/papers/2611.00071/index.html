@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How Reliable Are Object Detection Models Beyond Clear Weather? A Deployment-Oriented Robustness Study for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的相机图像目标检测（car、bus、truck、person 四类）跨天气鲁棒性评测。 应用场景：自动驾驶感知系统在雾、雨、雪、夜间等恶劣天气与照明变化下的部署可靠性。 研究问题：仅用晴天日间数据训练、不做任何域适应或合成天气增强时，检测模型在未见恶劣天气下（RQ1）性能退化程度、（RQ2）哪种天气退化最大、（RQ3）哪类目标最脆弱、（RQ4）不同检测架构在 Drop (%) 与 WRI 上的鲁棒性保持差异，并额外考察置信度校准可靠性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.00071">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.00071.webp" alt="How Reliable Are Object Detection Models Beyond Clear Weather? A Deployment-Oriented Robustness Study for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的相机图像目标检测（car、bus、truck、person 四类）跨天气鲁棒性评测。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">How Reliable Are Object Detection Models Beyond Clear Weather? A Deployment-Oriented Robustness Study for Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-15 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.00071" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.00071" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.00071</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的相机图像目标检测（car、bus、truck、person 四类）跨天气鲁棒性评测。 应用场景：自动驾驶感知系统在雾、雨、雪、夜间等恶劣天气与照明变化下的部署可靠性。 研究问题：仅用晴天日间数据训练、不做任何域适应或合成天气增强时，检测模型在未见恶劣天气下（RQ1）性能退化程度、（RQ2）哪种天气退化最大、（RQ3）哪类目标最脆弱、（RQ4）不同检测架构在 Drop (%) 与 WRI 上的鲁棒性保持差异，并额外考察置信度校准可靠性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Shahjalal University of Science and Technology (SUST), Sylhet, Bangladesh ·…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.00071/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的相机图像目标检测（car、bus、truck、person 四类）跨天气鲁棒性评测。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的相机图像目标检测（car、bus、truck、person 四类）跨天气鲁棒性评测。</li><li>应用场景：自动驾驶感知系统在雾、雨、雪、夜间等恶劣天气与照明变化下的部署可靠性。</li><li>研究问题：仅用晴天日间数据训练、不做任何域适应或合成天气增强时，检测模型在未见恶劣天气下（RQ1）性能退化程度、（RQ2）哪种天气退化最大、（RQ3）哪类目标最脆弱、（RQ4）不同检测架构在 Drop (%) 与 WRI 上的鲁棒性保持差异，并额外考察置信度校准可靠性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Shahjalal University of Science and Technology (SUST), Sylhet, Bangladesh；作者：Munshaibur Rahman Mahin</li><li>机构：University of Toronto, Toronto, ON, Canada；作者：Isha Das</li><li>机构：Bangladesh University of Business and Technology (BUBT), Dhaka, Bangladesh；作者：Most. Sonia Islam</li><li>机构：Missouri State University, Springfield, MO, USA；作者：Mohammad Sakib Mahmood</li><li>机构：American International University-Bangladesh (AIUB), Dhaka, Bangladesh；作者：M. F. Mridha</li><li>机构：Multimedia University, Melaka, Malaysia；作者：Md. Jakir Hossen</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的相机图像目标检测（car、bus、truck、person 四类）跨天气鲁棒性评测。</li><li>应用场景：自动驾驶感知系统在雾、雨、雪、夜间等恶劣天气与照明变化下的部署可靠性。</li><li>研究问题：仅用晴天日间数据训练、不做任何域适应或合成天气增强时，检测模型在未见恶劣天气下（RQ1）性能退化程度、（RQ2）哪种天气退化最大、（RQ3）哪类目标最脆弱、（RQ4）不同检测架构在 Drop (%) 与 WRI 上的鲁棒性保持差异，并额外考察置信度校准可靠性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出基于 BDD100K 晴天日间场景训练、ACDC 雾/雨/雪/夜场景测试的受控 source-only 跨天气评测协议，不引入域适应或合成增强，以隔离环境域偏移效应。</li><li>采用面向部署的鲁棒性指标：性能退化 Drop (%) 与天气鲁棒性指数 WRI，用于量化恶劣天气下的定位稳定性。</li><li>使用 Expected Calibration Error (ECE) 评估环境域偏移下的预测置信度可靠性。</li><li>对 car、bus、truck、person 进行天气条件与目标类别层面的敏感性分析，并在单阶段、两阶段与 Transformer 检测器之间做架构级鲁棒性对比。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知中的 2D 相机图像目标检测模块（不涉及 LiDAR/雷达融合）。</li><li>输入传感器：车载相机图像；原文未报告具体相机型号与内参。</li><li>场景表示：逐帧 2D 图像，输出类别与边界框；训练源域为 BDD100K 晴天日间帧，测试目标域为 ACDC 雾、雨、雪、夜间子集。</li><li>模型结构：五个检测器覆盖三类范式——YOLOv8n（轻量单阶段）、YOLOv8m 与 YOLO11m（中等规模单阶段）、Faster R-CNN（两阶段）、DETR（Transformer 检测）。</li><li>训练设置：统一 100 epochs、输入分辨率 768 像素（DETR 使用默认预处理）、AdamW 优化器、初始学习率 0.001、随机种子 42；Faster R-CNN 与 DETR 批大小为 8，YOLO 系列批大小为 20。</li><li>关键技术指标：mAP50 及 precision/recall（类别级与宏平均）；Drop (%) = max(0, (mAP_clear − mAP_weather)/mAP_clear × 100)；WRI = ACDC 平均 mAP50 / 晴天 mAP50，并按 ≥0.90、0.80–0.89、0.70–0.79、&lt;0.70 分级解释；ECE 以 M 个等宽置信度分箱计算，IoU&gt;0.50 且类别一致视为正确。</li><li>原文未报告：推理速度、模型参数量、具体 ECE 分箱数 M 的取值、RPN/检测头的细节改动。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>BDD100K（源域）：Clear 训练集 12,424 张图像（car 139,549、bus 2,732、truck 7,424、person 16,784）；验证集 1,757 张；测试集 3,563 张。</li><li>ACDC（目标域，仅评测）：Fog 490 张（car 2,134、bus 23、truck 401、person 238）；Rain 1,661 张（7,197/200/553/1,826）；Snow 496 张（2,371/68/173/778）；Night 487 张（2,000/57/22/829）。</li><li>数据分布：保留原始类别不平衡，未做类别均衡处理。</li><li>训练资源：NVIDIA RTX A4000 GPU（原文未报告 GPU 数量与训练时长）。</li><li>模型规模：原文未报告参数量等规模指标。</li><li>仿真器：原文未报告；实车平台：原文未报告（仅使用公开数据集）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：源域 BDD100K clear 测试集（in-domain 基线）+ ACDC 雾/雨/雪/夜（跨天气目标域）；纯离线数据集评测，非闭环、非实车。</li><li>评估指标：Precision、Recall、mAP50（类别级与宏平均）、Drop (%)、WRI、ECE。</li><li>基线 in-domain（BDD100K clear，mAP50）：YOLO11m 的 car 最高 0.8314；YOLOv8m car 0.8233；YOLOv8n car 0.7760、bus 0.5370、truck 0.5640、person 0.5317；Faster R-CNN car 0.7560（recall 0.8063 高但 precision 0.4835 低）；DETR car 0.3889、bus 0.2593、truck 0.2826、person 0.1870，整体定位精度最低。</li><li>各天气宏平均 mAP50（Avg ACDC）：YOLO11m 0.5094、YOLOv8m 0.5010、Faster R-CNN 0.4498、YOLOv8n 0.4373、DETR 0.1917；Clear 分别为 0.6818、0.6698、0.5594、0.6022、0.2795。</li><li>天气层面：夜间退化最大，雾几乎不退化（YOLO 系列与 Faster R-CNN 雾 Drop 为 0.00，YOLOv8m 为 0.15，DETR 为 2.97）；夜间 Drop 依次为 DETR 62.90%、YOLOv8n 57.51%、YOLO11m 53.58%、YOLOv8m 52.76%、Faster R-CNN 50.39%；雨 Drop 为 YOLOv8n 29.38%、YOLOv8m 24.57%、YOLO11m 24.11%、Faster R-CNN 19.15%、DETR 35.39%；雪 Drop 为 YOLOv8n 23.53%、YOLOv8m 23.32%、YOLO11m 24.36%、Faster R-CNN 16.05%、DETR 24.40%。</li><li>类别敏感性：car 最稳定（雾/雪 mAP50 约 0.7743–0.8352，夜间 0.5620–0.6517）；bus 最脆弱（雾 0.6561 → 雨 0.2002 → 夜 0.0652）；truck 夜间降至 0.0573；person 在雨与夜间下降（0.3108–0.4178）。</li><li>架构级：DETR 的 WRI 最低为 0.6859，属严重退化；YOLO 系列校准失配最小（ECE 最低），DETR 与 Faster R-CNN 存在过置信等问题；原文未报告具体 ECE 数值。</li><li>定性分析：原文报告了跨天气定性检测行为对比（Fig. 7 类推断），但正文提供的可核对定性结论有限。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.22795/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">STRIDE: Evaluating Spatiotemporal Reasoning in Driving Edge Cases</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.22215/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">FutureLift: Lifting Trajectory Proposals into Bidirectional Future Graphs for Motion Forecasting</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

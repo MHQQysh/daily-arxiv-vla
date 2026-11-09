@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BodyBridge: Grounded Body Layers for Sim-to-Real Translation of Vulnerable Road Users - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的仿真到真实（sim-to-real）驾驶视频扩散生成，重点是将仿真渲染的场景（CARLA/HABIT）翻译为逼真视频，同时保留易受伤害道路使用者（VRU，行人、骑行者）的关节姿态与身份信息。 应用场景：自动驾驶数据生成与 VRU 感知数据增广，并服务于下游行人检测。 研究问题：现有仿真条件化视频生成多以深度、语义布局、3D 包围盒等场景级/物体级信号为控制，无法唯一确定 VRU 的肢体构型、左右身份与朝向；同时常用评估只衡量场景级真实感，缺少对生成 VRU 关节姿态是否忠实于仿真真值的测量。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.24436">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.24436.webp" alt="BodyBridge: Grounded Body Layers for Sim-to-Real Translation of Vulnerable Road Users" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的仿真到真实（sim-to-real）驾驶视频扩散生成，重点是将仿真渲染的场景（CARLA/HABIT）翻译为逼真视频，同时保留易受伤害道路使用者（VRU，行人、骑行者）的关节姿态与身份信息。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">BodyBridge: Grounded Body Layers for Sim-to-Real Translation of Vulnerable Road Users</h1>
+            <div class="detail-meta">2026-10-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.24436" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.24436" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.24436</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的仿真到真实（sim-to-real）驾驶视频扩散生成，重点是将仿真渲染的场景（CARLA/HABIT）翻译为逼真视频，同时保留易受伤害道路使用者（VRU，行人、骑行者）的关节姿态与身份信息。 应用场景：自动驾驶数据生成与 VRU 感知数据增广，并服务于下游行人检测。 研究问题：现有仿真条件化视频生成多以深度、语义布局、3D 包围盒等场景级/物体级信号为控制，无法唯一确定 VRU 的肢体构型、左右身份与朝向；同时常用评估只衡量场景级真实感，缺少对生成 VRU 关节姿态是否忠实于仿真真值的测量。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Munich University of Applied Sciences（Intelligent Vehicles Lab） · Mark Azer…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.24436/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的仿真到真实（sim-to-real）驾驶视频扩散生成，重点是将仿真渲染的场景（CARLA/HABIT）翻译为逼真视频，同时保留易受伤害道路使用者（VRU，行人、骑行者）的关节姿态与身份信息。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的仿真到真实（sim-to-real）驾驶视频扩散生成，重点是将仿真渲染的场景（CARLA/HABIT）翻译为逼真视频，同时保留易受伤害道路使用者（VRU，行人、骑行者）的关节姿态与身份信息。</li><li>应用场景：自动驾驶数据生成与 VRU 感知数据增广，并服务于下游行人检测。</li><li>研究问题：现有仿真条件化视频生成多以深度、语义布局、3D 包围盒等场景级/物体级信号为控制，无法唯一确定 VRU 的肢体构型、左右身份与朝向；同时常用评估只衡量场景级真实感，缺少对生成 VRU 关节姿态是否忠实于仿真真值的测量。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Munich University of Applied Sciences（Intelligent Vehicles Lab）；作者：Mark Azer、Fabian B. Flohr</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的仿真到真实（sim-to-real）驾驶视频扩散生成，重点是将仿真渲染的场景（CARLA/HABIT）翻译为逼真视频，同时保留易受伤害道路使用者（VRU，行人、骑行者）的关节姿态与身份信息。</li><li>应用场景：自动驾驶数据生成与 VRU 感知数据增广，并服务于下游行人检测。</li><li>研究问题：现有仿真条件化视频生成多以深度、语义布局、3D 包围盒等场景级/物体级信号为控制，无法唯一确定 VRU 的肢体构型、左右身份与朝向；同时常用评估只衡量场景级真实感，缺少对生成 VRU 关节姿态是否忠实于仿真真值的测量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Grounded Body Layers（GBL）：由同一仿真状态导出的、像素对齐的三层表示，包括度量场景几何深度、稠密规范人体对应（canonical body correspondence）与精确 VRU 实例掩码。</li><li>提出 BodyBridge 条件化框架：以对应层训练专用身体控制分支，用 VRU 掩码对训练目标做区域加权，并在推理时通过加性多控制接口与场景几何控制组合。</li><li>提出据称首个面向 sim-to-real 驾驶视频生成的、以仿真精确关节状态为真值的 VRU 评估框架，覆盖姿态保真（PCK）、实例恢复、NMJE、朝向与身份失败分类。</li><li>报告姿态保真与下游行人检测增益之间的排序关联，并给出真实数据（KITTI、AV2 伪标签）扩展的权衡分析。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：仿真条件化的视频扩散翻译（sim-to-real translation），在冻结视频扩散骨干上附加可训练的身体控制分支。</li><li>输入传感器：原文未报告车载传感器配置；输入为仿真记录的场景几何（度量深度）、SMPL 关节姿态参数、VRU 实例掩码与相机标定，图像分辨率为 1280×720、16 fps。</li><li>场景表示：像素对齐的 GBL 三层——L1 为度量场景深度；L2 为规范人体对应编码（RGB 三通道：规范 x 左右位置、规范 z 前后位置、体内深度序），由 SMPL 模板通过 Umeyama 相似变换配准并 z-buffer 渲染得到；L3 为 VRU 实例掩码。三者共享同一相机与图像坐标。</li><li>模型结构：以 Cosmos-Transfer2.5-2B 为骨干，冻结视频 DiT；在注入位置 {0,7,14,21} 使用四个控制块；控制嵌入器与输出投影从发布的 edge-control 检查点热启动，控制块从对应骨干块初始化。</li><li>关键技术：Stage 2 区域加权后训练，将 VRU 掩码最大池化到潜空间网格并以 (1+λ·m) 加权 rectified-flow 损失（λ=4 获 VRU 强调）；Stage 3 推理时用加权和组合深度分支与身体分支（w_geom=0.5，w_body=1.0），不训练额外融合模块；评估采用 top-down 协议，以投影到 COCO-17 的 CARLA 骨架为真值，用 YOLO11-L-pose 作为独立姿态估计器，并以躯干尺度归一化计算 PCK 等指标。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：HABIT 序列（CARLA 渲染）；训练 1,650 个片段（220 个路线子集、3,470 个行人运动），评测 600 个片段（80 条留出路线、1,260 个留出运动），共 4,730 个运动；评测 top-down 集每变体 16,217 个可评分 VRU 实例（近距 &lt;15 m：2,531；中距 15–30 m：6,694；远距 &gt;30 m：6,992）。真实数据扩展使用 KITTI 与 AV2 视频；外观评估使用与真实视频后训练数据不相交的 KITTI 行人集。</li><li>仿真器：CARLA（通过 HABIT 序列）。</li><li>模型规模：Cosmos-Transfer2.5-2B（约 2B 参数）；评估姿态估计器 YOLO11-L-pose；下游检测器 YOLO11-s。</li><li>训练资源：原文未报告 GPU 型号、数量或训练时长等硬件资源；报告了 2,200 次迭代后训练、50 个 epoch 的下游检测训练、6 个检测器种子。代码、数据与检查点承诺公开。</li><li>实车平台：原文未报告；实验为仿真数据生成与离线评估，未进行实车部署。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：HABIT/CARLA 到真实的仿真到真实翻译；对比发布版 Cosmos 深度控制分支（场景几何基线）与 edge-control 分支（空间控制参考），并做身体表示、Stage 2 训练、Stage 3 组合的消融；下游在 KITTI 上做检测增广评估。</li><li>评估指标：近距 PCK@0.5（主指标）、Recovery（共同主指标）、PCK@α（α∈{0.1,0.2,0.5}）、池化/中距/远距 PCK、NMJE、VRU 裁剪 KID（×10³），以及 miss、full-body flip、switch、merge、stump、residual 失败分类与朝向翻转率。</li><li>关键数值（相对基线）：BodyBridge 相对 Cosmos 深度控制将近距 PCK@0.5 从 0.666 提升至 0.812，NMJE 从 0.380 降至 0.282，池化 PCK 从 0.308 升至 0.373，中距 PCK 从 0.407 升至 0.513，VRU-crop KID 从 217.2 降至 139.3；三推理种子下近距 PCK 差为 +0.142（95% CI [+0.101,+0.183]）。Recovery 总体略低（0.493 vs 0.504），但近距恢复提升 0.037（95% CI [+0.011,+0.070]）。</li><li>消融与身份失败：2D 骨架近距 PCK 0.595、法线图 0.796、规范对应 0.805；法线分支加 VRU 加权使近距 PCK 从 0.738 升至 0.796（+0.058 [+0.027,+0.088]），NMJE 从 0.332 降至 0.281，base 初始化仅 0.645；深度+法线图组合使恢复从 0.414 升至 0.486、池化 PCK 从 0.310 升至 0.369，近距 PCK 0.796→0.808；深度+规范对应组合得到 0.493、0.373、0.812。规范对应相对法线图使全身翻转率从 0.108 降至 0.088（相对降 18.4%，[6.1,30.7]%），组合模型中降 18.2%（[5.5,29.6]%）；近距前后朝向翻转在身体分支单独降 21.6%、与深度组合后降 27.2%（组合降幅统计上可分辨）。</li><li>下游与真实数据：九种生成配置增广约 900 帧训练 YOLO11-s，近距 PCK@0.5 与 ΔAP@0.5 的 Spearman ρ=0.810（p=0.022）、与 ΔAP@[.5:.95] 的 ρ=0.857（p=0.011），检测器种子 bootstrap 下 P(ρ&gt;0)≥0.997；最高保真生成源对检测近似中性，较低保真变体使 AP@0.5 下降 0.010–0.039。真实视频伪标签（HMR2.0b）：无权重配方下 KID 降 28% 且无统计可分辨的姿态损失；加权配方下真实视频比例 0%→66%→100% 时近距 PCK@0.5 由 0.805 降至 0.742、0.688，KID 由 125.6 改善至 99.6、94.0。</li><li>实验条件：全部为离线/仿真评估与仿真到真实翻译评估，评估基于单推理种子（关键比较另做三推理种子复现）与 clip 级 10,000 次配对 bootstrap 置信区间；未报告闭环驾驶仿真或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.24588/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Physics-Informed Koopman Learning for Data-Efficient System Identification of Automated Vehicle Dynamics</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.23642/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Diversity Without Labels: Task-Agnostic Coreset Selection Across Perception and Action</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BEVCast: Path-Adaptive BEV for Efficient End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向端到端自动驾驶的相机输入轨迹预测，模型从多相机图像与自车运动回归未来轨迹。 应用场景：nuScenes 开环规划评测（ST-P3 协议）与 NAVSIM navtest 非反应式评测。 研究问题：现有相机 BEV 方法（如 BEVFormer、UniAD、VAD）对整个 102.4 m 见方区域均匀使用固定高分辨率网格，每格计算量相同，但车辆在规划时域内只经过极少数格子，导致 BEV 编码计算浪费；现有稀疏/候选轨迹方法又丢弃候选路径之外的场景，且依赖由真实未来推导的导航指令。 核心思路：让 BEV 分辨率随预测行驶路径自适应，同时保留对整场景的粗粒度覆盖，且不使用高清地图与导航指令。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.08631">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.08631.webp" alt="BEVCast: Path-Adaptive BEV for Efficient End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向端到端自动驾驶的相机输入轨迹预测，模型从多相机图像与自车运动回归未来轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">BEVCast: Path-Adaptive BEV for Efficient End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-05 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.08631" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.08631" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.08631</span></div>
+            <p class="detail-summary">任务：面向端到端自动驾驶的相机输入轨迹预测，模型从多相机图像与自车运动回归未来轨迹。 应用场景：nuScenes 开环规划评测（ST-P3 协议）与 NAVSIM navtest 非反应式评测。 研究问题：现有相机 BEV 方法（如 BEVFormer、UniAD、VAD）对整个 102.4 m 见方区域均匀使用固定高分辨率网格，每格计算量相同，但车辆在规划时域内只经过极少数格子，导致 BEV 编码计算浪费；现有稀疏/候选轨迹方法又丢弃候选路径之外的场景，且依赖由真实未来推导的导航指令。 核心思路：让 BEV 分辨率随预测行驶路径自适应，同时保留对整场景的粗粒度覆盖，且不使用高清地图与导航指令。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">5 张阅读卡</span>
+              <span class="meta-pill">Connected and Autonomous Research Laboratory · Qiren Wang、Mingyu Guo、Zixuan…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.08631/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向端到端自动驾驶的相机输入轨迹预测，模型从多相机图像与自车运动回归未来轨迹。</p>
+  <ul class="reading-intro-points"><li>任务：面向端到端自动驾驶的相机输入轨迹预测，模型从多相机图像与自车运动回归未来轨迹。</li><li>应用场景：nuScenes 开环规划评测（ST-P3 协议）与 NAVSIM navtest 非反应式评测。</li><li>研究问题：现有相机 BEV 方法（如 BEVFormer、UniAD、VAD）对整个 102.4 m 见方区域均匀使用固定高分辨率网格，每格计算量相同，但车辆在规划时域内只经过极少数格子，导致 BEV 编码计算浪费；现有稀疏/候选轨迹方法又丢弃候选路径之外的场景，且依赖由真实未来推导的导航指令。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Connected and Autonomous Research Laboratory；作者：Qiren Wang、Mingyu Guo、Zixuan Wang、Weisong Shi</li><li>机构：University of Delaware, Newark, USA；作者：Qiren Wang、Mingyu Guo、Zixuan Wang、Weisong Shi</li><li>说明：原文仅在 Weisong Shi 条目下标注了上述两个机构及邮箱列表 qirenw、myuguo、zxwang、weisong@udel.edu，未逐作者区分机构，作者与机构的精确对应关系原文未明确对应。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向端到端自动驾驶的相机输入轨迹预测，模型从多相机图像与自车运动回归未来轨迹。</li><li>应用场景：nuScenes 开环规划评测（ST-P3 协议）与 NAVSIM navtest 非反应式评测。</li><li>研究问题：现有相机 BEV 方法（如 BEVFormer、UniAD、VAD）对整个 102.4 m 见方区域均匀使用固定高分辨率网格，每格计算量相同，但车辆在规划时域内只经过极少数格子，导致 BEV 编码计算浪费；现有稀疏/候选轨迹方法又丢弃候选路径之外的场景，且依赖由真实未来推导的导航指令。</li><li>核心思路：让 BEV 分辨率随预测行驶路径自适应，同时保留对整场景的粗粒度覆盖，且不使用高清地图与导航指令。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出两阶段路径自适应 BEV：粗阶段在 4.096 m 网格上编码全场景，由以真实行驶路径监督的 heat head 为每个粗单元打分，在固定预算下将最高热度的粗单元细分为 1.024 m 细单元，其余场景保持粗分辨率，轨迹头读取混合分辨率 BEV。</li><li>给出证据表明该 BEV 在显著更低成本下匹配或超过全 1.024 m 网格：10% 细化预算下编码 28% 的 BEV 查询、使用 66% 的 BEV 编码时间（batch size 1），并在 nuScenes 上取得更低位移误差与更低可行驶区域违规率、在 NAVSIM 上取得更高 EPDMS。</li><li>在 nuScenes 与 NAVSIM 上用同一套训练配方评估，在各自约定下与已发表规划器对比，并研究了细化预算、未细化粗单元、时序记忆、按驾驶行为划分的道路违规以及学习到的选择。</li><li>模型不使用 HD 地图与导航指令（nuScenes 上导航指令由真实未来推导），仅使用图像与由连续位姿导出的自车运动。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端规划中的场景表示与轨迹回归模块；整体含粗阶段（coarse pass）、heat head、细化与细阶段（fine pass）、粗网格时序记忆、自车运动嵌入与轨迹头。</li><li>输入传感器：N_cam 个相机的图像（当前关键帧及至多两个前序关键帧及其投影矩阵），以及由连续位姿导出的自车运动；原文未报告使用 LiDAR、CAN 总线信号；地图仅用于违规率指标，不作为输入或监督。</li><li>场景表示：覆盖以自车为中心、边长 102.4 m 的正方形；粗网格 G_c 为 25×25、单元 4.096 m（625 个）；细单元 1.024 m；每个 BEV 查询是绑定到中心 (x_i, y_i)、边长 c_i 的方形单元的 feature token；编码器接受任意单元集合而非固定网格。10% 预算下 Q 含 992 个细单元与 563 个未细化粗单元，共 1,555 个查询。</li><li>模型结构：</li></ul>
+<p> - 骨干：ResNet-50（ImageNet 权重，stem 与前两个 stage 冻结）加 4 层 FPN（stride 8 到 64，256 通道）。</p>
+<p> - BEV 编码器：查询初值为 φ_pos(x_i,y_i) + φ_size(c_i) + e_ego，其中 φ_pos 对归一化中心的 16 频傅里叶特征经 MLP 映射，φ_size 为单元尺寸的学习嵌入；每层先对前一关键帧记忆做时序注意力，再做查询间自注意力、对图像特征的可变形交叉注意力和前馈网络；交叉注意力为每单元在自车原点下方 4 m 至上方 2 m 间抬升 4 个点并投影到可见相机，在 4 个 FPN 层级上每个投影采样 2 个学习偏移并跨相机平均；自注意力代价 O(N_q²)、交叉注意力 O(N_q)。</p>
+<p> - 粗阶段与 heat head：独立的选择器编码器编码 G_c，输入（图像特征、自车嵌入、粗记忆）均被 detach，仅由自身损失训练；两层 MLP 将每个粗单元特征映射为 heat logit h_i，热度 s_i=σ(h_i)。</p>
+<p> - 细化：k=round(b\|G_c\|)，取热度最高的 k 个粗单元 S_k（硬 top-k，不传梯度），每个被 4×4 细单元替换；查询集 Q=(G_c\S_k)∪⋃F(i)，\|Q\|=\|G_c\|+15k，两种分辨率无缝铺满正方形；b=5%、10%、20% 分别选 31、62、125 个粗单元，不改变算法与参数量；各预算共享同一参数集。</p>
+<p> - 时序记忆：沿用 BEVFormer 时序自注意力，关键帧由旧到 t_0 处理，当前查询在上一自车坐标系中采样 4 个学习偏移；记忆为粗网格（625 格），每个关键帧用主编码器做一次记忆 pass 并读取对齐的上一帧记忆，历史关键帧无梯度；10% 预算下每帧编码 625+625+1,555=2,805 个查询（全网格为 10,000），三关键帧训练样本为 4,055 对 30,000。</p>
+<p> - 自车运动与轨迹头：自车运动输入 24 个数（前向/侧向速度、前向加速度、横摆角速度，以及 4 个前序关键帧的位置、朝向、时间戳与有效性标志），经 MLP 加末端归一化映射为 256 维 e_ego；两层 transformer 解码器以单个轨迹查询读取编码 BEV，查询为学习 token 与锚点 A（训练集平均未来轨迹）的 MLP 嵌入之和；零初始化线性层回归残差 Δ，输出 Ŷ=A+Δ；轨迹查询不直接接收自车运动，仅通过 BEV 读取自车状态。</p>
+<p> - 训练目标：L=L_traj+L_heat+L_occ，权重均为 1，按 minibatch 平均；L_traj 为逐目标关键帧的 smooth L1（β=1）x/y 误差；L_heat 为对热度目标的加权 BCE（正类权重 10），热度目标为记录路径穿过的粗单元并四邻域膨胀一格；L_occ 为对 Q 中每个单元占用 logit 的加权 BCE（正类权重 5），目标为单元中心是否落在 t_0 标注的智能体框内；heat 损失只更新选择器编码器与 heat head；全网格基线无选择器与 heat 损失。</p>
+<ul><li>关键技术要点：由真实行驶路径（驾驶日志自带、无标注成本）监督的路径热度选择；固定预算硬 top-k 细分；混合分辨率查询集保留粗覆盖；仅推理时无需真实未来，推理使用观测图像与自车运动。</li><li>原文未报告：模型总参数量、FLOPs、推理时延（仅报告 BEV 部分时间与查询数）、训练总时长与 GPU 数量。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（官方划分 700 训练/150 验证场景，2 Hz 标注关键帧；要求前一关键帧作自车运动、六个未来关键帧作目标，得 23,230 训练帧与 4,969 验证帧；六路 1600×900 图像缩放至 800×448）；NAVSIM v2 devkit（OpenScene logs，navtrain 1,167 logs、100,413 帧训练，navtest 136 logs、12,146 帧评测；八路 1920×1080 图像缩放至 800×448；4 s 时域、2 Hz 八个目标位姿）。</li><li>仿真器/评测工具：NAVSIM 官方 devkit（非反应式 navtest 设置，所有模型共用一个 metric cache）；nuScenes 采用 ST-P3 开环协议。</li><li>模型规模：骨干 ResNet-50 + 4 层 FPN（256 通道）；所有 transformer 层宽度 256、8 头，编码器 3 层、轨迹解码器 2 层；自车嵌入 256 维；总参数量原文未报告。</li><li>训练资源：AdamW，BEV 部分学习率 0.0002、骨干与 FPN 为其十分之一，权重衰减 0.01，梯度裁剪 5，500 步 warm up 后余弦退火至峰值 5%；8 帧 batch、bfloat16 混合精度；训练</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.08681/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">National and State-Level Approaches to Automated Vehicle Certification: A Comparative Framework for State Operational Governance</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.25734/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Think Densely, Act Sparsely: Latent Expert Cognitive Chains for Vision-Language-Action Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

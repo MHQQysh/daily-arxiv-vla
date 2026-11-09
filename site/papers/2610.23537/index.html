@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PanoBench: A Panoptic Occupancy Prediction Benchmark for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶的相机中心（camera-centric）全景占用预测（panoptic occupancy prediction）任务，统一表示 3D 场景几何、语义类别与实例身份。 应用场景为自动驾驶 3D 场景理解，需从多视角 RGB 图像序列估计自车坐标系下的稀疏体素全景占用。 研究问题在于：现有基准多只提供从不完整传感器观测重建的语义占用标签，实例级标注稀缺、标注完整性不足、域覆盖有限，缺乏统一的任务定义与评测协议，因而难以公平评估实例分离、形状补全、遮挡重建与跨域泛化能力。 论文提出 PanoBench 基准，包含合成分支（PanoBench-CarlaOcc）与真实分支（PanoBench-nuScenes、PanoBench-KITTI360），并提供统一的规范数据接口与评测协议。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.23537">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.23537.webp" alt="PanoBench: A Panoptic Occupancy Prediction Benchmark for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶的相机中心（camera-centric）全景占用预测（panoptic occupancy prediction）任务，统一表示 3D 场景几何、语义类别与实例身份。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">PanoBench: A Panoptic Occupancy Prediction Benchmark for Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.23537" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.23537" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.23537</span></div>
+            <p class="detail-summary">论文面向自动驾驶的相机中心（camera-centric）全景占用预测（panoptic occupancy prediction）任务，统一表示 3D 场景几何、语义类别与实例身份。 应用场景为自动驾驶 3D 场景理解，需从多视角 RGB 图像序列估计自车坐标系下的稀疏体素全景占用。 研究问题在于：现有基准多只提供从不完整传感器观测重建的语义占用标签，实例级标注稀缺、标注完整性不足、域覆盖有限，缺乏统一的任务定义与评测协议，因而难以公平评估实例分离、形状补全、遮挡重建与跨域泛化能力。 论文提出 PanoBench 基准，包含合成分支（PanoBench-CarlaOcc）与真实分支（PanoBench-nuScenes、PanoBench-KITTI360），并提供统一的规范数据接口与评测协议。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确给出机构信息 · Yi Feng、Zizhan Guo、Junwu E 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.23537/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶的相机中心（camera-centric）全景占用预测（panoptic occupancy prediction）任务，统一表示 3D 场景几何、语义类别与实例身份。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶的相机中心（camera-centric）全景占用预测（panoptic occupancy prediction）任务，统一表示 3D 场景几何、语义类别与实例身份。</li><li>应用场景为自动驾驶 3D 场景理解，需从多视角 RGB 图像序列估计自车坐标系下的稀疏体素全景占用。</li><li>研究问题在于：现有基准多只提供从不完整传感器观测重建的语义占用标签，实例级标注稀缺、标注完整性不足、域覆盖有限，缺乏统一的任务定义与评测协议，因而难以公平评估实例分离、形状补全、遮挡重建与跨域泛化能力。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未明确给出机构信息；作者：Yi Feng、Zizhan Guo、Junwu E、Yu Ma、Mengtan Zhang、Jin Wu、Wei Ye、Hanli Wang、Qijun Chen、Danwei Wang、Rui Fan（原文仅列出作者与 ORCID，未给出机构名，且无法确定作者与机构的对应关系）。</li><li>说明：原文标注 Yi Feng 与 Zizhan Guo 为共同第一作者，Rui Fan 为通讯作者；其余作者身份原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶的相机中心（camera-centric）全景占用预测（panoptic occupancy prediction）任务，统一表示 3D 场景几何、语义类别与实例身份。</li><li>应用场景为自动驾驶 3D 场景理解，需从多视角 RGB 图像序列估计自车坐标系下的稀疏体素全景占用。</li><li>研究问题在于：现有基准多只提供从不完整传感器观测重建的语义占用标签，实例级标注稀缺、标注完整性不足、域覆盖有限，缺乏统一的任务定义与评测协议，因而难以公平评估实例分离、形状补全、遮挡重建与跨域泛化能力。</li><li>论文提出 PanoBench 基准，包含合成分支（PanoBench-CarlaOcc）与真实分支（PanoBench-nuScenes、PanoBench-KITTI360），并提供统一的规范数据接口与评测协议。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 PanoBench：一个综合的相机中心全景占用基准，将两个真实世界数据集 PanoBench-nuScenes、PanoBench-KITTI360 与高保真合成数据集 PanoBench-CarlaOcc 结合，支持标注保真度、真实世界重建与仿真到现实迁移的统一研究。</li><li>建立统一的全景占用构建框架：系统化整理 CarlaOcc，并在规范标注格式下引入真实世界背景重建、前景实例生成与全景融合，为部分观测场景提供完整实例级监督。</li><li>提供面向完整全景占用的标准化相机中心评测协议，而非仅评测当前帧可见表面；该协议由稀疏全景标签与时间感知有效掩码组成，并在其下对语义占用预测、全景占用预测与 4D 占用预测的代表性方法进行基准评测。</li><li>构建时间感知有效掩码：对已观测到的 thing 实例整体纳入评测，对 stuff 区域按体素保守评分，并将自由空间评估限制在相机可观测射线范围内。</li><li>通过观测保真度、几何完整性、空间连续性与时间一致性分析，展示 PanoBench 相对现有公开占用预测基准的优越性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基准与数据构建方法，包含任务形式化、合成数据生成、真实世界全景占用重建与有效掩码生成；原文未提出新的占用预测网络结构。</li><li>输入传感器：占用预测方法仅使用多视角 RGB 图像及相机内参、外参和自车位姿；真实数据重建阶段还使用语义 LiDAR 点云、HD 地图与 3D 框标注；合成数据由 CARLA 仿真采集。</li><li>场景表示：自车坐标系下的稀疏占据体素集合，每个体素存储离散体素索引、语义类别与实例身份；stuff 体素实例身份为 0，同一 thing 实例体素共享正实例身份；语义与实例通过编码基 β 组合为单一全景标签。</li><li>存储格式：每帧以稀疏体素列表加打包的稠密有效掩码和网格元数据存储，体素坐标与全景标签按 Fortran 顺序序列化并写入压缩 NPZ 归档。</li><li>合成分支构建：使用 CARLA 与 Unreal Engine 5，传感器配置参照 KITTI-360 并增加后向相机，六相机同步渲染 1408×376 的 RGB、深度与语义图像，配 32 线 80 m 量程 LiDAR，20 Hz 同步；从仿真网格直接重建每帧场景（静态背景网格变换到自车坐标系，动态实例按位姿与实例身份加入，非刚性行人按骨架相似度从标准网格库检索），再体素化并分配语义与实例标签，重叠组件按拓扑感知顺序合并，地面类别正则化为单层表面。</li><li>真实分支背景重建：先剔除前景点后跨序列聚合语义 LiDAR 点云；以 HD 地图多边形为水平先验、聚合 LiDAR 点为垂直证据，对地面层进行 2D 网格采样并用高斯距离加权局部平面拟合估计高程；对地图空洞/未观测平坦区域采用连通域分析、法向一致性验证、TPS 插值与最近邻语义投票进行拓扑感知恢复，并限制传播范围以避免过度外推；对非平面结构进行统计离群点去除及半自动人工修正。</li><li>真实分支前景实例生成：遍历实例时间轨迹，将 3D 框投影到多视角图像并裁剪实例块，用图像质量评估器（如 MANIQA）与文本提示分割器（如 SAM 3）筛选视角；用生成式网格模型（如 MV-SAM3D）从裁剪图与掩码重建完整网格，烘焙为带纹理 GLB 并做二次曲面简化；按类别用对称 Chamfer 距离与 Farthest Mesh Sampling 构建原型网格池，再按比例形状兼容性为主的字典序最小化进行层级实例到网格分配。</li><li>全景真值融合：背景点云与前景网格统一变换到当前自车帧并在同一体素格上量化，采用高程感知的全景标签融合（按类别高程优先级查表并依世界坐标高程排序写入），避免地面覆盖高层结构或前景。</li><li>有效掩码生成：对时间窗口 T 内各相机做体素级射线行进可见性判定并取时间并集；thing 实例只要任一体素在窗口内可见则整个实例有效，stuff 仅逐体素按可见性有效且前景不作为背景遮挡物，自由空间标记相机可观测射线穿过的空体素，三者取并集构成最终掩码。</li><li>原文未报告：预测网络的具体结构设计（论文未提出新预测模型）、模型规模、训练资源等细节在给定原文中未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：PanoBench-CarlaOcc（合成，104 个序列、104,000 帧、8 个 CARLA 城镇、30 类、前视/环视变体，体素 0.1/0.2/0.4 m，51.2×51.2×6.4 m 体积，含实例与有效掩码）；PanoBench-nuScenes（真实，850 场景、34,149 帧、17 类、0.2/0.4 m、80×80×6.4 m、实例与有效掩码）；PanoBench-KITTI360（真实，9 序列、76,473 帧、19 类、0.2 m、51.2×51.2×6.4 m、实例与有效掩码）；PanoBench 总计 963 序列、214,622 帧。</li><li>仿真器：CARLA 配合 Unreal Engine 5；合成数据采集提供 6 相机 1408×376 图像与 32 线 80 m LiDAR，20 Hz 同步，并提供 3D 框、速度与超过 40K 物体网格资产。</li><li>对比基准：SemanticKITTI、SSCBench-KITTI360、Occ3D-nuScenes、SurroundOcc、CarlaSC、CoHFF 等公开占用预测基准。</li><li>模型规模与训练资源：原文未报告。</li><li>实车平台：原文未报告实车平台；真实数据来自 nuScenes 与 KITTI-360 公开数据集。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：在 PanoBench-nuScenes、PanoBench-KITTI360、PanoBench-CarlaOcc 三个子集上评测；nuScenes 上与 SurroundOcc、Occ3D、OpenOccupancy 的标注进行比较，默认协议为 0.4 m 体素、80×80×6.4 m 体积、图像缩放至 256×704，方法仅输入 RGB 与相机参数。</li><li>评估指标：语义占用预测、全景占用预测与 4D 占用预测指标（原文相关章节内容在给定 HTML 中被截断，具体指标名称与数值原文未完整报告）；标注质量分析涵盖观测保真度、几何完整性、空间连续性与时间一致性四个维度。</li><li>关键数值：数据集统计见 Table I（如 PanoBench 总计 963 序列、214,622 帧）；具体精度数值在给定原文片段中未报告。</li><li>对比方法：语义/全景占用预测与 4D 占用预测的代表性基线（原文提及 SparseOcc、PanoOcc、Panoptic-FlashOcc、Cam4DOcc、OccWorld、Drive-OccWorld、SparseWorld 等相关工作）；消融实验针对构建流程。</li><li>实验条件：以开环评测为主（基于数据集真值的预测评测），包含仿真（CARLA 合成分支）与真实数据（nuScenes、KITTI-360）条件；扩展实验包括多分辨率分析、合成到真实迁移学习与规范存储/IO 效率分析；闭环评测与实车实验原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.23642/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Diversity Without Labels: Task-Agnostic Coreset Selection Across Perception and Action</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.23262/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Expand-and-Prune: Test-Time Candidate-Space Adaptation for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
