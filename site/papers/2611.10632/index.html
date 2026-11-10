@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Latent-WAM++: Shaping World and Action Representations for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：端到端自动驾驶规划，即在给定多视角相机图像与自车状态的条件下直接输出未来自车轨迹。 应用场景：城市/结构化道路驾驶场景下的规划，基于 NAVSIM v2 非反应式仿真评测与 HUGSIM 零样本闭环评测。 研究问题：现有世界动作模型（WAM）主要监督未来状态或最终动作，连接预测与规划的中间世界表示与动作表示仅被间接约束，导致表示学习效率低、规划性能次优；核心问题是“如何联合塑造世界表示与动作表示以更好支持 WAM 规划”。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.10632">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.10632.webp" alt="Latent-WAM++: Shaping World and Action Representations for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：端到端自动驾驶规划，即在给定多视角相机图像与自车状态的条件下直接输出未来自车轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Latent-WAM++: Shaping World and Action Representations for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-07 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.10632" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.10632" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.10632</span></div>
+            <p class="detail-summary">任务：端到端自动驾驶规划，即在给定多视角相机图像与自车状态的条件下直接输出未来自车轨迹。 应用场景：城市/结构化道路驾驶场景下的规划，基于 NAVSIM v2 非反应式仿真评测与 HUGSIM 零样本闭环评测。 研究问题：现有世界动作模型（WAM）主要监督未来状态或最终动作，连接预测与规划的中间世界表示与动作表示仅被间接约束，导致表示学习效率低、规划性能次优；核心问题是“如何联合塑造世界表示与动作表示以更好支持 WAM 规划”。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute of Automation, Chinese Academy of Sciences · 原文未明确对应（作者列表含 Yichen…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.10632/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：端到端自动驾驶规划，即在给定多视角相机图像与自车状态的条件下直接输出未来自车轨迹。</p>
+  <ul class="reading-intro-points"><li>任务：端到端自动驾驶规划，即在给定多视角相机图像与自车状态的条件下直接输出未来自车轨迹。</li><li>应用场景：城市/结构化道路驾驶场景下的规划，基于 NAVSIM v2 非反应式仿真评测与 HUGSIM 零样本闭环评测。</li><li>研究问题：现有世界动作模型（WAM）主要监督未来状态或最终动作，连接预测与规划的中间世界表示与动作表示仅被间接约束，导致表示学习效率低、规划性能次优；核心问题是“如何联合塑造世界表示与动作表示以更好支持 WAM 规划”。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute of Automation, Chinese Academy of Sciences；作者：原文未明确对应（作者列表含 Yichen Zhang、Yupeng Zheng、Linbo Wang、Pengxuan Yang、Zebin Xing、Junli Wang、Shiwei Li、Kangwei Liu、Fan Ren、Qichao Zhang、Yifeng Pan、Ji Tao、Dongbin Zhao，但原文仅标注单位编号，未逐一给出作者与单位的对应关系）。</li><li>机构：Chongqing Changan Technology Co., Ltd.；作者：原文未明确对应（原文仅标注单位编号，并注明第一作者实习期间完成该工作）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：端到端自动驾驶规划，即在给定多视角相机图像与自车状态的条件下直接输出未来自车轨迹。</li><li>应用场景：城市/结构化道路驾驶场景下的规划，基于 NAVSIM v2 非反应式仿真评测与 HUGSIM 零样本闭环评测。</li><li>研究问题：现有世界动作模型（WAM）主要监督未来状态或最终动作，连接预测与规划的中间世界表示与动作表示仅被间接约束，导致表示学习效率低、规划性能次优；核心问题是“如何联合塑造世界表示与动作表示以更好支持 WAM 规划”。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将 WAM 规划中的联合表示塑造形式化为“角色匹配的表示目标 + 视觉-动作接口显式正则”的组合。</li><li>提出 Latent-WAM++，包含三个协同组件：WoRC 构建可预测、非退化、几何感知的世界表示；TrajMF 通过一步多模态生成产生轨迹预测性动作特征；VARA 以非对称方式将该动作特征与视觉语义对齐。</li><li>在 NAVSIM v2 上取得 90.1 EPDMS 的最优结果，并在零样本 HUGSIM 上取得平均 RC 47.0、平均 HD-Score 30.1。</li><li>将规划器端到端训练成本从 Latent-WAM 的 1,600 GPU-hours 降至 190 GPU-hours，减少 88.1%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：表征中心的世界动作模型（WAM）框架，由 World Representation Construction（WoRC）、Trajectory MeanFlow Planner（TrajMF）、Visual-Action Representation Alignment（VARA）三部分组成。</li><li>输入传感器：多视角相机图像与自车状态（ego state）；推理阶段仅使用模态编码器与 TrajMF，所有输入来自相机图像和自车状态，不引入额外传感器模态；占用（occupancy）信息由冻结的占用提取器在训练/构建阶段提供，原文未报告其额外传感器来源。</li><li>场景表示：世界表示 W_t_cur 由当前帧自车 token、视觉 token、经交叉注意力检索的占用 token 拼接构成；训练时动态世界模型在隐空间对未来 scene-ego latent 进行时序预测。</li><li>模型结构：</li></ul>
+<p> - WoRC：DINOv2 编码器与投影器将多视角 patch token 与可学习 query 转成视觉 token；冻结 WorldMirror 教师提供 stop-gradient 几何蒸馏目标；冻结占用提取器输出占用单元并经 MLP 投影为占用 token；自车编码器产生 ego token；动态世界模型为带 3D 旋转位置编码与逐帧 teacher-forcing 掩码的 Transformer 解码器，预测未来 latent 并监督 ego 速度/加速度与命令；SIGReg 通过特征经验特征函数匹配标准高斯实现特征分布稳定化，无需 EMA 目标编码器。</p>
+<p> - TrajMF：规划条件解码器用可学习动作 query 对世界表示做交叉注意力得到条件；以线性 flow 路径与 K_p 分量高斯混合先验构建轨迹流匹配，网络直接预测去噪轨迹并在诱导速度空间用 Improved MeanFlow 目标（JVP 计算方向导数、stop-gradient 处理导数项）优化，采样时每个先验分量各取一个噪声、一次性评估即生成 K_p 条多模态轨迹提案，再由 D_refine 条件聚合成最终轨迹；提案前的特征 H_a 定义为动作表示。</p>
+<p> - VARA：将动作特征投影并平均得 z_a，对当前帧视觉 token 取平均并加 stop-gradient 得 z_v，用 1−cos(z_a,z_v) 进行非对称对齐，阻止梯度经视觉目标回传。</p>
+<ul><li>关键技术：SIGReg 分布正则、几何蒸馏、占用上下文交叉注意力、Improved MeanFlow 一步多模态轨迹生成、stop-gradient 非对称表示对齐；总损失由世界损失（几何蒸馏+DWM+SIGReg，λ1=0.2）、动作损失（MeanFlow+轨迹聚合，λ2=20.0、λ3=7.0）与对齐损失（λ4=2.0）组成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM v2（训练与开环评测）、HUGSIM（零样本闭环评测）、NAVSIM-Occ（附录提及）；预训练视觉编码器为 DINOv2，几何教师为 WorldMirror。</li><li>仿真器：HUGSIM 用于闭环仿真评测；NAVSIM v2 为非反应式仿真基准。</li><li>模型规模：原文未报告整体参数量；消融表中显示 EMA 稳定器方案额外增加 86.6M 参数。</li><li>训练资源：端到端训练规划器需 190 GPU-hours，对比 Latent-WAM 的 1,600 GPU-hours；原文提及对比在相同 H20 硬件与数据加载流水线下进行。</li><li>实车平台：原文未报告实车平台；评测均为仿真条件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v2（开环/非反应式仿真）与 HUGSIM（零样本闭环仿真，分 easy/medium/hard/extreme 四档）。</li><li>评估指标：NAVSIM v2 使用 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC 与 EPDMS；HUGSIM 使用 RC 与 HD-Score 及其分档与平均值。</li><li>关键数值：</li></ul>
+<p> - NAVSIM v2：EPDMS 90.1，NC 98.5、DAC 97.5、DDC 99.7、TLC 99.8、EP 87.8、TTC 98.3、LK 97.7、HC 98.3、EC 89.0；较 Latent-WAM 的 89.3 EPDMS 提升 0.8。</p>
+<p> - HUGSIM 零样本闭环：平均 RC 47.0、平均 HD-Score 30.1；分档 RC 为 E 80.1、M 45.1、H 38.7、X 32.0，分档 HD-Score 为 E 68.9、M 26.8、H 20.5、X 13.9。</p>
+<p> - 训练成本：190 GPU-hours 对比 Latent-WAM 的 1,600 GPU-hours，降低 88.1%。</p>
+<ul><li>对比方法：TransFuser、DriveSuprim、ReCogDrive、DiffusionDrive、World4Drive、DriveVLA-W0、Drive-JEPA、MeanFuser、Latent-WAM（NAVSIM v2）；UniAD、VAD、LTF、GTRS-Dense、MeanFuser、Latent-WAM（HUGSIM）。</li><li>消融结果：世界表示消融中，基线（MLP 解码器）88.2 EPDMS；加 DWM 无稳定器为 88.0（−0.2）；加 EMA 稳定器为 88.6（+0.4，额外 86.6M 参数）；加 SIGReg 方案在原文截断处表格未完整给出对应数值，原文未报告该行完整结果。</li><li>开环/闭环/仿真条件：NAVSIM v2 为开环非反应式仿真评测；HUGSIM 为零样本闭环仿真评测；原文未报告实车评估结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.10720/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Locating and Repairing Domain Shift in VLM Trajectory Planning</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.10506/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">SRA: Spatial Reasoning Adapter via Evolving Social Interaction Graphs for Trajectory Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

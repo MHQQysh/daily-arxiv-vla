@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Time-JEPA: Grounding Video World Models with Physical Time Series - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：为视频世界模型（world model）引入物理状态信息，使视频表征能够保留物理状态随时间演化的信息。 应用场景：涵盖三个领域——自动驾驶（CoVLA）、机器人操作（AgiBot）、人体运动（EgoExo4D）。 研究问题：现有方法要么依赖领域特定的物理定律/动力学先验，难以跨多域训练且易偏重被约束的动力学；要么在单帧或帧对上施加监督，忽视物理状态在完整视频时序上下文中的演化，且常需额外输入信号。 目标：用低维、时间对齐的物理时间序列作为辅助监督，编码器在微调与评估时仅以视频为输入。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.23982">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.23982.webp" alt="Time-JEPA: Grounding Video World Models with Physical Time Series" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：为视频世界模型（world model）引入物理状态信息，使视频表征能够保留物理状态随时间演化的信息。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Time-JEPA: Grounding Video World Models with Physical Time Series</h1>
+            <div class="detail-meta">2026-10-14 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.23982" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.23982" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.23982</span></div>
+            <p class="detail-summary">任务：为视频世界模型（world model）引入物理状态信息，使视频表征能够保留物理状态随时间演化的信息。 应用场景：涵盖三个领域——自动驾驶（CoVLA）、机器人操作（AgiBot）、人体运动（EgoExo4D）。 研究问题：现有方法要么依赖领域特定的物理定律/动力学先验，难以跨多域训练且易偏重被约束的动力学；要么在单帧或帧对上施加监督，忽视物理状态在完整视频时序上下文中的演化，且常需额外输入信号。 目标：用低维、时间对齐的物理时间序列作为辅助监督，编码器在微调与评估时仅以视频为输入。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Harbin Institute of Technology · Shenyi Li、Ming Liu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.23982/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：为视频世界模型（world model）引入物理状态信息，使视频表征能够保留物理状态随时间演化的信息。</p>
+  <ul class="reading-intro-points"><li>任务：为视频世界模型（world model）引入物理状态信息，使视频表征能够保留物理状态随时间演化的信息。</li><li>应用场景：涵盖三个领域——自动驾驶（CoVLA）、机器人操作（AgiBot）、人体运动（EgoExo4D）。</li><li>研究问题：现有方法要么依赖领域特定的物理定律/动力学先验，难以跨多域训练且易偏重被约束的动力学；要么在单帧或帧对上施加监督，忽视物理状态在完整视频时序上下文中的演化，且常需额外输入信号。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Harbin Institute of Technology；作者：Shenyi Li、Ming Liu</li><li>机构：Shanghai Artificial Intelligence Laboratory；作者：Shenyi Li、Ziyang Zhang、Wen Wu、Chao Zhang</li><li>机构：Tsinghua University；作者：Ziyang Zhang、Chao Zhang</li><li>说明：原文作者标注中“Ming Liu   Chao Zhang”与机构列表的对应关系存在歧义，Ming Liu 与哈尔滨工业大学关联、Chao Zhang 与清华大学关联为原文可推断的信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：为视频世界模型（world model）引入物理状态信息，使视频表征能够保留物理状态随时间演化的信息。</li><li>应用场景：涵盖三个领域——自动驾驶（CoVLA）、机器人操作（AgiBot）、人体运动（EgoExo4D）。</li><li>研究问题：现有方法要么依赖领域特定的物理定律/动力学先验，难以跨多域训练且易偏重被约束的动力学；要么在单帧或帧对上施加监督，忽视物理状态在完整视频时序上下文中的演化，且常需额外输入信号。</li><li>目标：用低维、时间对齐的物理时间序列作为辅助监督，编码器在微调与评估时仅以视频为输入。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Time-JEPA：通过共享接口将潜空间预测（V-JEPA 掩码潜预测）与时间对齐的物理时间序列监督相结合，用于视频世界模型微调。</li><li>构建自动驾驶、机器人操作、人体运动三个领域的数据集，并设置条件级与状态变量级两个层次的分布内（ID）/分布外（OOD）评估设定。</li><li>开发评估工具包，包含当前状态解码、多时域未来状态预测与运动学重建，以更全面评估物理状态（含物理关系与状态演化）的表征能力。</li><li>实验表明 Time-JEPA 在三类任务上优于匹配的视频微调对照，且多域训练相对单域训练在三项任务上均带来总体增益。</li><li>在 GRASP、Physion 外部评估中显示对物理异常更敏感、对物理交互的表征更好（含未见场景）；在第二个视频骨干（iVideoGPT）上取得总体增益，提示方法可迁移到更多骨干。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：视频世界模型微调方法，建立在 V-JEPA 的掩码潜预测目标之上；整体由预测视频表征、物理时间序列准备、物理时间序列监督三个模块组成，共享同一个在线视频编码器。</li><li>输入传感器：视频（唯一编码器输入）；物理时间序列来自传感器或同步标注（如车速、机器人关节构型、人体关节角），仅用于训练时的辅助监督。</li><li>场景表示：视频被切分为 tubelet，在线编码器将掩码视频视图转为潜空间 patch token，按时间位置与空间 patch 位置索引；物理时间序列被映射到编码器的时间网格并按 tubelet 结构分组。</li><li>模型结构：在线编码器 + 预测器 + EMA 目标编码器（提供全片段的潜目标）；辅助物理状态回归头对每个时间位置的空间均值池化特征独立施加两层逐点非线性投影，输出各 tubelet 的归一化状态值；评估时丢弃辅助头、冻结编码器，用空间均值池化加两层逐点卷积的状态探针。</li><li>关键技术：JEPA 损失衡量掩码位置预测误差并更新在线编码器与预测器；时间序列损失为有效性掩码的 Smooth-L1 回归误差；联合目标为 L = L_JEPA + λ·L_time。</li><li>时间序列准备：按时间戳或帧索引将采样视频时间与邻近物理测量关联，按 tubelet 分组后在组内对各测量类型池化并归一化，从而在采样率不同的情况下对齐视频时序特征与物理测量。</li><li>多域训练：共享一个编码器，每个领域分配一个辅助头，各领域沿用与其单域运行相同的训练设置。</li><li>原文未报告：模型参数量、具体 λ 取值等超参数的数值细节（正文未给出）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：CoVLA（自动驾驶）、AgiBot（机器人操作）、EgoExo4D（人体运动）；外部评估使用 GRASP Level 2 与 Physion（v1.5）。</li><li>骨干模型：V-JEPA 2.1 ViT-g/16（主骨干）；第二骨干为 iVideoGPT；另在附录中使用原始视频骨干 InternVideo-Next-L 与 VideoMAE V2-G 作为对照。</li><li>训练/评估设置：每段采样 64 帧、5 FPS；探针先在探针训练划分上训练，再在对应测试划分上测试；状态值用探针训练划分统计量归一化。</li><li>仿真器：原文未报告。</li><li>模型规模：除骨干名称外，原文未报告参数量等规模信息。</li><li>训练资源：原文未报告（GPU 数量、训练时长等）。</li><li>实车平台：原文未报告；论文明确为离线视频评估，未测试真实车辆或机器人控制。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：三个领域的当前状态解码、多时域未来状态预测（t+{0.2,0.4,0.6,0.8,1.0}s）、运动学重建；外部 GRASP 与 Physion。评估均为基于冻结编码器特征的离线探针评估（开环、非闭环、非实车）。</li><li>评估指标：Pearson r、R²、nRMSE、轨迹 MAE（m）、reach-rate MAE（cm/s）、距离 MAE（cm）、GRASP 配对准确率、Physion Accuracy 与 AUROC。</li><li>对比方法：原始 V-JEPA、视频微调对照（Video FT）、Time-JEPA；另有 iVideoGPT 匹配对照、原始 InternVideo-Next-L 与 VideoMAE V2-G 对照，以及帧/帧对监督和显式物理定律约束的替代监督形式比较（见附录）。</li><li>当前状态解码（表 1）：在 ID_var/ID_cond 下，Time-JEPA 的 r 在自动驾驶/机器人/人体运动分别为 0.916/0.845/0.589（Video FT 为 0.817/0.639/0.503）；R² 为 0.849/0.725/0.345（Video FT 为 0.713/0.424/0.231）。在 OOD_var×OOD_cond 下，R² 由 Video FT 的 0.812/0.127/0.135 升至 0.876/0.205/0.225。</li><li>iVideoGPT 骨干（表 2）：在 OOD_var×OOD_cond 下 R² 由 Video FT 的 0.070 升至 0.113；四种聚合设定下两指标均优于匹配 Video FT，12 个域面板中 10 个提升。</li><li>多域训练：OOD_var×OOD_cond 下相对匹配单域训练，自动驾驶/机器人/人体运动的 R² 分别提升 0.047、0.063、0.231。</li><li>未来状态预测（表 3）：OOD_cond 下 nRMSE 由 Video FT 的 0.949 降至 0.875（ID_var）、0.911 降至 0.844（OOD_var）；ID_var×ID_cond 下 R² 由 0.296 升至 0.550。</li><li>运动学重建（表 4，五个探针种子的均值±标准差）：OOD_cond 下自动驾驶轨迹 MAE 由 4.150±0.146 m 降至 1.858±0.144 m；机器人 reach-rate MAE 由 5.822±0.035 降至 4.171±0.046 cm/s；人体运动距离 MAE 由 7.120±0.210 降至 4.557±0.053 cm。</li><li>GRASP：Time-JEPA 达 57.8%，超过匹配视频微调对照 2.2 个百分点（2,048 对匹配 possible–impossible 视频，八项属性宏平均）。</li><li>Physion：全场景读出下 Accuracy 与对照接近，AUROC 提高 1.182 个百分点；留一场景迁移下 Accuracy 与 AUROC 分别提高 2.945 与 3.997 个百分点。</li><li>评估条件：全部为离线视频评估，报告了 ID/OOD 条件与变量两个层次的分布偏移结果；原文未报告闭环仿真或实车验证结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.20203/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Investigating Behavior Cloning from Few Demonstrations for Autonomous Driving based on Bird&#x27;s-Eye View in Simulated Cities</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.19429/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A Comprehensive Comparison of Reinforcement Learning Algorithms in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

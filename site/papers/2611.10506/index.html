@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SRA: Spatial Reasoning Adapter via Evolving Social Interaction Graphs for Trajectory Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶、机器人和人机共存系统中的多智能体轨迹预测任务，目标是对场景中多个动态智能体的未来轨迹进行多模态、随机性预测。 研究问题：现有扩散/流匹配轨迹预测器只在观测历史上编码一次智能体间交互，并在整个生成式去噪过程中保持固定，无法表征随联合未来逐步清晰而出现的未来轨迹间几何约束（如路径交叉、防守盯人、群体协同）。 论文提出 SRA（Spatial Reasoning Adapter），作为可插入现有随机去噪预测器的模块化图去噪器，在每个反向去噪步骤上基于宿主自身当前未来估计重建稀疏欧氏交互图，并返回残差修正。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.10506">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.10506.webp" alt="SRA: Spatial Reasoning Adapter via Evolving Social Interaction Graphs for Trajectory Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶、机器人和人机共存系统中的多智能体轨迹预测任务，目标是对场景中多个动态智能体的未来轨迹进行多模态、随机性预测。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SRA: Spatial Reasoning Adapter via Evolving Social Interaction Graphs for Trajectory Prediction</h1>
+            <div class="detail-meta">2026-11-07 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.10506" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.10506" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.10506</span></div>
+            <p class="detail-summary">论文面向自动驾驶、机器人和人机共存系统中的多智能体轨迹预测任务，目标是对场景中多个动态智能体的未来轨迹进行多模态、随机性预测。 研究问题：现有扩散/流匹配轨迹预测器只在观测历史上编码一次智能体间交互，并在整个生成式去噪过程中保持固定，无法表征随联合未来逐步清晰而出现的未来轨迹间几何约束（如路径交叉、防守盯人、群体协同）。 论文提出 SRA（Spatial Reasoning Adapter），作为可插入现有随机去噪预测器的模块化图去噪器，在每个反向去噪步骤上基于宿主自身当前未来估计重建稀疏欧氏交互图，并返回残差修正。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">KAIST · Jaewoo Jeong、Seonkyu Song、Jegyeong Cho 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.10506/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶、机器人和人机共存系统中的多智能体轨迹预测任务，目标是对场景中多个动态智能体的未来轨迹进行多模态、随机性预测。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶、机器人和人机共存系统中的多智能体轨迹预测任务，目标是对场景中多个动态智能体的未来轨迹进行多模态、随机性预测。</li><li>研究问题：现有扩散/流匹配轨迹预测器只在观测历史上编码一次智能体间交互，并在整个生成式去噪过程中保持固定，无法表征随联合未来逐步清晰而出现的未来轨迹间几何约束（如路径交叉、防守盯人、群体协同）。</li><li>论文提出 SRA（Spatial Reasoning Adapter），作为可插入现有随机去噪预测器的模块化图去噪器，在每个反向去噪步骤上基于宿主自身当前未来估计重建稀疏欧氏交互图，并返回残差修正。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：KAIST；作者：Jaewoo Jeong、Seonkyu Song、Jegyeong Cho、Yujin Bae、Giwon Lee、Kuk-Jin Yoon</li><li>机构：DGIST；作者：Hyeonwoo Park、Daehee Park</li><li>机构：UNIVA；作者：Daehee Park（原文标注其同时隶属 DGIST 与 UNIVA）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶、机器人和人机共存系统中的多智能体轨迹预测任务，目标是对场景中多个动态智能体的未来轨迹进行多模态、随机性预测。</li><li>研究问题：现有扩散/流匹配轨迹预测器只在观测历史上编码一次智能体间交互，并在整个生成式去噪过程中保持固定，无法表征随联合未来逐步清晰而出现的未来轨迹间几何约束（如路径交叉、防守盯人、群体协同）。</li><li>论文提出 SRA（Spatial Reasoning Adapter），作为可插入现有随机去噪预测器的模块化图去噪器，在每个反向去噪步骤上基于宿主自身当前未来估计重建稀疏欧氏交互图，并返回残差修正。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SRA 模块化图去噪器：在每个反向去噪步骤依据宿主当前未来估计重建显式交互图，并注入残差修正，同时不重新设计宿主的扩散或流匹配生成核心。</li><li>设计三个组件：稀疏邻域选择（学习式 query-key 语义分数与几何偏置）、智能体对关系未来编码（基于当前未来估计构造边特征）、不确定性加权消息传递（置信智能体作为不确定智能体的锚点）。</li><li>通过三个运动数据集上的累积消融表明三个组件作为一个机制共同作用：只有组合使用时才能在全部九个宿主–数据集组合上均取得提升。</li><li>在三个结构不同的宿主（LED、MID、MoFlow）上实例化 SRA，并在四个基准（SDD、NBA、Soccer、Football）上给出一致的 ADE/FDE 改进。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：轨迹预测中的交互建模与去噪修正模块，作为插件集成到宿主随机去噪预测器的每个反向步骤。</li><li>输入传感器：原文未报告具体车载传感器配置；方法输入为多智能体观测轨迹（历史帧）及宿主提供的当前未来估计与每智能体不确定性。</li><li>场景表示：将场景建模为有向交互图 𝒢=(𝒱,ℰ)，节点为 N 个智能体；邻域 𝒩(i) 在每个去噪步骤依据模型自身当前未来估计重建，拓扑随预测锐化而演化。</li><li>模型结构：</li></ul>
+<p> - 稀疏邻域选择：基于当前干净未来估计（ε-预测宿主用 DDIM 反演恢复），以语义项（query–key 匹配）加几何偏置（相对轨迹的均值偏移、时间标准差、最近接近距离、平均航向差）打分，选 top-K_nbr（K_nbr=5）邻居。</p>
+<p> - 智能体对关系未来编码：在目标智能体自车坐标系下提取每对、每时间步的相对位置与航向差，经 MLP 编码为 D 维边特征。</p>
+<p> - 不确定性加权消息传递：对每时间步边特征做时间自注意力与不确定性偏置的注意力池化；边条件注意力中边特征进入 key/value；以平均不确定性差经 sigmoid 门控每条消息；聚合后由宿主特定解码器输出逐时间步残差，经学习门控加回宿主预测。</p>
+<ul><li>关键技术：未来条件化图拓扑、两阶段检索分数、不确定性加权消息传递、模块化但不免训练（需与宿主联合训练或微调）；损失为宿主生成目标加异方差 NLL 正则项训练对数方差头（λ_σ=10^-2，残差 detach）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：SDD、NBA、Soccer、Football。运动数据集以 10 帧历史预测 20 帧未来（NBA 5Hz、Football 5Hz、Soccer 3.33Hz）；SDD 按标准协议 8 帧历史（3.2 s）、12 帧未来（4.8 s）、2.5Hz。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告具体参数量；报告了特征宽度 D、K_nbr=5、门控温度 ζ=4、偏置 b_w=0.5、λ_σ=10^-2 等超参数。</li><li>训练资源：原文未报告（GPU 型号、数量、训练时长均未给出）。</li><li>实车平台：原文未报告；实验为数据集上的离线评估，未报告闭环或实车测试。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：SDD、NBA、Soccer、Football 四个多智能体轨迹预测基准。</li><li>评估指标：ADE 与 FDE，取 K=20 个预测模态中的最小值（best-of-20）；原文说明不使用碰撞率。</li><li>关键数值（Table 1，宿主 vs 宿主+SRA）：</li></ul>
+<p> - MID：NBA ADE 1.037→0.957（+7.7%）、FDE 1.472→1.346（+8.6%）；Soccer ADE 0.451→0.370（+18.0%）、FDE 0.783→0.595（+24.0%）；Football ADE 0.274→0.265（+3.3%）、FDE 0.459→0.438（+4.6%）；SDD ADE 8.85→8.53（+3.6%）、FDE 15.92→16.61（−4.3%，唯一负值）。</p>
+<p> - LED：NBA ADE 0.839→0.778（+7.3%）、FDE 1.204→1.161（+3.6%）；Soccer ADE 0.372→0.364（+2.2%）、FDE 0.821→0.710（+13.5%）；Football ADE 0.289→0.253（+12.5%）、FDE 0.580→0.505（+12.9%）；SDD ADE 8.14→7.91（+2.8%）、FDE 13.95→13.31（+4.6%）。</p>
+<p> - MoFlow：NBA ADE 0.703→0.695（+1.1%）、FDE 0.884→0.870（+1.6%）；Soccer ADE 0.406→0.374（+7.9%）、FDE 0.593→0.522（+12.0%）；Football ADE 0.251→0.245（+2.4%）、FDE 0.421→0.412（+2.1%）；SDD ADE 5.44→5.37（+1.3%）、FDE 8.30→8.21（+1.1%）。</p>
+<p> - 汇总：ADE 在每个宿主、每个数据集上均改善；FDE 在 12 个宿主–数据集对中 11 个改善；平均提升 ADE 5.8%、FDE 7.0%；最大提升为 MID 在 Soccer 上 ADE 18.0%、FDE 24.0%。</p>
+<ul><li>对比方法与条件：</li></ul>
+<p> - 对比方法：宿主基线 MID、LED、MoFlow 及各自加 SRA 的版本；补充材料另报告与未来感知交互模块的比较（Supp. E）及联合指标 JADE/JFDE（Supp. D）。</p>
+<p> - 开环/闭环：原文未报告闭环评估或实车实验；结果均为数据集上的离线开环预测评估。</p>
+<p> - 仿真/实车：原文未报告仿真器或实车平台。</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.10632/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Latent-WAM++: Shaping World and Action Representations for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.21132/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Trajectory Prediction Method for person under WSN with Hierarchical Envelope Adversarial Domain Adaptation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

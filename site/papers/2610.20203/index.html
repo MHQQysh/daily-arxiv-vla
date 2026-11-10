@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Investigating Behavior Cloning from Few Demonstrations for Autonomous Driving based on Bird&#x27;s-Eye View in Simulated Cities - 自动驾驶每日论文卡</title>
+    <meta name="description" content="研究自动驾驶在城市仿真环境中的端到端行为克隆（Behavior Cloning, BC）问题，要求智能体沿给定路线行驶并遵守交通灯（红灯停车、绿灯加速通过）。 应用场景为 CARLA 仿真器中的城市道路导航，训练仅使用少量专家演示（少量路线），并在未见过的测试城市上评估泛化。 核心研究问题：在演示数据稀少、动作分布不均衡（红绿灯切换时的减速/加速动作稀有）的情况下，标准 BC 难以学到正确的停车与起步行为；论文研究通过基于动作密度的样本加权来改进 BC。 输入采用鸟瞰图（BEV）中层次表示而非原始相机像素，以解耦特征表示与策略学习，简化策略学习任务。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.20203">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.20203.webp" alt="Investigating Behavior Cloning from Few Demonstrations for Autonomous Driving based on Bird&#x27;s-Eye View in Simulated Cities" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">研究自动驾驶在城市仿真环境中的端到端行为克隆（Behavior Cloning, BC）问题，要求智能体沿给定路线行驶并遵守交通灯（红灯停车、绿灯加速通过）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Investigating Behavior Cloning from Few Demonstrations for Autonomous Driving based on Bird&#x27;s-Eye View in Simulated Cities</h1>
+            <div class="detail-meta">2026-10-14 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.20203" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.20203" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.20203</span></div>
+            <p class="detail-summary">研究自动驾驶在城市仿真环境中的端到端行为克隆（Behavior Cloning, BC）问题，要求智能体沿给定路线行驶并遵守交通灯（红灯停车、绿灯加速通过）。 应用场景为 CARLA 仿真器中的城市道路导航，训练仅使用少量专家演示（少量路线），并在未见过的测试城市上评估泛化。 核心研究问题：在演示数据稀少、动作分布不均衡（红绿灯切换时的减速/加速动作稀有）的情况下，标准 BC 难以学到正确的停车与起步行为；论文研究通过基于动作密度的样本加权来改进 BC。 输入采用鸟瞰图（BEV）中层次表示而非原始相机像素，以解耦特征表示与策略学习，简化策略学习任务。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Automation and Systems Engineering Department, Federal University of Santa…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.20203/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">研究自动驾驶在城市仿真环境中的端到端行为克隆（Behavior Cloning, BC）问题，要求智能体沿给定路线行驶并遵守交通灯（红灯停车、绿灯加速通过）。</p>
+  <ul class="reading-intro-points"><li>研究自动驾驶在城市仿真环境中的端到端行为克隆（Behavior Cloning, BC）问题，要求智能体沿给定路线行驶并遵守交通灯（红灯停车、绿灯加速通过）。</li><li>应用场景为 CARLA 仿真器中的城市道路导航，训练仅使用少量专家演示（少量路线），并在未见过的测试城市上评估泛化。</li><li>核心研究问题：在演示数据稀少、动作分布不均衡（红绿灯切换时的减速/加速动作稀有）的情况下，标准 BC 难以学到正确的停车与起步行为；论文研究通过基于动作密度的样本加权来改进 BC。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Automation and Systems Engineering Department, Federal University of Santa Catarina；作者：Eric Aislan Antonelo、Gustavo Claudio Karl Couto、Pedro Henrique Fernandes</li><li>机构：Faculty of Science and Engineering, Information Technology, Åbo Akademi University；作者：Christian Möller</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>研究自动驾驶在城市仿真环境中的端到端行为克隆（Behavior Cloning, BC）问题，要求智能体沿给定路线行驶并遵守交通灯（红灯停车、绿灯加速通过）。</li><li>应用场景为 CARLA 仿真器中的城市道路导航，训练仅使用少量专家演示（少量路线），并在未见过的测试城市上评估泛化。</li><li>核心研究问题：在演示数据稀少、动作分布不均衡（红绿灯切换时的减速/加速动作稀有）的情况下，标准 BC 难以学到正确的停车与起步行为；论文研究通过基于动作密度的样本加权来改进 BC。</li><li>输入采用鸟瞰图（BEV）中层次表示而非原始相机像素，以解耦特征表示与策略学习，简化策略学习任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出加权行为克隆方法：利用核密度估计（KDE）估计专家动作密度，并以密度的倒数作为每个样本在 BC 损失中的权重，提升稀有但关键动作（红灯停车、绿灯加速）的学习重要性。</li><li>在 BC 中引入 Beta 分布建模随机策略，使加速度与转向动作（范围 [-1,1]）在有限区间内被自然约束，并以负对数似然作为损失。</li><li>构建含六个通道的 BEV 中层次输入（期望路线、可行驶区域、车道边界，以及三个时间步的交通灯历史通道），结合当前速度与上一时刻执行动作等标量状态变量作为策略输入。</li><li>在 CARLA 仿真中验证：加权 BC 在训练城市与未见测试城市上均优于标准 BC，尤其在新环境中显著提升路线完成率与驾驶分数。</li><li>通过记录专家沿路线的动作密度，展示不同动作（直行匀速 vs. 绿灯起步加速）对应不同权重，佐证加权机制的作用。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端驾驶策略（感知表示 + 控制输出），属模仿学习中的行为克隆；原文未报告独立的感知、规划或控制分模块流水线。</li><li>输入传感器：CARLA 中三个前向相机（左、中、右，每路 256×144 RGB）用于示意场景；实际策略输入为 CARLA 中可访问城市地图的模块生成的六通道 192×192 BEV 图像，另加当前车速与上一时刻策略执行的动作（加速度、转向）等标量状态。</li><li>场景表示：BEV 为俯视坐标表示，智能体起始位置固定在图像中心，图像尺寸 W×H 像素、地面采样分辨率 φ 米/像素，随车辆移动保持固定前向视野范围；六通道包含期望路线、可行驶区域、车道边界三个通道，以及时间步 -16、-9、-1 的交通灯状态历史三个通道（红/绿）。</li><li>模型结构：CNN 将 BEV 映射为 256 维嵌入；标量状态变量经 MLP 映射为 256 维向量；二者拼接后经另一个 MLP 输出动作；输出为加速度与转向各自 Beta 分布的两个参数 (α, β)，即两个输出头。</li><li>关键技术：BC 损失采用 Beta 分布的负对数似然（动作由 [-1,1] 通过 (a+1)/2 变换到 [0,1]）；KDE 采用高斯核，带宽为 h，权重 w_i = 1/ĝ(a_i)，得到加权 BC 损失；动作空间为 a∈[-1,1]^2（转向与加速度），加速度为负表示制动，从而避免同时加速与制动。</li><li>原文未报告：网络各层具体通道数、卷积核大小、MLP 层数与隐藏维度、KDE 带宽 h 的具体取值、学习率与优化器等训练超参数。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：基于 CARLA Leaderboard 评估平台的 town01 环境与十条预定义轨迹生成专家数据；专家为使用稠密点轨迹与经典 PID 控制器的确定性智能体，遇红灯制动、转绿加速；智能体本身只能使用稀疏点轨迹（每 50 米或行驶方向改变处生成）。</li><li>数据规模：以 10 Hz 记录，最短路线 1480 个样本，平均路线 2129 个样本；十条轨迹共 21,287 个带标签样本（未压缩约 30 GB），约相当于 36 分钟或 8 公里驾驶；训练使用其中 8 条路线，评估使用全部 10 条路线。</li><li>仿真器：CARLA（含 CARLA Leaderboard 评估平台）；训练城市为 town01，测试城市为 town02。</li><li>模型规模：原文未报告参数量或计算量。</li><li>训练资源：原文未报告 GPU 型号、数量与训练时长。</li><li>实车平台：原文未报告，全部实验在仿真中进行。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：CARLA 仿真中的 town01（训练城市，10 条路线）与 town02（未见测试城市）路线导航任务；对比方法为 Expert、标准 BC 与 Weighted BC（另含文中表格中重复列出的 BC 结果）。</li><li>评估指标：Driving Score（%，越高越好，等于 Route Completion 与 Infraction Penalty 的乘积）、Route Completion（%，越高越好）、Infraction Penalty（%，越高越好）、Red Light Infraction（#/Km，越低越好）、Crossed traffic lights（#，非性能指标）。</li><li>关键数值（Table 1）：</li></ul>
+<p> - Expert：town01 与 town02 上 Driving Score 100±0、Route Completion 100±0、Infraction Penalty 100±0、Red Light Infraction 0±0；Crossed traffic lights 在 town01 为 4.7±1.9，town02 为 9.0±2.16。</p>
+<p> - BC：town01 上 Driving Score 81±20、Route Completion 83±18、Infraction Penalty 97±5、Red Light Infraction 0.39±0.68；town02 上 Driving Score 34±18、Route Completion 53±18、Infraction Penalty 66±20、Red Light Infraction 3.08±2.45。</p>
+<p> - Weighted BC：town01 上 Driving Score 100±0、Route Completion 100±0、Infraction Penalty 100±0、Red Light Infraction 0±0；town02 上 Driving Score 98±0.03、Route Completion 100±0、Infraction Penalty 98±0.03、Red Light Infraction 0±0。</p>
+<ul><li>学习过程评估：每 8 个训练 epoch 在 town01 全部 10 条路线上评估一次，每个智能体运行 4 次并报告均值与标准差；纵轴为未完成路线数，两个智能体初始均为 10，Weighted BC 更快达到零违规（完成所有路线并遵守交通灯），标准 BC 在训练结束时未达到零违规。</li><li>评估条件：训练为 town01 上的离线训练，评估为 CARLA 仿真中的在线闭环驾驶；原文未报告开环指标与实车实验。</li><li>结论性表述：加权方法在训练城市 town01 上达到与专家相当的驾驶分数，在未见测试城市 town02 上显著优于标准 BC，说明其对提升自动驾驶在新环境中的导航表现具有潜力。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.20609/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SafeDriveVLA: Navigation-Conditioned World Model Dreaming for Conflict-Aware End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.23982/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Time-JEPA: Grounding Video World Models with Physical Time Series</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

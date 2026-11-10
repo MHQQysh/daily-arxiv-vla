@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RadarGSOcc: Doppler-Aware 3D Semantic Occupancy Prediction Using 4D Radar Tensor with Geometric-Semantic Feature Extraction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：基于 4D 雷达张量（4D radar tensor, 4DRT）的 3D 语义占据预测，为自动驾驶提供逐体素的占据状态与语义类别。 应用场景：需要在低光照与雨、雪、雾等恶劣天气下保持感知鲁棒性的自动驾驶场景，包括城市、大学校园和高速公路环境（昼夜）。 研究问题：相机方法在低光照下退化、LiDAR 方法对恶劣天气敏感；4D 雷达虽鲁棒，但张量稀疏、噪声大、角分辨率低，且现有雷达占据方法未充分利用多普勒（Doppler）信息，并依赖计算开销较大的 Transformer 结构。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.18686">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.18686.webp" alt="RadarGSOcc: Doppler-Aware 3D Semantic Occupancy Prediction Using 4D Radar Tensor with Geometric-Semantic Feature Extraction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：基于 4D 雷达张量（4D radar tensor, 4DRT）的 3D 语义占据预测，为自动驾驶提供逐体素的占据状态与语义类别。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">RadarGSOcc: Doppler-Aware 3D Semantic Occupancy Prediction Using 4D Radar Tensor with Geometric-Semantic Feature Extraction</h1>
+            <div class="detail-meta">2026-10-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.18686" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.18686" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.18686</span></div>
+            <p class="detail-summary">任务：基于 4D 雷达张量（4D radar tensor, 4DRT）的 3D 语义占据预测，为自动驾驶提供逐体素的占据状态与语义类别。 应用场景：需要在低光照与雨、雪、雾等恶劣天气下保持感知鲁棒性的自动驾驶场景，包括城市、大学校园和高速公路环境（昼夜）。 研究问题：相机方法在低光照下退化、LiDAR 方法对恶劣天气敏感；4D 雷达虽鲁棒，但张量稀疏、噪声大、角分辨率低，且现有雷达占据方法未充分利用多普勒（Doppler）信息，并依赖计算开销较大的 Transformer 结构。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Korea…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.18686/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：基于 4D 雷达张量（4D radar tensor, 4DRT）的 3D 语义占据预测，为自动驾驶提供逐体素的占据状态与语义类别。</p>
+  <ul class="reading-intro-points"><li>任务：基于 4D 雷达张量（4D radar tensor, 4DRT）的 3D 语义占据预测，为自动驾驶提供逐体素的占据状态与语义类别。</li><li>应用场景：需要在低光照与雨、雪、雾等恶劣天气下保持感知鲁棒性的自动驾驶场景，包括城市、大学校园和高速公路环境（昼夜）。</li><li>研究问题：相机方法在低光照下退化、LiDAR 方法对恶劣天气敏感；4D 雷达虽鲁棒，但张量稀疏、噪声大、角分辨率低，且现有雷达占据方法未充分利用多普勒（Doppler）信息，并依赖计算开销较大的 Transformer 结构。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Korea；作者：Christofel Rio Goenawan</li><li>机构：Korea Advanced Institute of Science and Technology (KAIST), Daejeon, Korea（CCS Graduate School of Mobility）；作者：Seung-Hyun Kong</li><li>机构：Korea University, Sejong, Korea（Department of Future Mobility）；作者：Dong-Hee Paek（原文注明其曾就职于 KAIST CCS Graduate School of Mobility，现属韩国大学）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：基于 4D 雷达张量（4D radar tensor, 4DRT）的 3D 语义占据预测，为自动驾驶提供逐体素的占据状态与语义类别。</li><li>应用场景：需要在低光照与雨、雪、雾等恶劣天气下保持感知鲁棒性的自动驾驶场景，包括城市、大学校园和高速公路环境（昼夜）。</li><li>研究问题：相机方法在低光照下退化、LiDAR 方法对恶劣天气敏感；4D 雷达虽鲁棒，但张量稀疏、噪声大、角分辨率低，且现有雷达占据方法未充分利用多普勒（Doppler）信息，并依赖计算开销较大的 Transformer 结构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 K-Radar 3DSemOcc 基准：首个面向 4D 雷达张量、细粒度 3D 语义占据预测的大规模基准，基于 K-Radar 数据集并用其 3D 边界框标注精化基于 LiDAR 的伪标签。</li><li>提出 RadarGSOcc：一种高效的、多普勒感知的 4D 雷达张量 3D 语义占据预测框架，分别提取几何（空间功率）与语义（多普勒相关）特征后融合。</li><li>设计几何-语义特征提取模块（稀疏卷积 + 可变形注意力分支）与占据头中的轻量几何特征精化模块，以恢复小目标等细粒度结构。</li><li>提出代理指标 Environment-Based KL Divergence (EBKL)，在无逐帧真值的恶劣天气下评估预测一致性，并表明 4D 雷达张量在雨、雨夹雪、雪中比相机和 LiDAR 预测更一致。</li><li>在参数量与 FLOPs 少于 RadarOcc 的情况下取得更高的加权 mIoU（25.5% vs. 21.9%，相对提升 16%）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端 3D 语义占据预测框架，包含 4D 雷达张量预处理、几何-语义特征提取（含几何-语义融合）、带几何特征精化的占据头，以及损失函数设计。</li><li>输入传感器：仅 4D 雷达张量（FMCW 4D 雷达，含距离、方位角、俯仰角与多普勒速度信息）；原文未报告使用相机或 LiDAR 作为模型输入（LiDAR 仅用于生成标签）。</li><li>场景表示：将方位角、距离、俯仰角拼接，对每个空间元素沿多普勒维取 top-3 功率值及其多普勒索引，并按距离 bin 仅保留 top 250 个值以稀疏化；最终输入为 8 通道稀疏 4D 雷达张量（top-3 功率、top-3 多普勒索引、多普勒维功率均值与方差）。</li><li>模型结构：</li></ul>
+<p> - 对输入通道分组做稀疏 3D 卷积：前 6 通道得到几何特征，通道 3 之后（含共享的多普勒索引通道 3–5）得到语义特征。</p>
+<p> - 分别用 3D 可变形自注意力增强几何与语义特征；再以交叉可变形注意力用语义特征精化几何特征（几何-语义融合），并施加体素级几何监督；融合方式为拼接，随后经 FPN 头送入占据预测头。</p>
+<p> - 占据头为多尺度 3D 卷积结构，并引入基于 3D 可变形注意力的几何特征精化模块，以残差融合增强小目标表示；随后经 3D 可变形 Transformer 从球坐标变换到笛卡尔坐标，由两层 3D 卷积 + ReLU 输出逐体素类别预测。</p>
+<ul><li>关键技术：稀疏 3D 卷积、3D 可变形注意力、几何-语义交叉注意力融合、几何特征监督、多尺度 3D 卷积占据头。</li><li>损失函数：交叉熵损失、Lovász-Softmax 损失、几何与类别亲和损失、雷达几何特征的二值交叉熵几何监督损失，各项等权相加。</li><li>原文未报告：可变形注意力的采样点数、头数、偏移归一化与插值方案等细节被放在补充材料 S-III，正文 HTML 未给出具体数值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：自建 K-Radar 3DSemOcc 基准，基于 K-Radar 数据集；含 5,910 帧训练、1,781 帧测试，15 类（14 个语义类 + 空类），覆盖城市、大学校园、高速公路的昼夜场景；训练场景为 2、5、8、9、10、14、16、17、20，测试场景为 3、6、15，均为正常天气。</li><li>标签生成：用 OpenOccupancy 的 CONet-L（在 nuScenes 上训练）生成 17 类单帧伪标签，再用 K-Radar 的 3D 边界框标注精化（运动物体体素从约 365k 增至 768k）；合并 bus 与 truck、移除工程车辆；阈值 0.8 下人工核验 525 个非空体素，标签准确率 91.8%。</li><li>仿真器：原文未报告。</li><li>模型规模：特征维度 192（与 RadarOcc 对齐）；参数量 104.2M、FLOPs 1260.1G（RadarOcc 为 117.5M、1334.1G）；预测范围前向 0–51.2 m、横向 ±25.6 m、垂直 −2.6 至 +3.0 m，体素网格 128×128×14，分辨率 0.4 m。</li><li>训练资源：4 块 RTX 3090 GPU，PyTorch 2.0.0，Ubuntu 18.04，训练 15 个 epoch，batch size 1，学习率 3×10⁻⁴。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：K-Radar 3DSemOcc 基准测试集（1,781 帧），离线（非闭环）评估；原文未报告闭环或实车评估。</li><li>评估指标：二值 IoU、mIoU、加权 mIoU（W-mIoU，按类别真值体素频率加权，C=14），以及代理指标 EBKL（越低越好，需与非空体素比例和定性结果配合使用）；另有参数量、FLOPs、FPS。</li><li>关键数值：</li></ul>
+<p> - RadarGSOcc：IoU 38.2%、mIoU 7.6%、W-mIoU 25.5%；RadarOcc：36.4%、6.7%、21.9%，W-mIoU 相对提升 16%，参数量少约 11%、FLOPs 少约 5%，帧率略低（3.1 vs. 3.3 FPS）。</p>
+<p> - 三次随机种子平均：RadarGSOcc 37.43%±2.34% IoU、7.14%±0.41% mIoU、23.83%±2.15% W-mIoU；RadarOcc 36.26%±0.23%、6.72%±0.28%、20.93%±0.90%；第三次运行中 RadarGSOcc 的 IoU/mIoU（34.8%/6.8%）低于 RadarOcc（36.0%/7.0%），但 W-mIoU 仍更高（21.4% vs. 20.8%），且 RadarGSOcc 运行间波动更大。</p>
+<p> - 增益主要来自大静态类：可行驶区域 42.2% vs. 40.4%、植被 21.2% vs. 16.3%、地形 23.9% vs. 18.0%；卡车/巴士 IoU 最高（4.7%），但汽车 IoU 从 6.3% 降至 0.6%；合并为单一车辆类时 RadarOcc 更优（6.5% vs. 2.6%）。</p>
+<p> - 去掉几何与语义分支共享的多普勒索引通道后，W-mIoU 降至 21.8%（降 3.7 点），卡车/巴士 IoU 从 4.7% 降至 2.1%，但部分稀有小目标类有所恢复。</p>
+<p> - 阈值实验（0.2/0.4/0.8/0.9）：mIoU 3.97/5.44/7.60/7.14，W-mIoU 12.7/17.7/25.5/24.5；因阈值定义标签集本身，各行不可直接比较，仅反映质量-覆盖权衡，主实验采用 0.8。</p>
+<p> - 消融</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.18866/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">AutoAgent0: An Agentic Runtime for Safe Closed-Loop Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.18417/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Resource-Efficient 3D Shape and Orientation Estimation of Road Users using Roadside RGB Camera and 3D Radar</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

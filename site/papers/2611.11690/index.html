@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Physical Testbed for Self-Driving Laboratories: Comparing Bayesian and Agentic Optimization in a Minimal Closed-Loop Color Formulation Task - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：构建物理自驱动实验室（SDL）测试台，在最小闭环颜色配方任务中，自主调配红、黄、蓝染料与水的混合液，以匹配目标吸光度光谱。 应用场景：以低成本、低风险、可重复的液体处理与吸光度测量工作流，作为评估 SDL 硬件集成与决策算法的参考平台，服务于化学、材料、生物等领域的自动驾驶实验室技术开发。 研究问题：如何用现成商用实验室自动化仪器搭建可连续无人值守运行的闭环系统，并在同一物理平台上公平比较传统贝叶斯优化（BO）与基于大语言模型（LLM）的智能体优化（agentic optimization）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.11690">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.11690.webp" alt="A Physical Testbed for Self-Driving Laboratories: Comparing Bayesian and Agentic Optimization in a Minimal Closed-Loop Color Formulation Task" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：构建物理自驱动实验室（SDL）测试台，在最小闭环颜色配方任务中，自主调配红、黄、蓝染料与水的混合液，以匹配目标吸光度光谱。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">A Physical Testbed for Self-Driving Laboratories: Comparing Bayesian and Agentic Optimization in a Minimal Closed-Loop Color Formulation Task</h1>
+            <div class="detail-meta">2026-11-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.11690" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.11690" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.11690</span></div>
+            <p class="detail-summary">任务：构建物理自驱动实验室（SDL）测试台，在最小闭环颜色配方任务中，自主调配红、黄、蓝染料与水的混合液，以匹配目标吸光度光谱。 应用场景：以低成本、低风险、可重复的液体处理与吸光度测量工作流，作为评估 SDL 硬件集成与决策算法的参考平台，服务于化学、材料、生物等领域的自动驾驶实验室技术开发。 研究问题：如何用现成商用实验室自动化仪器搭建可连续无人值守运行的闭环系统，并在同一物理平台上公平比较传统贝叶斯优化（BO）与基于大语言模型（LLM）的智能体优化（agentic optimization）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">The University of North Carolina at Chapel Hill, Department of Computer Sci…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.11690/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：构建物理自驱动实验室（SDL）测试台，在最小闭环颜色配方任务中，自主调配红、黄、蓝染料与水的混合液，以匹配目标吸光度光谱。</p>
+  <ul class="reading-intro-points"><li>任务：构建物理自驱动实验室（SDL）测试台，在最小闭环颜色配方任务中，自主调配红、黄、蓝染料与水的混合液，以匹配目标吸光度光谱。</li><li>应用场景：以低成本、低风险、可重复的液体处理与吸光度测量工作流，作为评估 SDL 硬件集成与决策算法的参考平台，服务于化学、材料、生物等领域的自动驾驶实验室技术开发。</li><li>研究问题：如何用现成商用实验室自动化仪器搭建可连续无人值守运行的闭环系统，并在同一物理平台上公平比较传统贝叶斯优化（BO）与基于大语言模型（LLM）的智能体优化（agentic optimization）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：The University of North Carolina at Chapel Hill, Department of Computer Science；作者：Tony Qin</li><li>机构：Lawrence Livermore National Laboratory；作者：Ziheng Wu</li><li>机构：Trilobio；作者：Aldair Gongora</li><li>机构：原文未明确对应；作者：Maximilian Schommer（原文未标注其所属机构）</li><li>机构：原文未明确对应；作者：Roya Amini-Naieni（原文未标注其所属机构，仅利益声明中提及其为 Trilobio 联合创始人兼员工）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：构建物理自驱动实验室（SDL）测试台，在最小闭环颜色配方任务中，自主调配红、黄、蓝染料与水的混合液，以匹配目标吸光度光谱。</li><li>应用场景：以低成本、低风险、可重复的液体处理与吸光度测量工作流，作为评估 SDL 硬件集成与决策算法的参考平台，服务于化学、材料、生物等领域的自动驾驶实验室技术开发。</li><li>研究问题：如何用现成商用实验室自动化仪器搭建可连续无人值守运行的闭环系统，并在同一物理平台上公平比较传统贝叶斯优化（BO）与基于大语言模型（LLM）的智能体优化（agentic optimization）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>搭建并集成了由商用实验室机器人（Trilobot）、商用吸光度读板仪（Absorbance 96 Automate）与可替换优化器组成的物理闭环测试台，实现从移液、微孔板操作到光谱测量、模型更新与下一次配方选择的全程无人干预。</li><li>在六个独立运行批次（campaign）中实现累计超过 24 小时的连续无人值守闭环运行，每批次 48 次闭环迭代、约 4 小时。</li><li>在该平台上验证最小闭环发现任务：系统平均 RMSE 达 9.95×10⁻³ OD，六批次中五批次在测量误差范围内匹配目标光谱。</li><li>在同一实验回路内比较 BO 与 LLM 智能体优化，报告智能体在三个目标上均以更少迭代匹配目标（最多减少 52%），并在 BO 48 次迭代内未匹配的目标 3 上于 11 次迭代内收敛。</li><li>提出该商用组件测试台可作为评估既有与新兴 AI 决策策略（含 LLM 引导优化）的参考物理平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：硬件自动化层（机器人移液、孔板搬运、读板测量）与 AI 决策层（可替换优化器），二者构成设计—构建—测试—学习（DBTL）闭环。</li><li>输入传感器：Byonoy Absorbance 96 Automate 吸光度微孔板读板仪，使用其已安装滤光片在 400 nm、600 nm、700 nm 三个波长测量吸光度，光度范围 0.0–4.0 OD；原文未报告其他传感器。</li><li>场景表示：输入为四种液体体积 x=(x₁,x₂,x₃,x₄)（红、黄、蓝染料与水，单位 µL），受约束 x₁+x₂+x₃+x₄=250 µL 且 xᵢ≥0；输出为目标三维吸光度向量 y=(y₁,y₂,y₃)；优化目标为 min‖S(x)−y‖₂。原文指出三个波长不能唯一确定完整光谱（存在同色异谱），但因现有仪器限制仍采用三波长表示。</li><li>模型结构：</li></ul>
+<p> - BO：使用 BoTorch 实现，对三个波长各拟合一个独立高斯过程（RBF 核、GaussianLikelihood 噪声模型），将输入参数降为三种染料体积（和不大于 250），水体积取剩余量；前 12 个点随机采样，其后用 qLogExpectedImprovement 采集函数逐点选择 36 个点；目标函数为模型三输出与目标间负均方误差；超参数为 num_restarts=32、raw_samples=512、batch_limit=5、max_iter=200。</p>
+<p> - 智能体优化：使用 Claude Opus 5 模型（thinking effort 设为 “high”，经 Claude Messages API），单次运行维持一段连续对话容纳全部 48 次迭代上下文；提供 run_python 工具在本地 Python 沙箱（NumPy、SciPy、pandas、scikit-learn、BoTorch）中执行代码，并通过 propose_setting 提交下一配方；提示词以黑箱方式给出（仅用 x、y 变量名），不告知颜色配方任务，且禁止外部工具（如网络搜索）与访问历史实验数据以保证与 BO 公平比较。</p>
+<ul><li>关键技术：商用仪器的 Python API 集成、机器人末端执行器自动换装（移液与抓取）、孔内反复吸打混匀、基于器件测量精度规格的“误差带内匹配”判定、智能体自主选择并拟合多种模型（线性模型、Hill 曲线、幂律响应曲线、Michaelis–Menten 曲线）、近期加权、漂移检查、输出通道噪声相关性分析与蒙特卡洛采样策略。</li><li>原文未报告：智能体底层模型的参数规模、训练细节与网络结构。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文未使用公开数据集；目标光谱由三次随机混合并实测其吸光度生成，共三个目标；每次运行 48 次闭环迭代，共 6 个批次（BO 3 次、智能体 3 次）。</li><li>仿真器：原文未报告；全部实验在物理测试台上完成。</li><li>模型规模：原文未报告（LLM 以 API 方式调用，未给出参数量）。</li><li>训练资源：原文未报告 GPU/算力配置；报告了智能体三次运行的 API 总费用为 20.83 美元，单次候选生成平均耗时 19 秒（BO 为 16 秒），物理自动化回路每次迭代约 4.5 分钟。</li><li>实车/实物平台：Trilobot（Trilobio）通用实验室机器人，置于透明外壳内，4 轴臂带工具更换器；工作区含 96 孔微孔板、Absorbance 96 Automate 读板仪、4 孔染料储液槽、96 个移液枪头架与废枪头回收盒；染料由三滴市售食用色素加入水中配制；每孔总体积固定 250 µL。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：最小闭环颜色配方任务，三个随机生成的目标吸光度光谱（目标 1、2、3）；以读板仪测量精度规格定义误差带（400 nm：0.0–2.0 OD 内 ≤1.5%+0.010 OD，2.0–3.0 OD 内 ≤3.0%+0.010 OD；≥450 nm：0.0–2.0 OD 内 ≤1.0%+0.010 OD，2.0–3.0 OD 内 ≤1.5%+0.010 OD）。</li><li>评估指标：三波长吸光度的 RMSE（OD）；达到误差带所需迭代次数；单次候选生成耗时与 API 成本。</li><li>关键数值：</li></ul>
+<p> - 六批次平均 RMSE 为 9.95×10⁻³ OD，六批次中五批次在测量误差内匹配目标。</p>
+<p> - 各批次最终最优 RMSE：BO 目标 1 为 5.47×10⁻³ OD、目标 2 为 4.00×10⁻³ OD、目标 3 为 2.92×10⁻² OD；智能体目标 1 为 2.98×10⁻³ OD、目标 2 为 8.08×10⁻³ OD、目标 3 为 1.00×10⁻² OD。</p>
+<p> - 达到误差带的迭代次数：BO 目标 1 为 21、目标 2 为 34、目标 3 未达到（48 次内失败）；智能体目标 1 为 10、目标 2 为 23、目标 3 为 11。</p>
+<p> - 相对改进：目标 1 减少 52%，目标 2 减少 32%，目标 3 由 BO 失败转为 11 次迭代收敛。</p>
+<p> - 时间与成本：智能体平均 19 秒/次生成候选，BO 平均 16 秒/次；物理回路约 4.5 分钟/次；智能体三次运行 API 总费用 20.83 美元。</p>
+<ul><li>对比方法：传统贝叶斯优化（BoTorch + 三个独立高斯过程 + qLogExpectedImprovement）与 LLM 智能体优化（Claude Opus 5 + Python 沙箱 + 连续上下文），在同一物理闭环中对比。</li><li>实验条件：全部为实物闭环实验，累计超过 24 小时无人值守运行，每批次 48 次迭代、约 4 小时；原文未报告开环评估或仿真评估结果。</li><li>其他观察：智能体在三个批次中均先采样设计空间中心点（四液体等体积 62.5 µL）与四个顶点（单一液体 250 µL），随后拟合模型、局部细化，并在判断误差主要来自噪声后重复近似候选；智能体虽有 BoTorch 可用但从未选择使用贝叶斯优化。原文指出目标 2 下 BO</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.11856/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DeltaForge: A Post-hoc Mixture-of-Experts VLA for Multi-Domain Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.11532/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DriveFoundry: Co-Evolving Data and Model for Efficient Closed-Loop Iteration in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

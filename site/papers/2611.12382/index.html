@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoVLA-D: Learn a Trajectory-Geometric Condition from Reasoning for Autonomous Driving VLA - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶的视觉-语言-动作（VLA）规划任务，输入相机图像与语言驾驶指令，输出未来自车轨迹。 应用场景为基于多模态大语言模型（MLLM）自回归解码的端到端自动驾驶规划，覆盖闭环仿真与开环真实驾驶基准。 研究问题：驾驶指令通常描述“让行、保持、转向”等动作而非自车状态，而现有 VLA 规划器常将指令直接映射到最终连续轨迹，存在指令—连续轨迹之间的“表述鸿沟”。 论文提出将离散轨迹作为“轨迹几何条件”（TrajCond）插入推理与最终连续轨迹预测之间，以兼顾离散动作 token 的指令对齐性与连续轨迹的输出精度。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.12382">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.12382.webp" alt="AutoVLA-D: Learn a Trajectory-Geometric Condition from Reasoning for Autonomous Driving VLA" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶的视觉-语言-动作（VLA）规划任务，输入相机图像与语言驾驶指令，输出未来自车轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">AutoVLA-D: Learn a Trajectory-Geometric Condition from Reasoning for Autonomous Driving VLA</h1>
+            <div class="detail-meta">2026-11-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.12382" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.12382" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.12382</span></div>
+            <p class="detail-summary">论文面向自动驾驶的视觉-语言-动作（VLA）规划任务，输入相机图像与语言驾驶指令，输出未来自车轨迹。 应用场景为基于多模态大语言模型（MLLM）自回归解码的端到端自动驾驶规划，覆盖闭环仿真与开环真实驾驶基准。 研究问题：驾驶指令通常描述“让行、保持、转向”等动作而非自车状态，而现有 VLA 规划器常将指令直接映射到最终连续轨迹，存在指令—连续轨迹之间的“表述鸿沟”。 论文提出将离散轨迹作为“轨迹几何条件”（TrajCond）插入推理与最终连续轨迹预测之间，以兼顾离散动作 token 的指令对齐性与连续轨迹的输出精度。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Electronic and Information Engineering, Beihang University · Yugu…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.12382/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶的视觉-语言-动作（VLA）规划任务，输入相机图像与语言驾驶指令，输出未来自车轨迹。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶的视觉-语言-动作（VLA）规划任务，输入相机图像与语言驾驶指令，输出未来自车轨迹。</li><li>应用场景为基于多模态大语言模型（MLLM）自回归解码的端到端自动驾驶规划，覆盖闭环仿真与开环真实驾驶基准。</li><li>研究问题：驾驶指令通常描述“让行、保持、转向”等动作而非自车状态，而现有 VLA 规划器常将指令直接映射到最终连续轨迹，存在指令—连续轨迹之间的“表述鸿沟”。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Electronic and Information Engineering, Beihang University；作者：Yuguang Yang, Xianbin Cao</li><li>机构：Institute for AI Industry Research (AIR), Tsinghua University；作者：Yuguang Yang, Canyu Chen, Yan Wang</li><li>机构：School of Computer Science and Engineering, Beihang University；作者：Zhewen Tan</li><li>机构：National College for Excellent Engineers, Beihang University；作者：Canyu Chen</li><li>机构：State Key Laboratory of Media Convergence and Communication, Communication University of China；作者：Linlin Yang</li><li>机构：School of Information, Renmin University of China；作者：Cheng Chi</li><li>机构：Didi；作者：Chunyang Liu, Kehua Sheng, Bo Zhang</li><li>机构：Harbin Institute of Technology, Shenzhen；作者：Jinyu Yang</li><li>机构：Hangzhou Innovation Research Institute, Beihang University；作者：Baochang Zhang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶的视觉-语言-动作（VLA）规划任务，输入相机图像与语言驾驶指令，输出未来自车轨迹。</li><li>应用场景为基于多模态大语言模型（MLLM）自回归解码的端到端自动驾驶规划，覆盖闭环仿真与开环真实驾驶基准。</li><li>研究问题：驾驶指令通常描述“让行、保持、转向”等动作而非自车状态，而现有 VLA 规划器常将指令直接映射到最终连续轨迹，存在指令—连续轨迹之间的“表述鸿沟”。</li><li>论文提出将离散轨迹作为“轨迹几何条件”（TrajCond）插入推理与最终连续轨迹预测之间，以兼顾离散动作 token 的指令对齐性与连续轨迹的输出精度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 TrajCond：先预测离散轨迹，再以其几何-语义作为条件辅助最终连续轨迹预测，最终输出仍保持在连续轨迹空间。</li><li>提出基于差分自车运动的 1D-Brohan 离散化动作 token：对 x、y、yaw 差分分别建立独立 Brohan 码本，相比 K-Means/K-Disks 共享码本取得最强 TrajCond 结果与最低重建误差。</li><li>提出两阶段对齐训练框架：Stage 1 用动作 token 序列对齐视觉-语言输入以预热 TrajCond 语义；Stage 2 利用解码的 TrajCond 与推理上下文回归最终连续轨迹，将条件学习与最终轨迹预测分离。</li><li>在 NAVSIM navtest、nuScenes、NeuroNCAP 上验证离散轨迹作为直接输出较弱、但作为 TrajCond 可一致提升最终连续轨迹预测的效果。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：自回归 VLA 规划器，基于 MLLM 的下一 token 解码接口，包含推理、TrajCond 动作 token 生成与最终连续轨迹生成。</li><li>输入传感器：NAVSIM 与 nuScenes 使用单张前视图像；NeuroNCAP 使用左-前-右三视角图像（原文未报告其他传感器模态）。</li><li>场景表示：自车坐标系下的未来轨迹 τ={(x_t, y_t, θ_t)}，连续轨迹以逐步归一化文本 waypoint token 表示（沿用 Curious-VLA 的逐步归一化）；TrajCond 为基于 t-1 时刻局部坐标系计算的差分运动 (Δx, Δy, Δθ)。</li><li>模型结构：Qwen3-VL-4B（NAVSIM 及表示消融默认）；nuScenes/NeuroNCAP 报告 Qwen2.5-VL 与 Qwen3-VL 变体。</li><li>关键技术一（动作 tokenizer）：按维度对训练集 1st–99th 分位区间均匀分箱，三个码本共 Q=ΣQ_i，默认 Q=768（每自由度 Q_i=256）。</li><li>关键技术二（轨迹离散化）：从上一 token 化位姿渲染候选，按有序框角点平均距离 d_corner 选择最优 token 元组；每自由度先取绝对残差最小的 4 个 token，枚举 4×4×4 候选后选角点误差最小者。</li><li>关键技术三（两阶段训练）：Stage 1 用 SFT 与自回归 token 损失学习 a=f^(1)(o,ℓ)；Stage 2 从 Stage 1 初始化，按 a→w 顺序用动作 token 损失与 waypoint token 损失联合优化，训练时对动作 token 采用 teacher forcing，推理时完全自回归。</li><li>关键技术四（推理与 RFT）：NAVSIM 使用 Qwen3-VL-235B 标注的 CoT 推理监督；Stage 1 输出顺序 r→a，Stage 2 为 a→r→w，并增加第三阶段用 GRPO 进行强化微调（RFT）；nuScenes 与 NeuroNCAP 仅用 Stage-1/2 SFT、无 CoT。</li><li>原文未报告：具体视觉编码器结构细节、轨迹预测时域 T 的数值、推理延迟等部署细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM navtest（大规模非反应式闭环仿真基准）、nuScenes（开环真实驾驶基准）、NeuroNCAP（基于 nuScenes 的逼真闭环仿真器）。</li><li>仿真器：NAVSIM 与 NeuroNCAP 作为闭环仿真基准使用；原文未报告其他仿真器。</li><li>模型规模：Qwen3-VL-4B、Qwen2.5-VL-3B、Qwen3-VL-235B（仅用于 CoT 标注）；基线对比含 InternVL2.5-4B、InternVL3-8B、Emu3-8B 等。</li><li>训练资源：使用 LLaMA-Factory 实现 SFT、EasyR1 实现 RFT；AdamW 优化器，weight decay 0.05，warmup ratio 0.10，cosine 学习率调度，全局 batch size 32；Stage 1 与 Stage 2 各训练 3 个 epoch，学习率 4×10⁻⁵；RFT 用 GRPO 训练 160 步，actor batch size 512。GPU 型号与数量原文未在可见正文中报告（附录 A 标题为 Computation Resources，但内容被截断）。</li><li>实车平台：原文未报告实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM navtest（闭环非反应式仿真，PDMS 与 EPDMS 两套指标）、nuScenes（开环，ST-P3 与 UniAD 两套指标下的 L2 误差与碰撞率）、NeuroNCAP（闭环仿真，NeuroNCAP Score 与碰撞率）。</li><li>NAVSIM PDMS 关键结果：AutoVLA-D（Qwen3-VL-4B）取得 92.0 PDMS，NC 98.8、DAC 97.7、EP 89.8、TTC 97.7、C 99.8；对比 ImagiDrive-S（87.4）、ReCogDrive（89.6/复现 90.7）、DriveVLA-W0（90.2）、AutoVLA（89.1）、AdaThinkDrive（90.3）、Curious-VLA（90.3/复现 89.7）、FLARE（91.4）。</li><li>NAVSIM EPDMS 关键结果：AutoVLA-D 取得 86.8 EPDMS，NC 98.8、DAC 97.7、DDC 98.8、TLC 99.8、EP 91.2、TTC 98.2、LK 96.9、C 98.2、EC 80.2；超过 Curious-VLA 的 85.3，对比 ReCogDrive（83.6）、DiffusionDrive（84.5）、Curious-VLA 复现（84.9）、DriveVLA-W0（86.1）、FLARE（86.3）。</li><li>nuScenes 开环关键结果：AutoVLA-D（Qwen2.5-VL-3B）ST-P3 指标 L2 0.30、Col. 0.10，UniAD 指标 L2 0.60、Col. 0.35；Qwen3-VL-4B 版本 ST-P3 指标 L2 0.30、Col. 0.09，UniAD 指标 L2 0.60、Col. 0.29；去 TrajCond 消融（Qwen3-VL-4B）ST-P3 L2 0.30、Col. 0.11，UniAD L2 0.60、Col. 0.34。对比 OpenDriveVLA、AutoVLA、Impromptu VLA、EMMA、OpenEMMA、UniAD、VAD、ST-P3 等。</li><li>评估条件：NAVSIM 为单相机闭环非反应式仿真；nuScenes 为开环评估；NeuroNCAP 为闭环仿真（表格后文在可见原文中被截断，具体分项数值未完整呈现）。</li><li>消融与分析：TrajCond 消融与渐进分析验证分阶段性能增益及训练/推理组件贡献；TrajCond</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2611.11856/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DeltaForge: A Post-hoc Mixture-of-Experts VLA for Multi-Domain Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

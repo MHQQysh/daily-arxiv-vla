@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DeltaForge: A Post-hoc Mixture-of-Experts VLA for Multi-Domain Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向端到端自动驾驶的视觉-语言-动作（VLA）模型多域整合问题：各运营方在各自私有数据上对共享基座模型进行微调，产生大量专用领域专家模型，难以低成本合并为单一多域模型。 应用场景覆盖城市、越野、高速等驾驶环境，涉及乘用车、卡车、全地形车（ATV）等多种车辆形态，以及不同地区（中国、日本、美国、欧洲）与法规（左行/右行）。 研究问题：在无法访问各领域完整数据、仅能获得已微调权重与少量代理数据的条件下，如何将 N 个独立微调的领域模型整合为一个多域 VLA，并同时满足能力匹配、无域标签的高效路由、新领域低成本接入三个目标。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.11856">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.11856.webp" alt="DeltaForge: A Post-hoc Mixture-of-Experts VLA for Multi-Domain Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向端到端自动驾驶的视觉-语言-动作（VLA）模型多域整合问题：各运营方在各自私有数据上对共享基座模型进行微调，产生大量专用领域专家模型，难以低成本合并为单一多域模型。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DeltaForge: A Post-hoc Mixture-of-Experts VLA for Multi-Domain Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.11856" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.11856" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.11856</span></div>
+            <p class="detail-summary">面向端到端自动驾驶的视觉-语言-动作（VLA）模型多域整合问题：各运营方在各自私有数据上对共享基座模型进行微调，产生大量专用领域专家模型，难以低成本合并为单一多域模型。 应用场景覆盖城市、越野、高速等驾驶环境，涉及乘用车、卡车、全地形车（ATV）等多种车辆形态，以及不同地区（中国、日本、美国、欧洲）与法规（左行/右行）。 研究问题：在无法访问各领域完整数据、仅能获得已微调权重与少量代理数据的条件下，如何将 N 个独立微调的领域模型整合为一个多域 VLA，并同时满足能力匹配、无域标签的高效路由、新领域低成本接入三个目标。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">NVIDIA Corporation, Santa Clara, CA, USA · Bingzhang Wang、Mo Poorsartep、Yas…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.11856/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向端到端自动驾驶的视觉-语言-动作（VLA）模型多域整合问题：各运营方在各自私有数据上对共享基座模型进行微调，产生大量专用领域专家模型，难以低成本合并为单一多域模型。</p>
+  <ul class="reading-intro-points"><li>面向端到端自动驾驶的视觉-语言-动作（VLA）模型多域整合问题：各运营方在各自私有数据上对共享基座模型进行微调，产生大量专用领域专家模型，难以低成本合并为单一多域模型。</li><li>应用场景覆盖城市、越野、高速等驾驶环境，涉及乘用车、卡车、全地形车（ATV）等多种车辆形态，以及不同地区（中国、日本、美国、欧洲）与法规（左行/右行）。</li><li>研究问题：在无法访问各领域完整数据、仅能获得已微调权重与少量代理数据的条件下，如何将 N 个独立微调的领域模型整合为一个多域 VLA，并同时满足能力匹配、无域标签的高效路由、新领域低成本接入三个目标。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：NVIDIA Corporation, Santa Clara, CA, USA；作者：Bingzhang Wang、Mo Poorsartep、Yasaman Esfandiari</li><li>机构：University of Washington, Seattle, WA, USA；作者：Bingzhang Wang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向端到端自动驾驶的视觉-语言-动作（VLA）模型多域整合问题：各运营方在各自私有数据上对共享基座模型进行微调，产生大量专用领域专家模型，难以低成本合并为单一多域模型。</li><li>应用场景覆盖城市、越野、高速等驾驶环境，涉及乘用车、卡车、全地形车（ATV）等多种车辆形态，以及不同地区（中国、日本、美国、欧洲）与法规（左行/右行）。</li><li>研究问题：在无法访问各领域完整数据、仅能获得已微调权重与少量代理数据的条件下，如何将 N 个独立微调的领域模型整合为一个多域 VLA，并同时满足能力匹配、无域标签的高效路由、新领域低成本接入三个目标。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DeltaForge，据作者所知是首个面向驾驶的后验（post-hoc）混合专家 VLA，仅用各领域权重与约 1% 代理集即可将独立微调的领域模型整合为单一多域 VLA，并支持新领域免端到端重训练接入。</li><li>提出后验专家分解（PEF），用联合 SVD 将各领域微调增量（task vector）分解为冻结的共享技能基与低秩域特定核心，使路由只需移动小核心而非稠密专家块。</li><li>提出两级技能混合路由器：一个位于输入层用于 VLM 推理专家，一个位于中间层用于流匹配动力学专家，二者在 clip 级别进行无域标签路由，可跨域自由组合场景推理与车辆动力学技能。</li><li>在覆盖城市、越野、高速及乘用车、卡车、ATV 的六个领域上评估，DeltaForge 接近逐领域专家精度，并以接近单模型的参数与计算成本超越所有合并、路由、集中式与联邦基线，且展现出对未见域组合的组合泛化能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于 Alpamayo 1.5（10B）驾驶 VLA，包含 8B Cosmos-Reason VLM 主干与 2B 流匹配动作专家，分两阶段微调，故每个领域贡献一个推理专家与一个动力学专家。方法可推广到任意“推理+动作”双组件 VLA。</li><li>输入传感器：默认轨迹模式下输入前视相机图像与 10Hz 的 16 步自车历史，预测 64 步未来轨迹；各微调领域使用单前视相机，基座模型使用四相机。</li><li>场景表示：原文未报告显式的 BEV 或 3D 场景表示，模型为基于视觉 token 与自车运动学历史的端到端轨迹预测形式。</li><li>模型结构与关键技术：</li></ul>
+<p> - 后验专家分解（PEF）：对每个待分解权重矩阵，先计算域任务向量 Δ_i = W_i − W_0，再用截断 SVD 联合提取所有域增量的低秩共享列空间 U 与行空间 V 作为冻结共享技能基；每个领域仅保留核心 C_i = U^T Δ_i V ∈ R^{r×r}，重构权重为 W_0 + U C_i V^T；基座模型以零核心 C_0 = 0 免费加入专家池作为默认路由。PEF 应用于 ViT、LLM 和流匹配动作专家的注意力与 FFN 矩阵，其余模块（token 嵌入、LM head、norm 等）合并为单一共享副本不参与路由。</p>
+<p> - 技能混合路由：每个输入 clip 计算一次专家混合权重 w，所有分解层共享该混合，按 W̄^(ℓ) = W_0^(ℓ) + U^(ℓ)(Σ_i w_i C_i^(ℓ))V^(ℓ)^T 组合，混合在参数空间一次性完成，无额外推理开销，且 w 保留在计算图中以支持端到端训练。路由采用 top-k 截断并重归一化的软混合。</p>
+<p> - 输入级 VLM 路由：输入为冻结基座 ViT 视觉 token 的均值特征 v 与自车历史速度、加速度、曲率的 z-score 统计量 m，经小 MLP 与 softmax 得到路由分布。</p>
+<p> - 中间层动力学路由：输入为 VLM 最后一层隐状态的均值池化 h 与相同运动学统计量 m，经 MLP 与 softmax 选择动力学专家；两路由解耦，使一个领域的场景推理可与另一领域的车辆动力学自由配对。</p>
+<p> - 基于代理集的组合训练：路由监督由专家自身生成软 oracle 标签，VLM 专家以教师强制 token 损失、流匹配专家以生成轨迹 ADE 作为专家得分，经温度 τ 的 softmax 得到软标签，路由器以 KL 散度拟合；随后冻结路由器与共享基，仅在与 top-k 混合下优化被选中的核心以补偿 SVD 截断损失。训练分两阶段：先训练 VLM MoE，再冻结并训练流匹配 MoE。</p>
+<p> - 新领域接入：将新域任务向量投影到冻结基上得到新核心，在其代理集上以锁定路由到该专家进行核心修复，再重新生成软 oracle 标签并在扩展代理集上联合刷新路由器与所有核心，无需端到端重训练。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>基座模型：Alpamayo 1.5（10B），8B Cosmos-Reason VLM + 2B 流匹配动作专家。</li><li>六个领域数据集：Urban China 使用 ONCE（训练 24,885 / 评估 2,769），Urban Japan 使用 CoVLA（26,987 / 2,893），Off-road ATV 使用 TartanDrive（17,470 / 1,484），Off-road car 使用 ORAD-3D（34,801 / 4,897），Highway truck EU 使用 TruckScenes（33,305 / 3,172），Base 域使用 PhysicalAI-AV（19,545 / 3,000）。</li><li>额外留出数据集：ParkRecon3D 用于新领域接入（5,753 / 745），Torc TruckDrive 与 BeVIS 用于零样本泛化（分别为 23,593 / 3,031 与 4,485 / 297）。</li><li>训练资源：每个领域专家在八块 H100 GPU 上训练；阶段 1 全量微调 VLM（AdamW，学习率 10^-5，batch 32），阶段 2 冻结 VLM 训练动作专家（学习率 10^-4，batch 8），各至多 10 个 epoch。</li><li>组合训练配置：PEF 核心秩 r=256，软 oracle 温度 τ=0.3，路由器与核心分别在代理集上训练 200 与 500 步；代理集每域 200 个 clip（约训练数据 1%），评估集从不使用。</li><li>模型规模：部署系统（N=5）总参数 12,547M，其中训练参数 122.7M（约 1.0%）；共享基 U,V 共 1,257M（闭式求解），路由器（×2）2.1M，每域核心与投影 42.0M。</li><li>仿真器：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：六个领域（PAI 基座域、ONCE、CoVLA、Tartan、ORAD、TruckScenes）的端到端轨迹预测；另有 ParkRecon3D 新域接入评估与 Torc TruckDrive、BeVIS 零样本评估。</li><li>评估指标：5 秒时域上六条采样轨迹的最小平均位移误差（minADE@5s，单位米，best-of-6，越低越好）；效率指标为参数量与每 token GFLOPs。</li><li>开环/闭环条件：所有结果为开环轨迹误差评估；原文未报告闭环或实车实验。</li><li>关键数值：</li></ul>
+<p> - DeltaForge top-2 路由平均 minADE@5s 为 1.0170，接近六个独立领域专家的 0.9798，优于集中式 SFT（1.1129）、联邦 SFT FedAdam（1.1086）、Model soup（1.6298）、Task arithmetic（1.7333）、TIES（1.9308）、DARE（1.6010）、TSV-M（1.6490）、KnOTS（1.7702）、EMR-Merging（1.2732）、Twin-Merging（1.3510）与 BTX（1.2398）。</p>
+<p> - DeltaForge top-1 路由平均为 1.0157；top-2 将基座域误差从 0.92 降至 0.76。</p>
+<p> - 效率：DeltaForge 参数随域数增长为 12.34 + 0.042N（N=5 时 12.55B、N=10 时 12.76B），推理成本为 23.39 +</p></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.12382/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">AutoVLA-D: Learn a Trajectory-Geometric Condition from Reasoning for Autonomous Driving VLA</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.11690/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">A Physical Testbed for Self-Driving Laboratories: Comparing Bayesian and Agentic Optimization in a Minimal Closed-Loop Color Formulation Task</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

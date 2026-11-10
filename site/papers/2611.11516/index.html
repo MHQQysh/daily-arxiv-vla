@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Breaking survivorship bias in driving world models - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究自动驾驶中的驾驶世界模型（driving world model），即根据当前观测和候选自车动作生成未来驾驶场景视频的生成式模型。 面向的应用场景是以世界模型作为“想象引擎”，为候选自车轨迹预测未来后果，并据此进行安全关键场景下的动作选择。 指出并研究驾驶世界模型中的“幸存者偏差”问题：主流驾驶数据集几乎只包含安全结束的未来，导致模型在碰撞即将发生时仍倾向于想象安全的良性结局。 目标是训练一个对常规驾驶与安全关键结局都保持中性（不偏乐观也不过度悲观）的世界模型，并将其用于轨迹选择。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.11516">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.11516.webp" alt="Breaking survivorship bias in driving world models" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究自动驾驶中的驾驶世界模型（driving world model），即根据当前观测和候选自车动作生成未来驾驶场景视频的生成式模型。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Breaking survivorship bias in driving world models</h1>
+            <div class="detail-meta">2026-11-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.11516" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.11516" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.11516</span></div>
+            <p class="detail-summary">论文研究自动驾驶中的驾驶世界模型（driving world model），即根据当前观测和候选自车动作生成未来驾驶场景视频的生成式模型。 面向的应用场景是以世界模型作为“想象引擎”，为候选自车轨迹预测未来后果，并据此进行安全关键场景下的动作选择。 指出并研究驾驶世界模型中的“幸存者偏差”问题：主流驾驶数据集几乎只包含安全结束的未来，导致模型在碰撞即将发生时仍倾向于想象安全的良性结局。 目标是训练一个对常规驾驶与安全关键结局都保持中性（不偏乐观也不过度悲观）的世界模型，并将其用于轨迹选择。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">威斯康星大学麦迪逊分校土木与环境工程系（Department of Civil and Environmental Engineering, Univ…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.11516/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究自动驾驶中的驾驶世界模型（driving world model），即根据当前观测和候选自车动作生成未来驾驶场景视频的生成式模型。</p>
+  <ul class="reading-intro-points"><li>论文研究自动驾驶中的驾驶世界模型（driving world model），即根据当前观测和候选自车动作生成未来驾驶场景视频的生成式模型。</li><li>面向的应用场景是以世界模型作为“想象引擎”，为候选自车轨迹预测未来后果，并据此进行安全关键场景下的动作选择。</li><li>指出并研究驾驶世界模型中的“幸存者偏差”问题：主流驾驶数据集几乎只包含安全结束的未来，导致模型在碰撞即将发生时仍倾向于想象安全的良性结局。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：威斯康星大学麦迪逊分校土木与环境工程系（Department of Civil and Environmental Engineering, University of Wisconsin–Madison）；作者：Zihao Sheng、Zilin Huang、Yuhao Luo、Zhengyang Wan、Boyue Wang、Soyoung Ahn、David A. Noyce、Sikai Chen。</li><li>机构：威斯康星交通中心（Wisconsin Transportation Center, University of Wisconsin–Madison）；作者：Zihao Sheng、Zilin Huang、Yuhao Luo、Zhengyang Wan、Boyue Wang、Soyoung Ahn、David A. Noyce。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究自动驾驶中的驾驶世界模型（driving world model），即根据当前观测和候选自车动作生成未来驾驶场景视频的生成式模型。</li><li>面向的应用场景是以世界模型作为“想象引擎”，为候选自车轨迹预测未来后果，并据此进行安全关键场景下的动作选择。</li><li>指出并研究驾驶世界模型中的“幸存者偏差”问题：主流驾驶数据集几乎只包含安全结束的未来，导致模型在碰撞即将发生时仍倾向于想象安全的良性结局。</li><li>目标是训练一个对常规驾驶与安全关键结局都保持中性（不偏乐观也不过度悲观）的世界模型，并将其用于轨迹选择。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>识别并提出驾驶世界模型中的幸存者偏差：现有模型（Vista、GEM）在真实事故视频条件下很少想象出即将发生的碰撞，而是改写为安全结局。</li><li>提出中性世界模型（NWM），在常规驾驶数据（nuScenes）与真实事故视频（MM-AU）混合数据上训练，并引入边界框引导损失以强化对周围交通参与者区域的建模。</li><li>证明 NWM 在保持较低误碰撞率和有竞争力的生成质量的同时，更忠实地预测即将发生的碰撞。</li><li>将 NWM 作为想象引擎用于动作选择：对每个候选自车轨迹想象未来，并用安全、进度、舒适度组成的奖励函数选择轨迹。</li><li>在 NAVSIM 挑战性场景和真实世界行人假人横穿实验中验证了想象引导决策的有效性与零样本迁移能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：世界模型生成模块与基于世界模型的动作选择模块。</li><li>输入传感器：单目前视相机图像（初始观测帧）；nuScenes 提供标定相机、自车位姿与 3D 道路使用者标注；实车使用前视相机与车载惯性传感。</li><li>场景表示：以视频帧序列表示未来场景，潜空间采用预训练 VAE 编码；周围交通参与者表示为 2D 边界框并栅格化为与相机视角对齐的 RGB 控制帧；可选 3D 边界框经相机内外参投影到图像平面。</li><li>模型结构：基于预训练 Stable Video Diffusion（SVD）主干的潜视频扩散模型，配合 ControlNet 适配器；条件输入包括视觉上下文（VAE 与 CLIP 图像编码器）、自车轨迹（位置经正弦傅里叶特征编码后加入图像嵌入并送入 ControlNet 交叉注意力层）以及可选的智能体边界框控制。</li><li>训练流程：两阶段训练，第一阶段在驾驶视频上微调 SVD 主干，第二阶段冻结主干并训练 ControlNet 分支；训练时随机选取时间步并将该步之后的所有控制替换为可学习空嵌入，使模型支持完整、部分或无智能体控制。</li><li>关键技术：边界框引导损失，用栅格化框掩码与全零序列分别经 VAE 编码得到潜变量，计算逐元素差异并做 ℓ2 归一化得到权重 W=1+q·Ā，在保留基础扩散目标的同时加强对智能体区域的监督；最终目标为加权扩散损失 L_neutral。</li><li>推理模式：带智能体控制时可按指定未来边界框轨迹生成（可表示常规、近失或碰撞过程）；无智能体控制时由模型自行推断其他交通参与者运动。</li><li>动作选择：对 K 个候选自车轨迹分别以空智能体控制想象未来，用奖励 R=S·(w_T·TTC+w_P·P+w_C·C)/(w_T+w_P+w_C) 评分，其中 S 为安全门控（对想象碰撞惩罚且越早惩罚越强），TTC 为时间安全裕度，P 为进度项（基于 NWM 推断的交通上下文），C 为舒适度项；选择奖励最高者。</li><li>原文未报告：模型参数量、具体训练硬件与训练时长（正文中未给出；附录中报告了单 GPU 生成 25 帧视频约需 23.11±1.39 s 的推理延迟）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>训练数据集：nuScenes（官方 700 训练 / 150 验证场景，重叠采样步长 5 帧得到 7,700 训练片段，非重叠采样得到 450 验证片段）与 MM-AU（8,815 / 1,022 视频划分，过滤后提取 7,939 训练片段：6,194 碰撞 + 1,745 常规；952 验证片段：733 碰撞 + 219 常规）。</li><li>数据预处理：统一转换为 25 帧前视片段，分辨率 512×320；对左转和右转片段重复五次以平衡直行主导；平衡后 MM-AU 与 nuScenes 有效训练样本分别为 12,011 与 11,500（比例 51.1% : 48.9%）；MM-AU 自车轨迹通过深度辅助伪标注流程估计。</li><li>评测数据：MM-AU 验证集 100 个自车参与事故场景（四个预测起点：碰撞前约 2.0、1.5、1.0、0.5 s）；MM-AU 50 个无碰撞片段与 nuScenes 100 个片段用于常规驾驶评测；nuScenes 158 个场景用 STRIVE 合成对抗与避让轨迹用于可控性评测；NAVSIM 200 个挑战性场景（ExploreVLA 与 AutoVLA 各提一条候选、仅一条成功）。</li><li>仿真器/工具：NAVSIM 评估器；STRIVE 用于合成对抗轨迹；YOLOv11 用于检测生成视频中的智能体框。</li><li>模型规模与训练资源：原文未报告模型参数量与训练资源；报告了推理成本为单 GPU 生成 25 帧视频需 23.11±1.39 s。</li><li>实车平台：威斯康星交通中心运营的 Ford E-Transit 电动研究车，配备前视相机与车载惯性传感与计算硬件；实验在威斯康星州 Fitchburg 受控路线于 2026 年 2 月 23 日和 3 月 17 日进行，使用轮式推车上的行人假人；NWM 未在这些数据上微调。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：MM-AU 事故场景碰撞召回、MM-AU 与 nuScenes 常规片段误碰撞率、MM-AU 与 nuScenes 生成质量、STRIVE 对抗/避让轨迹的智能体可控性、NAVSIM 200 场景动作选择、真实世界行人假人横穿零样本实验。</li><li>评估指标：碰撞召回率与误碰撞率（人工标注碰撞/无碰撞）、四种规避模式分类、FID、FVD、JEDi、mIoU、SR@0.5、nCO、NAVSIM 的 PDMS、动作选择准确率 Acc_sel。</li><li>对比方法：Vista 与 GEM（生成与碰撞召回对比）；动作选择以 Vista 作为世界模型基线并使用相同奖励；NAVSIM 中候选轨迹来自 ExploreVLA 与 AutoVLA，并以 NAVSIM 评估器给出 oracle 分数。</li><li>关键数值：碰撞前 0.5 s 时，NWM 碰撞召回 86%，Vista 9%，GEM 12%；Vista 与 GEM 的主要失败模式为“自车偏离”和“同速运动/场景冻结”，两者合计约占近三分之二场景；MM-AU 常规片段误碰撞率 NWM 8%，Vista 2%，GEM 2%（原文该句给出 2% 与 9%/12% 的对比表述），nuScenes 上所有模型不超过 1%；生成质量上 NWM 在 FID、FVD、JEDi 上在两个数据集均与基线相当或更优；边界框条件显著降低 nCO 并提升 mIoU 与 SR@0.5；STRIVE 轨迹下规定与实现的横向位移拟合斜率为车辆 0.96（R²=0.97）、行人 0.84（R²=0.98）；消融显示完整 NWM 在对抗与避让轨迹上均优于去掉边界框引导损失的变体，行人类提升更明显；NAVSIM 上 Vista 引导 PDMS 为 0.637，NWM 引导为 0.783，oracle 为 0.959；真实世界 Normal 阶段 Vista 选择正确率 100%、NWM 90%，Response 阶段 NWM 100%、Vista 30%，NWM 的三次错误均发生在假人开始横穿前的最后一帧且为保守的提前刹车。</li><li>评估条件：事故召回与常规驾驶评测</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.11532/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DriveFoundry: Co-Evolving Data and Model for Efficient Closed-Loop Iteration in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.11334/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">MoT3DVG: A Benchmark for Outdoor 3D Visual Grounding with Motion-Aware Descriptions and Temporal Cues</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

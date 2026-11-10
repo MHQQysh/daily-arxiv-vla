@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Locating and Repairing Domain Shift in VLM Trajectory Planning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向以视觉语言模型（VLM）作为端到端轨迹规划器的自动驾驶系统，研究并缓减跨城市部署时的域偏移（domain shift）。 应用场景：同一 VLM 规划器在源城市数据上训练/微调后，迁移到目标城市（如 Boston→Singapore）进行未来自车轨迹预测。 研究问题：(Q1) VLM 轨迹规划器中的跨城市域偏移具有怎样的结构形式；(Q2) 基于该结构，何种修复策略优于统一的域适应对齐。 核心观察：作者通过激活修补（activation patching）发现域偏移沿“模态（图像 vs. 文本）”与“层”两个轴呈结构化分布，而非单一标量，因此提出“先定位、再修复”的框架 MoLaRx（Modality–Layer Repair）。 论文明确指出统一 MMD 对齐在全部六个主表设置中均失效，从而论证结构引导修复的必要性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.10720">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.10720.webp" alt="Locating and Repairing Domain Shift in VLM Trajectory Planning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向以视觉语言模型（VLM）作为端到端轨迹规划器的自动驾驶系统，研究并缓减跨城市部署时的域偏移（domain shift）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Locating and Repairing Domain Shift in VLM Trajectory Planning</h1>
+            <div class="detail-meta">2026-11-07 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.10720" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.10720" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.10720</span></div>
+            <p class="detail-summary">任务：面向以视觉语言模型（VLM）作为端到端轨迹规划器的自动驾驶系统，研究并缓减跨城市部署时的域偏移（domain shift）。 应用场景：同一 VLM 规划器在源城市数据上训练/微调后，迁移到目标城市（如 Boston→Singapore）进行未来自车轨迹预测。 研究问题：(Q1) VLM 轨迹规划器中的跨城市域偏移具有怎样的结构形式；(Q2) 基于该结构，何种修复策略优于统一的域适应对齐。 核心观察：作者通过激活修补（activation patching）发现域偏移沿“模态（图像 vs. 文本）”与“层”两个轴呈结构化分布，而非单一标量，因此提出“先定位、再修复”的框架 MoLaRx（Modality–Layer Repair）。 论文明确指出统一 MMD 对齐在全部六个主表设置中均失效，从而论证结构引导修复的必要性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Department of Informatics, University of Oslo, Norway · Zhihong Cui、Guandon…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.10720/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向以视觉语言模型（VLM）作为端到端轨迹规划器的自动驾驶系统，研究并缓减跨城市部署时的域偏移（domain shift）。</p>
+  <ul class="reading-intro-points"><li>任务：面向以视觉语言模型（VLM）作为端到端轨迹规划器的自动驾驶系统，研究并缓减跨城市部署时的域偏移（domain shift）。</li><li>应用场景：同一 VLM 规划器在源城市数据上训练/微调后，迁移到目标城市（如 Boston→Singapore）进行未来自车轨迹预测。</li><li>研究问题：(Q1) VLM 轨迹规划器中的跨城市域偏移具有怎样的结构形式；(Q2) 基于该结构，何种修复策略优于统一的域适应对齐。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Department of Informatics, University of Oslo, Norway；作者：Zhihong Cui、Guandong Xu、Amir Taherkordi、Tor Skeie</li><li>机构：Department of Computer Science, Aalborg University, Denmark；作者：Hengyu Liu</li><li>机构：Simula Metropolitan Center for Digital Engineering (SimulaMet), Norway；作者：Michael Alexander Riegler</li><li>机构：The Education University of Hong Kong, Hong Kong, China；作者：Guandong Xu</li><li>机构：Simula Research Laboratory, Norway；作者：原文未明确对应（未逐一说明 Tor Skeie、Amir Taherkordi 与 Simula Research Laboratory 的从属关系）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向以视觉语言模型（VLM）作为端到端轨迹规划器的自动驾驶系统，研究并缓减跨城市部署时的域偏移（domain shift）。</li><li>应用场景：同一 VLM 规划器在源城市数据上训练/微调后，迁移到目标城市（如 Boston→Singapore）进行未来自车轨迹预测。</li><li>研究问题：(Q1) VLM 轨迹规划器中的跨城市域偏移具有怎样的结构形式；(Q2) 基于该结构，何种修复策略优于统一的域适应对齐。</li><li>核心观察：作者通过激活修补（activation patching）发现域偏移沿“模态（图像 vs. 文本）”与“层”两个轴呈结构化分布，而非单一标量，因此提出“先定位、再修复”的框架 MoLaRx（Modality–Layer Repair）。</li><li>论文明确指出统一 MMD 对齐在全部六个主表设置中均失效，从而论证结构引导修复的必要性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>发现：揭示跨城市域偏移的模态–层结构，图像与文本 token 在不同 VLM 中呈现不同的逐层偏移模式；(F2) 层分区与架构相关但在不同数据集上稳定，据作者称为 VLM 轨迹规划器中首个联合模态–层的跨城市偏移刻画。</li><li>工具：提出 Causal Importance Score（CIS），一种基于激活修补的诊断量，逐 (modality, layer) 切片测量源域激活替换对目标域预测轨迹的因果影响，形成 2×L 的模态–层张量并用 Hoeffding 不等式给出估计置信界。</li><li>方法：提出 MoLaRx 定位–修复框架，CIS 定位偏移来源并将层划分为 Φ_align、Φ_tune、Φ_freeze 三个功能分区；CISR 为每个分区匹配修复算子（MMD 分布对齐 / LoRA 选择性再训练 / 冻结），算子组合随架构自动适配。</li><li>实验：在三种架构不同的 VLM（LFM2-VL-1.6B、Qwen2-VL-2B、PaliGemma2-3B）与两个跨城市基准（nuScenes、Argoverse 2）的全部六个主表设置中取得最小的跨城市轨迹误差差距，同时可训练参数减少 50–60%、推理时延降低 8.4–10.9 ms。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：VLM 端到端轨迹规划器的跨域适配模块，包含定位模块 CIS 与修复模块 CISR 两部分。</li><li>输入传感器：多模态输入 x ∈ X = I × C，即图像与文本上下文；图像 token 与文本 token 在隐藏状态中按位置索引区分为两个模态块。原文未报告具体相机数量、分辨率等传感器配置细节。</li><li>场景表示：以层 l 的隐藏状态 H^(l)(x) ∈ R^{T×d} 表示，并按模态切分为 H^(l)_{M_m}(x)；输出为 K 个自车 2D 位置（K=6 个 waypoint）。</li><li>模型结构：L 层堆叠骨干 + 解码器 Dec；跨域分布以“场景匹配对” P_paired 定义（按任务相关内容向量 k(·) ∈ R^3 做源域最近邻匹配），域偏移差距 G(f) 为配对样本预测轨迹的逐 waypoint 平均 ℓ2 距离。</li><li>关键技术一（CIS）：对每个 (m,l)，将目标域 H^(l)(x_t) 中模态 m 的 token 行替换为源域 H^(l)(x_s) 对应行，继续前向传播得到反事实轨迹，计算与未修补目标预测的逐 waypoint ℓ2 距离，在 N=100 个配对上取蒙特卡洛平均得到 Ψ̂[m,l]；据 Hoeffding 不等式（η=0.05、R≈20 m、N=100）给出约 0.6 m 的 95% 半宽。</li><li>关键技术二（分区）：以各模态排序后 CIS 值的拐点作为阈值 τ_img、τ_txt，按 Eq.11–13 划分 Φ_align（图像 CIS 高）、Φ_tune（文本 CIS 高且不属于 Φ_align）、Φ_freeze（其余层）。</li><li>关键技术三（CISR 算子）：Φ_align 上最小化源/目标图像 token 平均池化表示的多尺度 RBF 核 MMD²，并在注意力投影（Q、K、V、O）上挂 rank-r LoRA；Φ_tune 上以源域监督轨迹损失（下一 token 对数似然）驱动 rank-r=16、α=32、作用于全部线性投影的 LoRA；Φ_freeze 上零梯度冻结。</li><li>优化目标：最小化 G(f_{Θ′+Δ})，并约束源域误差不增长超过 ε（原论文 Eq.7）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes 与 Argoverse 2 两个跨城市基准；附录另报告 KITScenes-LongTail 长尾压力测试。</li><li>仿真器：原文未报告（未见 CARLA 等仿真器使用说明）。</li><li>模型规模：LFM2-VL-1.6B、Qwen2-VL-2B、PaliGemma2-3B 三种 VLM；LoRA 秩 r=16、α=32（Φ_tune 全部投影，Φ_align 仅注意力投影）。</li><li>训练资源：原文未报告具体 GPU 型号与数量；CIS 采样预算 N=100 配对、K=6 waypoints。</li><li>实车平台：原文未报告（评估为离线跨城市基准，未见实车部署）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：三种 VLM × 两个跨城市数据集，共六个主表设置（(VLM, dataset) 单元）。</li><li>评估指标：域偏移差距 G(f)（配对样本预测轨迹的逐 waypoint 平均 ℓ2 距离）、跨城市轨迹误差、位移（displacement）、最近模态准确率（closest-mode accuracy）、Partition Consistency Score（PCS），以及可训练参数量与推理时延。</li><li>关键数值：摘要报告 MoLaRx 在六个主表设置中均取得最小跨城市轨迹误差差距；可训练参数比对比方法少 50–60%；推理时延低 8.4–10.9 ms；正文引言示例给出域偏移导致轨迹误差从 0.15 m 增至 1.13 m（+653%）。</li><li>对比方法：无适配参考、统一/标量视角域适应（如统一 MMD、对抗对齐、CorAL、LoRA 适配器、测试时归一化）、层选择性非因果域适应（如按层带选择的 Surgical FT）、locate-then-edit 类方法（如 ROME / MEMIT / MMEdit 思路）；其中统一 MMD-only 适配在全部六个设置中均崩溃。</li><li>补充实验：消融研究、CIS 阈值（τ_img、τ_txt）敏感性、MMD 损失权重 λ_MMD 敏感性、时间帧数 N_frame 敏感性、CIS 配对预算 N 敏感性、计算效率、归纳协议控制、长尾压力测试、反向迁移（target→source）实验、跨城市视觉相似性不变性定性案例。</li><li>条件：评估为离线跨城市基准上的开环轨迹评估（对比预测轨迹与配对预测），原文未报告闭环仿真或实车测试结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.11131/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">CrossLiDAR: Controllable Multi-Sensor LiDAR Sequence Generation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.10632/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Latent-WAM++: Shaping World and Action Representations for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

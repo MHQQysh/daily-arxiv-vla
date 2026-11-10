@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SafeDriveVLA: Navigation-Conditioned World Model Dreaming for Conflict-Aware End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）模型，研究其以自然语言指令等开放式导航信号作为输入时的安全问题。 核心研究问题是“导航信号–场景冲突”：同一指令在不同场景下可能安全或不安全，VLA 需要判断应当立即执行、谨慎跟随还是覆盖该信号。 论文同时关注导航跟随能力、冲突感知能力与对抗指令鲁棒性，指出只测其一会导致模型在另一维度表现失真。 应用场景为闭环 CARLA 仿真驾驶与基于 NavSim 真实数据集的评估，涵盖指令跟随、冲突指令与恶意指令。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.20609">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.20609.webp" alt="SafeDriveVLA: Navigation-Conditioned World Model Dreaming for Conflict-Aware End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）模型，研究其以自然语言指令等开放式导航信号作为输入时的安全问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SafeDriveVLA: Navigation-Conditioned World Model Dreaming for Conflict-Aware End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-14 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.20609" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.20609" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.20609</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）模型，研究其以自然语言指令等开放式导航信号作为输入时的安全问题。 核心研究问题是“导航信号–场景冲突”：同一指令在不同场景下可能安全或不安全，VLA 需要判断应当立即执行、谨慎跟随还是覆盖该信号。 论文同时关注导航跟随能力、冲突感知能力与对抗指令鲁棒性，指出只测其一会导致模型在另一维度表现失真。 应用场景为闭环 CARLA 仿真驾驶与基于 NavSim 真实数据集的评估，涵盖指令跟随、冲突指令与恶意指令。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">UC Irvine · Shaoyuan Xie、Jingxuan Wang、Xiaoqing Liang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.20609/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）模型，研究其以自然语言指令等开放式导航信号作为输入时的安全问题。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）模型，研究其以自然语言指令等开放式导航信号作为输入时的安全问题。</li><li>核心研究问题是“导航信号–场景冲突”：同一指令在不同场景下可能安全或不安全，VLA 需要判断应当立即执行、谨慎跟随还是覆盖该信号。</li><li>论文同时关注导航跟随能力、冲突感知能力与对抗指令鲁棒性，指出只测其一会导致模型在另一维度表现失真。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：UC Irvine；作者：Shaoyuan Xie、Jingxuan Wang、Xiaoqing Liang、Junchi Lu、Qi Alfred Chen</li><li>机构：UC San Diego；作者：Zihan Zhang、Henrik I. Christensen</li><li>机构：University of Cincinnati；作者：Jiashu Qu</li><li>机构：National University of Singapore；作者：Lingdong Kong</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶中的 Vision-Language-Action（VLA）模型，研究其以自然语言指令等开放式导航信号作为输入时的安全问题。</li><li>核心研究问题是“导航信号–场景冲突”：同一指令在不同场景下可能安全或不安全，VLA 需要判断应当立即执行、谨慎跟随还是覆盖该信号。</li><li>论文同时关注导航跟随能力、冲突感知能力与对抗指令鲁棒性，指出只测其一会导致模型在另一维度表现失真。</li><li>应用场景为闭环 CARLA 仿真驾驶与基于 NavSim 真实数据集的评估，涵盖指令跟随、冲突指令与恶意指令。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出首个同时评估导航跟随与冲突感知（并包含对抗鲁棒性）的基准套件，包含 CARLA-F、B2D-C、NavSim-C 和 B2D-Adv。</li><li>设计显式的三级导航遵从模式（strict、cautious、fallback），对每个专家帧进行重标注，并在动作 token 之前输出模式 token，从而将冲突推理与动作生成解耦。</li><li>提出导航条件化的世界模型 dreaming：与先前在世界模型中回放专家或规划动作不同，该方法在严格遵循导航信号所隐含动作的条件下推演未来潜变量，以显现跟随是否安全。</li><li>构建基于 InternVL3-1B 的自回归 VLA，结合离散动作码本与辅助路径头，并支持命令、目标路点、语言指令三种导航模态。</li><li>在 Bench2Drive 取得 88.16 DS 与 68.64% SR，将闭环语言跟随平均 NCR 提升至 83.0%，并在 B2D-C 上将碰撞从 60 降至 38。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端驾驶 VLA，包含驾驶模式归因、潜在世界模型、VLA 三个组件；输入为前视相机帧与导航信号（离散命令、目标路点或自然语言指令）。</li><li>场景表示：世界模型基于冻结的 V-JEPA 2 ViT-L 目标编码器，使用连续两帧编码一个潜变量（携带 0.25 s 运动信息），在 2.5 s 时域、2 Hz 下进行动作条件化预测。</li><li>世界模型结构：Transformer 动作条件预测器从零训练，采用教师强制与自回归损失；训练时冻结，推理时按导航信号隐含的 meta-command 选择动作锚点，从当前潜变量向前推演 5 步得到 dreamed latents。</li><li>VLA 结构：InternVL3-1B 主干经 LoRA 微调，输出模式 token（<code>&lt;STRICT&gt;</code>、<code>&lt;CAUTIOUS&gt;</code>、<code>&lt;FALLBACK&gt;</code>）后接 <code>&lt;ACTIONS&gt;</code> 分隔符及 T=10 个离散动作 token（4 Hz，对应 2.5 s），动作来自 N=2048 的运动基元码本；轻量 MLP 头在 <code>&lt;ACTIONS&gt;</code> 隐状态上回归 20 个自车坐标系路径点，供横向 PID 控制，纵向速度由离散动作 token 积分得到。</li><li>关键技术：按 meta-command 预计算动作锚点（对 2.5 s 训练轨迹取平均，变道锚点经标定）；语言指令通过词表匹配解析为 meta-command；未来专家轨迹仅用于构造训练标签，推理时不使用。</li><li>原文未报告明确的世界模型参数量与 VLA 总模型规模。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集与基准：Bench2Drive（220 条路线）、NavSim（12,146 帧）、作者构建的 CARLA-F（210 条路线）、B2D-C（150 条路线）、NavSim-C（300 帧）、B2D-Adv（15 条路线）。</li><li>仿真器：CARLA（用于 CARLA-F、B2D-C、B2D-Adv 闭环评测）；NavSim 用于开环/非反应式诊断评估。</li><li>训练数据：Renz 等人收集的 PDM-Lite 专家轨迹，世界模型在 CARLA 数据集上预训练，危险探测探针使用 5,095 段无危险起始的片段。</li><li>模型规模：VLA 主干为 InternVL3-1B；世界模型使用 V-JEPA 2 ViT-L 编码器；动作码本 N=2048；原文未报告总参数量、训练算力与训练时长。</li><li>实车平台：原文未报告实车平台，评估均为仿真或数据集评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Bench2Drive 闭环、CARLA-F 闭环、B2D-C 闭环、B2D-Adv 闭环，以及 NavSim-C 的评估型诊断（作者说明因 SafeDriveVLA 为 CARLA 训练的单视图模仿模型而未在其上评测）。</li><li>评估指标：DS、SR、Efficiency、Comfortness；CARLA-F 使用 Navigation Compliance Rate（NCR）与 Speed Error（SE）；NavSim-C 使用 NC、DAC、TTC、comfort、EP 与 PDMS；B2D-C 额外报告碰撞、交通违规、偏离路线次数。</li><li>Bench2Drive 结果：SafeDriveVLA 在 WP 导航下达到 88.16 DS、68.64% SR、264.51 Efficiency、30.14 Comfortness；在 CMD 导航下为 87.29 DS、68.18% SR；相较 SimLingo（同源 PDM-Lite 数据）平均提升 +2.15 DS 与 +1.89% SR。</li><li>CARLA-F 结果：语言指令下平均 NCR 83.0%（左变道 63.6%、右变道 72.4%），SimLingo 系列最高仅 55.6% 且两个变道方向均为 0%；命令输入下 SafeDriveVLA 为 78.8%，SimLingo 为 73.6%；命令专用模型 ORION 平均 NCR 为 87.8%，高于 SafeDriveVLA，作者归因于其容量集中于少量离散命令。</li><li>B2D-C 结果：SafeDriveVLA 达到 85.9 DS、67.3% SR，碰撞 38（较最佳 SimLingo 变体降低 36.7%）、交通违规 9（降低 85.2%）、偏离路线 4（降低 63.6%）；SimLingo-Safe 为 72.8 DS、38.0% SR、60 次碰撞。</li><li>NavSim-C 诊断：所有被测模型在冲突命令下显著退化；AutoVLA PDMS 从 88.2 降至 70.7、DAC 降至 79.0；DriveVLA-W0 与 ReCogDrive 分别下降 10.1 与 8.8 PDMS；CuriousVLA 表现最好，PDMS 84.4（下降 6.2）、EP 85.4。</li><li>B2D-Adv 结果：对抗指令使 SimLingo DS 从 95.7 降至 76.0，SafeDriveVLA 从 94.7 降至 83.9（退化 10.8 对 19.7）；无模式 token 与世界模型输入的同主干模型退化最大（93.0 降至 69.7）。</li><li>世界模型探针：预测潜变量在 0.5–2.5 s 各时域的危险 AUC 均高于首帧潜变量（如 1.5 s：0.73 对 0.65，oracle 0.75，恢复 78%），并恢复 oracle 增益的 49–78%；真值动作回放的 ℓ1 距离小于零动作与镜像动作。</li><li>消融：论文以 CARLA-F NCR 对 B2D-C DS 的 Pareto 前沿分析各设计选择，指出提示与数据扩增等朴素干预会在两个目标间此消彼长（如 SimLingo-IF 仅提升 NCR 3.2 点，却使 B2D-C DS 下降 16.5、碰撞从 66 增至 166）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.20866/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SHRED: Self-Play for Heterogeneous Road-Users without Expert Demonstrations</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.20203/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Investigating Behavior Cloning from Few Demonstrations for Autonomous Driving based on Bird&#x27;s-Eye View in Simulated Cities</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
