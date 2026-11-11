@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Squeeze-Aware-YOLO: Early Channel Recalibration and Multi-Scale Fusion for Real-Time Traffic Sign Detection - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：实时交通标志检测（traffic sign detection）。 应用场景：智能交通系统、高级驾驶辅助系统（ADAS）与自动驾驶车辆。 研究问题：在光照变化、恶劣天气、运动模糊、部分遮挡等条件下，小尺寸或视觉退化交通标志检测性能下降，重要空间信息易丢失；同时需要在嵌入式/资源受限平台上保持实时推理效率。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.15604">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.15604.webp" alt="Squeeze-Aware-YOLO: Early Channel Recalibration and Multi-Scale Fusion for Real-Time Traffic Sign Detection" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：实时交通标志检测（traffic sign detection）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Squeeze-Aware-YOLO: Early Channel Recalibration and Multi-Scale Fusion for Real-Time Traffic Sign Detection</h1>
+            <div class="detail-meta">2026-10-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.15604" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.15604" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.15604</span></div>
+            <p class="detail-summary">任务：实时交通标志检测（traffic sign detection）。 应用场景：智能交通系统、高级驾驶辅助系统（ADAS）与自动驾驶车辆。 研究问题：在光照变化、恶劣天气、运动模糊、部分遮挡等条件下，小尺寸或视觉退化交通标志检测性能下降，重要空间信息易丢失；同时需要在嵌入式/资源受限平台上保持实时推理效率。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Dept. of Computer Science and Engineering, Islamic University of Technology…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.15604/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：实时交通标志检测（traffic sign detection）。</p>
+  <ul class="reading-intro-points"><li>任务：实时交通标志检测（traffic sign detection）。</li><li>应用场景：智能交通系统、高级驾驶辅助系统（ADAS）与自动驾驶车辆。</li><li>研究问题：在光照变化、恶劣天气、运动模糊、部分遮挡等条件下，小尺寸或视觉退化交通标志检测性能下降，重要空间信息易丢失；同时需要在嵌入式/资源受限平台上保持实时推理效率。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Dept. of Computer Science and Engineering, Islamic University of Technology, Boardbazar, Gazipur, Bangladesh；作者：Mizbaul Haque Maruf、Syed Samin Sadaf、Syed Tamzid Bakht、Md. Hasanul Kabir、Sabbir Ahmed</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：实时交通标志检测（traffic sign detection）。</li><li>应用场景：智能交通系统、高级驾驶辅助系统（ADAS）与自动驾驶车辆。</li><li>研究问题：在光照变化、恶劣天气、运动模糊、部分遮挡等条件下，小尺寸或视觉退化交通标志检测性能下降，重要空间信息易丢失；同时需要在嵌入式/资源受限平台上保持实时推理效率。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种 SE（Squeeze-and-Excitation）增强的三瓶颈（triple-bottleneck）特征提取模块，将自适应通道重校准与渐进式多尺度表示学习结合，放置在网络输入端做早期特征细化。</li><li>提出统一的架构增强，将重参数化分层特征提取（RepHMS）与高效多尺度特征融合（MAFPN 中的 SAF、AAF）协同结合，促进跨语义层的信息交换。</li><li>在 BTSD、CCTSDB2021、GTSDB 三个地理区域、标志类别体系和采集条件不同的基准上独立训练与评估，验证方法的一致性。</li><li>提供逐类失败分析，刻画性能提升与回退发生的类别（增益集中在基线表现差的类别，回退集中在基线已解决的类别）。</li><li>保持轻量化：参数量约 2.2M，与基线参数量相当，兼顾精度与实时性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于 YOLOv10 的单阶段检测框架，扩展为 SE 增强输入阶段、分层骨干网络和多分支特征金字塔颈部；并采用 MHAF-YOLO 的 RepHMS 与多分支融合策略。</li><li>输入传感器：原文未报告（仅使用图像数据集，未说明具体车载传感器配置）。</li><li>场景表示：输入图像经 letterbox 缩放至 640×640，像素值归一化至 [0,1]，标注为归一化 YOLO 格式；网络在 P2–P5 四个阶段提取分层特征。</li><li>模型结构：</li></ul>
+<p> - SE 增强三瓶颈块：双分支设计，第一分支用 1×1 卷积、步长 2 下采样保留 shortcut 信息；第二分支经同样卷积后串联 Type-1、Type-2、Type-1 三个瓶颈（Type-1 使用 1×1 卷积加 3×3 与深度卷积；Type-2 使用 5×5 卷积扩大感受野），每个瓶颈含自适应平均池化（AAP）、全连接层与跳跃连接；两分支通道拼接后经 1×1 卷积投影回 C_out 通道。</p>
+<p> - SE 机制：Squeeze 用全局平均池化得到通道描述子，Excitation 用 W1（降维比 r）、SiLU、W2、Sigmoid 生成通道权重，Recalibration 做通道乘法；计算复杂度为 O(2C²/r)，r 取 8 或 16。</p>
+<p> - 分层骨干：四阶段（P2–P5），RepHMS 模块使用 3×3、5×5、7×7、9×9 异构卷积核捕获局部与全局上下文。</p>
+<p> - 多分支特征金字塔：SAF 将深层信息与浅层空间特征融合以利小目标检测；AAF 聚合浅层高分辨率、浅层低分辨率、同级与上一层信息；融合前各分支经最近邻上采样 U(·)、步长卷积下采样 Down(·)、全局平均池化 GAP 与 1×1 卷积对齐到目标分辨率 H_n×W_n，通道拼接后再经 1×1 卷积投影回 C_n。</p>
+<p> - RepHMS：输入经 1×1 卷积后分成 N 个并行分支，首个分支保留原始特征，其余分支用 M 个级联 RepHDWConv 逐步细化并逐级传递；输出通道拼接后由 1×1 卷积融合；RepHDWConv 训练时使用多种核尺寸的深度卷积，推理时重参数化为单一深度卷积。</p>
+<ul><li>关键技术：通道注意力（SE）、多尺度异构卷积、结构重参数化、多分支辅助特征金字塔融合。</li><li>原文未报告：传感器类型、具体部署硬件平台、模型各层的精确通道数配置。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：</li></ul>
+<p> - CCTSDB2021：18,356 张交通场景图像，含强制、禁止、警告三类标志，5,260 张额外真实图像，五个标志尺寸等级与六种天气条件，2,000 张含负样本测试集，训练子集 16,356 张。</p>
+<p> - BTSD：2,986 张图像、3,063 个标注标志、15 个类别；训练集 2,324 张，测试集 662 张。</p>
+<p> - GTSDB：900 张道路图像、约 1,200 个标注标志，含禁止、危险、强制类别；使用扩展版本（额外 296 张图像），划分为 788 张训练、218 张验证、190 个测试实例。</p>
+<ul><li>仿真器：原文未报告。</li><li>模型规模：参数量约 2.2M；GFLOPs 在 6.3–8.7 之间；参数量对比范围为 2.27M–3.01M；权重初始化自 MAF-YOLOv2-N 预训练参数（1,411 个参数组中 1,399 个迁移）。</li><li>训练资源：单块 NVIDIA GeForce RTX 3090 GPU；Python 3.12.12、Ultralytics 8.1.34、PyTorch 2.2.0（CUDA 12.1）、NumPy 1.26.4；最多 700 个 epoch，batch size 16，早停 patience 70；优化器由 Ultralytics 自动选择（在该训练长度下为 SGD），动量 0.937，权重衰减 5×10⁻⁴，学习率 0.01 衰减至 1%，3 个 epoch 预热。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：BTSD、CCTSDB2021、GTSDB，每个数据集独立训练与评估（非跨域迁移）。</li><li>评估指标：Precision、Recall、F1-score、逐类 AP、mAP@IoU=0.5；另报告 GFLOPs、参数量与分阶段运行时间。</li><li>关键数值（mAP@0.5）：</li></ul>
+<p> - BTSD：Squeeze-Aware-YOLO 0.747，对比 YOLOv8 0.663、YOLOv10 0.679、YOLOv11 0.668、MHAF-YOLO 0.685（较次优模型提升 6.2 个百分点）。</p>
+<p> - CCTSDB2021：Squeeze-Aware-YOLO 0.794，YOLOv8 0.794、YOLOv10 0.792、YOLOv11 0.804（最高）、MHAF-YOLO 0.769。</p>
+<p> - GTSDB：Squeeze-Aware-YOLO 0.840（最高），YOLOv8 0.809、YOLOv10 0.826、YOLOv11 0.836、MHAF-YOLO 0.816。</p>
+<ul><li>逐类结果：</li></ul>
+<p> - BTSD 15 类中在 5 类取得最佳；Sharp Bend (Right) 0.894、No Horn 0.952、SL60 0.950、Side Rd. (L) 0.831 等；Sharp Bend (Left) 仅 0.320、U-Turn 0.514。</p>
+<p> - GTSDB 在 Mandatory 类领先（0.760），Others 与 YOLOv11 持平（0.825），Danger 和 Prohibitory 略低于 YOLOv8/YOLOv10。</p>
+<ul><li>失败分析：按基线难度分组，4 个困难类（基线 &lt;0.60）平均提升 0.359 mAP（4/4 提升）；7 个中等类平均 +0.004（3/7 提升）；4 个简单类（≥0.90）平均下降 0.310（0/4 提升）。镜像对称标志（左右急弯）的回退被归因于 SE 的朝向无关性与水平翻转增强。</li><li>消融实验（mAP@0.5）：</li></ul>
+<p> - MHAF 基线：BTSD 0.685 / CCTSDB2021 0.769 / GTSDB 0.816。</p>
+<p> - 加 TLB：0.722 / 0.783 / 0.832（分别 +3.7、+1.4、+1.6）。</p>
+<p> - 加 TLB+SE：0.747 / 0.794 / 0.840（分别 +6.2、+2.5、+2.4）。</p>
+<ul><li>运行时：Squeeze-Aware-YOLO 在 CCTSDB2021 上 9.7 ms、BTSD</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.15745/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SpikeOcc: Towards Resilient Multimodal 3D Occupancy Perception via Spiking Experts</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.15359/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Adversarial Detection for Pre-trained Classifiers via Lipschitz-Margin Analysis with Certification</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

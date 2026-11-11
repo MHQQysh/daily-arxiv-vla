@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>URL-Sim: Unified and Regulated LiDAR Simulation for High-Fidelity Reconstruction of Dynamic Driving Scenes - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。 应用场景：面向自动驾驶系统感知与规划算法的低成本安全验证，以及大规模闭环仿真。 研究问题：现有 NeRF 类 LiDAR 仿真方法渲染慢；现有 3DGS 类方法多局限于刚性车辆，缺乏对行人、骑行者等非刚性目标的统一建模，且无约束致密化导致高斯基元冗余。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.12932">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.12932.webp" alt="URL-Sim: Unified and Regulated LiDAR Simulation for High-Fidelity Reconstruction of Dynamic Driving Scenes" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">URL-Sim: Unified and Regulated LiDAR Simulation for High-Fidelity Reconstruction of Dynamic Driving Scenes</h1>
+            <div class="detail-meta">2026-11-06 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.12932" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.12932" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.12932</span></div>
+            <p class="detail-summary">任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。 应用场景：面向自动驾驶系统感知与规划算法的低成本安全验证，以及大规模闭环仿真。 研究问题：现有 NeRF 类 LiDAR 仿真方法渲染慢；现有 3DGS 类方法多局限于刚性车辆，缺乏对行人、骑行者等非刚性目标的统一建模，且无约束致密化导致高斯基元冗余。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">重庆大学机械与运载工程学院（College of Mechanical and Vehicle Engineering, Chongqing Univ…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.12932/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。</p>
+  <ul class="reading-intro-points"><li>任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。</li><li>应用场景：面向自动驾驶系统感知与规划算法的低成本安全验证，以及大规模闭环仿真。</li><li>研究问题：现有 NeRF 类 LiDAR 仿真方法渲染慢；现有 3DGS 类方法多局限于刚性车辆，缺乏对行人、骑行者等非刚性目标的统一建模，且无约束致密化导致高斯基元冗余。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：重庆大学机械与运载工程学院（College of Mechanical and Vehicle Engineering, Chongqing University）；作者：Kefei Qian、Xipeng Feng、Jie Li、Long Cao、Yuhan Chen、Xiangfei Huang、Guofa Li</li><li>机构：原文未明确对应其他机构；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。</li><li>应用场景：面向自动驾驶系统感知与规划算法的低成本安全验证，以及大规模闭环仿真。</li><li>研究问题：现有 NeRF 类 LiDAR 仿真方法渲染慢；现有 3DGS 类方法多局限于刚性车辆，缺乏对行人、骑行者等非刚性目标的统一建模，且无约束致密化导致高斯基元冗余。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出统一的动态 LiDAR 仿真框架 URL-Sim，将刚性车辆、SMPL 行人以及无模板非刚性对象（如骑行者）纳入同一动态高斯场景图进行建模。</li><li>提出受调控高斯致密化（RGD）策略，通过二次预算分配和多维重要性评分，在总基元数有界的前提下平衡仿真精度与计算开销。</li><li>在 Waymo 和 KITTI-360 数据集上验证了对非刚性交通参与者几何与位姿的准确恢复，并在相近基元预算下取得优于现有基线的 2D 感知质量与 3D 几何精度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：LiDAR 仿真与动态场景重建；整体流程包括动态高斯场景图构建、可微 LiDAR 光线追踪渲染、RGD 训练期致密化以及后处理 U-Net。</li><li>输入传感器：原始 LiDAR 点云与目标跟踪边界框；原始数据被解析为深度图和强度图。</li><li>场景表示：以 2D 高斯泼溅（2DGS）为基本图元，参数包括均值位置、缩放、旋转四元数、不透明度、强度以及射线丢失概率；强度与射线命中/丢失对数通过球谐系数建模方向依赖。场景被分解为静态背景、刚性实例、SMPL 行人和一般可变形实例。</li><li>模型结构：刚性对象在对象中心规范空间建模并按时戳做刚体变换；行人高斯绑定到 SMPL 网格顶点，通过 LBS 和可优化体素变形器驱动蒙皮变形，初始姿态参数由图像域观测获得；无模板非刚性对象由轻量变形网络预测位置、旋转与尺度残差，网络参数全局共享并以实例级嵌入区分不同对象。</li><li>关键技术：RGD 按二次增长曲线分配每轮致密化预算，并以属性重要性、射线渲染贡献、距离、交叠频率和 geo-semantic 边缘图构建重要性分数，进行加权随机重采样与剪枝；训练损失联合深度、中值深度、强度、SSIM、畸变、射线丢失 BCE、点云 Chamfer 及正则项。</li><li>原文未报告：变形网络的具体层数、隐藏维度等网络细节，以及各损失权重的具体取值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Waymo Open Dataset（64 线 LiDAR，10 Hz，20° 垂直 FOV，64×2560 深度/强度图）与 KITTI-360（64 线 LiDAR，10 Hz，26.4° 垂直 FOV，投影为 64×1030）。每个数据集选取 4 个含非刚性动态实例的序列，每序列取 50 帧，每 10 帧中的第 10 帧作为测试集。</li><li>仿真器：原文未报告使用外部仿真器。</li><li>模型规模：高斯基元总数上限为 300 万；未报告网络参数量。</li><li>训练资源：原文未报告 GPU 型号、数量与训练时长。</li><li>实车平台：原文未报告实车部署平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Waymo Open Dataset 与 KITTI-360 上的动态场景重建；对比方法包括 DyNFL、LiDAR-NeRF、LiDAR4D、LiDAR-GS、GS-LiDAR 和 LiDAR-RT。</li><li>评估指标：2D 深度与强度的 RMSE、MedAE、LPIPS、SSIM、PSNR；3D 点云的 Chamfer Distance（CD）与 5 cm 阈值 F-Score；效率指标 FPS 与高斯基元数量。</li><li>关键数值（Waymo）：URL-Sim 为 17.6 FPS、3.00M 基元，深度 RMSE 5.9844、MedAE 0.0184、LPIPS 0.2042、SSIM 0.7154、PSNR 22.5603；强度 RMSE 0.0503、MedAE 0.0052、LPIPS 0.1377、SSIM 0.8259、PSNR 26.5183；CD 0.0468、F-Score 0.9682。LiDAR-RT 为 20.1 FPS、3.17M 基元，深度 RMSE 6.3597，CD 0.0863、F-Score 0.9461。</li><li>关键数值（KITTI-360）：URL-Sim 为 22.3 FPS、3.00M 基元，深度 RMSE 3.4700、MedAE 0.0277、LPIPS 0.0583、SSIM 0.9162、PSNR 27.3792；强度 RMSE 0.0844、MedAE 0.0233、LPIPS 0.1404、SSIM 0.7334、PSNR 21.5475；CD 0.0909、F-Score 0.9447。</li><li>消融结果：Waymo 上移除非刚性建模（w/o NRM）后 F-Score 降至 0.9543；移除 RGD（w/o RGD）后 PSNR 与 CD 分别变差至 26.0181 与 0.0710；KITTI-360 上完整 RGD 在多项指标上最优（如 CD 0.0798、F-Score 0.9577 对应的 RGD 行）。</li><li>评估条件：全部为数据驱动开环重建与仿真评估，原文未报告闭环规划评估或实车测试。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.12958/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Embodied Science Agents: Making Embodied Experimental Design Learnable</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.18373/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DR-VLA: Learning Human-Like Quadruped Navigation from Egocentric Web Videos via Domain-Invariant Scene Representations</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

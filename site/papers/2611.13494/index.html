@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Route-Time Conflict Maps for Cooperative End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。 应用场景：交叉口、汇入、换道等车辆相遇处，多车（1–8 辆受控车辆）需决定通行顺序的闭环驾驶场景。 研究问题：现有协同端到端工作在 Class A（仅共享感知状态），各车独立决策何时通行，导致双方同时让行时死锁、双方同时通行时碰撞；论文要解决如何在共享意图基础上使多车通行决策彼此一致。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.13494">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.13494.webp" alt="Route-Time Conflict Maps for Cooperative End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Route-Time Conflict Maps for Cooperative End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.13494" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.13494" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.13494</span></div>
+            <p class="detail-summary">任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。 应用场景：交叉口、汇入、换道等车辆相遇处，多车（1–8 辆受控车辆）需决定通行顺序的闭环驾驶场景。 研究问题：现有协同端到端工作在 Class A（仅共享感知状态），各车独立决策何时通行，导致双方同时让行时死锁、双方同时通行时碰撞；论文要解决如何在共享意图基础上使多车通行决策彼此一致。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of Georgia · Handong Yao（通讯作者、原文该机构标注仅出现在 Handong Yao 名下）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.13494/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。</p>
+  <ul class="reading-intro-points"><li>任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。</li><li>应用场景：交叉口、汇入、换道等车辆相遇处，多车（1–8 辆受控车辆）需决定通行顺序的闭环驾驶场景。</li><li>研究问题：现有协同端到端工作在 Class A（仅共享感知状态），各车独立决策何时通行，导致双方同时让行时死锁、双方同时通行时碰撞；论文要解决如何在共享意图基础上使多车通行决策彼此一致。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of Georgia；作者：Handong Yao（通讯作者，原文该机构标注仅出现在 Handong Yao 名下）</li><li>机构：原文未明确对应；作者：Haohua Que、Mingkai Liu、Tianle Zhu、Zhipeng Bao、Yiping Li（原文未标注其所属机构）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。</li><li>应用场景：交叉口、汇入、换道等车辆相遇处，多车（1–8 辆受控车辆）需决定通行顺序的闭环驾驶场景。</li><li>研究问题：现有协同端到端工作在 Class A（仅共享感知状态），各车独立决策何时通行，导致双方同时让行时死锁、双方同时通行时碰撞；论文要解决如何在共享意图基础上使多车通行决策彼此一致。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 route-time conflict map（路线—时间冲突图）：将融合检测、预测运动与伙伴车辆广播的计划表示为沿自车未来路线的占用，覆盖规划时域，供规划器评分候选速度曲线。</li><li>提出 order gate（顺序门）：在广播的意图轨迹上构建反对称的优先级网络（由通行权规则蒸馏得到的 precedence network），产生无环顺序，并将该顺序作为占用绘入冲突图，使车辆在相同消息上得出同一通行顺序。</li><li>提出对专家不可解释停车的时间维度重标注：模仿 V2Xverse 中可见仿真真值的规则专家，但对 When2Go 在其 2 s 规划时域内无法观测到原因的停车进行重标注，避免学习无观测依据的等待。</li><li>声明为（据作者所知）首个 CDA Class B 及以上的端到端规划器，并在三个闭环 CARLA 基准上以单一端到端模型取得 state-of-the-art 结果，同时在公开 V2Xverse 协议上复跑 16 个方法与 2 个变体并给出配对 95% 置信区间。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：感知—预测—协同融合—规划的一体化端到端系统（When2Go），包含感知/预测/协同融合、冲突图构建、规划、顺序门、训练与推理细节等子节。</li><li>输入传感器：LiDAR 检测（原文明确“broadcasts its LiDAR detections with forecast motion as instance tokens”）；其他传感器原文未报告。</li><li>场景表示：route-time conflict map，即以“沿路线位置 × 未来时间”的占用表示融合检测、预测运动与伙伴计划；顺序门结果也以占用形式进入该图。</li><li>模型结构与关键技术：车辆广播 LiDAR 检测及其预测运动（instance tokens）、自车计划与意图轨迹；接收方融合检测、预测与伙伴计划绘制冲突图；规划器在冲突图上对候选速度剖面打分，学习未来两秒内行驶距离（从静止到全速）；基准的 PID 控制器跟踪其路点，且无手写规则覆盖；order gate 在两条意图轨迹冲突处决定谁先行，双方在相同两条消息上评估，理想信道下无需 Class C 的多轮消息即可达成一致。</li><li>未报告信息：网络的具体层数、参数量、特征维度等结构细节原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集/基准：InterDrive（无背景交通与有背景交通两种设置）、V2Xverse（公开协议）、MDrive，均为闭环 CARLA 基准。</li><li>仿真器：CARLA。</li><li>模型规模：原文未报告具体参数量或模型规模。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告（评估均在 CARLA 闭环仿真中进行）。</li><li>其他资源：V2Xverse 的规则专家（可见仿真真值）用于模仿学习；实验中复跑 16 个已发表方法与 2 个变体（除一个重实现外均来自发布的 checkpoint）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与条件：三个闭环 CARLA 基准（InterDrive、V2Xverse 公开协议、MDrive），单一模型评估；论文仅报告闭环仿真结果，未报告开环或实车结果。</li><li>评估指标：driving score；V2Xverse 上另报告与其他车辆碰撞的运行数；MDrive 上报告无碰撞车辆百分比；并给出方法差异的配对 95% 置信区间。</li><li>关键数值：InterDrive 无交通 97.8、有交通 90.7（已发表最好为 90.1 与 78.9）；V2Xverse 公开协议 70.0（复跑的 16 个方法最好为 59.1），100 次运行中 6 次与其他车辆碰撞（协同类复跑方法为 38 至 69 次）；MDrive 88.2（复跑最好 85.1），95.0% 的车辆无碰撞（对比最高 87.7%）。</li><li>对比方法：已发表方法（InterDrive 的最优已发表结果）、V2Xverse 上复跑的 16 个已发表方法与 2 个变体、MDrive 上的复跑方法；另含消融实验与不完美通信（imperfect communication）实验。</li><li>说明：论文对基准默认 PID 控制器做了仅用于其自身运行的调整（按 When2Go 路点而非路线转向，并关闭对长时间等待车辆的强制推动），该调整在原文中作为实验条件明确报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.13790/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">RiSE-Drive: Risk-Sensitive Long-Horizon Candidate Evaluation for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.12958/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Embodied Science Agents: Making Embodied Experimental Design Learnable</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

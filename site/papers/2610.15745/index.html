@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SpikeOcc: Towards Resilient Multimodal 3D Occupancy Perception via Spiking Experts - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。 应用场景为车载感知在传感器部分失效（相机缺失、激光雷达缺失）条件下的可靠运行，针对现有方法默认推理时所有模态完整可用的隐含假设。 核心研究问题是“模态中断脆弱性”：强多模态占据模型在完整传感器下精度高，但移除前视相机即明显退化，整模态缺失时性能灾难性崩塌。 同时探索脉冲神经网络（SNN）作为提升多模态占据感知韧性的表示范式，并处理脉冲神经元离散性带来的优化困难。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.15745">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.15745.webp" alt="SpikeOcc: Towards Resilient Multimodal 3D Occupancy Perception via Spiking Experts" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SpikeOcc: Towards Resilient Multimodal 3D Occupancy Perception via Spiking Experts</h1>
+            <div class="detail-meta">2026-10-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.15745" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.15745" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.15745</span></div>
+            <p class="detail-summary">论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。 应用场景为车载感知在传感器部分失效（相机缺失、激光雷达缺失）条件下的可靠运行，针对现有方法默认推理时所有模态完整可用的隐含假设。 核心研究问题是“模态中断脆弱性”：强多模态占据模型在完整传感器下精度高，但移除前视相机即明显退化，整模态缺失时性能灾难性崩塌。 同时探索脉冲神经网络（SNN）作为提升多模态占据感知韧性的表示范式，并处理脉冲神经元离散性带来的优化困难。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Peking University · Yiding Sun、Zijie Xu、Jiajun Cao 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.15745/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。</p>
+  <ul class="reading-intro-points"><li>论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。</li><li>应用场景为车载感知在传感器部分失效（相机缺失、激光雷达缺失）条件下的可靠运行，针对现有方法默认推理时所有模态完整可用的隐含假设。</li><li>核心研究问题是“模态中断脆弱性”：强多模态占据模型在完整传感器下精度高，但移除前视相机即明显退化，整模态缺失时性能灾难性崩塌。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Peking University；作者：Yiding Sun、Zijie Xu、Jiajun Cao、Kai Tang、Wenxuan Liu、Zhaofei Yu、Tiejun Huang</li><li>机构：Xi’an Jiaotong University；作者：Yiding Sun、Dongxu Zhang、Jihua Zhu</li><li>机构：Zhejiang University；作者：Hongqiang Lin</li><li>机构：Tsinghua University；作者：Dongxu Zhang</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。</li><li>应用场景为车载感知在传感器部分失效（相机缺失、激光雷达缺失）条件下的可靠运行，针对现有方法默认推理时所有模态完整可用的隐含假设。</li><li>核心研究问题是“模态中断脆弱性”：强多模态占据模型在完整传感器下精度高，但移除前视相机即明显退化，整模态缺失时性能灾难性崩塌。</li><li>同时探索脉冲神经网络（SNN）作为提升多模态占据感知韧性的表示范式，并处理脉冲神经元离散性带来的优化困难。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>揭示并刻画多模态占据模型（MMOM）中的模态中断脆弱性，指出完整传感器精度与传感器故障下韧性之间存在被忽视的差距。</li><li>提出 SpikeOcc，原文称为首个面向三维占据预测的脉冲驱动多模态占据模型，确立脉冲计算作为可行表示范式并识别将传统融合迁移到脉冲机制的关键难点。</li><li>从架构角度提出脉冲混合专家（SMoE），将 RGB、LiDAR 与联合融合分解为专用脉冲通路，保留全宽单模态表示与原始多模态特征的有限残差。</li><li>从学习角度提出传感器可用性学习（SAL），采用三阶段课程与显式路由监督，学习跨多种传感器可用状态；原文称 SAL 也能为传统 MMOM 带来韧性增益。</li><li>实验表明 SpikeOcc 在完整传感器下与对比方法精度相当，同时显著抬高模态中断条件下的性能下限。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块为多模态三维占据预测框架，包含相机编码器、LiDAR 编码器、SMoE 融合模块、占据预测头以及 SAL 训练策略；整体结构见原文图 3。</li><li>输入传感器为 N_c 路同步相机图像与聚合 LiDAR 点云；引入二值视图掩码 m、LiDAR 可用指示 m_l、相机可用指示 m_c 与可用比例 r_c，构成可用性描述子 a=(m, m_c, m_l, r_c)，并要求至少一个模态可用。</li><li>场景表示为空间对齐的体素特征：相机与 LiDAR 编码器分别输出体素特征 C_0、L_0，经可用性掩码与 1×1×1 卷积投影得到 C 与 L，宽度均为 d，融合接口宽度 D=2d。</li><li>SMoE 采用“宽度优先分解”，设置 RGB 专家 E_c、LiDAR 专家 E_l 与联合专家 E_j，每个专家输出 D 通道表示；单模态专家使用全宽输出以避免模态缺失时占据预测器输入容量下降，联合专家以原始掩码拼接 B=[C̃_0;L̃_0] 为基础学习有界残差。</li><li>脉冲残差生成使用参数化泄漏积分发放（PLIF）神经元，膜电位动态含可学习衰减系数 β=σ(θ_β)，发放采用硬阈值与软重置；反向传播用 sigmoid 替代梯度，α=4；脉冲瓶颈将通道压缩至 D/4 后扩展回 D；对 T 个内部时间步输出取平均，样本间重置膜状态。</li><li>单模态专家形式为 F_c=ψ_c(C)+γ_c R̄_c、F_l=ψ_l(L)+γ_l R̄_l，γ 初始化为 0.01；联合专家形式为 F_j=B+ρR̄_j，ρ=ρ_max σ(θ_ρ)，ρ_max=0.2，ρ 初始化为 0.01。</li><li>路由模块以全局平均池化特征 g_c、g_l 与 m_c、m_l、r_c 拼接，经两层 MLP 输出三个 logits；用可用性向量 q=(m_c, m_l, m_c m_l) 屏蔽需缺失模态的专家，再对剩余 logits 做加权归一化并融合各专家特征。</li><li>SAL 中掩码在相机分支传播到体素池化前的视锥特征，并排除不可用相机的深度监督；课程按训练轮次从完整感知逐步过渡到传感器故障，按类别分布采样传感器状态；训练损失包含占据损失（类加权交叉熵、语义缩放、几何缩放、Lovasz-Softmax，权重均为 1）、仅有效视图上的深度损失，以及权重 λ_r=0.05 的路由交叉熵损失。</li><li>原文未报告具体的骨干网络类型、体素分辨率、时间步 T 的取值等结构细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：OpenOccupancy 验证集。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告参数量或计算量。</li><li>训练资源：原文未报告 GPU 型号与数量、训练时长。</li><li>实车平台：原文未报告，实验为数据集上的评测。</li><li>推理协议、附加评估细节等在附录中给出，但所提供原文未包含对应正文内容。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准为 OpenOccupancy 验证集，评估指标包括 IoU、mIoU 以及 barrier、bicycle、bus、car、const. veh.、motorcycle、pedestrian、traffic cone、trailer、truck、drive surf.、other_flat、sidewalk、terrain、manmade、vegetation 等类别的 IoU。</li><li>评估条件包括“全部传感器可用”与“前视相机缺失”两种传感器设置；对比方法包括 MonoScene、JS3C-Net、3DSketch、M-CONet、Co-Occ、OccMamba、RIOcc、SPSC 等，其中带 † 的结果由作者复现并取 3 个随机种子的平均。</li><li>全部传感器可用条件下，SpikeOcc（C&amp;L）取得 IoU 35.8、mIoU 25.9，为表中 IoU 最佳；OccMamba 的 mIoU 为 26.2，SPSC 的 mIoU 为 26.1，SpikeOcc 在 mIoU 上并非最高。</li><li>前视相机缺失条件下，SpikeOcc 取得 IoU 36.2、mIoU 25.3，均为表中最佳；OccMamba† 为 IoU 30.9、mIoU 21.0，SPSC† 为 IoU 22.3、mIoU 15.3。</li><li>上述结果均在数据集验证集上以开环方式评测；原文未报告闭环评测、仿真闭环或实车实验结果。</li><li>论文还报告了消融实验、课程顺序替代方案、路由目标定义、SAL 用于传统基线等分析，但所提供原文在相应表格处被截断，具体数值原文未完整给出。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.16139/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Directional Pullback Regularization for Long-Horizon Rollout of Latent World Models in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.15604/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Squeeze-Aware-YOLO: Early Channel Recalibration and Multi-Scale Fusion for Real-Time Traffic Sign Detection</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

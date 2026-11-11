@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FlowSim: Rendering-Free Closed-Loop Simulation for Evaluating End-to-End Driving Systems - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。 传统闭环评估依赖神经重建或驾驶世界模型生成传感器图像，再经感知编码器重新编码，带来较高计算开销以及仿真观测与真实观测之间的sim2real差距。 论文提出FlowSim——一种无渲染（rendering-free）仿真范式，直接从上一帧潜在表示与目标帧符号化场景条件预测系统内部的潜在表示，再交由原始冻结下游模块处理。 应用场景为在nuScenes与NavSim上对冻结的UniAD（稠密BEV潜在表示）与TransFuser（稀疏潜在表示）驾驶栈进行多时域、稠密/稀疏表示下的仿真评估。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.18030">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.18030.webp" alt="FlowSim: Rendering-Free Closed-Loop Simulation for Evaluating End-to-End Driving Systems" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">FlowSim: Rendering-Free Closed-Loop Simulation for Evaluating End-to-End Driving Systems</h1>
+            <div class="detail-meta">2026-10-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.18030" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.18030" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.18030</span></div>
+            <p class="detail-summary">论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。 传统闭环评估依赖神经重建或驾驶世界模型生成传感器图像，再经感知编码器重新编码，带来较高计算开销以及仿真观测与真实观测之间的sim2real差距。 论文提出FlowSim——一种无渲染（rendering-free）仿真范式，直接从上一帧潜在表示与目标帧符号化场景条件预测系统内部的潜在表示，再交由原始冻结下游模块处理。 应用场景为在nuScenes与NavSim上对冻结的UniAD（稠密BEV潜在表示）与TransFuser（稀疏潜在表示）驾驶栈进行多时域、稠密/稀疏表示下的仿真评估。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Karlsruhe Institute of Technology · Hanfeng Wu、Christoph Stiller</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.18030/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。</li><li>传统闭环评估依赖神经重建或驾驶世界模型生成传感器图像，再经感知编码器重新编码，带来较高计算开销以及仿真观测与真实观测之间的sim2real差距。</li><li>论文提出FlowSim——一种无渲染（rendering-free）仿真范式，直接从上一帧潜在表示与目标帧符号化场景条件预测系统内部的潜在表示，再交由原始冻结下游模块处理。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Karlsruhe Institute of Technology；作者：Hanfeng Wu、Christoph Stiller</li><li>机构：BMW Group；作者：Hanfeng Wu、Alvaro Marcos-Ramiro、Michael Schmidt</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。</li><li>传统闭环评估依赖神经重建或驾驶世界模型生成传感器图像，再经感知编码器重新编码，带来较高计算开销以及仿真观测与真实观测之间的sim2real差距。</li><li>论文提出FlowSim——一种无渲染（rendering-free）仿真范式，直接从上一帧潜在表示与目标帧符号化场景条件预测系统内部的潜在表示，再交由原始冻结下游模块处理。</li><li>应用场景为在nuScenes与NavSim上对冻结的UniAD（稠密BEV潜在表示）与TransFuser（稀疏潜在表示）驾驶栈进行多时域、稠密/稀疏表示下的仿真评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出FlowSim，一种面向E2E驾驶系统闭环评估的无渲染潜在空间仿真范式，消除图像生成，每步仿真耗时0.04–0.06s。</li><li>提出关联智能体条件（agent association conditioning），显式编码跨帧智能体对应关系与相对运动，用于潜在转移预测。</li><li>提出变量时域（variable-horizon）仿真及配套变量时域训练，可从同一真实锚点直接预测未来潜在状态，避免中间生成潜在表示带来的漂移。</li><li>建立source-to-reference agreement评估协议，并在稠密UniAD与稀疏TransFuser潜在表示、nuScenes与NavSim上验证完整框架。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：仿真器本身是唯一可训练组件，位于冻结感知编码器与冻结下游头之间；所有下游模块在训练与评估中均保持冻结，原文未报告具体所属系统模块划分细节。</li><li>输入传感器：训练时由冻结感知编码器从真实传感器观测提取成对潜在状态；运行时仅使用上一帧潜在表示与目标帧符号化场景条件，原文未报告具体相机/传感器配置细节。</li><li>场景表示：符号化场景条件包括目标帧智能体状态、地图上下文（HD map，图中标注为可选）与自车状态变化；潜在表示可为稠密BEV（UniAD）或稀疏token表示（TransFuser）。</li><li>模型结构：通用形式为 Ẑ_t = f_θ(Z_{t−1}, A_t, M_t, e_t)；稠密实例采用自车运动对齐的残差U-Net（先将B_{t−1}按自车相对运动warp为B̄_{t−1}，再预测残差R_t，经四级下采样200→100→50→25，在25×25瓶颈处通过cross-attention注入智能体、地图与状态token）；稀疏实例采用基于DiT的条件流匹配速度场，将噪声样本沿概率路径τ∈[0,1]输运至目标潜在表示，智能体、地图与自车状态经轻量MLP/CNN编码为token并cross-attention融合（参考FlowDrive）。</li><li>关键技术：关联动态智能体条件将每个目标帧智能体扩展为a_i^t = [s_i^t, s_i^{t−1}, Δs_i, c_i]，其中c_i表示是否存在有效对应，无对应的新智能体保留但标记为无效；训练目标为潜在重建L1损失；变量时域训练在多个源-目标间隔Δt上构造训练对并优化相应L1目标；评估时支持变量时域仿真（从真实锚点直接预测任意支持时域）与自回归仿真两种协议，并可耦合符号化场景仿真器更新自车与周围智能体以实现闭环。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（稠密UniAD设置）、NavSim/OpenScene（稀疏TransFuser设置）。</li><li>仿真器/基线来源：SplatAD、OmniRe、DreamForge；另含无训练ego-warp基线（R_t=0）。</li><li>模型规模：原文未报告FlowSim各实例的参数量或模型规模。</li><li>训练资源：原文正文未报告训练资源；仅表I注明DreamForge因A100(40GB)显存不足而使用CPU offload（†）。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与协议：采用source-to-reference agreement协议，参考分支将真实观测编码为Z_t后经冻结下游头得到结果，源分支仅潜在表示获取方式不同；分别在nuScenes（冻结UniAD）与NavSim（冻结TransFuser）上评估，对比方法共享相同目标帧符号条件。</li><li>评估指标：规划一致性ADE/FDE（UniAD：6个路点、3.0s；TransFuser：8个路点、4.0s）；UniAD另报告检测IoU与中心ADE、车道与可行驶区域IoU、运动预测与规划ADE/FDE；TransFuser另报告BEV分割像素与mIoU一致性、检测框中心L2与朝向误差；并报告每步推理时间与显存。</li><li>关键数值（表I，UniAD/nuScenes）：Δt=0.5s时，FlowSim（VH, assoc.）检测IoU 0.68、cADE 1.69、Lane 0.48、Drivable 0.86、运动ADE 5.96/FDE 10.88、规划ADE 0.53/FDE 0.97，推理0.04s、VRAM 3.0GB；对比SplatAD（gt hist.）IoU 0.75、规划ADE 0.31/FDE 0.64、0.13s/4.5GB，DreamForge（gt hist.）规划ADE 0.30/FDE 0.61、92.3s/38.2GB。</li><li>关键数值（表I，UniAD/nuScenes）：Δt=1.5s时FlowSim检测IoU 0.58、cADE 1.99、Lane 0.43、Drivable 0.82、运动ADE 7.09/FDE 12.86、规划ADE 0.61/FDE 1.14；Δt=2.5s时FlowSim检测IoU 0.56、cADE 2.12、Lane 0.40、Drivable 0.81、运动ADE 7.24/FDE 13.14、规划ADE 0.60/FDE 1.13；Δt=4.0s时表中SplatAD行FlowSim结果被截断，原文未完整报告。</li><li>对比结论：FlowSim在不同时域及稠密/稀疏潜在表示下，source-to-reference agreement与图像空间仿真具有竞争力，且在多个指标/时域上超过图像空间仿真；因直接预测潜在表示，两种实例化每步仿真仅需0.04–0.06s，明显快于所对比的图像空间仿真方法。</li><li>评估条件：论文报告为基于nuScenes与NavSim数据的仿真评估实验（前向仿真/开环式rollout与变量时域仿真），摘要与引言提及可与符号化仿真器耦合实现闭环，但提供内容中未给出闭环闭环驾驶指标或实车实验结果，原文未报告实车与完整闭环数值结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.18167/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Beyond Planning: Differentiable Control-in-the-loop End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.17903/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DriveWLA: Unifying Future Dynamics and Scene Semantics through World-Language-Action Modeling for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

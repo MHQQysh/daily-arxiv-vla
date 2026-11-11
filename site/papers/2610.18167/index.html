@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beyond Planning: Differentiable Control-in-the-loop End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。 应用场景为基于相机与 LiDAR 感知的端到端轨迹规划与车辆执行（Bench2Drive 闭环基准）。 核心问题：现有端到端规划训练止于规划输出，外部手工调参的跟踪控制器与不可微车辆动力学阻断梯度；同时存在监督混叠、标签/感知/控制三速率不一致、训练与部署车辆模型不匹配三类“规划—控制鸿沟”。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.18167">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.18167.webp" alt="Beyond Planning: Differentiable Control-in-the-loop End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Beyond Planning: Differentiable Control-in-the-loop End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.18167" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.18167" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.18167</span></div>
+            <p class="detail-summary">面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。 应用场景为基于相机与 LiDAR 感知的端到端轨迹规划与车辆执行（Bench2Drive 闭环基准）。 核心问题：现有端到端规划训练止于规划输出，外部手工调参的跟踪控制器与不可微车辆动力学阻断梯度；同时存在监督混叠、标签/感知/控制三速率不一致、训练与部署车辆模型不匹配三类“规划—控制鸿沟”。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Nanyang Technological University, School of Mechanical and Aerospace Engine…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.18167/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。</p>
+  <ul class="reading-intro-points"><li>面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。</li><li>应用场景为基于相机与 LiDAR 感知的端到端轨迹规划与车辆执行（Bench2Drive 闭环基准）。</li><li>核心问题：现有端到端规划训练止于规划输出，外部手工调参的跟踪控制器与不可微车辆动力学阻断梯度；同时存在监督混叠、标签/感知/控制三速率不一致、训练与部署车辆模型不匹配三类“规划—控制鸿沟”。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Nanyang Technological University, School of Mechanical and Aerospace Engineering；作者：Zhidong Wang、Zirui Li、Zitong Shan、Zhiqi Mao、Qihang Huang、Zhan Chen、Jingsong Liang、Chen Lv</li><li>机构：Nanyang Technological University, Collaborative Initiative, Interdisciplinary Graduate Programme；作者：Zhidong Wang</li><li>机构：Nanyang Technological University, College of Computing and Data Science；作者：Han Yu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。</li><li>应用场景为基于相机与 LiDAR 感知的端到端轨迹规划与车辆执行（Bench2Drive 闭环基准）。</li><li>核心问题：现有端到端规划训练止于规划输出，外部手工调参的跟踪控制器与不可微车辆动力学阻断梯度；同时存在监督混叠、标签/感知/控制三速率不一致、训练与部署车辆模型不匹配三类“规划—控制鸿沟”。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 DIVA：将执行器级车辆动力学模型嵌入端到端驾驶网络训练回路，形成从感知到车辆状态的可微通路；并通过同策略重辨识保持模型与所学控制器一致。</li><li>提出状态空间中的动力学在环模仿学习：以车辆状态监督绕开混叠的控制输入标签，配合可辨识性感知损失与梯度门控实现控制器与规划器联合训练。</li><li>提出速率一致的控制输入参数化（控制结在标签率、以零阶/一阶保持插值到控制率），协调标签、感知与控制速率，并支持异步执行。</li><li>通过在线扰动观测器向学习控制器显式提供模型失配估计，提升部署阶段对车辆动力学失配的鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端驾驶栈中的规划器 + 学习式控制解码器 + 可微车辆动力学模块；训练与部署均在同一可微链上。</li><li>输入传感器：相机与 LiDAR 经感知骨干融合为 BEV 感知 token（原文未报告具体传感器型号与数量）；另含状态反馈 token（纵向速度 v_x、一个标签周期平均横摆角速度 r_avg）与扰动估计 token（转向偏差、纵向加速度偏差）。</li><li>场景表示：BEV 特征投影并位置编码为感知 token M，加车速与导航 token；规划 transformer 输出规划 token P，GRU 解码几何路径 R 与离散速度类别概率 p^v（路径与目标速度解耦）。</li><li>模型结构：三层 transformer 控制解码器，记忆由感知特征、规划器中间特征、显式参考路径/速度、状态反馈、扰动估计五组 token 拼接，输出 K+1 个控制结（tanh 限幅），单一路径纵向输入经 [·]_+ 分解为油门/刹车。</li><li>关键技术：一阶保持（FOH）插值到 20 Hz 控制率并在 20 Hz 积分；执行器级车辆动力学（滑移率限制、动力总成静态映射加一阶滞后、制动减速度、单轨模型加饱和轮胎力、低速与运动学模型融合、坡道、轮锁与驻车保持等离散工况）；非光滑环节用泄漏直通估计器（ε_st=0.1）保证驻车与死区处梯度；同策略重辨识（12 个标量修正）；模型失配参数化（k_s、b_s、b_t、k_d、k_b、k_m、k_μ、d_x）并归并为两个可观测集总偏差 b̄_s、d̄_x；风险敏感分位数损失（κ=3）、因果状态反馈、恢复样本、预览距离外参考扰动等闭环迁移机制；梯度门控 λ=0.1；异步执行（感知 token 缓存 + 坐标刚体变换 + 时延嵌入）与增广 UKF 在线扰动观测器。</li><li>原文未报告：具体感知骨干网络层数/参数量等网络规模细节在提供的正文范围内未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：PDM-Lite 数据集（4 Hz 录制，沿用 TF++ 的路线过滤与数据划分）用于训练；Bench2Drive-220 官方闭环基准用于评估；评估子集为 Hard-52（52 条路线）与无交通的 maneuver suite（16 条路线，六类场景）。</li><li>仿真器：Bench2Drive 闭环仿真环境（原文未报告其底层仿真器名称）。</li><li>模型规模：原文未报告整体模型参数量；仅报告控制解码器为三层 transformer、输出 K+1=9 个控制结、控制周期 3.8 ms（仅控制）。</li><li>训练资源：原文未报告 GPU/算力与训练时长。</li><li>实车平台：原文未报告实车部署；仅报告车辆动力学模型基于车辆数据表的规格参数、常值输入/阶跃/滑行实验与阶跃转向/扫频转向实验辨识，并在留出驾驶数据上验证（附录提及）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Bench2Drive-220 闭环基准，官方指标为驾驶得分（DS）、成功率（SR）、效率、舒适度及五项能力分数；另用动力学指标（平均 jerk、平均 \|a_x\|、峰值减速度、横向加速度、侧偏角、舒适超限）与执行器活动/跟踪指标（WOT 占比、油门变化、刹车切换次数、转向速率、速度误差、横向偏移）。</li><li>对比方法：TF++（基线规划器 + PID）、MPC+DOB（共享辨识模型与观测器的 MPPI-MPC，1024 次 rollout）、DIVA+PID、DOB-PID、DIVA w/o observer，以及控制输入行为克隆消融。</li><li>关键数值（摘要报告）：Bench2Drive 闭环驾驶得分 86.7，比广泛采用的最先进方法高 3.3 分；平均 jerk 近乎减半；刹车切换减少 64%；控制专用周期 3.8 ms；在部署端显著车辆模型失配下仍保持更优路径跟踪精度。</li><li>其他条件：Hard-52 上 DIVA 与 DIVA+PID 在剩余路线上接近（92.14 vs. 91.20 DS）；评估统计采用逐路线配对差异与 95% 置信区间。</li><li>实验条件：全部为闭环仿真评估（Bench2Drive），原文未报告开环指标对比数值与实车实验；提供正文的 HTML 在表 I 数据处被截断，具体分项数值与消融/失配/时延实验的详细结果原文未完整给出。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.18373/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DR-VLA: Learning Human-Like Quadruped Navigation from Egocentric Web Videos via Domain-Invariant Scene Representations</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.18030/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">FlowSim: Rendering-Free Closed-Loop Simulation for Evaluating End-to-End Driving Systems</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

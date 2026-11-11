@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>XAI-Guided Fourier Domain Generalisation for Pure-Simulation Sim-to-Real Deep Reinforcement Learning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。 应用场景为 Duckiebot 小车在仿真地图训练后，零样本（zero-shot）部署到真实 Duckietown 地图运行。 核心研究问题：现有 sim-to-real 方法要么依赖目标域真实数据做图像迁移/域自适应，要么采用与策略无关的随机域随机化，后者引入无引导扰动、难以反映真实差异；且 Fourier 域方法通常借用目标域频谱或通用频谱混合，未与闭环策略行为关联。论文希望仅用仿真内部构造“策略相关”的视觉域扰动，提升跨域鲁棒性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.16478">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.16478.webp" alt="XAI-Guided Fourier Domain Generalisation for Pure-Simulation Sim-to-Real Deep Reinforcement Learning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">XAI-Guided Fourier Domain Generalisation for Pure-Simulation Sim-to-Real Deep Reinforcement Learning</h1>
+            <div class="detail-meta">2026-10-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.16478" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.16478" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.16478</span></div>
+            <p class="detail-summary">论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。 应用场景为 Duckiebot 小车在仿真地图训练后，零样本（zero-shot）部署到真实 Duckietown 地图运行。 核心研究问题：现有 sim-to-real 方法要么依赖目标域真实数据做图像迁移/域自适应，要么采用与策略无关的随机域随机化，后者引入无引导扰动、难以反映真实差异；且 Fourier 域方法通常借用目标域频谱或通用频谱混合，未与闭环策略行为关联。论文希望仅用仿真内部构造“策略相关”的视觉域扰动，提升跨域鲁棒性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">City St George’s, University of London · Wei Yao、Chuyao Wang、Ziwei Wang 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.16478/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。</p>
+  <ul class="reading-intro-points"><li>论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。</li><li>应用场景为 Duckiebot 小车在仿真地图训练后，零样本（zero-shot）部署到真实 Duckietown 地图运行。</li><li>核心研究问题：现有 sim-to-real 方法要么依赖目标域真实数据做图像迁移/域自适应，要么采用与策略无关的随机域随机化，后者引入无引导扰动、难以反映真实差异；且 Fourier 域方法通常借用目标域频谱或通用频谱混合，未与闭环策略行为关联。论文希望仅用仿真内部构造“策略相关”的视觉域扰动，提升跨域鲁棒性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：City St George’s, University of London；作者：Wei Yao、Chuyao Wang、Ziwei Wang、Nabil Aouf（原文仅给出共同机构与邮箱列表，未逐一区分各作者的具体隶属单位）</li><li>机构：London, United Kingdom；作者：原文未明确对应（仅作为通信地址出现）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。</li><li>应用场景为 Duckiebot 小车在仿真地图训练后，零样本（zero-shot）部署到真实 Duckietown 地图运行。</li><li>核心研究问题：现有 sim-to-real 方法要么依赖目标域真实数据做图像迁移/域自适应，要么采用与策略无关的随机域随机化，后者引入无引导扰动、难以反映真实差异；且 Fourier 域方法通常借用目标域频谱或通用频谱混合，未与闭环策略行为关联。论文希望仅用仿真内部构造“策略相关”的视觉域扰动，提升跨域鲁棒性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出基于 DeepLIFT 的 XAI 引导 Fourier 域干预机制：将策略归因图转换为结构化频谱扰动，在修改外观敏感统计量的同时保留任务相关的空间结构，从而完全在仿真内实现鲁棒性增强的视觉域泛化。</li><li>提出无目标域的鲁棒策略优化（teacher-student 框架）：教师仅提供归因引导与训练稳定化参考，而非模仿目标或性能上界，使学生策略可在任务表现上超过教师，并学习更聚焦的任务相关表征。</li><li>在仿真与 Duckietown 真实平台开展大量评估（车道跟随与障碍规避），在含大量背景杂乱、未见过地图上展示 XFD 相对标准 SAC 与随机域随机化基线在行驶距离和奖励上的持续提升，且无需目标域数据采集或真实微调。</li><li>通过基于归因的分析表明，所提策略在仿真与真实观测间保留了更一致的任务相关视觉证据。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：纯仿真 sim-to-real 视觉域泛化与鲁棒强化学习训练框架（XFD），采用 teacher-student 结构，教师为冻结的域随机化 SAC 策略，学生从零训练，最终学生策略用于仿真评估与 Duckiebot 零样本部署（导出 ONNX）。</li><li>输入传感器：前视 RGB 图像（裁剪上部、缩放与归一化以去除任务无关背景）与 5 维导航状态；动作为 2 维连续左右轮指令；以连续控制 MDP 建模。</li><li>场景表示：Duckietown 地图（训练 Map 2，评估 Map 1/3，真实 Map 4/5），训练时随机障碍物摆放；未报告显式地图/语义表征，原文未报告其他场景表示。</li><li>模型结构：SAC 为基础的视觉 actor-critic；actor 与 critic 使用分离的 MobileNetV2 视觉编码器，导航状态经轻量全连接编码器，特征拼接后进入策略/价值头；actor 输出 2 维高斯轮控策略均值和对数标准差，critic 采用 clipped double-Q 双 Q 头。</li><li>关键技术：</li></ul>
+<p> - DeepLIFT 归因提取：从冻结教师 actor 的动作输出反传到图像，得到 H×W×3×d_a 归因张量，对通道与动作维聚合归一化为 [0,1] 空间归因图。</p>
+<p> - XAI 引导 Fourier 域干预：逐通道 FFT 得到幅度与相位，仅扰动幅度（引入光照、纹理、对比度、颜色统计变化），保留相位以维持车道几何、道路边界与障碍布局；以互补归因掩码 M_t = 1 − A_T(I_t) 混合原图与 Fourier 扰动图，使高归因区域扰动自由度低、低归因区域扰动自由度高。</p>
+<p> - 奖励门控课程：以最近 K 回合回报滑动平均是否超过阈值 ρ 作为干预开关，激活后按 T_ramp 将扰动强度从 η_min 线性提升至 η_max，避免早期探索不稳定。</p>
+<p> - 无目标域鲁棒策略优化：学生 actor 目标为 SAC 损失 + 门控加权的行为一致性损失（学生扰动观测动作均值与教师干净观测动作均值，stop-gradient）、归因外泄损失（惩罚学生归因落入低教师归因区域）与归因对齐损失（余弦相似度）；教师不参与 critic 目标与损失。</p>
+<p> - 障碍感知语义回放：将转移分为 normal/near/success/fail 四类，按训练进度依赖的类别分布采样，早期增加近障碍与失败样本，后期转向成功规避样本，同时保留车道跟随样本。</p>
+<p> - 奖励设计：进度奖励、运动奖励，以及停车、航向偏差、靠近边界惩罚；无效车道位姿返回固定惩罚 −5；基线与所提方法使用相同奖励。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：使用 Duckietown 仿真环境（Map 1/2/3）训练与评估，真实 Duckietown 布局 Map 4/5 用于零样本部署；论文未报告公开数据集名称或规模。</li><li>仿真器：Duckietown 仿真环境（原文未报告具体版本/渲染配置）。</li><li>模型规模：actor 与 critic 各用独立 MobileNetV2 视觉编码器加轻量导航编码器；未报告参数量或计算量。</li><li>训练资源：原文未报告 GPU/CPU 型号、数量与训练时长；实现基于 PyTorch，策略导出为 ONNX 用于部署。</li><li>实车平台：Duckiebot 小车；真实评估使用 OptiTrack 运动捕捉系统记录位姿，位姿投影到标定地图坐标系并以 10 Hz 重采样。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：同一 SAC 视觉控制骨干在 Map 2 随机障碍训练；对比方法为 Base（标准 SAC）、DR（传统视觉域随机化 SAC，同时作为 XFD 教师）、XFD（所提完整方法）；每个训练检查点在车道跟随与障碍规避两种任务下评估，仿真 Map 1/2/3 与真实 Map 4/5 均不做目标域微调。</li><li>评估指标：行驶距离、重建奖励、横向偏差（与拟合右车道中心线平均绝对距离）、基于偏航加速度的平滑度分数；车道跟随每图 10 次运行，障碍规避每图 2 种障碍配置×5 次共 10 条轨迹，报告均值±标准差；完成一圈闭环视为成功，离开车道或碰撞即终止。</li><li>关键数值（仿真，车道跟随）：</li></ul>
+<p> - Map 1：Base 距离 10.95±0.01、奖励 834.40±0.78；DR 10.54±0.00、798.46±0.36；XFD 距离 11.39±0.01、奖励 851.39±0.21（最优）。</p>
+<p> - Map 2：Base 5.88±0.02、338.73±1.21；DR 10.22±0.01、734.70±0.77；XFD 11.00±0.00、819.31±0.36（最优）。</p>
+<p> - Map 3：Base 4.04±0.02、198.38±0.88；DR 9.09±2.27、587.94±195.99；XFD 10.72±0.01、799.75±0.46（最优）。</p>
+<p> - 横向偏差方面，Base 在 Map 1/2/3 分别为 0.0333±0.0005、0.0460±0.0023、0.0504±0.0021，多数为表中最优，XFD 偏差更大（如 Map 1 0.0796±0.0003）；平滑度上 DR 在 Map 1 车道跟随为 93.86±0.26%，XFD 为 93.23±0.12%。</p>
+<ul><li>关键数值（仿真，障碍规避）：</li></ul>
+<p> - Map 1：Base 11.07±0.04、780.54±4.19；DR 10.42±0.01、720.42±0.67；XFD 11.36±0.01、802.13±0.90（距离与奖励最优）。</p>
+<p> - Map 2：Base 6.10±0.06、277.63±7.86；原文表格在该处截断，XFD 与 DR 的完整障碍规避数值未在给定原文中完整呈现，原文未报告（可确认部分见上）。</p>
+<p> - Map 3：原文表格在 Map 2 障碍规避行处截断，Map 3 障碍规避完整数值原文未报告。</p>
+<ul><li>对比方法：Base、DR（教师）、XFD；所有方法共享相同骨干、训练环境、任务设置、地图布局、障碍摆放与奖励重建流程。</li><li>评估条件：以仿真评估与零样本真实部署为主，真实部署为开环记录轨迹后离线计算指标（OptiTrack 位姿、10 Hz 重采样）；未报告闭环实车在线控制之外的额外闭环仿真统计细节；真实世界</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.16634/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Language2Drive: Do Vision-Language-Action Models Really Follow the Instructions in Autonomous Driving?</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.16139/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Directional Pullback Regularization for Long-Horizon Rollout of Latent World Models in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

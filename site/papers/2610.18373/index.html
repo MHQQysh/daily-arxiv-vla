@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DR-VLA: Learning Human-Like Quadruped Navigation from Egocentric Web Videos via Domain-Invariant Scene Representations - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。 研究问题：机器人遥操作演示数据规模有限（公开真实腿足数据每份仅约 5–15 小时），而互联网第一视角人类视频丰富但存在观测差异（视角、成像、相机运动）与动作差异（无机器人动作标签、人体运动不可直接执行）。 核心思路：将人类与机器人观测抽象为共享的领域不变场景表示（DISR），在该抽象层面从大规模人类第一视角视频中学习可迁移的场景理解与未来预测先验，再在机器人数据上适配动作生成。 任务形式化为指令条件下的轨迹预测：输入多视角图像序列、语言导航指令与自车状态，输出机器人本体系下的平面位姿动作块。 同时探讨该框架向自动驾驶的泛化（NAVSIM v1）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.18373">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.18373.webp" alt="DR-VLA: Learning Human-Like Quadruped Navigation from Egocentric Web Videos via Domain-Invariant Scene Representations" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">DR-VLA: Learning Human-Like Quadruped Navigation from Egocentric Web Videos via Domain-Invariant Scene Representations</h1>
+            <div class="detail-meta">2026-10-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.18373" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.18373" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.18373</span></div>
+            <p class="detail-summary">面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。 研究问题：机器人遥操作演示数据规模有限（公开真实腿足数据每份仅约 5–15 小时），而互联网第一视角人类视频丰富但存在观测差异（视角、成像、相机运动）与动作差异（无机器人动作标签、人体运动不可直接执行）。 核心思路：将人类与机器人观测抽象为共享的领域不变场景表示（DISR），在该抽象层面从大规模人类第一视角视频中学习可迁移的场景理解与未来预测先验，再在机器人数据上适配动作生成。 任务形式化为指令条件下的轨迹预测：输入多视角图像序列、语言导航指令与自车状态，输出机器人本体系下的平面位姿动作块。 同时探讨该框架向自动驾驶的泛化（NAVSIM v1）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Deep Robotics · 原文未明确对应</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.18373/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。</p>
+  <ul class="reading-intro-points"><li>面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。</li><li>研究问题：机器人遥操作演示数据规模有限（公开真实腿足数据每份仅约 5–15 小时），而互联网第一视角人类视频丰富但存在观测差异（视角、成像、相机运动）与动作差异（无机器人动作标签、人体运动不可直接执行）。</li><li>核心思路：将人类与机器人观测抽象为共享的领域不变场景表示（DISR），在该抽象层面从大规模人类第一视角视频中学习可迁移的场景理解与未来预测先验，再在机器人数据上适配动作生成。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Deep Robotics；作者：原文未明确对应</li><li>机构：University of Illinois Urbana-Champaign；作者：原文未明确对应</li><li>机构：Zhejiang University；作者：原文未明确对应</li><li>机构：Tsinghua University；作者：原文未明确对应</li><li>机构：MIT；作者：原文未明确对应</li><li>注：原文仅以机构标识图给出单位，未在署名行中列出作者与机构的对应关系；作者名单为 Jun Tian、Yingjie Niu、Ruo Chen、Hongyi Lin、Chao Li。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。</li><li>研究问题：机器人遥操作演示数据规模有限（公开真实腿足数据每份仅约 5–15 小时），而互联网第一视角人类视频丰富但存在观测差异（视角、成像、相机运动）与动作差异（无机器人动作标签、人体运动不可直接执行）。</li><li>核心思路：将人类与机器人观测抽象为共享的领域不变场景表示（DISR），在该抽象层面从大规模人类第一视角视频中学习可迁移的场景理解与未来预测先验，再在机器人数据上适配动作生成。</li><li>任务形式化为指令条件下的轨迹预测：输入多视角图像序列、语言导航指令与自车状态，输出机器人本体系下的平面位姿动作块。</li><li>同时探讨该框架向自动驾驶的泛化（NAVSIM v1）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出领域不变场景表示（DISR），将人类与机器人观测抽象为共享的语义、空间与关系结构，使社会合规等人类导航先验可从大规模第一视角视频蒸馏并跨具身迁移。</li><li>提出 DR-VLA，一种 Mixture-of-Transformers 潜在世界动作模型，其理解、世界与动作专家解耦不同数据来源的监督，并可扩展到多种导航场景。</li><li>构建 EgoLynx 数据集，将 1 万小时第一视角网络视频与 2,000 段遥操作四足机器人片段按统一标注格式（指令、描述、DISR 目标）配对，支持无动作预训练后进行数据高效适配。</li><li>提出四足导航分数（QNS），一种伪闭环指标，综合评估安全性、指令合规性、舒适性与行进进度。</li><li>在真实四足导航上 QNS 相对最优对比结果提升约 5%，在 NAVSIM 上达到 92.1 PDMS，说明该表示跨具身具有通用性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：策略分解为跨具身共享的场景演化预测器 Ψ（由理解专家与世界专家共同实现）与具身特定动作生成器 π_e（动作专家）。</li><li>输入传感器：四足机器人为 4 路环视鱼眼相机，指令为自然语言路线描述；机器人动作块覆盖 1 秒，N_a=10，δ=0.1 秒。驾驶场景指令为四类高层命令，动作块覆盖 4 秒，N_a=8，δ=0.5 秒。</li><li>场景表示：DISR 为紧凑时空隐变量 z，沿语义、空间、关系三轴刻画场景。语义来自冻结的 SAM 3 概念分割（固定类别词表的多通道类别掩码），空间来自冻结的 Depth Anything 3 相对深度（丢弃绝对尺度以缓解相机高度差异）；二者拼接后经 L_rel 层因果时空自注意力编码，由轻量解码器重建，构成自编码器。编码器仅接收 (S_i, D_i) 而不接收 RGB，从构造上排除纹理、光照、成像风格等外观因素。</li><li>模型结构：理解专家基于 Qwen3-VL-2B，编码多视角图像与指令生成前缀 token，并以场景布局、周围智能体、潜在危险与自车运动的描述作为链式辅助监督；世界专家在世界 token 上预测 K 个未来帧的 DISR 隐变量，损失为 smooth-L1 与余弦相似度组合；动作专家以条件流匹配生成轨迹，每个路点一个动作 token，自车状态额外一个 token，推理时用 4 步 Euler 积分。</li><li>关键技术：三位专家参数独立、通过共享注意力交互；采用块级注意力掩码，世界与动作 token 不关注描述，动作 token 对前缀与世界 token 不可见，因此前缀与世界隐状态在推理时只计算一次并在积分步间复用；图像 token 加入可学习视角嵌入以区分四路鱼眼视图而无需矫正。</li><li>训练流程：两阶段。阶段一在 EgoLynx-Web 上仅训练理解与世界专家（L1 = L_cap + λ_w L_world），刻意不从视频估计伪轨迹；阶段二在 EgoLynx-Robot 上初始化动作专家与四路相机视角嵌入，并以 L2 = L1 + λ_a L_act 微调全部参数，保留描述与世界损失以防能力退化并吸收残余视角差异。</li><li>原文未报告：网络层数、隐变量维度 N_z 与 d_z、损失权重 λ_w 与 λ_a 的具体取值、世界专家预测的未来帧数 K 的具体取值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>EgoLynx-Web：约 1 万小时第一视角网络视频，采集自 YouTube，覆盖步行、骑行等人类导航形式，含城市与乡村、不同时段与天气；经多阶段清洗后保留，约为 Sekai 的两倍、Ego4D 的三倍；每条片段由 Gemini 3.1 Flash-Lite 生成指令与描述。</li><li>EgoLynx-Robot：2,000 段训练遥操作片段（约 17 小时），选自真实配送场景中轮腿式机器人遥操作导航的更大集合，并含不共享片段的留出测试划分。</li><li>评测数据集：NAVSIM v1（navtrain 训练、navtest 评估，仅相机输入）。</li><li>模型规模：理解专家初始化自 Qwen3-VL-2B；世界专家 N_w = N_z 个查询 token；其余规模原文未报告。</li><li>训练资源：阶段一 20k 步、阶段二 5k 步，使用 32 块 NVIDIA H800 GPU。</li><li>实车平台：真实世界配送场景中的轮腿式机器人，配备 4 路环视鱼眼相机；具体型号原文未报告。</li><li>仿真器：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：留出的 EgoLynx-Robot 测试划分（真实世界四足导航）与 NAVSIM v1（自动驾驶）。</li><li>评估指标：开环平均/最终位移误差（ADE/FDE）、平均/最终航向误差（AHE/FHE）；伪闭环指标包括无碰撞（NC）、可行走区域合规（WAC）、碰撞时间（TTC）、间隙（CL）、自车进度（EP）、指令合规（IC）与四足导航分数（QNS）；驾驶使用 PDMS。</li><li>关键数值：在 EgoLynx-Robot 测试划分上，QNS 相对该指标最强对比结果提升约 5%，最终航向误差 FHE 降低 14.6%；与八个导航及视觉-语言-动作基线对比。NAVSIM v1 上（无 EgoLynx-Web 预训练、独立训练）达到 92.1 PDMS，移除世界专家后降至 89.5。</li><li>消融结论：网络视频预训练提升留出机器人数据上的表现；DISR 作为未来预测目标优于五种通用视觉表示；与任务特定 3D 感知相比，DISR 在无 Box/Line 标注、无点云构建目标的情况下取得接近的目标端性能；将感知作为在线策略输入可提升 QNS 但增加计算开销。</li><li>对比方法：VLN 类策略包括 InternNav、NaVILA 等（原文表格另含其他导航与视觉-语言-动作基线，正文截断处未完整列出）。</li><li>评估条件：四足导航结果基于真实世界遥操作数据的开环位移/航向误差与伪闭环 QNS 评估；驾驶结果为 NAVSIM 基准上的开环/伪闭环评测。实车在线闭环部署结果原文未报告；仿真条件原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.12932/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">URL-Sim: Unified and Regulated LiDAR Simulation for High-Fidelity Reconstruction of Dynamic Driving Scenes</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.18167/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Beyond Planning: Differentiable Control-in-the-loop End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

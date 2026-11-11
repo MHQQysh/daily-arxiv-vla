@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beyond Safe Execution: Safe Online Reinforcement Learning for Autonomous Driving with Value Calibration and Adaptive Guidance - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。 应用场景包括 MetaDrive 仿真环境中的自动驾驶场景，以及 UGV 上的真实世界实验（如 Blocked-Side Bypass、8-shaped Maneuver、Held-out Cornering）。 核心研究问题是：仅靠安全过滤虽能保证执行安全，但无法保证策略稳定改进或减少对安全纠正的依赖；论文希望在学习过程中同时实现安全执行、稳定价值学习和逐步降低对过滤纠正的依赖。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.17799">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.17799.webp" alt="Beyond Safe Execution: Safe Online Reinforcement Learning for Autonomous Driving with Value Calibration and Adaptive Guidance" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Beyond Safe Execution: Safe Online Reinforcement Learning for Autonomous Driving with Value Calibration and Adaptive Guidance</h1>
+            <div class="detail-meta">2026-10-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.17799" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.17799" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.17799</span></div>
+            <p class="detail-summary">论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。 应用场景包括 MetaDrive 仿真环境中的自动驾驶场景，以及 UGV 上的真实世界实验（如 Blocked-Side Bypass、8-shaped Maneuver、Held-out Cornering）。 核心研究问题是：仅靠安全过滤虽能保证执行安全，但无法保证策略稳定改进或减少对安全纠正的依赖；论文希望在学习过程中同时实现安全执行、稳定价值学习和逐步降低对过滤纠正的依赖。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未明确对应：论文 HTML 原文未给出作者所属机构信息；作者为 Zeqiao Li、Yijing Wang、Haoyu Wang、Zheng Li…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.17799/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。</li><li>应用场景包括 MetaDrive 仿真环境中的自动驾驶场景，以及 UGV 上的真实世界实验（如 Blocked-Side Bypass、8-shaped Maneuver、Held-out Cornering）。</li><li>核心研究问题是：仅靠安全过滤虽能保证执行安全，但无法保证策略稳定改进或减少对安全纠正的依赖；论文希望在学习过程中同时实现安全执行、稳定价值学习和逐步降低对过滤纠正的依赖。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>原文未明确对应：论文 HTML 原文未给出作者所属机构信息；作者为 Zeqiao Li、Yijing Wang、Haoyu Wang、Zheng Li、Zhiqiang Zuo，原文未明确对应各作者与机构的关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。</li><li>应用场景包括 MetaDrive 仿真环境中的自动驾驶场景，以及 UGV 上的真实世界实验（如 Blocked-Side Bypass、8-shaped Maneuver、Held-out Cornering）。</li><li>核心研究问题是：仅靠安全过滤虽能保证执行安全，但无法保证策略稳定改进或减少对安全纠正的依赖；论文希望在学习过程中同时实现安全执行、稳定价值学习和逐步降低对过滤纠正的依赖。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SOAR-Flow 框架，用于离线初始化 Flow 驾驶策略的安全在线微调，使用 CBF–MPC 在执行前对策略动作进行认证或纠正。</li><li>提出 Gaussian-return-aware 值校准方法，在 Cal-QL 基础上结合 DSAC 的高斯回报模型，用记录的行为回报和预测回报方差平滑保守 critic 更新，缓解策略退化。</li><li>提出自适应引导机制，结合成对纠正学习（paired corrective learning）与 intervention-to-go 预测器，既指导策略动作，也根据预测的过滤依赖程度调节引导强度。</li><li>给出采样时刻安全执行条件与辅助引导渐近消失的条件分析。</li><li>在 MetaDrive 仿真和 UGV 实车上进行 Safety-filtered（SF）与 policy-only（PO）测试，评估学习稳定性、安全性和自主性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：离线到在线强化学习微调框架，包含 CBF–MPC 安全过滤、校准价值学习、成对纠正学习、干预预测与自适应引导。</li><li>输入传感器：原文未报告具体传感器配置与输入模态细节。</li><li>场景表示：将自动驾驶建模为连续动作马尔可夫决策过程，状态与驾驶参考空间记为 S 和 A；策略输出驾驶参考（driving references），由 CBF–MPC 认证后交由底层 MPC 跟踪执行。</li><li>模型结构：使用条件 Flow 策略，通过状态条件向量场将高斯噪声变换为驾驶参考；使用 SAC 风格的熵增广目标；critic 采用双 critic 并预测高斯回报的均值 Q 与方差 σ²；另设 intervention-to-go 预测器 P_ψ。</li><li>关键技术：</li></ul>
+<p> - CBF–MPC 过滤器：对策略原始动作检查离散时间 CBF 条件、状态/输入约束与终端条件，保留可认证参考或返回可行纠正；记录 raw action、certified action、干预标志、奖励、下一状态与终止标志。</p>
+<p> - 值校准：以记录的行为回报 b_t 为校准参考，构造高斯截断校准项 G_i，使保守压力在 b_t 附近连续变化；critic 目标同时包含校准项与高斯 Bellman 回归项，校准权重 β_cal,n 逐步衰减。</p>
+<p> - 策略改进：对无干预记录使用任务 critic 引导策略动作；对有干预记录使用执行纠正作为可行动作目标进行成对纠正学习。</p>
+<p> - 干预预测：估计折扣未来过滤使用 P^π(s,a)，用长度为 K 的连续片段构造目标并训练 P_ψ；该预测同时作为 actor 目标中的引导项并用于调节引导权重 λ_F,n。</p>
+<p> - 自适应引导：根据最新在线批次上的平均预测依赖更新 λ_F,n，使纠正监督与干预惩罚随预测依赖下降而减弱。</p>
+<p> - 理论分析：给出 CBF 不等式迭代下的 barrier 下界，以及在预测依赖和校准权重趋于零时辅助梯度贡献消失的条件。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文提及离线数据集 D_off 与在线数据 D_on，但未报告具体数据集名称、规模或采集细节。</li><li>仿真器：MetaDrive。</li><li>模型规模：原文未报告网络参数量、层数等模型规模信息。</li><li>训练资源：原文未报告 GPU/CPU 型号、数量或训练时长；仅展示实验工作站图片，未给出具体资源配置。</li><li>实车平台：uncrewed ground vehicle（UGV）；原文未报告车辆型号、传感器配置等细节。</li><li>其他资源：论文提供演示视频与项目主页链接。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：MetaDrive 仿真实验与 UGV 实车实验；包含 Safety-filtered（SF）与 policy-only（PO）测试；实车场景包括 Blocked-Side Bypass、8-shaped Maneuver 和 Held-out Cornering。</li><li>评估指标：仿真中报告 Return、Safe Success（SS）、Eval. Cost、Train Cost、Correction Rate；UGV 中报告 SS、Return、Correction Rate，8-shaped Maneuver 还报告 Time 与 Min. Clearance。</li><li>关键数值：</li></ul>
+<p> - 仿真表 I 中，SOAR-Flow（Ours）取得 Return 352.3±2.1、SS 100.0±0.0、Eval. Cost 0.00±0.00、Train Cost 0.18±0.10、Correction Rate 0.72±0.12。</p>
+<p> - 对比方法包括 CBF–MPC（Return 350.0±0.6、SS 100.0±0.0、Eval. Cost 0.00±0.00）、Flow-BC（Return 309.1±4.8、SS 70.0±7.1、Eval. Cost 5.42±0.76、Correction Rate 3.33±0.35）、Cal-QL（Return 335.9±3.5、SS 88.0±3.2、Eval. Cost 1.94±0.54、Train Cost 6.94±1.46、Correction Rate 5.25±0.40）、PROTO-SAC（Return 340.3±3.4、SS 91.6±2.6、Eval. Cost 1.14±0.48、Train Cost 4.66±1.02、Correction Rate 3.86±0.40）、Gaussian-DSAC（Return 343.5±3.0、SS 96.0±3.2、Eval. Cost 0.38±0.28、Train Cost 0.85±0.32、Correction Rate 2.68±0.28）、Flow-Q-only（Return 278.2±12.1、SS 42.0±9.5、Eval. Cost 6.24±0.87、Train Cost 18.22±3.20、Correction Rate 37.11±4.40）。</p>
+<p> - 消融结果包括 Ours w/o correction（Return 335.8±4.3、SS 86.4±4.8、Eval. Cost 1.82±0.60、Train Cost 2.26±0.55、Correction Rate 4.98±0.75）、Ours w/o P（Return 341.6±3.6、SS 91.6±3.8、Eval. Cost 0.82±0.35、Train Cost 1.32±0.35、Correction Rate 1.98±0.53）、Ours w/o calibration（Return 338.0±4.5、SS 92.0±3.2、Eval. Cost 1.20±0.35、Train Cost 1.50±0.40、Correction Rate 2.50±0.45）、Ours w/ mean calibration（Return 348.0±2.8、SS 98.0±2.0、Eval. Cost 0.20±0.12、Train Cost 0.50±0.18、Correction Rate 1.20±0.20）。</p>
+<p> - UGV 表 II 中，Blocked-Side Bypass：CBF–MPC 的 SS 为 100、Return 345.7±1.5；Flow-BC 的 SS 为 85、Return 311.2±3.8；原文截断处未完整给出 SOAR-Flow 在 UGV 各场景的全部数值，因此无法完整报告 UGV 上 SOAR-Flow 的关键结果。</p>
+<ul><li>对比方法：CBF–MPC、Flow-BC、Cal-QL、PROTO-SAC、Gaussian-DSAC、Flow-Q-only，以及多项消融变体。</li><li>实验条件：包含仿真实验与 UGV 实车实验；仿真中报告训练过程与评估结果，实车中在三种场景评估安全性、任务表现与纠正率。原文未报告开环评估结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.17903/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DriveWLA: Unifying Future Dynamics and Scene Semantics through World-Language-Action Modeling for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.17688/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">OccWAM: Occupancy World-Action Models with Joint Scene-to-Ego Flow Matching</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

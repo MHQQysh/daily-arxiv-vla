@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SIGMO: Sigmoid Gated Interaction-Aware Motion Planning - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。 研究问题是在不存在独立安全间隙的环境中，如何让自车主动“协商”通行权，同时避免过度保守导致的“冻结机器人”问题和过度激进带来的安全风险。 论文提出基于 sigmoid 门控的交互感知规划器 SIGMO，目标是在多智能体场景中兼具可扩展性、对其他智能体行为变化的适应性、可解释性以及较低计算负担。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.14414">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.14414.webp" alt="SIGMO: Sigmoid Gated Interaction-Aware Motion Planning" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SIGMO: Sigmoid Gated Interaction-Aware Motion Planning</h1>
+            <div class="detail-meta">2026-11-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.14414" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.14414" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.14414</span></div>
+            <p class="detail-summary">论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。 研究问题是在不存在独立安全间隙的环境中，如何让自车主动“协商”通行权，同时避免过度保守导致的“冻结机器人”问题和过度激进带来的安全风险。 论文提出基于 sigmoid 门控的交互感知规划器 SIGMO，目标是在多智能体场景中兼具可扩展性、对其他智能体行为变化的适应性、可解释性以及较低计算负担。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">8 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Honda Research Institute, USA, Inc. · Avinash Singh、Manish Saroya、Fatemeh C…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.14414/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。</li><li>研究问题是在不存在独立安全间隙的环境中，如何让自车主动“协商”通行权，同时避免过度保守导致的“冻结机器人”问题和过度激进带来的安全风险。</li><li>论文提出基于 sigmoid 门控的交互感知规划器 SIGMO，目标是在多智能体场景中兼具可扩展性、对其他智能体行为变化的适应性、可解释性以及较低计算负担。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Honda Research Institute, USA, Inc.；作者：Avinash Singh、Manish Saroya、Fatemeh Cheraghi Pouria、Faizan Tariq、Jovin D’sa、David Isele、Yosuke Sakamoto、Sangjae Bae。</li><li>机构：University of Illinois Urbana-Champaign；作者：原文未明确对应（原文仅标注作者列表与机构脚注，未逐项说明哪些作者隶属该机构）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。</li><li>研究问题是在不存在独立安全间隙的环境中，如何让自车主动“协商”通行权，同时避免过度保守导致的“冻结机器人”问题和过度激进带来的安全风险。</li><li>论文提出基于 sigmoid 门控的交互感知规划器 SIGMO，目标是在多智能体场景中兼具可扩展性、对其他智能体行为变化的适应性、可解释性以及较低计算负担。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出多项式 sigmoid 函数 Polygate，用物理 grounded 的交互特征（TTC、近期加速度、相对速度、路径优先权和车身邻近度）解析估计周围智能体的让行概率。</li><li>将 Polygate 集成到采样式滚动时域规划框架 MPPI 中，用估计的让行概率调节交互感知风险项，从而支持与任意轨迹预测方法兼容的交互感知规划。</li><li>Polygate 基于候选轨迹的几何特征评估，不需要针对每个候选自车轨迹重复推理预测模型，因此计算轻量且具有可解释性。</li><li>在交互密集的仿真场景中验证 SIGMO，并在 MetaDrive（由 Waymo Open Dataset 初始化）上分析泛化性，同时用 1/10 比例 F1Tenth 赛车进行硬件实验。</li><li>结果表明 SIGMO 在保持计算高效的同时，能够在主动协商与防御性行为之间取得平衡。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：运动规划模块，采用采样式滚动时域控制（MPPI）求解离散时间最优控制问题。</li><li>输入传感器：原文未报告具体传感器配置。</li><li>场景表示：以自车和周围智能体的位置、速度、加速度历史、局部目标点、车道中心线（可选）和道路边界（可选）表示；智能体用圆形或多圆覆盖表示，交互风险使用有向二维高斯重叠表示。</li><li>模型结构：</li></ul>
+<p> - 使用自行车运动学模型进行轨迹 rollout。</p>
+<p> - 规划代价由名义跟踪与舒适性代价、交互感知风险项、碰撞风险项和终端代价组成。</p>
+<p> - 交互感知风险项由时间衰减、空间风险（Bhattacharyya 核重叠）和合作门控相乘得到；合作门控为 max(1−P_yield, 0.3)。</p>
+<p> - 碰撞风险包括硬碰撞惩罚（圆重叠）和软碰撞惩罚（各向异性安全范围归一化距离），仅作用于近时域 T_c=min(T,1/Δt)。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 五个 sigmoid 特征：s_TTC、s_Σa、s_speed、s_path、s_prox，分别刻画碰撞预期、激进度、相对速度、路径优先权和邻近门控。</p>
+<p> - Polygate 融合步骤：先构造 TTC 门控的交互项 I，再得到 TTC 加权基础让行概率 P_base，再与路径优先权混合得到 P′，最后由邻近门控混合到中性先验 P̄，得到 P_yield。</p>
+<p> - 论文给出了 sigmoid 参数表（Table I）和融合权重；原文指出 μ 除邻近门控外几乎不需要调参，仿真和硬件实验使用相同参数（仅 μ(d_body)=0.5 为例外说明）。</p>
+<p> - 原文未报告具体的预测模型类型和网络结构。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：MetaDrive 仿真环境，并由 Waymo Open Dataset 初始化用于泛化性分析。</li><li>仿真器：MetaDrive；原文还报告了交互密集的自定义仿真场景（窄道会车与行人穿越、密集交通汇入等），但原文未报告这些场景的仿真器名称。</li><li>模型规模：原文未报告神经网络模型规模；Polygate 为解析 sigmoid 函数，参数见 Table I。</li><li>训练资源：原文未报告训练资源（方法为基于采样的优化规划，原文未报告训练过程）。</li><li>实车平台：1/10 比例 F1Tenth 赛车，用于汇入场景硬件实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：交互密集仿真场景（窄道通行与行人穿越、密集交通汇入等）；MetaDrive 泛化性分析；F1Tenth 硬件实验。</li><li>评估指标：原文在提供的 HTML 内容中未报告具体指标名称和数值；评估协议位于 IV-A4 “Metrics and protocol”，但该部分在提供的原文中未展开。</li><li>关键数值：原文在提供的 HTML 内容中未报告定量结果数值。</li><li>对比方法：原文在提供的 HTML 内容中未列出具体基线名称（基线位于 IV-A3 “Baselines for Comparative Analysis”，该部分未展开）。</li><li>实验条件：包括仿真实验（交互密集场景与 MetaDrive）、开环/闭环条件原文未明确区分；硬件实验为 1/10 比例 F1Tenth 赛车汇入场景。</li><li>结果结论：摘要和引言指出 SIGMO 在多种场景中平衡主动协商与防御行为，并保持计算高效；定性分析、对比分析、泛化性分析和效率实验的具体结果在提供的原文中未展开。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2611.13790/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">RiSE-Drive: Risk-Sensitive Long-Horizon Candidate Evaluation for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

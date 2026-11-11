@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ConDenseDrive: Knowledge-Dense, Token-Sparse Visual Encoder for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。 应用场景为视觉编码器，在严格推理延迟约束下为下游规划器提供场景表示。 研究问题：多数端到端系统从通用图像预训练初始化视觉编码器，并稠密处理每个相机视角和输入帧的全部 patch token，导致表示质量与推理效率难以兼顾；论文试图在不增大编码器规模、不重新设计下游规划器的前提下同时提升表示质量和降低编码延迟。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.16908">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.16908.webp" alt="ConDenseDrive: Knowledge-Dense, Token-Sparse Visual Encoder for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ConDenseDrive: Knowledge-Dense, Token-Sparse Visual Encoder for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.16908" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.16908" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.16908</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。 应用场景为视觉编码器，在严格推理延迟约束下为下游规划器提供场景表示。 研究问题：多数端到端系统从通用图像预训练初始化视觉编码器，并稠密处理每个相机视角和输入帧的全部 patch token，导致表示质量与推理效率难以兼顾；论文试图在不增大编码器规模、不重新设计下游规划器的前提下同时提升表示质量和降低编码延迟。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">华中科技大学 · Shengzhen Li、Yongkang Li、Hao Gao 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.16908/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。</li><li>应用场景为视觉编码器，在严格推理延迟约束下为下游规划器提供场景表示。</li><li>研究问题：多数端到端系统从通用图像预训练初始化视觉编码器，并稠密处理每个相机视角和输入帧的全部 patch token，导致表示质量与推理效率难以兼顾；论文试图在不增大编码器规模、不重新设计下游规划器的前提下同时提升表示质量和降低编码延迟。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：华中科技大学；作者：Shengzhen Li、Yongkang Li、Hao Gao、Chenxi Wu、Wenyu Liu、Xinggang Wang</li><li>机构：银望智能科技有限公司（Yinwang Intelligent Technology Co. Ltd.）；作者：Shengzhen Li、Chenxi Wu、Yajing Sun、Lu Hou</li><li>作者 Shengzhen Li 与 Chenxi Wu 同时在两个机构署名，原文分别列出两处隶属关系；其余作者与机构的对应关系如上。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。</li><li>应用场景为视觉编码器，在严格推理延迟约束下为下游规划器提供场景表示。</li><li>研究问题：多数端到端系统从通用图像预训练初始化视觉编码器，并稠密处理每个相机视角和输入帧的全部 patch token，导致表示质量与推理效率难以兼顾；论文试图在不增大编码器规模、不重新设计下游规划器的前提下同时提升表示质量和降低编码延迟。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 ConDenseDrive 三阶段框架，使视觉编码器成为“知识稠密、token 稀疏”的编码器，用于端到端驾驶。</li><li>第一阶段通过多教师视觉蒸馏，将视觉、语义、几何三类互补知识蒸馏到紧凑学生编码器，在不增加编码器规模的情况下提升表示质量。</li><li>第二阶段进行多帧 register 适配，将时空上下文聚合进 register token 供规划使用。</li><li>第三阶段提出 register 引导的 token 压缩，利用面向驾驶的 register token 注意力保留信息量大的 patch token、融合其余 token，无需辅助路由网络。</li><li>在 NAVSIM v1 取得 94.5 PDMS、NAVSIM v2 取得 90.8 EPDMS，并在 HUGSIM 零样本闭环评测取得 37.4 HD-Score，同时实现 2.0× 加速。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：视觉编码模块，论文保持下游规划器接口不变，仅优化视觉编码器。</li><li>输入传感器：端到端训练使用前、后、左、右四个相机图像，缩放至 1136×672；辅助输入包括自车状态与导航信息；每视角每帧使用 R=16 个 register token。</li><li>场景表示：通过每个相机视角各自的 register token 聚合空间信息，再经时间注意力聚合跨帧信息，register token 连同自车状态与导航信息送入轨迹生成器与评分器。</li><li>模型结构：学生编码器为 DeiT-S；第一阶段使用冻结教师 DINOv3 ViT-L/16、SigLIP2-SO400M NaFlex、Depth Anything 3-Large，分别提供视觉、语义、几何监督；采用逐教师卷积适配器对齐空间分辨率与通道宽度，损失为余弦损失与 Smooth L1 损失的等权多教师平均，仅优化学生与适配器，之后丢弃适配器。</li><li>第二阶段：将蒸馏编码器放入 DrivoR 的规划架构中进行端到端训练，此阶段保留全部 patch token；空间注意力由相机特定 register token 与 patch token 共同自注意力完成；时间注意力在各相机流内对帧级 register token 序列施加，并加入学习的时间嵌入与由相对平面运动得到的自车运动嵌入；端到端目标为轨迹最小 L1 损失与驾驶质量分数二分类交叉熵损失之和；蒸馏骨干权重冻结并用 LoRA 适配，规划器联合训练。</li><li>第三阶段：在选定的 Transformer 块中做 token 压缩；以 R 个 register token 对每个可压缩 token 在 H 个注意力头上的平均注意力作为路由分数；始终保留 register 与 CLS token，保留分数最高的比例 ρ，其余低分 token 按未归一化的路由分数加权求和融合为单个 token，融合 token 继续参与后续块并可在后续压缩中再次被处理；不引入辅助路由网络或损失。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM navtrain 训练集（103,288 个场景），NAVSIM navtest 评测集（12,146 个场景）；HUGSIM 全部 436 个场景用于零样本闭环评测，训练流程未使用 HUGSIM 四个源数据集的任何数据；蒸馏使用 NAVSIM navtrain 的前视图图像。</li><li>仿真器：HUGSIM 用于闭环仿真评测；NAVSIM 评测设置原文报告于附录，但所给 HTML 未包含附录细节，原文未报告更具体的仿真器描述。</li><li>模型规模：学生编码器 DeiT-S 为 22M 参数；教师为 DINOv3 ViT-L/16、SigLIP2-SO400M NaFlex、Depth Anything 3-Large；对比中提到 GoalFlow（V2-99，70M）、DriveSuprim（ViT-L，304M）、RAP-DINO（DINOv3-H+，840M）的参数量。</li><li>训练资源：四块 A100 GPU 训练，延迟在单块 A100 上测量。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1 navtest（PDMS 及 NC、DAC、TTC、Comf.、EP 子指标）、NAVSIM v2 navtest（EPDMS 及 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC 子指标）、HUGSIM 全部 436 个场景的零样本闭环评测（HD-Score 及 NC、DAC、TTC、COM、PDMS、RC 与 Easy/Medium/Hard/Extreme 分难度分数）。</li><li>开环/闭环条件：NAVSIM 为开环评测；HUGSIM 为零样本闭环仿真评测；未报告实车评测。</li><li>NAVSIM v1 关键结果：T=2、ρ=0.4 时 PDMS 94.5，NC 99.3、DAC 98.8、TTC 96.8、Comf. 100、EP 91.9，比人类驾驶员参考 94.8 低 0.3；优于 DriveSuprim（93.5）、RAP-DINO（93.8）、DrivoR（93.7）、DiffusionDriveV2（91.2）、Hydra-MDP（90.3）、GoalFlow（90.3）等。</li><li>NAVSIM v2 关键结果：同配置下 EPDMS 90.8（官方修正后评测器）、EPDMS* 87.1（原始评测代码）；NC 99.4、DAC 99.1、DDC 99.7、TLC 99.5、EP 90.3、TTC 98.8、LK 96.1、HC 97.8、EC 71.0；比采用同类 DrivoR 风格规划器的 CLOVER 高 0.4 EPDMS，EP 高 3.4 分，NC 持平。</li><li>HUGSIM 零样本结果：T=1、ρ=0.7 时 HD-Score 37.4，比 DrivoR 的 32.5 高 4.9 分；中等难度场景 HD-Score 从 29.1 提升到 41.2；NC 79.7、DAC 96.8、TTC 54.1、COM 93.9、PDMS 53.3、RC 49.9，Easy 41.2、Medium 21.8、Hard 13.3。</li><li>效率结果：T=2、ρ=0.4 时 94.5 PDMS、26.6 FPS；同 T=2 下 ρ 从 1.0 降至 0.4 带来 2.0× 加速且规划性能提升；T=1、ρ=0.3 时 44.5 FPS、94.0 PDMS，仅比未压缩版本低 0.1；T=1 下 token 压缩在 ρ=0.7 和 ρ=0.3 时分别相对 ρ=1.0 降低感知延迟 30.0% 和 46.6%。</li><li>消融：三阶段逐步叠加在 NAVSIM v1 上从 91.8 PDMS（原始预训练 DeiT-S）提升至 94.1（+蒸馏）、94.3（+时间注意力，T=2）、94.5（+压缩，T=2、ρ=0.4，26.6 FPS）；路由 token 使用 register 相比 CLS 在 T=1、ρ=0.7 下 PDMS 从 94.0 提升至 94.3；压缩阶段从完整 Stage 2 检查点初始化优于从 DeiT-S 直接初始化（对应表 6 的数值在所给 HTML 中被截断，原文该表后续内容未完整给出）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.16985/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">AUGUstus: Autonomous Driving VLA Model with Unified Generation and Understanding</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.16906/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Mining Cross-Modal Perception Gaps in Autonomous Driving: When Camera and LiDAR Disagree</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

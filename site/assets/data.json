@@ -1,5 +1,585 @@
 [
   {
+    "date": "2026-11-10",
+    "title": "SIGMO: Sigmoid Gated Interaction-Aware Motion Planning",
+    "link": "https://arxiv.org/abs/2611.14414",
+    "arxiv_id": "2611.14414",
+    "detail_path": "papers/2611.14414/",
+    "cover_path": "covers/2611.14414/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.14414.webp",
+    "paper_image_full_path": "assets/paper-images/2611.14414.webp",
+    "preview_text": "论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。 研究问题是在不存在独立安全间隙的环境中，如何让自车主动“协商”通行权，同时避免过度保守导致的“冻结机器人”问题和过度激进带来的安全风险。 论文提出基于 sigmoid 门控的交互感知规划器 SIGMO，目标是在多智能体场景中兼具可扩展性、对其他智能体行为变化的适应性、可解释性以及较低计算负担。",
+    "research_unit": "Honda Research Institute, USA, Inc. · Avinash Singh、Manish Saroya、Fatemeh C…",
+    "hook_text": "论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。",
+    "key_points": [
+      "论文面向自动驾驶在交互密集场景中的运动规划任务，典型场景包括窄道会车、密集交通汇入和无信号交叉口通行。",
+      "研究问题是在不存在独立安全间隙的环境中，如何让自车主动“协商”通行权，同时避免过度保守导致的“冻结机器人”问题和过度激进带来的安全风险。",
+      "论文提出基于 sigmoid 门控的交互感知规划器 SIGMO，目标是在多智能体场景中兼具可扩展性、对其他智能体行为变化的适应性、可解释性以及较低计算负担。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-10",
+    "title": "RiSE-Drive: Risk-Sensitive Long-Horizon Candidate Evaluation for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2611.13790",
+    "arxiv_id": "2611.13790",
+    "detail_path": "papers/2611.13790/",
+    "cover_path": "covers/2611.13790/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.13790.webp",
+    "paper_image_full_path": "assets/paper-images/2611.13790.webp",
+    "preview_text": "论文面向端到端自动驾驶中的“生成-选择”（generate-and-select）范式，研究如何在多个轨迹候选中选出最优执行轨迹。 任务核心是候选轨迹评估与排序（candidate evaluation / ranking），而非候选生成；上游感知与提案生成保持不变。 应用场景为城市驾驶下的多视角端到端规划，需满足安全、进度、规则合规等行为约束。 研究问题：现有方法使用确定性点分数、启发式子分数或单结果评估，难以刻画延迟失败、尾部风险和未来扰动下的排序不稳定性；候选质量应被视为由未来条件诱导的长时程结果分布，而非标量。",
+    "research_unit": "Zhejiang University（School of Software Technology） · Yu Zhao、Hongyi Duan、Mi…",
+    "hook_text": "论文面向端到端自动驾驶中的“生成-选择”（generate-and-select）范式，研究如何在多个轨迹候选中选出最优执行轨迹。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的“生成-选择”（generate-and-select）范式，研究如何在多个轨迹候选中选出最优执行轨迹。",
+      "任务核心是候选轨迹评估与排序（candidate evaluation / ranking），而非候选生成；上游感知与提案生成保持不变。",
+      "应用场景为城市驾驶下的多视角端到端规划，需满足安全、进度、规则合规等行为约束。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Route-Time Conflict Maps for Cooperative End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2611.13494",
+    "arxiv_id": "2611.13494",
+    "detail_path": "papers/2611.13494/",
+    "cover_path": "covers/2611.13494/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.13494.webp",
+    "paper_image_full_path": "assets/paper-images/2611.13494.webp",
+    "preview_text": "任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。 应用场景：交叉口、汇入、换道等车辆相遇处，多车（1–8 辆受控车辆）需决定通行顺序的闭环驾驶场景。 研究问题：现有协同端到端工作在 Class A（仅共享感知状态），各车独立决策何时通行，导致双方同时让行时死锁、双方同时通行时碰撞；论文要解决如何在共享意图基础上使多车通行决策彼此一致。",
+    "research_unit": "University of Georgia · Handong Yao（通讯作者、原文该机构标注仅出现在 Handong Yao 名下）",
+    "hook_text": "任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。",
+    "key_points": [
+      "任务：协同端到端自动驾驶（cooperative end-to-end autonomous driving），在 SAE J3216 协同驾驶自动化（CDA）Class B 及以上（意图共享或更高层级）条件下学习“何时通行”（when to go）。",
+      "应用场景：交叉口、汇入、换道等车辆相遇处，多车（1–8 辆受控车辆）需决定通行顺序的闭环驾驶场景。",
+      "研究问题：现有协同端到端工作在 Class A（仅共享感知状态），各车独立决策何时通行，导致双方同时让行时死锁、双方同时通行时碰撞；论文要解决如何在共享意图基础上使多车通行决策彼此一致。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-07",
+    "title": "Embodied Science Agents: Making Embodied Experimental Design Learnable",
+    "link": "https://arxiv.org/abs/2611.12958",
+    "arxiv_id": "2611.12958",
+    "detail_path": "papers/2611.12958/",
+    "cover_path": "covers/2611.12958/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.12958.webp",
+    "paper_image_full_path": "assets/paper-images/2611.12958.webp",
+    "preview_text": "论文面向 AI for Science 中的自驱动实验室（Self-Driving Laboratory, SDL）场景，研究如何将大模型驱动的科学智能体与真实物理实验执行闭环耦合。 核心研究问题是现有 SDL 将基础模型当作“离身”规划器、把机器人当作独立执行器，导致物理接地不足、规划与执行缺乏实时反馈、缺少感知运动学习（embodiment gap）。 论文提出应以认知可学习性（研究什么）、实验可学习性（在哪里搜索）、具身可学习性（如何行动）三条相互依赖的轴作为下一代具身科学智能体的设计原则。 应用任务为真实化学实验室中的 Electro-Fenton 降解 Safranine T 染料废水参数优化，需在高维离散参数空间中自主搜索最优工况。",
+    "research_unit": "University College London · Yihang Chen、Jun Wang",
+    "hook_text": "论文面向 AI for Science 中的自驱动实验室（Self-Driving Laboratory, SDL）场景，研究如何将大模型驱动的科学智能体与真实物理实验执行闭环耦合。",
+    "key_points": [
+      "论文面向 AI for Science 中的自驱动实验室（Self-Driving Laboratory, SDL）场景，研究如何将大模型驱动的科学智能体与真实物理实验执行闭环耦合。",
+      "核心研究问题是现有 SDL 将基础模型当作“离身”规划器、把机器人当作独立执行器，导致物理接地不足、规划与执行缺乏实时反馈、缺少感知运动学习（embodiment gap）。",
+      "论文提出应以认知可学习性（研究什么）、实验可学习性（在哪里搜索）、具身可学习性（如何行动）三条相互依赖的轴作为下一代具身科学智能体的设计原则。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-06",
+    "title": "URL-Sim: Unified and Regulated LiDAR Simulation for High-Fidelity Reconstruction of Dynamic Driving Scenes",
+    "link": "https://arxiv.org/abs/2611.12932",
+    "arxiv_id": "2611.12932",
+    "detail_path": "papers/2611.12932/",
+    "cover_path": "covers/2611.12932/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.12932.webp",
+    "paper_image_full_path": "assets/paper-images/2611.12932.webp",
+    "preview_text": "任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。 应用场景：面向自动驾驶系统感知与规划算法的低成本安全验证，以及大规模闭环仿真。 研究问题：现有 NeRF 类 LiDAR 仿真方法渲染慢；现有 3DGS 类方法多局限于刚性车辆，缺乏对行人、骑行者等非刚性目标的统一建模，且无约束致密化导致高斯基元冗余。",
+    "research_unit": "重庆大学机械与运载工程学院（College of Mechanical and Vehicle Engineering, Chongqing Univ…",
+    "hook_text": "任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。",
+    "key_points": [
+      "任务：从真实驾驶日志重建高保真 LiDAR 仿真场景，并支持动态城市驾驶场景的可控编辑。",
+      "应用场景：面向自动驾驶系统感知与规划算法的低成本安全验证，以及大规模闭环仿真。",
+      "研究问题：现有 NeRF 类 LiDAR 仿真方法渲染慢；现有 3DGS 类方法多局限于刚性车辆，缺乏对行人、骑行者等非刚性目标的统一建模，且无约束致密化导致高斯基元冗余。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "title": "DR-VLA: Learning Human-Like Quadruped Navigation from Egocentric Web Videos via Domain-Invariant Scene Representations",
+    "link": "https://arxiv.org/abs/2610.18373",
+    "arxiv_id": "2610.18373",
+    "detail_path": "papers/2610.18373/",
+    "cover_path": "covers/2610.18373/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.18373.webp",
+    "paper_image_full_path": "assets/paper-images/2610.18373.webp",
+    "preview_text": "面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。 研究问题：机器人遥操作演示数据规模有限（公开真实腿足数据每份仅约 5–15 小时），而互联网第一视角人类视频丰富但存在观测差异（视角、成像、相机运动）与动作差异（无机器人动作标签、人体运动不可直接执行）。 核心思路：将人类与机器人观测抽象为共享的领域不变场景表示（DISR），在该抽象层面从大规模人类第一视角视频中学习可迁移的场景理解与未来预测先验，再在机器人数据上适配动作生成。 任务形式化为指令条件下的轨迹预测：输入多视角图像序列、语言导航指令与自车状态，输出机器人本体系下的平面位姿动作块。 同时探讨该框架向自动驾驶的泛化（NAVSIM v1）。",
+    "research_unit": "Deep Robotics · 原文未明确对应",
+    "hook_text": "面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。",
+    "key_points": [
+      "面向四足机器人户外最后一公里配送导航任务，要求机器人理解复杂场景、预判环境变化并以符合社会规范的方式导航。",
+      "研究问题：机器人遥操作演示数据规模有限（公开真实腿足数据每份仅约 5–15 小时），而互联网第一视角人类视频丰富但存在观测差异（视角、成像、相机运动）与动作差异（无机器人动作标签、人体运动不可直接执行）。",
+      "核心思路：将人类与机器人观测抽象为共享的领域不变场景表示（DISR），在该抽象层面从大规模人类第一视角视频中学习可迁移的场景理解与未来预测先验，再在机器人数据上适配动作生成。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "title": "Beyond Planning: Differentiable Control-in-the-loop End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.18167",
+    "arxiv_id": "2610.18167",
+    "detail_path": "papers/2610.18167/",
+    "cover_path": "covers/2610.18167/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.18167.webp",
+    "paper_image_full_path": "assets/paper-images/2610.18167.webp",
+    "preview_text": "面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。 应用场景为基于相机与 LiDAR 感知的端到端轨迹规划与车辆执行（Bench2Drive 闭环基准）。 核心问题：现有端到端规划训练止于规划输出，外部手工调参的跟踪控制器与不可微车辆动力学阻断梯度；同时存在监督混叠、标签/感知/控制三速率不一致、训练与部署车辆模型不匹配三类“规划—控制鸿沟”。",
+    "research_unit": "Nanyang Technological University, School of Mechanical and Aerospace Engine…",
+    "hook_text": "面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。",
+    "key_points": [
+      "面向端到端自动驾驶中“规划到控制”的衔接环节，研究如何将车辆动力学纳入端到端网络的可微训练回路。",
+      "应用场景为基于相机与 LiDAR 感知的端到端轨迹规划与车辆执行（Bench2Drive 闭环基准）。",
+      "核心问题：现有端到端规划训练止于规划输出，外部手工调参的跟踪控制器与不可微车辆动力学阻断梯度；同时存在监督混叠、标签/感知/控制三速率不一致、训练与部署车辆模型不匹配三类“规划—控制鸿沟”。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "title": "FlowSim: Rendering-Free Closed-Loop Simulation for Evaluating End-to-End Driving Systems",
+    "link": "https://arxiv.org/abs/2610.18030",
+    "arxiv_id": "2610.18030",
+    "detail_path": "papers/2610.18030/",
+    "cover_path": "covers/2610.18030/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.18030.webp",
+    "paper_image_full_path": "assets/paper-images/2610.18030.webp",
+    "preview_text": "论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。 传统闭环评估依赖神经重建或驾驶世界模型生成传感器图像，再经感知编码器重新编码，带来较高计算开销以及仿真观测与真实观测之间的sim2real差距。 论文提出FlowSim——一种无渲染（rendering-free）仿真范式，直接从上一帧潜在表示与目标帧符号化场景条件预测系统内部的潜在表示，再交由原始冻结下游模块处理。 应用场景为在nuScenes与NavSim上对冻结的UniAD（稠密BEV潜在表示）与TransFuser（稀疏潜在表示）驾驶栈进行多时域、稠密/稀疏表示下的仿真评估。",
+    "research_unit": "Karlsruhe Institute of Technology · Hanfeng Wu、Christoph Stiller",
+    "hook_text": "论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。",
+    "key_points": [
+      "论文面向端到端（E2E）自动驾驶系统的闭环评估任务，核心研究问题是：图像空间仿真是否真的是E2E驾驶系统闭环评估所必需的。",
+      "传统闭环评估依赖神经重建或驾驶世界模型生成传感器图像，再经感知编码器重新编码，带来较高计算开销以及仿真观测与真实观测之间的sim2real差距。",
+      "论文提出FlowSim——一种无渲染（rendering-free）仿真范式，直接从上一帧潜在表示与目标帧符号化场景条件预测系统内部的潜在表示，再交由原始冻结下游模块处理。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "title": "DriveWLA: Unifying Future Dynamics and Scene Semantics through World-Language-Action Modeling for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.17903",
+    "arxiv_id": "2610.17903",
+    "detail_path": "papers/2610.17903/",
+    "cover_path": "covers/2610.17903/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.17903.webp",
+    "paper_image_full_path": "assets/paper-images/2610.17903.webp",
+    "preview_text": "面向自动驾驶的端到端轨迹生成任务：根据相机观测、历史轨迹、导航命令与自车状态生成未来轨迹。 研究问题是如何在轨迹规划中同时利用视觉语言模型（VLM）的语义理解能力与世界模型的未来场景动态预测能力。 指出既有方法多以“辅助目标”或“特征条件化”方式拼接两种能力，未显式建模语义表示与动态表示之间的交互与对齐，因而难以充分释放二者的互补信息。",
+    "research_unit": "Huazhong University of Science and Technology · Shuzheng Wang、Haoxuan Li、Sh…",
+    "hook_text": "面向自动驾驶的端到端轨迹生成任务：根据相机观测、历史轨迹、导航命令与自车状态生成未来轨迹。",
+    "key_points": [
+      "面向自动驾驶的端到端轨迹生成任务：根据相机观测、历史轨迹、导航命令与自车状态生成未来轨迹。",
+      "研究问题是如何在轨迹规划中同时利用视觉语言模型（VLM）的语义理解能力与世界模型的未来场景动态预测能力。",
+      "指出既有方法多以“辅助目标”或“特征条件化”方式拼接两种能力，未显式建模语义表示与动态表示之间的交互与对齐，因而难以充分释放二者的互补信息。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "title": "Beyond Safe Execution: Safe Online Reinforcement Learning for Autonomous Driving with Value Calibration and Adaptive Guidance",
+    "link": "https://arxiv.org/abs/2610.17799",
+    "arxiv_id": "2610.17799",
+    "detail_path": "papers/2610.17799/",
+    "cover_path": "covers/2610.17799/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.17799.webp",
+    "paper_image_full_path": "assets/paper-images/2610.17799.webp",
+    "preview_text": "论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。 应用场景包括 MetaDrive 仿真环境中的自动驾驶场景，以及 UGV 上的真实世界实验（如 Blocked-Side Bypass、8-shaped Maneuver、Held-out Cornering）。 核心研究问题是：仅靠安全过滤虽能保证执行安全，但无法保证策略稳定改进或减少对安全纠正的依赖；论文希望在学习过程中同时实现安全执行、稳定价值学习和逐步降低对过滤纠正的依赖。",
+    "research_unit": "原文未明确对应：论文 HTML 原文未给出作者所属机构信息；作者为 Zeqiao Li、Yijing Wang、Haoyu Wang、Zheng Li…",
+    "hook_text": "论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。",
+    "key_points": [
+      "论文面向自动驾驶/无人地面车辆（UGV）的在线强化学习安全微调任务，研究如何在训练全程保证安全探索的前提下，对离线初始化的 Flow 策略进行在线改进。",
+      "应用场景包括 MetaDrive 仿真环境中的自动驾驶场景，以及 UGV 上的真实世界实验（如 Blocked-Side Bypass、8-shaped Maneuver、Held-out Cornering）。",
+      "核心研究问题是：仅靠安全过滤虽能保证执行安全，但无法保证策略稳定改进或减少对安全纠正的依赖；论文希望在学习过程中同时实现安全执行、稳定价值学习和逐步降低对过滤纠正的依赖。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "title": "OccWAM: Occupancy World-Action Models with Joint Scene-to-Ego Flow Matching",
+    "link": "https://arxiv.org/abs/2610.17688",
+    "arxiv_id": "2610.17688",
+    "detail_path": "papers/2610.17688/",
+    "cover_path": "covers/2610.17688/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.17688.webp",
+    "paper_image_full_path": "assets/paper-images/2610.17688.webp",
+    "preview_text": "论文面向端到端自动驾驶中的规划任务，研究未来驾驶场景建模（占据栅格预测）与自车轨迹生成之间的接口问题。 应用场景包括闭环驾驶仿真（Bench2Drive）与开环规划/未来占据预测（nuScenes）。 核心研究问题：现有占据感知规划器采用层次化耦合（world-first 或 action-first）或并行多任务学习，保留显式生成顺序或角色不对称，限制了世界预测与动作生成之间的双向交互；同时联合生成面临坐标表示难题（场景中心利于世界预测稳定，自车中心利于动作对齐规划）。 论文提出 OccWAM，以流匹配联合生成稠密度量占据与连续自车轨迹，并设计 scene-to-ego 两阶段公式化解上述接口与坐标表示问题。",
+    "research_unit": "Nanyang Technological University, Singapore · Collister Chua、Zhan Chen、Song…",
+    "hook_text": "论文面向端到端自动驾驶中的规划任务，研究未来驾驶场景建模（占据栅格预测）与自车轨迹生成之间的接口问题。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的规划任务，研究未来驾驶场景建模（占据栅格预测）与自车轨迹生成之间的接口问题。",
+      "应用场景包括闭环驾驶仿真（Bench2Drive）与开环规划/未来占据预测（nuScenes）。",
+      "核心研究问题：现有占据感知规划器采用层次化耦合（world-first 或 action-first）或并行多任务学习，保留显式生成顺序或角色不对称，限制了世界预测与动作生成之间的双向交互；同时联合生成面临坐标表示难题（场景中心利于世界预测稳定，自车中心利于动作对齐规划）。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "title": "AUGUstus: Autonomous Driving VLA Model with Unified Generation and Understanding",
+    "link": "https://arxiv.org/abs/2610.16985",
+    "arxiv_id": "2610.16985",
+    "detail_path": "papers/2610.16985/",
+    "cover_path": "covers/2610.16985/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.16985.webp",
+    "paper_image_full_path": "assets/paper-images/2610.16985.webp",
+    "preview_text": "论文面向端到端自动驾驶的视觉-语言-动作（VLA）模型规划任务，目标是在保持低延迟可部署的同时，利用视觉语言模型（VLM）的空间理解能力生成安全、可解释且准确的轨迹。 应用场景为基于相机视频的端到端驾驶规划，输入包括相机视频、自车状态、路线指令和历史轨迹。 研究问题在于现有 VLA 方法难以兼顾 VLM 理解与低延迟控制：回归头方法退化为视觉-动作（VA）模型，缺乏动作分布且难以做强化学习后训练；扩散/流匹配专家未充分利用 VLM 空间理解，产生不安全、不可解释的动作；自回归方法串行生成思维链（CoT）和动作 token，延迟高、难以实时部署。",
+    "research_unit": "Peking University · Yuqi Ye、Changhao Peng、Junhong Lin 等",
+    "hook_text": "论文面向端到端自动驾驶的视觉-语言-动作（VLA）模型规划任务，目标是在保持低延迟可部署的同时，利用视觉语言模型（VLM）的空间理解能力生成安全、可解释且准确的轨迹。",
+    "key_points": [
+      "论文面向端到端自动驾驶的视觉-语言-动作（VLA）模型规划任务，目标是在保持低延迟可部署的同时，利用视觉语言模型（VLM）的空间理解能力生成安全、可解释且准确的轨迹。",
+      "应用场景为基于相机视频的端到端驾驶规划，输入包括相机视频、自车状态、路线指令和历史轨迹。",
+      "研究问题在于现有 VLA 方法难以兼顾 VLM 理解与低延迟控制：回归头方法退化为视觉-动作（VA）模型，缺乏动作分布且难以做强化学习后训练；扩散/流匹配专家未充分利用 VLM 空间理解，产生不安全、不可解释的动作；自回归方法串行生成思维链（CoT）和动作 token，延迟高、难以实时部署。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "title": "ConDenseDrive: Knowledge-Dense, Token-Sparse Visual Encoder for End-to-End Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.16908",
+    "arxiv_id": "2610.16908",
+    "detail_path": "papers/2610.16908/",
+    "cover_path": "covers/2610.16908/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.16908.webp",
+    "paper_image_full_path": "assets/paper-images/2610.16908.webp",
+    "preview_text": "论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。 应用场景为视觉编码器，在严格推理延迟约束下为下游规划器提供场景表示。 研究问题：多数端到端系统从通用图像预训练初始化视觉编码器，并稠密处理每个相机视角和输入帧的全部 patch token，导致表示质量与推理效率难以兼顾；论文试图在不增大编码器规模、不重新设计下游规划器的前提下同时提升表示质量和降低编码延迟。",
+    "research_unit": "华中科技大学 · Shengzhen Li、Yongkang Li、Hao Gao 等",
+    "hook_text": "论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。",
+    "key_points": [
+      "论文面向端到端自动驾驶中的视觉编码器设计，任务是从多相机、多帧图像及自车状态与导航输入预测未来自车轨迹。",
+      "应用场景为视觉编码器，在严格推理延迟约束下为下游规划器提供场景表示。",
+      "研究问题：多数端到端系统从通用图像预训练初始化视觉编码器，并稠密处理每个相机视角和输入帧的全部 patch token，导致表示质量与推理效率难以兼顾；论文试图在不增大编码器规模、不重新设计下游规划器的前提下同时提升表示质量和降低编码延迟。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "title": "Mining Cross-Modal Perception Gaps in Autonomous Driving: When Camera and LiDAR Disagree",
+    "link": "https://arxiv.org/abs/2610.16906",
+    "arxiv_id": "2610.16906",
+    "detail_path": "papers/2610.16906/",
+    "cover_path": "covers/2610.16906/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.16906.webp",
+    "paper_image_full_path": "assets/paper-images/2610.16906.webp",
+    "preview_text": "面向自动驾驶的相机–LiDAR 融合 3D 目标检测任务，研究多模态融合中相机与 LiDAR 感知不一致（Cross-Modal Perception Gap, CMPG）的规律。 应用场景为自动驾驶多模态感知与融合检测，关注单模态检测器在何种条件、何种空间位置与物体属性下更可靠。 研究问题包括：相机相对 LiDAR 何时更可靠；这种差异是否遵循可预测的空间与属性模式；该结构能否转化为融合可用的信号。 论文指出当前融合设计内嵌的三项假设（LiDAR 近距离更可靠、相机远距离退化更快、两模态可互补）在细粒度层面并不成立，并提出将可靠性从学习权重中提取出来、使其可审计。",
+    "research_unit": "伦敦玛丽女王大学电子工程与计算机科学学院（School of Electronic Engineering and Computer Science…",
+    "hook_text": "面向自动驾驶的相机–LiDAR 融合 3D 目标检测任务，研究多模态融合中相机与 LiDAR 感知不一致（Cross-Modal Perception Gap, CMPG）的规律。",
+    "key_points": [
+      "面向自动驾驶的相机–LiDAR 融合 3D 目标检测任务，研究多模态融合中相机与 LiDAR 感知不一致（Cross-Modal Perception Gap, CMPG）的规律。",
+      "应用场景为自动驾驶多模态感知与融合检测，关注单模态检测器在何种条件、何种空间位置与物体属性下更可靠。",
+      "研究问题包括：相机相对 LiDAR 何时更可靠；这种差异是否遵循可预测的空间与属性模式；该结构能否转化为融合可用的信号。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "title": "Language2Drive: Do Vision-Language-Action Models Really Follow the Instructions in Autonomous Driving?",
+    "link": "https://arxiv.org/abs/2610.16634",
+    "arxiv_id": "2610.16634",
+    "detail_path": "papers/2610.16634/",
+    "cover_path": "covers/2610.16634/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.16634.webp",
+    "paper_image_full_path": "assets/paper-images/2610.16634.webp",
+    "preview_text": "研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。 应用场景为乘客以自然语言指定驾驶行为（如路口转向、车道选择、停车位、限速区间、长时程任务程序），系统需在多个安全合法可行行为中选出被请求的一项。 研究问题：现有闭环基准主要衡量路线完成、安全与规则合规，无法回答“语言是否真正决定了车辆执行哪一个可行行为”；单条指令成功或高驾驶分数可能高估指令跟随能力。 论文指出核心矛盾：强驾驶能力与弱语言控制并存，需以匹配反事实方式检验指令改变是否可靠改变行为选择。",
+    "research_unit": "Institute for AI Industry Research (AIR), Tsinghua University · Zihan You、Y…",
+    "hook_text": "研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。",
+    "key_points": [
+      "研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。",
+      "应用场景为乘客以自然语言指定驾驶行为（如路口转向、车道选择、停车位、限速区间、长时程任务程序），系统需在多个安全合法可行行为中选出被请求的一项。",
+      "研究问题：现有闭环基准主要衡量路线完成、安全与规则合规，无法回答“语言是否真正决定了车辆执行哪一个可行行为”；单条指令成功或高驾驶分数可能高估指令跟随能力。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "title": "XAI-Guided Fourier Domain Generalisation for Pure-Simulation Sim-to-Real Deep Reinforcement Learning",
+    "link": "https://arxiv.org/abs/2610.16478",
+    "arxiv_id": "2610.16478",
+    "detail_path": "papers/2610.16478/",
+    "cover_path": "covers/2610.16478/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.16478.webp",
+    "paper_image_full_path": "assets/paper-images/2610.16478.webp",
+    "preview_text": "论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。 应用场景为 Duckiebot 小车在仿真地图训练后，零样本（zero-shot）部署到真实 Duckietown 地图运行。 核心研究问题：现有 sim-to-real 方法要么依赖目标域真实数据做图像迁移/域自适应，要么采用与策略无关的随机域随机化，后者引入无引导扰动、难以反映真实差异；且 Fourier 域方法通常借用目标域频谱或通用频谱混合，未与闭环策略行为关联。论文希望仅用仿真内部构造“策略相关”的视觉域扰动，提升跨域鲁棒性。",
+    "research_unit": "City St George’s, University of London · Wei Yao、Chuyao Wang、Ziwei Wang 等",
+    "hook_text": "论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。",
+    "key_points": [
+      "论文面向视觉输入下的自动驾驶连续控制任务（Duckietown 平台上的车道跟随与障碍物规避），研究纯仿真训练到真实世界部署（sim-to-real）的深度强化学习迁移问题。",
+      "应用场景为 Duckiebot 小车在仿真地图训练后，零样本（zero-shot）部署到真实 Duckietown 地图运行。",
+      "核心研究问题：现有 sim-to-real 方法要么依赖目标域真实数据做图像迁移/域自适应，要么采用与策略无关的随机域随机化，后者引入无引导扰动、难以反映真实差异；且 Fourier 域方法通常借用目标域频谱或通用频谱混合，未与闭环策略行为关联。论文希望仅用仿真内部构造“策略相关”的视觉域扰动，提升跨域鲁棒性。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-12",
+    "title": "Directional Pullback Regularization for Long-Horizon Rollout of Latent World Models in Autonomous Driving",
+    "link": "https://arxiv.org/abs/2610.16139",
+    "arxiv_id": "2610.16139",
+    "detail_path": "papers/2610.16139/",
+    "cover_path": "covers/2610.16139/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.16139.webp",
+    "paper_image_full_path": "assets/paper-images/2610.16139.webp",
+    "preview_text": "研究自动驾驶中潜在世界模型的长时域开环自车运动 rollout 建模问题。 关注的核心问题：潜在世界模型在无约束潜在空间中学习，但其解码后的状态增量可能解码出违反车辆非完整运动学约束的横向运动，长时域 rollout 中这种不匹配会累积。 论文探索是否可以通过给潜在转移赋予运动感知的几何结构（而非重新设计预测器架构）来提升长时域 rollout 质量。 应用场景为基于运动历史、当前状态和道路曲率的开环自车轨迹状态预测与多步推演。",
+    "research_unit": "Toyota Motor North America R&D - InfoTech Labs · Shatadal Mishra、Ahmadreza…",
+    "hook_text": "研究自动驾驶中潜在世界模型的长时域开环自车运动 rollout 建模问题。",
+    "key_points": [
+      "研究自动驾驶中潜在世界模型的长时域开环自车运动 rollout 建模问题。",
+      "关注的核心问题：潜在世界模型在无约束潜在空间中学习，但其解码后的状态增量可能解码出违反车辆非完整运动学约束的横向运动，长时域 rollout 中这种不匹配会累积。",
+      "论文探索是否可以通过给潜在转移赋予运动感知的几何结构（而非重新设计预测器架构）来提升长时域 rollout 质量。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-11",
+    "title": "SpikeOcc: Towards Resilient Multimodal 3D Occupancy Perception via Spiking Experts",
+    "link": "https://arxiv.org/abs/2610.15745",
+    "arxiv_id": "2610.15745",
+    "detail_path": "papers/2610.15745/",
+    "cover_path": "covers/2610.15745/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.15745.webp",
+    "paper_image_full_path": "assets/paper-images/2610.15745.webp",
+    "preview_text": "论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。 应用场景为车载感知在传感器部分失效（相机缺失、激光雷达缺失）条件下的可靠运行，针对现有方法默认推理时所有模态完整可用的隐含假设。 核心研究问题是“模态中断脆弱性”：强多模态占据模型在完整传感器下精度高，但移除前视相机即明显退化，整模态缺失时性能灾难性崩塌。 同时探索脉冲神经网络（SNN）作为提升多模态占据感知韧性的表示范式，并处理脉冲神经元离散性带来的优化困难。",
+    "research_unit": "Peking University · Yiding Sun、Zijie Xu、Jiajun Cao 等",
+    "hook_text": "论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。",
+    "key_points": [
+      "论文研究自动驾驶中的多模态三维语义占据预测任务，输入为多相机图像与激光雷达点云，输出预定义三维空间中每个体素的占据状态与语义类别。",
+      "应用场景为车载感知在传感器部分失效（相机缺失、激光雷达缺失）条件下的可靠运行，针对现有方法默认推理时所有模态完整可用的隐含假设。",
+      "核心研究问题是“模态中断脆弱性”：强多模态占据模型在完整传感器下精度高，但移除前视相机即明显退化，整模态缺失时性能灾难性崩塌。"
+    ],
+    "reading_minutes": 10,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-11",
+    "title": "Squeeze-Aware-YOLO: Early Channel Recalibration and Multi-Scale Fusion for Real-Time Traffic Sign Detection",
+    "link": "https://arxiv.org/abs/2610.15604",
+    "arxiv_id": "2610.15604",
+    "detail_path": "papers/2610.15604/",
+    "cover_path": "covers/2610.15604/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.15604.webp",
+    "paper_image_full_path": "assets/paper-images/2610.15604.webp",
+    "preview_text": "任务：实时交通标志检测（traffic sign detection）。 应用场景：智能交通系统、高级驾驶辅助系统（ADAS）与自动驾驶车辆。 研究问题：在光照变化、恶劣天气、运动模糊、部分遮挡等条件下，小尺寸或视觉退化交通标志检测性能下降，重要空间信息易丢失；同时需要在嵌入式/资源受限平台上保持实时推理效率。",
+    "research_unit": "Dept. of Computer Science and Engineering, Islamic University of Technology…",
+    "hook_text": "任务：实时交通标志检测（traffic sign detection）。",
+    "key_points": [
+      "任务：实时交通标志检测（traffic sign detection）。",
+      "应用场景：智能交通系统、高级驾驶辅助系统（ADAS）与自动驾驶车辆。",
+      "研究问题：在光照变化、恶劣天气、运动模糊、部分遮挡等条件下，小尺寸或视觉退化交通标志检测性能下降，重要空间信息易丢失；同时需要在嵌入式/资源受限平台上保持实时推理效率。"
+    ],
+    "reading_minutes": 12,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#316b57",
+      "to": "#8bb174",
+      "spot": "#d9e7c7",
+      "ink": "#fbfff6",
+      "muted": "rgba(251, 255, 246, 0.82)",
+      "chip": "rgba(251, 255, 246, 0.16)",
+      "stroke": "rgba(251, 255, 246, 0.24)"
+    }
+  },
+  {
+    "date": "2026-10-11",
+    "title": "Adversarial Detection for Pre-trained Classifiers via Lipschitz-Margin Analysis with Certification",
+    "link": "https://arxiv.org/abs/2610.15359",
+    "arxiv_id": "2610.15359",
+    "detail_path": "papers/2610.15359/",
+    "cover_path": "covers/2610.15359/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.15359.webp",
+    "paper_image_full_path": "assets/paper-images/2610.15359.webp",
+    "preview_text": "面向自动驾驶感知等安全关键场景中的深度分类器，研究对抗样本防御问题：分类器参数在部署时固定、不可重训练，且推理需满足实时延迟预算。 任务不是证明预测在 ℓ2 球内不变（认证鲁棒性），而是认证“声明 ℓ2 半径内的成功对抗样本都会被检测并拒绝”，即认证对抗检测。 研究问题：能否把认证鲁棒分类器转化为一个足够高效、可用于实时部署的认证检测器，并解决三个耦合难点——鲁棒性到检测的归约、Lipschitz 常数不可计算、局部 Lipschitz 估计需校准。 应用场景包括自动驾驶中的交通标志/行人分类、内容审核中的违规图像分类、生物特征认证与门禁。",
+    "research_unit": "Nanjing University of Aeronautics and Astronautics · Rui Zhang、Youwen Zhu",
+    "hook_text": "面向自动驾驶感知等安全关键场景中的深度分类器，研究对抗样本防御问题：分类器参数在部署时固定、不可重训练，且推理需满足实时延迟预算。",
+    "key_points": [
+      "面向自动驾驶感知等安全关键场景中的深度分类器，研究对抗样本防御问题：分类器参数在部署时固定、不可重训练，且推理需满足实时延迟预算。",
+      "任务不是证明预测在 ℓ2 球内不变（认证鲁棒性），而是认证“声明 ℓ2 半径内的成功对抗样本都会被检测并拒绝”，即认证对抗检测。",
+      "研究问题：能否把认证鲁棒分类器转化为一个足够高效、可用于实时部署的认证检测器，并解决三个耦合难点——鲁棒性到检测的归约、Lipschitz 常数不可计算、局部 Lipschitz 估计需校准。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
     "date": "2026-11-09",
     "title": "AutoVLA-D: Learn a Trajectory-Geometric Condition from Reasoning for Autonomous Driving VLA",
     "link": "https://arxiv.org/abs/2611.12382",

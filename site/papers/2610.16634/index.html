@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Language2Drive: Do Vision-Language-Action Models Really Follow the Instructions in Autonomous Driving? - 自动驾驶每日论文卡</title>
+    <meta name="description" content="研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。 应用场景为乘客以自然语言指定驾驶行为（如路口转向、车道选择、停车位、限速区间、长时程任务程序），系统需在多个安全合法可行行为中选出被请求的一项。 研究问题：现有闭环基准主要衡量路线完成、安全与规则合规，无法回答“语言是否真正决定了车辆执行哪一个可行行为”；单条指令成功或高驾驶分数可能高估指令跟随能力。 论文指出核心矛盾：强驾驶能力与弱语言控制并存，需以匹配反事实方式检验指令改变是否可靠改变行为选择。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.16634">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.16634.webp" alt="Language2Drive: Do Vision-Language-Action Models Really Follow the Instructions in Autonomous Driving?" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Language2Drive: Do Vision-Language-Action Models Really Follow the Instructions in Autonomous Driving?</h1>
+            <div class="detail-meta">2026-10-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.16634" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.16634" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.16634</span></div>
+            <p class="detail-summary">研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。 应用场景为乘客以自然语言指定驾驶行为（如路口转向、车道选择、停车位、限速区间、长时程任务程序），系统需在多个安全合法可行行为中选出被请求的一项。 研究问题：现有闭环基准主要衡量路线完成、安全与规则合规，无法回答“语言是否真正决定了车辆执行哪一个可行行为”；单条指令成功或高驾驶分数可能高估指令跟随能力。 论文指出核心矛盾：强驾驶能力与弱语言控制并存，需以匹配反事实方式检验指令改变是否可靠改变行为选择。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Institute for AI Industry Research (AIR), Tsinghua University · Zihan You、Y…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.16634/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。</p>
+  <ul class="reading-intro-points"><li>研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。</li><li>应用场景为乘客以自然语言指定驾驶行为（如路口转向、车道选择、停车位、限速区间、长时程任务程序），系统需在多个安全合法可行行为中选出被请求的一项。</li><li>研究问题：现有闭环基准主要衡量路线完成、安全与规则合规，无法回答“语言是否真正决定了车辆执行哪一个可行行为”；单条指令成功或高驾驶分数可能高估指令跟随能力。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Institute for AI Industry Research (AIR), Tsinghua University；作者：Zihan You、Yuguang Yang、Jieyuan Pei、Yan Wang</li><li>机构：Southeast University；作者：Zihan You</li><li>机构：Li Auto Inc.；作者：Benjin Zhu</li><li>机构：The Hong Kong University of Science and Technology (Guangzhou)；作者：Jieyuan Pei、Zhiwen Chen、Wenxuan Song、Haoang Li</li><li>机构：Shanghai Jiao Tong University；作者：Zehua Fan</li><li>机构：University of Adelaide；作者：Wenqi Lyu</li><li>机构：Beijing Information Science and Technology University；作者：Aoqi Wang</li><li>机构：Amazon；作者：Ni Wang</li><li>机构：Beijing Jiaotong University；作者：Yifei Yang</li><li>机构：Wuhan University；作者：Linge Zhao</li><li>机构：Huazhong University of Science and Technology；作者：Huan Li</li><li>机构：University of Science and Technology of China；作者：Sining Ang、Jueyu Chen</li><li>机构：NIO；作者：Jueyu Chen</li><li>机构：University of Texas at Austin；作者：Xiangyu Li</li><li>机构：Chinese Academy of Sciences；作者：Qianshan Wei</li><li>机构：HiThink Research；作者：Jieyuan Pei</li><li>机构：AMD；作者：Yuxin Wang</li><li>机构：The University of Hong Kong；作者：Jiaqi Li</li><li>机构：EPFL；作者：Yanyuan Qiao</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>研究对象为自动驾驶中的视觉-语言-动作（VLA）模型，任务是评估其是否真正依据自然语言指令选择并执行可行行为，而非仅完成安全、合规的行驶。</li><li>应用场景为乘客以自然语言指定驾驶行为（如路口转向、车道选择、停车位、限速区间、长时程任务程序），系统需在多个安全合法可行行为中选出被请求的一项。</li><li>研究问题：现有闭环基准主要衡量路线完成、安全与规则合规，无法回答“语言是否真正决定了车辆执行哪一个可行行为”；单条指令成功或高驾驶分数可能高估指令跟随能力。</li><li>论文指出核心矛盾：强驾驶能力与弱语言控制并存，需以匹配反事实方式检验指令改变是否可靠改变行为选择。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出配对评估框架：以配对反事实单元（PCU）固定初始场景、非语言输入与仿真种子，仅改变指令，区分单条指令成功与在匹配条件下执行任一被请求替代行为的能力。</li><li>构建 Language2Drive 基准，按语言控制范围组织四类任务：原子动作、持续行为、场景接地导航、长时程程序。</li><li>发布 CARLA-Language2Drive 扩展仿真器，包含六张专门设计地图（地下停车场、港口、中国城市道路、带详细标志的美国城市、校园、高速），并提供 AlpaSim 重建真实场景赛道。</li><li>构建基于 nuScenes、NAVSIM、WOD-E2E 的开环配对评估，检验预测轨迹上单条—配对差距是否同样存在。</li><li>实证揭示驾驶质量与可靠指令跟随之间的显著分离，刻画单侧成功、执行不完整以及释义变化下配对成功脆弱等现象。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向自动驾驶 VLA 的闭环指令跟随评估基准与开环扩展，不提出新的驾驶模型。</li><li>输入传感器：原文在正文概述中未逐一列出模型输入传感器配置；具体检查点身份、传感器、动作接口与执行设置在附录 D 中给出，正文未报告详细传感器清单。</li><li>场景表示：以地图、自车/参与者状态、历史、非语言输入与仿真种子固定初始条件；语言引用通过有向车道图、出口门、命名区域、停车多边形与物理参与者进行几何接地；持续任务指定明确进入/退出几何与相关参与者。</li><li>模型结构与关键技术：</li></ul>
+<p> - 配对反事实单元（PCU）：每个单元含两条互斥可行指令，各自带机器可检查成功判据；条件相关目的地、未来参考路径与转向命令仅评估器私有。</p>
+<p> - 机器可检查成功判据：规定请求结果、适用位置与完成时机；持续条件需完整穿越非空区间，提前停止不满足。</p>
+<p> - 指标：严格指令成功率 SISR 与反事实配对成功率 CFPS；二者差值满足 SISR−CFPS=½q_one，q_one 为单侧完成比例。</p>
+<p> - 部分完成诊断：松弛语义代理 SemISR/Sem-CFPS，以及分级完成 SCS/PCS。</p>
+<p> - 汇总指标 L2D：先由严格、语义、分级三族构造 L_bal，再与赛道驾驶质量项融合，驾驶项上限为 1 分。</p>
+<p> - 诊断项：Foundation Driving Qualification（FDQ）测试无乘客指令下的交通反应；Safety Qualification 测试安全回退、拒绝或受限替代。</p>
+<p> - 构建流程：源数据策展、几何接地、配对规格、公私编译、任务验证；每个 PCU 均有三个种子下两种替代的特权成功见证。</p>
+<p> - 开环扩展：固定记录历史上下文，仅改变指令，对预测轨迹施加配对语义判据。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集/场景来源：CARLA-Language2Drive（六张专门设计地图）；RealSim 由 PhysicalAI-NuRec 重建场景经 AlpaSim 执行；开环测试集由 nuScenes、NAVSIM、WOD-E2E 开发。</li><li>仿真器：CARLA 扩展 CARLA-Language2Drive；重建场景执行使用 AlpaSim。</li><li>基准规模：64 个 CARLA PCU、30 个 RealSim PCU（来自 23 个重建场景）；CARLA 每系统 384 次核心 rollout、192 个配对实例；RealSim 每系统 60 次 rollout、30 个配对。</li><li>模型规模：正文仅出现 Qwen-Drive-1.0-4B 的参数量标识；其他被评系统规模原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告；RealSim 为重建真实场景仿真执行，非实车测试。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：闭环 CARLA-Language2Drive（64 PCU×2 臂×3 种同义表达）、闭环 RealSim（30 PCU×2 臂×1 种表达）、开环 nuScenes/NAVSIM/WOD-E2E 配对预测轨迹评估；另有 FDQ 与 Safety-Q 诊断。</li><li>评估指标：SISR、CFPS、SemISR、Sem-CFPS、SCS、PCS、PSM、DrivingScore、Safety、L2D；指令指标为 0–100 尺度，越高越好。</li><li>关键数值：</li></ul>
+<p> - 主要 CARLA 系统中 93.2% 的成功 rollout 没有对应的相反指令成功配对。</p>
+<p> - LMDrive SISR 最高为 12.24，但 CFPS 为 0.00；Alpamayo 1.5 与 SimLingo CFPS 均为 1.04；OneVL、Qwen-Drive-1.0-4B、Impromptu-VLA 的 CFPS 均为 0.00。</p>
+<p> - CARLA 中 Alpamayo 1.5 的 SCS 26.18、PCS 12.50、PSM 70.10、DrivingScore 62.69、L2D 12.20；SimLingo 的 PSM 62.30、DrivingScore 65.04、L2D 12.15。</p>
+<p> - RealSim 中仅 240 个系统–PCU 配对里有 1 个严格成功（SimLingo）；Alpamayo2-Super SISR 13.33、CFPS 0.00；Alpamayo 1.5 SISR 11.67、Safety 100.00、DrivingScore 97.17、CFPS 0.00。</p>
+<p> - RealSim 中 SimLingo CFPS 3.33、SCS 16.67、PCS 10.00、Safety 68.33、DrivingScore 83.09、L2D 7.58。</p>
+<p> - 无 CARLA 系统在全部三种同义表达下完成同一 PCU 的两臂；SimLingo 仅在 9/128 臂上发生结果变化，但这些臂占其曾解决 15 臂的 60%；Alpamayo 1.5 对应条件比例为 75%。</p>
+<p> - 长时程程序中 7 个严格成功全部属于“维持不变量直至事件”族（LMDrive 6 个、SimLingo 1 个）；有序访问、条件回退、参考返回程序在 504 次 rollout 中无严格成功。</p>
+<p> - Safety-Q 六个探索性案例中 LMDrive 五例通过安全但仅完成两次安全拒绝；六个主要系统的三次严格 Safety-Q 成功均为拒绝，24 次回退或受限替代试验全部失败。</p>
+<ul><li>对比方法：Alpamayo 1.5、SimLingo、LMDrive、OneVL、Qwen-Drive-1.</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.16906/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Mining Cross-Modal Perception Gaps in Autonomous Driving: When Camera and LiDAR Disagree</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.16478/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">XAI-Guided Fourier Domain Generalisation for Pure-Simulation Sim-to-Real Deep Reinforcement Learning</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
