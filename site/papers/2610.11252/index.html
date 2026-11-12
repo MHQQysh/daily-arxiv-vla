@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neuro-Memory Fuzzy Inference System for Mimicking Human-like Car Following Behavior - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶/网联自动驾驶车辆（CAVs）中对类人驾驶行为的建模需求，研究车辆跟驰（car following）行为。 任务目标是复现真实的人类加速与减速决策，使自动驾驶决策系统具备自适应、类人的跟驰特性，以提升交通安全。 研究问题是如何将人类五类记忆（程序性、工作性、情景性、语义性、陈述性记忆）与外部变量建立联系，非对称地建模加速与减速，并揭示不同道路类型与车型下的潜在认知影响。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.11252">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.11252.webp" alt="Neuro-Memory Fuzzy Inference System for Mimicking Human-like Car Following Behavior" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶/网联自动驾驶车辆（CAVs）中对类人驾驶行为的建模需求，研究车辆跟驰（car following）行为。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Neuro-Memory Fuzzy Inference System for Mimicking Human-like Car Following Behavior</h1>
+            <div class="detail-meta">2026-10-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.11252" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.11252" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.11252</span></div>
+            <p class="detail-summary">论文面向自动驾驶/网联自动驾驶车辆（CAVs）中对类人驾驶行为的建模需求，研究车辆跟驰（car following）行为。 任务目标是复现真实的人类加速与减速决策，使自动驾驶决策系统具备自适应、类人的跟驰特性，以提升交通安全。 研究问题是如何将人类五类记忆（程序性、工作性、情景性、语义性、陈述性记忆）与外部变量建立联系，非对称地建模加速与减速，并揭示不同道路类型与车型下的潜在认知影响。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">5 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未提供可识别的机构名称 · Nazmul Haque、Md Asif Raihan. Md. Hadiuzzaman（原文未明确对应各作者所属机构）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.11252/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶/网联自动驾驶车辆（CAVs）中对类人驾驶行为的建模需求，研究车辆跟驰（car following）行为。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶/网联自动驾驶车辆（CAVs）中对类人驾驶行为的建模需求，研究车辆跟驰（car following）行为。</li><li>任务目标是复现真实的人类加速与减速决策，使自动驾驶决策系统具备自适应、类人的跟驰特性，以提升交通安全。</li><li>研究问题是如何将人类五类记忆（程序性、工作性、情景性、语义性、陈述性记忆）与外部变量建立联系，非对称地建模加速与减速，并揭示不同道路类型与车型下的潜在认知影响。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未提供可识别的机构名称；作者：Nazmul Haque、Md Asif Raihan. Md. Hadiuzzaman（原文未明确对应各作者所属机构）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶/网联自动驾驶车辆（CAVs）中对类人驾驶行为的建模需求，研究车辆跟驰（car following）行为。</li><li>任务目标是复现真实的人类加速与减速决策，使自动驾驶决策系统具备自适应、类人的跟驰特性，以提升交通安全。</li><li>研究问题是如何将人类五类记忆（程序性、工作性、情景性、语义性、陈述性记忆）与外部变量建立联系，非对称地建模加速与减速，并揭示不同道路类型与车型下的潜在认知影响。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Neuro-Memory Fuzzy Inference System（NeMeFIS），一种分层机器学习架构，将五类人类记忆整合进跟驰行为建模，并对加速与减速进行非对称建模。</li><li>通过元启发式方法将外部变量与记忆函数关联，并用因子分析与 p 值分析进行验证，从而在 Arterial、Collector 与 Rural Highway 三类走廊及不同车型上揭示潜在认知影响。</li><li>训练并分析了 54 个不同模型，强调由驾驶员感知限制与认知负荷形成的认知阈值。</li><li>训练的 NeMeFIS 模型在复现真实驾驶行为上优于传统统计模型与常规机器学习模型（对比 Linear Regression、ANFIS、LSTM）。</li><li>模糊规则分析揭示：陈述性记忆在规则中需求最高（尤其在减速时，反映复杂制动决策）；程序性记忆驱动加速，语义与陈述性记忆引导减速；风险感知在城市道路上尤为关键。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：跟驰行为建模与驾驶员认知建模模块，面向 CAVs 的类人决策系统。</li><li>输入传感器：原文未报告（原文仅描述输入为与记忆函数关联的“外部变量”，未说明具体传感器配置）。</li><li>场景表示：按道路走廊类型（Arterial、Collector、Rural Highway）与车型区分建模场景。</li><li>模型结构：分层机器学习架构 NeMeFIS，包含五类记忆模块（程序性、工作性、情景性、语义性、陈述性），并对加速与减速分支进行非对称建模；结合模糊推理规则。</li><li>关键技术：元启发式方法用于连接外部变量与记忆函数；因子分析与 p 值分析用于验证；模糊规则分析用于解释各记忆类型在加速/减速中的贡献。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：在异质（heterogeneous）与同质（homogeneous）数据集上均进行了验证；具体数据集名称、规模与采集方式原文未报告。</li><li>仿真器：原文未报告。</li><li>模型规模：共训练 54 个不同模型；具体参数量原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Arterial、Collector、Rural Highway 三类走廊及不同车型的跟驰数据；异质与同质数据集。</li><li>评估指标：原文未报告具体量化指标名称与数值（仅报告因子分析与 p 值分析作为验证手段）。</li><li>关键数值：原文未报告具体数值结果。</li><li>对比方法：Linear Regression、ANFIS、LSTM；NeMeFIS 在复现真实驾驶行为上优于上述方法。</li><li>实验条件：基于真实驾驶行为数据的离线建模与验证；开环、闭环、仿真或实车条件原文未明确报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.11382/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">PlanWAM: Planning-Shaped Future Representations for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.11175/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Higher-Order Action Supervision Makes A Strong Policy Class</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

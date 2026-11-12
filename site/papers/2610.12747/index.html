@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trajectory Prediction for Autonomous Driving in Road Construction Zones Using Human-in-the-Loop Driving Data - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究城市道路施工区（roadway work zones）中的自车轨迹预测（ego-trajectory prediction）任务，目标是基于 2 秒历史观测预测未来 5 秒的人类驾驶自车轨迹。 应用场景为自动驾驶（AD）与高级驾驶辅助系统（ADAS）在临时改变车道布局、存在施工人员与临时交通控制设施的施工区中的安全评估、预警与路径规划。 研究问题在于：施工区缺乏专用轨迹数据与系统性评测；临时车道变化及与周边车辆、工人的交互使未来轨迹难以预测；仅依靠轨迹历史不足以应对，需要引入人类驾驶信号。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.12747">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.12747.webp" alt="Trajectory Prediction for Autonomous Driving in Road Construction Zones Using Human-in-the-Loop Driving Data" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究城市道路施工区（roadway work zones）中的自车轨迹预测（ego-trajectory prediction）任务，目标是基于 2 秒历史观测预测未来 5 秒的人类驾驶自车轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Trajectory Prediction for Autonomous Driving in Road Construction Zones Using Human-in-the-Loop Driving Data</h1>
+            <div class="detail-meta">2026-10-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.12747" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.12747" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.12747</span></div>
+            <p class="detail-summary">论文研究城市道路施工区（roadway work zones）中的自车轨迹预测（ego-trajectory prediction）任务，目标是基于 2 秒历史观测预测未来 5 秒的人类驾驶自车轨迹。 应用场景为自动驾驶（AD）与高级驾驶辅助系统（ADAS）在临时改变车道布局、存在施工人员与临时交通控制设施的施工区中的安全评估、预警与路径规划。 研究问题在于：施工区缺乏专用轨迹数据与系统性评测；临时车道变化及与周边车辆、工人的交互使未来轨迹难以预测；仅依靠轨迹历史不足以应对，需要引入人类驾驶信号。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">New York University · Shuo Zhang、Aman Sunesh、Semiha Ergan 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.12747/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究城市道路施工区（roadway work zones）中的自车轨迹预测（ego-trajectory prediction）任务，目标是基于 2 秒历史观测预测未来 5 秒的人类驾驶自车轨迹。</p>
+  <ul class="reading-intro-points"><li>论文研究城市道路施工区（roadway work zones）中的自车轨迹预测（ego-trajectory prediction）任务，目标是基于 2 秒历史观测预测未来 5 秒的人类驾驶自车轨迹。</li><li>应用场景为自动驾驶（AD）与高级驾驶辅助系统（ADAS）在临时改变车道布局、存在施工人员与临时交通控制设施的施工区中的安全评估、预警与路径规划。</li><li>研究问题在于：施工区缺乏专用轨迹数据与系统性评测；临时车道变化及与周边车辆、工人的交互使未来轨迹难以预测；仅依靠轨迹历史不足以应对，需要引入人类驾驶信号。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：New York University；作者：Shuo Zhang、Aman Sunesh、Semiha Ergan、Kaan Ozbay</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究城市道路施工区（roadway work zones）中的自车轨迹预测（ego-trajectory prediction）任务，目标是基于 2 秒历史观测预测未来 5 秒的人类驾驶自车轨迹。</li><li>应用场景为自动驾驶（AD）与高级驾驶辅助系统（ADAS）在临时改变车道布局、存在施工人员与临时交通控制设施的施工区中的安全评估、预警与路径规划。</li><li>研究问题在于：施工区缺乏专用轨迹数据与系统性评测；临时车道变化及与周边车辆、工人的交互使未来轨迹难以预测；仅依靠轨迹历史不足以应对，需要引入人类驾驶信号。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>采集 WZDrive-Data 数据集：包含 33 名有效驾驶员、1,183 个施工区驾驶片段，覆盖 3 种施工区配置与 6 种场景条件，同步记录自车轨迹、驾驶员控制与注视信号及场景上下文。</li><li>基于人机回环（human-in-the-loop）仿真平台完成数据采集，平台集成 CARLA–SUMO 联合仿真、物理驾驶控制、注视追踪、场景感知以及用于施工工人交互的 VR 接口。</li><li>建立施工区自车轨迹预测基准，评测规则法、序列模型与多种先进轨迹预测基线。</li><li>提出 WZDrive 多模态自车轨迹预测模型，结合多模态编码与分阶段精炼，提升施工区轨迹预测精度。</li><li>实验报告 WZDrive 在六候选轨迹设置下取得平均 minADE6 为 1.09 m、minFDE6 为 2.12 m，相比各指标最佳已发表基线分别降低 7.18% 与 13.18%。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向自动驾驶/ADAS 的自车轨迹预测模块，属于预测环节，输出 6 条候选未来轨迹及其概率。</li><li>输入传感器与信息：结构化输入包括自车运动历史、驾驶员控制历史（转向、油门、刹车）、驾驶员注视历史、周边智能体历史（周边车辆与 VR 控制工人）、车道几何与连通性、施工区几何与静态工人上下文；数据集另保留前视 RGB 图像、语义分割图像与驾驶视角截图。</li><li>场景表示：轨迹坐标表达在以自车最新观测位置为中心、与车头朝向对齐的局部坐标系；车道用向量地图表示（8 维点特征、10 维车道属性及图连通性）；施工区参考点与静态工人锚点用 3 维相对位置与有效性特征表示；用掩码区分有效观测与缺失/填充项。</li><li>问题形式化：输入为 2 秒观测（5 Hz 下 10 帧），输出 5 秒预测（25 帧、0.2 秒间隔），候选轨迹数 K=6。</li><li>模型结构：分别为自车运动、驾驶员控制、注视、周边智能体、车道、施工区设置独立编码器；运动与控制特征通过学习评分融合为 z_motion+control，并据此计算各智能体相关性评分进行特征聚合；车道与施工区表示经“临时拓扑适配器”学习车道可行驶性与车道连接适宜性软权重，更新车道图后池化为 z_map；随后进行 horizon-aware 融合，生成 1 s、3 s、5 s 三个预测时段上下文 c1、c3、c5，每个上下文使用随预测时段变化的模态权重。</li><li>轨迹解码器：受 MTR 的模式查询启发，使用共享运动先验网络估计 25 个未来速度并乘以 Δt=0.2 s 得到先验位移；每个候选的 25 个时间索引查询结合运动–控制特征、候选嵌入、时间编码、融合上下文及先验位置/速度编码，通过交叉注意力利用自车、车道、智能体、工人与施工区特征（无效特征被掩码），单次前向非自回归预测候选特定位移残差，累加得到初始轨迹；评分头输出候选概率。</li><li>训练与精炼：Phase A 多模态预训练，损失由重建、对比、拓扑、路线覆盖与行驶距离损失组成；Phase B 监督轨迹预测，损失包括轨迹损失、终点损失、辅助损失与局部精炼损失；随后依次进行 ProgressFix（修正 1/3/5 s 路线行驶距离）、HeadOnly（学习 25 个未来步的行驶增量修正）、Direct-K6（引入直接解码器联合训练，含轨迹、终点、候选评分、运动先验与路线多样性损失）、AnchorCal（冻结 Direct-K6，附加校准头预测 1/3/5 s 纵向与横向位置修正，线性插值到 25 步并加到原预测上）。</li><li>原文未报告模型参数量、具体网络层数或推理时延等信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：自建 WZDrive-Data，包含 33 名有效驾驶员（招募 34 人，1 人因传感器断开被排除）、1,183 个施工区遭遇片段、26,892 个重叠预测窗口，轨迹覆盖约 3.7 小时；轨迹采样率 5 Hz，观测/预测时域 2 s/5 s；注视与三路视觉流为 10 Hz，注视对齐到 5 Hz 输入。</li><li>场景设置：3 种施工区配置（WZ1、WZ3 使用预录工人动画；WZ2 由 VR 操作员实时摆放锥桶形成临时边界并与驾驶员交互，3 名土木工程背景学生担任 VR 工人操作员）；6 种场景条件（S1 标准车道封闭对照、S2 缺失警示标志、S3 降雨、S4 弯道、S5 夜间、S6 卡车参与）；每个场景地图含 4–6 辆 SUMO 控制车辆，采用 IDM 模型，S6 中全部为卡车。</li><li>仿真器与平台：CARLA–SUMO 联合仿真的人机回环平台 DualSense，集成物理驾驶控制（Logitech G923 方向盘与踏板）、注视追踪、场景感知与 VR 工人交互接口。</li><li>训练/评测划分：主实验使用按参与者不相交划分的 Set1（27 名训练，P14/P20/P34 验证，P2/P12/P31 测试，对应 22,540/2,119/2,233 个窗口）；另设 Set2、Set3 两个参与者划分用于泛化评估。</li><li>计算资源：Intel Core i7-14700K CPU、64 GB RAM、NVIDIA RTX 4090 GPU。</li><li>实车平台：原文未报告；数据均在仿真平台采集，未使用实车。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：自建 WZDrive-Data 基准，按参与者不相交划分，主结果为 Set1 测试集，另报告 Set2、Set3 的泛化结果。</li><li>评估指标：单轨迹模型用 ADE/FDE；六候选模型用 minADE6/minFDE6（分别独立选取平均轨迹误差与终点误差最小的候选），单位为米，越低越好；WZDrive 报告三个随机种子的均值 ± 标准差。</li><li>规则与序列基线（K=1）：Stay 的 ADE/FDE 为 21.635/42.053 m，CV 为 7.237/16.896 m；LSTM（Ego+control+WZ）为 2.988/7.513 m；Transformer（Ego+control+WZ）为 2.876/7.284 m；GRU（Ego+control+WZ+lane）取得最低 ADE 2.860 m，FDE 为 7.320 m。</li><li>先进基线（K=6，含/不含施工区信息）：LAFormer 取得最佳已发表 minADE6（不含 WZ 1.204 m，含 WZ 1.179 m）；DeMo 取得最佳已发表 minFDE6（不含 WZ 2.436 m，含 WZ 2.462 m）；RouteFormer 误差最高（不含 WZ 2.106/4.023 m）；加入施工区信息使所有配对基线的 minADE 下降、除 DeMo 外所有基线的 minFDE 下降。</li><li>自研 MM-GRU 基线：含 WZ 时 minADE6 1.124 m、minFDE6 2.242 m，优于上述已发表基线。</li><li>WZDrive 最终结果：minADE6 为 1.094±0.022 m，minFDE6 为 2.115±0.082 m；相对 LAFormer（含 WZ）降低 minADE6 7.18%，相对 DeMo（不含 WZ）降低 minFDE6 13.18%。</li><li>输入模态消融（Set1，WZDrive 完整模型 1.103/2.119 m）：移除注视影响很小（1.108/2.116 m）；移除驾驶员控制退化最大，minADE6 与 minFDE6 分别上升 17.20% 与 14.17%（1.293/2.419 m）；移除施工区与工人上下文及相关机制使两项误差分别上升 7.54% 与 12</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.12895/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">MeshBind: Point-to-Mesh Binding for Non-Rigid Scene Flow Automatic Annotation</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.12266/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">DVD: Dynamic Vector Decoding for Efficient MLLM-based Perception</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

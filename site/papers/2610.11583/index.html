@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SDPAD: A Fully Spike-Driven Pipeline for End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向端到端自动驾驶中的轨迹规划任务，输入为多视角环视图像，输出为自车未来轨迹。 应用场景为车载边缘部署：要求规划精度高且计算/能耗开销低。 研究问题是现有ANN规划器精度高但依赖稠密浮点计算、能耗大，而SNN规划器虽具稀疏事件驱动节能潜力，但规划精度显著落后，且存在三方面瓶颈：依赖时间步迭代仿真带来延迟、BEV 2D-to-3D提升依赖浮点softmax深度分布、缺乏基于query的多模态场景信息聚合解码器。 论文提出SDPAD，目标是构建全脉冲驱动的端到端规划流水线，在nuScenes开环与NAVSIM闭环上以极低能耗达到与主流ANN规划器相当的精度。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.11583">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.11583.webp" alt="SDPAD: A Fully Spike-Driven Pipeline for End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向端到端自动驾驶中的轨迹规划任务，输入为多视角环视图像，输出为自车未来轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SDPAD: A Fully Spike-Driven Pipeline for End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.11583" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.11583" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.11583</span></div>
+            <p class="detail-summary">论文面向端到端自动驾驶中的轨迹规划任务，输入为多视角环视图像，输出为自车未来轨迹。 应用场景为车载边缘部署：要求规划精度高且计算/能耗开销低。 研究问题是现有ANN规划器精度高但依赖稠密浮点计算、能耗大，而SNN规划器虽具稀疏事件驱动节能潜力，但规划精度显著落后，且存在三方面瓶颈：依赖时间步迭代仿真带来延迟、BEV 2D-to-3D提升依赖浮点softmax深度分布、缺乏基于query的多模态场景信息聚合解码器。 论文提出SDPAD，目标是构建全脉冲驱动的端到端规划流水线，在nuScenes开环与NAVSIM闭环上以极低能耗达到与主流ANN规划器相当的精度。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Zhejiang Key Laboratory of 3D Micro/Nano Fabrication and Characterization…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.11583/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向端到端自动驾驶中的轨迹规划任务，输入为多视角环视图像，输出为自车未来轨迹。</p>
+  <ul class="reading-intro-points"><li>论文面向端到端自动驾驶中的轨迹规划任务，输入为多视角环视图像，输出为自车未来轨迹。</li><li>应用场景为车载边缘部署：要求规划精度高且计算/能耗开销低。</li><li>研究问题是现有ANN规划器精度高但依赖稠密浮点计算、能耗大，而SNN规划器虽具稀疏事件驱动节能潜力，但规划精度显著落后，且存在三方面瓶颈：依赖时间步迭代仿真带来延迟、BEV 2D-to-3D提升依赖浮点softmax深度分布、缺乏基于query的多模态场景信息聚合解码器。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Zhejiang Key Laboratory of 3D Micro/Nano Fabrication and Characterization, Westlake Institute for Optoelectronics, Fuyang, Hangzhou, China；作者：Chengjun Zhang、Yuhao Zhang、Jie Yang、Mohamad Sawan</li><li>机构：Integrated-On-Chips Brain-Computer Interfaces, Zhejiang Engineering Research Center, Hangzhou, Zhejiang, China；作者：Chengjun Zhang、Yuhao Zhang、Jie Yang、Mohamad Sawan</li><li>机构：CenBRAIN Neurotech, School of Engineering, Westlake University, Hangzhou, Zhejiang, China；作者：Jie Yang、Mohamad Sawan</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向端到端自动驾驶中的轨迹规划任务，输入为多视角环视图像，输出为自车未来轨迹。</li><li>应用场景为车载边缘部署：要求规划精度高且计算/能耗开销低。</li><li>研究问题是现有ANN规划器精度高但依赖稠密浮点计算、能耗大，而SNN规划器虽具稀疏事件驱动节能潜力，但规划精度显著落后，且存在三方面瓶颈：依赖时间步迭代仿真带来延迟、BEV 2D-to-3D提升依赖浮点softmax深度分布、缺乏基于query的多模态场景信息聚合解码器。</li><li>论文提出SDPAD，目标是构建全脉冲驱动的端到端规划流水线，在nuScenes开环与NAVSIM闭环上以极低能耗达到与主流ANN规划器相当的精度。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出SDPAD，据作者称为首个在NAVSIM闭环评估的全脉冲驱动端到端规划器，基于整数脉冲计算与单次前馈推理，避免时间仿真循环延迟。</li><li>提出Spike-3D-Lift，以Spike-Driven-Max（SDM）替代浮点softmax深度分布，将2D-to-3D BEV提升转化为硬件友好的脉冲门控累加，并保持几何保真度。</li><li>提出Spike-QFormer，统一脉冲query transformer，将ego、agent、map三类query从BEV场景中蒸馏并通过脉冲交叉注意力融合为waypoint预测，同时配合Deformable Spike-Cross-Attention进行轨迹细化。</li><li>采用量化ANN2SNN转换将预训练ANN感知栈转换为整数脉冲形式，并用辅助BEV分割与agent状态监督正则化场景表示。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：完整端到端流水线，包含感知主干、BEV提升、辅助感知头（Spike-SegHead、Spike-AgentHead）、Spike-QFormer规划解码与Deformable SCA轨迹细化。</li><li>输入传感器：多视角图像（6×3×H×W）；ego query构造中还使用CAN总线信号与one-hot导航指令。</li><li>场景表示：Spiking BEV representation；ego/agent query从下采样10×10 BEV网格构建，map query从全分辨率BEV特征构建。</li><li>模型结构：E-Spikeformer主干输出图像特征与脉冲深度分数；Spike-3D-Lift生成脉冲BEV；Spike-QFormer由共享spiking attention原语构成，ego query（1×D）、agent query（N_a=30）、map query（N_b=16）经3层脉冲解码器蒸馏，waypoint token（K=3种导航命令，长度L）经单层脉冲交叉注意力融合，Spike-MLP解码逐点位移并累加为候选轨迹，按当前导航命令选取最终轨迹；随后Deformable SCA以初始轨迹给出的参考点进行可变形采样细化。</li><li>关键技术：I-LIF软重置脉冲神经元；整数ANN2SNN量化转换（量化clip激活，时间窗内并行化）；SDM将深度量化、指数映射、可学习归一化并配合STE反传；spiking attention去除softmax，以脉冲门控累加实现QK^T V；Deformable SCA将偏移、注意力权重与value全部脉冲化。</li><li>损失：BEV分割交叉熵（λ_seg=1.1）、agent检测BCE+L1（λ_cls=0.85、λ_box=0.1）、命令条件规划L1（初始与细化轨迹，λ_plan=10.0）、深度BCE（λ_depth=0.1）。</li><li>原文未报告：具体参数量、MACs/FLOPs数值、训练硬件与训练时长、实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（开环评估）、NAVSIM navtest split（闭环评估）。</li><li>仿真器：NAVSIM（闭环评估平台）。</li><li>模型规模：原文未报告参数量；原文报告agent query数30、map query数16、导航命令数3。</li><li>训练资源：原文未报告。</li><li>实车平台：原文未报告实车实验或实车平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes开环基准（L2误差与碰撞率，按VAD方式计算，1s/2s/3s及平均）与NAVSIM navtest闭环基准（NAC、DAC、TTC、Comf.、EP、PDMS）。</li><li>评估指标：L2误差（m）、碰撞率（%）、能耗（mJ）；闭环指标NAC、DAC、TTC、Comf.、EP、PDMS。</li><li>关键数值：nuScenes上SDPAD平均L2误差0.40 m、平均碰撞率0.12%、能耗69.93 mJ（摘要记为0.40 m、0.12%、69.9 mJ）；NAVSIM闭环PDMS为86.3（摘要），较此前SNN规划器SAD提升4.3分。</li><li>对比方法：nuScenes上对比ST-P3、UniAD、VAD、SparseDrive、DiffusionDrive、ResWorld、SAD（SNN）；NAVSIM上对比Transfuser等主流ANN规划器及SAD（原文表格在提供的HTML中被截断，部分对比数值未完整呈现）。</li><li>实验条件：开环评估在nuScenes上进行，闭环评估在NAVSIM navtest split上进行；摘要称能耗低于近期ANN基线的2%；未报告实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.12266/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">DVD: Dynamic Vector Decoding for Efficient MLLM-based Perception</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.11580/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Uncertainty-Aware Optimization for Physics-Aware Highway Trajectory Prediction</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

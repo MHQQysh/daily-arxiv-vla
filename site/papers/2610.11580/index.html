@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Uncertainty-Aware Optimization for Physics-Aware Highway Trajectory Prediction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：高速公路场景下的车辆轨迹预测，利用目标车及周围车辆的运动历史预测未来轨迹。 应用场景：自动驾驶中支撑运动规划、碰撞避免与风险评估等安全关键下游任务。 输入设定：给定 3 s 历史观测，预测 5 s 未来运动，不依赖高精地图或额外语义场景信息（地图独立预测场景）。 研究问题：现有不确定性感知方法多在轨迹空间直接估计不确定性；而物理感知框架中，未来轨迹由车辆运动变量（纵向加速度、横摆角速度）经运动学模型推演得到，运动变量的不确定性应显式建模并传播至轨迹空间，否则轨迹空间不确定性可能无法反映运动预测的变异性。 核心思路：在物理感知轨迹预测框架 X-TRACK 上构建不确定性感知扩展，将运动空间不确定性经非线性运动学推演传播到轨迹空间，并用共形预测校准预测区域。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.11580">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.11580.webp" alt="Uncertainty-Aware Optimization for Physics-Aware Highway Trajectory Prediction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：高速公路场景下的车辆轨迹预测，利用目标车及周围车辆的运动历史预测未来轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Uncertainty-Aware Optimization for Physics-Aware Highway Trajectory Prediction</h1>
+            <div class="detail-meta">2026-10-08 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.11580" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.11580" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.11580</span></div>
+            <p class="detail-summary">任务：高速公路场景下的车辆轨迹预测，利用目标车及周围车辆的运动历史预测未来轨迹。 应用场景：自动驾驶中支撑运动规划、碰撞避免与风险评估等安全关键下游任务。 输入设定：给定 3 s 历史观测，预测 5 s 未来运动，不依赖高精地图或额外语义场景信息（地图独立预测场景）。 研究问题：现有不确定性感知方法多在轨迹空间直接估计不确定性；而物理感知框架中，未来轨迹由车辆运动变量（纵向加速度、横摆角速度）经运动学模型推演得到，运动变量的不确定性应显式建模并传播至轨迹空间，否则轨迹空间不确定性可能无法反映运动预测的变异性。 核心思路：在物理感知轨迹预测框架 X-TRACK 上构建不确定性感知扩展，将运动空间不确定性经非线性运动学推演传播到轨迹空间，并用共形预测校准预测区域。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Technische Hochschule Augsburg · Aanchal Chugh、Sebastian Dorn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.11580/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：高速公路场景下的车辆轨迹预测，利用目标车及周围车辆的运动历史预测未来轨迹。</p>
+  <ul class="reading-intro-points"><li>任务：高速公路场景下的车辆轨迹预测，利用目标车及周围车辆的运动历史预测未来轨迹。</li><li>应用场景：自动驾驶中支撑运动规划、碰撞避免与风险评估等安全关键下游任务。</li><li>输入设定：给定 3 s 历史观测，预测 5 s 未来运动，不依赖高精地图或额外语义场景信息（地图独立预测场景）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Technische Hochschule Augsburg；作者：Aanchal Chugh、Sebastian Dorn</li><li>机构：TTZ Landsberg am Lech；作者：Aanchal Chugh、Sebastian Dorn</li><li>说明：原文作者署名区未逐人区分所属机构，两位作者同时列于上述两机构之下</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：高速公路场景下的车辆轨迹预测，利用目标车及周围车辆的运动历史预测未来轨迹。</li><li>应用场景：自动驾驶中支撑运动规划、碰撞避免与风险评估等安全关键下游任务。</li><li>输入设定：给定 3 s 历史观测，预测 5 s 未来运动，不依赖高精地图或额外语义场景信息（地图独立预测场景）。</li><li>研究问题：现有不确定性感知方法多在轨迹空间直接估计不确定性；而物理感知框架中，未来轨迹由车辆运动变量（纵向加速度、横摆角速度）经运动学模型推演得到，运动变量的不确定性应显式建模并传播至轨迹空间，否则轨迹空间不确定性可能无法反映运动预测的变异性。</li><li>核心思路：在物理感知轨迹预测框架 X-TRACK 上构建不确定性感知扩展，将运动空间不确定性经非线性运动学推演传播到轨迹空间，并用共形预测校准预测区域。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出基于 X-TRACK 的不确定性感知轨迹预测框架，对预测的车辆运动变量显式建模偶然不确定性（aleatoric）与认知不确定性（epistemic）。</li><li>构建从运动空间到轨迹空间的概率不确定性传播框架，通过物理运动学层获得轨迹空间不确定性估计。</li><li>在轨迹空间预测协方差上应用共形预测，构建面向指定边际覆盖水平的不确定性区域（逐预测时域分别标定）。</li><li>从预测精度、校准与覆盖三个维度评估不确定性建模、传播与共形预测（摘要与第 1 节表述）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：轨迹预测中的不确定性量化与校准模块，构建在 X-TRACK 物理感知轨迹预测框架之上。</li><li>输入传感器：原文未报告具体车载传感器；数据来自无人机拍摄的高速公路轨迹数据（highD），输入为目标车及邻车观测运动历史。</li><li>场景表示：以车辆运动状态序列表示，输入 $u_t=[a_x,\dot\psi]^\top$（纵向加速度、横摆角速度）；不依赖 HD 地图与额外语义信息；通过预定义交互图（空间车辆构型）编码邻车关系。</li><li>模型结构：</li></ul>
+<p> - 编码：xLSTM 对每辆车独立编码；GAT 在交互图上将邻车编码聚合到目标表示。</p>
+<p> - 解码：LSTM 解码器预测未来运动变量序列（纵向加速度、横摆角速度）。</p>
+<p> - 概率输出头：将 X-TRACK 预测头改为输出运动变量的均值与方差 $\hat\theta_t=[\mu_{a_x,t},\mu_{\dot\psi,t},\sigma^2_{a_x,t},\sigma^2_{\dot\psi,t}]^\top$，对两个运动变量采用对角异方差高斯分布；原文报告未显式建模运动变量间交叉协方差。</p>
+<p> - 物理推演：采样的运动变量经运动学自行车模型逐时刻递推车辆状态，得到位置轨迹。</p>
+<ul><li>关键技术：</li></ul>
+<p> - 认知不确定性：MC Dropout（推理时保持 dropout，$M$ 次随机前向）与 Deep Ensembles（$K$ 个独立初始化网络），由成员/采样间差异估计认知协方差。</p>
+<p> - 偶然不确定性：从预测的高斯运动分布中每时刻独立采样 $N$ 组运动变量，逐样本经运动学层生成完整轨迹，并由样本偏差估计位置协方差。</p>
+<p> - 组合不确定性：嵌套方案，$M$ 次随机前向 × 每次 $N$ 个运动采样共 $M\times N$ 条轨迹；按全协方差公式分解为偶然协方差（模型内）与认知协方差（条件均值间），依全协方差定律求和，得到 $2\times2$ 全位置协方差（含 $x$–$y$ 相关项）。</p>
+<p> - 共形预测（后处理）：以总协方差下的 Mahalanobis 距离为共形分数（$\epsilon=10^{-8}$ 正则），按预测时域分别收集校准分数，取有限样本秩 $j=\lceil(S_{cal}+1)(1-\delta)\rceil$ 对应的分位数 $q_t$，测试时构造 $\hat\Sigma_{cp,t,s}=q_t^2(\Sigma_{total,t,s}+\epsilon I)$ 及椭球预测区域。</p>
+<ul><li>原文未报告：具体网络层数/隐藏维度等模型规模细节（正文截断部分未给出）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：highD（采样率 25 Hz，德国六处高速公路无人机采集）；预处理与 X-TRACK 保持一致。</li><li>数据划分：训练/验证/校准/测试比例为 70:5:5:20，样本数分别为 9604、686、685、2747；验证集对半拆分出校准集；每个场景 8 s（3 s 观测 + 5 s 未来）。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告（正文可见部分未给出参数量或层数配置）。</li><li>训练资源：原文未报告（训练与超参数细节指向附录 A.2，所提供的 HTML 正文中未见具体内容）。</li><li>实车平台：原文未报告；评估为数据集上的离线实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：highD 数据集上的高速公路轨迹预测；基线包括 X-TRACK、MHA-LSTM、iNATran、GFTNNv2、cVMD、cVMDx、X-TRAJ，以及不确定性对比方法 cVMDx。</li><li>评估指标：</li></ul>
+<p> - 轨迹精度：ADE、FDE（5 s 时域）、minADE@80、minFDE@80、逐时域 RMSE（1–5 s）。</p>
+<p> - 不确定性质量（共形校准前）：NLL、ECE、Pearson 相关（$\rho$）、平均预测不确定性（m²）、Miss Rate@2 m。</p>
+<p> - 共形区域：CP Coverage@95%、MPIW@95%（共形后）、ECE（共形后）。</p>
+<ul><li>关键数值：</li></ul>
+<p> - 轨迹精度（5 s）：X-TRACK-DE 取得最低 ADE 0.44、FDE 1.49（基线 X-TRACK 为 0.56/1.76，相对提升约 21.4%/15.3%）；X-TRACK-MCD ADE 0.54、FDE 1.79（FDE 略差于基线）。</p>
+<p> - 多模态指标：X-TRACK-DE minADE 0.15、minFDE 0.33；X-TRACK-MCD minADE 0.20、minFDE 0.41；cVMDx minADE 0.66、minFDE 1.70。</p>
+<p> - 逐时域 RMSE：X-TRACK-DE 全时域最低（1 s：0.04；5 s：1.87，相对基线 2.16 提升 13.4%）；X-TRACK-MCD 在 3 s 内低于基线，4 s/5 s 为 1.34 m/2.23 m，高于基线。</p>
+<p> - 不确定性质量：NLL 为 X-TRACK-MCD 0.47、X-TRACK-DE 0.51、cVMDx 11.32；ECE 为 X-TRACK-MCD 0.17、X-TRACK-DE 0.12、cVMDx 0.10；Pearson 相关为 0.34（MCD）、0.33（DE）、0.05（cVMDx）；平均预测不确定性为 1.32（MCD）、0.75（DE）、4.04（cVMDx）；Miss Rate@2 m 为 0.02（MCD）、0.01（DE）、0.31（cVMDx）。</p>
+<p> - 共形校准：CP Coverage@95% 为 95.72%（MCD）、95.39%（DE）；MPIW@95% 为 2.61（MCD）、2.11（DE）；共形后 ECE 两者均为 0.11。</p>
+<ul><li>对比结论：X-TRACK-DE 精度最优；X-TRACK-MCD 主要受益于较短时域；两者在相同目标覆盖下，DE 的区域更窄。定性分析显示 DE 预测均值轨迹最接近真值；不确定性分解显示偶然项占主导且随时间非线性增长，MCD 增长更强、总不确定性更大；原始预测分布的经验覆盖在多数置信水平高于理想校准线，DE 更接近校准线。</li><li>评估条件：highD 数据集上的开环离线评估（未见闭环、仿真或实车实验报告；原文未报告）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.11583/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SDPAD: A Fully Spike-Driven Pipeline for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.11577/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">CoCam4D: Geometry-Aware Cooperative 4D Perception for Camera-Only Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

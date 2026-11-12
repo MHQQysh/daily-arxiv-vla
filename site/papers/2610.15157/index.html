@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RootSLAM: Square Root Bundle Adjustment for Visual-Inertial SLAM - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向多相机视觉惯性 SLAM（VI-SLAM）任务，目标是在机器人、混合现实、自动驾驶和无人机等资源受限设备上实现高效感知与定位。 研究问题在于：学习型 SLAM 精度高但算力需求大，经典几何方法效率高但精度存在差距；现有高精度系统如 OKVIS2 计算开销大，ORB-SLAM3 相对轨迹误差退化明显，而 Basalt 虽高效但缺少回环检测，长期绝对轨迹精度不足。 论文提出 RootSLAM，在 Basalt 及既有修改基础上扩展为完整 VI-SLAM 系统，通过平方根形式全局优化在单精度浮点下运行，以在保持竞争性精度的同时显著提升运行效率。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.15157">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.15157.webp" alt="RootSLAM: Square Root Bundle Adjustment for Visual-Inertial SLAM" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向多相机视觉惯性 SLAM（VI-SLAM）任务，目标是在机器人、混合现实、自动驾驶和无人机等资源受限设备上实现高效感知与定位。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">RootSLAM: Square Root Bundle Adjustment for Visual-Inertial SLAM</h1>
+            <div class="detail-meta">2026-10-10 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.15157" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.15157" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.15157</span></div>
+            <p class="detail-summary">论文面向多相机视觉惯性 SLAM（VI-SLAM）任务，目标是在机器人、混合现实、自动驾驶和无人机等资源受限设备上实现高效感知与定位。 研究问题在于：学习型 SLAM 精度高但算力需求大，经典几何方法效率高但精度存在差距；现有高精度系统如 OKVIS2 计算开销大，ORB-SLAM3 相对轨迹误差退化明显，而 Basalt 虽高效但缺少回环检测，长期绝对轨迹精度不足。 论文提出 RootSLAM，在 Basalt 及既有修改基础上扩展为完整 VI-SLAM 系统，通过平方根形式全局优化在单精度浮点下运行，以在保持竞争性精度的同时显著提升运行效率。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">慕尼黑工业大学（Technical University of Munich） · Mateo de Mayo、Daniel Cremers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.15157/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向多相机视觉惯性 SLAM（VI-SLAM）任务，目标是在机器人、混合现实、自动驾驶和无人机等资源受限设备上实现高效感知与定位。</p>
+  <ul class="reading-intro-points"><li>论文面向多相机视觉惯性 SLAM（VI-SLAM）任务，目标是在机器人、混合现实、自动驾驶和无人机等资源受限设备上实现高效感知与定位。</li><li>研究问题在于：学习型 SLAM 精度高但算力需求大，经典几何方法效率高但精度存在差距；现有高精度系统如 OKVIS2 计算开销大，ORB-SLAM3 相对轨迹误差退化明显，而 Basalt 虽高效但缺少回环检测，长期绝对轨迹精度不足。</li><li>论文提出 RootSLAM，在 Basalt 及既有修改基础上扩展为完整 VI-SLAM 系统，通过平方根形式全局优化在单精度浮点下运行，以在保持竞争性精度的同时显著提升运行效率。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：慕尼黑工业大学（Technical University of Munich）；作者：Mateo de Mayo、Daniel Cremers</li><li>机构：慕尼黑机器学习中心（Munich Center for Machine Learning）；作者：Mateo de Mayo、Daniel Cremers</li><li>机构：罗萨里奥国立大学（National University of Rosario）；作者：Tomás Santucci、Taihú Pire</li><li>机构：CIFASIS（CONICET-UNR）；作者：Taihú Pire</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向多相机视觉惯性 SLAM（VI-SLAM）任务，目标是在机器人、混合现实、自动驾驶和无人机等资源受限设备上实现高效感知与定位。</li><li>研究问题在于：学习型 SLAM 精度高但算力需求大，经典几何方法效率高但精度存在差距；现有高精度系统如 OKVIS2 计算开销大，ORB-SLAM3 相对轨迹误差退化明显，而 Basalt 虽高效但缺少回环检测，长期绝对轨迹精度不足。</li><li>论文提出 RootSLAM，在 Basalt 及既有修改基础上扩展为完整 VI-SLAM 系统，通过平方根形式全局优化在单精度浮点下运行，以在保持竞争性精度的同时显著提升运行效率。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种高效、低延迟的多相机 VI-SLAM 系统，相比当前最先进方法最高快 20 倍，并具有竞争性精度。</li><li>将 Demmel 等人的平方根 bundle adjustment 形式从 structure from motion 迁移到多相机 VI-SLAM 的全局优化步骤，提出围绕位姿图的新重构，使大规模地图优化可在 32 位单精度浮点下进行，而非通常的 64 位双精度，从而将性能翻倍。</li><li>提供与最先进方法的全面基准测试，以及针对各组件贡献的消融研究。</li><li>系统完整实现将开源，包括长期地图管理、回环检测与全局建图组件。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：在 Basalt 前端与局部优化器之上，新增持久地图、回环检测与闭合、全局优化三个组件。</li><li>输入传感器：多相机图像与 IMU 数据；原文未报告具体相机型号或 IMU 型号。</li><li>场景表示：关键帧与路标点组成的持久地图，维护协 visibility 图等图结构，并形成轻量地图表示用于位姿图优化。</li><li>持久地图：保存局部优化器滑窗边缘化的关键帧与路标点；边缘化时丢弃观测与三个以上其他关键帧冗余度超过 90% 的关键帧；地图超过 1500 个关键帧时按质量与协 visibility 冗余评分丢弃最差的 30 个；相应阈值可配置。</li><li>回环检测与闭合：以关键帧频率接收图像与关键点指针，在独立线程异步运行；使用 HashBoW 进行候选检测，在前端已检测角点上计算 ORB 描述子并构建词袋向量查询数据库；候选经过一致性验证、暴力匹配与路标重投影建立 3D-2D 对应，并用 OpenGV 库的 gP3P 做几何验证；估计漂移低于 10 cm 时仅融合内点路标，超过 10 cm 时将关键帧位姿与位姿图边交给回环线程优化，再同步并融合路标；位姿图优化使用 Levenberg-Marquardt、四元数流形与稀疏 Cholesky 求解器，滑窗内活跃关键帧固定以锚定规范自由度。</li><li>全局优化：基于 RootBA 的平方根 bundle adjustment，将状态分为位姿部分与路标部分，通过局部 QR 分解对每个路标做零空间投影边缘化，避免形成法方程，从而保持单精度数值条件；从状态中移除内参，将每相机维度从 9 降至 6，并支持 Basalt 的任意相机模型；以刚体位姿重新参数化多相机 rig，利用伴随矩阵链式法则累积同一 rig 各相机观测到同一 body pose 列；引入位姿图正则项，将相对位姿残差以额外行追加到平方根因子中，而非作为 Hessian 块。</li><li>关键技术：平方根优化、QR 零空间路标边缘化、单精度全局优化、位姿图约束融合、异步回环闭合。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Monado SLAM Dataset（MSD）103 条序列、EuRoC、TUM-VI；评估共涉及 103 条序列，消融与对比表中部分统计排除离群 TO 组。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告神经网络模型规模；全局优化状态包含位姿与路标变量，单相机维度由 9 降至 6，原文未报告具体参数量。</li><li>训练资源：方法无需训练阶段，完全在 CPU 上运行；原文未报告训练资源。</li><li>实车平台：原文未报告实车平台；实验运行硬件包括 Intel Core Ultra 9 285H（图 1 运行时间）和 Intel Core i5-13600（表 II 全局 BA 时间）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：MSD 的 103 条序列、EuRoC、TUM-VI；按类别分组报告平均值，并给出每组序列数。</li><li>评估指标：RMSE 绝对轨迹误差（ATE，厘米）、相对轨迹误差（RTE，厘米，Δ=6 帧）、成功率（有估计的相机帧百分比）；ATE 使用 SE(3) 对齐；所有数值为非因果、整段序列处理后的最终轨迹。</li><li>对比方法：Basalt（VIO 基线）、OKVIS2、ORB-SLAM3；OKVIS2 与 ORB-SLAM3 每序列运行三次，保留成功帧最多者，并以最低 ATE、再最低 RTE 打破平局；ORB-SLAM3 无法使用 MSD 中 15 条 MGO 序列的 4 相机，仅用两个前视相机。</li><li>消融结果：在 Basalt 基线上逐步加入回环闭合（+LC）、平方根全局 BA（+GBA）和位姿图项（RS）；回环闭合单独将 MIP 组 ATE 从 23.6 cm 降至 4.0 cm，完整系统进一步降至 2.3 cm；RootSLAM 在全部十二组中改善 Basalt 的 ATE；仅加入 GBA 会改善 ATE 但使 RTE 相对 +LC 退化（如 MIO 从 1.48 升至 1.88 cm，EV1 从 1.33 升至 2.11 cm），加入位姿图残差后在所有组恢复 RTE 并保持 ATE 改善。</li><li>精度对比：RootSLAM 在所有 MSD 组取得四种系统中最佳 ATE；MIO 组 OKVIS2 为 451.7 cm、ORB-SLAM3 为 398.9 m，RootSLAM 为 7.0 cm；在 EuRoC 与 TUM-VI 上两个基线在多数组取得最低 ATE，但三种 SLAM 系统相差数厘米，RootSLAM 在 EMH、EV1、EV2、TC、TR 保持低于分米；TO 序列大部分为开阔空间、仅结尾返回有真值房间，比较更接近各系统 VIO 核心。</li><li>成功率：Basalt、RootSLAM、OKVIS2 对 103 条序列每个相机帧均给出估计，ORB-SLAM3 平均 94.1%，MIO 组最低 87.1%，使其误差偏乐观。</li><li>单精度与双精度对比：两者在除 TUM-VI 室外组外的每组 ATE 相差不超过 1 cm，ATE/RTE 无系统性优劣；单精度全局优化在 103 条序列上平均快 2.16 倍，范围从 slides 组 1.20 倍到 outdoors 组 2.54 倍。</li><li>运行时间：图 1 中 42 分钟序列上每帧处理时间 99.99% 低于 33 ms 实时预算，平均 7.2 ms，标准差 1.6 ms；表 IV 报告 EMH02 平均帧时间 Basalt 11.8 ms、RootSLAM 11.5 ms、OKVIS2 191.5 ms、ORB-SLAM3 40.9 ms，全局 BA 时间 RootSLAM 2.83 s、OKVIS2 6.35 s（表 IV 在提供文本中被截断，后续数值未完整给出）。</li><li>开环/闭环/仿真/实车条件：评估为公开数据集上的开环非因果轨迹评估，原文未报告闭环控制实验、仿真实验或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2610.15112/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Drive3R: Block-wise Streaming Geometric Foundation Models for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

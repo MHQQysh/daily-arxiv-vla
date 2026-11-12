@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ManeuverFlow: Maneuver Hypothesis Generation with Future Evidence for Trajectory Evaluation and Refinement in End-to-End Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向端到端自动驾驶的轨迹规划任务，将传感器观测、自车状态与导航指令直接映射为未来自车轨迹。 应用场景为复杂交通场景下的多模态驾驶意图建模与候选轨迹生成、评估、修正与选择。 研究问题：在固定候选预算下，如何生成与场景相关、意图/机动模式互异的轨迹假设，并利用当前与未来证据对其进行评估、局部修正和最终选择，避免多查询回归的模式坍缩、固定锚点预算浪费，以及候选逐一未来推演带来的计算开销。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.13409">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.13409.webp" alt="ManeuverFlow: Maneuver Hypothesis Generation with Future Evidence for Trajectory Evaluation and Refinement in End-to-End Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向端到端自动驾驶的轨迹规划任务，将传感器观测、自车状态与导航指令直接映射为未来自车轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ManeuverFlow: Maneuver Hypothesis Generation with Future Evidence for Trajectory Evaluation and Refinement in End-to-End Autonomous Driving</h1>
+            <div class="detail-meta">2026-10-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.13409" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.13409" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.13409</span></div>
+            <p class="detail-summary">面向端到端自动驾驶的轨迹规划任务，将传感器观测、自车状态与导航指令直接映射为未来自车轨迹。 应用场景为复杂交通场景下的多模态驾驶意图建模与候选轨迹生成、评估、修正与选择。 研究问题：在固定候选预算下，如何生成与场景相关、意图/机动模式互异的轨迹假设，并利用当前与未来证据对其进行评估、局部修正和最终选择，避免多查询回归的模式坍缩、固定锚点预算浪费，以及候选逐一未来推演带来的计算开销。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Chongqing University · 原文未明确对应（仅全体作者列表与脚注标注通讯作者 Guofa Li、未给出机构—作者逐项对应关系）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.13409/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向端到端自动驾驶的轨迹规划任务，将传感器观测、自车状态与导航指令直接映射为未来自车轨迹。</p>
+  <ul class="reading-intro-points"><li>面向端到端自动驾驶的轨迹规划任务，将传感器观测、自车状态与导航指令直接映射为未来自车轨迹。</li><li>应用场景为复杂交通场景下的多模态驾驶意图建模与候选轨迹生成、评估、修正与选择。</li><li>研究问题：在固定候选预算下，如何生成与场景相关、意图/机动模式互异的轨迹假设，并利用当前与未来证据对其进行评估、局部修正和最终选择，避免多查询回归的模式坍缩、固定锚点预算浪费，以及候选逐一未来推演带来的计算开销。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Chongqing University；作者：原文未明确对应（仅全体作者列表与脚注标注通讯作者 Guofa Li，未给出机构—作者逐项对应关系）</li><li>机构：Artificial Intelligence Center, Geely Automotive Research Institute；作者：原文未明确对应（原文未报告逐作者机构归属）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向端到端自动驾驶的轨迹规划任务，将传感器观测、自车状态与导航指令直接映射为未来自车轨迹。</li><li>应用场景为复杂交通场景下的多模态驾驶意图建模与候选轨迹生成、评估、修正与选择。</li><li>研究问题：在固定候选预算下，如何生成与场景相关、意图/机动模式互异的轨迹假设，并利用当前与未来证据对其进行评估、局部修正和最终选择，避免多查询回归的模式坍缩、固定锚点预算浪费，以及候选逐一未来推演带来的计算开销。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 M-GMP 与机动路由的 M³F 结合的场景自适应机动生成器，将运动定义的机动分量显式保留为可评估、可修正的独立候选假设，并一步生成意图条件化轨迹。</li><li>提出共享未来 BEV 场上的轨迹引导证据探针，将每个候选投影到当前与预测 BEV 中提取轨迹特定证据，用于 PDM 因子对齐打分，避免逐候选未来推演。</li><li>提出 Metric Prism 进行分因子 PDM 打分，并提出 ECFR 使用同一证据在 Frenet 坐标系预测局部残差，修正后的候选与保留候选在同一打分函数下联合重打分选择。</li><li>以轻量 ResNet-34 TransFuser 感知骨干，ManeuverFlow-TF 在 NAVSIM v1/v2 navtest 上达到 90.58 PDMS 与 90.14 EPDMS；相机-only LTF 变体在 WorldEngine 闭环基准上取得 75.19（logged traffic）与 74.58（IDM-controlled traffic）的 PDMS*。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：统一的“Hypothesize–Verify–Improve”规划框架，包含感知编码与规划上下文、M-GMP、M³F 生成器、共享未来 BEV 世界模型、Metric Prism 打分器与 ECFR 修正器。</li><li>输入传感器：TF 配置输入三路相机图像、LiDAR BEV 栅格、自车状态与导航指令；LTF 配置输入三路相机图像、自车状态与导航指令，并以学习潜变量张量替代 LiDAR。原文未报告其他传感器输入。</li><li>场景表示：编码器输出 BEV 地图特征、agent/机动查询与状态—导航上下文；世界模型每个规划步预测一次候选无关的多步未来 BEV 特征场，包含绝对特征与时间残差特征。</li><li>模型结构：M-GMP 将专家轨迹按位移、平均航向与速度趋势分为 M 个运动族并拟合因子化高斯先验，推理时按场景条件权重分配候选；M³F 采用 iMF 的边界场与 JVP 构造，轨迹状态 token 依次查询 BEV—自车特征与 agent 记忆，时间条件 AdaLN 调制，机动路由的专家参数化区间平均场并一步输运；证据探针将候选航点投影到当前与时间对齐的预测 BEV 采样聚合；Metric Prism 以集合自注意力与证据交叉注意力预测五类 PDM 因子（NC、DAC、EP、TTC、Comf）并按固定 log-PDM 组合打分；ECFR 在路径对齐 Frenet 系预测残差并更新轨迹。</li><li>关键技术：一步 MeanFlow 式轨迹输运、机动路由混合专家、共享未来场上的轨迹特定证据检索、基于同机动索引最优参考轨迹的 Frenet 残差监督、修正与保留候选的联合重打分；推理时保留 Top-3 机动分量并按最大余数法分配 N 个候选。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM v1 与 v2 的 navtrain/navtest，基于 OpenScene/nuPlan 驾驶日志；WorldEngine 闭环基准（3DGS 场景）。原文未报告其他数据集。</li><li>仿真器：WorldEngine 闭环仿真（含 logged traffic 与 IDM-controlled traffic 两种交通设置）。</li><li>模型规模：感知骨干为 ResNet-34 的 TransFuser（TF）或 Latent TransFuser（LTF）；每场景候选数 N=64；原文未报告总参数量与计算量。</li><li>训练资源：原文未报告 GPU 型号、数量与训练时长。</li><li>实车平台：原文未报告实车平台或实车实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：NAVSIM v1 navtest（12,146 场景）与 NAVSIM v2 navtest，均在单一官方基准版本下评估；WorldEngine 全部场景闭环评估。</li><li>评估指标：NAVSIM v1 使用 NC、DAC、TTC、Comf.、EP 与 PDMS；NAVSIM v2 使用 NC、DAC、DDC、TLC、EP、TTC、LK、HC、EC 与 EPDMS；WorldEngine 使用 SR、EP 与 PDMS*。</li><li>关键数值：NAVSIM v1 上 TF 变体 PDMS 90.58（NC 98.42、DAC 98.01、TTC 95.19、Comf. 99.99、EP 85.36），LTF 变体 PDMS 89.98；NAVSIM v2 上 TF 变体 EPDMS 90.14，LTF 变体 EPDMS 89.70；WorldEngine 闭环上 logged traffic PDMS* 75.19（SR 87.48、EP 60.68）、IDM traffic PDMS* 74.58（SR 87.92、EP 60.89）。</li><li>对比方法：NAVSIM v1 对比 UniAD、TransFuser、World4Drive、GoalFlow、DiffusionDrive、WoTE、MeanFuser、VADv2、DriveSuprim；NAVSIM v2 对比 Ego Status MLP、TransFuser、DriveSuprim、DiffusionDrive、MeanFuser；WorldEngine 对比 VADv2、DiffusionDrive、MeanFuser。基线使用官方结果。</li><li>评估条件：NAVSIM 为数据驱动的开环规划评估；WorldEngine 为仿真闭环评估，分别覆盖 logged 与 IDM-controlled 交通；原文未报告实车评估结果。原文指出标准差见补充材料，消融包括 M-GMP 召回率与候选预算敏感性分析。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.14802/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">YOUDrive: Driving Style as a Composable Direction for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.13232/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">FPD-Drive: Future Policy Distillation for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

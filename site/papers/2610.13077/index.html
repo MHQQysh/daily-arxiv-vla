@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Towards Safer Cities: A Design Process for Perception Datasets in Urban Driving Scenarios - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向城市环境中的自动驾驶感知数据需求，聚焦重型卡车与有轨电车（tram）等非乘用车平台，指出当前公开数据集主要基于乘用车采集、对城市卡车与电车场景覆盖不足的问题。 研究任务不是提出新的感知模型，而是提出一套面向城市驾驶场景的感知数据集设计流程：从六层 ODD 模型出发定义目标 ODD，分析已有数据集覆盖情况，识别差距并规划针对性数据采集。 应用场景为城市道路中的卡车运行（环岛、狭窄交叉口、限高路段、施工区、与电车混行）以及电车运行（路轨嵌入道路、电车平交道口），并以德国达姆施塔特及周边为目标采集区域。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.13077">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.13077.webp" alt="Towards Safer Cities: A Design Process for Perception Datasets in Urban Driving Scenarios" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向城市环境中的自动驾驶感知数据需求，聚焦重型卡车与有轨电车（tram）等非乘用车平台，指出当前公开数据集主要基于乘用车采集、对城市卡车与电车场景覆盖不足的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Towards Safer Cities: A Design Process for Perception Datasets in Urban Driving Scenarios</h1>
+            <div class="detail-meta">2026-10-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.13077" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.13077" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.13077</span></div>
+            <p class="detail-summary">论文面向城市环境中的自动驾驶感知数据需求，聚焦重型卡车与有轨电车（tram）等非乘用车平台，指出当前公开数据集主要基于乘用车采集、对城市卡车与电车场景覆盖不足的问题。 研究任务不是提出新的感知模型，而是提出一套面向城市驾驶场景的感知数据集设计流程：从六层 ODD 模型出发定义目标 ODD，分析已有数据集覆盖情况，识别差距并规划针对性数据采集。 应用场景为城市道路中的卡车运行（环岛、狭窄交叉口、限高路段、施工区、与电车混行）以及电车运行（路轨嵌入道路、电车平交道口），并以德国达姆施塔特及周边为目标采集区域。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">达姆施塔特工业大学汽车工程研究所（Institute of Automotive Engineering Darmstadt, FZD, TU Dar…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.13077/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向城市环境中的自动驾驶感知数据需求，聚焦重型卡车与有轨电车（tram）等非乘用车平台，指出当前公开数据集主要基于乘用车采集、对城市卡车与电车场景覆盖不足的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向城市环境中的自动驾驶感知数据需求，聚焦重型卡车与有轨电车（tram）等非乘用车平台，指出当前公开数据集主要基于乘用车采集、对城市卡车与电车场景覆盖不足的问题。</li><li>研究任务不是提出新的感知模型，而是提出一套面向城市驾驶场景的感知数据集设计流程：从六层 ODD 模型出发定义目标 ODD，分析已有数据集覆盖情况，识别差距并规划针对性数据采集。</li><li>应用场景为城市道路中的卡车运行（环岛、狭窄交叉口、限高路段、施工区、与电车混行）以及电车运行（路轨嵌入道路、电车平交道口），并以德国达姆施塔特及周边为目标采集区域。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：达姆施塔特工业大学汽车工程研究所（Institute of Automotive Engineering Darmstadt, FZD, TU Darmstadt）；作者：Alexander Kroth、Cristian Martinez、Steven Peters</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向城市环境中的自动驾驶感知数据需求，聚焦重型卡车与有轨电车（tram）等非乘用车平台，指出当前公开数据集主要基于乘用车采集、对城市卡车与电车场景覆盖不足的问题。</li><li>研究任务不是提出新的感知模型，而是提出一套面向城市驾驶场景的感知数据集设计流程：从六层 ODD 模型出发定义目标 ODD，分析已有数据集覆盖情况，识别差距并规划针对性数据采集。</li><li>应用场景为城市道路中的卡车运行（环岛、狭窄交叉口、限高路段、施工区、与电车混行）以及电车运行（路轨嵌入道路、电车平交道口），并以德国达姆施塔特及周边为目标采集区域。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一种基于 ODD 分析、结合用户生成地图数据（OpenStreetMap）的引导式数据集创建方法，用于比较已有数据集与目标 ODD 之间的差距并支持采集规划。</li><li>在 Scholtes 等六层模型基础上引入 Mendiboure 等的 ODD 定义，把自车能力、传感器配置与场景描述纳入数据集 ODD 描述体系。</li><li>识别并示例化卡车在城市环境中的代表性用例（环岛、狭窄交叉口、限高设施、施工区、与大型车辆并行驶、与电车共用路段及电车交叉口），并给出卡车与电车的联合 ODD 分析。</li><li>构建两套基于 OpenStreetMap 的处理流程：一套从已有数据集的 GPS 轨迹回溯提取道路基础设施元数据，另一套从目标区域（达姆施塔特周边 10 km 半径、以 Luisenplatz 为中心）提取候选采集地点。</li><li>在目标区域内量化识别出 33 个卡车可达环岛、狭窄交叉口若干以及 49 处电车平交道口，为后续采集提供候选位置依据。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据集设计与采集规划方法，不涉及具体感知网络结构。</li><li>输入传感器：论文未训练或评估感知模型；所规划采集数据包含位置数据、相机图像、点云和驾驶员提示（driver prompts），具体传感器型号与数量原文未报告（卡车车辆与传感器配置引用文献 [12]）。</li><li>场景表示：采用六层模型（数字信息、环境条件、动态物体、L1/L2 临时修改、路侧结构、道路网络与交通引导对象）扩展车辆信息与场景层，作为数据集 ODD 的描述与比较框架。</li><li>模型结构：原文未报告；论文不提出神经网络模型。</li><li>关键技术：</li></ul>
+<p> - 基于 ODD 的可获取性评估表，判断各层信息在已有数据集中的可得性、采集规划可行性和可用的外部数据源（Open-Meteo 用于天气，OpenStreetMap 用于地图）。</p>
+<p> - 数据集信息提取流程：提取 GPS 坐标并统一格式，生成 Overpass 查询访问 OSM 数据库，获取道路宽度、限高、道路类型、道路构型等属性并存储为 JSON。</p>
+<p> - 目标区域分析流程：过滤卡车不可通行道路，排除 footway、pedestrian、proposed 等无关道路类型，再查询 OSM 提取同类基础设施属性。</p>
+<p> - 环岛识别使用 <code>junction=roundabout</code> 并排除非机动车道路与卡车限行道路，再对重复 way 做去重合并；狭窄交叉口按道路宽度中位数配对并排序统计；电车交叉口使用 <code>railway=tram_level_crossing</code> 并结合父级 highway 与 tram/light_rail way 过滤。</p>
+<p> - 采集规划按定义 ODD 与已记录 ODD 的差异迭代进行，直到目标 ODD 覆盖充分。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：论文本身未发布完整新数据集，但报告了基于该方法采集的卡车数据样本，发布于 TUdatalib（引用 [11]）；分析对象包括 nuScenes、NVIDIA Physical AI、TruckScenes、TruckDrive，以及 RailSem19、OSDaR23、RailGoerl24 和 Hovanotayan 等的电车数据集。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：卡车作为研究车辆进行选定场景录制，车辆与传感器配置引用文献 [12]；电车数据集为后续工作计划，尚未报告实车平台细节。</li><li>外部数据资源：OpenStreetMap（Overpass 查询）与 Open-Meteo；目标区域分析半径 10 km，中心为达姆施塔特 Luisenplatz，共识别 19,981 条唯一道路段（ways）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：不以模型精度为评估对象，而是以“定义 ODD 与已有数据集记录 ODD 的覆盖差距”为评估框架；对比数据集包括 nuScenes（波士顿、新加坡）与 TruckScenes（巴伐利亚地区），以及表 2、表 3 中的汽车与铁路数据集。</li><li>评估指标：六层模型各层在已有数据集中的可获取性等级（–、o、+、++）、采集规划可行性、外部数据源可用性；基础设施要素计数（环岛数、交叉口宽度分布、电车交叉口数）。</li><li>关键数值：</li></ul>
+<p> - 目标区域 10 km 半径内识别 19,981 条唯一道路段。</p>
+<p> - 环岛查询返回 66 条 way，去重后得到 33 个唯一环岛；对比 nuScenes 仅 4 个环岛（波士顿 3 个、新加坡 1 个），TruckScenes 为 10 个。</p>
+<p> - 狭窄交叉口分析中，多数交叉口道路宽度足够卡车通行，但存在两条道路宽度均接近 2.5 m 的交叉口，而欧洲法定最大车宽约 2.55 m，被视为挑战性机动场景。</p>
+<p> - 识别 49 处电车平交道口，多数位于 Griesheim 市镇。</p>
+<ul><li>对比方法：以 nuScenes、TruckScenes 等现有数据集的基础设施覆盖作为对比；表 2 给出 nuScenes、NVIDIA Physical AI、TruckScenes、TruckDrive 的场景数、范围、区域、相机/LiDAR/雷达/GNSS/IMU 数量、类别数与采集车辆；表 3 给出 RailSem19、OSDaR23、RailGoerl24 和 Hovanotayan 等数据集的同类信息。</li><li>开环/闭环/仿真/实车条件：论文未进行开环或闭环算法评测，也未报告仿真实验；仅在目标区域基于 OSM 数据完成离线分析，并使用卡车实车录制了覆盖所识别兴趣点的样本数据，用于后续端到端驾驶研究。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.13232/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">FPD-Drive: Future Policy Distillation for End-to-End Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.12895/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">MeshBind: Point-to-Mesh Binding for Non-Rigid Scene Flow Automatic Annotation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

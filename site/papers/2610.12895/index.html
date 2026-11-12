@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MeshBind: Point-to-Mesh Binding for Non-Rigid Scene Flow Automatic Annotation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶与机器人场景中的 LiDAR 场景流（scene flow）估计任务，解决非刚性目标（尤其行人）逐点非刚体运动标注缺失的问题。 应用场景为真实多线 LiDAR 与六路环视相机的城市驾驶平台；现有基准多假设每个动态目标仅有一个 6-DoF 刚体变换，无法表达行人摆腿、摆臂、躯干弯曲等关节级运动。 研究问题包括：如何从多视角图像重建行人的关节化网格并对齐到 LiDAR 坐标系；如何构建对刚体运动不变、又能适应关节形变的点到网格绑定；如何将自车运动补偿、包围盒刚体绑定与网格非刚体绑定整合为全场景逐点流流水线。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.12895">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.12895.webp" alt="MeshBind: Point-to-Mesh Binding for Non-Rigid Scene Flow Automatic Annotation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶与机器人场景中的 LiDAR 场景流（scene flow）估计任务，解决非刚性目标（尤其行人）逐点非刚体运动标注缺失的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">MeshBind: Point-to-Mesh Binding for Non-Rigid Scene Flow Automatic Annotation</h1>
+            <div class="detail-meta">2026-10-09 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.12895" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.12895" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.12895</span></div>
+            <p class="detail-summary">论文面向自动驾驶与机器人场景中的 LiDAR 场景流（scene flow）估计任务，解决非刚性目标（尤其行人）逐点非刚体运动标注缺失的问题。 应用场景为真实多线 LiDAR 与六路环视相机的城市驾驶平台；现有基准多假设每个动态目标仅有一个 6-DoF 刚体变换，无法表达行人摆腿、摆臂、躯干弯曲等关节级运动。 研究问题包括：如何从多视角图像重建行人的关节化网格并对齐到 LiDAR 坐标系；如何构建对刚体运动不变、又能适应关节形变的点到网格绑定；如何将自车运动补偿、包围盒刚体绑定与网格非刚体绑定整合为全场景逐点流流水线。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">南方科技大学可信自主系统研究院（Research Institute of Trustworthy Autonomous Systems, South…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.12895/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶与机器人场景中的 LiDAR 场景流（scene flow）估计任务，解决非刚性目标（尤其行人）逐点非刚体运动标注缺失的问题。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶与机器人场景中的 LiDAR 场景流（scene flow）估计任务，解决非刚性目标（尤其行人）逐点非刚体运动标注缺失的问题。</li><li>应用场景为真实多线 LiDAR 与六路环视相机的城市驾驶平台；现有基准多假设每个动态目标仅有一个 6-DoF 刚体变换，无法表达行人摆腿、摆臂、躯干弯曲等关节级运动。</li><li>研究问题包括：如何从多视角图像重建行人的关节化网格并对齐到 LiDAR 坐标系；如何构建对刚体运动不变、又能适应关节形变的点到网格绑定；如何将自车运动补偿、包围盒刚体绑定与网格非刚体绑定整合为全场景逐点流流水线。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：南方科技大学可信自主系统研究院（Research Institute of Trustworthy Autonomous Systems, Southern University of Science and Technology）；作者：Yinqi Chen、E Li、Shuaijun Wang、Weiyuan Peng、Meiying Zhang、Qi Hao</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶与机器人场景中的 LiDAR 场景流（scene flow）估计任务，解决非刚性目标（尤其行人）逐点非刚体运动标注缺失的问题。</li><li>应用场景为真实多线 LiDAR 与六路环视相机的城市驾驶平台；现有基准多假设每个动态目标仅有一个 6-DoF 刚体变换，无法表达行人摆腿、摆臂、躯干弯曲等关节级运动。</li><li>研究问题包括：如何从多视角图像重建行人的关节化网格并对齐到 LiDAR 坐标系；如何构建对刚体运动不变、又能适应关节形变的点到网格绑定；如何将自车运动补偿、包围盒刚体绑定与网格非刚体绑定整合为全场景逐点流流水线。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出多视角模块，利用六路环视相机重建行人的关节化网格模型，并通过外参变换、离散轴搜索与包围盒质心吸附将其配准到 LiDAR 坐标系。</li><li>提出局部坐标系绑定技术，将每个 LiDAR 点绑定到网格三角面，存储由面索引、重心坐标与逐三角面切向-法向局部坐标系残差构成的三元组，使其对刚体运动不变而对关节形变自适应。</li><li>提出三层流配准流水线，将自车运动补偿（L1 背景）、包围盒刚体绑定（L2）与网格非刚体绑定（L3）组合为全场景逐点场景流，后层覆盖前层对应点的预测。</li><li>实现交互式标注工具 SF-Studio，支持流可视化、逐目标网格编辑，并在编辑后由后端自动重新绑定与重算流。</li><li>构建并发布 SFB（SUScape-Flow Benchmark），覆盖 41,196 帧、超过 310k 人体检测，提供逐点非刚体行人标注及 Rigid / Semi-Rigid / Non-Rigid 运动机制评估协议。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：论文为自动标注方法，包含网格重建与对齐模块、点到网格绑定模块、三层流配准流水线以及交互标注工具 SF-Studio。</li><li>输入传感器：六路同步环视相机图像与 64 线 LiDAR 点云，配合相机与 LiDAR 标定外参；原文未报告其他传感器输入。</li><li>场景表示：以行人的关节化三角网格模型（顶点集加固定三角面列表）作为几何代理，逐点以三角面索引、重心坐标与局部坐标系残差表示绑定关系；全场景点云按背景、包围盒目标与人体目标分层处理。</li><li>模型结构与关键技术：多视角模块对每个行人选取六路图像中二维包围盒面积最大的视图，运行 SAM 3D Body 基础模型生成水密关节化网格，再经外参变换与 2×6×8=96 个候选刚体修正的离散轴搜索（以网格关键点到 LiDAR 点的平均最近距离为准则，每场景搜索一次）完成对齐，并将网格质心吸附到三维检测框中心；绑定模块用面质心 KD-tree 取每个点最近 K=16 个候选面，用 Ericson 七 Voronoi 区域算法求最近面与重心坐标，以 0.25 m 距离阈值过滤不可靠绑定，残差按逐三角面正交坐标架存储，并在下一帧同一面的形变坐标架中恢复位置，可选软权重 exp(−α‖r‖)，α=10；三层流水线依次计算自车运动补偿、由匹配包围盒推导的刚体变换、以及非刚体网格绑定，最终流为恢复位置与源位置之差。</li><li>原文未报告：网络训练细节、模型规模、推理时延等未在给定原文中报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：基于公开 SUScape 多传感器城市驾驶平台构建 SFB，含 1,059 个驾驶序列、41,196 帧（2 Hz，训练 741 / 验证 159 / 测试 159），每帧约 3.4×10^5 个 64 线 LiDAR 回波与六路同步环视图像；相邻帧对（Δt=0.5 s）用于场景流监督，得到 28,080 个训练对与 6,026 个测试对（覆盖 6,185 个测试帧）。</li><li>标注范围：Pedestrian、Child、BabyCart、BicycleRider、ScooterRider、MotorcycleRider、BicycleGroup、RoadWorker 等共享 SAM 3D Body 网格先验的人体类别获得逐点非刚体流并可经 SF-Studio 编辑；其他动态目标、车辆与背景回波采用包围盒驱动流。</li><li>仿真器：原文未报告仿真器。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告具体硬件与训练时长；仅报告微调 30 epoch、从零训练 15 epoch 的设置。</li><li>实车平台：SUScape 公开多传感器城市驾驶平台（提供同步 LiDAR、多视角图像与标定参数）；原文未报告更多实车平台细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：SFB 测试划分（6,185 帧，2.04×10^9 个有效点），采用 Argoverse 风格三向 EPE（EPE_FD、EPE_BS、EPE_FS）以及运动机制 EPE（Rigid、Semi-Rigid、Non-Rigid）；测试集中三类运动机制分别占 9.51%、1.01%、0.45%，其余为静态背景，Non-Rigid 点比 Rigid 点约稀缺 21 倍。</li><li>标注质量验证：在 30,510 帧、86,349,113 个绑定点上，绑定距离 73.5% 低于 0.10 m（中位数 0.054 m，均值 0.072 m），0.25 m 截断仅去除长尾并保留 26.5% 的边缘点；310,879 个非刚体/半刚体实例的绑定成功率均值 0.87、中位数 0.99，93.6% 的实例绑定比例超过 0.5，仅 868 个（0.3%）低于 0.1。</li><li>跨模态投影一致性：在 15 个场景、300 个帧对、6 个相机视图上，将三维流投影到图像平面并与 RAFT 光流比较方向余弦相似度，MeshBind 均值 0.78，刚体包围盒基线为 0.01。</li><li>合成数据验证：以 SAM 3D Body 网格顶点为 GT（940,389 个顶点、56 个实例），刚体质心基线平均 EPE 为 0.107 m，局部坐标系恢复 EPE 为 0；在 LiDAR 点上，刚体包围盒标注平均遗漏 0.41 m 的差异。</li><li>零样本基线对比：在无 SUScape 微调条件下评估 11 个估计器（8 个 Argoverse 2 预训练前馈网络与 3 个免学习方法）。前馈方法 EPE_FD 为 2.57–3.50 m，免学习方法为 1.96–2.88 m，均比 EPE_BS 高一到两个数量级；2 帧模型（DeFlow、VoteFlow）与 3/5 帧变体（HiMo、Flow4D）相当或更优。运动机制 EPE 显示 Non-Rigid 反而最小（平均 0.400 m，对比 Rigid 2.586 m、Semi-Rigid 0.971 m），论文指出这是刚体监督将行人点坍缩为小位移刚体运动所致的假象；ICP-Flow 在 Non-Rigid 上取得最低 EPE（0.316 m），恰是其刚体假设被最严重违反之处。</li><li>下游验证：在 SFB 训练划分上微调（30 epoch，自 Argoverse 权重）与从零训练（15 epoch）9 个估计器；摘要报告微调使三向 EPE 降低 2–3 倍，并将非刚体 EPE 降至与刚体 EPE 相当的水平（具体逐项数值在给定原文中未完整给出）。</li><li>消融：局部坐标系残差与世界坐标残差对比，以及网格错位下的残差容忍度（给定原文未给出具体消融数值）。</li><li>评估条件：全部为真实 SUScape 数据上的开环评估与离线标注质量验证；原文未报告闭环规划控制评估或实车在线部署结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.13077/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Towards Safer Cities: A Design Process for Perception Datasets in Urban Driving Scenarios</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.12747/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Trajectory Prediction for Autonomous Driving in Road Construction Zones Using Human-in-the-Loop Driving Data</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
