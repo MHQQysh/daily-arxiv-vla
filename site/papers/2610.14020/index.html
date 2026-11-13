@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LabInstruct: Benchmarking Situated Instructional Video Generation for Lab Procedures - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向自驱动实验室（Self-driving Laboratories, SDLs）中 AI 生成实验计划与人类物理执行之间的指导接口，研究“情境化教学视频生成”（situated instructional video generation）任务。 任务设定：给定初始实验工作区观测帧 f₀ 与自然语言指令 T，由生成器合成后续视频 f₁:ₙ = G(f₀, T; θ)，需保持工作区身份与连续性、按正确顺序执行动作、达到预期中间与最终状态。 应用场景为真实实验室的人向实验指导视频，覆盖 5 个科学学科，任务分为单步操作（Level 1，1–3 个原子动作，标称 4 秒）与短程多步实验（Level 2，4–10 个原子动作，含步间依赖，标称 12 秒）。 核心研究问题：视频生成模型能否生成可靠、程序正确的实验教学视频，而非仅仅视觉上逼真。 现有基准只评估视觉保真、提示对齐、物理合理性或科学推理，未评估模型能否在真实实验室中正确生成人类执行的实验流程。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.14020">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.14020.webp" alt="LabInstruct: Benchmarking Situated Instructional Video Generation for Lab Procedures" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向自驱动实验室（Self-driving Laboratories, SDLs）中 AI 生成实验计划与人类物理执行之间的指导接口，研究“情境化教学视频生成”（situated instructional video generation）任务。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">LabInstruct: Benchmarking Situated Instructional Video Generation for Lab Procedures</h1>
+            <div class="detail-meta">2026-09-29 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.14020" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.14020" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.14020</span></div>
+            <p class="detail-summary">面向自驱动实验室（Self-driving Laboratories, SDLs）中 AI 生成实验计划与人类物理执行之间的指导接口，研究“情境化教学视频生成”（situated instructional video generation）任务。 任务设定：给定初始实验工作区观测帧 f₀ 与自然语言指令 T，由生成器合成后续视频 f₁:ₙ = G(f₀, T; θ)，需保持工作区身份与连续性、按正确顺序执行动作、达到预期中间与最终状态。 应用场景为真实实验室的人向实验指导视频，覆盖 5 个科学学科，任务分为单步操作（Level 1，1–3 个原子动作，标称 4 秒）与短程多步实验（Level 2，4–10 个原子动作，含步间依赖，标称 12 秒）。 核心研究问题：视频生成模型能否生成可靠、程序正确的实验教学视频，而非仅仅视觉上逼真。 现有基准只评估视觉保真、提示对齐、物理合理性或科学推理，未评估模型能否在真实实验室中正确生成人类执行的实验流程。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Central South University · Yuming Fu、Jiahao Tang、Feifei Chen 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.14020/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向自驱动实验室（Self-driving Laboratories, SDLs）中 AI 生成实验计划与人类物理执行之间的指导接口，研究“情境化教学视频生成”（situated instructional video generation）任务。</p>
+  <ul class="reading-intro-points"><li>面向自驱动实验室（Self-driving Laboratories, SDLs）中 AI 生成实验计划与人类物理执行之间的指导接口，研究“情境化教学视频生成”（situated instructional video generation）任务。</li><li>任务设定：给定初始实验工作区观测帧 f₀ 与自然语言指令 T，由生成器合成后续视频 f₁:ₙ = G(f₀, T; θ)，需保持工作区身份与连续性、按正确顺序执行动作、达到预期中间与最终状态。</li><li>应用场景为真实实验室的人向实验指导视频，覆盖 5 个科学学科，任务分为单步操作（Level 1，1–3 个原子动作，标称 4 秒）与短程多步实验（Level 2，4–10 个原子动作，含步间依赖，标称 12 秒）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Central South University；作者：Yuming Fu、Jiahao Tang、Feifei Chen、Alex Jinpeng Wang</li><li>机构：National University of Singapore；作者：Weijia Wu</li><li>机构：Beijing University of Posts and Telecommunications；作者：Jing Chen</li><li>机构：Chongqing Institute of Green and Intelligent Technology, Chinese Academy of Sciences；作者：Hongyu Zhu</li><li>机构：Monash University；作者：Xin Jin</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向自驱动实验室（Self-driving Laboratories, SDLs）中 AI 生成实验计划与人类物理执行之间的指导接口，研究“情境化教学视频生成”（situated instructional video generation）任务。</li><li>任务设定：给定初始实验工作区观测帧 f₀ 与自然语言指令 T，由生成器合成后续视频 f₁:ₙ = G(f₀, T; θ)，需保持工作区身份与连续性、按正确顺序执行动作、达到预期中间与最终状态。</li><li>应用场景为真实实验室的人向实验指导视频，覆盖 5 个科学学科，任务分为单步操作（Level 1，1–3 个原子动作，标称 4 秒）与短程多步实验（Level 2，4–10 个原子动作，含步间依赖，标称 12 秒）。</li><li>核心研究问题：视频生成模型能否生成可靠、程序正确的实验教学视频，而非仅仅视觉上逼真。</li><li>现有基准只评估视觉保真、提示对齐、物理合理性或科学推理，未评估模型能否在真实实验室中正确生成人类执行的实验流程。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将实验室视频生成形式化为面向人类的程序性沟通任务，强调装置、对象、因果顺序与可观测状态转换的正确性。</li><li>提出 LabInstruct 基准：204 个真实实验室任务、5 个学科、两个复杂度层级，每任务含真实参考执行与对象、动作、接触、状态转换的结构化标注。</li><li>构建人工验证的程序感知评估协议，包含核心视觉质量、关键完成度与场景/安全有效性约束，并形成 3,229 个专家核验的问答式检查项。</li><li>对 8 个前沿图像到视频模型进行评测，量化“视觉逼真”与“端到端程序正确”之间的显著差距。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基准构建（数据筛选、时序分段、结构化任务规范、指令生成）与评估协议设计；不涉及新的生成模型训练。</li><li>输入传感器：初始工作区图像帧 f₀ 与自然语言指令 T；参考视频来自第一人称或邻近观察者视角。</li><li>场景表示：真实实验室视频片段及结构化任务规范，包含任务相关对象与角色、空间关系、有序动作、交互类型、可观测状态转换和难度属性；动作绑定稳定对象 ID 并记录步骤索引、执行手、动作动词、目标对象、接触类型及动作前后可见状态。</li><li>模型结构：评估对象为 8 个图像到视频生成模型（Wan 2.2、LTX 2.3、Cosmos3 Nano、Cosmos3 Super、LingBot Video、MiniMax H3、Seedance 2.0、Wan 3.0）；标注辅助使用 Qwen3.6-27B，检查项生成使用 DeepSeek-v4-flash。</li><li>关键技术：模型辅助标注加人工核验的流水线；冻结任务规范后渲染指令，抽象掉参考特有的手别、轨迹与停顿；评估采用 Yes/No/Unjudgeable 三值检查项、按重要性加权违规并用惩罚函数映射维度分数，核心分数取四维几何平均，完成度由 Critical 项决定，场景一致性与视觉安全作为二值门控，最终分数为 S_overall = S_core · C(n_c) · G_scene · G_safety。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：LabInstruct，204 个任务（101 个 Level 1、103 个 Level 2），5 个科学学科，7 类操作域；参考片段平均时长 Level 1 为 4.5 秒、Level 2 为 12.7 秒；含 3,229 个专家核验问答项（Level 1 平均 13.0 项、Level 2 平均 18.6 项）。</li><li>数据来源：Bilibili、YouTube、FineBio 数据集、ExpVid 基准。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告具体参数量。</li><li>训练资源：原文未报告（本文为基准评测，未报告训练算力）。</li><li>实车平台：原文未报告；研究场景为真实实验室人工执行流程。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：LabInstruct 的 204 个任务，按 Level 1 与 Level 2 分层报告。</li><li>评估指标：Object Consistency（Obj.）、Action Fidelity（Act.）、State Correctness（St.）、Physical Plausibility（Phys.）、核心分数 S_core、完成度因子 Comp.、场景门控 G_scene、安全门控 G_safety、Overall 与 Pooled Overall。</li><li>GPT-5.6 Sol 评估者结果（Table 2/3）：Level 1 中 MiniMax H3 的 S_core 最高为 82.6，Wan 3.0 为 81.6、Seedance 2.0 为 77.9；Level 2 中 Wan 3.0 的 S_core 最高为 80.3、Seedance 2.0 为 79.6、MiniMax H3 为 77.0；Pooled Overall 上 MiniMax H3 为 46.3、Seedance 2.0 为 45.1、Wan 3.0 为 44.4；较弱的 Wan 2.2 的 Pooled Overall 为 25.9、LTX 2.3 为 22.1、Cosmos3 Nano 为 19.4。</li><li>关键现象：物体一致性普遍很高（如 Seedance 2.0 Level 1 的 Obj. 为 98.5、Wan 3.0 Level 2 的 Obj. 为 95.7），但动作保真与完成度明显偏低（如 Wan 2.2 Level 2 的 Comp. 为 17.4、LingBot Video Level 2 的 Comp. 为 22.3），表明视觉逼真与程序正确存在显著差距。</li><li>对比方法：8 个图像到视频模型，其中 Seedance 2.0 与 Wan 3.0 标注为商业模型（†）。</li><li>评估条件：基于生成视频的离线评估，包含 VLM 评估者（GPT-5.6 Sol，附录另报告 Gemini 3.7 Flash）与人工评估；提供跨评估者一致性、领域/学科/视角分解、失败归因与评分敏感性分析；开环、闭环、仿真或实车执行条件下的结果原文未报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2610.09174/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Context-aware Attention-based Gaussian Mixture Models for Vehicular Trajectory Prediction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.23886/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">EvoAD: Self-Evolving Autonomous Driving via Latent World-Model Guided Post-hoc Reflection</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evaluating Video LLMs&#x27; Understanding of Corner Cases in Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究的是自动驾驶场景下视频大语言模型（Video LLMs）对“长尾极端场景”（corner cases）的理解能力评估问题。 应用场景为车载前视行车记录仪（ego-view dashcam）视频流中的安全关键事件理解与自然语言解释，目标是评估此类模型能否作为可解释自动驾驶系统的语言解释模块。 具体研究问题包括：现有基准覆盖的极端场景类型不足（偏重碰撞类、物体级异常）、评估形式偏向多选题、且未系统评测驾驶专用微调模型；论文希望解答 Video LLMs 在稀有安全关键事件上的真实能力缺口及失败模式。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.16767">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.16767.webp" alt="Evaluating Video LLMs&#x27; Understanding of Corner Cases in Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究的是自动驾驶场景下视频大语言模型（Video LLMs）对“长尾极端场景”（corner cases）的理解能力评估问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Evaluating Video LLMs&#x27; Understanding of Corner Cases in Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.16767" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.16767" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.16767</span></div>
+            <p class="detail-summary">论文研究的是自动驾驶场景下视频大语言模型（Video LLMs）对“长尾极端场景”（corner cases）的理解能力评估问题。 应用场景为车载前视行车记录仪（ego-view dashcam）视频流中的安全关键事件理解与自然语言解释，目标是评估此类模型能否作为可解释自动驾驶系统的语言解释模块。 具体研究问题包括：现有基准覆盖的极端场景类型不足（偏重碰撞类、物体级异常）、评估形式偏向多选题、且未系统评测驾驶专用微调模型；论文希望解答 Video LLMs 在稀有安全关键事件上的真实能力缺口及失败模式。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Korea Advanced Institute of Science and Technology (KAIST) · Gabriel Manalu…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.16767/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究的是自动驾驶场景下视频大语言模型（Video LLMs）对“长尾极端场景”（corner cases）的理解能力评估问题。</p>
+  <ul class="reading-intro-points"><li>论文研究的是自动驾驶场景下视频大语言模型（Video LLMs）对“长尾极端场景”（corner cases）的理解能力评估问题。</li><li>应用场景为车载前视行车记录仪（ego-view dashcam）视频流中的安全关键事件理解与自然语言解释，目标是评估此类模型能否作为可解释自动驾驶系统的语言解释模块。</li><li>具体研究问题包括：现有基准覆盖的极端场景类型不足（偏重碰撞类、物体级异常）、评估形式偏向多选题、且未系统评测驾驶专用微调模型；论文希望解答 Video LLMs 在稀有安全关键事件上的真实能力缺口及失败模式。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Korea Advanced Institute of Science and Technology (KAIST)；作者：Gabriel Manalu、Minh Son Hoang、Hyeontaek Hwang、Jaesung Lee、Hyojin Choi、Tran Tuan Phong、Seon Kwon Kim、Saad Wazir、Daeyoung Kim。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究的是自动驾驶场景下视频大语言模型（Video LLMs）对“长尾极端场景”（corner cases）的理解能力评估问题。</li><li>应用场景为车载前视行车记录仪（ego-view dashcam）视频流中的安全关键事件理解与自然语言解释，目标是评估此类模型能否作为可解释自动驾驶系统的语言解释模块。</li><li>具体研究问题包括：现有基准覆盖的极端场景类型不足（偏重碰撞类、物体级异常）、评估形式偏向多选题、且未系统评测驾驶专用微调模型；论文希望解答 Video LLMs 在稀有安全关键事件上的真实能力缺口及失败模式。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建 DashBench 基准：1,709 段前视行车记录仪视频片段、88 个极端场景类别，并在碰撞类与非碰撞类事件之间做类别均衡，弥补既有数据集对非碰撞危险场景覆盖不足的问题。</li><li>设计开放式、多提示词（Q1–Q5）评估协议，并采用 LLM-as-a-Judge（DeepSeekV3）进行自由文本对齐打分，替代多选题式评估。</li><li>系统评测 25 个 Video LLM，包括闭源 SOTA、开源通用模型与 7 个驾驶专用微调模型，发现最高平均一致率仅 34.75%，说明能力缺口普遍存在。</li><li>归纳两类系统性失败模式：极端场景“盲视”（生成流畅但完全忽略危险）与道路智能体/行为幻觉（虚构不存在的车辆、物体或他车动作），并报告将碰撞误述为近失事件等现象。</li><li>通过极端场景时间窗（CCW）实验与既有幻觉缓解方法实验，说明时间局部化和现有缓解技术均无法带来满足安全关键要求的提升。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向自动驾驶场景理解的 Video LLM 评测基准与评估工具箱，不涉及具体规划或控制模块；原文未报告端到端系统集成。</li><li>输入传感器：单车前视行车记录仪视频；每个片段统一均匀采样 16 帧作为多帧输入；原文未报告其他传感器（如 LiDAR、雷达）输入。</li><li>场景表示：原始视频帧序列 + 人工标注的极端场景关键帧（起始帧、最可观测帧、结束帧）与极端场景类别标签；平均片段长度 7.70 s，平均极端场景窗口长度 3.47 s。</li><li>数据来源与构建：以 MM-AU 为主语料（保留其 626 个非碰撞片段、11 类；并从 46 个碰撞类别中类别均衡采样），再以 RoadSocial 补充 314 个非碰撞片段、覆盖 31 个新类别；经 LLM 辅助标签映射、前视视角筛选与人工核验，由 5 名标注者历时 4 个月完成。</li><li>真值标注：使用 OpenAI o3 模型在给定三张关键帧与类别提示下生成场景描述，再由 3 名独立标注者迭代修订至共识标签。</li><li>评估协议：每个样本使用 5 个提示词，Q1（有何异常）、Q2（有何危险）、Q3（详细描述，不提示危险）、Q4（JSON 输出，含 Q4_TF 二分类检测与 Q4_R 自由文本推理）、Q5（先给极端场景定义与示例再识别描述）；另设系统提示要求以道路助手口吻简洁作答。</li><li>评判方法：DeepSeekV3 作为 LLM-as-a-Judge，对 Q1–Q3、Q4_R 做结构化二值判定（是否在成因、责任智能体、事件时序上与真值一致），仅“Yes”计入准确率；Q4_TF 单独作为事件检测分数报告。</li><li>关键技术补充实验：极端场景时间窗（CCW）实验，将 16 帧限制在标注的极端场景起止区间内，仅对窗口占片段时长不足一半的 823 个样本（48.2%）进行；以及基线、VDGD、SECOND、TriCD 四类幻觉缓解方法的实现对比。</li><li>模型规模与结构：被评测模型为现成 Video LLM，论文未提出新模型结构；原文未报告自研模型参数量或训练细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：DashBench（1,709 段前视行车记录仪片段、88 个极端场景类别），由 MM-AU 与 RoadSocial 两个公开数据集筛选构建。</li><li>仿真器：原文未报告（无仿真环境实验）。</li><li>模型规模：评测 25 个 Video LLM，含 GPT-5、Gemini-3-Flash 两个闭源模型；开源模型包括 Qwen3-VL（8B/32B/235B）、InternVL3.5（8B/38B/241B）、Ovis2.5（9B）、KeyeVL（8B）、MiniCPM4.5（8B）、GLM-4.1V-Thinking（9B）、LLaVA-Next-Video（7B）、Tarsier2（7B）、VITA-1.5（8B）、IXC-2.5（7B）、InternVideo2.5（8B）、LLaVA-OV-1.5（8B）；驾驶专用模型包括 Dolphins（7B）、DriveMM（8B）、MiniInternVL2-BDD/DLM（4B）、DriveLMM-o1（8B）、CrashChat（7B）、LlaVA-OV-RS（7B）。原文未报告自研模型规模。</li><li>训练资源：原文未报告本文自身的训练资源；附录 A.4 列有“Hardware Configuration”，但所给 HTML 正文中未展开具体配置数值。</li><li>实车平台：原文未报告（评估基于已有行车记录仪视频，非实车在线部署）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：DashBench 全量 1,709 个片段，以及 CCW 子集 823 个片段（48.2%）。</li><li>评估指标：五个提示词各自的准确率（%）、“最小/最大/平均一致率”（Min/Max/Avg Agree，基于 Q1、Q2、Q3、Q4_R、Q5），以及独立的 Q4_TF 二分类事件检测准确率；评判器与人工一致性用 Cohen’s κ 衡量。</li><li>关键数值：无模型在任何单一提示词上超过 50%，平均一致率均低于 35%；GPT-5 取得最高 Q4_R 46.52%、平均一致率 34.75%；Gemini-3-Flash 平均 34.41%；最强开源 Qwen3-VL（235B）平均仅 20.67%；驾驶专用模型最高平均一致率仅 10.01%（LlaVA-OV-RS），部分接近随机（如 Dolphins 0.32%、MiniInternVL2-DLM 0.87%）。</li><li>规模与专门化分析：Qwen3-VL 由 8B 扩到 235B 平均仅提升约 2%（18.48%→20.67%）；InternVL3.5 由 8B 扩到 241B 平均仅提升约 7.43%（8.64%→16.07%）；推理型模型未见优势（Ovis2.5 16.43%、GLM-4.1V-Thinking 6.33%）。</li><li>提示词敏感性：同一模型在不同措辞下分数波动最高达 26%（GPT-5 从 Q1 的 19.95% 到 Q4_R 的 46.52%）；Q4_TF 到 Q4_R 平均准确率下降约 55 个百分点；Q3（无危险提示）在几乎所有模型上得分最低。</li><li>CCW 实验：限制到极端场景窗口后平均一致率有提升，闭源模型 +3.79 pp（GPT-5）与 +4.31 pp（Gemini-3-Flash），开源模型仅 +0.81 至 +1.98 pp；Q1 上 GPT-5（−1.22 pp）与 Qwen3-VL（−4.37 pp）反而下降。</li><li>评判器验证：DeepSeekV3 与人工判断的 Cohen’s κ 平均 0.96（各模型 0.93–1.00），优于 Llama3.1(70B) 的 0.85 与多 LLM 集成的 0.54；5 次重复评判的准确率标准差均小于 1%。</li><li>对比方法：25 个 Video LLM 横向对比；幻觉缓解方面对比基线、VDGD、SECOND、TriCD；另对比 3 种评判器方案。</li><li>实验条件：全部为离线开环评估（基于已录制视频的开放式问答打分），不含闭环仿真或实车在线测试；原文未报告闭环与实车结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2611.16742/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Fog-FWL: A Large-Scale Full-Waveform LiDAR Dataset for Recovering Fog-Hidden Objects</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

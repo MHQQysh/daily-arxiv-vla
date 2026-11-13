@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>From Foundation VLM to Versatile Driving VLM: A Triplet Incremental Training Approach - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶（AD）任务，研究如何将通用视觉语言模型（VLM）适配为具备 3D 空间感知能力的驾驶 VLM。 应用场景覆盖单目 3D 空间感知（深度估计、3D 目标检测）、驾驶导向语言推理、端到端（非反应式）轨迹规划，以及通用多模态理解能力的保持。 核心研究问题：通用 VLM 缺乏精确度量深度这一空间接地（spatial grounding）环节；如何在注入 3D 几何感知的同时不引入推理开销、不破坏模型原有的开放世界能力（避免灾难性遗忘）。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.16727">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.16727.webp" alt="From Foundation VLM to Versatile Driving VLM: A Triplet Incremental Training Approach" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶（AD）任务，研究如何将通用视觉语言模型（VLM）适配为具备 3D 空间感知能力的驾驶 VLM。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">From Foundation VLM to Versatile Driving VLM: A Triplet Incremental Training Approach</h1>
+            <div class="detail-meta">2026-11-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.16727" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.16727" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.16727</span></div>
+            <p class="detail-summary">论文面向自动驾驶（AD）任务，研究如何将通用视觉语言模型（VLM）适配为具备 3D 空间感知能力的驾驶 VLM。 应用场景覆盖单目 3D 空间感知（深度估计、3D 目标检测）、驾驶导向语言推理、端到端（非反应式）轨迹规划，以及通用多模态理解能力的保持。 核心研究问题：通用 VLM 缺乏精确度量深度这一空间接地（spatial grounding）环节；如何在注入 3D 几何感知的同时不引入推理开销、不破坏模型原有的开放世界能力（避免灾难性遗忘）。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">浙江大学（Zhejiang University） · Xin Zhan、Junbo Chen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.16727/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶（AD）任务，研究如何将通用视觉语言模型（VLM）适配为具备 3D 空间感知能力的驾驶 VLM。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶（AD）任务，研究如何将通用视觉语言模型（VLM）适配为具备 3D 空间感知能力的驾驶 VLM。</li><li>应用场景覆盖单目 3D 空间感知（深度估计、3D 目标检测）、驾驶导向语言推理、端到端（非反应式）轨迹规划，以及通用多模态理解能力的保持。</li><li>核心研究问题：通用 VLM 缺乏精确度量深度这一空间接地（spatial grounding）环节；如何在注入 3D 几何感知的同时不引入推理开销、不破坏模型原有的开放世界能力（避免灾难性遗忘）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：浙江大学（Zhejiang University）；作者：Xin Zhan、Junbo Chen</li><li>机构：Udeer.AI；作者：Xin Zhan、Junbo Chen</li><li>机构：原文未给出其余作者（Shengtao Wu、Zichao Dong、Weixuan Qiao、Xiaolu Liu、Jianke Zhu）的机构归属；作者：原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶（AD）任务，研究如何将通用视觉语言模型（VLM）适配为具备 3D 空间感知能力的驾驶 VLM。</li><li>应用场景覆盖单目 3D 空间感知（深度估计、3D 目标检测）、驾驶导向语言推理、端到端（非反应式）轨迹规划，以及通用多模态理解能力的保持。</li><li>核心研究问题：通用 VLM 缺乏精确度量深度这一空间接地（spatial grounding）环节；如何在注入 3D 几何感知的同时不引入推理开销、不破坏模型原有的开放世界能力（避免灾难性遗忘）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Triplet Incremental Training 框架，以自动构造的（图像, 深度, QA 对）三元组驱动增量训练，将显式几何约束与离策略语言蒸馏协同对齐，向 VLM 注入 3D 空间意识。</li><li>提出非侵入式三流架构：可训练的主 VLM 流、训练时使用但在部署时丢弃的辅助深度流、以及冻结的孪生 VLM 正则流，部署时不增加架构与推理开销。</li><li>在四类驾驶与推理范式上开展评测，报告在 3D 感知、语言推理与非反应式轨迹规划上取得最优性能，并有效缓解灾难性遗忘。</li><li>通过消融实验说明几何监督与语义正则化的互补作用：深度监督提升几何探测与规划，KL 蒸馏恢复通用基准平均分。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：通用 VLM 的驾驶任务适配与几何感知注入，属于训练范式/训练框架层面，而非新的推理架构。</li><li>输入传感器：驾驶图像 I 与稠密度量深度 D；深度由原始稀疏 LiDAR 点云投影到图像平面作为稀疏度量提示，经 Prompt Depth Anything 单次前向传播生成；训练平台为相机（图像）输入，部署为纯视觉。</li><li>场景表示：使用稠密像素级度量深度图（H×W）作为几何表示，隐式嵌入视觉骨干的多尺度特征；原文未报告 BEV 等显式场景表示。</li><li>模型结构：主 VLM 基于 InternVL3.5-4B（视觉编码器 InternViT + LLM，不冻结）；孪生 VLM 以相同权重初始化并全程冻结；辅助深度流在 InternViT 视觉编码器上挂接轻量 DPT 式深度头（30M 参数），输入第 4、8、16、24 阶段的多尺度特征，进行投影、融合与上采样，输出稠密度量深度；深度支路不接在 LLM 侧。</li><li>关键技术：三元组自动构造（深度生成 + 用原始基础 VLM 生成符合其自身语言分布的描述性 QA 对）；三目标联合优化，包括深度 SiLog 损失、词表级 KL 蒸馏损失（掩码掉 prompt token）、自回归交叉熵任务损失，总损失为三项线性加权；训练顺序为先用深度损失初始化深度头（VLM 冻结），再解冻主 VLM 联合优化，随后丢弃深度头与孪生 VLM，在下游任务中于冻结的适配骨干上从零训练任务头（语言任务直接使用适配后的 VLM）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（深度估计与 3D 检测探测）、OmniDrive 与 nuInstruct（驾驶语言推理）、NAVSIM（非反应式轨迹规划）、MMMU / MMStar / POPE / OCRBench / ScienceQA（通用能力保持）。</li><li>仿真器：使用 NAVSIM 非反应式离线仿真基准；未使用闭环仿真器。</li><li>模型规模：主模型 InternVL3.5-4B；深度头 30M 参数；对比中出现 8B 规模模型（ReCogDrive、VGGDrive、AdaThinkDrive 等）。</li><li>训练资源：16 块 NVIDIA A100 GPU（每块 80 GB），训练 2 个 epoch；三元组规模 170k（由 OmniDrive 与 nuInstruct 使用的 nuScenes 训练图像构造）。</li><li>训练配置：AdamW，视觉编码器基础学习率 2×10⁻⁵、余弦衰减；α=0.25（深度）、β=0.20（KL）、γ=1.0（CE）；SiLog 损失 λ=0.85，有效深度范围 [0.5, 80] m；随机种子 42。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与指标：nuScenes 深度（δ₁↑、Abs Rel↓）与 3D 检测（mAP↑）；OmniDrive（BLEU、ROUGE、CIDEr、Average）与 nuInstruct（MAE↓、Accuracy、mAP、BLEU、Average*）；NAVSIM（NC、DAC、EP、TTC、Comf.、PDMS）；通用基准 5 项及平均。</li><li>感知探测（冻结骨干）：深度 δ₁ 由 77.2% 提升至 80.6%，Abs Rel 由 19.1 降至 16.7；3D 检测 mAP 由 34.7 提升至 38.1，超过 OmniDrive（35.4）与 PETR（37.8）等领域专家模型；同表对比还包括 Metric3Dv2、UniDepth、UniDepthV2、VGGT 等。</li><li>驾驶语言推理：OmniDrive 上 BLEU 42.55、ROUGE 36.80、CIDEr 92.09、Average 57.15（Baseline 54.47，VGGDrive 52.85，Specialist 46.40）；nuInstruct 上 MAE 1.44、Accuracy 58.29、mAP 39.46、BLEU 84.14、Average* 45.11（Baseline 44.83，VGGDrive 42.98）。</li><li>非反应式规划（NAVSIM，纯视觉）：PDMS 89.10，NC 98.70、DAC 96.80、EP 83.90、TTC 95.80、Comf. 100；Baseline 为 83.30；接近 8B 的 ReCogDrive（89.60），优于 TransFuser（83.88）、WoTE（88.30）等含 LiDAR 的模型。</li><li>通用能力保持：Ours-4B 平均 73.2（MMMU 59.1、MMStar 61.7、POPE 80.9、OCRBench 77.4、ScienceQA 87.1），相对未调优 InternVL3.5-4B（平均 73.6）仅下降 0.3；ReCogDrive 平均下降 34.8（MMMU 降至 7.6）。</li><li>消融：SFT+Depth 使 3D 检测 mAP 提升 3.2、PDMS 提升 4.54；仅深度监督时通用平均为 21.8，加入 KL 后恢复至 73.2（各基准增益 +52.1、+57.2、+13.8、+56.4、+77.6，平均 +51.4）；完整框架通用平均 73.2。</li><li>评估条件：全部为离线真实数据集上的开环/非反应式评测（NAVSIM 为非反应式离线基准），未报告闭环仿真或实车验证；论文在结论中将缺少闭环仿真验证列为局限。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.16742/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Fog-FWL: A Large-Scale Full-Waveform LiDAR Dataset for Recovering Fog-Hidden Objects</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.16579/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">ActWorld-JEPA: Action-Conditioned JEPA World Models Meet Latent Planning for End-to-End Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Can MLLMs Reason over Surround-View Driving Videos? A Multi-View Autonomous Driving QA Benchmark - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文关注自动驾驶场景下多模态大语言模型（MLLMs）对环视（surround-view）驾驶视频的理解与推理能力。 现有 MLLMs 与基准多集中于前视单视角视频、离散图像、多视角静态图像或结构化场景表示，难以评估侧后方盲区、跨视角目标连续性等安全关键推理。 研究问题为：当前 MLLMs 是否真正理解并能推理同步环视驾驶视频。 为此论文提出 MVDriveBench，一个高信息密度的多视角自动驾驶视频问答基准，并系统评测开源、闭源及专家型 MLLMs。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.15225">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.15225.webp" alt="Can MLLMs Reason over Surround-View Driving Videos? A Multi-View Autonomous Driving QA Benchmark" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文关注自动驾驶场景下多模态大语言模型（MLLMs）对环视（surround-view）驾驶视频的理解与推理能力。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Can MLLMs Reason over Surround-View Driving Videos? A Multi-View Autonomous Driving QA Benchmark</h1>
+            <div class="detail-meta">2026-11-11 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.15225" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.15225" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.15225</span></div>
+            <p class="detail-summary">论文关注自动驾驶场景下多模态大语言模型（MLLMs）对环视（surround-view）驾驶视频的理解与推理能力。 现有 MLLMs 与基准多集中于前视单视角视频、离散图像、多视角静态图像或结构化场景表示，难以评估侧后方盲区、跨视角目标连续性等安全关键推理。 研究问题为：当前 MLLMs 是否真正理解并能推理同步环视驾驶视频。 为此论文提出 MVDriveBench，一个高信息密度的多视角自动驾驶视频问答基准，并系统评测开源、闭源及专家型 MLLMs。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">吉林大学计算机科学与技术学院 · Shunming Liu、Huaxiao Liu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.15225/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文关注自动驾驶场景下多模态大语言模型（MLLMs）对环视（surround-view）驾驶视频的理解与推理能力。</p>
+  <ul class="reading-intro-points"><li>论文关注自动驾驶场景下多模态大语言模型（MLLMs）对环视（surround-view）驾驶视频的理解与推理能力。</li><li>现有 MLLMs 与基准多集中于前视单视角视频、离散图像、多视角静态图像或结构化场景表示，难以评估侧后方盲区、跨视角目标连续性等安全关键推理。</li><li>研究问题为：当前 MLLMs 是否真正理解并能推理同步环视驾驶视频。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：吉林大学计算机科学与技术学院；作者：Shunming Liu、Huaxiao Liu</li><li>机构：华为引望智能技术有限公司；作者：Jianyi Peng、Cheng Li、Lu Hou、Yajing Sun、Shunming Liu</li><li>机构：斯坦福大学；作者：原文中 Pei Huang 的机构标注出现错位，作者与机构的对应关系存在歧义，原文未明确对应</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文关注自动驾驶场景下多模态大语言模型（MLLMs）对环视（surround-view）驾驶视频的理解与推理能力。</li><li>现有 MLLMs 与基准多集中于前视单视角视频、离散图像、多视角静态图像或结构化场景表示，难以评估侧后方盲区、跨视角目标连续性等安全关键推理。</li><li>研究问题为：当前 MLLMs 是否真正理解并能推理同步环视驾驶视频。</li><li>为此论文提出 MVDriveBench，一个高信息密度的多视角自动驾驶视频问答基准，并系统评测开源、闭源及专家型 MLLMs。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 MVDriveBench，填补现有基准在基于环视视频的驾驶推理评估方面的空白，其输入为同步六路环视视频。</li><li>设计 12 类问答任务，覆盖从低层视觉感知到高层驾驶决策的完整推理链条，并提供推理依据作为辅助参考。</li><li>系统评测 23 个开源、闭源和专家型 MLLMs，从总体准确率与细粒度问题类型两个角度揭示模型在环视驾驶视频理解与推理上的能力边界。</li><li>在 AlpaSim 中对专家模型开展闭环评估，考察环视时空理解能力与闭环驾驶性能之间的关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：面向 MLLMs 的自动驾驶多视角视频问答基准构建与评估，不属于端到端驾驶模型训练方法。</li><li>输入传感器：同步的六路车载相机，包括 Front Left、Front、Front Right、Left Rear、Rear、Right Rear；六路视图被渲染为统一的 2×3、30 Hz 网格视频。</li><li>场景表示：将六路同步相机视频拼接为单一环视网格视频，保留跨相机时间同步，支持跨视角空间连续性与目标出现、消失、相对运动的观察。</li><li>数据来源与筛选：视频片段来自 NVIDIA PhysicalAI-Autonomous-Vehicles 数据集；使用 Qwen3.5-397B-A17B 仅基于前视视频判断是否需要环视信息，并输出是否需要环视、驾驶行为类型、关键时间窗与筛选理由。</li><li>QA 生成：采用两阶段提示，第一轮进行场景理解（目标位置、运动、跨视角关联、时间变化、潜在风险等），第二轮在同一对话中生成 12 类 QA；并进行基于动作类型的配额控制以平衡驾驶行为分布。</li><li>质量检查：对自动生成的 QA 进行人工质量检查，剔除目标识别错误、跨视角关联错误、答案不唯一或证据不足的样本。</li><li>评估协议：原文在提供内容中说明了模型需产出推理结果文件，但具体匹配与打分细节被截断，原文未报告完整评估协议。</li><li>模型结构：论文本身不提出新的 MLLM 网络结构；原文未报告相关模型结构设计。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：MVDriveBench，包含 2418 个视频、4303 个 QA、12 类任务；标注类型为人工加自动（M+A）；视频来源为 NVIDIA PhysicalAI-Autonomous-Vehicles 数据集。</li><li>仿真器：闭环评估使用 AlpaSim。</li><li>模型规模：评测对象覆盖 7B 至超大参数 MoE 模型，如 Qwen3.5-397B-A17B；论文未提出自研模型，未报告自研模型规模。</li><li>训练资源：原文未报告。</li><li>实车平台：数据来自真实世界驾驶视频，但原文未报告实车部署平台或实车在线评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：MVDriveBench，包含 3 个高层维度、12 类细粒度任务：相对运动、目标运动、目标跟踪、自车运动、意图预测、跨视角时空一致性、关键目标识别、关键交通事件、风险推理、自车决策规划、反事实推理、行为合理性论证。</li><li>评估指标：总体准确率及分任务准确率；原文未报告更细的指标定义（提供内容被截断）。</li><li>对比方法：23 个 MLLMs，涵盖闭源模型（GPT-5.5、GPT-5、GPT-4o、Gemini-2.5-Pro、Gemini-3-Pro、Claude Opus 4.6）、开源 MoE 模型（Qwen3.5-397B-A17B、ERNIE-4.5-VL-28B-A3B-Thinking、Qwen3-VL-30B-A3B-Thinking）、开源大于 7B 模型（InternVL3-78B、Qwen2.5-VL-72B、InternVL3-38B、Qwen2.5-VL-32B、Qwen3.5-27B、GLM-4.1V-9B-Thinking、Video-R1-7B、LLaVA-OneVision-Qwen2-7B-OV、VGLM-QA-VGGT-8B）及专家模型（ReCogDrive-VLM-8B、Cosmos-Reason1-7B、Cosmos-Reason2-8B、MiMoEmbodied-7B、MiMo-VL-7B-SFT）；另有人类表现作为参照。</li><li>关键数值：人类总体 88.5；最佳模型 GPT-5.5 总体 80.1，GPT-5 为 78.7，Gemini-3-Pro 为 78.3；专家模型总体仅 45.7–54.4；开源模型中 Qwen3.5-397B-A17B 为 74.7，GLM-4.1V-9B-Thinking 最低为 43.2。</li><li>前视消融：去掉环视输入后多数模型总体性能下降，如 Qwen3.5-397B-A17B 下降 15.1、Qwen2.5-VL-72B 下降 17.0、InternVL3-78B 下降 15.6；GPT-5.5、GPT-5、GPT-4o 分别下降 1.3、1.5、9.2。</li><li>评估条件：主要结果为开环视频问答评测；另在 AlpaSim 中进行闭环仿真评估，原文指出环视时空推理能力与闭环驾驶性能存在相关性；未报告实车评估结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.15238/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Towards Robust Vision-Language Reasoning: A Multi-Stage Optimization Pipeline with Masked Diffusion Model</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.15217/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Are We Ready for Snow-tonomous Driving? Challenges Toward Robust Automated Driving in Extreme Weather</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

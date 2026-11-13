@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fog-FWL: A Large-Scale Full-Waveform LiDAR Dataset for Recovering Fog-Hidden Objects - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自动驾驶的雾天全波形 LiDAR（FWL）感知，在峰值检测转换为点云之前直接从原始接收波形中恢复被雾遮挡弱化的物体回波，并支撑下游 3D 目标检测评估。 应用场景：自动驾驶车辆在雾等恶劣天气下的 LiDAR 感知；传感器为自研 SPAD 全波形 LiDAR，部署场地为室外停车场，目标为 10–20 m 处的车辆。 研究问题：雾颗粒后向散射在传感器近端产生强回波并衰减物体反射，常规 LiDAR 仅输出每束最强 2–3 个峰，弱物体回波在峰值检测阶段被丢弃；同时缺乏真实雾天 FWL 数据（已有真实雾天 FWL 数据仅 13 帧）且已有雾天 FWL 仿真采用空间均匀解析雾模型、对 SPAD 响应近似粗糙，阻碍了该方向研究。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.16742">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.16742.webp" alt="Fog-FWL: A Large-Scale Full-Waveform LiDAR Dataset for Recovering Fog-Hidden Objects" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自动驾驶的雾天全波形 LiDAR（FWL）感知，在峰值检测转换为点云之前直接从原始接收波形中恢复被雾遮挡弱化的物体回波，并支撑下游 3D 目标检测评估。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Fog-FWL: A Large-Scale Full-Waveform LiDAR Dataset for Recovering Fog-Hidden Objects</h1>
+            <div class="detail-meta">2026-11-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.16742" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.16742" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.16742</span></div>
+            <p class="detail-summary">任务：面向自动驾驶的雾天全波形 LiDAR（FWL）感知，在峰值检测转换为点云之前直接从原始接收波形中恢复被雾遮挡弱化的物体回波，并支撑下游 3D 目标检测评估。 应用场景：自动驾驶车辆在雾等恶劣天气下的 LiDAR 感知；传感器为自研 SPAD 全波形 LiDAR，部署场地为室外停车场，目标为 10–20 m 处的车辆。 研究问题：雾颗粒后向散射在传感器近端产生强回波并衰减物体反射，常规 LiDAR 仅输出每束最强 2–3 个峰，弱物体回波在峰值检测阶段被丢弃；同时缺乏真实雾天 FWL 数据（已有真实雾天 FWL 数据仅 13 帧）且已有雾天 FWL 仿真采用空间均匀解析雾模型、对 SPAD 响应近似粗糙，阻碍了该方向研究。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Keio University, Japan · Kazuma Ikeda、Kotaro Oishi、Ryosei Hara 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.16742/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自动驾驶的雾天全波形 LiDAR（FWL）感知，在峰值检测转换为点云之前直接从原始接收波形中恢复被雾遮挡弱化的物体回波，并支撑下游 3D 目标检测评估。</p>
+  <ul class="reading-intro-points"><li>任务：面向自动驾驶的雾天全波形 LiDAR（FWL）感知，在峰值检测转换为点云之前直接从原始接收波形中恢复被雾遮挡弱化的物体回波，并支撑下游 3D 目标检测评估。</li><li>应用场景：自动驾驶车辆在雾等恶劣天气下的 LiDAR 感知；传感器为自研 SPAD 全波形 LiDAR，部署场地为室外停车场，目标为 10–20 m 处的车辆。</li><li>研究问题：雾颗粒后向散射在传感器近端产生强回波并衰减物体反射，常规 LiDAR 仅输出每束最强 2–3 个峰，弱物体回波在峰值检测阶段被丢弃；同时缺乏真实雾天 FWL 数据（已有真实雾天 FWL 数据仅 13 帧）且已有雾天 FWL 仿真采用空间均匀解析雾模型、对 SPAD 响应近似粗糙，阻碍了该方向研究。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Keio University, Japan；作者：Kazuma Ikeda、Kotaro Oishi、Ryosei Hara、Ryo Yoshida、Mariko Isogawa、Kentaro Yoshioka</li><li>机构：Sony Semiconductor Solutions, Japan；作者：Takahiro Kado、Ibuki Fujioka、Taro Beppu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自动驾驶的雾天全波形 LiDAR（FWL）感知，在峰值检测转换为点云之前直接从原始接收波形中恢复被雾遮挡弱化的物体回波，并支撑下游 3D 目标检测评估。</li><li>应用场景：自动驾驶车辆在雾等恶劣天气下的 LiDAR 感知；传感器为自研 SPAD 全波形 LiDAR，部署场地为室外停车场，目标为 10–20 m 处的车辆。</li><li>研究问题：雾颗粒后向散射在传感器近端产生强回波并衰减物体反射，常规 LiDAR 仅输出每束最强 2–3 个峰，弱物体回波在峰值检测阶段被丢弃；同时缺乏真实雾天 FWL 数据（已有真实雾天 FWL 数据仅 13 帧）且已有雾天 FWL 仿真采用空间均匀解析雾模型、对 SPAD 响应近似粗糙，阻碍了该方向研究。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建 Fog-FWL-Real：首个大规模真实雾天 FWL 数据集，包含 8 个场景、58 个序列、7,527 帧，比唯一已有真实雾天 FWL 数据大 579×，并提供直方图级 Object/Fog/Noise 标签、10,719 个 3D 边界框和基于物体反射衰减的三级难度划分。</li><li>开发 Fog-FWL-Simulator：融合 CARLA 驾驶场景、非均匀雾密度场、基于 Mitsuba 3 的时间分辨体积光传输渲染（含多次散射）以及光子计数 SPAD 接收机模型，并据此构建 12,000 帧训练集 Fog-FWL-Sim。</li><li>使真实与仿真两个子集采用相同传感器格式与标注协议，从而支持严格的 sim-to-real 评测（训练不使用任何真实波形）。</li><li>通过数据分析量化峰值检测造成的信息损失：Hard 条件下仅有 34.9% 的物体射线的物体回波进入最强三个峰。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据与仿真基础设施（数据集构建 + 物理仿真管线），非端到端感知网络；原文未报告恢复方法或检测网络的具体结构（作者称基准结果将在后续版本报告）。</li><li>输入传感器：自研 SPAD 全波形 LiDAR，从 FPGA 直接获取时间分辨光子计数直方图；每帧 400（方位）×512（俯仰）×700（时间）像素，角分辨率 0.1°（方位）/0.05°（俯仰），视场 40°×25.6°，时间分辨率 1 ns。商用 LiDAR 因内部处理仅输出点云，无法获取峰值检测前波形。</li><li>场景表示：真实数据在室外停车场采集，8 个场景改变背景（建筑、树木）与车辆布置（1–3 辆车，距传感器 10–20 m）；仿真使用 CARLA 的 Town01–07 与 Town10 共 8 个城市场景，传感器俯仰在 −3° 到 3° 间变化，车辆置于传感器前方 ±17° 方位、距离至少 15 m 且中心在 25 m 内。</li><li>雾生成（真实）：使用 STAGE EVOLUTION PFOG1500 烟雾机，在传感器与目标车辆之间生成局部雾（而非均匀雾舱），通过改变烟雾机工作间隔控制雾浓度。</li><li>雾场与渲染（仿真）：采用烟羽模型定义消光系数 σ_t(x)，烟羽半径 R(s)=r₀+as+b√(s/U)，内部 σ_t(x)=c(r₀/R(s))²(1−ρ²/R(s)²)²M(x)，M(x) 为多尺度分形噪声；雾源位于视线侧方、以相对视线 80–88° 方向平流；雾作为参与介质置于场景，单次散射反照率 ω 与 Henyey–Greenstein 相位函数定义散射，传感器处放置时间脉冲点光源，通过含介质多次散射、单次表面反弹的路径追踪计算时间分辨响应，再与真实激光脉宽（FWHM 匹配）卷积。</li><li>SPAD 接收机模型：以 N 个 SPAD 单元/像素建模，单元 n 在 bin k 探测光子的伯努利概率 a_k=1−e^(−λ_k/N)，复现计数饱和；单元探测后输出保持 T_d 个 bin 的抑制期，复现 pile-up 与 tailing；像素计数 C_k 为输出为 1 的单元数。</li><li>难度控制与标注：真实数据用 r=I_fog/I_clear 表示框内物体峰值强度比，按序列取 20 帧等间隔中值，Easy r≥0.70、Moderate 0.40≤r&lt;0.70、Hard r&lt;0.40；仿真以残差比目标 0.80/0.50/0.25 通过对数尺度二分确定密度尺度 c，再用与真实数据相同流程重评难度。标注上，Object 以无雾参考波形（约 100 帧求和）最大峰 bin k_ref 为基准，雾天波形中 ±2 bin（±0.30 m）内最近峰标为 Object，否则标 k_ref 本身；Fog 用区间检测（背景 λ 为物体后方均值，超过 λ+5√λ 且 ≥3 并连续 5 bin 以上），排除 k_ref 前三 bin 之前及地面以下 0.15 m 的标签；Object/Fog 按半高全宽时间延展，其余为 Noise。3D 边界框在 FWL 转换点云上人工标注并由专家核验，仿真中框来自场景布局。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：Fog-FWL-Real（8 场景、58 序列、7,527 帧；含约 9.4 亿 Object 标签与 10,719 个 3D 框；仅用于评测）；Fog-FWL-Sim（1,500 视角/城镇 × 8 城镇 = 12,000 帧，每视角 1 帧，目标与雾分布逐视角变化）；全集合共 19,527 帧。按难度：Real 为 Easy 4,007 / Moderate 2,451 / Hard 1,069；Sim 为 1,857 / 3,969 / 6,174；合计 5,864 / 6,420 / 7,243。</li><li>仿真器/渲染器：CARLA（场景构建）、Mitsuba 3 与 mitransient（时间分辨体积渲染）。</li><li>实车平台：室外停车场采集，使用自研 SPAD LiDAR 与 PGOG1500 烟雾机；未报告具体车辆型号与安装方式。</li><li>模型规模与训练资源：原文未报告（未提出或训练具体网络，也未报告 GPU/训练时长等信息）。</li><li>数据公开：论文称数据集将在录用后公开发布。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：Fog-FWL-Real 作为真实雾天评测基准，分为 Easy/Moderate/Hard 三档；提出严格的 sim-to-real 设定（Fog-FWL-Sim 训练、Fog-FWL-Real 评测，不使用真实波形训练）。</li><li>评估指标：物体射线中 Object 标签落入最强 k 个峰的比率（Top-1/Top-2/Top-3）；用于下游评估的 3D 边界框指标原文未报告；对比方法原文未报告具体恢复/检测方法。</li><li>关键数值：Easy 条件 Top-1/2/3 = 60.7%/79.7%/87.1%（4,007 帧）；Moderate = 26.4%/53.4%/65.8%（2,451 帧）；Hard = 11.6%/25.5%/34.9%（1,069 帧）。仅取最强峰（等价单回波点云）时 Hard 下物体回波仅被捕获 11.6% 的射线。</li><li>条件说明：结果为真实数据（Fog-FWL-Real）上的统计分析，属数据层面开环评估；未报告闭环实验、仿真到真实的定量迁移结果、实车闭环测试或恢复方法与检测方法的基准数值，作者明确表示这些结果将在后续版本报告。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.16767/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Evaluating Video LLMs&#x27; Understanding of Corner Cases in Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.16727/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">From Foundation VLM to Versatile Driving VLM: A Triplet Incremental Training Approach</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
