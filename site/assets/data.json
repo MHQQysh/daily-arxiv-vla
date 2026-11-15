@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-09-23",
+    "title": "Taming an End-to-End Autonomous Driving Policy for Urban Navigation of Quadruped Robots",
+    "link": "https://arxiv.org/abs/2610.08812",
+    "arxiv_id": "2610.08812",
+    "detail_path": "papers/2610.08812/",
+    "cover_path": "covers/2610.08812/",
+    "paper_image_path": "assets/paper-images/thumbs/2610.08812.webp",
+    "paper_image_full_path": "assets/paper-images/2610.08812.webp",
+    "preview_text": "任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。 应用场景：人行道、道路与混合城市环境，缺少车道中心线与固定路线几何，需要处理障碍物、行人、地面变化以及下游运动控制的可跟踪性限制。 研究问题：如何将面向车辆的端到端轨迹规划框架 DrivoR 适配到四足机器人场景，即在不大改核心解码器的前提下引入局部子目标条件化，并重新定义“可行驶区域合规”与“自车进展”两项评分准则，实现基于仿真的训练与零样本 sim-to-real 迁移。",
+    "research_unit": "Purdue University · Ziran Wang（原文仅在作者信息块列出两处单位、未逐人标注对应关系、故除可推断者外统一标注原文未明确对应）",
+    "hook_text": "任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。",
+    "key_points": [
+      "任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。",
+      "应用场景：人行道、道路与混合城市环境，缺少车道中心线与固定路线几何，需要处理障碍物、行人、地面变化以及下游运动控制的可跟踪性限制。",
+      "研究问题：如何将面向车辆的端到端轨迹规划框架 DrivoR 适配到四足机器人场景，即在不大改核心解码器的前提下引入局部子目标条件化，并重新定义“可行驶区域合规”与“自车进展”两项评分准则，实现基于仿真的训练与零样本 sim-to-real 迁移。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
     "date": "2026-11-12",
     "title": "Evaluating Video LLMs' Understanding of Corner Cases in Autonomous Driving",
     "link": "https://arxiv.org/abs/2611.16767",

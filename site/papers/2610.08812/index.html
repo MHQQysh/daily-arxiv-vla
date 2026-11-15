@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Taming an End-to-End Autonomous Driving Policy for Urban Navigation of Quadruped Robots - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。 应用场景：人行道、道路与混合城市环境，缺少车道中心线与固定路线几何，需要处理障碍物、行人、地面变化以及下游运动控制的可跟踪性限制。 研究问题：如何将面向车辆的端到端轨迹规划框架 DrivoR 适配到四足机器人场景，即在不大改核心解码器的前提下引入局部子目标条件化，并重新定义“可行驶区域合规”与“自车进展”两项评分准则，实现基于仿真的训练与零样本 sim-to-real 迁移。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2610.08812">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2610.08812.webp" alt="Taming an End-to-End Autonomous Driving Policy for Urban Navigation of Quadruped Robots" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Taming an End-to-End Autonomous Driving Policy for Urban Navigation of Quadruped Robots</h1>
+            <div class="detail-meta">2026-09-23 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2610.08812" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2610.08812" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2610.08812</span></div>
+            <p class="detail-summary">任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。 应用场景：人行道、道路与混合城市环境，缺少车道中心线与固定路线几何，需要处理障碍物、行人、地面变化以及下游运动控制的可跟踪性限制。 研究问题：如何将面向车辆的端到端轨迹规划框架 DrivoR 适配到四足机器人场景，即在不大改核心解码器的前提下引入局部子目标条件化，并重新定义“可行驶区域合规”与“自车进展”两项评分准则，实现基于仿真的训练与零样本 sim-to-real 迁移。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Purdue University · Ziran Wang（原文仅在作者信息块列出两处单位、未逐人标注对应关系、故除可推断者外统一标注原文未明确对应）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2610.08812/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。</p>
+  <ul class="reading-intro-points"><li>任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。</li><li>应用场景：人行道、道路与混合城市环境，缺少车道中心线与固定路线几何，需要处理障碍物、行人、地面变化以及下游运动控制的可跟踪性限制。</li><li>研究问题：如何将面向车辆的端到端轨迹规划框架 DrivoR 适配到四足机器人场景，即在不大改核心解码器的前提下引入局部子目标条件化，并重新定义“可行驶区域合规”与“自车进展”两项评分准则，实现基于仿真的训练与零样本 sim-to-real 迁移。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Purdue University；作者：Ziran Wang（原文仅在作者信息块列出两处单位，未逐人标注对应关系，故除可推断者外统一标注原文未明确对应）</li><li>机构：Korea Institute of Science and Technology (KIST)；作者：Joochan Kim、Chanuk Yang、Tackgeun You、Hwasup Lim（原文未明确逐人对应，且致谢注明 Tackgeun You 的工作在 KIST 期间完成）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向四足机器人（Unitree Go2）的城市导航，进行短时域、目标条件（goal-conditioned）局部轨迹规划。</li><li>应用场景：人行道、道路与混合城市环境，缺少车道中心线与固定路线几何，需要处理障碍物、行人、地面变化以及下游运动控制的可跟踪性限制。</li><li>研究问题：如何将面向车辆的端到端轨迹规划框架 DrivoR 适配到四足机器人场景，即在不大改核心解码器的前提下引入局部子目标条件化，并重新定义“可行驶区域合规”与“自车进展”两项评分准则，实现基于仿真的训练与零样本 sim-to-real 迁移。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Go2-DrivoR：以目标 token 将轨迹生成条件化于当前自车坐标系下的局部前视路点（4 秒前视），保留 DrivoR 的视觉特征提取器、轨迹解码器、评分解码器与 winner-takes-all 轨迹目标。</li><li>将原车辆中心的可行驶区域合规（DAC）重定义为面向人行道的语义区域评分（人行道=1，含道路但不越界=0.5，否则=0），并采用四足机器人足迹进行碰撞与 TTC 评估。</li><li>将原始自车进展（EP）项改写为目标条件自车进展（GEP），融合原 EP 与目标指向进展（α=0.5），并将评分组件从六项减为五项（去掉驾驶方向合规 DDC）。</li><li>仅在 TartanGround 仿真数据上训练，在未见仿真地图上提升路径点条件规划性能，并零样本迁移到真实 Go2 日志的开环轨迹预测。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端轨迹规划（感知编码 + 轨迹候选生成 + 解耦评分排序）；输入为四路环视鱼眼图像、机器人本体状态、高层四向方向指令以及当前自车坐标系下的二维目标。</li><li>场景表示：基于 DINOv2 预训练 ViT-S 骨干（LoRA 微调）与相机特定 register token，将每路相机图像压缩为紧凑场景 token 集合 F ∈ R^{Nc×Nr×D}；原文未报告 Nr、D 的具体数值。</li><li>输入处理：本体状态（相对位姿、线速度与角速度、加速度、指令）经线性层得到 ego token；目标 (x,y) 以 d_scale=4 m 归一化后经线性层得到 goal token；两者拼接后再投影融合，并以残差方式加到每个可学习轨迹查询上，送入未改动的轨迹解码器。</li><li>输出：K=64 条候选轨迹，每条为 4 秒时域内 0.5 秒间隔的 n_p=8 个 (x,y,θ) 路点，按预测综合得分选出最高分轨迹。</li><li>关键技术：GEP 中目标进展项按候选轨迹端点位移在目标方向上的投影计算并裁剪到 [0,1]，再以 (1-α)·ep + α·goal 融合；综合评分在对数域组合（NOC 与 DAC 取对数相加，5·TTC+5·GEP+2·Comfort 取对数后相加）；评分头以逐组件 BCEWithLogits 独立监督，评分梯度不回流到轨迹解码器。</li><li>原文未报告：模型参数量、推理是否含运动控制接口的闭环实现细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：TartanGround 仿真数据集（多相机针孔图像重投影为前/左/右/后四路鱼眼、IMU、稠密语义点云），训练集含 14,192 个局部规划样本；评估使用已见 6 张地图/2,554 个场景与未见 3 张地图/2,707 个场景。</li><li>真实数据：Unitree Go2 搭载四个 GMSL Owl 相机（90° 方位间隔）由人工遥操作采集，仅用于零样本开环测试，含行人场景 5,990 个与道路场景 719 个。</li><li>训练资源：3 张 NVIDIA H200 GPU，全局 batch size 48，训练 20 个 epoch，AdamW，学习率 5×10⁻⁴，2 个 epoch 预热后余弦退火；开环推理单张 H200，batch 1 延迟 10.8 ms、batch 16 延迟 94.1 ms。</li><li>仿真器：原文未报告独立仿真器名称，仅使用 TartanGround 数据；对比方法 iPlanner 使用官方预训练权重零样本推理。</li><li>实车平台：Unitree Go2 四足机器人。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：TartanGround 开环（非反应式）评估（已见/未见地图划分）与真实 Go2 日志零样本开环评估；均为开环，原文未进行闭环或实车在线导航实验。</li><li>仿真指标：NOC、TTC、DAC、GEP、Comfort 及改编的 PDMS 式综合分（式 9）；对比方法为恒速外推、零样本 iPlanner 与 GT Agent 参考。已见划分上 Go2-DrivoR 综合分 0.8368（恒速 0.6953、iPlanner 0.7344、GT 0.9304），NOC 0.9397、TTC 0.9391、DAC 0.9869、GEP 0.7875；未见划分上综合分 0.8512（恒速 0.7425、iPlanner 0.7721、GT 0.9269），NOC 0.9579、TTC 0.9539、DAC 0.9888；未见的 GEP 为 0.7757，略低于 iPlanner 的 0.7827。</li><li>真实世界指标：ADE、FDE@1s/2s/4s、Heading MAE，对比恒速基线。行人场景 ADE 0.200 m vs 0.785 m，FDE@1s 0.149 vs 0.318，FDE@2s 0.233 vs 0.672，FDE@4s 0.209 vs 1.470，Heading MAE 5.79° vs 8.94°；道路场景 ADE 0.213 vs 0.824，FDE@1s 0.164 vs 0.333，FDE@2s 0.263 vs 0.704，FDE@4s 0.186 vs 1.542，Heading MAE 6.81° vs 9.22°。</li><li>消融（真实日志开环，α 与 goal token 变体）：完整模型 ADE 0.202、FDE@4s 0.207、GP 0.988、EP 0.976；仅 EP（α=0）ADE 0.251、FDE@4s 0.239；无 goal token（α=0.5）ADE 4.364、FDE@4s 7.766、GP 0.718；仅 goal（α=1）ADE 0.325、FDE@4s 0.463。</li><li>定性结果：仿真示例中选中轨迹与专家路径不同，但 oracle 评分达 0.933（图注另一处报综合分 0.959，各分项 NOC 0.993、DAC 1.000、TTC 0.994、GEP 0.924、Comfort 1.000）；真实示例选中轨迹综合分 0.693，在路口选择朝目标的转向轨迹而恒速基线沿原航向直行。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2611.16767/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Evaluating Video LLMs&#x27; Understanding of Corner Cases in Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
