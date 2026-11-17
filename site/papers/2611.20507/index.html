@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VoxSAOR: Semantic-Aware Occupancy Robustification via Aleatoric Uncertainty Modeling - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶与具身感知中的视觉（单目/环视图像）3D 语义占用预测任务，目标是恢复场景的稠密几何占用与语义组成。 关注的研究问题：遮挡、深度歧义、投影误差与传感器噪声会引发体素特征的空间变化可靠性差异，而现有方法通常将体素表示确定性映射到语义预测，未显式建模这种观测诱导的特征变化（即偶然不确定性）。 论文提出 VoxSAOR，在特征空间构建类别条件的偶然不确定性代理分布，并以此指导鲁棒占用预测训练，提升语义占用精度、长尾识别与预测校准。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.20507">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.20507.webp" alt="VoxSAOR: Semantic-Aware Occupancy Robustification via Aleatoric Uncertainty Modeling" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶与具身感知中的视觉（单目/环视图像）3D 语义占用预测任务，目标是恢复场景的稠密几何占用与语义组成。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">VoxSAOR: Semantic-Aware Occupancy Robustification via Aleatoric Uncertainty Modeling</h1>
+            <div class="detail-meta">2026-11-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.20507" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.20507" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.20507</span></div>
+            <p class="detail-summary">论文面向自动驾驶与具身感知中的视觉（单目/环视图像）3D 语义占用预测任务，目标是恢复场景的稠密几何占用与语义组成。 关注的研究问题：遮挡、深度歧义、投影误差与传感器噪声会引发体素特征的空间变化可靠性差异，而现有方法通常将体素表示确定性映射到语义预测，未显式建模这种观测诱导的特征变化（即偶然不确定性）。 论文提出 VoxSAOR，在特征空间构建类别条件的偶然不确定性代理分布，并以此指导鲁棒占用预测训练，提升语义占用精度、长尾识别与预测校准。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">湖南大学人工智能与机器人学院、机器人视觉感知与控制技术国家工程研究中心 · Mengfei Duan、Yuheng Zhang、Guoqiang Zh…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.20507/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶与具身感知中的视觉（单目/环视图像）3D 语义占用预测任务，目标是恢复场景的稠密几何占用与语义组成。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶与具身感知中的视觉（单目/环视图像）3D 语义占用预测任务，目标是恢复场景的稠密几何占用与语义组成。</li><li>关注的研究问题：遮挡、深度歧义、投影误差与传感器噪声会引发体素特征的空间变化可靠性差异，而现有方法通常将体素表示确定性映射到语义预测，未显式建模这种观测诱导的特征变化（即偶然不确定性）。</li><li>论文提出 VoxSAOR，在特征空间构建类别条件的偶然不确定性代理分布，并以此指导鲁棒占用预测训练，提升语义占用精度、长尾识别与预测校准。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：湖南大学人工智能与机器人学院、机器人视觉感知与控制技术国家工程研究中心；作者：Mengfei Duan、Yuheng Zhang、Guoqiang Zhao、Yuanfan Zheng、Kailun Yang、Zhiyong Li（原文以统一署名与统一通讯邮箱给出，未逐人区分所属单位）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶与具身感知中的视觉（单目/环视图像）3D 语义占用预测任务，目标是恢复场景的稠密几何占用与语义组成。</li><li>关注的研究问题：遮挡、深度歧义、投影误差与传感器噪声会引发体素特征的空间变化可靠性差异，而现有方法通常将体素表示确定性映射到语义预测，未显式建模这种观测诱导的特征变化（即偶然不确定性）。</li><li>论文提出 VoxSAOR，在特征空间构建类别条件的偶然不确定性代理分布，并以此指导鲁棒占用预测训练，提升语义占用精度、长尾识别与预测校准。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出语义感知占用鲁棒化框架 VoxSAOR，通过建模观测诱导的偶然不确定性提升视觉 3D 占用预测的准确性与鲁棒性。</li><li>提出局部语义一致性（LSC）量化与“稳定到模糊”转移构建策略，从占用监督中导出经验代理样本；并结合跨视图语义共识、类别分层与空间匹配，抑制不可靠语义对应、语义身份和场景上下文带来的混杂变化。</li><li>采用类别条件对角高斯分布刻画稳定到模糊特征转移的主导方向与随机离散度，形成语义感知的偶然不确定性代理分布（SAUM）。</li><li>提出偶然不确定性状态集成学习（AREL）：在训练中通过可靠性感知调制，让独立参数化的预测头接受逐级增强的代理诱导特征扰动；推理时所有头处理同一观测特征并在概率空间平均，形成确定性共识预测。</li><li>在多个占用模型与数据集上开展实验与消融，验证框架的有效性与可推广性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：在通用视觉 3D 占用预测器上增加两个组件——语义感知偶然不确定性建模（SAUM）与偶然不确定性状态集成学习（AREL）；SAUM 内含 LSC 量化、跨视图语义共识（CSC）、稳定到模糊转移构建与类别条件代理分布。</li><li>输入传感器：RGB 图像输入（支持单目或环视图像）；训练阶段额外使用离线预训练开放词汇分割模型生成的 2D 伪语义标签作为图像空间语义线索。原文未报告激光雷达等其它传感器输入。</li><li>场景表示：体素特征场，由图像编码器、视图变换模块与 3D 体素编码器提取；语义占用场为 H×W×D 体素语义体。</li><li>模型结构：共享特征提取骨干 + R 个独立参数化的语义占用预测头；各头输出经 Softmax 得到类别概率。</li><li>关键技术：</li></ul>
+<p> - LSC：以 6/18/26 邻域内中心体素与有效邻居的加权语义一致率定义稳定性先验，权重按面/边/角连接（λ_face、λ_edge、λ_corner）设置，并用 3×3×3 稀疏卷积核并行高效计算。</p>
+<p> - CSC：保留体素语义标签与投影图像空间语义标签一致的候选体素，形成每类共识集合 Ω_k；仅保留候选数不少于 n_min 的类别。</p>
+<p> - 转移构建：每类取 LSC 最低的 n_a 个体素为模糊锚点，取 TopK n_s 个高一致体素为稳定候选池，按空间最近邻在同类别内匹配，得到转移向量 Δ = f_a − f_π(a)；按类别统计通道均值与方差，构建对角高斯代理分布。</p>
+<p> - AREL：按递增尺度 α_m = mα 从代理分布采样，并按 LSC 分数调制扰动强度（稳定区域增强、低一致区域衰减），扰动仅施加于有有效代理的类别体素；各头使用相同占用监督平均训练。</p>
+<p> - 推理：关闭 SAUM、伪标签处理、代理构造与采样，所有头处理同一未扰动特征场，平均各头类别概率得到最终预测。</p>
+<ul><li>原文未报告：具体图像骨干网络细节、体素分辨率与特征维度、损失函数具体形式、开放词汇分割模型名称。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：SemanticKITTI（含隐藏测试集）、Human360Occ 公开基准；其余数据集原文未报告。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告具体参数量；涉及 ResNet-50 与 EfficientNet-B7 两种骨干设置。</li><li>训练资源：原文未报告 GPU 型号、数量与训练时长。</li><li>实车平台：原文未报告；论文仅在驾驶与具身感知场景的公开数据上评估。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：SemanticKITTI 隐藏测试集与 Human360Occ 公开基准；对比方法包括 MonoScene、TPVFormer、SurroundOcc、OccFormer、IAMSSC、VoxFormer、DepthSSC、Symphonies、HASSC、StereoScene 以及 VoxDet 等占用骨干。</li><li>评估指标：IoU、mIoU、长尾 mIoU，以及不确定性相关指标（原文图注说明其下降）。</li><li>关键数值：原文提供的 HTML 片段仅包含 SemanticKITTI 隐藏测试集表格的部分行（如 MonoScene IoU 34.16/mIoU 11.08，TPVFormer 34.25/11.26，SurroundOcc 34.72/11.86，OccFormer 34.53/12.32，IAMSSC 43.74/12.37，VoxFormer 42.95/12.20，DepthSSC 44.58/13.11，Symphonies 42.19/15.04，HASSC 43.40/13.34，StereoScene 43.34/15.36 等），但 VoxSAOR 自身在表中的完整数值行未出现在所提供的原文片段中，故无法报告其具体数值。</li><li>对比条件：主要在开环数据集评测下进行（语义占用预测评估），原文未报告闭环规划控制评测或实车实验；消融覆盖组件分析、SAUM 消融、分支数量、基础扰动尺度、代理分布、锚点构建与 LSC 量化。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.20510/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">WTR-Drive: World-Task Decomposition with Structured Risk Supervision for End-to-End Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.20412/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Training-Free Anonymization of Driving Data with Promptable Segmentation and 3D Human Mesh Recovery</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

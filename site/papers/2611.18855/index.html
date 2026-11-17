@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Technical Report of Auriga&#x27;s 1:10 Scale Autonomous Vehicle Robot - 自动驾驶每日论文卡</title>
+    <meta name="description" content="该技术报告面向 1:10 比例自动驾驶小车平台，在结构化、类城市道路场景中实现车道检测与跟踪、交通标志/信号灯识别、决策与横纵向控制。 研究问题是如何将低成本嵌入式硬件（双 ESP32）与 Jetson Orin NX 上的深度学习感知、ROS 软件栈和控制算法集成为一个模块化、可复现的完整自动驾驶栈，作为学术研究平台。 应用场景包括车道保持、路口处理、停车行为以及人行横道/交通标志响应等结构化驾驶任务。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.18855">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.18855.webp" alt="Technical Report of Auriga&#x27;s 1:10 Scale Autonomous Vehicle Robot" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">该技术报告面向 1:10 比例自动驾驶小车平台，在结构化、类城市道路场景中实现车道检测与跟踪、交通标志/信号灯识别、决策与横纵向控制。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Technical Report of Auriga&#x27;s 1:10 Scale Autonomous Vehicle Robot</h1>
+            <div class="detail-meta">2026-11-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.18855" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.18855" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.18855</span></div>
+            <p class="detail-summary">该技术报告面向 1:10 比例自动驾驶小车平台，在结构化、类城市道路场景中实现车道检测与跟踪、交通标志/信号灯识别、决策与横纵向控制。 研究问题是如何将低成本嵌入式硬件（双 ESP32）与 Jetson Orin NX 上的深度学习感知、ROS 软件栈和控制算法集成为一个模块化、可复现的完整自动驾驶栈，作为学术研究平台。 应用场景包括车道保持、路口处理、停车行为以及人行横道/交通标志响应等结构化驾驶任务。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Shahid Beheshti University, Faculty of Electrical Engineering, Team Auriga…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.18855/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">该技术报告面向 1:10 比例自动驾驶小车平台，在结构化、类城市道路场景中实现车道检测与跟踪、交通标志/信号灯识别、决策与横纵向控制。</p>
+  <ul class="reading-intro-points"><li>该技术报告面向 1:10 比例自动驾驶小车平台，在结构化、类城市道路场景中实现车道检测与跟踪、交通标志/信号灯识别、决策与横纵向控制。</li><li>研究问题是如何将低成本嵌入式硬件（双 ESP32）与 Jetson Orin NX 上的深度学习感知、ROS 软件栈和控制算法集成为一个模块化、可复现的完整自动驾驶栈，作为学术研究平台。</li><li>应用场景包括车道保持、路口处理、停车行为以及人行横道/交通标志响应等结构化驾驶任务。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Shahid Beheshti University, Faculty of Electrical Engineering, Team Auriga；作者：Marya Sabouri Dodaran, Ali Taheri Garakani, Mandana Shabanzadeh Nasrollah-Abadi, Yousef Ashrafi, Mohammad Mahdi Azimi, Erfan Nekouei Ghahfarokhi, Amirhossein Kheiri Holighi, Seyyed Sobhan Hosseini Hajibakandeh, Matin Jamshidi, Amirhossein Gholizadeh Behbahani, Mohammad Hossein Moaiyeri（原文以团队统一署名，未逐一对应作者与子单位）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>该技术报告面向 1:10 比例自动驾驶小车平台，在结构化、类城市道路场景中实现车道检测与跟踪、交通标志/信号灯识别、决策与横纵向控制。</li><li>研究问题是如何将低成本嵌入式硬件（双 ESP32）与 Jetson Orin NX 上的深度学习感知、ROS 软件栈和控制算法集成为一个模块化、可复现的完整自动驾驶栈，作为学术研究平台。</li><li>应用场景包括车道保持、路口处理、停车行为以及人行横道/交通标志响应等结构化驾驶任务。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>设计并实现了自定义 1:10 比例自动驾驶车辆硬件平台，包括自定义机械底盘、Ackermann 转向、后轮差速驱动、自定义控制板与电机驱动板。</li><li>构建了基于双 ESP32（ZERO 与 CONTROL）的分布式嵌入式系统与 FreeRTOS 固件架构，实现传感器采集、执行器控制及与 Jetson 的 UART 结构化通信。</li><li>在 Jetson Orin NX 上基于 ROS 搭建模块化感知—决策—控制软件架构，并集成 Stanley、PID、Pure Pursuit 多种控制算法。</li><li>提出并实现了基于深度学习的车道检测流水线（“Dilated” 3-Stack Hourglass、置信度/偏移/嵌入损失、IPM 与多项式拟合后处理）以及交通标志、信号灯和人行横道感知模块。</li><li>系统化给出车辆运动学建模（前轴/后轴模型、Ackermann 几何）、转向标定与路口处理策略的版本演进（V1 开环到 V4 自行车模型机动）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：整体系统分为低层嵌入式（ESP32 固件）、高层感知与决策（Jetson Orin NX + ROS）、控制与定位三部分。</li><li>输入传感器：12 个 VL53L1X ToF 激光测距传感器、CMPS14 倾斜补偿罗盘、DC 电机光学旋转编码器、摄像头（用于车道/标志/信号灯/人行横道视觉感知）；MPU-9250 仅在面包板上离线开发验证，未装车使用。</li><li>场景表示：视觉车道检测网络输出逐像素置信度、偏移与实例嵌入特征；经逆透视变换（IPM）到鸟瞰平面后用多项式拟合车道几何并生成控制变量。</li><li>模型结构：车道检测采用“Dilated” 3-Stack Hourglass 网络；损失包含置信度损失、偏移损失与嵌入特征损失，并给出总优化目标。</li><li>关键技术：多阶段航向估计融合方案（MPU-9250 内 Kalman 滤波 + 速率相关的 CMPS14/MPU 混合 + 磁力计标定，原文注明为面向未来平台的离线设计）；传感器 I²C 多路复用；串行数据包协议与故障保护；交通标志深度门控验证与 FIFO 时序投票；人行横道几何验证与行为信号；车辆前轴/后轴运动学模型及 Stanley/PID/Pure Pursuit 控制，增益标定。</li><li>原文未报告：模型参数量、具体网络层通道配置、训练轮数与硬件资源的完整细节。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：原文提及数据整理与增强流水线（Data Curation and Augmentation Pipeline），但所引 HTML 原文未给出数据集名称、规模或采集场地的具体报告。</li><li>仿真器：原文未报告。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：1:10 比例自定义底盘车辆（轴距 25.0±1.0 cm、车宽 21.5±0.5 cm、总长 39.5±0.5 cm、高 29.5±0.5 cm），后轮 DC 电机差速驱动 + Ackermann 转向舵机，双 ESP32（Xtensa LX6 双核）与 NVIDIA Jetson Orin NX，5000 mAh 4-cell Li-Po 电池，自定义控制板与 L298 电机驱动板。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：车道检测训练收敛分析、定性域适应分析、端到端实验室推理与实例分离；航向估计器的实验验证；转向标定、自行车模型几何验证、Ackermann 模型实验验证与最小转弯半径估计。</li><li>评估指标：原文 HTML 中可见评估章节标题与定性/收敛分析框架，但所提供文本未包含具体指标定义与数值表格。</li><li>关键数值：所提供 HTML 原文未报告可直接引用的量化结果（精度、误差、IoU 等）；仅报告了平台几何与传感器/执行器参数（如编码器 1600 counts/rev、ToF 全扫约半秒、舵机 50 Hz 脉宽 1000–1815 µs）。</li><li>对比方法：原文描述了路口处理策略四个版本的演进（V1 开环基线、V2 航向误差反馈、V3 曲率泛化、V4 自行车模型机动），但未给出各版本的量化对比数值。</li><li>开环、闭环、仿真或实车条件：以实车平台与实验室推理验证为主；航向融合为面包板离线验证；原文未报告仿真评估结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.19138/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">SuperGlance: Driving at a Glance with a Vision-Language Model</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.18496/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Toward Resilient Self-Driving Laboratories through Telerobotic Interventions</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

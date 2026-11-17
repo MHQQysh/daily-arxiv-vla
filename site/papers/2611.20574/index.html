@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ExtremeDrive: A Real-World Dataset and Benchmark for Critical Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="针对自动驾驶在安全关键场景（紧急机动、复杂交通交互、湿滑/积雪结冰等极端环境）中真实数据稀缺的问题，构建真实世界数据集与基准。 任务属于轨迹规划与执行评估：规划器在记录的锚点处基于指定传感器输入预测未来 4 s 的八个自车位姿（0.5 s 间隔），通过共享跟踪与车辆动力学模型模拟执行。 应用场景覆盖紧急制动与避让转向、低光照、降雨、湿滑与雪冰路面，以及常规驾驶。 研究问题包括：如何在真实记录上统一比较规划方法的行为后果（安全性、道路合规、进度、舒适性），以及关键驾驶数据对学习与评估的实际价值。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.20574">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.20574.webp" alt="ExtremeDrive: A Real-World Dataset and Benchmark for Critical Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">针对自动驾驶在安全关键场景（紧急机动、复杂交通交互、湿滑/积雪结冰等极端环境）中真实数据稀缺的问题，构建真实世界数据集与基准。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">ExtremeDrive: A Real-World Dataset and Benchmark for Critical Driving</h1>
+            <div class="detail-meta">2026-11-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.20574" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.20574" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.20574</span></div>
+            <p class="detail-summary">针对自动驾驶在安全关键场景（紧急机动、复杂交通交互、湿滑/积雪结冰等极端环境）中真实数据稀缺的问题，构建真实世界数据集与基准。 任务属于轨迹规划与执行评估：规划器在记录的锚点处基于指定传感器输入预测未来 4 s 的八个自车位姿（0.5 s 间隔），通过共享跟踪与车辆动力学模型模拟执行。 应用场景覆盖紧急制动与避让转向、低光照、降雨、湿滑与雪冰路面，以及常规驾驶。 研究问题包括：如何在真实记录上统一比较规划方法的行为后果（安全性、道路合规、进度、舒适性），以及关键驾驶数据对学习与评估的实际价值。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">School of Vehicle and Mobility, Tsinghua University, Beijing, China · Xinha…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.20574/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">针对自动驾驶在安全关键场景（紧急机动、复杂交通交互、湿滑/积雪结冰等极端环境）中真实数据稀缺的问题，构建真实世界数据集与基准。</p>
+  <ul class="reading-intro-points"><li>针对自动驾驶在安全关键场景（紧急机动、复杂交通交互、湿滑/积雪结冰等极端环境）中真实数据稀缺的问题，构建真实世界数据集与基准。</li><li>任务属于轨迹规划与执行评估：规划器在记录的锚点处基于指定传感器输入预测未来 4 s 的八个自车位姿（0.5 s 间隔），通过共享跟踪与车辆动力学模型模拟执行。</li><li>应用场景覆盖紧急制动与避让转向、低光照、降雨、湿滑与雪冰路面，以及常规驾驶。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：School of Vehicle and Mobility, Tsinghua University, Beijing, China；作者：Xinhan Li、Yuhong Jiang、Shiyue Zhao、Junzhi Zhang、Chengkun He、Ruihai Ma、Shijie Zhao、Wenxuan Cheng、Jinbo Lv</li><li>机构：State Key Laboratory of Intelligent Green Vehicle and Mobility, Tsinghua University, Beijing, China；作者：Junzhi Zhang、Chengkun He、Ruihai Ma、Shijie Zhao</li><li>机构：Xibu Zhiche (Chongqing) Technology Co., Ltd., Chongqing, China；作者：Tao Liu</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>针对自动驾驶在安全关键场景（紧急机动、复杂交通交互、湿滑/积雪结冰等极端环境）中真实数据稀缺的问题，构建真实世界数据集与基准。</li><li>任务属于轨迹规划与执行评估：规划器在记录的锚点处基于指定传感器输入预测未来 4 s 的八个自车位姿（0.5 s 间隔），通过共享跟踪与车辆动力学模型模拟执行。</li><li>应用场景覆盖紧急制动与避让转向、低光照、降雨、湿滑与雪冰路面，以及常规驾驶。</li><li>研究问题包括：如何在真实记录上统一比较规划方法的行为后果（安全性、道路合规、进度、舒适性），以及关键驾驶数据对学习与评估的实际价值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>构建 ExtremeDrive 真实世界关键驾驶数据集：从真实道路采集记录中整理 589 个驾驶场景、420 km 采集里程，包含紧急机动与极端环境，并提供校准对齐的多传感器数据、车辆状态与完整场景标注。</li><li>建立统一基准：通过共享跟踪与车辆执行接口评估规划轨迹，度量碰撞规避、道路合规、进度与舒适性，并提出面向关键场景的专用“关键成功率”判据。</li><li>在等训练集规模下验证关键数据的价值：加入关键数据后降低轨迹误差并提升关键场景平均成功率。</li><li>对代表性规划方法进行基准比较，揭示轨迹精度与基于执行的安全指标、综合得分之间的排序差异。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：数据集构建（数据采集、传感器标定与时间对齐、场景与因果标注）与规划评估基准（轨迹执行、指标聚合）。</li><li>输入传感器：1280×720 双目相机、5 个 640×480 相机、120° 水平视场 LiDAR、带 RTK 的 GNSS/IMU、CAN FD 提供的车辆动力学/驾驶员输入/执行器响应；数据以标称 4 Hz 提供。</li><li>场景表示：完整场景几何标注（道路标线、可行驶面、物理排除区，可编辑曲线与多边形）、相机–LiDAR 关联与跨时跟踪得到的三维交通参与者轨迹与一致身份，以及场景级语义（天气、交通、路面、驾驶意图、危险、关键性）和逐帧相对位姿增量。</li><li>模型结构：评估时使用共享线性二次调节器（LQR）跟踪器与标定后的七自由度（7DOF）车辆动力学模型，耦合平面运动与四轮转动，轮胎力采用基于滑移的近似与平滑合力极限；道路摩擦按场景路面条件设定（雪 0.30、湿 0.60、干 0.85）；控制请求受转向/力矩限制、执行器延迟与一阶响应约束，以 1000 Hz 数值积分。</li><li>关键技术：多传感器标定与时间对齐、完整场景地图标注、VLM 辅助生成并人工校验的语义与因果（Chain of Causation）标注、以固定规划轨迹与非反应式周围交通进行模拟执行的评估协议；指标包括碰撞门控 N、道路合规 R、1 s 视界 TTC 合规 T、进度 P、舒适性 C、综合得分 S 以及关键成功率 E。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：ExtremeDrive，589 个驾驶场景，约 20 h 原始记录中整理，420 km 采集里程；采集地为重庆与漠河；标注页面提供 Hugging Face 链接（CC BY-NC 4.0），RGB 图像中人脸与车牌已模糊处理。</li><li>仿真器：原文未报告使用外部仿真器；基准为基于记录场景的模拟轨迹执行（7DOF 车辆模型 + LQR 跟踪器）。</li><li>模型规模：原文未报告参数量或计算规模。</li><li>训练资源：原文未报告 GPU 型号、数量与训练时长；仅报告使用 3 个配对随机种子、100 个训练轮次，感知编码器冻结，按验证集 ADE 选择检查点。</li><li>实车平台：Changan Deepal SL03 测试车，总质量 2178 kg，横摆转动惯量 3216 kg·m²，质心到前/后轴距离 1.526 m / 1.374 m，车轮转动惯量 2.5 kg·m²。</li><li>数据划分：按源场景整体划分训练/验证/测试，标注地图标识不跨划分共享；每臂 3161 个片段，混合臂用 177 个关键样本替换常规样本。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：ExtremeDrive 测试划分，共享执行设置与场景相关摩擦设定；评估条件为基于真实记录的模拟执行（非反应式周围交通），非开环纯误差评估，也非实车闭环。</li><li>评估指标：ADE/FDE（4 s 视界）、碰撞率、道路合规率、TTC 合规、进度、舒适性 C、综合得分上界 S⁺、关键成功率 ES。</li><li>关键数值（规划器比较，表 III）：TransFuser 取得最低 ADE/FDE（1.09/2.71 m），但 HyperDiffusion 的道路合规更高（85.85% vs 77.95%）、关键成功率更高（61.70% vs 56.03%），ADE/FDE 为 1.17/2.79 m；HyperDiffusion 综合得分上界最高（80.57）、碰撞率最低（2.53%）；SimLingo 综合得分高于 Latent TransFuser（77.58 vs 75.46），但关键成功率更低（51.77% vs 58.16%）。</li><li>关键数据价值（等训练规模，表 V）：TransFuser 关键 ADE 降低 29.5%、FDE 降低 33.2%；DiffusionDrive 关键 ADE 降低 33.0%、FDE 降低 36.0%；平均关键成功率由 47.43% 升至 57.45%（TransFuser）、由 46.35% 升至 57.05%（DiffusionDrive）；ADE 变化的源场景 bootstrap 95% 区间分别为 [−3.07, −0.24] m 与 [−3.67, −0.34] m。</li><li>车辆模型验证（表 IV）：在 6 段未参与标定的日志上，标定 7DOF 模型在位置、纵向速度、横向速度 RMSE 上均优于运动学自行车模型；横向速度 RMSE 在干路面降低 32.2%、湿路面降低 22.7%。</li><li>对比方法：HyperDiffusion、SimLingo、Latent TransFuser、DiffusionDrive、TransFuser（输入为相机或相机+LiDAR）；数据价值实验另含冻结特征 MLP 基线。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.20648/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Competent Autonomous Driving Through Fine Tuning Vision Language Action Models with Symbolic Traffic Rules</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.20510/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">WTR-Drive: World-Task Decomposition with Structured Risk Supervision for End-to-End Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

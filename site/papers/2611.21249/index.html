@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Heteroscedastic Gaussian Process Q-learning for Sample Efficient Experimentation - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自驱动实验室（self-driving laboratories）中的实验控制问题：每个 episode 是一次真实实验，控制器观测反应器或培养物的状态、设定进料速率等输入，且往往只在批次结束时获得一次奖励。 任务被建模为连续状态与连续输入的有限时域马尔可夫决策过程（MDP），动力学未知，可用实验次数仅数十到数百次。 研究问题是：在样本极少、难以调参的条件下，如何高效学习 Q 函数并选择输入；论文避免学习动力学以避免模型误差随 horizon 累积，并尝试用 GP 后验自动给出 Q-learning 的学习率，从而免除学习率调参。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.21249">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.21249.webp" alt="Heteroscedastic Gaussian Process Q-learning for Sample Efficient Experimentation" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自驱动实验室（self-driving laboratories）中的实验控制问题：每个 episode 是一次真实实验，控制器观测反应器或培养物的状态、设定进料速率等输入，且往往只在批次结束时获得一次奖励。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Heteroscedastic Gaussian Process Q-learning for Sample Efficient Experimentation</h1>
+            <div class="detail-meta">2026-11-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.21249" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.21249" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.21249</span></div>
+            <p class="detail-summary">论文面向自驱动实验室（self-driving laboratories）中的实验控制问题：每个 episode 是一次真实实验，控制器观测反应器或培养物的状态、设定进料速率等输入，且往往只在批次结束时获得一次奖励。 任务被建模为连续状态与连续输入的有限时域马尔可夫决策过程（MDP），动力学未知，可用实验次数仅数十到数百次。 研究问题是：在样本极少、难以调参的条件下，如何高效学习 Q 函数并选择输入；论文避免学习动力学以避免模型误差随 horizon 累积，并尝试用 GP 后验自动给出 Q-learning 的学习率，从而免除学习率调参。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">9 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Imperial College London · Maximilian Bloor、Max Mowbray、Calvin Tsay 等</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.21249/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自驱动实验室（self-driving laboratories）中的实验控制问题：每个 episode 是一次真实实验，控制器观测反应器或培养物的状态、设定进料速率等输入，且往往只在批次结束时获得一次奖励。</p>
+  <ul class="reading-intro-points"><li>论文面向自驱动实验室（self-driving laboratories）中的实验控制问题：每个 episode 是一次真实实验，控制器观测反应器或培养物的状态、设定进料速率等输入，且往往只在批次结束时获得一次奖励。</li><li>任务被建模为连续状态与连续输入的有限时域马尔可夫决策过程（MDP），动力学未知，可用实验次数仅数十到数百次。</li><li>研究问题是：在样本极少、难以调参的条件下，如何高效学习 Q 函数并选择输入；论文避免学习动力学以避免模型误差随 horizon 累积，并尝试用 GP 后验自动给出 Q-learning 的学习率，从而免除学习率调参。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Imperial College London；作者：Maximilian Bloor、Max Mowbray、Calvin Tsay、Antonio del Rio Chanona</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自驱动实验室（self-driving laboratories）中的实验控制问题：每个 episode 是一次真实实验，控制器观测反应器或培养物的状态、设定进料速率等输入，且往往只在批次结束时获得一次奖励。</li><li>任务被建模为连续状态与连续输入的有限时域马尔可夫决策过程（MDP），动力学未知，可用实验次数仅数十到数百次。</li><li>研究问题是：在样本极少、难以调参的条件下，如何高效学习 Q 函数并选择输入；论文避免学习动力学以避免模型误差随 horizon 累积，并尝试用 GP 后验自动给出 Q-learning 的学习率，从而免除学习率调参。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 Heteroscedastic Gaussian Process Q-learning（HGPQ）：以 GP 直接对 Q 函数建模，无需学习动力学，并用 Kalman 增益作为学习率；目标方差由异方差 GP 估计，因此无需调节学习率。</li><li>从理论上说明：把每个 Bellman 目标视为 Q 函数的含噪测量时，最小化均方误差的学习率即 Kalman 增益，且对每个观测到的 transition 施加该增益等价于 GP 回归。</li><li>针对“目标在被收集时即赋予其方差、核固定”的核值迭代设定，证明了在已探索区域上一致成立的高概率值估计误差界。</li><li>在五个仿真基准（其中包括化学反应器与生物过程）上汇总结果显示：HGPQ 以比 GP、核方法与深度 RL 基线更少的 episode 数逼近任一方法找到的最佳回报。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：基于值的强化学习 / Q-learning 模块，采用 GP 对每个时间步的 Q 函数建模；不使用动力学模型。</li><li>输入传感器：原文未报告具体传感器信息；仅描述控制器测量反应器或培养物状态并设定进料速率等输入。</li><li>场景表示：有限时域 MDP，状态 x ∈ X ⊂ R^{d_x}，输入 u ∈ U ⊂ R^{d_u}，记 z=(x,u) ∈ Z=X×U，d=d_x+d_u；含随机阶段奖励与随机终端奖励。</li><li>模型结构：每个时间步 t=0,…,T−1 维护一个独立先验的 GP，Q_t ~ GP(μ_t, Σ_t)，每个 episode 后从终端值开始反向重新拟合；Bellman 目标为 y_{t,i}=r_i+V_{t+1}(x&#x27;_i)，其中 V_{t+1}(x)=max_u μ_{t+1}(x,u)。</li><li>关键技术：</li></ul>
+<p> - 学习率为 Kalman 增益 α^{(i)}_t(z)=Σ^{(i−1)}_t(z,z_i)/(Σ^{(i−1)}_t(z_i,z_i)+λ_{t,i})，在测量点处取值于 [0,1)，并随后验方差下降自动收缩；全部目标更新后等价于一次 GP 后验回归。</p>
+<p> - 目标方差设为 λ_{t,i}=σ_r²+ω_t(z_i)，其中 σ_r² 为奖励噪声下限，ω_t 为目标的独立误差，由第二个异方差 GP 拟合 leave-one-out 残差平方的对数来估计。</p>
+<p> - 目标误差被分解为奖励项、下一状态项与下一估计项；共享误差作为偏差处理，随 μ_{t+1} 收敛而消失。</p>
+<p> - 核函数默认使用 Matérn-5/2（各维一个长度尺度），LMDP 上使用固定特征的线性核。</p>
+<p> - 行为策略：前 N_0 个 episode 使用空间填充输入；之后以概率 ε 均匀随机探索，否则用路径条件化采样的后验样本进行 Thompson sampling 并取最大化。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：五个仿真基准，包括非平稳线性 MDP（LMDP）、半批式反应器（semi-batch reactor）、光合生物质生产（photosynthetic biomass production）、倒立摆（inverted pendulum）、目标跟踪（target tracking）；另有用于分析目标方差的两个合成 MDP。</li><li>仿真器：原文未报告具体仿真器名称。</li><li>模型规模：原文未报告网络规模；模型为 GP，核为 Matérn-5/2 或线性核，超参数见附录。</li><li>训练资源：原文未报告所用算力资源。</li><li>实车平台：原文未报告实车平台；实验均为仿真。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：五个仿真 benchmark 的汇总比较，以及两个合成 MDP 的目标方差分析；另有消融（下一时间步后验方差、目标间方差迁移、噪声估计器选择、下限与探索）、稀疏 HGPQ 计算成本与附加学习曲线等附录实验。</li><li>评估指标：样本效率（达到任一方法所找到最佳回报所需的 episode 数）、每 episode 回报（学习曲线）、值估计误差界（理论）；target variance 分析中与最优值 V*_1 及噪声水平对照。</li><li>关键数值：论文正文声明汇总五个基准后，HGPQ 以更少 episode 逼近任一方法的最佳回报；理论部分给出误差上界 sup\|μ_t^n−Q_t*\|≤ n^{−(1−ζ)θ} Σ C_{σ,j} β_{j,n}(δ)，并以 Matérn-5/2 给出阶数 n^{−(10−d²)/(2(2+d)(5+d))}（d≤3 时趋于零）；合成 MDP 中噪声下限 σ_r²=10^{−4}。</li><li>对比方法：GP、核方法与深度 RL 基线；附录列出 GPQ-SLR、GPQ-CLR、KOVI、GPTD、KTD、KFQL、Deep RL 等。</li><li>实验条件：全部为仿真环境；未报告开环、闭环或实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.21378/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Data-Driven Predictive Control for Autonomous Vehicle Racing under Varying Friction</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.21126/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">IGRecon4D: Dynamic-Object-Aware Feed-Forward Reconstruction of Driving Scenes</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

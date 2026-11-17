@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Data-Driven Predictive Control for Autonomous Vehicle Racing under Varying Friction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文研究自动驾驶赛车这一应用场景，聚焦轮胎—路面摩擦在赛道分段和轮胎组之间变化时的控制问题。 核心研究问题是：将不同摩擦水平下采集的轨迹数据池化（pooled）后，数据驱动预测控制（DPC）在多大程度上、在什么条件下能保持与当前摩擦水平“匹配数据”相当的多步预测精度，而无需显式摩擦估计或专门的在线自适应方法。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.21378">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.21378.webp" alt="Data-Driven Predictive Control for Autonomous Vehicle Racing under Varying Friction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文研究自动驾驶赛车这一应用场景，聚焦轮胎—路面摩擦在赛道分段和轮胎组之间变化时的控制问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Data-Driven Predictive Control for Autonomous Vehicle Racing under Varying Friction</h1>
+            <div class="detail-meta">2026-11-16 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.21378" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.21378" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.21378</span></div>
+            <p class="detail-summary">论文研究自动驾驶赛车这一应用场景，聚焦轮胎—路面摩擦在赛道分段和轮胎组之间变化时的控制问题。 核心研究问题是：将不同摩擦水平下采集的轨迹数据池化（pooled）后，数据驱动预测控制（DPC）在多大程度上、在什么条件下能保持与当前摩擦水平“匹配数据”相当的多步预测精度，而无需显式摩擦估计或专门的在线自适应方法。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">10 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">University of the Bundeswehr Munich, Department of Aerospace Engineering ·…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.21378/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文研究自动驾驶赛车这一应用场景，聚焦轮胎—路面摩擦在赛道分段和轮胎组之间变化时的控制问题。</p>
+  <ul class="reading-intro-points"><li>论文研究自动驾驶赛车这一应用场景，聚焦轮胎—路面摩擦在赛道分段和轮胎组之间变化时的控制问题。</li><li>核心研究问题是：将不同摩擦水平下采集的轨迹数据池化（pooled）后，数据驱动预测控制（DPC）在多大程度上、在什么条件下能保持与当前摩擦水平“匹配数据”相当的多步预测精度，而无需显式摩擦估计或专门的在线自适应方法。</li><li>将使用池化数据的 DPC 预测分解为匹配贡献与失配贡献，并给出在无显式摩擦估计、无专用自适应方法时，非线性 DPC 使用池化数据仍能接近匹配数据预测精度的实用条件（A1 覆盖性、A2 可比覆盖、A3 信息性历史）。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：University of the Bundeswehr Munich, Department of Aerospace Engineering；作者：Julius Beerwerth、Bassam Alrifaee</li><li>机构：RWTH Aachen University, Department of Computer Science；作者：Julius Tischbein</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文研究自动驾驶赛车这一应用场景，聚焦轮胎—路面摩擦在赛道分段和轮胎组之间变化时的控制问题。</li><li>核心研究问题是：将不同摩擦水平下采集的轨迹数据池化（pooled）后，数据驱动预测控制（DPC）在多大程度上、在什么条件下能保持与当前摩擦水平“匹配数据”相当的多步预测精度，而无需显式摩擦估计或专门的在线自适应方法。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将使用池化数据的 DPC 预测分解为匹配贡献与失配贡献，并给出在无显式摩擦估计、无专用自适应方法时，非线性 DPC 使用池化数据仍能接近匹配数据预测精度的实用条件（A1 覆盖性、A2 可比覆盖、A3 信息性历史）。</li><li>在仿真中表明池化数据 DPC 的预测精度接近匹配数据，而失配数据显著降低精度；提出“隐含摩擦”（implied friction）指标，说明在摩擦影响车辆运动的区域池化预测主要接近匹配预测。</li><li>在仿真中表明使用池化数据的 DPC 取得与 TUM-CONTROL 框架中的非线性模型预测控制（NMPC）相当的跟踪性能。</li><li>在 Cyber-Physical Mobility Lab（CPM Lab）中用小型车辆进行物理实验，验证仿真结论。</li><li>公开代码、仿真数据和硬件评估运行记录。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：控制/规划层面的数据驱动预测控制（DPC），不训练车辆模型，也不做显式摩擦估计或在线模型自适应。</li><li>输入传感器：控制器输入为纵向加速度与转向角；测量输出为车辆位置、航向与速度；在仿真中小型车辆与全尺寸多体车辆模型的传感器细节方面，原文未报告。</li><li>场景表示：以记录的控制输入—输出轨迹构造深度为 T_ini+N 的 Hankel 矩阵，并分为过去块与未来块；预测被参数化为记录轨迹的仿射组合（系数和为 1），通过求解带正则化的二次规划得到。</li><li>模型结构与关键技术：</li></ul>
+<p> - 采用带正则化的 DPC 优化问题，包含跟踪代价、输入代价、系数正则与松弛变量正则，并施加输入/输出约束。</p>
+<p> - 使用 contextual sampling 在线按过去与未来距离筛选 n 条轨迹，以降低计算规模。</p>
+<p> - 将不同摩擦水平的数据池化后统一使用；对比使用当前摩擦匹配数据与使用其他摩擦失配数据。</p>
+<p> - 理论分析固定规划输入、忽略输出约束与跟踪代价，得到闭式解，将池化预测分解为匹配与失配两部分，并讨论分离、良性混合、误归因三种情形。</p>
+<p> - 提出隐含摩擦：将池化预测表示为两种摩擦专用预测的凸组合，以插值权重加权得到隐含摩擦值。</p></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：仿真中在摩擦系数 μ∈{0.5, 1.1} 下各记录 1000 s 的随机转向与速度目标轨迹，按 80% 建模、20% 验证划分；评估赛道含 μ∈{0.5, 0.8, 1.1} 三个摩擦区；另在未见过的 Nürburgring 赛道上测试。原文未报告公开数据集名称。</li><li>仿真器：使用带空间变化摩擦的车辆仿真，车辆为基于文献的全尺寸多体模型；原文未报告仿真器具体名称。</li><li>模型规模：DPC 每个采样时刻用 contextual sampling 选取 n=300 条轨迹；预测时域 N=10，采样时间 100 ms（预测精度实验 T_ini=10，跟踪实验 T_ini=5）；正则参数 λ_g=5、λ_σ=50。</li><li>训练资源：原文未报告模型训练资源；报告了在 Apple M3 Pro CPU 上单控制步计算时间中位数 21.5 ms、95 分位 44.5 ms。</li><li>实车平台：Cyber-Physical Mobility Lab（CPM Lab）中的小型车辆，使用高摩擦与低摩擦轮胎组。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：仿真中的多步 RMS 位置预测误差与闭环赛道跟踪误差（相对赛车线的横向误差）；对比池化 DPC、匹配 DPC（oracle 基线）、失配 DPC，以及 TUM-CONTROL 框架的 NMPC。</li><li>评估指标：N 步 RMS 位置预测误差、单步预测误差、闭环跟踪误差（公式给出）、隐含摩擦。</li><li>关键数值：</li></ul>
+<p> - 预测精度（仿真）：匹配 DPC 中位预测误差为 μ=0.5 时 12.7 cm、μ=1.1 时 23.6 cm；失配 DPC 分别增加 29.8 cm 与 28.1 cm（约 2.2–3.4 倍）；池化 DPC 仅增加 6.1 cm 与 1.0 cm，保持在中位误差的 1.5 倍以内。</p>
+<p> - 轨迹选择与正则：contextual sampling 中位仅 55% 选中轨迹为匹配；池化预测中匹配子集贡献中位为 0.83（μ=0.5）与 0.92（μ=1.1），说明分离主要来自正则化。</p>
+<p> - 闭环跟踪（仿真）：整圈池化 DPC 跟踪误差 13.7 cm，NMPC 13.3 cm；池化 DPC 相对匹配 DPC 增加 1.0 cm（+7.69%）；三个随机种子下圈误差变化不超过 0.2 cm。</p>
+<p> - 单步预测误差：匹配 DPC 在 μ=0.5 与 μ=1.1 分别为 1.5 mm 与 0.7 mm；池化 DPC 分别增加 0.6 mm 与 1.1 mm；失配 DPC 分别增加 3.1 mm 与 3.0 mm。</p>
+<p> - 隐含摩擦：在两种预测差异最大的路段，低摩擦区隐含摩擦 0.77、高摩擦区 0.96，分离为部分分离，低摩擦区更弱。</p>
+<p> - 未见赛道：限速 20 m/s 时池化 DPC 在 Nürburgring 跟踪误差 8.8 cm，NMPC 为 6.7 cm；不设限速时 68% 速度剖面超出数据覆盖范围，池化 DPC 失败，支持条件 A1。</p>
+<ul><li>对比方法：匹配 DPC、失配 DPC、NMPC。</li><li>开环/闭环/仿真/实车条件：预测精度与隐含摩擦分析为仿真开环评估；跟踪性能为仿真闭环评估（每控制器 3 个种子、每种子 11 圈，丢弃首圈，聚合 10 圈）；硬件实验为 CPM Lab 小型车辆闭环实车条件，原文报告池化 DPC 与匹配 DPC 在低摩擦轮胎上跟踪误差为 1.6 cm 对 1.5 cm（差 0.1 cm），高摩擦轮胎为 0.9 cm 对 1.1 cm（差 0.2 cm）。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-next" href="../../papers/2611.21249/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Heteroscedastic Gaussian Process Q-learning for Sample Efficient Experimentation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

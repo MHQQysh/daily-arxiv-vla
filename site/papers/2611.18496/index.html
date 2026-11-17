@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toward Resilient Self-Driving Laboratories through Telerobotic Interventions - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：面向自驱动实验室（Self-driving Laboratories, SDLs）的机器人遥操作故障恢复，即人在回路（human-in-the-loop）干预机制。 应用场景：实验室自动化中的流程中断、初始化错误、严重故障（如掉瓶、掉落样品）等异常，需要人工远程介入使实验流程恢复名义运行。 研究问题：如何设计直观的遥操作接口与控制器映射，并评估不同控制策略与参考路径引导对操作员故障恢复绩效、碰撞与奇异风险的影响，从而提升 SDL 系统韧性。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.18496">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.18496.webp" alt="Toward Resilient Self-Driving Laboratories through Telerobotic Interventions" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：面向自驱动实验室（Self-driving Laboratories, SDLs）的机器人遥操作故障恢复，即人在回路（human-in-the-loop）干预机制。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Toward Resilient Self-Driving Laboratories through Telerobotic Interventions</h1>
+            <div class="detail-meta">2026-11-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.18496" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.18496" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.18496</span></div>
+            <p class="detail-summary">任务：面向自驱动实验室（Self-driving Laboratories, SDLs）的机器人遥操作故障恢复，即人在回路（human-in-the-loop）干预机制。 应用场景：实验室自动化中的流程中断、初始化错误、严重故障（如掉瓶、掉落样品）等异常，需要人工远程介入使实验流程恢复名义运行。 研究问题：如何设计直观的遥操作接口与控制器映射，并评估不同控制策略与参考路径引导对操作员故障恢复绩效、碰撞与奇异风险的影响，从而提升 SDL 系统韧性。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Lawrence Livermore National Laboratory（Materials Engineering Division、Cente…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.18496/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：面向自驱动实验室（Self-driving Laboratories, SDLs）的机器人遥操作故障恢复，即人在回路（human-in-the-loop）干预机制。</p>
+  <ul class="reading-intro-points"><li>任务：面向自驱动实验室（Self-driving Laboratories, SDLs）的机器人遥操作故障恢复，即人在回路（human-in-the-loop）干预机制。</li><li>应用场景：实验室自动化中的流程中断、初始化错误、严重故障（如掉瓶、掉落样品）等异常，需要人工远程介入使实验流程恢复名义运行。</li><li>研究问题：如何设计直观的遥操作接口与控制器映射，并评估不同控制策略与参考路径引导对操作员故障恢复绩效、碰撞与奇异风险的影响，从而提升 SDL 系统韧性。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Lawrence Livermore National Laboratory（Materials Engineering Division、Center for Applied Scientific Computing、Engineering Directorate）；作者：Ziheng Wu、Adrian Vecina Tercero、Andre A. Fatehi、Abhik Sarkar、Brian Giera、Eric B. Duoss、Christopher M. Spadaccini、Nikhil Deshpande、Aldair E. Gongora（原文作者列表未逐一标注个人所属的具体部门，仅通讯作者 Gongora 附带多个 LLNL 部门与下述大学隶属信息）</li><li>机构：University of Nottingham（School of Computer Science）；作者：Aldair E. Gongora（原文将该机构列于 Gongora 的 affiliation 中，原文未明确对应其他作者）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：面向自驱动实验室（Self-driving Laboratories, SDLs）的机器人遥操作故障恢复，即人在回路（human-in-the-loop）干预机制。</li><li>应用场景：实验室自动化中的流程中断、初始化错误、严重故障（如掉瓶、掉落样品）等异常，需要人工远程介入使实验流程恢复名义运行。</li><li>研究问题：如何设计直观的遥操作接口与控制器映射，并评估不同控制策略与参考路径引导对操作员故障恢复绩效、碰撞与奇异风险的影响，从而提升 SDL 系统韧性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>搭建了一套面向 SDL 的遥操作框架：操作员端为 3Dconnexion SpaceMouse Pro，SDL 端为六自由度 UR3e 机械臂，配腕部相机与 Linux 工作站，通过 RTDE 与 ur_rtde 通信。</li><li>提出并比较了两种基于速度的控制映射：耦合模式（六自由度全部映射到 3D 鼠标中央旋钮）与解耦模式（四自由度映射到旋钮，俯仰与偏航映射到外围按键）。</li><li>通过用户研究在三种模拟 SDL 故障场景（PI、IE、EF）中量化比较两种控制模式的成功率、完成时间、平均旋转与路径长度。</li><li>开展了参考路径引导研究（无引导、仅终点参考路径、多航点参考路径），分析轨迹偏差、执行序列与性能差异。</li><li>基于记录的遥操作轨迹回顾性分析碰撞与奇异风险，使用 Yoshikawa 指数、雅可比条件数与最小连杆距离三项指标，并给出“Telerobotic Janitor”真实世界定性演示。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：遥操作干预/故障恢复模块，作为 SDL 自主流程的人在回路补充机制；原文强调并非提出全新遥操作算法。</li><li>输入传感器：UR3e 腕部安装的视觉模块（Intel RealSense D435 或 Logitech C920e）提供实时视觉反馈；SpaceMouse Pro 提供六自由度输入与 15 个可编程按键。</li><li>场景表示：原文未报告显式场景/环境表示模型；任务场景为玻璃瓶与瓶架、障碍物与 ArUco 标记等实物布置。</li><li>模型结构：单边遥操作架构；SpaceMouse 输入以 500 Hz 采样并映射为末端执行器笛卡尔速度（式 1，含平移/角速度缩放因子 sv、sω）；本设置取加速度 1.2 m/s²、sv=0.1、sω=0.5；周边按键负责夹爪开合、模式切换、复位与操作象限切换；独立线程以 30 fps 录制腕部与环境相机视频，并以 20 Hz 记录关节位置、TCP 位置与夹爪状态。</li><li>关键技术：速度控制映射（因机械臂与 SpaceMouse 耦合非相似而选用速度控制）、解耦控制降低跨轴干扰、直接演示方式给出参考路径、弧长对齐的轨迹偏差比较方法；统计上用 Wilcoxon 符号秩检验、配对 t 检验、Cohen&#x27;s dz、10,000 次重采样的 bootstrap 95% CI、Fisher 精确检验与 Wilson 区间。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：无公开数据集；第 3 节研究由 6 名男性参与者完成 86 次遥操作试验（PI 28 次、EF 28 次、IE 30 次），两种控制模式均衡分布；第 4 节研究由 8 名参与者（6 男 2 女）每人 12 次试验，共 96 组数据。</li><li>仿真器：原文未报告使用仿真器；三种“模拟故障场景”为实物搭建的受控场景。</li><li>模型规模：原文未报告（不涉及学习模型规模）。</li><li>训练资源：原文未报告模型训练资源。</li><li>实车/实机平台：Universal Robots UR3e 六轴机械臂、3Dconnexion SpaceMouse Pro、Linux 工作站、腕部视觉模块；真实世界演示为“Telerobotic Janitor”场景（清理模拟泄漏、整理玻璃器皿与样品容器、处理普通与尖锐废弃物、擦除白板待办清单）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：三种模拟 SDL 故障场景 PI、IE、EF（运动学与认知复杂度 PI &lt; IE &lt; EF）；引导研究为绕障对准虚拟标记与物理 ArUco 标记的瞄准任务。</li><li>评估指标：成功率、平均旋转、完成时间、平均路径长度；引导研究另含位置/姿态平均与最大偏差、总姿态变化、路径效率（参考路径长度与遥操作路径长度之比）、执行序列（Δx、Δy、Δz、Δrx、Δry、Δrz）；风险指标为 Yoshikawa 指数、雅可比条件数、最小连杆距离。</li><li>关键数值：成功率 PI 由 71% 提升至 86%（解耦模式），IE 与 EF 分别提升 6% 与 22%；结论部分汇总为成功率提升 9.9%、完成时间减少 25.6 s；平均旋转配对差 -3.99 rad（bootstrap 95% CI: -6.59 至 -1.22 rad；Wilcoxon p = 0.094；Cohen&#x27;s dz = -1.08）；完成时间配对差 -25.6 s（95% CI: -36.6 至 -14.2 s；p = 0.031；dz = -1.60）；多航点引导相对无引导时长差 -40.1 s（n = 7；95% CI: -55.9 至 -26.3 s；p = 0.016），路径长度差 -218 mm（95% CI: -365 至 -81 mm；p = 0.047）；参考路径长度 375.04 mm（仅终点）与 755.10 mm（多航点），对应引导执行路径长度 387.44 mm 与 373.29 mm、时长 42.78 s 与 38.52 s；无引导成功率前两次试验低于 50%，第 6 次达 100%，引导后第 7 次短暂下降，随后仅终点引导达 85%、多航点引导达 100%。</li><li>对比方法：耦合控制模式 vs 解耦控制模式；无引导 vs 仅终点参考路径 vs 多航点参考路径。</li><li>条件：全部为用户研究（受控实验）+ 真实 SDL 实机定性演示；无开环/闭环自动驾驶式评测、无仿真实验；风险指标分析为回顾性（离线）分析，未集成实时辅助控制；引导试验在无引导试验之后进行，存在练习效应，作者将其视为探索性结果。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.18855/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Technical Report of Auriga&#x27;s 1:10 Scale Autonomous Vehicle Robot</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2610.08812/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Taming an End-to-End Autonomous Driving Policy for Urban Navigation of Quadruped Robots</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

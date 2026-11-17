@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SuperGlance: Driving at a Glance with a Vision-Language Model - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文面向自动驾驶的端到端规划任务，目标是让视觉语言模型（VLM）作为驾驶策略，根据前视相机帧、自车状态、导航指令等输入直接输出未来数秒的轨迹。 应用场景包括开放环规划基准（NAVSIM、WOD-E2E、PAI-AV）、闭环仿真（AlpaSim）以及指令跟随（Language2Drive）。 研究问题：现有驾驶 VLA 通过自回归解码或扩散/流匹配多步生成轨迹，每步都是一次前向传播，导致规划延迟可达数百毫秒到秒级；本文探究能否在 VLM 的单个隐藏状态上一次性完成规划，同时保留 VLM 回答视觉问题的能力。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.19138">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.19138.webp" alt="SuperGlance: Driving at a Glance with a Vision-Language Model" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文面向自动驾驶的端到端规划任务，目标是让视觉语言模型（VLM）作为驾驶策略，根据前视相机帧、自车状态、导航指令等输入直接输出未来数秒的轨迹。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">SuperGlance: Driving at a Glance with a Vision-Language Model</h1>
+            <div class="detail-meta">2026-11-14 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.19138" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.19138" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.19138</span></div>
+            <p class="detail-summary">论文面向自动驾驶的端到端规划任务，目标是让视觉语言模型（VLM）作为驾驶策略，根据前视相机帧、自车状态、导航指令等输入直接输出未来数秒的轨迹。 应用场景包括开放环规划基准（NAVSIM、WOD-E2E、PAI-AV）、闭环仿真（AlpaSim）以及指令跟随（Language2Drive）。 研究问题：现有驾驶 VLA 通过自回归解码或扩散/流匹配多步生成轨迹，每步都是一次前向传播，导致规划延迟可达数百毫秒到秒级；本文探究能否在 VLM 的单个隐藏状态上一次性完成规划，同时保留 VLM 回答视觉问题的能力。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">原文未报告 · Yan Wang（原文未明确对应）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.19138/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文面向自动驾驶的端到端规划任务，目标是让视觉语言模型（VLM）作为驾驶策略，根据前视相机帧、自车状态、导航指令等输入直接输出未来数秒的轨迹。</p>
+  <ul class="reading-intro-points"><li>论文面向自动驾驶的端到端规划任务，目标是让视觉语言模型（VLM）作为驾驶策略，根据前视相机帧、自车状态、导航指令等输入直接输出未来数秒的轨迹。</li><li>应用场景包括开放环规划基准（NAVSIM、WOD-E2E、PAI-AV）、闭环仿真（AlpaSim）以及指令跟随（Language2Drive）。</li><li>研究问题：现有驾驶 VLA 通过自回归解码或扩散/流匹配多步生成轨迹，每步都是一次前向传播，导致规划延迟可达数百毫秒到秒级；本文探究能否在 VLM 的单个隐藏状态上一次性完成规划，同时保留 VLM 回答视觉问题的能力。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：原文未报告；作者：Yan Wang（原文未明确对应）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文面向自动驾驶的端到端规划任务，目标是让视觉语言模型（VLM）作为驾驶策略，根据前视相机帧、自车状态、导航指令等输入直接输出未来数秒的轨迹。</li><li>应用场景包括开放环规划基准（NAVSIM、WOD-E2E、PAI-AV）、闭环仿真（AlpaSim）以及指令跟随（Language2Drive）。</li><li>研究问题：现有驾驶 VLA 通过自回归解码或扩散/流匹配多步生成轨迹，每步都是一次前向传播，导致规划延迟可达数百毫秒到秒级；本文探究能否在 VLM 的单个隐藏状态上一次性完成规划，同时保留 VLM 回答视觉问题的能力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出 SuperGlance，将仅解码器 VLM 转为编码器式驾驶策略：在提示末尾答案位置 <code>[ANS]</code> 的最后一个隐藏状态上，用线性 Policy Head 对固定的 5,273 条候选轨迹打分，一次前向传播完成规划。</li><li>候选集固定使每条候选在每个训练场景中的奖励可离线一次计算，从而监督目标可按奖励加权，强化学习可在全部候选上精确计算期望奖励，无需采样或仿真。</li><li>设计三阶段训练：通用多选题 QA、驾驶 QA、策略训练（先监督后精确 RL），并以 KL 项保持各阶段接近起始模型、以双选项顺序构造问题对抗捷径，使 VLM 的视觉问答能力在一次前向传播中得以保留。</li><li>报告单次规划在单个 H200 上耗时 84 ms，比 Qwen-Drive-1.0 快约 6 倍，并在 NAVSIM、WOD-E2E、PAI-AV 与 AlpaSim 上至少不差；把每次规划的 GPU 时间计为延迟后，其在 AlpaSim 中每次有责事故行驶里程相对 Qwen-Drive-1.0 的领先从 2.8 倍增至 3.9 倍。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端驾驶规划与视觉问答共用同一 VLM；基础模型为 Qwen3.5-9B，两个头分别为语言模型头（多选题答案字母分布）和线性 Policy Head（候选轨迹分布）。</li><li>输入传感器：当前前视相机帧（1024×576，576 个视觉 token）以及可用的 1.5、1.0、0.5 s 前三帧历史图像（544×320，每帧 170 个 token）；原文未报告其他传感器输入，并明确无检测器或地图输出进入提示，场景仅来自图像帧。</li><li>场景表示：提示中包含自车速度、加速度、过去 1.5 s 的位置、导航指令和可选指令文本，以 <code>[ANS]</code> 位置结尾；候选轨迹为自车坐标系下 4 s、2 Hz 的 8 个位姿（位置与朝向）。</li><li>候选集：共 5,273 条，其中 4,096 条为 NAVSIM 92,339 个训练场景中人类轨迹的 k-means 中心，1 条为静止候选，1,024 条为 PAI-AV 中 13 m/s 及以上速度的 k-means 中心，152 条由规则构造（用于聚类遗漏的停车与弯道）。</li><li>Policy Head：线性层，权重维度 K×d（K=5,273，d=4,096），输出 softmax 概率；执行时对概率最高的 64 条候选按温度 τ=0.2 加权平均得到最终轨迹。</li><li>训练：三阶段均训练语言模型上的 rank-32 LoRA 并在下一阶段前合并，使用 KL 项约束各阶段偏离起始模型；阶段 1 使用 116 万多选题（视觉与文本数据集），阶段 2 使用 124,378 条 DriveLM-nuScenes 驾驶问题，阶段 3 先以奖励加权的监督目标训练策略，再用 KL 正则的精确期望奖励 RL（β=0.3）；每道题以两种选项顺序的配对要求同时答对，以抑制字母与位置偏置。</li><li>闭环恢复数据：阶段 3 还使用 46,583 帧（占其行数 2.1%），由早期模型在 492 个非评估场景的 AlpaSim rollout 中渲染，目标轨迹约 3 s 内汇回人类路径。</li><li>低层控制：采用 NAVSIM PDM 模拟器的 LQR 跟踪器（运动学自行车模型），从当前速度、加速度及上一条规划执行到的转向角开始运行规划，并以 0.1 s 间隔向 AlpaSim 控制器传递 40 个位姿；原文未报告模型参数量与训练算力。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：NAVSIM（92,339 个训练场景、navtest 12,146 个场景）、WOD-E2E（含评级验证帧与测试服务器）、PAI-AV（140 个留出片段的 700 帧）、AlpaSim 闭环使用 PAI-AV-NuRec v26.01 的 916 个场景、Language2Drive；QA 数据包括 DriveLM-nuScenes 及阶段 1 的视觉/文本数据集（CV-Bench、BLINK、3DSRBench、MMLU、MMLU-Pro、ARC-C、HellaSwag、WinoGrande、BoolQ、TruthfulQA 等评测基准）。</li><li>仿真器：AlpaSim（闭环）。</li><li>模型规模：基础模型 Qwen3.5-9B，隐藏维度 d=4,096，Policy Head 输出 5,273 类；LoRA 秩 32；其余参数规模原文未报告。</li><li>训练资源：原文仅报告推理在单个 H200 GPU、批大小为 1 上计时；训练算力、GPU 数量与训练时长原文未报告。</li><li>实车平台：原文未报告实车实验。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准与指标：NAVSIM 用 PDMS（含 NC、DAC、EP、TTC、Comfort）；WOD-E2E 用 RFS 与 3 s/5 s ADE；PAI-AV 用 3 s/5 s ADE；AlpaSim 闭环报告碰撞率、越野率、进度、通过场景比例、每次事故（碰撞或越野）行驶公里数；Language2Drive 评估指令跟随；另在 CV-Bench、BLINK、3DSRBench、MMLU、MMLU-Pro、ARC-C、HellaSwag、WinoGrande、BoolQ、TruthfulQA、DriveLM 上评估问答准确率。</li><li>效率：单次规划 84 ms GPU 时间，Qwen-Drive-1.0 为 518 ms（11 次前向，含 10 步流匹配），本文 VLM 以文本写出规划需 5,558 ms；Qwen-Drive-1.0 仅读图即需 187 ms，因其图像 token 约为本文四倍。</li><li>问答：最终 RL 模型在多选题字母读取下，所有视觉基准持平或超过 Qwen3.5-9B 的解码回复，DriveLM 上高 24.56 分；3DSRBench 上基础模型字母读取比其自身解码低 11.70 分，阶段 1 通过跨选项顺序一致性弥补；阶段 3 策略训练使各分数变化不超过 2.21 分；TruthfulQA 是唯一低于 Qwen3.5-9B 字母读取的基准。</li><li>开环规划：NAVSIM 上 SuperGlance（监督）PDMS 91.24，NC 98.73、DAC 98.25、EP 86.18、TTC 95.56、Comfort 100.00，高于 Qwen-Drive-1.0（87.8）与 Qwen-Drive-1.0+reasoning（88.2），也高于 AutoVLA（80.5）、ReCogDrive（86.5）等；top-64 加权平均相比最高概率单候选在 navtest 上提升 1.21 PDMS，RL 后提升 0.23。</li><li>闭环 AlpaSim：把各规划 GPU 时间计为延迟时，RL 模型每次有责事故行驶 1.248 km（全体碰撞统计为 0.970），Qwen-Drive-1.0 为 0.317 km（0.229），领先 3.9 倍（95% 区间 3.3–4.7），通过率 72.2% 对至多 36.6%；延迟不超过 300 ms 时两种规划器的每事故里程变化在 8% 以内，600 ms 时 Qwen-Drive-1.0 降至 0.317 km、本文为 1.061 km，1.2 s 时本文降至 0.259 km，低于 Qwen-Drive-1.0 在其自身 518 ms 延迟下的水平；无延迟时监督模型每事故行驶里程为 Qwen-Drive-1.0 两个规划器的 2.6 与 3.1</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.19184/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Do VLMs Really Look at the Road? A Diagnostic Evaluation for Autonomous Driving</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.18855/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Technical Report of Auriga&#x27;s 1:10 Scale Autonomous Vehicle Robot</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

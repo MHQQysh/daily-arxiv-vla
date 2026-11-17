@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lao Siji: Adapting openpilot to Closed-Loop End-to-End Driving in Neural Reconstruction - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向自动驾驶的端到端闭环驾驶策略后训练（post-training）问题：将开源 L2 量产模型 openpilot 适配为可完成路口转向与路线跟随的闭环端到端策略。 应用场景为基于神经重建的闭环仿真评测（2026 NVIDIA AlpaSim 端到端驾驶挑战赛），并在 HUGSIM、Odyssey 闭环基准与 NAVSIM 开环基准上评测。 研究问题：在有限算力下，如何不从头训练视觉主干，而是通过闭环后训练提升侧向路径能力，同时保留原有纵向跟车能力；并系统分析哪些数据/监督/服务层组件真正带来收益。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.19922">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.19922.webp" alt="Lao Siji: Adapting openpilot to Closed-Loop End-to-End Driving in Neural Reconstruction" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向自动驾驶的端到端闭环驾驶策略后训练（post-training）问题：将开源 L2 量产模型 openpilot 适配为可完成路口转向与路线跟随的闭环端到端策略。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Lao Siji: Adapting openpilot to Closed-Loop End-to-End Driving in Neural Reconstruction</h1>
+            <div class="detail-meta">2026-11-15 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.19922" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.19922" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.19922</span></div>
+            <p class="detail-summary">面向自动驾驶的端到端闭环驾驶策略后训练（post-training）问题：将开源 L2 量产模型 openpilot 适配为可完成路口转向与路线跟随的闭环端到端策略。 应用场景为基于神经重建的闭环仿真评测（2026 NVIDIA AlpaSim 端到端驾驶挑战赛），并在 HUGSIM、Odyssey 闭环基准与 NAVSIM 开环基准上评测。 研究问题：在有限算力下，如何不从头训练视觉主干，而是通过闭环后训练提升侧向路径能力，同时保留原有纵向跟车能力；并系统分析哪些数据/监督/服务层组件真正带来收益。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">12 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">东南大学机械工程学院（School of Mechanical Engineering, Southeast University, Nanjing…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.19922/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向自动驾驶的端到端闭环驾驶策略后训练（post-training）问题：将开源 L2 量产模型 openpilot 适配为可完成路口转向与路线跟随的闭环端到端策略。</p>
+  <ul class="reading-intro-points"><li>面向自动驾驶的端到端闭环驾驶策略后训练（post-training）问题：将开源 L2 量产模型 openpilot 适配为可完成路口转向与路线跟随的闭环端到端策略。</li><li>应用场景为基于神经重建的闭环仿真评测（2026 NVIDIA AlpaSim 端到端驾驶挑战赛），并在 HUGSIM、Odyssey 闭环基准与 NAVSIM 开环基准上评测。</li><li>研究问题：在有限算力下，如何不从头训练视觉主干，而是通过闭环后训练提升侧向路径能力，同时保留原有纵向跟车能力；并系统分析哪些数据/监督/服务层组件真正带来收益。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：东南大学机械工程学院（School of Mechanical Engineering, Southeast University, Nanjing, China）；作者：Chengzhi Gao、Yongzhi Liu、Jinchang Xu、Weichao Zhuang、Guodong Yin（原文仅给出统一机构署名，未逐一说明每位作者与机构的细分对应关系）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向自动驾驶的端到端闭环驾驶策略后训练（post-training）问题：将开源 L2 量产模型 openpilot 适配为可完成路口转向与路线跟随的闭环端到端策略。</li><li>应用场景为基于神经重建的闭环仿真评测（2026 NVIDIA AlpaSim 端到端驾驶挑战赛），并在 HUGSIM、Odyssey 闭环基准与 NAVSIM 开环基准上评测。</li><li>研究问题：在有限算力下，如何不从头训练视觉主干，而是通过闭环后训练提升侧向路径能力，同时保留原有纵向跟车能力；并系统分析哪些数据/监督/服务层组件真正带来收益。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出一个算力高效的后训练配方：冻结 openpilot 视觉编码器，仅训练约 5% 参数（适配器与策略层），把量产 L2 模型适配为具竞争力的端到端闭环驾驶策略，并具有跨基准迁移能力。</li><li>在神经重建场景的闭环 rollout 上，用特权地图教师对策略实际到达的状态提供侧向自校正轨迹目标，并在无教师目标时用车身包络（body-extent）间隙损失约束道路与障碍物净空。</li><li>系统消融闭环状态、监督信号与服务层，区分各组件的作用、冗余，以及学习式规划与继承式控制之间的边界。</li><li>报告数据选择、rollout 规模与训练时长方面的负结果，为算力受限下的后训练设计提供参考。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端驾驶策略后训练（模仿学习 + 数据集聚合 DAgger）+ 规则化服务层；原文未报告独立感知/预测模块的训练。</li><li>输入传感器：前视相机（八组帧对，间隔 0.2 s），以及自车状态（速度、加速度、过去四个位姿、转向命令）与导航路线；原文未报告其他传感器。</li><li>场景表示：冻结视觉编码器对每帧对输出 32 个宽度 512 的 token；适配器含两个结构相同的 transformer-decoder 分支，32 个可学习 query 经两层 decoder 注意力聚合后线性投影为 32×512 偏置逐 token 相加；自车分支（2.5M 参数，宽 256）处理 4 个自车状态 token，路线分支（0.6M 参数，宽 128）处理 1 个自车 token 与最多 40 个路线航点（学习式位置编码）；两分支输出层零初始化，使训练严格从基础模型分布出发。</li><li>模型结构：openpilot Cinque 基础模型，冻结视觉编码器 352.9M 参数、后训练时序 transformer 与规划头 16.2M、辅助冻结输出头 12.5M（含前车估计）；策略输出 8 个位姿的 4 s 规划与前车估计。</li><li>关键技术：参数无关的路线记忆（累积路线消息，覆盖车后 6 m 至车前 72 m；训练时 25% 样本丢弃路线输入）；闭环 rollout 仅保留首次违规前的状态；自校正目标由特权地图教师在最短满足横向加速度 ≤4 m/s² 的 2.0/2.5/3.0 s 时域内用 Frenet 五次多项式生成，参考为路线中心线叠加人类驾驶员平滑横向偏移（≤0.5 m）；间隙罚项只沿规划位姿法向反传（0.3 m 间隙 hinge），不改变轨迹长度以防靠减速降低损失；对无目标样本额外施加车道罚项（仅 nuPlan 轮）；用蒸馏损失保持基础模型其余输出（含前车估计）；两阶段训练（适配 10k 步 + 精炼 9.5k 步），AdamW，网络学习率 3×10⁻⁵、适配器 3×10⁻⁴，余弦衰减。</li><li>服务层：每 0.1 s 将规划路径与时序控制解耦，速度目标取设定速度、曲率限速（√(a_lat/κ)）与前车限速的最小值；不直接下发规划，避免控制器在制动不足时转向打转；另含两项挑战赛专用规则（高速接管时相邻车道路线保持本车道、U 型弯沿路线行驶）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuPlan 日志（NAVSIM navtrain 103k 人类帧；70k 扰动样本；25% 保留样本）、AlpaSim nuPlan 赛道 1,031 个场景、PAI-AV 数据集 719 个训练场景（与评测场景不相交）、AlpaSim 本地考试 433 场景、HUGSIM 436 场景、Odyssey 100 条路线、NAVSIM navtest。</li><li>仿真器：AlpaSim（闭环 rollout 仅在此采集）、HUGSIM、Odyssey，开环用 NAVSIM。</li><li>模型规模：视觉编码器 352.9M（冻结）、策略层 16.2M、辅助头 12.5M、自车适配分支 2.5M、路线分支 0.6M；训练参数约占 5%。</li><li>训练资源：NVIDIA RTX 6000D；整条链采集与训练约 36 GPU 小时（单个最终策略约 34 GPU 小时，不含评测），最终训练约 1 GPU 小时、显存峰值 41 GB；推理在单张 NVIDIA RTX 3090 上中位延迟 42 ms/帧、占用 1.3 GiB 显存。</li><li>实车平台：原文未报告实车平台，全部实验在仿真与开环基准上完成。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：AlpaSim（PAI-AV 赛道，10 Hz，其他智能体回放日志）、HUGSIM、Odyssey（非反应式板）闭环，NAVSIM navtest 开环；挑战赛私有榜按 Policy Capability Score（PCS）排名。</li><li>评估指标：AlpaSim 平均得分、零分场景数、有责碰撞/驶出道路数；HUGSIM 的 NC、DAC、TTC、Rc、HD-Score；Odyssey 的 RouteDS；NAVSIM 的 PDMS 与 EPDMS；零分按有责碰撞、驶出道路或横向偏离路线走廊 ≥4 m 判定，否则为 min(p/0.8, 1)。</li><li>关键数值：提交检查点在 AlpaSim 私有榜排名第三（PCS 2497）；发布配方三随机种子本地考试得分 0.907、零分 35.3、有责 29.7；openpilot 经同一服务层仅 0.377；py123d_garage 为 0.774，Lao Siji 高出 +0.133 [+0.095,+0.172] 且仅有其一半有责零分；HUGSIM 上 openpilot 0.182 提升至 0.460（+0.280 [+0.243,+0.317]），与 WA-JEPA（0.461）、py123d_garage（0.457）未分出差异；Odyssey RouteDS 从 11.2 提升至 49.4，仅次于 py123d_garage；NAVSIM EPDMS 从 80.5 提升至 88.7，但落后 AutoVLA、DrivoR、WA-JEPA。</li><li>对比方法：UniAD、AutoVLA、DrivoR、WA-JEPA、py123d_garage，以及原始 openpilot；所有基线以其发布权重运行。</li><li>消融结果：五个闭环轮次相对离线后训练增益 +0.142 [+0.107,+0.176]，其中自校正样本贡献 −0.117（去除时），去除扰动样本损失 −0.063，清空推理时路线记忆损失 −0.042；无教师目标时无目标样本的间隙损失价值 +0.111；服务层最关键，去掉前车限速有责前碰从 15 升至 76、得分 −0.150，直接下发原始规划 −0.122（单种子）且出现 32 个场景车辆打转；无目标样本、间隙损失、保留样本、头部蒸馏及两项挑战规则在最终配方中均未达分辨率；更长训练、模仿人类日志、人类日志速度目标等均无可分辨增益或为负效果。</li><li>条件：所有闭环结果均在仿真中（AlpaSim/HUGSIM/Odyssey），NAVSIM 为开环；无实车实验；本地考试为开发集，配方与服务规则及提交种子均在其上选择；部分消融仅单种子。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.20011/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">ReactBench-AD: Do Driving VLAs and World-Action Models React to Imminent Hazards in Their Path?</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.19830/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Beyond Vehicle-Centric Data: Scaling Autonomous Driving through Roadside-to-Vehicle Generation</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
