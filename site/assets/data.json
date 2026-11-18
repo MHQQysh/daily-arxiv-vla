@@ -1,5 +1,353 @@
 [
   {
+    "date": "2026-11-17",
+    "title": "Learned versus Kinematic Trajectory Prediction under Reduced Observation Frequency",
+    "link": "https://arxiv.org/abs/2611.23198",
+    "arxiv_id": "2611.23198",
+    "detail_path": "papers/2611.23198/",
+    "cover_path": "covers/2611.23198/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.23198.webp",
+    "paper_image_full_path": "assets/paper-images/2611.23198.webp",
+    "preview_text": "论文研究自动驾驶中的轨迹预测任务，聚焦于仅使用被预测主体（focal agent）自身观测历史的预测器。 应用场景为通过车联万物（V2X）通信接收位置信息，其到达频率通常为 1–10 Hz，而现有轨迹预测模型通常基于固定采样频率数据训练。 研究问题：当观测历史频率从 10 Hz 降至 5、2、1 Hz 时，学习型预测器（LSTM 递归神经网络）相对于恒定速度（CV）与恒定加速度（CA）运动学模型是否仍保持优势；以及 10 Hz 模型配合线性插值在稀疏历史下是否可近似替代按频率专门训练的模型。",
+    "research_unit": "原文未明确对应机构名称 · Nukhbala Gadzhiev、Alexander Morochko（原文仅给出作者姓名与 arXiv 提交信息、未提…",
+    "hook_text": "论文研究自动驾驶中的轨迹预测任务，聚焦于仅使用被预测主体（focal agent）自身观测历史的预测器。",
+    "key_points": [
+      "论文研究自动驾驶中的轨迹预测任务，聚焦于仅使用被预测主体（focal agent）自身观测历史的预测器。",
+      "应用场景为通过车联万物（V2X）通信接收位置信息，其到达频率通常为 1–10 Hz，而现有轨迹预测模型通常基于固定采样频率数据训练。",
+      "研究问题：当观测历史频率从 10 Hz 降至 5、2、1 Hz 时，学习型预测器（LSTM 递归神经网络）相对于恒定速度（CV）与恒定加速度（CA）运动学模型是否仍保持优势；以及 10 Hz 模型配合线性插值在稀疏历史下是否可近似替代按频率专门训练的模型。"
+    ],
+    "reading_minutes": 7,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Residual-Guided Lightweight Reinforcement Learning for Risk-Aware Trajectory Selection with a Frozen World Model",
+    "link": "https://arxiv.org/abs/2611.22998",
+    "arxiv_id": "2611.22998",
+    "detail_path": "papers/2611.22998/",
+    "cover_path": "covers/2611.22998/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.22998.webp",
+    "paper_image_full_path": "assets/paper-images/2611.22998.webp",
+    "preview_text": "面向自动驾驶轨迹选择任务：在冻结的世界模型（RiskWorld）与固定候选轨迹库（K=12）条件下，从候选轨迹中选出一条轨迹执行。 研究问题：固定的手工阈值与字典序优先级难以刻画随场景变化的候选偏好，需要训练一个轻量选择器，同时保持世界模型与候选生成器冻结，并且推理时仍返回原始候选轨迹坐标。 研究思路：用强化学习（PPO）在训练阶段做候选选择与有界轨迹残差的联合探索，从局部轨迹扰动反馈中学习上下文相关的候选偏好。",
+    "research_unit": "RWTH Aachen University（亚琛工业大学），Aachen, Germany · Jiaqi Wu、Yongqi Dong、Yijie…",
+    "hook_text": "面向自动驾驶轨迹选择任务：在冻结的世界模型（RiskWorld）与固定候选轨迹库（K=12）条件下，从候选轨迹中选出一条轨迹执行。",
+    "key_points": [
+      "面向自动驾驶轨迹选择任务：在冻结的世界模型（RiskWorld）与固定候选轨迹库（K=12）条件下，从候选轨迹中选出一条轨迹执行。",
+      "研究问题：固定的手工阈值与字典序优先级难以刻画随场景变化的候选偏好，需要训练一个轻量选择器，同时保持世界模型与候选生成器冻结，并且推理时仍返回原始候选轨迹坐标。",
+      "研究思路：用强化学习（PPO）在训练阶段做候选选择与有界轨迹残差的联合探索，从局部轨迹扰动反馈中学习上下文相关的候选偏好。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Learning Agent-Centric Vision-Language-Action World Models for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2611.22880",
+    "arxiv_id": "2611.22880",
+    "detail_path": "papers/2611.22880/",
+    "cover_path": "covers/2611.22880/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.22880.webp",
+    "paper_image_full_path": "assets/paper-images/2611.22880.webp",
+    "preview_text": "论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。 应用场景为自动驾驶：以多视角图像、自车状态、导航目标和语言提示为输入，预测未来自车轨迹并输出高层驾驶动作。 指出现有 VLA 世界模型多以像素级未来帧生成进行想象，产生大量与规划无关的稠密视觉 token，规划收益有限；提出应改用紧凑、结构化、以智能体为中心（agent-centric）的潜在世界状态。",
+    "research_unit": "MoE Key Lab of Artificial Intelligence, Institute of AI, Shanghai Jiao Tong…",
+    "hook_text": "论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。",
+    "key_points": [
+      "论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。",
+      "应用场景为自动驾驶：以多视角图像、自车状态、导航目标和语言提示为输入，预测未来自车轨迹并输出高层驾驶动作。",
+      "指出现有 VLA 世界模型多以像素级未来帧生成进行想象，产生大量与规划无关的稠密视觉 token，规划收益有限；提出应改用紧凑、结构化、以智能体为中心（agent-centric）的潜在世界状态。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Making the World React Realistically: A Closed-Loop Interactive World Model for Autonomous Driving",
+    "link": "https://arxiv.org/abs/2611.22691",
+    "arxiv_id": "2611.22691",
+    "detail_path": "papers/2611.22691/",
+    "cover_path": "covers/2611.22691/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.22691.webp",
+    "paper_image_full_path": "assets/paper-images/2611.22691.webp",
+    "preview_text": "论文面向自动驾驶世界模型（World Model, WM）任务，目标是生成超出真实日志记录的驾驶场景，用于自动驾驶系统的训练与评估。 应用场景为闭环交互式驾驶场景生成：背景车辆（BV）需对自车行为做出反应，自车则基于渲染图像做出反应。 研究问题：现有世界模型难以同时保证 BV 行为真实性与视觉保真度，因为它们忽视了车辆交互与自车视觉观测之间的耦合关系。 具体表现为三方面：BV 行为模型只基于车辆状态、未学习视觉观测波动下的交互变化；交互暴露的新视角渲染质量差、现有方法整体替换高斯资产导致已拟合区域被破坏；信号灯被烘焙为静态颜色、无法随交互意图变化。",
+    "research_unit": "Tongji University · Jia Hu、Yang Chang、Changjian Yu 等",
+    "hook_text": "论文面向自动驾驶世界模型（World Model, WM）任务，目标是生成超出真实日志记录的驾驶场景，用于自动驾驶系统的训练与评估。",
+    "key_points": [
+      "论文面向自动驾驶世界模型（World Model, WM）任务，目标是生成超出真实日志记录的驾驶场景，用于自动驾驶系统的训练与评估。",
+      "应用场景为闭环交互式驾驶场景生成：背景车辆（BV）需对自车行为做出反应，自车则基于渲染图像做出反应。",
+      "研究问题：现有世界模型难以同时保证 BV 行为真实性与视觉保真度，因为它们忽视了车辆交互与自车视觉观测之间的耦合关系。"
+    ],
+    "reading_minutes": 11,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-17",
+    "title": "AutoE2E: Don't speak - Language free end-to-end autonomy A Real-Time Driving Model for L2++ ADAS and L4 Robotaxis",
+    "link": "https://arxiv.org/abs/2611.22374",
+    "arxiv_id": "2611.22374",
+    "detail_path": "papers/2611.22374/",
+    "cover_path": "covers/2611.22374/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.22374.webp",
+    "paper_image_full_path": "assets/paper-images/2611.22374.webp",
+    "preview_text": "论文提出 AutoE2E，一个由 Autoware Foundation Robotaxi Working Group 开发的开源端到端（E2E）驾驶模型，面向 L2++ ADAS 与 L4 Robotaxi 应用。 目标任务是根据多相机图像、HD 地图栅格与选定路线栅格预测未来车辆运动（轨迹），输出未来 6.4 s、10 Hz 的加速度与曲率并积分成自车坐标系 XY 轨迹。 研究问题聚焦于：在不使用语言模型与推理轨迹的前提下，构建一个紧凑、确定性、可检查的实时驾驶策略；评估其开环轨迹预测性能，并探索其在实车平台上的初步可行性。",
+    "research_unit": "Autoware Foundation Robotaxi Working Group · 原文未明确对应（原文仅标注为工作组集体作者、完整贡献者名单在…",
+    "hook_text": "论文提出 AutoE2E，一个由 Autoware Foundation Robotaxi Working Group 开发的开源端到端（E2E）驾驶模型，面向 L2++ ADAS 与 L4 Robotaxi 应用。",
+    "key_points": [
+      "论文提出 AutoE2E，一个由 Autoware Foundation Robotaxi Working Group 开发的开源端到端（E2E）驾驶模型，面向 L2++ ADAS 与 L4 Robotaxi 应用。",
+      "目标任务是根据多相机图像、HD 地图栅格与选定路线栅格预测未来车辆运动（轨迹），输出未来 6.4 s、10 Hz 的加速度与曲率并积分成自车坐标系 XY 轨迹。",
+      "研究问题聚焦于：在不使用语言模型与推理轨迹的前提下，构建一个紧凑、确定性、可检查的实时驾驶策略；评估其开环轨迹预测性能，并探索其在实车平台上的初步可行性。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-17",
+    "title": "FIRE-Drive: Feasibility-Informed Risk Evaluation for End-to-End Diffusion Planning",
+    "link": "https://arxiv.org/abs/2611.22297",
+    "arxiv_id": "2611.22297",
+    "detail_path": "papers/2611.22297/",
+    "cover_path": "covers/2611.22297/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.22297.webp",
+    "paper_image_full_path": "assets/paper-images/2611.22297.webp",
+    "preview_text": "面向端到端自动驾驶的扩散式轨迹规划任务，输入为前左/前/前右相机拼接图像、LiDAR 与自车状态，输出未来轨迹并从中选择最终规划。 应用场景为城市道路等复杂交通场景中的多模态未来轨迹生成与安全感知的模式选择，覆盖 NAVSIM v1 开环（非反应式）评测与 Bench2Drive/CARLA 闭环评测。 研究问题：扩散规划器的性能依赖轨迹初始化、模式评估与监督质量；弱约束噪声初始化会引入不可行候选并加重去噪负担；几何相似的候选在安全性与进度上存在差异，仅靠几何相似性难以选出最优模式；单一日志未来监督对备选机动引导不足。 作者认为候选生成与评估应联合设计，需同时改善初始支撑、风险感知评分与多模态监督。",
+    "research_unit": "西安电子科技大学电子工程学院 · Qifeng Xie",
+    "hook_text": "面向端到端自动驾驶的扩散式轨迹规划任务，输入为前左/前/前右相机拼接图像、LiDAR 与自车状态，输出未来轨迹并从中选择最终规划。",
+    "key_points": [
+      "面向端到端自动驾驶的扩散式轨迹规划任务，输入为前左/前/前右相机拼接图像、LiDAR 与自车状态，输出未来轨迹并从中选择最终规划。",
+      "应用场景为城市道路等复杂交通场景中的多模态未来轨迹生成与安全感知的模式选择，覆盖 NAVSIM v1 开环（非反应式）评测与 Bench2Drive/CARLA 闭环评测。",
+      "研究问题：扩散规划器的性能依赖轨迹初始化、模式评估与监督质量；弱约束噪声初始化会引入不可行候选并加重去噪负担；几何相似的候选在安全性与进度上存在差异，仅靠几何相似性难以选出最优模式；单一日志未来监督对备选机动引导不足。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#ef6c3f",
+      "to": "#f6b13d",
+      "spot": "#ffd59c",
+      "ink": "#fff8ef",
+      "muted": "rgba(255, 248, 239, 0.82)",
+      "chip": "rgba(255, 248, 239, 0.16)",
+      "stroke": "rgba(255, 248, 239, 0.26)"
+    }
+  },
+  {
+    "date": "2026-11-16",
+    "title": "AR-WAM: efficient streaming world-action modeling for autonomous driving",
+    "link": "https://arxiv.org/abs/2611.21851",
+    "arxiv_id": "2611.21851",
+    "detail_path": "papers/2611.21851/",
+    "cover_path": "covers/2611.21851/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.21851.webp",
+    "paper_image_full_path": "assets/paper-images/2611.21851.webp",
+    "preview_text": "论文针对自动驾驶端到端轨迹规划任务，解决视频基础模型（world-action model）在每次决策时重复编码历史帧和迭代生成未来视频所导致的高延迟问题。 应用场景为单前视相机的城市/动态交通驾驶，需在连续驾驶流中保持视觉历史并在低延迟下做出行为决策。 研究问题包括：在已有视觉历史缓存后，测试时未来预测对决策的贡献有多大；以及如何在不迭代去噪未来视频的前提下，用一次前向传播获得未来预测特征来条件化轨迹生成。",
+    "research_unit": "Toyota Motor North America R&D - InfoTech Labs · Baiting Luo、Shatadal Mishr…",
+    "hook_text": "论文针对自动驾驶端到端轨迹规划任务，解决视频基础模型（world-action model）在每次决策时重复编码历史帧和迭代生成未来视频所导致的高延迟问题。",
+    "key_points": [
+      "论文针对自动驾驶端到端轨迹规划任务，解决视频基础模型（world-action model）在每次决策时重复编码历史帧和迭代生成未来视频所导致的高延迟问题。",
+      "应用场景为单前视相机的城市/动态交通驾驶，需在连续驾驶流中保持视觉历史并在低延迟下做出行为决策。",
+      "研究问题包括：在已有视觉历史缓存后，测试时未来预测对决策的贡献有多大；以及如何在不迭代去噪未来视频的前提下，用一次前向传播获得未来预测特征来条件化轨迹生成。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-13",
+    "title": "Ego2Flow: Benchmarking the Traffic-System Impact of Autonomous Driving on Maps Distilled from Real-World Roads",
+    "link": "https://arxiv.org/abs/2611.17720",
+    "arxiv_id": "2611.17720",
+    "detail_path": "papers/2611.17720/",
+    "cover_path": "covers/2611.17720/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.17720.webp",
+    "paper_image_full_path": "assets/paper-images/2611.17720.webp",
+    "preview_text": "论文面向端到端自动驾驶策略的评估问题，指出现有闭环基准主要衡量自车安全与任务完成度，难以反映策略在城市交通中对其他车辆与整体交通系统的影响。 论文提出 Ego2Flow，一个闭环基准，用于评估自动驾驶策略在“从真实世界道路蒸馏得到的 CARLA 地图”上对交通系统的影响。 为构建可支持持续闭环交通仿真的真实感 3D 城市环境，论文提出 agent-guided map distillation（智能体引导地图蒸馏）框架，融合真实地图与观测及补充地理信息，保留车道拓扑、关键道路几何与决策相关视觉条件，简化非必要细节并补全未观测区域。 研究问题可概括为：一个驾驶策略如何影响其加入的交通流，其控制是否能改善集体交通结果；评估覆盖交通效率、安全、稳定性与能耗四个方面。 论文基于 Argoverse 2 数据生成并公开释放六幅 CARLA 地图，覆盖对应真实区域，支持在真实观测与仿真观测下对驾驶行为进行配对比较。",
+    "research_unit": "University of Wisconsin–Madison · Xiangbo Gao、Zhengzhong Tu（原文未明确其他作者与该校的具体…",
+    "hook_text": "论文面向端到端自动驾驶策略的评估问题，指出现有闭环基准主要衡量自车安全与任务完成度，难以反映策略在城市交通中对其他车辆与整体交通系统的影响。",
+    "key_points": [
+      "论文面向端到端自动驾驶策略的评估问题，指出现有闭环基准主要衡量自车安全与任务完成度，难以反映策略在城市交通中对其他车辆与整体交通系统的影响。",
+      "论文提出 Ego2Flow，一个闭环基准，用于评估自动驾驶策略在“从真实世界道路蒸馏得到的 CARLA 地图”上对交通系统的影响。",
+      "为构建可支持持续闭环交通仿真的真实感 3D 城市环境，论文提出 agent-guided map distillation（智能体引导地图蒸馏）框架，融合真实地图与观测及补充地理信息，保留车道拓扑、关键道路几何与决策相关视觉条件，简化非必要细节并补全未观测区域。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-13",
+    "title": "EViDS: An Environment--Vehicle Dynamics Integrated Simulation Platform for Intelligent Chassis Development",
+    "link": "https://arxiv.org/abs/2611.17660",
+    "arxiv_id": "2611.17660",
+    "detail_path": "papers/2611.17660/",
+    "cover_path": "covers/2611.17660/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.17660.webp",
+    "paper_image_full_path": "assets/paper-images/2611.17660.webp",
+    "preview_text": "面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。 应用场景为环境感知型智能底盘的算法开发与闭环验证，包括底盘动力学分析、控制验证与感知–估计–控制链路测试。 研究问题：现有自动驾驶仿真器（CARLA、PreScan）环境与感知仿真能力强但内置车辆模型保真度有限；车辆动力学工具（CarSim、Adams/Car）动力学保真但缺乏可配置的真实驾驶环境与感知能力；耦合异构仿真器还面临接口、状态表示和时间管理机制差异。 提出 EViDS 平台，基于 CARLA、CarSim 与 MATLAB/Simulink 构建环境–车辆动力学一体化联合仿真平台。",
+    "research_unit": "College of Automotive and Energy Engineering, Tongji University, Shanghai 2…",
+    "hook_text": "面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。",
+    "key_points": [
+      "面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。",
+      "应用场景为环境感知型智能底盘的算法开发与闭环验证，包括底盘动力学分析、控制验证与感知–估计–控制链路测试。",
+      "研究问题：现有自动驾驶仿真器（CARLA、PreScan）环境与感知仿真能力强但内置车辆模型保真度有限；车辆动力学工具（CarSim、Adams/Car）动力学保真但缺乏可配置的真实驾驶环境与感知能力；耦合异构仿真器还面临接口、状态表示和时间管理机制差异。"
+    ],
+    "reading_minutes": 13,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#6f4cc9",
+      "to": "#c57be8",
+      "spot": "#efd9ff",
+      "ink": "#fdf7ff",
+      "muted": "rgba(253, 247, 255, 0.82)",
+      "chip": "rgba(253, 247, 255, 0.16)",
+      "stroke": "rgba(253, 247, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Verifiable pXRD: Hill-climbing pXRD structure determination with LLM agents",
+    "link": "https://arxiv.org/abs/2611.17539",
+    "arxiv_id": "2611.17539",
+    "detail_path": "papers/2611.17539/",
+    "cover_path": "covers/2611.17539/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.17539.webp",
+    "paper_image_full_path": "assets/paper-images/2611.17539.webp",
+    "preview_text": "任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。 应用场景：面向自驱动材料实验室的自主结构表征，以及固相合成产物的实验多相 pXRD 物相识别与精修。 研究问题：如何把 pXRD 结构解析建模为可验证的智能体搜索问题，并通过智能体适配、推理时扩展以及从自生成合成问题中学习，提升单相与实验多相条件下的结构恢复与图谱一致性；同时缺乏统一基准来比较现有专用方法与通用智能体方法。",
+    "research_unit": "Stanford University, Stanford, CA, USA · 原文未明确对应（论文摘要页以统一作者列表与统一机构列表呈现、未逐一声…",
+    "hook_text": "任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。",
+    "key_points": [
+      "任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。",
+      "应用场景：面向自驱动材料实验室的自主结构表征，以及固相合成产物的实验多相 pXRD 物相识别与精修。",
+      "研究问题：如何把 pXRD 结构解析建模为可验证的智能体搜索问题，并通过智能体适配、推理时扩展以及从自生成合成问题中学习，提升单相与实验多相条件下的结构恢复与图谱一致性；同时缺乏统一基准来比较现有专用方法与通用智能体方法。"
+    ],
+    "reading_minutes": 14,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#3f6ee8",
+      "to": "#6fa7ff",
+      "spot": "#d5e6ff",
+      "ink": "#f7fbff",
+      "muted": "rgba(247, 251, 255, 0.82)",
+      "chip": "rgba(247, 251, 255, 0.16)",
+      "stroke": "rgba(247, 251, 255, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Adversarial Tracking: Attacks on Image Sensors for Object Tracking in Autonomous Vehicles",
+    "link": "https://arxiv.org/abs/2611.17505",
+    "arxiv_id": "2611.17505",
+    "detail_path": "papers/2611.17505/",
+    "cover_path": "covers/2611.17505/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.17505.webp",
+    "paper_image_full_path": "assets/paper-images/2611.17505.webp",
+    "preview_text": "论文研究的自动驾驶任务是相机图像输入下的多目标跟踪（MOT），特别是 Tracking-By-Detection（TBD）框架中的目标跟踪，用于估计周围车辆随时间的运动与身份。 应用场景为自动驾驶感知，关注基于图像传感器的在线跟踪系统在对抗性扰动下的鲁棒性。 研究问题是：对目标检测器的对抗攻击是否会传导到下游跟踪轨迹估计；仅用检测精度不足以刻画攻击对跟踪的影响，因此需要在跟踪层面系统评估图像特定（image-specific）攻击与图像无关（image-agnostic）攻击对典型 TBD 跟踪系统的影响。",
+    "research_unit": "School of Engineering, Newcastle University, Newcastle upon Tyne, United Ki…",
+    "hook_text": "论文研究的自动驾驶任务是相机图像输入下的多目标跟踪（MOT），特别是 Tracking-By-Detection（TBD）框架中的目标跟踪，用于估计周围车辆随时间的运动与身份。",
+    "key_points": [
+      "论文研究的自动驾驶任务是相机图像输入下的多目标跟踪（MOT），特别是 Tracking-By-Detection（TBD）框架中的目标跟踪，用于估计周围车辆随时间的运动与身份。",
+      "应用场景为自动驾驶感知，关注基于图像传感器的在线跟踪系统在对抗性扰动下的鲁棒性。",
+      "研究问题是：对目标检测器的对抗攻击是否会传导到下游跟踪轨迹估计；仅用检测精度不足以刻画攻击对跟踪的影响，因此需要在跟踪层面系统评估图像特定（image-specific）攻击与图像无关（image-agnostic）攻击对典型 TBD 跟踪系统的影响。"
+    ],
+    "reading_minutes": 8,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#177e89",
+      "to": "#5ec2a8",
+      "spot": "#c5f0de",
+      "ink": "#f5fffb",
+      "muted": "rgba(245, 255, 251, 0.82)",
+      "chip": "rgba(245, 255, 251, 0.16)",
+      "stroke": "rgba(245, 255, 251, 0.24)"
+    }
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Real-Time Diffusion Relighting as a Neural Sensor: Closing the Low-Light Domain Gap for Robotic Perception",
+    "link": "https://arxiv.org/abs/2611.17438",
+    "arxiv_id": "2611.17438",
+    "detail_path": "papers/2611.17438/",
+    "cover_path": "covers/2611.17438/",
+    "paper_image_path": "assets/paper-images/thumbs/2611.17438.webp",
+    "paper_image_full_path": "assets/paper-images/2611.17438.webp",
+    "preview_text": "论文面向低光照与恶劣天气下的自动驾驶/机器人感知任务，解决检测器在训练分布外（黑暗、雾等）失效的问题。 指出现有低光照图像增强（LLIE）方法为离线处理设计，难以嵌入实时控制回路，且以像素重建为目标会破坏检测器依赖的低对比度结构边缘。 研究问题：如何将高延迟的大规模扩散生成模型作为“神经传感器”嵌入实时机器人控制回路，在需要时恢复任务相关语义，同时不阻塞低延迟控制。",
+    "research_unit": "University of Maryland, College Park · Shengjie Xu、Alexander Gao、Ming C. Lin",
+    "hook_text": "论文面向低光照与恶劣天气下的自动驾驶/机器人感知任务，解决检测器在训练分布外（黑暗、雾等）失效的问题。",
+    "key_points": [
+      "论文面向低光照与恶劣天气下的自动驾驶/机器人感知任务，解决检测器在训练分布外（黑暗、雾等）失效的问题。",
+      "指出现有低光照图像增强（LLIE）方法为离线处理设计，难以嵌入实时控制回路，且以像素重建为目标会破坏检测器依赖的低对比度结构边缘。",
+      "研究问题：如何将高延迟的大规模扩散生成模型作为“神经传感器”嵌入实时机器人控制回路，在需要时恢复任务相关语义，同时不阻塞低延迟控制。"
+    ],
+    "reading_minutes": 9,
+    "section_count": 6,
+    "cover_theme": {
+      "from": "#d84f61",
+      "to": "#f29c6b",
+      "spot": "#ffd6c4",
+      "ink": "#fff7f4",
+      "muted": "rgba(255, 247, 244, 0.82)",
+      "chip": "rgba(255, 247, 244, 0.16)",
+      "stroke": "rgba(255, 247, 244, 0.24)"
+    }
+  },
+  {
     "date": "2026-11-16",
     "title": "Data-Driven Predictive Control for Autonomous Vehicle Racing under Varying Friction",
     "link": "https://arxiv.org/abs/2611.21378",

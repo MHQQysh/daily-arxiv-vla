@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verifiable pXRD: Hill-climbing pXRD structure determination with LLM agents - 自动驾驶每日论文卡</title>
+    <meta name="description" content="任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。 应用场景：面向自驱动材料实验室的自主结构表征，以及固相合成产物的实验多相 pXRD 物相识别与精修。 研究问题：如何把 pXRD 结构解析建模为可验证的智能体搜索问题，并通过智能体适配、推理时扩展以及从自生成合成问题中学习，提升单相与实验多相条件下的结构恢复与图谱一致性；同时缺乏统一基准来比较现有专用方法与通用智能体方法。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.17539">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.17539.webp" alt="Verifiable pXRD: Hill-climbing pXRD structure determination with LLM agents" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Verifiable pXRD: Hill-climbing pXRD structure determination with LLM agents</h1>
+            <div class="detail-meta">2026-11-12 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.17539" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.17539" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.17539</span></div>
+            <p class="detail-summary">任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。 应用场景：面向自驱动材料实验室的自主结构表征，以及固相合成产物的实验多相 pXRD 物相识别与精修。 研究问题：如何把 pXRD 结构解析建模为可验证的智能体搜索问题，并通过智能体适配、推理时扩展以及从自生成合成问题中学习，提升单相与实验多相条件下的结构恢复与图谱一致性；同时缺乏统一基准来比较现有专用方法与通用智能体方法。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">14 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">Stanford University, Stanford, CA, USA · 原文未明确对应（论文摘要页以统一作者列表与统一机构列表呈现、未逐一声…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.17539/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。</p>
+  <ul class="reading-intro-points"><li>任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。</li><li>应用场景：面向自驱动材料实验室的自主结构表征，以及固相合成产物的实验多相 pXRD 物相识别与精修。</li><li>研究问题：如何把 pXRD 结构解析建模为可验证的智能体搜索问题，并通过智能体适配、推理时扩展以及从自生成合成问题中学习，提升单相与实验多相条件下的结构恢复与图谱一致性；同时缺乏统一基准来比较现有专用方法与通用智能体方法。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：Stanford University, Stanford, CA, USA；作者：原文未明确对应（论文摘要页以统一作者列表与统一机构列表呈现，未逐一声明每位作者所属机构）</li><li>机构：University of Toronto, Toronto, ON, Canada；作者：原文未明确对应</li><li>机构：Vector Institute for Artificial Intelligence, Toronto, ON, Canada；作者：原文未明确对应</li><li>机构：Acceleration Consortium, University of Toronto, Toronto, ON, Canada；作者：原文未明确对应</li><li>机构：Canadian Institute for Advanced Research (CIFAR), Toronto, ON, Canada；作者：原文未明确对应</li><li>机构：NVIDIA, Toronto, ON, Canada；作者：原文未明确对应</li><li>说明：原文作者为 Samuel Chen、Jiaru Bai、Austin Henry Cheng、Varinia Bernales、Alán Aspuru-Guzik，但未给出作者与机构的逐项对应关系。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>任务：从粉末 X 射线衍射（pXRD）图谱出发，在给定化学组成与 X 射线波长的条件下，反演并输出周期性晶体结构（CIF），即 pXRD 结构解析。</li><li>应用场景：面向自驱动材料实验室的自主结构表征，以及固相合成产物的实验多相 pXRD 物相识别与精修。</li><li>研究问题：如何把 pXRD 结构解析建模为可验证的智能体搜索问题，并通过智能体适配、推理时扩展以及从自生成合成问题中学习，提升单相与实验多相条件下的结构恢复与图谱一致性；同时缺乏统一基准来比较现有专用方法与通用智能体方法。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>将 pXRD 结构解析形式化为“可验证任务”，区分推理时可验证性（前向模拟图谱一致性，如加权图谱残差 Rwp）与评测时可验证性（与已知参考结构的 StructureMatcher 匹配）。</li><li>提出 pXRD-Bench：200 个模拟单相问题，等分为分布内 pXRD-100 与分布外 pXRD-ood，覆盖代表性、挑战性、同分异构（多晶型）、组分外推与拓扑外推等类别，并对现有专用方法、通用编码智能体进行统一评测。</li><li>构建智能体适配阶梯（GPT-5.6 Sol 无工具 → matsci-codex → pxrd-codex → adapted-codex），并在 pXRD-Bench 上将选定结构精确恢复率从 27% 提升到 69%。</li><li>在 20 问题子集 pXRD-Bench-20 上展示重复采样与验证器引导的推理时扩展可进一步带来收益，并评估 LLM 作为验证器/裁判用于裁决与继续搜索的价值。</li><li>提出面向实验多相 pXRD 的“反思式演化”框架：evolver 智能体利用自生成合成问题的已知结构与测量参数诊断求解失败，产出持久化指导与可执行工具，在 15 个实测图谱上改善平均图谱一致性，并迁移出可恢复参考库中缺失物相的类同 substitutions 流程。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：pXRD 结构解析的逆问题求解；单相基准评测模块（pXRD-Bench）与智能体适配模块；推理时扩展模块；实验多相 pXRD 的反思式演化模块。</li><li>输入传感器/输入数据：化学组成（reduced composition）、X 射线波长、模拟或实测强度图谱 y(2θ)；推理时不提供参考结构、来源标识、晶格参数、空间群、晶胞内化学式单元数与基准类别。</li><li>场景表示：晶体结构以 CIF 表示；图谱以 2θ-强度曲线表示（基准模拟使用 Cu Kα1，λ=1.5406 Å，2θ 范围 5°–90°，步长 0.01°，共 8,501 个强度点；伪 Voigt 剖面参数 U=2、V=−2、W=5、X=Y=0、偏振 0.7、SH/L=0.002，1 μm 晶粒尺寸与 1000 ppm 微应变各向同性展宽；关闭择优取向、样品位移与背景；峰值归一化到 5,000 计数后加泊松噪声与标准差 5 计数的高斯噪声，再归一化到最大强度 100）。</li><li>模型结构：固定前沿 LLM 权重（GPT-5.6 Sol (high)），通过改变智能体外围“harness”（动作接口、可用工具与数据、可复用任务知识）实现适配；适配阶梯包括无工具单次调用、带材料科学 Python 环境与晶体学数据库访问的编码智能体 matsci-codex、增加 GSAS-II 与 DICVOL14 的 pxrd-codex、以及从 50 题不相交课程中经外部验证经验蒸馏得到的 frozen 能力包 adapted-codex（含 139 词技能与一个改善 DICVOL 原始输入理解的适配器）。</li><li>关键技术：生成—验证—更新循环；前向模拟图谱一致性验证；pymatgen StructureMatcher 结构匹配评测（默认几何容差 l_tol=0.2、θ_tol=5°、s_tol=0.3，关闭晶格缩放以要求恢复晶胞尺寸）；推理时独立重复采样、参考盲的图谱选择、盲 stop/continue 验证器（judge-v1）与验证器门控继续；实验多相中的可替换实验室规格、evolver 智能体、合成课程、图谱分数与结构分数验证、演化—晋级—停止规则。</li><li>原文未报告：LLM 的具体参数规模、训练数据细节与权重更新方法（本文方法不做参数更新）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：pXRD-Bench（200 题，含 pXRD-100 与 pXRD-ood；类别构成为 Representative 30、Challenge 30、Polymorph 40、Substitution 25、Ordered decoration 25、Wyckoff enumeration 25、Crystal search 25）；pXRD-Bench-20（推理时扩展用 20 题代表性子集，存储名 inference-scaling-20）；adapted-codex 训练课程 50 题（与基准同分布但不重叠）；实验多相面板 divalent-tungstates-PG15（15 个实测图谱，来自 Precursor Genome）。</li><li>数据来源：Materials Project 冻结 MP-20 训练划分、Crystallography Open Database、JARVIS，以及被评测结构解析系统的公开训练语料/检索索引构成的冻结暴露边界。</li><li>仿真器/工具：GSAS-II 用于前向模拟与精修；DICVOL14 用于指标化；pymatgen 的 StructureMatcher 用于评测；Crystal Toolkit 用于结构渲染。</li><li>模型规模：原文未报告具体模型参数规模；仅报告使用的模型为 GPT-5.6 Sol (high)，且方法不更新模型权重。</li><li>训练资源：原文未报告 GPU/算力硬件与训练时长；报告了推理侧消耗，例如 matsci-codex 完成且未触发 1 小时上限的 187 次 rollout 平均输入加输出 6.09 M tokens、平均墙钟 25.3 分钟，而无工具单次调用条件 200 次求解平均 161,293 tokens、6.94 分钟。</li><li>实车平台：不适用；原文未报告自动驾驶或车辆平台信息。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：pXRD-Bench（主基准，200 题）与 pXRD-Bench-20（推理时扩展面板）；实验多相评估使用 divalent-tungstates-PG15 的 15 个实测图谱。</li><li>评估指标：结构精确恢复率（pass@1 与 pass@8，按类别/语料/总体统计；智能体条件区分 selected exact 与 any exact）；实验多相使用平均图谱一致性（profile agreement）与物相恢复情况，并报告与已 deposited 解释的分歧及逐次尝试结果。</li><li>关键数值：智能体适配阶梯在 pXRD-Bench 上 selected exact 恢复率为 GPT-5.6 Sol (high) 27.0%、matsci-codex 52.0%、pxrd-codex 57.0%、adapted-codex 69.0%（any exact 对应 29.0%、52.5%、58.5%、70.5%）；分语料看，adapted-codex 在 pXRD-100 为 77%（77），pXRD-ood 为 61%（64），pxrd-codex 为 58%（59）与 56%（58），matsci-codex 为 60%（61）与 44%（44），GPT-5.6 Sol (high) 为 30%（33）与 24%（25）。专用方法 pass@1 总体：PXRDGen 32.0%（pass@8 55.0%）、Ab-PXRD-Solver 31.0%、RealPXRD-Solver 30.5%（pass@8 45.0%）、deCIFer 13.5%（pass@8 22.0%）、DiffractGPT 7.5%（无 pass@8）、Crystalyze 6.5%（pass@8 12.5%）；其中 PXRDGen、Real</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.17660/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">EViDS: An Environment--Vehicle Dynamics Integrated Simulation Platform for Intelligent Chassis Development</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.17505/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Adversarial Tracking: Attacks on Image Sensors for Object Tracking in Autonomous Vehicles</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

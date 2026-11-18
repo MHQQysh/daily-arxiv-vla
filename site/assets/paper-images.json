@@ -45206,5 +45206,693 @@
     "inside_figure": false,
     "width": 918,
     "height": 1188
+  },
+  "2611.22998": {
+    "title": "Residual-Guided Lightweight Reinforcement Learning for Risk-Aware Trajectory Selection with a Frozen World Model",
+    "abs_url": "https://arxiv.org/abs/2611.22998",
+    "html_url": "https://arxiv.org/html/2611.22998v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.22998v1/architecture_dimensions_20261115.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 409,
+        "height": 307,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22998v1/qualitative_annotations_20261109.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 327,
+        "height": 250,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2611.22998.webp",
+    "image_url": "https://arxiv.org/html/2611.22998v1/architecture_dimensions_20261115.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 409,
+    "height": 307
+  },
+  "2611.22880": {
+    "title": "Learning Agent-Centric Vision-Language-Action World Models for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2611.22880",
+    "html_url": "https://arxiv.org/html/2611.22880v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.22880v1/method.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 184,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22880v1/QA_result.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 290,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22880v1/distribution.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 296,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22880v1/intro.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 142,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22880v1/grounding_data.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 130,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2611.22880.webp",
+    "image_url": "https://arxiv.org/html/2611.22880v1/method.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 184
+  },
+  "2611.21851": {
+    "title": "AR-WAM: efficient streaming world-action modeling for autonomous driving",
+    "abs_url": "https://arxiv.org/abs/2611.21851",
+    "html_url": "https://arxiv.org/html/2611.21851v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.21851v1/fig1.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 380,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.21851v1/fig2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 241,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2611.21851.webp",
+    "image_url": "https://arxiv.org/html/2611.21851v1/fig1.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 380
+  },
+  "2611.22297": {
+    "title": "FIRE-Drive: Feasibility-Informed Risk Evaluation for End-to-End Diffusion Planning",
+    "abs_url": "https://arxiv.org/abs/2611.22297",
+    "html_url": "https://arxiv.org/html/2611.22297v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.22297v1/compare_diff.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 506,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22297v1/overall.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 225,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22297v1/candidate_statistics.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 212,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22297v1/risk_vis.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 187,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22297v1/risk_map.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 158,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2611.22297.webp",
+    "image_url": "https://arxiv.org/html/2611.22297v1/compare_diff.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 506
+  },
+  "2611.22374": {
+    "title": "AutoE2E: Don't speak - Language free end-to-end autonomy A Real-Time Driving Model for L2++ ADAS and L4 Robotaxis",
+    "abs_url": "https://arxiv.org/abs/2611.22374",
+    "html_url": "https://arxiv.org/html/2611.22374v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.22374v1/fig_channels_real.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 586,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22374v1/fig_qualitative.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 527,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_portrait",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22374v1/DataModelConsole.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 332,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22374v1/fig_console_cases.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 381,
+        "height": 352,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22374v1/figures_pdf/edgar_tum.png",
+        "source": "img",
+        "inside_figure": false,
+        "width": 148,
+        "height": 96,
+        "alt": "[Uncaptioned image]",
+        "classes": "ltx_graphics ltx_img_landscape",
+        "score": -5
+      }
+    ],
+    "path": "assets/paper-images/2611.22374.webp",
+    "image_url": "https://arxiv.org/html/2611.22374v1/fig_channels_real.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 586
+  },
+  "2611.22691": {
+    "title": "Making the World React Realistically: A Closed-Loop Interactive World Model for Autonomous Driving",
+    "abs_url": "https://arxiv.org/abs/2611.22691",
+    "html_url": "https://arxiv.org/html/2611.22691v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.22691v1/methodology_overview.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 651,
+        "height": 529,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22691v1/figures/f3_lamp_v2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 419,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 120
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22691v1/f1_interaction_v2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 651,
+        "height": 299,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22691v1/f2_interaction.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 166,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 85
+      },
+      {
+        "url": "https://arxiv.org/html/2611.22691v1/f3_turn_signal_seq.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 651,
+        "height": 81,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 60
+      }
+    ],
+    "path": "assets/paper-images/2611.22691.webp",
+    "image_url": "https://arxiv.org/html/2611.22691v1/methodology_overview.png",
+    "source": "img",
+    "score": 120,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 651,
+    "height": 529
+  },
+  "2611.17720": {
+    "title": "Ego2Flow: Benchmarking the Traffic-System Impact of Autonomous Driving on Maps Distilled from Real-World Roads",
+    "abs_url": "https://arxiv.org/abs/2611.17720",
+    "html_url": "https://arxiv.org/html/2611.17720v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.17720v1/figure2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 685,
+        "height": 230,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      },
+      {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "[LOGO]",
+        "classes": "",
+        "score": -140
+      }
+    ],
+    "path": "assets/paper-images/2611.17720.webp",
+    "image_url": "https://arxiv.org/html/2611.17720v1/figure2.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 685,
+    "height": 230
+  },
+  "2611.17660": {
+    "title": "EViDS: An Environment--Vehicle Dynamics Integrated Simulation Platform for Intelligent Chassis Development",
+    "abs_url": "https://arxiv.org/abs/2611.17660",
+    "html_url": "https://arxiv.org/html/2611.17660v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.17660v1/Architecture.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 202,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17660v1/Fig_workflow_V2.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 239,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17660v1/figures/figure_gui_and_reference_paths.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 467,
+        "height": 274,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17660v1/figures/paper_figure_sm_road_2_semantics.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 467,
+        "height": 268,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17660v1/Fig7_dual_scene_carsim_validation_v12.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 467,
+        "height": 286,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      }
+    ],
+    "path": "assets/paper-images/2611.17660.webp",
+    "image_url": "https://arxiv.org/html/2611.17660v1/Architecture.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 202
+  },
+  "2611.17438": {
+    "title": "Real-Time Diffusion Relighting as a Neural Sensor: Closing the Low-Light Domain Gap for Robotic Perception",
+    "abs_url": "https://arxiv.org/abs/2611.17438",
+    "html_url": "https://arxiv.org/html/2611.17438v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.17438v1/figure_1_architecture.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 286,
+        "height": 174,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17438v1/img/day_progress_020p_raw_frame_000439.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 153,
+        "height": 153,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17438v1/img/night_progress_020p_raw_frame_000477.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 153,
+        "height": 153,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17438v1/img/day_progress_020p_relit_frame_000439.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 153,
+        "height": 153,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17438v1/img/night_progress_020p_relit_frame_000477.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 153,
+        "height": 153,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_img_square",
+        "score": 70
+      }
+    ],
+    "path": "assets/paper-images/2611.17438.webp",
+    "image_url": "https://arxiv.org/html/2611.17438v1/figure_1_architecture.png",
+    "source": "img",
+    "score": 70,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 286,
+    "height": 174
+  },
+  "2611.17505": {
+    "title": "Adversarial Tracking: Attacks on Image Sensors for Object Tracking in Autonomous Vehicles",
+    "abs_url": "https://arxiv.org/abs/2611.17505",
+    "html_url": "https://arxiv.org/html/2611.17505v2",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.17505v2/figures/chapter_tracking/yolov3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 185,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17505v2/figures/chapter_tracking/yolov4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 185,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17505v2/figures/yolov3.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 239,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17505v2/figures/yolov4.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 238,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17505v2/figures/overview.jpeg",
+        "source": "img",
+        "inside_figure": true,
+        "width": 229,
+        "height": 229,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_square",
+        "score": 85
+      }
+    ],
+    "path": "assets/paper-images/2611.17505.webp",
+    "image_url": "https://arxiv.org/html/2611.17505v2/figures/chapter_tracking/yolov3.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 476,
+    "height": 185
+  },
+  "2611.17539": {
+    "title": "Verifiable pXRD: Hill-climbing pXRD structure determination with LLM agents",
+    "abs_url": "https://arxiv.org/abs/2611.17539",
+    "html_url": "https://arxiv.org/html/2611.17539v1",
+    "candidates": [
+      {
+        "url": "https://arxiv.org/html/2611.17539v1/pxrd-verifiability-figure.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 429,
+        "height": 235,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17539v1/evolution.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 448,
+        "height": 331,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17539v1/framework_evolution.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 190,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://arxiv.org/html/2611.17539v1/cu_deposited_profiles.png",
+        "source": "img",
+        "inside_figure": true,
+        "width": 476,
+        "height": 371,
+        "alt": "Refer to caption",
+        "classes": "ltx_graphics ltx_centering ltx_img_landscape",
+        "score": 105
+      },
+      {
+        "url": "https://static.arxiv.org/static/design-system/latest/logos/arxiv-logo.svg",
+        "source": "img",
+        "inside_figure": false,
+        "width": null,
+        "height": null,
+        "alt": "archive",
+        "classes": "",
+        "score": -130
+      }
+    ],
+    "path": "assets/paper-images/2611.17539.webp",
+    "image_url": "https://arxiv.org/html/2611.17539v1/pxrd-verifiability-figure.png",
+    "source": "img",
+    "score": 105,
+    "content_type": "image/png",
+    "inside_figure": true,
+    "width": 429,
+    "height": 235
+  },
+  "2611.23198": {
+    "title": "Learned versus Kinematic Trajectory Prediction under Reduced Observation Frequency",
+    "abs_url": "https://arxiv.org/abs/2611.23198",
+    "html_url": "https://arxiv.org/html/2611.23198v1",
+    "path": "assets/paper-images/2611.23198.webp",
+    "image_url": "https://arxiv.org/pdf/2611.23198",
+    "source": "pdf:first-page",
+    "score": 50,
+    "content_type": "image/png",
+    "inside_figure": false,
+    "width": 893,
+    "height": 1263
   }
 }

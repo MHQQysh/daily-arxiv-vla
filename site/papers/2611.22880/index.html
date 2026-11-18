@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Learning Agent-Centric Vision-Language-Action World Models for Autonomous Driving - 自动驾驶每日论文卡</title>
+    <meta name="description" content="论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。 应用场景为自动驾驶：以多视角图像、自车状态、导航目标和语言提示为输入，预测未来自车轨迹并输出高层驾驶动作。 指出现有 VLA 世界模型多以像素级未来帧生成进行想象，产生大量与规划无关的稠密视觉 token，规划收益有限；提出应改用紧凑、结构化、以智能体为中心（agent-centric）的潜在世界状态。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.22880">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.22880.webp" alt="Learning Agent-Centric Vision-Language-Action World Models for Autonomous Driving" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">Learning Agent-Centric Vision-Language-Action World Models for Autonomous Driving</h1>
+            <div class="detail-meta">2026-11-17 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.22880" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.22880" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.22880</span></div>
+            <p class="detail-summary">论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。 应用场景为自动驾驶：以多视角图像、自车状态、导航目标和语言提示为输入，预测未来自车轨迹并输出高层驾驶动作。 指出现有 VLA 世界模型多以像素级未来帧生成进行想象，产生大量与规划无关的稠密视觉 token，规划收益有限；提出应改用紧凑、结构化、以智能体为中心（agent-centric）的潜在世界状态。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">11 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">MoE Key Lab of Artificial Intelligence, Institute of AI, Shanghai Jiao Tong…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.22880/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。</p>
+  <ul class="reading-intro-points"><li>论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。</li><li>应用场景为自动驾驶：以多视角图像、自车状态、导航目标和语言提示为输入，预测未来自车轨迹并输出高层驾驶动作。</li><li>指出现有 VLA 世界模型多以像素级未来帧生成进行想象，产生大量与规划无关的稠密视觉 token，规划收益有限；提出应改用紧凑、结构化、以智能体为中心（agent-centric）的潜在世界状态。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：MoE Key Lab of Artificial Intelligence, Institute of AI, Shanghai Jiao Tong University, Shanghai, China；作者：Guoqing Wang、Pin Tang、Xiangxuan Ren、Chao Ma（原文作者栏统一标注该机构，未逐一区分作者与下属实验室的对应关系）。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>论文针对端到端自动驾驶中的轨迹规划任务，研究视觉-语言-动作（VLA）世界模型应基于何种“世界状态”进行推理。</li><li>应用场景为自动驾驶：以多视角图像、自车状态、导航目标和语言提示为输入，预测未来自车轨迹并输出高层驾驶动作。</li><li>指出现有 VLA 世界模型多以像素级未来帧生成进行想象，产生大量与规划无关的稠密视觉 token，规划收益有限；提出应改用紧凑、结构化、以智能体为中心（agent-centric）的潜在世界状态。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>揭示现有世界 VLA 模型的瓶颈来自大量用于未来生成、但与规划无关的视觉 token，从而引出紧凑、结构化、面向规划的潜在世界建模设计。</li><li>提出面向规划的“以智能体为中心的潜在状态”，将驾驶场景表示为随时间演化、并锚定 3D 几何、运动、语义与交互上下文的智能体。</li><li>提出 AgentWorld：用以离散 agent token（<code>&lt;agent_i&gt;</code>）实例化该世界状态的世界 VLA 模型，token 同时用于推理与轨迹规划。</li><li>通过显式几何锚定、面向推理的监督微调（SFT）和面向智能体的强化学习（GRPO）三阶段学习 agent token。</li><li>在开环与闭环基准上报告了规划性能提升与更可解释的世界状态，并通过消融与干预分析支持 agent 中心表示的有效性。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：端到端自动驾驶 VLA 世界模型，包含世界状态构建与策略学习两部分。</li><li>输入传感器：多视角图像作为视觉输入；自车状态（ego-status）与导航目标；原文未报告激光雷达等其它传感器输入。</li><li>场景表示：在世界状态中使用固定数量 N 个特殊 agent token 组成 <code>𝒯_agent={⟨agent_1⟩,…,⟨agent_N⟩}</code>，以 MLLM 在这些位置的隐状态 <code>h_t^i</code> 构成 agent-centric 潜在状态 <code>S_t^agent</code>；每个槽位可动态锚定到周围交通参与者或“无目标”状态。</li><li>模型结构：以 Qwen2-VL 与 Qwen2.5-VL 系列初始化 MLLM；agent token 由特殊 token 的可学习嵌入初始化（不引入独立 object query 集）；多模态路由锚定模块将查询分别路由到 4D 几何分支（离线 VGGT 风格特征）和 2D 视觉分支（MLLM 视觉编码器），各分支用 token 级门控调制后做交叉注意力，再融合并投影回 MLLM 隐空间插入对应 token 位置；训练时用轻量 agent head 预测类别/存在性、3D bbox 与未来轨迹，并以 DETR 式匈牙利匹配监督。</li><li>关键技术：物理锚定目标；策略输出结构化响应 <code>y=(ξ,a,τ)</code>，即 <code>&lt;think&gt;</code> 简洁理由、<code>&lt;action&gt;</code> 高层动作、<code>&lt;answer&gt;</code> 未来自车航点；以 <code>&lt;perception&gt;</code> 字段暴露 agent token；面向推理的 SFT 使用标准自回归目标；面向智能体的 RL 使用 GRPO，复合奖励覆盖格式、感知、动作、轨迹与交互上下文（惩罚碰撞、间距不足、短 TTC），RL 仅更新 MLLM 策略，辅助 agent head 作为冻结奖励生成器。</li><li>推理阶段不需要辅助锚定模块与 agent head；原文未报告具体网络层数、隐藏维度等超参数数值。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：nuScenes（开环规划、感知、动作预测评估）与 Bench2Drive（闭环评估）。</li><li>仿真器：闭环实验在 CARLA（Bench2Drive）中进行；原文未报告使用其它仿真器。</li><li>模型规模：使用 Qwen2-VL-2B 与 Qwen2.5-VL 系列作为初始化；对比方法涉及 BLIP2-2.7B、LLaVA-7B、Lumina-mGPT-7B、Gemini 1.0 Nano-1 等；AgentWorld 自身最大参数量原文未单独报告。</li><li>训练资源：4×80GB NVIDIA A800 GPU，PyTorch 实现；三阶段训练（物理锚定 SFT、面向推理 SFT、面向智能体 RL）。</li><li>实车平台：原文未报告。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：nuScenes 开环（ST-P3 与 UniAD 两套协议）与 Bench2Drive 闭环；另有 nuScenes 感知与元动作评估。</li><li>评估指标：L2 误差（1s/2s/3s 及平均）、碰撞率（%）、3D 检测 mAP 与 NDS、横向/纵向动作 F1、闭环 Driving Score、Success Rate、Efficiency、Comfortness。</li><li>关键数值（开环，表 1）：AgentWorld 平均 L2 为 0.27 m（ST-P3 协议）、0.45 m（UniAD 协议），平均碰撞率 0.08%（ST-P3）、0.12%（UniAD）；带自车状态版本（AgentWorld*）平均 L2 为 0.25 m 与 0.40 m，平均碰撞率 0.07% 与 0.11%。</li><li>关键数值（感知，表 2）：mAP 0.318、NDS 0.416，优于 CenterNet、FCOS3D、DETR3D、PGD。</li><li>关键数值（元动作，表 3）：横向 forward 95.14、left 77.63、right 78.41；纵向 keep 63.85、acc. 84.17、dec. 82.93、stop 84.56，多数类别优于 VLA-World 与 Qwen2-VL-2B 基线。</li><li>关键数值（闭环，表 4，CARLA/Bench2Drive）：Driving Score 81.17、Success Rate 61.36%、Efficiency 147.82、Comfortness 54.39；驾驶分数与成功率优于 AD-MLP、UniAD-Base、VAD、TCP-traj、DriveAdapter、Orion、AutoVLA，Efficiency 略低于 VAD（157.94）。</li><li>对比方法：ELM、FeD、OccWorld、Doe-1、RDA-Driver、EMMA、OmniDrive、FSDrive、VLA-World（开环与感知/动作）；AD-MLP、UniAD-Base、VAD、TCP-traj、DriveAdapter、Orion、AutoVLA（闭环）。</li><li>消融与进一步分析：去掉 4D 几何或 2D 视觉锚定后平均 L2 分别升至 0.30 m 与 0.28 m，完整模型为 0.27 m；仅 Qwen2-VL-2B 为 1.37 m，加 SFT 降至 0.32 m，再加 RL 进一步改善；另有 token 效率、agent head 阶段消融、奖励消融、表示对比与 agent-token 干预实验（HTML 原文在此处截断，部分附录数值未完整给出）。</li><li>评估条件：包含开环规划、感知与元动作评估，以及 CARLA 仿真闭环评估；原文未报告实车实验。</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.22998/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Residual-Guided Lightweight Reinforcement Learning for Risk-Aware Trajectory Selection with a Frozen World Model</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.22691/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Making the World React Realistically: A Closed-Loop Interactive World Model for Autonomous Driving</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>

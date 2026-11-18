@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EViDS: An Environment--Vehicle Dynamics Integrated Simulation Platform for Intelligent Chassis Development - 自动驾驶每日论文卡</title>
+    <meta name="description" content="面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。 应用场景为环境感知型智能底盘的算法开发与闭环验证，包括底盘动力学分析、控制验证与感知–估计–控制链路测试。 研究问题：现有自动驾驶仿真器（CARLA、PreScan）环境与感知仿真能力强但内置车辆模型保真度有限；车辆动力学工具（CarSim、Adams/Car）动力学保真但缺乏可配置的真实驾驶环境与感知能力；耦合异构仿真器还面临接口、状态表示和时间管理机制差异。 提出 EViDS 平台，基于 CARLA、CarSim 与 MATLAB/Simulink 构建环境–车辆动力学一体化联合仿真平台。" />
+
+    <script>
+      (function() {
+        try {
+          var themePreference = window.localStorage.getItem('color-theme') || 'system';
+          var systemUsesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedTheme = themePreference === 'system'
+            ? (systemUsesDarkTheme ? 'dark' : 'light')
+            : themePreference;
+          document.documentElement.dataset.theme = resolvedTheme;
+          document.documentElement.dataset.themePreference = themePreference;
+          document.documentElement.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.themePreference = 'system';
+        }
+      })();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111827'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' dominant-baseline='middle' font-size='24' font-family='Arial, sans-serif' fill='white'%3EAD%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body class="detail-page" data-paper-id="2611.17660">
+    <div class="page-noise"></div>
+    <div class="page-blur page-blur-a"></div>
+    <div class="page-blur page-blur-b"></div>
+
+    <header class="header detail-page-header">
+      <div class="container">
+        <div class="detail-page-topbar">
+          <a class="back-link" href="../../index.html">返回列表</a>
+          <div class="detail-topbar-actions">
+            <span class="detail-site-name">自动驾驶每日论文卡</span>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="当前主题：设备，点击切换主题" title="当前主题：设备">
+  <span class="theme-toggle-icons" aria-hidden="true">
+    <svg class="theme-toggle-icon theme-toggle-icon-light" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-dark" viewBox="0 0 24 24" fill="none">
+      <path d="M20 15.2A8.1 8.1 0 0 1 8.8 4a8.2 8.2 0 1 0 11.2 11.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <svg class="theme-toggle-icon theme-toggle-icon-system" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+  </span>
+  <span class="theme-toggle-label" data-theme-toggle-label>设备</span>
+</button>
+          </div>
+        </div>
+
+        <div class="detail-hero-grid">
+          <div class="detail-hero-cover"><figure class="paper-figure-card paper-figure-card-detail">
+  <img class="paper-figure-image" src="../../assets/paper-images/2611.17660.webp" alt="EViDS: An Environment--Vehicle Dynamics Integrated Simulation Platform for Intelligent Chassis Development" loading="lazy" onclick="window.openPaperFigureImage && window.openPaperFigureImage(this)" />
+  <figcaption class="paper-figure-caption">面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。</figcaption>
+</figure></div>
+          <div class="detail-hero-copy">
+            <p class="eyebrow">论文详情</p>
+            <h1 class="detail-page-title">EViDS: An Environment--Vehicle Dynamics Integrated Simulation Platform for Intelligent Chassis Development</h1>
+            <div class="detail-meta">2026-11-13 · <a data-analytics-event="paper_source_click" href="https://arxiv.org/abs/2611.17660" target="_blank" rel="noopener noreferrer">原文</a> · <a data-analytics-event="paper_translation_click" href="https://hjfy.top/arxiv/2611.17660" target="_blank" rel="noopener noreferrer">翻译</a> · <span class="meta-pill">2611.17660</span></div>
+            <p class="detail-summary">面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。 应用场景为环境感知型智能底盘的算法开发与闭环验证，包括底盘动力学分析、控制验证与感知–估计–控制链路测试。 研究问题：现有自动驾驶仿真器（CARLA、PreScan）环境与感知仿真能力强但内置车辆模型保真度有限；车辆动力学工具（CarSim、Adams/Car）动力学保真但缺乏可配置的真实驾驶环境与感知能力；耦合异构仿真器还面临接口、状态表示和时间管理机制差异。 提出 EViDS 平台，基于 CARLA、CarSim 与 MATLAB/Simulink 构建环境–车辆动力学一体化联合仿真平台。</p>
+            <div class="detail-micro-meta">
+              <span class="meta-pill">13 分钟读完</span>
+              <span class="meta-pill">6 张阅读卡</span>
+              <span class="meta-pill">College of Automotive and Energy Engineering, Tongji University, Shanghai 2…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container detail-layout">
+      <div class="detail-shell">
+        <article id="detail-body" class="reading-flow"><section class="reading-card reading-card-intro">
+  <div class="reading-card-topline">
+    <span class="reading-badge">一眼看懂</span>
+    <a class="cover-preview-link" data-analytics-event="paper_cover_open" href="../../covers/2611.17660/">封面预览</a>
+  </div>
+  <p class="reading-intro-hook">面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。</p>
+  <ul class="reading-intro-points"><li>面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。</li><li>应用场景为环境感知型智能底盘的算法开发与闭环验证，包括底盘动力学分析、控制验证与感知–估计–控制链路测试。</li><li>研究问题：现有自动驾驶仿真器（CARLA、PreScan）环境与感知仿真能力强但内置车辆模型保真度有限；车辆动力学工具（CarSim、Adams/Car）动力学保真但缺乏可配置的真实驾驶环境与感知能力；耦合异构仿真器还面临接口、状态表示和时间管理机制差异。</li></ul>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 01</span>
+    <span class="reading-step-note">研究单位</span>
+  </div>
+  <h2>研究单位</h2>
+  <div class="reading-card-content"><ul><li>机构：College of Automotive and Energy Engineering, Tongji University, Shanghai 200092, China；作者：Lu Xiong、Yiming Zhou、Xuge Hu、Yi Zhang、Haoran Lv、Chen Tang（原文以并列单位形式列出两所机构，未逐一标注各作者的具体归属，作者与机构的对应关系原文未明确对应）</li><li>机构：Shanghai Research Institute for Intelligent Autonomous Systems, Tongji University, Shanghai 200092, China；作者：Lu Xiong、Yiming Zhou、Xuge Hu、Yi Zhang、Haoran Lv、Chen Tang（原文未明确各作者与两机构的具体对应关系）</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 02</span>
+    <span class="reading-step-note">论文概述</span>
+  </div>
+  <h2>论文概述</h2>
+  <div class="reading-card-content"><ul><li>面向智能底盘开发，解决环境感知信息与高保真车辆动力学难以在同一仿真框架内集成的问题。</li><li>应用场景为环境感知型智能底盘的算法开发与闭环验证，包括底盘动力学分析、控制验证与感知–估计–控制链路测试。</li><li>研究问题：现有自动驾驶仿真器（CARLA、PreScan）环境与感知仿真能力强但内置车辆模型保真度有限；车辆动力学工具（CarSim、Adams/Car）动力学保真但缺乏可配置的真实驾驶环境与感知能力；耦合异构仿真器还面临接口、状态表示和时间管理机制差异。</li><li>提出 EViDS 平台，基于 CARLA、CarSim 与 MATLAB/Simulink 构建环境–车辆动力学一体化联合仿真平台。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 03</span>
+    <span class="reading-step-note">核心贡献</span>
+  </div>
+  <h2>核心贡献</h2>
+  <div class="reading-card-content"><ul><li>提出环境–车辆动力学一体化联合仿真架构，实现自动驾驶环境与高保真车辆动力学之间的闭环交互，用于智能底盘开发。</li><li>开发跨域交互机制，包括基于参考位姿的状态对齐、多速率交互和基于射线投射的轮胎–路面交互，以维持时空一致性并将环境信息传递到车辆动力学域。</li><li>通过环境–动力学交互测试（含车辆动力学一致性对比）与智能底盘应用对平台进行评估，表明其可支持环境感知型智能底盘算法的开发与闭环验证。</li><li>提供场景配置、同步数据采集与算法接口等功能模块，支持智能底盘开发流程。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 04</span>
+    <span class="reading-step-note">方法描述</span>
+  </div>
+  <h2>方法描述</h2>
+  <div class="reading-card-content"><ul><li>所属模块：环境–车辆动力学联合仿真平台，MATLAB/Simulink 作为中心集成层，负责状态同步、轮胎–路面交互、仿真管理与算法集成；世界管理模块负责 CARLA 世界初始化及场景对象创建与移除。</li><li>输入传感器：CARLA 提供环境与多源传感器仿真（含视觉观测），CarSim 提供底盘/车辆动力学信号；原文未报告具体传感器型号与配置细节。</li><li>场景表示：车辆位姿表示为 X_veh=[x,y,z,ψ,θ,ϕ]^T（位置与偏航、俯仰、侧倾），轮胎平面接地点为 p_i=[x_i,y_i]^T，i∈{FL,FR,RL,RR}；上标 S 与 C 分别表示 CarSim 与 CARLA 表示。</li><li>状态对齐：因 CarSim 采用 ISO 坐标约定、CARLA 采用 Unreal Engine 约定，以 CARLA 地图生成的初始位姿作为公共参考并传给 CarSim 初始化；平面位置映射为 p_xy^C(t)=p_0+T(ψ_0)[p_xy^S(t)−p_0]，其中 T(ψ_0)=R(ψ_0)MR(−ψ_0)，M=[[1,0],[0,−1]] 处理轴向差异；姿态映射为 [ψ^C,θ^C,ϕ^C]^T=[wrap180(2ψ_0−ψ^S), −θ^S, ϕ_E^S]^T，wrap180 将偏航限制在 [−180°,180°)。</li><li>多速率交互：以动力学周期 T_dyn 为主仿真周期；累计时间达到环境更新周期 T_env 时，将对齐位姿 X_veh^C 应用于 CARLA 进行车辆位姿同步、场景渲染与传感器更新；轮胎接地点 p_i^C 在每个动力学步用于轮胎–路面查询，摩擦系数 μ_i 与路面高度 z_i 以动力学速率返回 CarSim。</li><li>轮胎–路面交互：在每个转换后的轮胎接地点生成向下射线，水平位置为 (x_i^C,y_i^C)，以对齐位姿中的车辆高度 z^C 为垂直搜索参考，当前实现取相对 z^C 的 +3 m 与 −30 m 作为射线起点与终点；按语义标签处理交点，跳过自车与无关对象，仅摩擦对象记录 μ_i 并继续向下确定路面高度，同时影响摩擦与几何的对象直接用其摩擦系数与碰撞高度作为 μ_i 与 z_i，到达下层路面时用其摩擦属性与碰撞高度确定路面输入，最终 μ_i 与 z_i 反馈给 CarSim。</li><li>功能模块：提供图形界面用于地图可视化、场景与机动选择、参考路径生成与数据导出；场景库含 11 类场景（居住区、商业区、工业区、公园、城市混合、密集交叉口、高速/多车道、环岛、坡道/桥梁、郊区/乡村、封闭测试区）与 9 种机动定义（两种双移线配置、单移线、定半径圆周行驶、车道跟随、曲线跟随、坡道跟随、环岛跟随、遗留双移线配置），构成 94 种地图–场景–机动–布点组合；双移线路径由原 CarSim LTARG 数据生成，道路与曲线跟随路径从 CARLA 道路几何提取，定半径圆周路径由参数化几何生成，GUI 支持交互指定起点、途经点与终点。</li><li>复杂路面与环境对象配置：通过 CARLA 蓝图库经 Python API 部署锥桶、障碍物等通用场景对象；引入带不同材质外观的自定义路面资产，赋予语义标签与道路属性，可部署于指定道路位置，轮胎–路面模块依据轮胎接地点与语义信息识别配置区域并获取对应摩擦或高程属性。</li><li>算法接口：算法可在 MATLAB/Simulink 中实现，也可用 Python 外部开发并通过 Python 接口连接；外部 Python 接口还提供地图数据导出与可视化、场景配置、轨迹生成与车辆初始化功能，初始化信息传入 CarSim 以保持两域初始条件一致。</li><li>原文未报告：具体感知模型结构细节、网络规模与训练策略等。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 05</span>
+    <span class="reading-step-note">数据集与资源</span>
+  </div>
+  <h2>数据集与资源</h2>
+  <div class="reading-card-content"><ul><li>数据集：未使用公开标注数据集；使用 CARLA 虚拟场景与自建场景库（11 类场景、9 种机动、94 种组合）；智能底盘应用中使用了真实车辆数据进行估计器精炼与评估，原文未报告该真实数据集的名称、规模与采集条件。</li><li>仿真器：CARLA 0.9.11、CarSim 2019.1、MATLAB/Simulink 2021b。</li><li>模型规模：原文未报告。</li><li>训练资源：原文未报告。</li><li>实车平台：原文报告使用真实车辆数据进行侧偏角估计器的精炼与评估，但未报告实车平台的具体车型、传感器配置与测试场地信息。</li><li>开源：论文声明发表后开源，代码地址为 https://github.com/YimingZhou-tj/EViDS。</li></ul></div>
+</section>
+<section class="reading-card reading-card-section">
+  <div class="reading-card-topline">
+    <span class="reading-step">Card 06</span>
+    <span class="reading-step-note">评估与结果</span>
+  </div>
+  <h2>评估与结果</h2>
+  <div class="reading-card-content"><ul><li>评估基准：以独立 CarSim 仿真并施加等效预设路面输入作为参考；智能底盘应用部分以真实车辆侧偏角参考值为基准。</li><li>评估指标：轨迹 RMSE、偏航角 RMSE、俯仰角 RMSE、侧倾角 RMSE；侧偏角估计 MAE（按侧偏角幅值区间与纵向车速区间分别统计）。</li><li>环境–动力学交互验证（仿真）：异构摩擦场景中四轮因空间位置不同先后进出低摩擦区域，摩擦系数由 μ=1.0 变为 μ=0.3 并在离开后恢复，体现局部路面属性与轮胎接地点的时空对应；与独立 CarSim 参考相比，轨迹 RMSE 为 0.137 m、偏航角 RMSE 为 0.046 deg。路面高程扰动场景中，局部高程扰动随车辆通过被逐轮检测，俯仰角 RMSE 为 0.012 deg、侧倾角 RMSE 为 0.036 deg。结果表明 EViDS 保持车辆动力学特性并将路面属性与几何信息可靠传递到动力学域。</li><li>智能底盘应用（实车数据评估 + 平台闭环）：在 EViDS 内使用 CARLA 视觉观测与 CarSim 底盘信号进行多源车辆状态估计，比较三条分支——仅底盘的含混合物理与数据驱动分量的可学习卡尔曼滤波、基于 RAFT-Stereo、LoFTR 与 RANSAC-PnP 的双目视觉里程计基线、以及质量感知的视觉–底盘多源卡尔曼融合估计器；融合状态输入带侧偏相关稳定性约束的运动控制器，控制指令返回车辆动力学模型，形成完整感知–估计–控制链路。</li><li>关键数值：最高车速区间融合方法 MAE 为 0.00438 rad，仅底盘为 0.00971 rad，仅视觉为 0.00442 rad；最高侧偏角幅值区间融合方法 MAE 最低，为 0.01208 rad；在若干其他工况区间仅底盘或仅视觉估计的 MAE 最低，表明无单一信息源始终最优。</li><li>对比方法：仅底盘可学习卡尔曼滤波估计器、基于 RAFT-Stereo + LoFTR + RANSAC-P</li></ul></div>
+</section></article>
+        <aside id="detail-toc" class="detail-toc hidden" aria-label="内容目录">
+          <p class="detail-toc-title">阅读目录</p>
+          <nav id="detail-toc-nav" class="detail-toc-nav"></nav>
+        </aside>
+      </div>
+      <nav class="paper-nav"><a class="paper-nav-link paper-nav-prev" href="../../papers/2611.17720/"><span class="paper-nav-label">← 上一篇</span><span class="paper-nav-title">Ego2Flow: Benchmarking the Traffic-System Impact of Autonomous Driving on Maps Distilled from Real-World Roads</span></a>
+      <a class="paper-nav-link paper-nav-next" href="../../papers/2611.17539/"><span class="paper-nav-label">下一篇 →</span><span class="paper-nav-title">Verifiable pXRD: Hill-climbing pXRD structure determination with LLM agents</span></a></nav>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>内容来自 <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">arXiv.org</a>，阅读卡片由静态站点生成器构建。</p>
+      </div>
+    </footer>
+
+    <script src="../../assets/theme.js"></script>
+    <script src="../../assets/media.js"></script>
+    <script src="../../assets/analytics.js"></script>
+    <script src="../../assets/paper.js"></script>
+  </body>
+</html>
